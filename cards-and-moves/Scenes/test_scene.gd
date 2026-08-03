@@ -9,24 +9,26 @@ var confirmed_player_moves: int = 0
 
 var list_occupied_tiles: Array[Vector2i]
 
-var players: Array[Node]
+var players: Array[Player]
 var num_finished_player_turns: int = 0
 
 var current_state: State
 
 func _ready() -> void:
-	players = get_tree().get_nodes_in_group("Player")
-	for player in players:
-		var starting_tile: Vector2i = tile_map.local_to_map(tile_map.to_local(player.global_position))
-		player.starting_tile = starting_tile
-		player.player_path.append(starting_tile)
-		list_occupied_tiles.append(starting_tile)
+	for player in get_tree().get_nodes_in_group("Player"):
+		if player is Player:
+			var starting_tile: Vector2i = tile_map.local_to_map(tile_map.to_local(player.global_position))
+			player.starting_tile = starting_tile
+			player.player_path.append(starting_tile)
+			list_occupied_tiles.append(starting_tile)
+			players.append(player)
 		
 	setup_grid()
 	connect_to_signals()
-	current_state = PlayerSetMoveState.new([self])
+	current_state = PlayerSetMoveState.new([self, players])
 
-var current_mouse_tile_position: Vector2i
+func get_alive_players() -> Array[Player]:
+	return players
 
 func set_level_state(new_state: State):
 	if current_state:
@@ -98,7 +100,9 @@ func draw_path(selected_player: Player = null) -> void:
 		path_line.points = points
 		if selected_player:
 			selected_player.num_steps_to_do = len(path_line.points) - 1
-
+	else:
+		path_line.points = []
+	
 func free_tile(tile: Vector2i):
 	grid.set_point_solid(tile, false)
 func occupy_tile(tile: Vector2i):
