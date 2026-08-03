@@ -8,6 +8,8 @@ size = Vector2(60, 60)
 
 [node name="Player" type="Node2D" unique_id=1108589071 groups=["Player"]]
 script = ExtResource("1_ft8w5")
+max_range = 1500.0
+fov_degrees = 45.0
 
 [node name="Player_Sprite" type="Sprite2D" parent="." unique_id=1716240992]
 texture_filter = 1
@@ -18,5 +20,9 @@ texture = ExtResource("1_s0eop")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Selection_Area" unique_id=108256655]
 shape = SubResource("RectangleShape2D_06txj")
+
+[node name="Vision_Polygon" type="Polygon2D" parent="." unique_id=1560586749]
+color = Color(0.5822249, 0.63125, 0.33140624, 0.19500001)
+polygon = PackedVector2Array(0, 0, -256, -256, 256, -256)
 
 [connection signal="input_event" from="Selection_Area" to="." method="_on_selection_area_input_event"]

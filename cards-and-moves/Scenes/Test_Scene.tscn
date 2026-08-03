@@ -26,6 +26,15 @@ custom_data_layer_0/type = 1
 sources/1 = SubResource("TileSetAtlasSource_mwjvy")
 sources/0 = SubResource("TileSetAtlasSource_10mtb")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_06txj"]
+size = Vector2(64, 448)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jjc5n"]
+size = Vector2(640, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fhwqp"]
+size = Vector2(64, 192)
+
 [node name="Node2D" type="Node2D" unique_id=1609049363]
 script = ExtResource("1_4ms0o")
 
@@ -36,7 +45,27 @@ tile_set = SubResource("TileSet_06txj")
 [node name="Path_Line" type="Line2D" parent="." unique_id=780851806]
 
 [node name="Player" parent="." unique_id=1108589071 instance=ExtResource("4_10mtb")]
-position = Vector2(96, 96)
+position = Vector2(1056, 544)
 
 [node name="Player2" parent="." unique_id=2120155671 instance=ExtResource("4_10mtb")]
-position = Vector2(480, 352)
+position = Vector2(864, 224)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1702938192]
+position = Vector2(928, 288)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1953621873]
+position = Vector2(0, 64)
+shape = SubResource("RectangleShape2D_06txj")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="." unique_id=1451802714]
+position = Vector2(480, 96)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2" unique_id=794179377]
+position = Vector2(-32, 0)
+shape = SubResource("RectangleShape2D_jjc5n")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="." unique_id=1690032868]
+position = Vector2(800, 160)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3" unique_id=357753609]
+shape = SubResource("RectangleShape2D_fhwqp")
