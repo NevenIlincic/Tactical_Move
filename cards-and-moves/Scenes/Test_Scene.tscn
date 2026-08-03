@@ -48,7 +48,7 @@ tile_set = SubResource("TileSet_06txj")
 position = Vector2(1056, 544)
 
 [node name="Player2" parent="." unique_id=2120155671 instance=ExtResource("4_10mtb")]
-position = Vector2(864, 224)
+position = Vector2(1056, 416)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1702938192]
 position = Vector2(928, 288)

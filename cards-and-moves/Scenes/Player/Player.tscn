@@ -2,14 +2,13 @@
 
 [ext_resource type="Script" uid="uid://c1ym0y4pbnw4j" path="res://Scripts/Player/player.gd" id="1_ft8w5"]
 [ext_resource type="Texture2D" uid="uid://c442lp23townj" path="res://Sprites/Player/player.png" id="1_s0eop"]
+[ext_resource type="Script" uid="uid://jnl8fjr17re8" path="res://Scenes/Player/vision.gd" id="3_h54ih"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_06txj"]
 size = Vector2(60, 60)
 
 [node name="Player" type="Node2D" unique_id=1108589071 groups=["Player"]]
 script = ExtResource("1_ft8w5")
-max_range = 1500.0
-fov_degrees = 45.0
 
 [node name="Player_Sprite" type="Sprite2D" parent="." unique_id=1716240992]
 texture_filter = 1
@@ -24,5 +23,8 @@ shape = SubResource("RectangleShape2D_06txj")
 [node name="Vision_Polygon" type="Polygon2D" parent="." unique_id=1560586749]
 color = Color(0.5822249, 0.63125, 0.33140624, 0.19500001)
 polygon = PackedVector2Array(0, 0, -256, -256, 256, -256)
+script = ExtResource("3_h54ih")
+max_range = 1200.0
+fov_degrees = 45.0
 
 [connection signal="input_event" from="Selection_Area" to="." method="_on_selection_area_input_event"]
