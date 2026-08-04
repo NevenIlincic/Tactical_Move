@@ -37,9 +37,9 @@ func _unhandled_input(event: InputEvent):
 		if selected_player:
 			is_drawing = false
 
-	if Input.is_action_pressed("rotate_player") and selected_player:
-		selected_player.look_at(level.get_global_mouse_position())
-	
+	if Input.is_action_just_pressed("rotate_player") and selected_player:
+		#selected_player.look_at(level.get_global_mouse_position())
+		selected_player.set_point_to_look(level.get_global_mouse_position())
 	if Input.is_action_just_pressed("reset_path") and selected_player:
 		if len(selected_player.player_path) > 1:
 			level.free_tile(selected_player.player_path[-1])
