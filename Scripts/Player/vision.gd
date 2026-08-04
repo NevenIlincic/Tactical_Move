@@ -15,6 +15,7 @@ var facing_angle: float = 0.0
 
 func _ready() -> void:
 	vision_center_line.add_point(Vector2.ZERO)
+	setup_vision_rays()
 
 func setup_vision_rays() -> void:
 	var half_fov = deg_to_rad(fov_degrees / 2.0)
@@ -31,7 +32,8 @@ func setup_vision_rays() -> void:
 		rays.append(ray)
 
 func update_vision() -> void:
-	var points: PackedVector2Array = [Vector2.ZERO]
+	#var points: PackedVector2Array = [Vector2.ZERO]
+	var raw_points: Array[Vector2] = [Vector2.ZERO]
 	var half_fov = deg_to_rad(fov_degrees / 2.0)
 	
 	for i in rays.size():
@@ -52,12 +54,22 @@ func update_vision() -> void:
 		else:
 			current_point = ray.target_position
 		
-		points.append(current_point)
+		#points.append(current_point)
+		if raw_points.back().distance_to(current_point) > 0.5:
+			raw_points.append(current_point)
 		if i == rays.size() / 2:
 			if vision_center_line.get_point_count() > 1:
 				vision_center_line.set_point_position(1, current_point)
 			else:
 				vision_center_line.add_point(current_point)
-		
-	self.polygon = points
-	collision_polygon_2d.polygon = points
+	
+	var points = PackedVector2Array(raw_points)
+	if points.size() > 3:
+		var triangles = Geometry2D.triangulate_polygon(points)
+		if not triangles.is_empty():
+			self.polygon = points
+			collision_polygon_2d.polygon = points
+		else:
+			pass
+
+	

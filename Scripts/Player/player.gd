@@ -11,17 +11,12 @@ var player_path: Array[Vector2]
 @onready var player_path_line: PlayerPathLine = $Player_Path_Line
 @onready var player_look_at_line: PlayerLookAtLine = $Player_Look_At_Line
 
-
-##PLAYER MOVES
+####PLAYER MOVES
 var num_available_steps: int = 50
 var num_steps_to_do: int = 0
 const SPEED: float = 250
 var is_enemy_spotted: bool = false
 @onready var look_at_position_sprite: Sprite2D = $Look_At_Position_Sprite
-
-###
-#VISION (FOW)
-@onready var vision_polygon: PlayerVision = $Vision_Polygon
 
 enum EngagementRules {
 	IGNORE, #Ignorise i nastavlja dalje
@@ -30,6 +25,13 @@ enum EngagementRules {
 	MOVE_AND_SHOT_IN_PASSING, #Nastavlja kretnju (ako postoji) i samo puca u vidokrugu (bez pracenja rotacijom)
 	MOVE_AND_SHOT_FOLLOWING # Nastavlja (ako postoji) i prati rotiranjem dok ne izgubi iz vidokruga
 }
+@export var current_engagement_rule: EngagementRules = EngagementRules.IGNORE
+
+var enemy_to_shoot: Enemy
+var follow_enemy_with_rotation: bool = false
+#####
+#VISION (FOW)
+@onready var vision_polygon: PlayerVision = $Vision_Polygon
 
 var rays: Array[RayCast2D] = []
 var point_to_look
@@ -39,8 +41,7 @@ func _ready() -> void:
 	player_path.append(global_position)
 	set_up_lines_data()
 	Signals.move_player.connect(move)
-	vision_polygon.setup_vision_rays()
-
+	
 func set_up_lines_data():
 	player_path_line.add_point(global_position)
 	player_look_at_line.add_point(global_position)
@@ -49,10 +50,22 @@ func set_up_lines_data():
 func _physics_process(delta: float) -> void:
 	vision_polygon.update_vision()
 	if is_moving:
+		if enemy_to_shoot:
+			if follow_enemy_with_rotation:
+				set_point_to_look(enemy_to_shoot)
+			
 		set_player_looking_at()
+		vision_polygon.update_vision()
 		move_player_look_at_line_start_position()
 		gradually_remove_path_line()
-	
+		#if enemy_to_shoot:
+			##print("PUC PUC!")
+			#if follow_enemy_with_rotation:
+				#look_at(enemy_to_shoot.global_position)
+			#else:
+				#set_player_looking_at()
+		#else:
+			#set_player_looking_at()
 func gradually_remove_path_line():
 	if player_path_line.get_point_count() > 1:
 		player_path_line.set_point_position(0, global_position)
@@ -66,8 +79,10 @@ func set_player_looking_at():
 	if point_to_look:
 		if check_is_point_to_look_vector():	
 			look_at(point_to_look)
+			print(point_to_look)
 		else:
 			look_at(point_to_look.global_position)
+			print(point_to_look.global_position)
 
 func set_point_to_look(point):
 	point_to_look = point
@@ -105,27 +120,39 @@ func do_initial_player_rotation(tween: Tween):
 			func(weight: float): rotation = lerp_angle(start_angle, target_angle, weight),
 			0.0, 1.0, 0.15
 		)
+	else:
+		tween.kill()
 func do_movement(tween: Tween):
-	var current_position = global_position
+	var current_position = global_position	
+	if len(player_path) > 1:
+		for target_position in player_path:
+			var distance = current_position.distance_to(target_position)
+			var duration = distance / SPEED
+			tween.tween_property(self, "global_position", target_position, duration)
+			
+			current_position = target_position
+	else:
+		tween.kill()
 
-	for target_position in player_path:
-		var distance = current_position.distance_to(target_position)
-		var duration = distance / SPEED
-		tween.tween_property(self, "global_position", target_position, duration)
-		
-		
-		current_position = target_position
-		
+#Executes when player confirmes end moves
 func move(tile_map: TileMapLayer):
 	player_look_at_line.reset_path()
 	is_moving = true
 	#num_available_steps -= num_steps_to_do
-	var tween: Tween = create_tween()
-	do_initial_player_rotation(tween)
-	do_movement(tween)
-	await tween.finished
-	
+	await do_actions()
 	on_move_finished()
+
+var rotation_tween: Tween
+var move_tween: Tween
+func do_actions():
+	rotation_tween = create_tween()
+	move_tween = create_tween()
+	do_initial_player_rotation(rotation_tween)
+	do_movement(move_tween)
+	if move_tween and move_tween.is_valid():
+		await move_tween.finished
+	if rotation_tween and rotation_tween.is_valid():
+		await rotation_tween.finished
 
 func on_move_finished():
 	is_moving = false
@@ -168,19 +195,36 @@ func get_line_length(line: Line2D) -> float:
 		
 	return total_length
 
-
+func on_engagement_action(enemy: Enemy):
+	match current_engagement_rule:
+		EngagementRules.IGNORE:
+			enemy_to_shoot = null
+			return
+		EngagementRules.STOP_AND_SHOT_IN_PASSING:
+			enemy_to_shoot = enemy
+			if move_tween and move_tween.is_valid():
+				move_tween.kill()
+		EngagementRules.STOP_AND_SHOT_FOLLOWING:
+			enemy_to_shoot = enemy
+			follow_enemy_with_rotation = true
+			if move_tween and move_tween.is_valid():
+				move_tween.kill()
+		EngagementRules.MOVE_AND_SHOT_IN_PASSING:
+			enemy_to_shoot = enemy
+			follow_enemy_with_rotation = false
+		EngagementRules.MOVE_AND_SHOT_FOLLOWING:
+			enemy_to_shoot = enemy
+			follow_enemy_with_rotation = true
+			#follow_enemy_with_rotation = true
 func _on_vision_area_area_entered(area: Area2D) -> void:
 	if area.is_in_group("enemy"):
 		var enemy: Enemy = area.get_parent()
-		set_point_to_look(enemy)
 		enemy.show_enemy()
-		var tween: Tween = create_tween()
-		do_initial_player_rotation(tween)
-		await tween.finished
+		on_engagement_action(enemy)
 	
-
 func _on_vision_area_area_exited(area: Area2D) -> void:
 	if area.is_in_group("enemy"):
 		var enemy: Enemy = area.get_parent()
 		enemy.hide_enemy()
+		enemy_to_shoot = null
 		point_to_look = null

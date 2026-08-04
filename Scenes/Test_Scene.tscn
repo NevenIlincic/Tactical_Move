@@ -46,10 +46,11 @@ tile_set = SubResource("TileSet_06txj")
 [node name="Path_Line" type="Line2D" parent="." unique_id=780851806]
 
 [node name="Player" parent="." unique_id=1108589071 instance=ExtResource("4_10mtb")]
-position = Vector2(1056, 544)
+position = Vector2(264, 488)
 
 [node name="Player2" parent="." unique_id=2120155671 instance=ExtResource("4_10mtb")]
-position = Vector2(1056, 416)
+position = Vector2(928, 600)
+current_engagement_rule = 4
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1702938192]
 position = Vector2(928, 288)
@@ -72,7 +73,7 @@ position = Vector2(800, 160)
 shape = SubResource("RectangleShape2D_fhwqp")
 
 [node name="Player3" parent="." unique_id=1999289494 instance=ExtResource("4_10mtb")]
-position = Vector2(992, 480)
+position = Vector2(496, 384)
 
 [node name="Enemy" parent="." unique_id=1440065138 instance=ExtResource("5_svcn8")]
-position = Vector2(1024, 120)
+position = Vector2(1040, 32)
