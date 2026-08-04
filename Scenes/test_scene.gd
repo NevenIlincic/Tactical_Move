@@ -19,8 +19,6 @@ func _ready() -> void:
 		if player is Player:
 			var starting_tile: Vector2i = tile_map.local_to_map(tile_map.to_local(player.global_position))
 			player.starting_tile = starting_tile
-			player.player_path.append(starting_tile)
-			list_occupied_tiles.append(starting_tile)
 			players.append(player)
 		
 	setup_grid()
@@ -77,8 +75,8 @@ func setup_grid():
 		if tile_data.get_custom_data("solid"):
 			grid.set_point_solid(cell, true)
 			
-	for tile in list_occupied_tiles:
-		grid.set_point_solid(tile, true)
+	#for tile in list_occupied_tiles:
+		#grid.set_point_solid(tile, true)
 		
 			
 @onready var path_line: Line2D = $Path_Line
@@ -89,20 +87,11 @@ var is_drawing: bool = false
 func _unhandled_input(event: InputEvent) -> void:
 	current_state._unhandled_input(event)
 	
-func draw_path(selected_player: Player = null) -> void:
-	if selected_player:
-		var points: PackedVector2Array = []
-		var drawed_steps: int = -1
-		for tile in selected_player.player_path:
-			if drawed_steps < selected_player.num_available_steps:
-				drawed_steps += 1
-				points.append(tile_map.map_to_local(tile))
-		path_line.points = points
-		if selected_player:
-			selected_player.num_steps_to_do = len(path_line.points) - 1
-	else:
-		path_line.points = []
-	
+func add_point_to_path(point: Vector2) -> void:
+	path_line.add_point(point)
+func reset_path():
+	path_line.points = []
+
 func free_tile(tile: Vector2i):
 	grid.set_point_solid(tile, false)
 func occupy_tile(tile: Vector2i):
