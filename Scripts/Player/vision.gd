@@ -2,6 +2,7 @@ extends Polygon2D
 class_name PlayerVision
 
 @onready var vision_center_line: Line2D = $Vision_Center_Line
+@onready var collision_polygon_2d: CollisionPolygon2D = $Vision_Area/CollisionPolygon2D
 
 
 @export var max_range: float = 300.0
@@ -24,6 +25,8 @@ func setup_vision_rays() -> void:
 		ray.target_position = Vector2(max_range, 0).rotated(angle)
 		ray.collision_mask = wall_collision_mask
 		ray.enabled = true
+		ray.collide_with_areas = true
+		ray.set_collision_mask_value(3, false)
 		add_child(ray)
 		rays.append(ray)
 
@@ -43,6 +46,9 @@ func update_vision() -> void:
 		
 		if ray.is_colliding():
 			current_point = ray.to_local(ray.get_collision_point())
+			#var hit_object = ray.get_collider()
+			#if hit_object is Enemy:
+				#hit_object.show_enemy()
 		else:
 			current_point = ray.target_position
 		
@@ -54,3 +60,4 @@ func update_vision() -> void:
 				vision_center_line.add_point(current_point)
 		
 	self.polygon = points
+	collision_polygon_2d.polygon = points

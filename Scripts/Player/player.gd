@@ -23,6 +23,13 @@ var is_enemy_spotted: bool = false
 #VISION (FOW)
 @onready var vision_polygon: PlayerVision = $Vision_Polygon
 
+enum EngagementRules {
+	IGNORE, #Ignorise i nastavlja dalje
+	STOP_AND_SHOT_IN_PASSING, #Staje i puca ako mu je u vidokrugu (bez pracenja rotacijom)
+	STOP_AND_SHOT_FOLLOWING, #Staje i puca ako mu je usao u vidokrug (prati neprijatelja rotacijom)
+	MOVE_AND_SHOT_IN_PASSING, #Nastavlja kretnju (ako postoji) i samo puca u vidokrugu (bez pracenja rotacijom)
+	MOVE_AND_SHOT_FOLLOWING # Nastavlja (ako postoji) i prati rotiranjem dok ne izgubi iz vidokruga
+}
 
 var rays: Array[RayCast2D] = []
 var point_to_look
@@ -64,7 +71,9 @@ func set_player_looking_at():
 
 func set_point_to_look(point):
 	point_to_look = point
+	#If point is enemy
 	if not check_is_point_to_look_vector():
+		point_to_look = point.global_position
 		look_at_position_sprite.visible = false
 		return
 	look_at_position_sprite.visible = true
@@ -89,7 +98,7 @@ func set_player_path(new_path: Array[Vector2]):
 
 func do_initial_player_rotation(tween: Tween):
 	if point_to_look:
-		var target_angle = global_position.angle_to_point(point_to_look)
+		var	target_angle = global_position.angle_to_point(point_to_look)
 		var start_angle = rotation
 		
 		tween.tween_method(
@@ -158,3 +167,20 @@ func get_line_length(line: Line2D) -> float:
 		total_length += points[i].distance_to(points[i + 1])
 		
 	return total_length
+
+
+func _on_vision_area_area_entered(area: Area2D) -> void:
+	if area.is_in_group("enemy"):
+		var enemy: Enemy = area.get_parent()
+		set_point_to_look(enemy)
+		enemy.show_enemy()
+		var tween: Tween = create_tween()
+		do_initial_player_rotation(tween)
+		await tween.finished
+	
+
+func _on_vision_area_area_exited(area: Area2D) -> void:
+	if area.is_in_group("enemy"):
+		var enemy: Enemy = area.get_parent()
+		enemy.hide_enemy()
+		point_to_look = null

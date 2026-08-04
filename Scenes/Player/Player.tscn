@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://c1ym0y4pbnw4j" path="res://Scripts/Player/player.gd" id="1_ft8w5"]
 [ext_resource type="Texture2D" uid="uid://c442lp23townj" path="res://Sprites/Player/player.png" id="1_s0eop"]
 [ext_resource type="Script" uid="uid://kkaaaj6uvi8u" path="res://Scripts/Line/player_path_line.gd" id="2_4wape"]
-[ext_resource type="Script" uid="uid://jnl8fjr17re8" path="res://Scenes/Player/vision.gd" id="3_h54ih"]
+[ext_resource type="Script" uid="uid://jnl8fjr17re8" path="res://Scripts/Player/vision.gd" id="3_h54ih"]
 [ext_resource type="Texture2D" uid="uid://cp3f8t70d5twp" path="res://icon.svg" id="4_ude3g"]
 [ext_resource type="Texture2D" uid="uid://uwcsyrtrt75l" path="res://Sprites/Path_Line/New Piskel-1.png - 2026-08-04T161338.290.png" id="5_jmcll"]
 [ext_resource type="Script" uid="uid://b260cldj7kekv" path="res://Scripts/Line/player_look_at_line.gd" id="7_t26db"]
@@ -44,6 +44,11 @@ width = 3.0
 texture = ExtResource("5_jmcll")
 texture_mode = 1
 
+[node name="Vision_Area" type="Area2D" parent="Vision_Polygon" unique_id=600177350]
+collision_layer = 4
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Vision_Polygon/Vision_Area" unique_id=1640132888]
+
 [node name="Look_At_Position_Sprite" type="Sprite2D" parent="." unique_id=560975301]
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("4_ude3g")
@@ -58,3 +63,5 @@ texture_mode = 1
 script = ExtResource("7_t26db")
 
 [connection signal="input_event" from="Selection_Area" to="." method="_on_selection_area_input_event"]
+[connection signal="area_entered" from="Vision_Polygon/Vision_Area" to="." method="_on_vision_area_area_entered"]
+[connection signal="area_exited" from="Vision_Polygon/Vision_Area" to="." method="_on_vision_area_area_exited"]

@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://c3qy2e6a8kyg2" path="res://Sprites/Tiles/New Piskel-1.png - 2026-08-02T002434.484.png" id="2_mrf6p"]
 [ext_resource type="Texture2D" uid="uid://dx4qogxo2oe5u" path="res://Sprites/Tiles/New Piskel-2.png (46).png" id="2_mwjvy"]
 [ext_resource type="PackedScene" uid="uid://chy7dddrrr700" path="res://Scenes/Player/Player.tscn" id="4_10mtb"]
+[ext_resource type="PackedScene" uid="uid://y3pndfcq1kxo" path="res://Scenes/Enemy/Enemy.tscn" id="5_svcn8"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_10mtb"]
 texture = ExtResource("2_mwjvy")
@@ -72,3 +73,6 @@ shape = SubResource("RectangleShape2D_fhwqp")
 
 [node name="Player3" parent="." unique_id=1999289494 instance=ExtResource("4_10mtb")]
 position = Vector2(992, 480)
+
+[node name="Enemy" parent="." unique_id=1440065138 instance=ExtResource("5_svcn8")]
+position = Vector2(1024, 120)
