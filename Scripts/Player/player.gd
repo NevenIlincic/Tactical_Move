@@ -8,8 +8,8 @@ var is_selected: bool = false
 
 var player_path: Array[Vector2]
 @onready var player_sprite: Sprite2D = $Player_Sprite
-@onready var player_path_line: Line2D = $Player_Path_Line
-@onready var player_look_at_line: Line2D = $Player_Look_At_Line
+@onready var player_path_line: PlayerPathLine = $Player_Path_Line
+@onready var player_look_at_line: PlayerLookAtLine = $Player_Look_At_Line
 
 
 ##PLAYER MOVES
@@ -30,25 +30,33 @@ var point_to_look
 
 func _ready() -> void:
 	player_path.append(global_position)
-	player_path_line.add_point(global_position)
-	player_look_at_line.add_point(global_position)
+	set_up_lines_data()
 	Signals.move_player.connect(move)
 	vision_polygon.setup_vision_rays()
-	
+
+func set_up_lines_data():
+	player_path_line.add_point(global_position)
+	player_look_at_line.add_point(global_position)
+	player_look_at_line.set_player_look_at_position_sprite(look_at_position_sprite)
+
 func _physics_process(delta: float) -> void:
 	vision_polygon.update_vision()
-	set_player_looking_at()
-	if is_moving and player_path_line.get_point_count() > 1:
+	if is_moving:
+		set_player_looking_at()
+		move_player_look_at_line_start_position()
+		gradually_remove_path_line()
+	
+func gradually_remove_path_line():
+	if player_path_line.get_point_count() > 1:
 		player_path_line.set_point_position(0, global_position)
 		var next_point = player_path_line.get_point_position(1)
 		if global_position.distance_to(next_point) < 10.0:
 			player_path_line.remove_point(0)
-	
-	if is_moving and player_look_at_line.get_point_count() > 1:
+func move_player_look_at_line_start_position():
+	if player_look_at_line.get_point_count() > 0:
 		player_look_at_line.set_point_position(0, global_position)
-
 func set_player_looking_at():
-	if is_moving and point_to_look:
+	if point_to_look:
 		if check_is_point_to_look_vector():	
 			look_at(point_to_look)
 		else:
@@ -59,11 +67,16 @@ func set_point_to_look(point):
 	if not check_is_point_to_look_vector():
 		look_at_position_sprite.visible = false
 		return
+	look_at_position_sprite.visible = true
 	look_at_position_sprite.global_position = point_to_look
 	if player_look_at_line.get_point_count() == 1:
 		player_look_at_line.add_point(point_to_look)
 	else:
 		player_look_at_line.set_point_position(1, point_to_look)
+
+func reset_point_to_look():
+	point_to_look = null
+	player_look_at_line.reset_path()
 	
 func check_is_point_to_look_vector() -> bool:
 	if point_to_look:
@@ -95,6 +108,7 @@ func do_movement(tween: Tween):
 		current_position = target_position
 		
 func move(tile_map: TileMapLayer):
+	player_look_at_line.reset_path()
 	is_moving = true
 	#num_available_steps -= num_steps_to_do
 	var tween: Tween = create_tween()
@@ -102,10 +116,14 @@ func move(tile_map: TileMapLayer):
 	do_movement(tween)
 	await tween.finished
 	
+	on_move_finished()
+
+func on_move_finished():
 	is_moving = false
 	player_path.clear()
 	point_to_look = null
-	starting_tile = tile_map.local_to_map(tile_map.to_local(self.global_position))
+	
+	#starting_tile = tile_map.local_to_map(tile_map.to_local(self.global_position))
 	#player_path.append(starting_tile)
 	player_path.append(global_position)
 
@@ -124,22 +142,18 @@ func _on_selection_area_input_event(viewport: Node, event: InputEvent, shape_idx
 
 ##PATH_LINE
 func add_point_to_path(point: Vector2) -> void:
-	var line_length: float = get_line_length(player_path_line)
-	var new_line_length: float = line_length + point.distance_to(player_path_line.points[-1]) 
-	print(new_line_length)
-	if new_line_length < 1000:
+	if player_path_line.check_can_add_point(point):
 		player_path_line.add_point(point)
 		player_path.append(point)	
 
 
 func reset_path():
-	player_path_line.points = player_path_line.points.slice(0,1)
+	player_path_line.reset_path()
 
 func get_line_length(line: Line2D) -> float:
 	var total_length: float = 0.0
 	var points = line.points
 	
-	# Prolazimo kroz sve tačke i sabiramo rastojanja između svake dve susedne
 	for i in range(points.size() - 1):
 		total_length += points[i].distance_to(points[i + 1])
 		
