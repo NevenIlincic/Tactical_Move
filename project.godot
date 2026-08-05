@@ -18,7 +18,6 @@ config/icon="res://icon.svg"
 [autoload]
 
 Signals="*uid://bsc3uuw8qrlyh"
-EnemyManager="*uid://cvisdfgsub8y5"
 
 [display]
 

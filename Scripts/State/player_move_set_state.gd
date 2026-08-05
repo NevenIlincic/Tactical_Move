@@ -2,9 +2,9 @@ class_name PlayerSetMoveState extends State
 
 #Data variables
 var level: Level
-var alive_players: Dictionary 
 
 #Other variables
+var alive_players: Dictionary 
 var is_drawing: bool = false
 var player_selection_manager: PlayerSelectionManager
 var occupied_target_tiles: Dictionary = {} #{tile: {player_key: true } }
@@ -12,9 +12,9 @@ var players_cause_collision: Dictionary = {}
 
 
 func _init(data: Array):
+	print("RAZMISLI!")
 	level = data[0]
-	for player: Player in data[1]:
-		alive_players[player] = player.player_path
+	alive_players = level.get_alive_players()
 	player_selection_manager = PlayerSelectionManager.new()
 	connect_to_singals()
 	#fill_occupied_target_tiles_dict()
@@ -27,7 +27,8 @@ func _unhandled_input(event: InputEvent):
 		if player_selection_manager.selected_player:
 			player_selection_manager.deselect_player()
 		if check_is_players_moving_possible():
-			Signals.move_player.emit(level.tile_map)
+			#Signals.move_player.emit(level.tile_map)
+			level.set_level_state(ActionState.new([level]))
 		#else:
 			#print(occupied_target_tiles)
 		
@@ -131,4 +132,6 @@ func check_is_players_moving_possible() -> bool:
 		if len(target_tile_dict) > 1:
 			return false
 	return true
-	
+
+func _physics_process(delta: float):
+	pass

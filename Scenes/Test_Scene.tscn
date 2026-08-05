@@ -45,9 +45,6 @@ tile_set = SubResource("TileSet_06txj")
 
 [node name="Path_Line" type="Line2D" parent="." unique_id=780851806]
 
-[node name="Player" parent="." unique_id=1108589071 instance=ExtResource("4_10mtb")]
-position = Vector2(264, 488)
-
 [node name="Player2" parent="." unique_id=2120155671 instance=ExtResource("4_10mtb")]
 position = Vector2(928, 600)
 current_engagement_rule = 2
@@ -72,11 +69,14 @@ position = Vector2(800, 160)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3" unique_id=357753609]
 shape = SubResource("RectangleShape2D_fhwqp")
 
-[node name="Player3" parent="." unique_id=1999289494 instance=ExtResource("4_10mtb")]
-position = Vector2(496, 384)
-
 [node name="Enemy" parent="." unique_id=1440065138 instance=ExtResource("5_svcn8")]
 position = Vector2(1040, 32)
 
-[node name="Player4" parent="." unique_id=1917919051 instance=ExtResource("4_10mtb")]
-position = Vector2(235, 355)
+[node name="Player" parent="." unique_id=1108589071 instance=ExtResource("4_10mtb")]
+position = Vector2(241, 361)
+
+[node name="Player3" parent="." unique_id=933176661 instance=ExtResource("4_10mtb")]
+position = Vector2(289, 516)
+
+[node name="Player4" parent="." unique_id=1948750327 instance=ExtResource("4_10mtb")]
+position = Vector2(494, 453)

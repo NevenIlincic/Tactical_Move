@@ -7,3 +7,6 @@ func _init(data: Array);
 
 @abstract
 func _unhandled_input(event: InputEvent);
+
+@abstract
+func _physics_process(delta: float);

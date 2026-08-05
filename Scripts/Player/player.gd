@@ -3,7 +3,6 @@ class_name Player
 
 var starting_tile: Vector2i
 var target_tile: Vector2i
-var is_moving: bool = false
 var is_selected: bool = false
 
 var player_path: Array[Vector2]
@@ -36,12 +35,26 @@ var follow_enemy_with_rotation: bool = false
 var rays: Array[RayCast2D] = []
 var point_to_look
 
+var is_walking: bool = false
+var is_shooting: bool = false
+var enemies_in_sight: Dictionary = {} #{Enemy: true}
 
 func _ready() -> void:
 	player_path.append(global_position)
 	set_up_lines_data()
 	connect_to_signals()
-	
+
+func is_player_walking() -> bool:
+	return is_walking
+func has_enemies_in_sight() -> bool:
+	return not enemies_in_sight.is_empty()
+func is_player_shooting() -> bool:
+	return is_shooting
+
+#Checks if player is in his finished state 
+func is_in_finished_state():
+	return not is_player_walking() and not is_player_shooting() and not has_enemies_in_sight()
+
 func set_up_lines_data():
 	player_path_line.add_point(global_position)
 	player_look_at_line.add_point(global_position)
@@ -54,15 +67,6 @@ func connect_to_signals():
 	
 func _physics_process(delta: float) -> void:
 	vision_polygon.update_vision()
-	if is_moving:
-		if enemy_to_shoot:
-			if follow_enemy_with_rotation:
-				set_point_to_look(enemy_to_shoot)
-			
-		set_player_looking_at()
-		vision_polygon.update_vision()
-		move_player_look_at_line_start_position()
-		gradually_remove_path_line()
 		#if enemy_to_shoot:
 			##print("PUC PUC!")
 			#if follow_enemy_with_rotation:
@@ -71,6 +75,20 @@ func _physics_process(delta: float) -> void:
 				#set_player_looking_at()
 		#else:
 			#set_player_looking_at()
+
+#Called when ActionState
+func do_while_action(delta: float):
+	check_is_enemy_in_sight()	
+	set_player_looking_at()
+	#vision_polygon.update_vision()
+	move_player_look_at_line_start_position()
+	gradually_remove_path_line()
+
+func check_is_enemy_in_sight():
+	if enemy_to_shoot:
+		if follow_enemy_with_rotation:
+			set_point_to_look(enemy_to_shoot)
+	
 func gradually_remove_path_line():
 	if player_path_line.get_point_count() > 1:
 		player_path_line.set_point_position(0, global_position)
@@ -138,16 +156,16 @@ func do_movement(tween: Tween):
 		tween.kill()
 
 #Executes when player confirmes end moves
-func move(tile_map: TileMapLayer):
+func do_actions():
 	player_look_at_line.reset_path()
-	is_moving = true
 	#num_available_steps -= num_steps_to_do
-	await do_actions()
+	await move()
 	on_move_finished()
 
 var rotation_tween: Tween
 var move_tween: Tween
-func do_actions():
+func move():
+	is_walking = true
 	rotation_tween = create_tween()
 	move_tween = create_tween()
 	do_initial_player_rotation(rotation_tween)
@@ -158,15 +176,10 @@ func do_actions():
 		await rotation_tween.finished
 
 func on_move_finished():
-	is_moving = false
+	is_walking = false
 	player_path.clear()
 	point_to_look = null
 	player_path.append(global_position)
-
-func check_has_player_finished_move():
-	if not is_moving:
-		Signals.player_move_finished.emit()
-
 
 func _on_selection_area_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.is_pressed() and event.button_index == MOUSE_BUTTON_LEFT:
@@ -188,15 +201,6 @@ func reset_path():
 	player_path.append(global_position)
 	player_path_line.reset_path()
 
-func get_line_length(line: Line2D) -> float:
-	var total_length: float = 0.0
-	var points = line.points
-	
-	for i in range(points.size() - 1):
-		total_length += points[i].distance_to(points[i + 1])
-		
-	return total_length
-
 func on_engagement_action(enemy: Enemy):
 	match current_engagement_rule:
 		EngagementRules.IGNORE:
@@ -206,12 +210,14 @@ func on_engagement_action(enemy: Enemy):
 			enemy_to_shoot = enemy
 			if move_tween and move_tween.is_valid():
 				move_tween.kill()
+			is_walking = false
 			reset_path()
 		EngagementRules.STOP_AND_SHOT_FOLLOWING:
 			enemy_to_shoot = enemy
 			follow_enemy_with_rotation = true
 			if move_tween and move_tween.is_valid():
 				move_tween.kill()
+			is_walking = false
 			reset_path()
 		EngagementRules.MOVE_AND_SHOT_IN_PASSING:
 			enemy_to_shoot = enemy
@@ -223,17 +229,15 @@ func on_engagement_action(enemy: Enemy):
 func _on_enemy_seen(enemy: Enemy, players: Array[Player]) -> void:
 	if self not in players:
 		return
-	print("VIDIM GA")
 	enemy.show_enemy()
+	enemies_in_sight[enemy] = true
 	on_engagement_action(enemy)
 	
 func _on_enemy_lost(enemy: Enemy, players: Array[Player]) -> void:
 	if self not in players:
 		return
-	print("IZGUBIO GA")
 	enemy.hide_enemy()
+	if enemies_in_sight.has(enemy):
+		enemies_in_sight.erase(enemy)
 	enemy_to_shoot = null
 	point_to_look = null
-		#TEST
-		#if current_engagement_rule == EngagementRules.STOP_AND_SHOT_IN_PASSING or current_engagement_rule == EngagementRules.STOP_AND_SHOT_FOLLOWING:
-			#is_moving = false
