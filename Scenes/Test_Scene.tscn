@@ -36,7 +36,7 @@ size = Vector2(640, 64)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fhwqp"]
 size = Vector2(64, 192)
 
-[node name="Node2D" type="Node2D" unique_id=1609049363]
+[node name="Node2D" type="Node2D" unique_id=1609049363 groups=["Level"]]
 script = ExtResource("1_4ms0o")
 
 [node name="TileMap" type="TileMapLayer" parent="." unique_id=1180536432]
@@ -50,7 +50,7 @@ position = Vector2(264, 488)
 
 [node name="Player2" parent="." unique_id=2120155671 instance=ExtResource("4_10mtb")]
 position = Vector2(928, 600)
-current_engagement_rule = 4
+current_engagement_rule = 2
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1702938192]
 position = Vector2(928, 288)
@@ -77,3 +77,6 @@ position = Vector2(496, 384)
 
 [node name="Enemy" parent="." unique_id=1440065138 instance=ExtResource("5_svcn8")]
 position = Vector2(1040, 32)
+
+[node name="Player4" parent="." unique_id=1917919051 instance=ExtResource("4_10mtb")]
+position = Vector2(235, 355)

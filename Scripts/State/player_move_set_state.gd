@@ -46,7 +46,6 @@ func _unhandled_input(event: InputEvent):
 		selected_player.set_point_to_look(level.get_global_mouse_position())
 	if Input.is_action_just_pressed("reset_path") and selected_player:
 			#_erase_from_occupated_tiles_dict(selected_player.player_path[-1], selected_player)
-		selected_player.player_path = selected_player.player_path.slice(0, 1)
 		selected_player.reset_path()
 
 func connect_to_singals():

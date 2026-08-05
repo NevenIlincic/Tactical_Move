@@ -48,6 +48,7 @@ texture_mode = 1
 collision_layer = 4
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Vision_Polygon/Vision_Area" unique_id=1640132888]
+disabled = true
 
 [node name="Look_At_Position_Sprite" type="Sprite2D" parent="." unique_id=560975301]
 scale = Vector2(0.1, 0.1)
@@ -63,5 +64,3 @@ texture_mode = 1
 script = ExtResource("7_t26db")
 
 [connection signal="input_event" from="Selection_Area" to="." method="_on_selection_area_input_event"]
-[connection signal="area_entered" from="Vision_Polygon/Vision_Area" to="." method="_on_vision_area_area_entered"]
-[connection signal="area_exited" from="Vision_Polygon/Vision_Area" to="." method="_on_vision_area_area_exited"]

@@ -40,13 +40,18 @@ var point_to_look
 func _ready() -> void:
 	player_path.append(global_position)
 	set_up_lines_data()
-	Signals.move_player.connect(move)
+	connect_to_signals()
 	
 func set_up_lines_data():
 	player_path_line.add_point(global_position)
 	player_look_at_line.add_point(global_position)
 	player_look_at_line.set_player_look_at_position_sprite(look_at_position_sprite)
 
+func connect_to_signals():
+	Signals.move_player.connect(move)
+	Signals.show_enemy.connect(_on_enemy_seen)
+	Signals.hide_enemy.connect(_on_enemy_lost)
+	
 func _physics_process(delta: float) -> void:
 	vision_polygon.update_vision()
 	if is_moving:
@@ -79,10 +84,8 @@ func set_player_looking_at():
 	if point_to_look:
 		if check_is_point_to_look_vector():	
 			look_at(point_to_look)
-			print(point_to_look)
 		else:
 			look_at(point_to_look.global_position)
-			print(point_to_look.global_position)
 
 func set_point_to_look(point):
 	point_to_look = point
@@ -158,9 +161,6 @@ func on_move_finished():
 	is_moving = false
 	player_path.clear()
 	point_to_look = null
-	
-	#starting_tile = tile_map.local_to_map(tile_map.to_local(self.global_position))
-	#player_path.append(starting_tile)
 	player_path.append(global_position)
 
 func check_has_player_finished_move():
@@ -184,6 +184,7 @@ func add_point_to_path(point: Vector2) -> void:
 
 
 func reset_path():
+	player_path = player_path.slice(0, 1)
 	player_path_line.reset_path()
 
 func get_line_length(line: Line2D) -> float:
@@ -204,11 +205,13 @@ func on_engagement_action(enemy: Enemy):
 			enemy_to_shoot = enemy
 			if move_tween and move_tween.is_valid():
 				move_tween.kill()
+			reset_path()
 		EngagementRules.STOP_AND_SHOT_FOLLOWING:
 			enemy_to_shoot = enemy
 			follow_enemy_with_rotation = true
 			if move_tween and move_tween.is_valid():
 				move_tween.kill()
+			reset_path()
 		EngagementRules.MOVE_AND_SHOT_IN_PASSING:
 			enemy_to_shoot = enemy
 			follow_enemy_with_rotation = false
@@ -216,15 +219,20 @@ func on_engagement_action(enemy: Enemy):
 			enemy_to_shoot = enemy
 			follow_enemy_with_rotation = true
 			#follow_enemy_with_rotation = true
-func _on_vision_area_area_entered(area: Area2D) -> void:
-	if area.is_in_group("enemy"):
-		var enemy: Enemy = area.get_parent()
-		enemy.show_enemy()
-		on_engagement_action(enemy)
+func _on_enemy_seen(enemy: Enemy, players: Array[Player]) -> void:
+	if self not in players:
+		return
+	print("VIDIM GA")
+	enemy.show_enemy()
+	on_engagement_action(enemy)
 	
-func _on_vision_area_area_exited(area: Area2D) -> void:
-	if area.is_in_group("enemy"):
-		var enemy: Enemy = area.get_parent()
-		enemy.hide_enemy()
-		enemy_to_shoot = null
-		point_to_look = null
+func _on_enemy_lost(enemy: Enemy, players: Array[Player]) -> void:
+	if self not in players:
+		return
+	print("IZGUBIO GA")
+	enemy.hide_enemy()
+	enemy_to_shoot = null
+	point_to_look = null
+		#TEST
+		#if current_engagement_rule == EngagementRules.STOP_AND_SHOT_IN_PASSING or current_engagement_rule == EngagementRules.STOP_AND_SHOT_FOLLOWING:
+			#is_moving = false

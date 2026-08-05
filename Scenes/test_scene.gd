@@ -10,6 +10,7 @@ var confirmed_player_moves: int = 0
 var list_occupied_tiles: Array[Vector2i]
 
 var players: Array[Player]
+var enemies: Dictionary = {}
 var num_finished_player_turns: int = 0
 
 var current_state: State
@@ -20,13 +21,20 @@ func _ready() -> void:
 			var starting_tile: Vector2i = tile_map.local_to_map(tile_map.to_local(player.global_position))
 			player.starting_tile = starting_tile
 			players.append(player)
-		
+	for enemy in get_tree().get_nodes_in_group("enemy_node"):
+		if enemy is Enemy:
+			enemies[enemy] = true
+	
+	Signals.get_alive_enemies.emit(enemies)
 	setup_grid()
 	connect_to_signals()
 	current_state = PlayerSetMoveState.new([self, players])
 
 func get_alive_players() -> Array[Player]:
 	return players
+
+func get_alive_enemies() -> Dictionary:
+	return enemies
 
 func set_level_state(new_state: State):
 	if current_state:
