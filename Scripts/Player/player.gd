@@ -184,7 +184,8 @@ func add_point_to_path(point: Vector2) -> void:
 
 
 func reset_path():
-	player_path = player_path.slice(0, 1)
+	player_path.clear()
+	player_path.append(global_position)
 	player_path_line.reset_path()
 
 func get_line_length(line: Line2D) -> float:
