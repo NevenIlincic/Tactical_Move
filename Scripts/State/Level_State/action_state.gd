@@ -30,7 +30,7 @@ func _physics_process(delta: float) -> void:
 		player.do_while_action(delta)
 		if not player.is_in_finished_state():
 			all_players_finished_moves = false
-	#print(all_players_finished_moves)
+			
 	if all_players_finished_moves:
 		level.set_level_state(PlayerSetMoveState.new([level]))
 	

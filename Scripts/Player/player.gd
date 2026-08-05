@@ -39,21 +39,27 @@ var is_walking: bool = false
 var is_shooting: bool = false
 var enemies_in_sight: Dictionary = {} #{Enemy: true}
 
+@export var weapons: Array[Weapon]
+@export var current_weapon: Weapon
+
 func _ready() -> void:
 	player_path.append(global_position)
 	set_up_lines_data()
 	connect_to_signals()
-
+	if not weapons.is_empty():
+		current_weapon = weapons[0]
+		current_weapon.set_weapon_owner(self)
+		print(current_weapon)
 func is_player_walking() -> bool:
 	return is_walking
 func has_enemies_in_sight() -> bool:
 	return not enemies_in_sight.is_empty()
-func is_player_shooting() -> bool:
-	return is_shooting
+#func is_player_shooting() -> bool:
+	#return is_shooting
 
 #Checks if player is in his finished state 
 func is_in_finished_state():
-	return not is_player_walking() and not is_player_shooting() and not has_enemies_in_sight()
+	return not is_player_walking() and not has_enemies_in_sight()
 
 func set_up_lines_data():
 	player_path_line.add_point(global_position)
@@ -61,21 +67,12 @@ func set_up_lines_data():
 	player_look_at_line.set_player_look_at_position_sprite(look_at_position_sprite)
 
 func connect_to_signals():
-	Signals.move_player.connect(move)
+	#Signals.move_player.connect(move)
 	Signals.show_enemy.connect(_on_enemy_seen)
 	Signals.hide_enemy.connect(_on_enemy_lost)
 	
 func _physics_process(delta: float) -> void:
 	vision_polygon.update_vision()
-		#if enemy_to_shoot:
-			##print("PUC PUC!")
-			#if follow_enemy_with_rotation:
-				#look_at(enemy_to_shoot.global_position)
-			#else:
-				#set_player_looking_at()
-		#else:
-			#set_player_looking_at()
-
 #Called when ActionState
 func do_while_action(delta: float):
 	check_is_enemy_in_sight()	
@@ -83,6 +80,8 @@ func do_while_action(delta: float):
 	#vision_polygon.update_vision()
 	move_player_look_at_line_start_position()
 	gradually_remove_path_line()
+	if current_weapon:
+		current_weapon.update(delta)
 
 func check_is_enemy_in_sight():
 	if enemy_to_shoot:
@@ -159,12 +158,12 @@ func do_movement(tween: Tween):
 func do_actions():
 	player_look_at_line.reset_path()
 	#num_available_steps -= num_steps_to_do
-	await move()
-	on_move_finished()
+	await _move()
+	_on_move_finished()
 
 var rotation_tween: Tween
 var move_tween: Tween
-func move():
+func _move():
 	is_walking = true
 	rotation_tween = create_tween()
 	move_tween = create_tween()
@@ -175,7 +174,7 @@ func move():
 	if rotation_tween and rotation_tween.is_valid():
 		await rotation_tween.finished
 
-func on_move_finished():
+func _on_move_finished():
 	is_walking = false
 	player_path.clear()
 	point_to_look = null
@@ -225,7 +224,13 @@ func on_engagement_action(enemy: Enemy):
 		EngagementRules.MOVE_AND_SHOT_FOLLOWING:
 			enemy_to_shoot = enemy
 			follow_enemy_with_rotation = true
-			#follow_enemy_with_rotation = true
+	#
+	if enemy_to_shoot:
+		current_weapon.change_weapon_state(WeaponShootState.new())
+	else:
+		current_weapon.change_weapon_state(WeaponIdleState.new())
+	current_weapon.change_enemy_to_shoot(enemy)
+	
 func _on_enemy_seen(enemy: Enemy, players: Array[Player]) -> void:
 	if self not in players:
 		return
@@ -239,5 +244,13 @@ func _on_enemy_lost(enemy: Enemy, players: Array[Player]) -> void:
 	enemy.hide_enemy()
 	if enemies_in_sight.has(enemy):
 		enemies_in_sight.erase(enemy)
-	enemy_to_shoot = null
+	
+	if enemies_in_sight.is_empty():
+		enemy_to_shoot = null
+		current_weapon.change_weapon_state(WeaponIdleState.new())
+	else:
+		enemy_to_shoot = enemies_in_sight.keys()[0]
+		current_weapon.change_weapon_state(WeaponShootState.new())
+	
+	current_weapon.change_enemy_to_shoot(enemy_to_shoot)
 	point_to_look = null

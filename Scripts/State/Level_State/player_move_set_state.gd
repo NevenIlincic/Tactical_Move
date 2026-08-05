@@ -12,11 +12,9 @@ var players_cause_collision: Dictionary = {}
 
 
 func _init(data: Array):
-	print("RAZMISLI!")
 	level = data[0]
 	alive_players = level.get_alive_players()
 	player_selection_manager = PlayerSelectionManager.new()
-	connect_to_singals()
 	#fill_occupied_target_tiles_dict()
 
 func _unhandled_input(event: InputEvent):
@@ -49,16 +47,7 @@ func _unhandled_input(event: InputEvent):
 			#_erase_from_occupated_tiles_dict(selected_player.player_path[-1], selected_player)
 		selected_player.reset_path()
 
-func connect_to_singals():
-	player_selection_manager.player_selection_changed.connect(_on_player_selection_changed)
-	player_selection_manager.player_deselected.connect(_on_deselect_player)
-func _on_deselect_player(deselected_player: Player):
-	pass
-	#var target_tile = deselected_player.player_path[-1]
-	#_add_to_occupated_tiles_dict(target_tile, deselected_player)
-	#level.draw_path()
 
-	
 
 func is_adjacent(a: Vector2i, b: Vector2i) -> bool:
 	var diff = (a - b).abs()
@@ -97,35 +86,6 @@ func is_path_blocked(from: Vector2, to: Vector2) -> bool:
 		
 	return false
 
-func _on_player_selection_changed(previous_selected_player: Player, new_selected_player: Player):
-	pass
-	#level.free_tile(new_selected_player.starting_tile)
-	#level.free_tile(new_selected_player.player_path[-1])
-	#_erase_from_occupated_tiles_dict(new_selected_player.starting_tile, new_selected_player)
-	#_erase_from_occupated_tiles_dict(new_selected_player.player_path[-1], new_selected_player)
-	
-#func _add_to_occupated_tiles_dict(tile: Vector2i, player: Player):
-	#if not occupied_target_tiles.has(tile):
-		#var new_dict: Dictionary = {player: true}
-		#occupied_target_tiles[tile] = new_dict
-	#else:
-		#var existing_tile_dict: Dictionary = occupied_target_tiles[tile]
-		#existing_tile_dict[player] = true
-		#occupied_target_tiles[tile] = existing_tile_dict
-
-#func _erase_from_occupated_tiles_dict(tile: Vector2i, player: Player):
-	#if not occupied_target_tiles.has(tile):
-		#return
-	#var tile_dict: Dictionary = occupied_target_tiles[tile]
-	#tile_dict.erase(player)
-	#if tile_dict.is_empty():
-		#occupied_target_tiles.erase(tile)
-	#else:
-		#occupied_target_tiles[tile] = tile_dict
-
-#func fill_occupied_target_tiles_dict():
-	#for player in alive_players:
-		#occupied_target_tiles[player.starting_tile] = {player: true}
 
 func check_is_players_moving_possible() -> bool:
 	for target_tile_dict: Dictionary in occupied_target_tiles.values():

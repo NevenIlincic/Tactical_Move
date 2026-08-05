@@ -5,6 +5,9 @@
 [ext_resource type="Texture2D" uid="uid://dx4qogxo2oe5u" path="res://Sprites/Tiles/New Piskel-2.png (46).png" id="2_mwjvy"]
 [ext_resource type="PackedScene" uid="uid://chy7dddrrr700" path="res://Scenes/Player/Player.tscn" id="4_10mtb"]
 [ext_resource type="PackedScene" uid="uid://y3pndfcq1kxo" path="res://Scenes/Enemy/Enemy.tscn" id="5_svcn8"]
+[ext_resource type="Script" uid="uid://cubw4ogrqm6po" path="res://Scripts/Weapon/weapon.gd" id="6_mykrp"]
+[ext_resource type="Script" uid="uid://bqnc1ha42r85" path="res://Scripts/Weapon/pistol.gd" id="7_88mxo"]
+[ext_resource type="Script" uid="uid://bmr38t2grjqqv" path="res://Scripts/Weapon/m4a1_rifle.gd" id="7_argnq"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_10mtb"]
 texture = ExtResource("2_mwjvy")
@@ -27,6 +30,18 @@ custom_data_layer_0/type = 1
 sources/1 = SubResource("TileSetAtlasSource_mwjvy")
 sources/0 = SubResource("TileSetAtlasSource_10mtb")
 
+[sub_resource type="Resource" id="Resource_88mxo"]
+script = ExtResource("7_88mxo")
+current_ammo = 3
+max_ammo_capacity = 3
+fire_rate = 1.0
+damage = 10.0
+metadata/_custom_type_script = "uid://bqnc1ha42r85"
+
+[sub_resource type="Resource" id="Resource_8c5ma"]
+script = ExtResource("7_argnq")
+metadata/_custom_type_script = "uid://bmr38t2grjqqv"
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_06txj"]
 size = Vector2(64, 448)
 
@@ -35,6 +50,26 @@ size = Vector2(640, 64)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fhwqp"]
 size = Vector2(64, 192)
+
+[sub_resource type="Resource" id="Resource_ofkpl"]
+script = ExtResource("7_88mxo")
+current_ammo = 3
+max_ammo_capacity = 3
+fire_rate = 1.0
+damage = 10.0
+metadata/_custom_type_script = "uid://bqnc1ha42r85"
+
+[sub_resource type="Resource" id="Resource_argnq"]
+script = ExtResource("7_88mxo")
+metadata/_custom_type_script = "uid://bqnc1ha42r85"
+
+[sub_resource type="Resource" id="Resource_yn6en"]
+script = ExtResource("7_argnq")
+metadata/_custom_type_script = "uid://bmr38t2grjqqv"
+
+[sub_resource type="Resource" id="Resource_ltieu"]
+script = ExtResource("7_88mxo")
+metadata/_custom_type_script = "uid://bqnc1ha42r85"
 
 [node name="Node2D" type="Node2D" unique_id=1609049363 groups=["Level"]]
 script = ExtResource("1_4ms0o")
@@ -47,7 +82,8 @@ tile_set = SubResource("TileSet_06txj")
 
 [node name="Player2" parent="." unique_id=2120155671 instance=ExtResource("4_10mtb")]
 position = Vector2(928, 600)
-current_engagement_rule = 2
+current_engagement_rule = 4
+weapons = Array[ExtResource("6_mykrp")]([SubResource("Resource_88mxo"), SubResource("Resource_8c5ma")])
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1702938192]
 position = Vector2(928, 288)
@@ -74,9 +110,15 @@ position = Vector2(1040, 32)
 
 [node name="Player" parent="." unique_id=1108589071 instance=ExtResource("4_10mtb")]
 position = Vector2(241, 361)
+current_engagement_rule = 2
 
 [node name="Player3" parent="." unique_id=933176661 instance=ExtResource("4_10mtb")]
-position = Vector2(289, 516)
+position = Vector2(302, 591)
+current_engagement_rule = 4
+weapons = Array[ExtResource("6_mykrp")]([SubResource("Resource_ofkpl")])
 
 [node name="Player4" parent="." unique_id=1948750327 instance=ExtResource("4_10mtb")]
 position = Vector2(494, 453)
+current_engagement_rule = 3
+weapons = Array[ExtResource("6_mykrp")]([SubResource("Resource_argnq"), SubResource("Resource_yn6en")])
+current_weapon = SubResource("Resource_ltieu")

@@ -3,7 +3,7 @@ class_name Enemy
 
 var num_seen_by: int = 0
 
-
+@export var HP: float = 100.0
 
 func _ready() -> void:
 	visible = false
