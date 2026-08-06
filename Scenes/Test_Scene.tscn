@@ -5,6 +5,8 @@
 [ext_resource type="Texture2D" uid="uid://dx4qogxo2oe5u" path="res://Sprites/Tiles/New Piskel-2.png (46).png" id="2_mwjvy"]
 [ext_resource type="PackedScene" uid="uid://chy7dddrrr700" path="res://Scenes/Player/Player.tscn" id="4_10mtb"]
 [ext_resource type="PackedScene" uid="uid://y3pndfcq1kxo" path="res://Scenes/Enemy/Enemy.tscn" id="5_svcn8"]
+[ext_resource type="Script" uid="uid://cubw4ogrqm6po" path="res://Scripts/Weapon/weapon.gd" id="6_mykrp"]
+[ext_resource type="Script" uid="uid://bqnc1ha42r85" path="res://Scripts/Weapon/pistol.gd" id="7_88mxo"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_10mtb"]
 texture = ExtResource("2_mwjvy")
@@ -36,7 +38,23 @@ size = Vector2(640, 64)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fhwqp"]
 size = Vector2(64, 192)
 
-[node name="Node2D" type="Node2D" unique_id=1609049363]
+[sub_resource type="Resource" id="Resource_mykrp"]
+script = ExtResource("7_88mxo")
+current_ammo = 3
+max_ammo_capacity = 3
+fire_rate = 1.0
+damage = 10.0
+metadata/_custom_type_script = "uid://bqnc1ha42r85"
+
+[sub_resource type="Resource" id="Resource_argnq"]
+script = ExtResource("7_88mxo")
+current_ammo = 3
+max_ammo_capacity = 3
+fire_rate = 1.0
+damage = 10.0
+metadata/_custom_type_script = "uid://bqnc1ha42r85"
+
+[node name="Node2D" type="Node2D" unique_id=1609049363 groups=["Level"]]
 script = ExtResource("1_4ms0o")
 
 [node name="TileMap" type="TileMapLayer" parent="." unique_id=1180536432]
@@ -44,12 +62,6 @@ tile_map_data = PackedByteArray("AAAAAAAAAQABAAAAAAAAAAEAAAAAAAAAAAAAAAIAAAAAAAA
 tile_set = SubResource("TileSet_06txj")
 
 [node name="Path_Line" type="Line2D" parent="." unique_id=780851806]
-
-[node name="Player" parent="." unique_id=1108589071 instance=ExtResource("4_10mtb")]
-position = Vector2(1056, 544)
-
-[node name="Player2" parent="." unique_id=2120155671 instance=ExtResource("4_10mtb")]
-position = Vector2(1056, 416)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1702938192]
 position = Vector2(928, 288)
@@ -71,8 +83,15 @@ position = Vector2(800, 160)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3" unique_id=357753609]
 shape = SubResource("RectangleShape2D_fhwqp")
 
-[node name="Player3" parent="." unique_id=1999289494 instance=ExtResource("4_10mtb")]
-position = Vector2(992, 480)
-
 [node name="Enemy" parent="." unique_id=1440065138 instance=ExtResource("5_svcn8")]
-position = Vector2(1024, 120)
+position = Vector2(1040, 32)
+
+[node name="Player" parent="." unique_id=1108589071 instance=ExtResource("4_10mtb")]
+position = Vector2(902, 615)
+current_engagement_rule = 4
+weapons = Array[ExtResource("6_mykrp")]([SubResource("Resource_mykrp")])
+
+[node name="Player2" parent="." unique_id=811757841 instance=ExtResource("4_10mtb")]
+position = Vector2(87, 92)
+current_engagement_rule = 2
+weapons = Array[ExtResource("6_mykrp")]([SubResource("Resource_argnq")])
