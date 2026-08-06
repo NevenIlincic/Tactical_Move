@@ -8,9 +8,9 @@ script = ExtResource("1_sf78t")
 base_value = 1000.0
 metadata/_custom_type_script = "uid://bencr8mnns7ut"
 
-[sub_resource type="Resource" id="Resource_ae2e2"]
+[sub_resource type="Resource" id="Resource_42oyf"]
 script = ExtResource("1_sf78t")
-base_value = 0.25
+base_value = 0.5
 metadata/_custom_type_script = "uid://bencr8mnns7ut"
 
 [sub_resource type="Resource" id="Resource_xq73l"]
@@ -21,6 +21,6 @@ metadata/_custom_type_script = "uid://bencr8mnns7ut"
 [resource]
 script = ExtResource("1_81ppm")
 speed = SubResource("Resource_xq73l")
-reaction_time = SubResource("Resource_ae2e2")
+reaction_time = SubResource("Resource_42oyf")
 max_travel_distance = SubResource("Resource_stuxa")
 metadata/_custom_type_script = "uid://cp4iog725gtuq"

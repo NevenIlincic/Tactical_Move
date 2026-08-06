@@ -4,7 +4,7 @@ var fire_timer: float
 
 func enter(weapon: Weapon):
 	current_weapon = weapon
-	fire_timer = 0.0
+	fire_timer = current_weapon.weapon_owner.player_stats.reaction_time.get_value()
 	
 func update(delta: float):
 	if current_weapon.weapon_stats.current_ammo.get_value() <= 0:
