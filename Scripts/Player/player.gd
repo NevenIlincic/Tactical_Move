@@ -16,7 +16,7 @@ var num_steps_to_do: int = 0
 const SPEED: float = 250
 var is_enemy_spotted: bool = false
 @onready var look_at_position_sprite: Sprite2D = $Look_At_Position_Sprite
-
+var initial_point: Vector2
 enum EngagementRules {
 	IGNORE, #Ignorise i nastavlja dalje
 	STOP_AND_SHOT_IN_PASSING, #Staje i puca ako mu je u vidokrugu (bez pracenja rotacijom)
@@ -24,6 +24,7 @@ enum EngagementRules {
 	MOVE_AND_SHOT_IN_PASSING, #Nastavlja kretnju (ako postoji) i samo puca u vidokrugu (bez pracenja rotacijom)
 	MOVE_AND_SHOT_FOLLOWING # Nastavlja (ako postoji) i prati rotiranjem dok ne izgubi iz vidokruga
 }
+var engagement_strategy: EngagementStrategy
 @export var current_engagement_rule: EngagementRules = EngagementRules.IGNORE
 
 var enemy_to_shoot: Enemy
@@ -32,6 +33,7 @@ var follow_enemy_with_rotation: bool = false
 #VISION (FOW)
 @onready var vision_polygon: PlayerVision = $Vision_Polygon
 
+var ray_index: int
 var rays: Array[RayCast2D] = []
 var point_to_look
 
@@ -42,6 +44,7 @@ var enemies_in_sight: Dictionary = {} #{Enemy: true}
 @export var weapons: Array[Weapon]
 @export var current_weapon: Weapon
 
+
 func _ready() -> void:
 	player_path.append(global_position)
 	set_up_lines_data()
@@ -49,6 +52,8 @@ func _ready() -> void:
 	if not weapons.is_empty():
 		current_weapon = weapons[0]
 		current_weapon.set_weapon_owner(self)
+		
+	change_engagement_strategy(current_engagement_rule)
 func is_player_walking() -> bool:
 	return is_walking
 func has_enemies_in_sight() -> bool:
@@ -83,6 +88,19 @@ func do_while_action(delta: float):
 	if current_weapon:
 		current_weapon.update(delta)
 
+func change_engagement_strategy(rule: EngagementRules):
+	match rule:
+		EngagementRules.IGNORE:
+			engagement_strategy = IgnoreEnemyStrategy.new()
+		EngagementRules.STOP_AND_SHOT_IN_PASSING:
+			engagement_strategy = StopShootPassingStrategy.new()
+		EngagementRules.STOP_AND_SHOT_FOLLOWING:
+			engagement_strategy = StopShootFollowingStrategy.new()
+		EngagementRules.MOVE_AND_SHOT_IN_PASSING:
+			engagement_strategy = MoveShootPassingStrategy.new()
+		EngagementRules.MOVE_AND_SHOT_FOLLOWING:
+			engagement_strategy = MoveShootFollowingStrategy.new()
+
 func check_is_enemy_in_sight():
 	if enemy_to_shoot:
 		if follow_enemy_with_rotation:
@@ -110,7 +128,11 @@ func set_point_to_look(point):
 	if not check_is_point_to_look_vector():
 		point_to_look = point.global_position
 		look_at_position_sprite.visible = false
+		if not initial_point:
+			initial_point = point_to_look
 		return
+	if not initial_point:
+			initial_point = point_to_look
 	look_at_position_sprite.visible = true
 	look_at_position_sprite.global_position = point_to_look
 	if player_look_at_line.get_point_count() == 1:
@@ -201,30 +223,9 @@ func reset_path():
 	player_path_line.reset_path()
 
 func on_engagement_action(enemy: Enemy):
-	match current_engagement_rule:
-		EngagementRules.IGNORE:
-			enemy_to_shoot = null
-			return
-		EngagementRules.STOP_AND_SHOT_IN_PASSING:
-			enemy_to_shoot = enemy
-			if move_tween and move_tween.is_valid():
-				move_tween.kill()
-			is_walking = false
-			reset_path()
-		EngagementRules.STOP_AND_SHOT_FOLLOWING:
-			enemy_to_shoot = enemy
-			follow_enemy_with_rotation = true
-			if move_tween and move_tween.is_valid():
-				move_tween.kill()
-			is_walking = false
-			reset_path()
-		EngagementRules.MOVE_AND_SHOT_IN_PASSING:
-			enemy_to_shoot = enemy
-			follow_enemy_with_rotation = false
-		EngagementRules.MOVE_AND_SHOT_FOLLOWING:
-			enemy_to_shoot = enemy
-			follow_enemy_with_rotation = true
-	#
+	if engagement_strategy:
+		engagement_strategy.execute(self, enemy)
+		
 	if not current_weapon.weapon_state is WeaponReloadState:
 		if enemy_to_shoot:
 			current_weapon.change_weapon_state(WeaponShootState.new())
@@ -256,4 +257,9 @@ func _on_enemy_lost(enemy: Enemy, player: Player) -> void:
 			current_weapon.change_weapon_state(WeaponShootState.new())
 	
 	current_weapon.change_enemy_to_shoot(enemy_to_shoot)
-	point_to_look = null
+	point_to_look = initial_point
+	rotation_tween = create_tween()
+	do_initial_player_rotation(rotation_tween)
+	if rotation_tween and rotation_tween.is_valid():
+		await rotation_tween.finished
+	#point_to_look = null

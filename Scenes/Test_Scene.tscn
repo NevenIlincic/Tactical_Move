@@ -93,5 +93,5 @@ weapons = Array[ExtResource("6_mykrp")]([SubResource("Resource_mykrp")])
 
 [node name="Player2" parent="." unique_id=811757841 instance=ExtResource("4_10mtb")]
 position = Vector2(87, 92)
-current_engagement_rule = 4
+current_engagement_rule = 2
 weapons = Array[ExtResource("6_mykrp")]([SubResource("Resource_argnq")])

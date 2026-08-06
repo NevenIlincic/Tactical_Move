@@ -7,7 +7,7 @@ class_name PlayerVision
 
 @export var max_range: float = 300.0
 @export var fov_degrees: float = 90.0
-@export var ray_count: float = 50
+@export var ray_count: float = 75
 @export var wall_collision_mask: int= 1
 
 var level: Level
@@ -57,7 +57,7 @@ func update_vision() -> void:
 			var hit_object = ray.get_collider().get_parent()
 			if hit_object and hit_object is Enemy:
 				if not currently_visible_enemies.has(hit_object):
-					currently_visible_enemies[hit_object] = true
+					currently_visible_enemies[hit_object] = true					
 					Signals.report_enemy_seen.emit(hit_object, get_parent())
 		else:
 			current_point = ray.target_position
