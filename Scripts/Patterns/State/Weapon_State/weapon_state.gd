@@ -4,6 +4,7 @@ extends Resource
 
 var current_weapon: Weapon
 
+
 @abstract
 func enter(weapon: Weapon);
 
