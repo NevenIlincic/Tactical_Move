@@ -4,6 +4,7 @@ func execute(player: Player, enemy: Enemy):
 	if not player.enemy_to_shoot:
 		player.enemy_to_shoot = enemy
 		player.current_weapon.change_enemy_to_shoot(enemy)
+	player.follow_enemy_with_rotation = true	
 	if player.move_tween and player.move_tween.is_valid():
 		player.move_tween.kill()
 	if player.rotation_tween and player.rotation_tween.is_valid():
