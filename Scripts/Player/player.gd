@@ -13,7 +13,6 @@ var player_path: Array[Vector2]
 ####PLAYER MOVES
 var num_available_steps: int = 50
 var num_steps_to_do: int = 0
-const SPEED: float = 250
 var is_enemy_spotted: bool = false
 @onready var look_at_position_sprite: Sprite2D = $Look_At_Position_Sprite
 var initial_point: Vector2
@@ -33,7 +32,6 @@ var follow_enemy_with_rotation: bool = false
 #VISION (FOW)
 @onready var vision_polygon: PlayerVision = $Vision_Polygon
 
-var ray_index: int
 var rays: Array[RayCast2D] = []
 var point_to_look
 
@@ -43,7 +41,7 @@ var enemies_in_sight: Dictionary = {} #{Enemy: true}
 
 @export var weapons: Array[Weapon]
 @export var current_weapon: Weapon
-
+@export var player_stats: PlayerStats
 
 func _ready() -> void:
 	player_path.append(global_position)
@@ -63,7 +61,6 @@ func has_enemies_in_sight() -> bool:
 
 #Checks if player is in his finished state 
 func is_in_finished_state():
-	return false
 	return not is_player_walking() and not has_enemies_in_sight()
 
 func set_up_lines_data():
@@ -169,7 +166,7 @@ func do_movement(tween: Tween):
 	if len(player_path) > 1:
 		for target_position in player_path:
 			var distance = current_position.distance_to(target_position)
-			var duration = distance / SPEED
+			var duration = distance / player_stats.speed.get_value()
 			tween.tween_property(self, "global_position", target_position, duration)
 			
 			current_position = target_position
@@ -181,7 +178,7 @@ func do_actions():
 	player_look_at_line.reset_path()
 	#num_available_steps -= num_steps_to_do
 	await _move()
-	_on_move_finished()
+	_on_actions_finished()
 
 var rotation_tween: Tween
 var move_tween: Tween
@@ -196,7 +193,7 @@ func _move():
 	if rotation_tween and rotation_tween.is_valid():
 		await rotation_tween.finished
 
-func _on_move_finished():
+func _on_actions_finished():
 	is_walking = false
 	player_path.clear()
 	point_to_look = null
@@ -212,7 +209,7 @@ func _on_selection_area_input_event(viewport: Node, event: InputEvent, shape_idx
 
 ##PATH_LINE
 func add_point_to_path(point: Vector2) -> void:
-	if player_path_line.check_can_add_point(point):
+	if player_path_line.check_can_add_point(point, player_stats.max_travel_distance.get_value()):
 		player_path_line.add_point(point)
 		player_path.append(point)	
 

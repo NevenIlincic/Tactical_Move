@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="PlayerStats" format=3 uid="uid://bqytja2sqng4q"]
+
+[ext_resource type="Script" uid="uid://cp4iog725gtuq" path="res://Scripts/Player/player_stats.gd" id="1_81ppm"]
+[ext_resource type="Script" uid="uid://bencr8mnns7ut" path="res://Scripts/Patterns/Stat/stat.gd" id="1_sf78t"]
+
+[sub_resource type="Resource" id="Resource_stuxa"]
+script = ExtResource("1_sf78t")
+base_value = 1000.0
+metadata/_custom_type_script = "uid://bencr8mnns7ut"
+
+[sub_resource type="Resource" id="Resource_ae2e2"]
+script = ExtResource("1_sf78t")
+base_value = 0.25
+metadata/_custom_type_script = "uid://bencr8mnns7ut"
+
+[sub_resource type="Resource" id="Resource_xq73l"]
+script = ExtResource("1_sf78t")
+base_value = 250.0
+metadata/_custom_type_script = "uid://bencr8mnns7ut"
+
+[resource]
+script = ExtResource("1_81ppm")
+speed = SubResource("Resource_xq73l")
+reaction_time = SubResource("Resource_ae2e2")
+max_travel_distance = SubResource("Resource_stuxa")
+metadata/_custom_type_script = "uid://cp4iog725gtuq"

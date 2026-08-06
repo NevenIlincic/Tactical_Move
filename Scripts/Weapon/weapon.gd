@@ -1,12 +1,7 @@
 class_name Weapon
 extends Resource
 
-@export var current_ammo: int
-@export var max_ammo_capacity: int
-@export var fire_rate: float
-@export var damage: float
-@export var hit_chance: float
-
+@export var weapon_stats: WeaponStats
 var weapon_owner: Player
 var weapon_state: WeaponState
 var enemy_to_shoot: Enemy
