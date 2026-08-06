@@ -7,7 +7,9 @@ func enter(weapon: Weapon):
 	fire_timer = 0.0
 	
 func update(delta: float):
-	check_has_ammo()
+	if current_weapon.current_ammo <= 0:
+		current_weapon.change_weapon_state(WeaponReloadState.new())
+		return
 	fire_timer -= delta
 	if fire_timer <= 0.0:
 		shoot_target()
@@ -16,8 +18,7 @@ func update(delta: float):
 func check_has_ammo():
 	if current_weapon.current_ammo <= 0:
 		current_weapon.change_weapon_state(WeaponReloadState.new())
-		return 
 func shoot_target():
 	current_weapon.current_ammo -= 1
 	current_weapon.enemy_to_shoot.HP -= current_weapon.damage
-	print("NEPRIJATELJ POGODJEN: ", current_weapon.enemy_to_shoot.HP)
+	print("NEPRIJATELJ POGODJEN: ", current_weapon.enemy_to_shoot.HP, " ", current_weapon.weapon_state is WeaponShootState)

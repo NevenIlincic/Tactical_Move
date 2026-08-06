@@ -49,7 +49,6 @@ func _ready() -> void:
 	if not weapons.is_empty():
 		current_weapon = weapons[0]
 		current_weapon.set_weapon_owner(self)
-		print(current_weapon)
 func is_player_walking() -> bool:
 	return is_walking
 func has_enemies_in_sight() -> bool:
@@ -59,6 +58,7 @@ func has_enemies_in_sight() -> bool:
 
 #Checks if player is in his finished state 
 func is_in_finished_state():
+	return false
 	return not is_player_walking() and not has_enemies_in_sight()
 
 func set_up_lines_data():
@@ -225,21 +225,22 @@ func on_engagement_action(enemy: Enemy):
 			enemy_to_shoot = enemy
 			follow_enemy_with_rotation = true
 	#
-	if enemy_to_shoot:
-		current_weapon.change_weapon_state(WeaponShootState.new())
-	else:
-		current_weapon.change_weapon_state(WeaponIdleState.new())
+	if not current_weapon.weapon_state is WeaponReloadState:
+		if enemy_to_shoot:
+			current_weapon.change_weapon_state(WeaponShootState.new())
+		else:
+			current_weapon.change_weapon_state(WeaponIdleState.new())
 	current_weapon.change_enemy_to_shoot(enemy)
 	
-func _on_enemy_seen(enemy: Enemy, players: Array[Player]) -> void:
-	if self not in players:
+func _on_enemy_seen(enemy: Enemy, player: Player) -> void:
+	if self != player:
 		return
 	enemy.show_enemy()
 	enemies_in_sight[enemy] = true
 	on_engagement_action(enemy)
 	
-func _on_enemy_lost(enemy: Enemy, players: Array[Player]) -> void:
-	if self not in players:
+func _on_enemy_lost(enemy: Enemy, player: Player) -> void:
+	if self != player:
 		return
 	enemy.hide_enemy()
 	if enemies_in_sight.has(enemy):
@@ -247,10 +248,12 @@ func _on_enemy_lost(enemy: Enemy, players: Array[Player]) -> void:
 	
 	if enemies_in_sight.is_empty():
 		enemy_to_shoot = null
-		current_weapon.change_weapon_state(WeaponIdleState.new())
+		if not current_weapon.weapon_state is WeaponReloadState:
+			current_weapon.change_weapon_state(WeaponIdleState.new())
 	else:
 		enemy_to_shoot = enemies_in_sight.keys()[0]
-		current_weapon.change_weapon_state(WeaponShootState.new())
+		if not current_weapon.weapon_state is WeaponReloadState:
+			current_weapon.change_weapon_state(WeaponShootState.new())
 	
 	current_weapon.change_enemy_to_shoot(enemy_to_shoot)
 	point_to_look = null

@@ -18,36 +18,65 @@ func connect_to_signals():
 	Signals.report_enemy_seen.connect(_on_enemy_seen_report)
 
 func handle_enemy_visibility(delta: float):
-	for enemy in current_frame_visible_enemies:
-		if not last_frame_visible_enemies.has(enemy):
-			var players: Array[Player] =[]
-			for player in current_frame_visible_enemies[enemy].keys():
-				players.append(player)
-			Signals.show_enemy.emit(enemy, players)
-		
-		var enemy_data = current_frame_visible_enemies[enemy].duplicate()
-		enemy_data["counter"] = 0
-		last_frame_visible_enemies[enemy] = enemy_data
-		
-	var enemies_to_remove = []
-	for enemy in last_frame_visible_enemies:
-		if not current_frame_visible_enemies.has(enemy):
-			last_frame_visible_enemies[enemy]["counter"] += 1
-			
-			if last_frame_visible_enemies[enemy]["counter"] > 5:
-				var players: Array[Player] = []
-				for key in last_frame_visible_enemies[enemy].keys():
-					if not key is String:
-						players.append(key)
-				
-				Signals.hide_enemy.emit(enemy, players)
-				enemies_to_remove.append(enemy)
+	#Checks is enemy entered in sight
+	_check_is_enemy_entered_vision()
+	_check_is_enemy_exited_vision()
+	#print(last_frame_visible_enemies, " ", current_frame_visible_enemies)
+
 	
+	current_frame_visible_enemies.clear()
+
+func _check_is_enemy_entered_vision():
+	for enemy in current_frame_visible_enemies:
+		if last_frame_visible_enemies.has(enemy):
+			var enemy_seen_by: Dictionary = current_frame_visible_enemies[enemy].duplicate()
+			for player in enemy_seen_by:
+				if not last_frame_visible_enemies[enemy].has(player):
+					last_frame_visible_enemies[enemy][player] = 0
+					Signals.show_enemy.emit(enemy, player)
+		else:
+			var enemy_seen_by: Dictionary = current_frame_visible_enemies[enemy].duplicate()
+			#last_frame_visible_enemies[enemy] = enemy_seen_by
+			for player in enemy_seen_by:
+				if not last_frame_visible_enemies.has(enemy):
+					last_frame_visible_enemies[enemy] = {}
+				last_frame_visible_enemies[enemy][player] = 0
+				Signals.show_enemy.emit(enemy, player)
+			#var enemy_data = current_frame_visible_enemies[enemy].duplicate()
+			#enemy_data["counter"] = 0
+
+func _check_is_enemy_exited_vision():
+	var enemies_to_remove = []
+	var break_outer_loop: bool = false
+	for enemy in last_frame_visible_enemies:
+		var players_to_remove_from_enemy = []
+		if not current_frame_visible_enemies.has(enemy):
+			for player in last_frame_visible_enemies[enemy]:
+				if last_frame_visible_enemies[enemy][player] >= 10:
+					Signals.hide_enemy.emit(enemy, player)
+					players_to_remove_from_enemy.append(player)
+			
+					#last_frame_visible_enemies[enemy][player]["counter"] = 0
+				else:
+					last_frame_visible_enemies[enemy][player] += 1
+		else:
+			for player in last_frame_visible_enemies[enemy]:
+				if not current_frame_visible_enemies[enemy].has(player):
+					if last_frame_visible_enemies[enemy][player] >= 10:
+						Signals.hide_enemy.emit(enemy, player)
+						players_to_remove_from_enemy.append(player)
+						#last_frame_visible_enemies[enemy][player]["counter"] = 0
+					else:
+						last_frame_visible_enemies[enemy][player] += 1
+	
+		for player in players_to_remove_from_enemy:
+			last_frame_visible_enemies[enemy].erase(player)
+			
+		# Ako više nijedan igrač ne prati ovog neprijatelja, brišemo ga skroz
+		if last_frame_visible_enemies[enemy].is_empty():
+			enemies_to_remove.append(enemy)
 	for enemy in enemies_to_remove:
 		last_frame_visible_enemies.erase(enemy)
-		
-	current_frame_visible_enemies.clear()
-	
 func _on_enemy_seen_report(enemy: Enemy, player: Node):
 	if not current_frame_visible_enemies.has(enemy):
 		current_frame_visible_enemies[enemy] = {}
