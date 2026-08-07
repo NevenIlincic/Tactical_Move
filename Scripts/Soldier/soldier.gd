@@ -55,5 +55,38 @@ func is_in_finished_state():
 func has_enemies_in_sight() -> bool:
 	return not enemies_in_sight.is_empty()
 
-func _on_enemy_lost(enemy_lost_from_sight: Soldier, who_lost_sight: Soldier):
-	pass
+func _on_enemy_seen(enemy: Soldier, soldier: Soldier):
+	if self != soldier:
+		return
+	enemies_in_sight[enemy] = true
+	on_engagement_action(enemy)
+
+func on_engagement_action(enemy: Soldier):
+	if engagement_strategy:
+		engagement_strategy.execute(self, enemy)
+
+func _on_enemy_lost(enemy: Soldier, soldier: Soldier):
+	if self != soldier or not enemy:
+		return
+	if enemies_in_sight.has(enemy):
+		enemies_in_sight.erase(enemy)
+	
+	if enemies_in_sight.is_empty():
+		enemy_to_shoot = null
+		if not current_weapon.weapon_state is WeaponReloadState:
+			current_weapon.change_weapon_state(WeaponIdleState.new())
+		#point_to_look = initial_point
+		#rotation_tween = create_tween()
+		#do_initial_player_rotation(rotation_tween)
+		#if rotation_tween and rotation_tween.is_valid():
+			#await rotation_tween.finished
+	else:
+		if enemy == enemy_to_shoot:
+			_select_next_enemy_to_shoot()
+		if not (current_weapon.weapon_state is WeaponReloadState
+			or current_weapon.weapon_state is WeaponShootState):
+			current_weapon.change_weapon_state(WeaponShootState.new())
+	
+	current_weapon.change_enemy_to_shoot(enemy_to_shoot)
+	if enemy.is_killed:
+		enemy.queue_free()

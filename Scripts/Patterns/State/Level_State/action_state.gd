@@ -15,7 +15,7 @@ func _init(data: Array):
 	num_finished_moves = 0
 
 	alive_enemies = level.get_alive_enemies()
-	vision_manager = VisionManager.new(alive_enemies)
+	vision_manager = VisionManager.new()
 	
 	for player: Player in alive_players.keys():
 		player.do_actions()

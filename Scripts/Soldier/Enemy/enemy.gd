@@ -7,8 +7,6 @@ class_name Enemy extends Soldier
 var num_seen_by: int = 0
 
 #FOR ENEMY
-var players_in_sight: Dictionary = {} #{player1: true, player2: true}
-var player_to_shoot: Player
 var point_to_look: Vector2
 
 func show_enemy():
@@ -23,8 +21,8 @@ func hide_enemy():
 func _ready() -> void:
 	#pass
 	visible = false
-	engagement_strategy = EnemyStopShootStrategy.new()
-	connect_to_signals()
+	engagement_strategy = StopShootFollowingStrategy.new()
+	#connect_to_signals()
 	#var tween = create_tween()
 	#tween.tween_property(self, "global_position", Vector2(20,20), 40)
 
@@ -32,26 +30,22 @@ func do_while_action():
 	check_enemy_looking_at()
 
 func check_enemy_looking_at():
-	if player_to_shoot:
-		look_at(player_to_shoot.global_position)
+	if enemy_to_shoot:
+		look_at(enemy_to_shoot.global_position)
 	else:
 		look_at(point_to_look)
 
-func connect_to_signals():
-	Signals.shoot_player.connect(_on_player_seen)
-	Signals.hide_player.connect(_on_player_lost)
-
-func _on_player_seen(enemy: Enemy, player: Player):
-	if enemy != self:
-		return
-	players_in_sight[player] = true
-	on_engagement_action(player)
-	
-func _on_player_lost(enemy: Enemy, player: Player):
-	if self != enemy or not player:
-		return
-	players_in_sight[player] = true
-
-func on_engagement_action(player: Player):
-	if engagement_strategy:
-		engagement_strategy.execute(player, self)
+#func connect_to_signals():
+	#Signals.shoot_player.connect(_on_player_seen)
+	#Signals.hide_player.connect(_on_player_lost)
+#
+#func _on_player_seen(enemy: Enemy, player: Player):
+	#if enemy != self:
+		#return
+	#enemies_in_sight[player] = true
+	#on_engagement_action(player)
+	#
+#func _on_player_lost(enemy: Enemy, player: Player):
+	#if self != enemy or not player:
+		#return
+	#enemies_in_sight[player] = true

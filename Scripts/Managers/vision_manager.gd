@@ -1,29 +1,22 @@
 extends Node2D 
 class_name VisionManager
 
-var alive_enemies: Dictionary
 
 # Pamtićemo parove: { enemy: { player1: true, player2: true } }
 var last_frame_visible_enemies: Dictionary
 var current_frame_visible_enemies: Dictionary
 
-func _init(enemies: Dictionary) -> void:
-	alive_enemies = enemies
+func _init() -> void:
 	last_frame_visible_enemies = {}
 	current_frame_visible_enemies = {}
 	connect_to_signals()
 
 func connect_to_signals():
-	Signals.get_alive_enemies.connect(_on_get_enemies)
 	Signals.report_enemy_seen.connect(_on_enemy_seen_report)
 
 func handle_enemy_visibility(delta: float):
-	#Checks is enemy entered in sight
 	_check_is_enemy_entered_vision()
 	_check_is_enemy_exited_vision()
-	#print(last_frame_visible_enemies, " ", current_frame_visible_enemies)
-
-	
 	current_frame_visible_enemies.clear()
 
 func _check_is_enemy_entered_vision():
@@ -77,16 +70,8 @@ func _check_is_enemy_exited_vision():
 			
 	for enemy in enemies_to_remove:
 		last_frame_visible_enemies.erase(enemy)
+		
 func _on_enemy_seen_report(enemy: Enemy, player: Player):
 	if not current_frame_visible_enemies.has(enemy):
 		current_frame_visible_enemies[enemy] = {}
 	current_frame_visible_enemies[enemy][player] = true
-
-func _on_get_enemies(enemies: Dictionary):
-	alive_enemies = enemies
-
-func get_enemies() -> Dictionary:
-	return alive_enemies
-
-func remove_from_alive_enemies(enemy: Enemy):
-	alive_enemies.erase(enemy)

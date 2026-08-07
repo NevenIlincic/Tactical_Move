@@ -209,43 +209,14 @@ func reset_path():
 	player_path.append(global_position)
 	player_path_line.reset_path()
 
-func on_engagement_action(enemy: Enemy):
-	if engagement_strategy:
-		engagement_strategy.execute(self, enemy)
-
-func _on_enemy_seen(enemy: Enemy, player: Player) -> void:
-	if self != player:
-		return
-	enemy.show_enemy()
-	enemies_in_sight[enemy] = true
-	on_engagement_action(enemy)
+func _on_enemy_seen(enemy: Soldier, player: Soldier) -> void:
+	super._on_enemy_seen(enemy, player)
+	(enemy as Enemy).show_enemy()
 	
 func _on_enemy_lost(enemy: Soldier, player: Soldier) -> void:
-	if self != player or not enemy:
-		return
-	enemy.hide_enemy()
-	if enemies_in_sight.has(enemy):
-		enemies_in_sight.erase(enemy)
-	
-	if enemies_in_sight.is_empty():
-		enemy_to_shoot = null
-		if not current_weapon.weapon_state is WeaponReloadState:
-			current_weapon.change_weapon_state(WeaponIdleState.new())
-		#point_to_look = initial_point
-		#rotation_tween = create_tween()
-		#do_initial_player_rotation(rotation_tween)
-		#if rotation_tween and rotation_tween.is_valid():
-			#await rotation_tween.finished
-	else:
-		if enemy == enemy_to_shoot:
-			_select_next_enemy_to_shoot()
-		if not (current_weapon.weapon_state is WeaponReloadState
-			or current_weapon.weapon_state is WeaponShootState):
-			current_weapon.change_weapon_state(WeaponShootState.new())
-	
-	current_weapon.change_enemy_to_shoot(enemy_to_shoot)
-	if enemy and enemy.is_killed:
-		enemy.queue_free()
+	super._on_enemy_lost(enemy, player)
+	if enemy:
+		(enemy as Enemy).hide_enemy()
 	#point_to_look = null
 
 
