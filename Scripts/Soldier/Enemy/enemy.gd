@@ -20,7 +20,7 @@ func hide_enemy():
 
 func _ready() -> void:
 	#pass
-	visible = false
+	#visible = false
 	engagement_strategy = StopShootFollowingStrategy.new()
 	#connect_to_signals()
 	#var tween = create_tween()

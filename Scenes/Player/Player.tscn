@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://c1ym0y4pbnw4j" path="res://Scripts/Soldier/Player/player.gd" id="1_ft8w5"]
 [ext_resource type="Texture2D" uid="uid://c442lp23townj" path="res://Sprites/Player/player.png" id="1_s0eop"]
 [ext_resource type="Script" uid="uid://kkaaaj6uvi8u" path="res://Scripts/Line/player_path_line.gd" id="2_4wape"]
-[ext_resource type="Script" uid="uid://jnl8fjr17re8" path="res://Scripts/Soldier/Player/vision.gd" id="3_h54ih"]
+[ext_resource type="Script" uid="uid://c386pr8tx5qep" path="res://Scripts/Soldier/soldier_vision.gd" id="4_t26db"]
 [ext_resource type="Texture2D" uid="uid://cp3f8t70d5twp" path="res://icon.svg" id="4_ude3g"]
 [ext_resource type="Texture2D" uid="uid://uwcsyrtrt75l" path="res://Sprites/Path_Line/New Piskel-1.png - 2026-08-04T161338.290.png" id="5_jmcll"]
 [ext_resource type="Script" uid="uid://b260cldj7kekv" path="res://Scripts/Line/player_look_at_line.gd" id="7_t26db"]
@@ -32,9 +32,8 @@ shape = SubResource("RectangleShape2D_06txj")
 [node name="Vision_Polygon" type="Polygon2D" parent="." unique_id=1560586749]
 color = Color(0.5822249, 0.63125, 0.33140624, 0.19500001)
 polygon = PackedVector2Array(0, 0, -256, -256, 256, -256)
-script = ExtResource("3_h54ih")
-max_range = 1200.0
-fov_degrees = 45.0
+script = ExtResource("4_t26db")
+max_range = 1000.0
 
 [node name="Vision_Center_Line" type="Line2D" parent="Vision_Polygon" unique_id=1477870436]
 show_behind_parent = true

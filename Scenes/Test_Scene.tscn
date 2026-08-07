@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://cubw4ogrqm6po" path="res://Scripts/Weapon/weapon.gd" id="6_mykrp"]
 [ext_resource type="Script" uid="uid://bqnc1ha42r85" path="res://Scripts/Weapon/pistol.gd" id="7_88mxo"]
 [ext_resource type="Resource" uid="uid://ddj6vd6by3aw5" path="res://Resources/Weapon_Stats/Pistol_Stats.tres" id="8_argnq"]
+[ext_resource type="Resource" uid="uid://bqytja2sqng4q" path="res://Resources/Player_Stats/Regular_Soldier_Stats.tres" id="11_ltieu"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_10mtb"]
 texture = ExtResource("2_mwjvy")
@@ -43,7 +44,7 @@ size = Vector2(64, 192)
 
 [sub_resource type="Resource" id="Resource_8c5ma"]
 script = ExtResource("5_8c5ma")
-base_value = 30.0
+base_value = 45.0
 metadata/_custom_type_script = "uid://bencr8mnns7ut"
 
 [sub_resource type="Resource" id="Resource_stuxa"]
@@ -61,7 +62,7 @@ script = ExtResource("5_8c5ma")
 base_value = 250.0
 metadata/_custom_type_script = "uid://bencr8mnns7ut"
 
-[sub_resource type="Resource" id="Resource_ofkpl"]
+[sub_resource type="Resource" id="Resource_ltieu"]
 resource_local_to_scene = true
 script = ExtResource("6_ltieu")
 speed = SubResource("Resource_xq73l")
@@ -75,15 +76,6 @@ script = ExtResource("7_88mxo")
 weapon_stats = ExtResource("8_argnq")
 metadata/_custom_type_script = "uid://bqnc1ha42r85"
 
-[sub_resource type="Resource" id="Resource_grcoo"]
-resource_local_to_scene = true
-script = ExtResource("6_ltieu")
-speed = SubResource("Resource_xq73l")
-reaction_time = SubResource("Resource_42oyf")
-max_travel_distance = SubResource("Resource_stuxa")
-HP = SubResource("Resource_8c5ma")
-metadata/_custom_type_script = "uid://cp4iog725gtuq"
-
 [sub_resource type="Resource" id="Resource_tq75k"]
 resource_local_to_scene = true
 script = ExtResource("6_ltieu")
@@ -92,29 +84,6 @@ reaction_time = SubResource("Resource_42oyf")
 max_travel_distance = SubResource("Resource_stuxa")
 HP = SubResource("Resource_8c5ma")
 metadata/_custom_type_script = "uid://cp4iog725gtuq"
-
-[sub_resource type="Resource" id="Resource_3vrl3"]
-resource_local_to_scene = true
-script = ExtResource("6_ltieu")
-speed = SubResource("Resource_xq73l")
-reaction_time = SubResource("Resource_42oyf")
-max_travel_distance = SubResource("Resource_stuxa")
-HP = SubResource("Resource_8c5ma")
-metadata/_custom_type_script = "uid://cp4iog725gtuq"
-
-[sub_resource type="Resource" id="Resource_6uspl"]
-resource_local_to_scene = true
-script = ExtResource("6_ltieu")
-speed = SubResource("Resource_xq73l")
-reaction_time = SubResource("Resource_42oyf")
-max_travel_distance = SubResource("Resource_stuxa")
-HP = SubResource("Resource_8c5ma")
-metadata/_custom_type_script = "uid://cp4iog725gtuq"
-
-[sub_resource type="Resource" id="Resource_88mxo"]
-script = ExtResource("7_88mxo")
-weapon_stats = ExtResource("8_argnq")
-metadata/_custom_type_script = "uid://bqnc1ha42r85"
 
 [node name="Node2D" type="Node2D" unique_id=1609049363 groups=["Level"]]
 script = ExtResource("1_4ms0o")
@@ -146,28 +115,20 @@ position = Vector2(800, 160)
 shape = SubResource("RectangleShape2D_fhwqp")
 
 [node name="Player" parent="." unique_id=1108589071 instance=ExtResource("4_10mtb")]
-position = Vector2(896, 604)
+position = Vector2(1030, 523)
 current_engagement_rule = 4
-soldier_stats = SubResource("Resource_ofkpl")
+soldier_stats = SubResource("Resource_ltieu")
 weapons = Array[ExtResource("6_mykrp")]([SubResource("Resource_yn6en")])
 
-[node name="Enemy" parent="." unique_id=1440065138 instance=ExtResource("5_svcn8")]
-position = Vector2(1006, 133)
-HP = 10.0
-soldier_stats = SubResource("Resource_grcoo")
-
-[node name="Enemy2" parent="." unique_id=2099046103 instance=ExtResource("5_svcn8")]
-position = Vector2(1115, 155)
+[node name="Enemy3" parent="." unique_id=2042909401 instance=ExtResource("5_svcn8")]
+position = Vector2(763, 595)
 HP = 20.0
 soldier_stats = SubResource("Resource_tq75k")
 
-[node name="Enemy3" parent="." unique_id=2042909401 instance=ExtResource("5_svcn8")]
-position = Vector2(1065, 108)
-HP = 20.0
-soldier_stats = SubResource("Resource_3vrl3")
+[node name="Enemy" parent="." unique_id=1440065138 instance=ExtResource("5_svcn8")]
+position = Vector2(603, 475)
+soldier_stats = ExtResource("11_ltieu")
 
-[node name="Player2" parent="." unique_id=2111187698 instance=ExtResource("4_10mtb")]
-position = Vector2(408, 449)
-current_engagement_rule = 2
-soldier_stats = SubResource("Resource_6uspl")
-weapons = Array[ExtResource("6_mykrp")]([SubResource("Resource_88mxo")])
+[node name="Enemy2" parent="." unique_id=2085944523 instance=ExtResource("5_svcn8")]
+position = Vector2(359, 567)
+soldier_stats = ExtResource("11_ltieu")

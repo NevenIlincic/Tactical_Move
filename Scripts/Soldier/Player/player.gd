@@ -24,8 +24,6 @@ enum EngagementRules {
 
 #####
 #VISION (FOW)
-@onready var vision_polygon: PlayerVision = $Vision_Polygon
-
 var rays: Array[RayCast2D] = []
 var point_to_look
 
@@ -34,7 +32,7 @@ func _ready() -> void:
 	super._ready()
 	player_path.append(global_position)
 	set_up_lines_data()
-	connect_to_signals()
+	#connect_to_signals()
 	if not weapons.is_empty():
 		current_weapon = weapons[0]
 		current_weapon.set_weapon_owner(self)
@@ -52,14 +50,12 @@ func set_up_lines_data():
 	player_look_at_line.add_point(global_position)
 	player_look_at_line.set_player_look_at_position_sprite(look_at_position_sprite)
 
-func connect_to_signals():
-	#Signals.move_player.connect(move)
-	Signals.show_enemy.connect(_on_enemy_seen)
-	Signals.hide_enemy.connect(_on_enemy_lost)
-	#Signals.enemy_killed.connect(_on_enemy_killed)
+#func connect_to_signals():
+	##Signals.move_player.connect(move)
+	#Signals.show_enemy.connect(_on_enemy_seen)
+	#Signals.hide_enemy.connect(_on_enemy_lost)
+	##Signals.enemy_killed.connect(_on_enemy_killed)
 	
-func _physics_process(delta: float) -> void:
-	vision_polygon.update_vision()
 #Called when ActionState
 func do_while_action(delta: float):
 	check_is_enemy_in_sight()	
@@ -209,14 +205,11 @@ func reset_path():
 	player_path.append(global_position)
 	player_path_line.reset_path()
 
-func _on_enemy_seen(enemy: Soldier, player: Soldier) -> void:
-	super._on_enemy_seen(enemy, player)
+func _on_enemy_seen_extra(enemy: Soldier) -> void:
 	(enemy as Enemy).show_enemy()
 	
-func _on_enemy_lost(enemy: Soldier, player: Soldier) -> void:
-	super._on_enemy_lost(enemy, player)
-	if enemy:
-		(enemy as Enemy).hide_enemy()
+func _on_enemy_lost_extra(enemy: Soldier) -> void:
+	(enemy as Enemy).hide_enemy()
 	#point_to_look = null
 
 

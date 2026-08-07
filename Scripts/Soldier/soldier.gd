@@ -1,6 +1,8 @@
 #Base class for Player and Enemy
 class_name Soldier extends Node2D
 
+@onready var vision_polygon: SoldierVision = $Vision_Polygon
+
 var is_killed: bool = false
 var is_walking: bool = false
 var follow_enemy_with_rotation = false
@@ -28,6 +30,11 @@ var permanent_upgrades: Array[UpgradeData] = []
 
 func _ready() -> void:
 	Signals.enemy_soldier_killed.connect(_on_enemy_soldier_killed)
+	Signals.show_enemy.connect(_on_enemy_seen)
+	Signals.hide_enemy.connect(_on_enemy_lost)
+
+func _physics_process(delta: float) -> void:
+	vision_polygon.update_vision()
 
 func _on_enemy_soldier_killed(enemy_killed: Soldier, killed_by: Soldier):
 	if enemies_in_sight.has(enemy_killed):
@@ -53,6 +60,8 @@ func is_in_finished_state():
 	return not is_soldier_walking() and not has_enemies_in_sight()
 	
 func has_enemies_in_sight() -> bool:
+	if engagement_strategy is IgnoreEnemyStrategy:
+		return false
 	return not enemies_in_sight.is_empty()
 
 func _on_enemy_seen(enemy: Soldier, soldier: Soldier):
@@ -60,6 +69,9 @@ func _on_enemy_seen(enemy: Soldier, soldier: Soldier):
 		return
 	enemies_in_sight[enemy] = true
 	on_engagement_action(enemy)
+	_on_enemy_seen_extra(enemy)
+func _on_enemy_seen_extra(enemy: Soldier):
+	pass
 
 func on_engagement_action(enemy: Soldier):
 	if engagement_strategy:
@@ -88,5 +100,11 @@ func _on_enemy_lost(enemy: Soldier, soldier: Soldier):
 			current_weapon.change_weapon_state(WeaponShootState.new())
 	
 	current_weapon.change_enemy_to_shoot(enemy_to_shoot)
+	
+	_on_enemy_lost_extra(enemy)
+	
 	if enemy.is_killed:
 		enemy.queue_free()
+
+func _on_enemy_lost_extra(enemy: Soldier):
+	pass
