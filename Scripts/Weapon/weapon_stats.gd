@@ -6,3 +6,4 @@ extends Resource
 @export var fire_rate: Stat
 @export var damage: Stat
 @export var hit_chance: Stat
+@export var reload_time: Stat

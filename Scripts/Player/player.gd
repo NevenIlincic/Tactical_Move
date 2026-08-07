@@ -192,7 +192,7 @@ func do_actions():
 	_on_actions_finished()
 
 func check_for_temporary_perks():
-	UpgradeManager.apply_temporary_perks(self)
+	UpgradeManager.apply_movement_penalty_perk(self)
 	
 var rotation_tween: Tween
 var move_tween: Tween
@@ -212,7 +212,7 @@ func _on_actions_finished():
 	player_path.clear()
 	point_to_look = null
 	player_path.append(global_position)
-	UpgradeManager.remove_temporary_perks(self)
+	UpgradeManager.remove_moving_penalty(self)
 
 
 func _on_selection_area_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:

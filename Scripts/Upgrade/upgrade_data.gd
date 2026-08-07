@@ -6,7 +6,8 @@ enum UpgradeType{
 	HIT_CHANCE,
 	MAX_AMMO,
 	FIRE_RATE,
-	REACTION_TIME
+	REACTION_TIME,
+	RELOAD_TIME
 }
 
 enum UpgradeReason{
