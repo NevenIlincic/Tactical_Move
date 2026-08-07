@@ -22,33 +22,13 @@ enum EngagementRules {
 
 @export var current_engagement_rule: EngagementRules = EngagementRules.IGNORE
 
-#var enemy_to_shoot: Enemy
-var follow_enemy_with_rotation: bool = false
 #####
 #VISION (FOW)
 @onready var vision_polygon: PlayerVision = $Vision_Polygon
 
-#UPGRADE/PERKS
-var temporary_upgrades: Array[UpgradeData] = []
-var permanent_upgrades: Array[UpgradeData] = []
-
 var rays: Array[RayCast2D] = []
 var point_to_look
 
-#var is_walking: bool = false
-#var is_shooting: bool = false
-
-
-@export var weapons: Array[Weapon]
-@export var current_weapon: Weapon
-#@export var player_stats: PlayerStats:
-	#set(value):
-		#player_stats = value
-		#if player_stats:
-			#player_stats = player_stats.duplicate(true)
-			#player_stats.speed = Stat.new(player_stats.speed.base_value)
-			#player_stats.reaction_time = Stat.new(player_stats.reaction_time.base_value)
-			#player_stats.max_travel_distance = Stat.new(player_stats.max_travel_distance.base_value)
 
 func _ready() -> void:
 	super._ready()
@@ -269,15 +249,5 @@ func _on_enemy_lost(enemy: Soldier, player: Soldier) -> void:
 	#point_to_look = null
 
 
-func _select_next_enemy_to_shoot():
-	var lowest_hp_enemy: Soldier = null
-	var lowest_hp_value = INF
-	
-	for enemy: Soldier in enemies_in_sight.keys():
-		var current_enemy_hp = enemy.HP
-		if current_enemy_hp < lowest_hp_value:
-			lowest_hp_value = current_enemy_hp
-			lowest_hp_enemy = enemy
-			
-	enemy_to_shoot = lowest_hp_enemy
+
 	

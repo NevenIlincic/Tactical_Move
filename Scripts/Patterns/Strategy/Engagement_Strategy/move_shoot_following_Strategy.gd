@@ -1,6 +1,6 @@
 class_name MoveShootFollowingStrategy extends EngagementStrategy
 
-func execute(player: Player, enemy: Enemy):
+func execute(player: Soldier, enemy: Soldier):
 	if not player.enemy_to_shoot:
 		player.enemy_to_shoot = enemy
 		player.current_weapon.change_enemy_to_shoot(enemy)

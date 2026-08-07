@@ -82,8 +82,8 @@ shape = SubResource("RectangleShape2D_fhwqp")
 [node name="Player" parent="." unique_id=1108589071 instance=ExtResource("4_10mtb")]
 position = Vector2(896, 604)
 current_engagement_rule = 4
-weapons = Array[ExtResource("6_mykrp")]([SubResource("Resource_yn6en")])
 soldier_stats = ExtResource("11_ltieu")
+weapons = Array[ExtResource("6_mykrp")]([SubResource("Resource_yn6en")])
 
 [node name="Enemy" parent="." unique_id=1440065138 instance=ExtResource("5_svcn8")]
 position = Vector2(1006, 133)
@@ -102,6 +102,6 @@ soldier_stats = ExtResource("11_ltieu")
 
 [node name="Player2" parent="." unique_id=2111187698 instance=ExtResource("4_10mtb")]
 position = Vector2(1068, 609)
-current_engagement_rule = 1
-weapons = Array[ExtResource("6_mykrp")]([SubResource("Resource_88mxo")])
+current_engagement_rule = 2
 soldier_stats = ExtResource("11_ltieu")
+weapons = Array[ExtResource("6_mykrp")]([SubResource("Resource_88mxo")])

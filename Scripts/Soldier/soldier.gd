@@ -3,8 +3,10 @@ class_name Soldier extends Node2D
 
 var is_killed: bool = false
 var is_walking: bool = false
+var follow_enemy_with_rotation = false
 var enemy_to_shoot: Soldier
 var enemies_in_sight: Dictionary = {} #{Soldier: true}
+
 @export var soldier_stats: PlayerStats:
 	set(value):
 		soldier_stats = value
@@ -16,6 +18,13 @@ var enemies_in_sight: Dictionary = {} #{Soldier: true}
 			soldier_stats.HP = Stat.new(soldier_stats.HP.base_value)
 			
 var engagement_strategy: EngagementStrategy
+#UPGRADE/PERKS
+var temporary_upgrades: Array[UpgradeData] = []
+var permanent_upgrades: Array[UpgradeData] = []
+
+#LAYOUT
+@export var weapons: Array[Weapon]
+@export var current_weapon: Weapon
 
 func _ready() -> void:
 	Signals.enemy_soldier_killed.connect(_on_enemy_soldier_killed)
@@ -25,6 +34,18 @@ func _on_enemy_soldier_killed(enemy_killed: Soldier, killed_by: Soldier):
 		enemies_in_sight.erase(enemy_killed)
 	_on_enemy_lost(enemy_killed, killed_by)
 
+func _select_next_enemy_to_shoot():
+	var lowest_hp_enemy: Soldier = null
+	var lowest_hp_value = INF
+	
+	for enemy: Soldier in enemies_in_sight.keys():
+		var current_enemy_hp = enemy.HP
+		if current_enemy_hp < lowest_hp_value:
+			lowest_hp_value = current_enemy_hp
+			lowest_hp_enemy = enemy
+			
+	enemy_to_shoot = lowest_hp_enemy
+
 func is_soldier_walking() -> bool:
 	return is_walking
 
@@ -33,8 +54,6 @@ func is_in_finished_state():
 	
 func has_enemies_in_sight() -> bool:
 	return not enemies_in_sight.is_empty()
-	
-func on_enemy_soldier_killed(enemy: Soldier, killed_by: Soldier):
-	pass
+
 func _on_enemy_lost(enemy_lost_from_sight: Soldier, who_lost_sight: Soldier):
 	pass
