@@ -55,8 +55,8 @@ func apply_low_hp_penalty(player: Player):
 	var lower_speed_mod: StatModifier = StatModifier.new(
 		lower_speed_perk.bonus_value, lower_speed_perk.modifier_type, lower_speed_perk
 	)
-	player.player_stats.speed.add_modifier(lower_speed_mod)
-	lower_speed_perk.set_applied_on_stat(player.player_stats.speed)
+	player.soldier_stats.speed.add_modifier(lower_speed_mod)
+	lower_speed_perk.set_applied_on_stat(player.soldier_stats.speed)
 	#HIT CHANCE
 	var lower_hit_chance_perk: UpgradeData = UpgradeData.new(
 		-0.25, UpgradeData.UpgradeType.HIT_CHANCE, StatModifier.Type.PERCENT, UpgradeData.UpgradeReason.LOW_HP
@@ -73,8 +73,8 @@ func apply_low_hp_penalty(player: Player):
 	var longer_reaction_time_mod: StatModifier = StatModifier.new(
 		longer_reaction_time_perk.bonus_value, longer_reaction_time_perk.modifier_type, longer_reaction_time_perk
 	)
-	player.player_stats.reaction_time.add_modifier(longer_reaction_time_mod)
-	longer_reaction_time_perk.set_applied_on_stat(player.player_stats.reaction_time)
+	player.soldier_stats.reaction_time.add_modifier(longer_reaction_time_mod)
+	longer_reaction_time_perk.set_applied_on_stat(player.soldier_stats.reaction_time)
 	#RELOAD TIME
 	var longer_reload_time_perk: UpgradeData = UpgradeData.new(
 		0.2, UpgradeData.UpgradeType.RELOAD_TIME, StatModifier.Type.PERCENT, UpgradeData.UpgradeReason.LOW_HP

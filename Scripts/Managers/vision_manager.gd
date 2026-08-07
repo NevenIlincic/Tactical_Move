@@ -77,7 +77,7 @@ func _check_is_enemy_exited_vision():
 			
 	for enemy in enemies_to_remove:
 		last_frame_visible_enemies.erase(enemy)
-func _on_enemy_seen_report(enemy: Enemy, player: Node):
+func _on_enemy_seen_report(enemy: Enemy, player: Player):
 	if not current_frame_visible_enemies.has(enemy):
 		current_frame_visible_enemies[enemy] = {}
 	current_frame_visible_enemies[enemy][player] = true

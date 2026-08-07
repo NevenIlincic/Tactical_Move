@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://chy7dddrrr700"]
 
-[ext_resource type="Script" uid="uid://c1ym0y4pbnw4j" path="res://Scripts/Player/player.gd" id="1_ft8w5"]
+[ext_resource type="Script" uid="uid://c1ym0y4pbnw4j" path="res://Scripts/Soldier/Player/player.gd" id="1_ft8w5"]
 [ext_resource type="Texture2D" uid="uid://c442lp23townj" path="res://Sprites/Player/player.png" id="1_s0eop"]
 [ext_resource type="Script" uid="uid://kkaaaj6uvi8u" path="res://Scripts/Line/player_path_line.gd" id="2_4wape"]
-[ext_resource type="Script" uid="uid://jnl8fjr17re8" path="res://Scripts/Player/vision.gd" id="3_h54ih"]
+[ext_resource type="Script" uid="uid://jnl8fjr17re8" path="res://Scripts/Soldier/Player/vision.gd" id="3_h54ih"]
 [ext_resource type="Texture2D" uid="uid://cp3f8t70d5twp" path="res://icon.svg" id="4_ude3g"]
 [ext_resource type="Texture2D" uid="uid://uwcsyrtrt75l" path="res://Sprites/Path_Line/New Piskel-1.png - 2026-08-04T161338.290.png" id="5_jmcll"]
 [ext_resource type="Script" uid="uid://b260cldj7kekv" path="res://Scripts/Line/player_look_at_line.gd" id="7_t26db"]

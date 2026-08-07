@@ -12,9 +12,9 @@ extends Resource
 			weapon_stats.fire_rate = Stat.new(weapon_stats.fire_rate.base_value)
 			weapon_stats.hit_chance = Stat.new(weapon_stats.hit_chance.base_value)
 
-var weapon_owner: Player
+var weapon_owner: Soldier
 var weapon_state: WeaponState
-var enemy_to_shoot: Enemy
+var enemy_to_shoot: Soldier
 
 func _init():
 	change_weapon_state(WeaponIdleState.new())
@@ -26,7 +26,7 @@ func change_weapon_state(new_state: WeaponState):
 	weapon_state = new_state
 	weapon_state.enter(self)
 
-func change_enemy_to_shoot(enemy: Enemy):
+func change_enemy_to_shoot(enemy: Soldier):
 	enemy_to_shoot = enemy
 
 func update(delta: float):
