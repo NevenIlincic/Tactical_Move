@@ -17,7 +17,6 @@ func get_value() -> float:
 			final_value += mod.value
 		elif mod.type == StatModifier.Type.PERCENT:
 			percent_sum += mod.value
-			
 	final_value *= (1.0 + percent_sum)
 	
 	return max(0.0, final_value)

@@ -11,8 +11,6 @@ var player_path: Array[Vector2]
 @onready var player_look_at_line: PlayerLookAtLine = $Player_Look_At_Line
 
 ####PLAYER MOVES
-var num_available_steps: int = 50
-var num_steps_to_do: int = 0
 var is_enemy_spotted: bool = false
 @onready var look_at_position_sprite: Sprite2D = $Look_At_Position_Sprite
 var initial_point: Vector2
@@ -31,6 +29,10 @@ var follow_enemy_with_rotation: bool = false
 #####
 #VISION (FOW)
 @onready var vision_polygon: PlayerVision = $Vision_Polygon
+
+#UPGRADE/PERKS
+var temporary_upgrades: Array[UpgradeData] = []
+var permanent_upgrades: Array[UpgradeData] = []
 
 var rays: Array[RayCast2D] = []
 var point_to_look
@@ -59,6 +61,7 @@ func _ready() -> void:
 		current_weapon.set_weapon_owner(self)
 		
 	change_engagement_strategy(current_engagement_rule)
+	
 func is_player_walking() -> bool:
 	return is_walking
 func has_enemies_in_sight() -> bool:
@@ -183,11 +186,14 @@ func do_movement(tween: Tween):
 
 #Executes when player confirmes end moves
 func do_actions():
+	check_for_temporary_perks()
 	player_look_at_line.reset_path()
-	#num_available_steps -= num_steps_to_do
 	await _move()
 	_on_actions_finished()
 
+func check_for_temporary_perks():
+	UpgradeManager.apply_temporary_perks(self)
+	
 var rotation_tween: Tween
 var move_tween: Tween
 func _move():
@@ -206,6 +212,8 @@ func _on_actions_finished():
 	player_path.clear()
 	point_to_look = null
 	player_path.append(global_position)
+	UpgradeManager.remove_temporary_perks(self)
+
 
 func _on_selection_area_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.is_pressed() and event.button_index == MOUSE_BUTTON_LEFT:
