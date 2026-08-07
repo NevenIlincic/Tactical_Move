@@ -13,4 +13,5 @@ signal get_alive_enemies()
 #VISION
 signal report_enemy_seen(enemy: Enemy)
 signal show_enemy(enemy: Enemy, player: Player)
-signal hide_enemy(enemy: Enemy, players: Array[Player])
+signal hide_enemy(enemy: Enemy, player: Player)
+signal enemy_killed(enemy: Enemy, player: Player)

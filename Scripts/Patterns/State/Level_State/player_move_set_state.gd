@@ -66,15 +66,7 @@ func update_preview() -> void:
 				if not is_path_blocked(last_mouse_pos, mouse_pos):
 					var mouse_global_position: Vector2 = level.get_global_mouse_position()
 					player_selection_manager.selected_player.add_point_to_path(mouse_global_position)	
-					#level.add_point_to_path(level.get_global_mouse_position())
-			#if player_selection_manager.selected_player.player_path.size() >= 2 and target_tile == player_selection_manager.selected_player.player_path[-2]:
-				#player_selection_manager.selected_player.player_path.remove_at(player_selection_manager.selected_player.player_path.size() - 1)
-			#elif is_adjacent(player_selection_manager.selected_player.player_path[-1], target_tile) and player_selection_manager.selected_player.num_available_steps >= len(player_selection_manager.selected_player.player_path):
-				#player_selection_manager.selected_player.player_path.append(target_tile)
-			#level.draw_path(player_selection_manager.selected_player)
-			
-	#for player in alive_players:
-		#level.draw_path(alive_players[player])
+				
 
 func is_path_blocked(from: Vector2, to: Vector2) -> bool:
 	var space_state = level.get_world_2d().direct_space_state

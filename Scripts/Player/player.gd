@@ -11,9 +11,6 @@ var player_path: Array[Vector2]
 @onready var player_look_at_line: PlayerLookAtLine = $Player_Look_At_Line
 
 ####PLAYER MOVES
-var num_available_steps: int = 50
-var num_steps_to_do: int = 0
-const SPEED: float = 250
 var is_enemy_spotted: bool = false
 @onready var look_at_position_sprite: Sprite2D = $Look_At_Position_Sprite
 var initial_point: Vector2
@@ -33,7 +30,10 @@ var follow_enemy_with_rotation: bool = false
 #VISION (FOW)
 @onready var vision_polygon: PlayerVision = $Vision_Polygon
 
-var ray_index: int
+#UPGRADE/PERKS
+var temporary_upgrades: Array[UpgradeData] = []
+var permanent_upgrades: Array[UpgradeData] = []
+
 var rays: Array[RayCast2D] = []
 var point_to_look
 
@@ -43,7 +43,14 @@ var enemies_in_sight: Dictionary = {} #{Enemy: true}
 
 @export var weapons: Array[Weapon]
 @export var current_weapon: Weapon
-
+@export var player_stats: PlayerStats:
+	set(value):
+		player_stats = value
+		if player_stats:
+			player_stats = player_stats.duplicate(true)
+			player_stats.speed = Stat.new(player_stats.speed.base_value)
+			player_stats.reaction_time = Stat.new(player_stats.reaction_time.base_value)
+			player_stats.max_travel_distance = Stat.new(player_stats.max_travel_distance.base_value)
 
 func _ready() -> void:
 	player_path.append(global_position)
@@ -54,6 +61,7 @@ func _ready() -> void:
 		current_weapon.set_weapon_owner(self)
 		
 	change_engagement_strategy(current_engagement_rule)
+	
 func is_player_walking() -> bool:
 	return is_walking
 func has_enemies_in_sight() -> bool:
@@ -63,7 +71,6 @@ func has_enemies_in_sight() -> bool:
 
 #Checks if player is in his finished state 
 func is_in_finished_state():
-	return false
 	return not is_player_walking() and not has_enemies_in_sight()
 
 func set_up_lines_data():
@@ -75,6 +82,7 @@ func connect_to_signals():
 	#Signals.move_player.connect(move)
 	Signals.show_enemy.connect(_on_enemy_seen)
 	Signals.hide_enemy.connect(_on_enemy_lost)
+	Signals.enemy_killed.connect(_on_enemy_killed)
 	
 func _physics_process(delta: float) -> void:
 	vision_polygon.update_vision()
@@ -169,7 +177,7 @@ func do_movement(tween: Tween):
 	if len(player_path) > 1:
 		for target_position in player_path:
 			var distance = current_position.distance_to(target_position)
-			var duration = distance / SPEED
+			var duration = distance / player_stats.speed.get_value()
 			tween.tween_property(self, "global_position", target_position, duration)
 			
 			current_position = target_position
@@ -178,11 +186,14 @@ func do_movement(tween: Tween):
 
 #Executes when player confirmes end moves
 func do_actions():
+	check_for_temporary_perks()
 	player_look_at_line.reset_path()
-	#num_available_steps -= num_steps_to_do
 	await _move()
-	_on_move_finished()
+	_on_actions_finished()
 
+func check_for_temporary_perks():
+	UpgradeManager.apply_movement_penalty_perk(self)
+	
 var rotation_tween: Tween
 var move_tween: Tween
 func _move():
@@ -196,11 +207,13 @@ func _move():
 	if rotation_tween and rotation_tween.is_valid():
 		await rotation_tween.finished
 
-func _on_move_finished():
+func _on_actions_finished():
 	is_walking = false
 	player_path.clear()
 	point_to_look = null
 	player_path.append(global_position)
+	UpgradeManager.remove_moving_penalty(self)
+
 
 func _on_selection_area_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.is_pressed() and event.button_index == MOUSE_BUTTON_LEFT:
@@ -212,7 +225,7 @@ func _on_selection_area_input_event(viewport: Node, event: InputEvent, shape_idx
 
 ##PATH_LINE
 func add_point_to_path(point: Vector2) -> void:
-	if player_path_line.check_can_add_point(point):
+	if player_path_line.check_can_add_point(point, player_stats.max_travel_distance.get_value()):
 		player_path_line.add_point(point)
 		player_path.append(point)	
 
@@ -225,13 +238,14 @@ func reset_path():
 func on_engagement_action(enemy: Enemy):
 	if engagement_strategy:
 		engagement_strategy.execute(self, enemy)
+	#current_weapon.change_enemy_to_shoot(enemy)
 		
-	if not current_weapon.weapon_state is WeaponReloadState:
-		if enemy_to_shoot:
-			current_weapon.change_weapon_state(WeaponShootState.new())
-		else:
-			current_weapon.change_weapon_state(WeaponIdleState.new())
-	current_weapon.change_enemy_to_shoot(enemy)
+	#if not current_weapon.weapon_state is WeaponReloadState:
+		#print(enemy," ", current_weapon.weapon_state is WeaponShootState)
+		#if enemy_to_shoot and not current_weapon.weapon_state is WeaponShootState:
+			#current_weapon.change_weapon_state(WeaponShootState.new())
+		#else:
+			#current_weapon.change_weapon_state(WeaponIdleState.new())
 	
 func _on_enemy_seen(enemy: Enemy, player: Player) -> void:
 	if self != player:
@@ -241,7 +255,7 @@ func _on_enemy_seen(enemy: Enemy, player: Player) -> void:
 	on_engagement_action(enemy)
 	
 func _on_enemy_lost(enemy: Enemy, player: Player) -> void:
-	if self != player:
+	if self != player or not enemy:
 		return
 	enemy.hide_enemy()
 	if enemies_in_sight.has(enemy):
@@ -251,15 +265,34 @@ func _on_enemy_lost(enemy: Enemy, player: Player) -> void:
 		enemy_to_shoot = null
 		if not current_weapon.weapon_state is WeaponReloadState:
 			current_weapon.change_weapon_state(WeaponIdleState.new())
+		#point_to_look = initial_point
+		#rotation_tween = create_tween()
+		#do_initial_player_rotation(rotation_tween)
+		#if rotation_tween and rotation_tween.is_valid():
+			#await rotation_tween.finished
 	else:
-		enemy_to_shoot = enemies_in_sight.keys()[0]
-		if not current_weapon.weapon_state is WeaponReloadState:
+		if enemy == enemy_to_shoot:
+			_select_next_enemy_to_shoot()
+		if not (current_weapon.weapon_state is WeaponReloadState
+			or current_weapon.weapon_state is WeaponShootState):
 			current_weapon.change_weapon_state(WeaponShootState.new())
 	
 	current_weapon.change_enemy_to_shoot(enemy_to_shoot)
-	point_to_look = initial_point
-	rotation_tween = create_tween()
-	do_initial_player_rotation(rotation_tween)
-	if rotation_tween and rotation_tween.is_valid():
-		await rotation_tween.finished
+	if enemy and enemy.is_killed:
+		enemy.queue_free()
 	#point_to_look = null
+
+func _on_enemy_killed(enemy: Enemy, player: Player):
+	_on_enemy_lost(enemy, player)
+
+func _select_next_enemy_to_shoot():
+	var lowest_hp_enemy: Enemy = null
+	var lowest_hp_value = INF
+	
+	for enemy: Enemy in enemies_in_sight.keys():
+		var current_enemy_hp = enemy.HP
+		if current_enemy_hp < lowest_hp_value:
+			lowest_hp_value = current_enemy_hp
+			lowest_hp_enemy = enemy
+			
+	enemy_to_shoot = lowest_hp_enemy

@@ -53,7 +53,8 @@ func _check_is_enemy_exited_vision():
 		if not current_frame_visible_enemies.has(enemy):
 			for player in last_frame_visible_enemies[enemy]:
 				if last_frame_visible_enemies[enemy][player] >= 10:
-					Signals.hide_enemy.emit(enemy, player)
+					if enemy: #Provera da nije ubijen!
+						Signals.hide_enemy.emit(enemy, player)
 					players_to_remove_from_enemy.append(player)
 			
 					#last_frame_visible_enemies[enemy][player]["counter"] = 0
@@ -65,16 +66,15 @@ func _check_is_enemy_exited_vision():
 					if last_frame_visible_enemies[enemy][player] >= 10:
 						Signals.hide_enemy.emit(enemy, player)
 						players_to_remove_from_enemy.append(player)
-						#last_frame_visible_enemies[enemy][player]["counter"] = 0
 					else:
 						last_frame_visible_enemies[enemy][player] += 1
 	
 		for player in players_to_remove_from_enemy:
 			last_frame_visible_enemies[enemy].erase(player)
 			
-		# Ako više nijedan igrač ne prati ovog neprijatelja, brišemo ga skroz
 		if last_frame_visible_enemies[enemy].is_empty():
 			enemies_to_remove.append(enemy)
+			
 	for enemy in enemies_to_remove:
 		last_frame_visible_enemies.erase(enemy)
 func _on_enemy_seen_report(enemy: Enemy, player: Node):

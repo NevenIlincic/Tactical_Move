@@ -1,0 +1,44 @@
+[gd_resource type="Resource" script_class="WeaponStats" format=3 uid="uid://ddj6vd6by3aw5"]
+
+[ext_resource type="Script" uid="uid://bencr8mnns7ut" path="res://Scripts/Patterns/Stat/stat.gd" id="1_eih0w"]
+[ext_resource type="Script" uid="uid://dh5netn8c2b4e" path="res://Scripts/Weapon/weapon_stats.gd" id="1_gr8ws"]
+
+[sub_resource type="Resource" id="Resource_mykrp"]
+script = ExtResource("1_eih0w")
+base_value = 2.0
+metadata/_custom_type_script = "uid://bencr8mnns7ut"
+
+[sub_resource type="Resource" id="Resource_sr62i"]
+script = ExtResource("1_eih0w")
+base_value = 10.0
+metadata/_custom_type_script = "uid://bencr8mnns7ut"
+
+[sub_resource type="Resource" id="Resource_jre2x"]
+script = ExtResource("1_eih0w")
+base_value = 1.0
+metadata/_custom_type_script = "uid://bencr8mnns7ut"
+
+[sub_resource type="Resource" id="Resource_tg3ak"]
+script = ExtResource("1_eih0w")
+base_value = 20.0
+metadata/_custom_type_script = "uid://bencr8mnns7ut"
+
+[sub_resource type="Resource" id="Resource_eih0w"]
+script = ExtResource("1_eih0w")
+base_value = 10.0
+metadata/_custom_type_script = "uid://bencr8mnns7ut"
+
+[sub_resource type="Resource" id="Resource_8c5ma"]
+script = ExtResource("1_eih0w")
+base_value = 3.0
+metadata/_custom_type_script = "uid://bencr8mnns7ut"
+
+[resource]
+script = ExtResource("1_gr8ws")
+current_ammo = SubResource("Resource_mykrp")
+max_ammo_capacity = SubResource("Resource_eih0w")
+fire_rate = SubResource("Resource_jre2x")
+damage = SubResource("Resource_sr62i")
+hit_chance = SubResource("Resource_tg3ak")
+reload_time = SubResource("Resource_8c5ma")
+metadata/_custom_type_script = "uid://dh5netn8c2b4e"

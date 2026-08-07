@@ -12,7 +12,6 @@ radius = 20.0
 script = ExtResource("1_02vxf")
 
 [node name="Enemy_Sprite" type="Sprite2D" parent="." unique_id=1264594983]
-visible = false
 texture_filter = 1
 texture_repeat = 1
 texture = ExtResource("1_i1u57")
