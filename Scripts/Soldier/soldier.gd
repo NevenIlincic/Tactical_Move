@@ -8,6 +8,7 @@ var is_walking: bool = false
 var follow_enemy_with_rotation = false
 var enemy_to_shoot: Soldier
 var enemies_in_sight: Dictionary = {} #{Soldier: true}
+var after_move_looking_point #Vector2/null
 
 @export var soldier_stats: PlayerStats:
 	set(value):
@@ -40,7 +41,7 @@ func _physics_process(delta: float) -> void:
 func _on_enemy_soldier_killed(enemy_killed: Soldier, killed_by: Soldier):
 	if enemies_in_sight.has(enemy_killed):
 		enemies_in_sight.erase(enemy_killed)
-	_on_enemy_lost(enemy_killed, killed_by)
+	_on_enemy_lost(enemy_killed, self)
 
 func _select_next_enemy_to_shoot():
 	var lowest_hp_enemy: Soldier = null
@@ -79,6 +80,7 @@ func on_engagement_action(enemy: Soldier):
 		engagement_strategy.execute(self, enemy)
 
 func _on_enemy_lost(enemy: Soldier, soldier: Soldier):
+	#print(self, " ", enemies_in_sight, " ", soldier)
 	if self != soldier or not enemy:
 		return
 	if enemies_in_sight.has(enemy):

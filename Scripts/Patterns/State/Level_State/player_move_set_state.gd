@@ -39,7 +39,12 @@ func _unhandled_input(event: InputEvent):
 		
 	if Input.is_action_just_pressed("reset_look_at_path") and selected_player:
 		selected_player.reset_point_to_look()
-
+	
+	if Input.is_action_just_pressed("rotate_player_after_move") and selected_player and len(selected_player.player_path) > 1:
+		selected_player.set_after_move_looking_point(level.get_global_mouse_position())
+	if Input.is_action_just_pressed("reset_rotate_player_after_move") and selected_player:
+		selected_player.reset_after_move_looking_point()
+	
 	if Input.is_action_just_pressed("rotate_player") and selected_player:
 		#selected_player.look_at(level.get_global_mouse_position())
 		selected_player.set_point_to_look(level.get_global_mouse_position())
