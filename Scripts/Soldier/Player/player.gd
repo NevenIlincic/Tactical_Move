@@ -143,8 +143,8 @@ func do_initial_player_rotation(tween: Tween):
 	else:
 		tween.kill()
 func do_movement(tween: Tween):
-	var current_position = global_position	
 	if len(player_path) > 1:
+		var current_position = global_position	
 		for target_position in player_path:
 			var distance = current_position.distance_to(target_position)
 			var duration = distance / soldier_stats.speed.get_value()
@@ -176,13 +176,12 @@ func _move():
 		await move_tween.finished
 	if rotation_tween and rotation_tween.is_valid():
 		await rotation_tween.finished
+	is_walking = false
 
 func _on_actions_finished():
-	is_walking = false
 	player_path.clear()
 	point_to_look = null
 	player_path.append(global_position)
-	UpgradeManager.remove_moving_penalty(self)
 
 
 func _on_selection_area_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:

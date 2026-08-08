@@ -16,5 +16,4 @@ func update(delta: float):
 func on_reload_finished():
 	if not current_weapon.weapon_state is WeaponShootState:
 		current_weapon.weapon_stats.current_ammo.base_value = current_weapon.weapon_stats.max_ammo_capacity.get_value()
-		print("RELOAD FINISHED! ", current_weapon.weapon_stats.current_ammo.get_value())
 		current_weapon.change_weapon_state(WeaponShootState.new())

@@ -46,7 +46,7 @@ func _check_is_enemy_exited_vision():
 		if not current_frame_visible_enemies.has(enemy):
 			for player in last_frame_visible_enemies[enemy]:
 				if last_frame_visible_enemies[enemy][player] >= 10:
-					if enemy: #Provera da nije ubijen!
+					if enemy and player: #Provera da nije ubijen!
 						Signals.hide_enemy.emit(enemy, player)
 					players_to_remove_from_enemy.append(player)
 			
@@ -57,8 +57,9 @@ func _check_is_enemy_exited_vision():
 			for player in last_frame_visible_enemies[enemy]:
 				if not current_frame_visible_enemies[enemy].has(player):
 					if last_frame_visible_enemies[enemy][player] >= 10:
-						Signals.hide_enemy.emit(enemy, player)
-						players_to_remove_from_enemy.append(player)
+						if enemy and player:
+							Signals.hide_enemy.emit(enemy, player)
+							players_to_remove_from_enemy.append(player)
 					else:
 						last_frame_visible_enemies[enemy][player] += 1
 	

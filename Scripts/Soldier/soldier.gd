@@ -35,6 +35,7 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	vision_polygon.update_vision()
+	#print(is_walking, " ", has_enemies_in_sight())
 
 func _on_enemy_soldier_killed(enemy_killed: Soldier, killed_by: Soldier):
 	if enemies_in_sight.has(enemy_killed):
@@ -107,4 +108,7 @@ func _on_enemy_lost(enemy: Soldier, soldier: Soldier):
 		enemy.queue_free()
 
 func _on_enemy_lost_extra(enemy: Soldier):
+	pass
+
+func do_while_action(delta: float):
 	pass

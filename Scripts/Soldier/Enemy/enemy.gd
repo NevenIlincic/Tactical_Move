@@ -26,8 +26,11 @@ func _ready() -> void:
 	#var tween = create_tween()
 	#tween.tween_property(self, "global_position", Vector2(20,20), 40)
 
-func do_while_action():
+func do_while_action(delta: float):
 	check_enemy_looking_at()
+
+func do_actions():
+	pass
 
 func check_enemy_looking_at():
 	if enemy_to_shoot:

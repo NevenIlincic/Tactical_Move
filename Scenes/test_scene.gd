@@ -19,11 +19,11 @@ func _ready() -> void:
 	for player in get_tree().get_nodes_in_group("Player"):
 		if player is Player:
 			players[player] = true
-	for enemy in get_tree().get_nodes_in_group("enemy_node"):
-		if enemy is Enemy:
-			enemies[enemy] = true
+	#for enemy in get_tree().get_nodes_in_group("enemy_node"):
+		#if enemy is Enemy:
+			#enemies[enemy] = true
 	
-	Signals.get_alive_enemies.emit(enemies)
+	#Signals.get_alive_enemies.emit(enemies)
 	setup_grid()
 	connect_to_signals()
 	current_state = PlayerSetMoveState.new([self])
@@ -36,6 +36,12 @@ func get_alive_players() -> Dictionary:
 
 func get_alive_enemies() -> Dictionary:
 	return enemies
+
+func get_alive_soldiers() -> Dictionary:
+	var alive_soldiers: Dictionary = {}
+	for soldier in get_tree().get_nodes_in_group("soldier"):
+		alive_soldiers[soldier] = true
+	return alive_soldiers
 
 func set_level_state(new_state: State):
 	if current_state:

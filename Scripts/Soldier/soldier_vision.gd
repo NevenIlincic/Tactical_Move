@@ -1,8 +1,7 @@
 class_name SoldierVision extends Polygon2D
 
-@onready var vision_center_line: Line2D = $Vision_Center_Line
 @onready var collision_polygon_2d: CollisionPolygon2D = $Vision_Area/CollisionPolygon2D
-
+@onready var enemy_target_line: Line2D = $Enemy_Target_Line
 
 @export var max_range: float = 300.0
 @export var fov_degrees: float = 90.0
@@ -14,7 +13,10 @@ var level: Level
 var rays: Array[RayCast2D] = []
 var facing_angle: float = 0.0
 
+
 func _ready() -> void:
+	enemy_target_line.add_point(Vector2.ZERO)
+	
 	setup_vision_rays()
 	level = get_tree().get_first_node_in_group("Level")
 
@@ -33,6 +35,7 @@ func setup_vision_rays() -> void:
 		rays.append(ray)
 
 func update_vision():
+	var enemy_position: Vector2
 	var half_fov = deg_to_rad(fov_degrees / 2.0)
 	var raw_points: Array[Vector2] = [Vector2.ZERO]
 	var points = PackedVector2Array(raw_points)
@@ -56,18 +59,15 @@ func update_vision():
 					if not currently_visible_enemies.has(hit_object):
 						currently_visible_enemies[hit_object] = true					
 						Signals.report_enemy_seen.emit(hit_object, get_parent())
+						if not enemy_position and hit_object == get_parent().enemy_to_shoot:
+							enemy_position = current_point
 		else:
 			current_point = ray.target_position
 		
 		points.append(current_point)
 		if raw_points.back().distance_to(current_point) > 0.5:
 			raw_points.append(current_point)
-		if i == rays.size() / 2:
-			if vision_center_line.get_point_count() > 1:
-				vision_center_line.set_point_position(1, current_point)
-			else:
-				vision_center_line.add_point(current_point)
-
+		
 	if points.size() > 3:
 		var triangles = Geometry2D.triangulate_polygon(points)
 		if not triangles.is_empty():
@@ -75,9 +75,19 @@ func update_vision():
 			#collision_polygon_2d.polygon = points
 		else:
 			pass
+			
+	if enemy_target_line.get_point_count() == 1:
+		enemy_target_line.add_point(enemy_position)
+	else:
+		enemy_target_line.set_point_position(1, enemy_position)
 
 func check_is_enemy_soldier_hit(current_soldier: Soldier, hit_soldier: Soldier):
 	return current_soldier.get_script() != hit_soldier.get_script()
 	#if hit_soldier and hit_soldier is Enemy:
 		#if not currently_visible_enemies.has(hit_soldier):
 			#currently_visible_enemies[hit_soldier] = true
+
+func reset_target_line():
+	enemy_target_line.remove_point(-1)
+
+	

@@ -7,6 +7,7 @@ func execute(player: Soldier, enemy: Soldier):
 	player.follow_enemy_with_rotation = true
 	if player.rotation_tween and player.rotation_tween.is_valid():
 		player.rotation_tween.kill()
+		print(player.rotation_tween)
 	if not (player.current_weapon.weapon_state is WeaponReloadState
 	or player.current_weapon.weapon_state is WeaponShootState):
 		player.current_weapon.change_weapon_state(WeaponShootState.new())

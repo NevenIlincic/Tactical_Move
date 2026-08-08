@@ -8,7 +8,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_02vxf"]
 radius = 20.0
 
-[node name="Enemy" type="Node2D" unique_id=1440065138 groups=["enemy_node"]]
+[node name="Enemy" type="Node2D" unique_id=1440065138 groups=["enemy_node", "soldier"]]
 script = ExtResource("1_02vxf")
 
 [node name="Enemy_Sprite" type="Sprite2D" parent="." unique_id=1264594983]
@@ -23,7 +23,7 @@ script = ExtResource("3_fw0yv")
 max_range = 1000.0
 ray_count = 30.0
 
-[node name="Vision_Center_Line" type="Line2D" parent="Vision_Polygon" unique_id=1406944396]
+[node name="Enemy_Target_Line" type="Line2D" parent="Vision_Polygon" unique_id=1406944396]
 visible = false
 show_behind_parent = true
 texture_filter = 1

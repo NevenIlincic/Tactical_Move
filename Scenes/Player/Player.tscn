@@ -11,7 +11,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_06txj"]
 size = Vector2(60, 60)
 
-[node name="Player" type="Node2D" unique_id=1108589071 groups=["Player"]]
+[node name="Player" type="Node2D" unique_id=1108589071 groups=["Player", "soldier"]]
 script = ExtResource("1_ft8w5")
 
 [node name="Player_Path_Line" type="Line2D" parent="." unique_id=2110637716]
@@ -35,7 +35,7 @@ polygon = PackedVector2Array(0, 0, -256, -256, 256, -256)
 script = ExtResource("4_t26db")
 max_range = 1000.0
 
-[node name="Vision_Center_Line" type="Line2D" parent="Vision_Polygon" unique_id=1477870436]
+[node name="Enemy_Target_Line" type="Line2D" parent="Vision_Polygon" unique_id=1477870436]
 show_behind_parent = true
 texture_filter = 1
 texture_repeat = 2
