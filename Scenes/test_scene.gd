@@ -55,18 +55,13 @@ func set_occupied_tiles_list():
 		list_occupied_tiles.append(starting_tile)
 		
 func connect_to_signals():
-	Signals.player_move_finished.connect(check_is_turn_finished)
+	pass
+	#Signals.player_move_finished.connect(check_is_turn_finished)
 
 #func _on_deselect_player():
 	#selected_player.is_selected = false
 	#selected_player = null
 	#draw_path([])
-
-func check_is_turn_finished():
-	num_finished_player_turns += 1
-	if num_finished_player_turns == len(players):
-		num_finished_player_turns = 0
-		print("ZAVRSEN POTEZ!")
 
 #func set_selected_player(new_selected_player: Player):
 	##if selected_player:

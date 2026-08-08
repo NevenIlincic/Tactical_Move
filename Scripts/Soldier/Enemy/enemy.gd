@@ -7,7 +7,6 @@ class_name Enemy extends Soldier
 var num_seen_by: int = 0
 
 #FOR ENEMY
-var point_to_look: Vector2
 
 func show_enemy():
 	visible = true
@@ -22,6 +21,7 @@ func _ready() -> void:
 	#pass
 	#visible = false
 	engagement_strategy = StopShootFollowingStrategy.new()
+	point_to_look = Vector2.ZERO
 	#connect_to_signals()
 	#var tween = create_tween()
 	#tween.tween_property(self, "global_position", Vector2(20,20), 40)
@@ -30,7 +30,7 @@ func do_while_action(delta: float):
 	check_enemy_looking_at()
 
 func do_actions():
-	pass
+	Signals.player_move_finished.emit(self)
 func set_point_to_look(point):
 	pass
 

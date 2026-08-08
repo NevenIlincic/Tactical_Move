@@ -3,12 +3,15 @@ class_name Soldier extends Node2D
 
 @onready var vision_polygon: SoldierVision = $Vision_Polygon
 
+var is_in_active_state: bool = false
 var is_killed: bool = false
 var is_walking: bool = false
 var follow_enemy_with_rotation = false
 var enemy_to_shoot: Soldier
 var enemies_in_sight: Dictionary = {} #{Soldier: true}
 var after_move_looking_point #Vector2/null
+var point_to_look #Vector2/Soldier
+
 
 @export var soldier_stats: PlayerStats:
 	set(value):
@@ -58,7 +61,7 @@ func _select_next_enemy_to_shoot():
 func is_soldier_walking() -> bool:
 	return is_walking
 
-func is_in_finished_state():
+func is_in_finished_state() -> bool:
 	return not is_soldier_walking() and not has_enemies_in_sight()
 	
 func has_enemies_in_sight() -> bool:
@@ -66,9 +69,16 @@ func has_enemies_in_sight() -> bool:
 		return false
 	return not enemies_in_sight.is_empty()
 
+func check_is_enemy_in_sight():
+	if enemy_to_shoot:
+		if follow_enemy_with_rotation:
+			set_point_to_look(enemy_to_shoot)
+
 func _on_enemy_seen(enemy: Soldier, soldier: Soldier):
 	if self != soldier:
 		return
+	if is_in_finished_state():
+		Signals.player_move_continued.emit(self)
 	enemies_in_sight[enemy] = true
 	on_engagement_action(enemy)
 	_on_enemy_seen_extra(enemy)
@@ -87,6 +97,8 @@ func _on_enemy_lost(enemy: Soldier, soldier: Soldier):
 		enemies_in_sight.erase(enemy)
 	
 	if enemies_in_sight.is_empty():
+		if is_in_finished_state():
+			Signals.player_move_finished.emit(self)
 		enemy_to_shoot = null
 		if not current_weapon.weapon_state is WeaponReloadState:
 			current_weapon.change_weapon_state(WeaponIdleState.new())
@@ -115,4 +127,6 @@ func _on_enemy_lost_extra(enemy: Soldier):
 func do_while_action(delta: float):
 	pass
 func set_point_to_look(point):
+	pass
+func check_soldier_has_action():
 	pass

@@ -31,7 +31,7 @@ enum EngagementRules {
 #####
 #VISION (FOW)
 var rays: Array[RayCast2D] = []
-var point_to_look
+
 
 
 func _ready() -> void:
@@ -69,8 +69,10 @@ func set_after_move_looking_point(point: Vector2):
 func reset_after_move_looking_point():
 	after_move_looking_point = null
 	player_look_at_line_after_move.clear_points()
-	player_look_at_line_after_move.add_point(global_position)
-	
+	if len(player_path) > 1:
+		player_look_at_line_after_move.add_point(player_path[-1])
+	else:
+		player_look_at_line_after_move.add_point(global_position)
 #func connect_to_signals():
 	##Signals.move_player.connect(move)
 	#Signals.show_enemy.connect(_on_enemy_seen)
@@ -100,10 +102,10 @@ func change_engagement_strategy(rule: EngagementRules):
 		EngagementRules.MOVE_AND_SHOT_FOLLOWING:
 			engagement_strategy = MoveShootFollowingStrategy.new()
 
-func check_is_enemy_in_sight():
-	if enemy_to_shoot:
-		if follow_enemy_with_rotation:
-			set_point_to_look(enemy_to_shoot)
+#func check_is_enemy_in_sight():
+	#if enemy_to_shoot:
+		#if follow_enemy_with_rotation:
+			#set_point_to_look(enemy_to_shoot)
 	
 func gradually_remove_path_line():
 	if player_path_line.get_point_count() > 1:
@@ -153,30 +155,35 @@ func set_player_path(new_path: Array[Vector2]):
 	player_path = new_path
 
 func do_initial_player_rotation(tween: Tween):
+	var target_point: Vector2 = global_position
 	if point_to_look:
-		var	target_angle = global_position.angle_to_point(point_to_look)
-		var start_angle = rotation
-		
-		tween.tween_method(
-			func(weight: float): rotation = lerp_angle(start_angle, target_angle, weight),
-			0.0, 1.0, 0.15
-		)
-	else:
-		tween.kill()
+		target_point = point_to_look
+	#if point_to_look:
+	var	target_angle = global_position.angle_to_point(target_point)
+	var start_angle = rotation
+	
+	tween.tween_method(
+		func(weight: float): rotation = lerp_angle(start_angle, target_angle, weight),
+		0.0, 1.0, 0.15
+	)
+	await tween.finished.connect(_on_rotation_stop)
+	#else:
+		#tween.kill()
 func do_movement(tween: Tween):
-	if len(player_path) > 1:
-		var current_position = global_position	
-		for target_position in player_path:
-			var distance = current_position.distance_to(target_position)
-			var duration = distance / soldier_stats.speed.get_value()
-			tween.tween_property(self, "global_position", target_position, duration)
-			
-			current_position = target_position
-		await tween.finished.connect(_on_move_stop)
-	else:
-		tween.kill()
+	#if len(player_path) > 1:
+	var current_position = global_position	
+	for target_position in player_path:
+		var distance = current_position.distance_to(target_position)
+		var duration = distance / soldier_stats.speed.get_value()
+		tween.tween_property(self, "global_position", target_position, duration)
+		
+		current_position = target_position
+	await tween.finished.connect(_on_move_stop)
+	#else:
+		#tween.kill()
 
 func _on_move_stop():
+	is_walking = false
 	if after_move_looking_point:
 		point_to_look = after_move_looking_point
 		var tween: Tween = create_tween()
@@ -184,13 +191,28 @@ func _on_move_stop():
 		await tween.finished
 		reset_after_move_looking_point()
 		set_player_looking_at()
+		#if not enemies_in_sight.is_empty():
+		#	Signals.player_move_continued.emit(self)
+	if is_in_finished_state():
+		Signals.player_move_finished.emit(self)
+func _on_rotation_stop():
+	if is_in_finished_state():
+		Signals.player_move_finished.emit(self)
+
+func check_soldier_has_action():
+	if len(player_path) > 1 or point_to_look:
+		Signals.player_move_continued.emit(self)
 #Executes when player confirmes end moves
 func do_actions():
-	check_for_temporary_perks()
+	is_walking = true
+	check_soldier_has_action()
+	#check_for_temporary_perks()
 	player_look_at_line.reset_path()
 	await _move()
 	_on_actions_finished()
 
+
+	#Signals.player_move_finished.emit(self)
 func check_for_temporary_perks():
 	UpgradeManager.apply_movement_penalty_perk(self)
 	
@@ -208,12 +230,12 @@ func _move():
 		await rotation_tween.finished
 	is_walking = false
 
-	
 
 func _on_actions_finished():
 	player_path.clear()
 	point_to_look = null
 	player_path.append(global_position)
+	
 
 
 func _on_selection_area_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
