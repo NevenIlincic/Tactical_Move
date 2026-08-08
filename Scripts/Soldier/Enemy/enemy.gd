@@ -6,8 +6,6 @@ class_name Enemy extends Soldier
 #FOR PLAYER
 var num_seen_by: int = 0
 
-#FOR ENEMY
-
 func show_enemy():
 	visible = true
 	num_seen_by +=1 
@@ -18,39 +16,26 @@ func hide_enemy():
 		visible = false
 
 func _ready() -> void:
-	#pass
+	super._ready()
 	#visible = false
 	engagement_strategy = StopShootFollowingStrategy.new()
 	point_to_look = Vector2.ZERO
-	#connect_to_signals()
-	#var tween = create_tween()
-	#tween.tween_property(self, "global_position", Vector2(20,20), 40)
 
-func do_while_action(delta: float):
-	check_enemy_looking_at()
-
-func do_actions():
-	Signals.player_move_finished.emit(self)
 func set_point_to_look(point):
-	pass
+	point_to_look = point
+	if not check_is_point_to_look_vector():
+		point_to_look = point.global_position
 
+
+func _pre_move_actions():
+	#ADD LOGIC FOR PLAYER MOVEMENT (probably will use built-in A* algorithm)
+	#var i: int = randi() % 500 + 1
+	#player_path.append(Vector2(i, i)) #Only for test 
+	Signals.player_move_finished.emit(self)
+	#check_soldier_has_action()
+	
 func check_enemy_looking_at():
 	if enemy_to_shoot:
 		look_at(enemy_to_shoot.global_position)
 	else:
 		look_at(point_to_look)
-
-#func connect_to_signals():
-	#Signals.shoot_player.connect(_on_player_seen)
-	#Signals.hide_player.connect(_on_player_lost)
-#
-#func _on_player_seen(enemy: Enemy, player: Player):
-	#if enemy != self:
-		#return
-	#enemies_in_sight[player] = true
-	#on_engagement_action(player)
-	#
-#func _on_player_lost(enemy: Enemy, player: Player):
-	#if self != enemy or not player:
-		#return
-	#enemies_in_sight[player] = true

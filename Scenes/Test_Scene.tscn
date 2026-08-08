@@ -78,9 +78,10 @@ script = ExtResource("7_88mxo")
 weapon_stats = ExtResource("8_argnq")
 metadata/_custom_type_script = "uid://bqnc1ha42r85"
 
-[sub_resource type="Resource" id="Resource_8c5ma"]
+[sub_resource type="Resource" id="Resource_6uspl"]
+resource_local_to_scene = true
 script = ExtResource("5_8c5ma")
-base_value = 45.0
+base_value = 30.0
 metadata/_custom_type_script = "uid://bencr8mnns7ut"
 
 [sub_resource type="Resource" id="Resource_stuxa"]
@@ -104,8 +105,13 @@ script = ExtResource("6_ltieu")
 speed = SubResource("Resource_xq73l")
 reaction_time = SubResource("Resource_42oyf")
 max_travel_distance = SubResource("Resource_stuxa")
-HP = SubResource("Resource_8c5ma")
+HP = SubResource("Resource_6uspl")
 metadata/_custom_type_script = "uid://cp4iog725gtuq"
+
+[sub_resource type="Resource" id="Resource_tq75k"]
+script = ExtResource("7_88mxo")
+weapon_stats = ExtResource("8_argnq")
+metadata/_custom_type_script = "uid://bqnc1ha42r85"
 
 [sub_resource type="Resource" id="Resource_518se"]
 resource_local_to_scene = true
@@ -113,34 +119,24 @@ script = ExtResource("5_8c5ma")
 base_value = 30.0
 metadata/_custom_type_script = "uid://bencr8mnns7ut"
 
-[sub_resource type="Resource" id="Resource_tq75k"]
-script = ExtResource("5_8c5ma")
-base_value = 1000.0
-metadata/_custom_type_script = "uid://bencr8mnns7ut"
-
-[sub_resource type="Resource" id="Resource_3vrl3"]
-script = ExtResource("5_8c5ma")
-base_value = 0.4
-metadata/_custom_type_script = "uid://bencr8mnns7ut"
-
-[sub_resource type="Resource" id="Resource_6uspl"]
-script = ExtResource("5_8c5ma")
-base_value = 250.0
-metadata/_custom_type_script = "uid://bencr8mnns7ut"
-
 [sub_resource type="Resource" id="Resource_7tbrw"]
 resource_local_to_scene = true
 script = ExtResource("6_ltieu")
-speed = SubResource("Resource_6uspl")
-reaction_time = SubResource("Resource_3vrl3")
-max_travel_distance = SubResource("Resource_tq75k")
+speed = SubResource("Resource_xq73l")
+reaction_time = SubResource("Resource_42oyf")
+max_travel_distance = SubResource("Resource_stuxa")
 HP = SubResource("Resource_518se")
 metadata/_custom_type_script = "uid://cp4iog725gtuq"
+
+[sub_resource type="Resource" id="Resource_3vrl3"]
+script = ExtResource("7_88mxo")
+weapon_stats = ExtResource("8_argnq")
+metadata/_custom_type_script = "uid://bqnc1ha42r85"
 
 [sub_resource type="Resource" id="Resource_q2r4x"]
 resource_local_to_scene = true
 script = ExtResource("5_8c5ma")
-base_value = 30.0
+base_value = 1000.0
 metadata/_custom_type_script = "uid://bencr8mnns7ut"
 
 [sub_resource type="Resource" id="Resource_nja13"]
@@ -188,21 +184,22 @@ shape = SubResource("RectangleShape2D_fhwqp")
 
 [node name="Player" parent="." unique_id=1108589071 instance=ExtResource("4_10mtb")]
 position = Vector2(67, 219)
-current_engagement_rule = 2
 soldier_stats = SubResource("Resource_grcoo")
 weapons = Array[ExtResource("6_mykrp")]([SubResource("Resource_yn6en")])
 
 [node name="Enemy3" parent="." unique_id=2042909401 instance=ExtResource("5_svcn8")]
-position = Vector2(484, 573)
+position = Vector2(705, 602)
 HP = 20.0
 soldier_stats = SubResource("Resource_513u8")
+weapons = Array[ExtResource("6_mykrp")]([SubResource("Resource_tq75k")])
 
 [node name="Enemy2" parent="." unique_id=2085944523 instance=ExtResource("5_svcn8")]
-position = Vector2(270, 547)
+position = Vector2(275, 590)
 soldier_stats = SubResource("Resource_7tbrw")
+weapons = Array[ExtResource("6_mykrp")]([SubResource("Resource_3vrl3")])
 
 [node name="Player2" parent="." unique_id=1802276897 instance=ExtResource("4_10mtb")]
-position = Vector2(708, 367)
-current_engagement_rule = 1
+position = Vector2(1097, 446)
+current_engagement_rule = 2
 soldier_stats = SubResource("Resource_nja13")
 weapons = Array[ExtResource("6_mykrp")]([SubResource("Resource_kw30y")])

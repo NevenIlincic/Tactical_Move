@@ -57,7 +57,7 @@ func update_vision():
 			if hit_object and hit_object is Soldier:
 				if check_is_enemy_soldier_hit(get_parent(), hit_object):
 					if not currently_visible_enemies.has(hit_object):
-						currently_visible_enemies[hit_object] = true					
+						currently_visible_enemies[hit_object] = true
 						Signals.report_enemy_seen.emit(hit_object, get_parent())
 						if not enemy_position and hit_object == get_parent().enemy_to_shoot:
 							enemy_position = current_point

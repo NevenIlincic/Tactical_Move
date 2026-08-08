@@ -22,7 +22,6 @@ func _init(data: Array):
 	connect_to_signals()
 	
 	vision_manager = VisionManager.new()
-	
 	for player: Soldier in alive_soldiers.keys():	
 		player.do_actions()
 
@@ -42,15 +41,7 @@ func _physics_process(delta: float) -> void:
 			
 	for player: Soldier in alive_soldiers.keys():
 		player.do_while_action(delta)
-		#if len(alive_soldiers) == 1:
-			#print(player.is_soldier_walking(), " ", player.has_enemies_in_sight())
-		#if not player.is_in_finished_state():
-			#all_players_finished_moves = false
-			
-	#if all_players_finished_moves:
-		#await level.get_tree().create_timer(1.0).timeout
-		#level.set_level_state(PlayerSetMoveState.new([level]))
-
+		
 func check_for_deletion():
 	for player in alive_soldiers.keys():
 		if not is_instance_valid(player) or player.is_queued_for_deletion():

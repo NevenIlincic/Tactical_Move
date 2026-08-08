@@ -19,8 +19,8 @@ var enemy_to_shoot: Soldier
 func _init():
 	change_weapon_state(WeaponIdleState.new())
 	
-func set_weapon_owner(player: Player):
-	weapon_owner = player
+func set_weapon_owner(soldier: Soldier):
+	weapon_owner = soldier
 
 func change_weapon_state(new_state: WeaponState):
 	weapon_state = new_state

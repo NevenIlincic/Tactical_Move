@@ -15,6 +15,7 @@ var num_finished_player_turns: int = 0
 
 var current_state: State
 
+var nesto
 func _ready() -> void:
 	for player in get_tree().get_nodes_in_group("Player"):
 		if player is Player:

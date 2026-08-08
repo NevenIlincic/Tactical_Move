@@ -28,8 +28,5 @@ func shoot_target():
 func check_can_shoot_target():
 	return current_weapon.enemy_to_shoot and not current_weapon.enemy_to_shoot.is_killed
 
-#HAS TO BE OVERRIDEN!
 func on_target_killed(enemy_killed: Soldier, killed_by: Soldier):
 	Signals.enemy_soldier_killed.emit(enemy_killed, killed_by)
-	#killed_by.on_enemy_soldier_killed(enemy_killed, killed_by)
-	#Signals.enemy_killed.emit(current_weapon.enemy_to_shoot, current_weapon.weapon_owner)

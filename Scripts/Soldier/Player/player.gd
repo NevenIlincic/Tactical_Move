@@ -5,7 +5,6 @@ var target_tile: Vector2i
 var is_selected: bool = false
 
 #LINE PATH NODES
-var player_path: Array[Vector2]
 @onready var player_path_line: PlayerPathLine = $Player_Path_Line
 @onready var player_look_at_line: PlayerLookAtLine = $Player_Look_At_Line
 @onready var player_look_at_line_after_move: Line2D = $Player_Look_At_Line_After_Move
@@ -31,28 +30,15 @@ enum EngagementRules {
 #####
 #VISION (FOW)
 var rays: Array[RayCast2D] = []
-
-
-
 func _ready() -> void:
 	super._ready()
-	player_path.append(global_position)
 	set_up_lines_data()
 	#connect_to_signals()
-	if not weapons.is_empty():
-		current_weapon = weapons[0]
-		current_weapon.set_weapon_owner(self)
-		
+	
 	change_engagement_strategy(current_engagement_rule)
 	#MOVE TO POSITION MARKER
 	animation_player.play("Position_Marker_Rotation")
-	move_to_position_marker.global_position = global_position
-	
-#func is_player_shooting() -> bool:
-	#return is_shooting
-
-#Checks if player is in his finished state 
-
+	move_to_position_marker.global_position = global_position	
 
 func set_up_lines_data():
 	player_path_line.add_point(global_position)
@@ -61,33 +47,22 @@ func set_up_lines_data():
 	player_look_at_line_after_move.add_point(global_position)
 
 func set_after_move_looking_point(point: Vector2):
-	after_move_looking_point = point
+	super.set_after_move_looking_point(point)
 	if player_look_at_line_after_move.get_point_count() == 1:
 		player_look_at_line_after_move.add_point(point)
 	else:
 		player_look_at_line_after_move.set_point_position(1, point)
 func reset_after_move_looking_point():
-	after_move_looking_point = null
+	super.reset_after_move_looking_point()
 	player_look_at_line_after_move.clear_points()
 	if len(player_path) > 1:
 		player_look_at_line_after_move.add_point(player_path[-1])
 	else:
 		player_look_at_line_after_move.add_point(global_position)
-#func connect_to_signals():
-	##Signals.move_player.connect(move)
-	#Signals.show_enemy.connect(_on_enemy_seen)
-	#Signals.hide_enemy.connect(_on_enemy_lost)
-	##Signals.enemy_killed.connect(_on_enemy_killed)
 	
-#Called when ActionState
-func do_while_action(delta: float):
-	check_is_enemy_in_sight()	
-	set_player_looking_at()
-	#vision_polygon.update_vision()
+func do_while_action_extra():
 	move_player_look_at_line_start_position()
 	gradually_remove_path_line()
-	if current_weapon:
-		current_weapon.update(delta)
 
 func change_engagement_strategy(rule: EngagementRules):
 	match rule:
@@ -129,11 +104,8 @@ func set_point_to_look(point):
 	if not check_is_point_to_look_vector():
 		point_to_look = point.global_position
 		look_at_position_sprite.visible = false
-		#if not initial_point:
-			#initial_point = point_to_look
 		return
-	#if not initial_point:
-			#initial_point = point_to_look
+
 	look_at_position_sprite.visible = true
 	look_at_position_sprite.global_position = point_to_look
 	if player_look_at_line.get_point_count() == 1:
@@ -145,68 +117,13 @@ func reset_point_to_look():
 	point_to_look = null
 	player_look_at_line.reset_path()
 	
-func check_is_point_to_look_vector() -> bool:
-	if point_to_look:
-		if point_to_look is Vector2:
-			return true
-		return false
-	return false
 func set_player_path(new_path: Array[Vector2]):
 	player_path = new_path
 
-func do_initial_player_rotation(tween: Tween):
-	var target_point: Vector2 = global_position
-	if point_to_look:
-		target_point = point_to_look
-	#if point_to_look:
-	var	target_angle = global_position.angle_to_point(target_point)
-	var start_angle = rotation
-	
-	tween.tween_method(
-		func(weight: float): rotation = lerp_angle(start_angle, target_angle, weight),
-		0.0, 1.0, 0.15
-	)
-	await tween.finished.connect(_on_rotation_stop)
-	#else:
-		#tween.kill()
-func do_movement(tween: Tween):
-	#if len(player_path) > 1:
-	var current_position = global_position	
-	for target_position in player_path:
-		var distance = current_position.distance_to(target_position)
-		var duration = distance / soldier_stats.speed.get_value()
-		tween.tween_property(self, "global_position", target_position, duration)
-		
-		current_position = target_position
-	await tween.finished.connect(_on_move_stop)
-	#else:
-		#tween.kill()
-
-func _on_move_stop():
-	is_walking = false
-	if after_move_looking_point:
-		point_to_look = after_move_looking_point
-		var tween: Tween = create_tween()
-		do_initial_player_rotation(tween)
-		await tween.finished
-		reset_after_move_looking_point()
-		set_player_looking_at()
-		#if not enemies_in_sight.is_empty():
-		#	Signals.player_move_continued.emit(self)
-	if is_in_finished_state():
-		Signals.player_move_finished.emit(self)
-func _on_rotation_stop():
-	if is_in_finished_state():
-		Signals.player_move_finished.emit(self)
-
-func check_soldier_has_action():
-	if len(player_path) > 1 or point_to_look:
-		Signals.player_move_continued.emit(self)
 #Executes when player confirmes end moves
 func do_actions():
 	is_walking = true
 	check_soldier_has_action()
-	#check_for_temporary_perks()
 	player_look_at_line.reset_path()
 	await _move()
 	_on_actions_finished()
@@ -215,29 +132,11 @@ func do_actions():
 	#Signals.player_move_finished.emit(self)
 func check_for_temporary_perks():
 	UpgradeManager.apply_movement_penalty_perk(self)
+
+func _pre_move_actions():
+	check_soldier_has_action()
+
 	
-var rotation_tween: Tween
-var move_tween: Tween
-func _move():
-	is_walking = true
-	rotation_tween = create_tween()
-	move_tween = create_tween()
-	do_initial_player_rotation(rotation_tween)
-	do_movement(move_tween)
-	if move_tween and move_tween.is_valid():
-		await move_tween.finished
-	if rotation_tween and rotation_tween.is_valid():
-		await rotation_tween.finished
-	is_walking = false
-
-
-func _on_actions_finished():
-	player_path.clear()
-	point_to_look = null
-	player_path.append(global_position)
-	
-
-
 func _on_selection_area_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.is_pressed() and event.button_index == MOUSE_BUTTON_LEFT:
 		is_selected = !is_selected
@@ -256,17 +155,19 @@ func add_point_to_path(point: Vector2) -> void:
 
 
 func reset_path():
-	player_path.clear()
-	player_path.append(global_position)
+	super.reset_path()
+	#player_path.clear()
+	#player_path.append(global_position)
 	player_path_line.reset_path()
 	move_to_position_marker.global_position = global_position
-	reset_after_move_looking_point()
+	#reset_after_move_looking_point()
 
 func _on_enemy_seen_extra(enemy: Soldier) -> void:
 	(enemy as Enemy).show_enemy()
 	
 func _on_enemy_lost_extra(enemy: Soldier) -> void:
-	(enemy as Enemy).hide_enemy()
+	if not enemy is Player: 
+		(enemy as Enemy).hide_enemy()
 	#point_to_look = null
 
 

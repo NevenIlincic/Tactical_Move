@@ -6,7 +6,6 @@ func execute(player: Soldier, enemy: Soldier):
 		player.current_weapon.change_enemy_to_shoot(enemy)
 	player.follow_enemy_with_rotation = true	
 	player.set_point_to_look(enemy)
-	
 	stop_movement(player)
 	
 	if not (player.current_weapon.weapon_state is WeaponReloadState
