@@ -107,8 +107,10 @@ func _on_enemy_lost(enemy: Soldier, soldier: Soldier):
 	if enemy.is_killed:
 		enemy.queue_free()
 
+#HAS TO BE OVERRIDEN
 func _on_enemy_lost_extra(enemy: Soldier):
 	pass
-
 func do_while_action(delta: float):
+	pass
+func set_point_to_look(point):
 	pass

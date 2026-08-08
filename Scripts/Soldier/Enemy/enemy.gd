@@ -31,6 +31,8 @@ func do_while_action(delta: float):
 
 func do_actions():
 	pass
+func set_point_to_look(point):
+	pass
 
 func check_enemy_looking_at():
 	if enemy_to_shoot:

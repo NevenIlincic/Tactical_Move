@@ -5,6 +5,7 @@ func execute(player: Soldier, enemy: Soldier):
 		player.enemy_to_shoot = enemy
 		player.current_weapon.change_enemy_to_shoot(enemy)
 	player.follow_enemy_with_rotation = true	
+	player.set_point_to_look(enemy)
 	
 	stop_movement(player)
 	
@@ -17,7 +18,5 @@ func stop_movement(player: Soldier):
 
 	if player.move_tween and player.move_tween.is_valid():
 		player.move_tween.kill()
-	if player.rotation_tween and player.rotation_tween.is_valid():
-		player.rotation_tween.kill()
 	player.is_walking = false
 	player.reset_path()

@@ -106,11 +106,11 @@ func set_point_to_look(point):
 	if not check_is_point_to_look_vector():
 		point_to_look = point.global_position
 		look_at_position_sprite.visible = false
-		if not initial_point:
-			initial_point = point_to_look
+		#if not initial_point:
+			#initial_point = point_to_look
 		return
-	if not initial_point:
-			initial_point = point_to_look
+	#if not initial_point:
+			#initial_point = point_to_look
 	look_at_position_sprite.visible = true
 	look_at_position_sprite.global_position = point_to_look
 	if player_look_at_line.get_point_count() == 1:
