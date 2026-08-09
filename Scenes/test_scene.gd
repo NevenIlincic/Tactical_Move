@@ -14,11 +14,9 @@ var enemies: Dictionary = {} #Enemy
 var num_finished_player_turns: int = 0
 
 var current_state: State
-var vision_manager: VisionManager
 
 var nesto
 func _ready() -> void:
-	vision_manager = VisionManager.new()
 	for player in get_tree().get_nodes_in_group("Player"):
 		if player is Player:
 			players[player] = true
@@ -32,7 +30,7 @@ func _ready() -> void:
 	current_state = PlayerSetMoveState.new([self])
 
 func _physics_process(delta: float) -> void:
-	#vision_manager.handle_enemy_visibility(delta)
+	VisionManager.handle_enemy_visibility(delta)
 	current_state._physics_process(delta)
 
 func get_alive_players() -> Dictionary:
@@ -60,21 +58,6 @@ func set_occupied_tiles_list():
 		
 func connect_to_signals():
 	pass
-	#Signals.player_move_finished.connect(check_is_turn_finished)
-
-#func _on_deselect_player():
-	#selected_player.is_selected = false
-	#selected_player = null
-	#draw_path([])
-
-#func set_selected_player(new_selected_player: Player):
-	##if selected_player:
-		##selected_player.is_selected = false
-		##selected_player.player_sprite.modulate.a = 1.0
-		###if len(selected_player.player_path) == 1:
-		##grid.set_point_solid(selected_player.player_path[-1], true)
-	#selected_player = new_selected_player
-	##grid.set_point_solid(selected_player.starting_tile, false)
 
 func setup_grid():
 	grid.region = tile_map.get_used_rect()

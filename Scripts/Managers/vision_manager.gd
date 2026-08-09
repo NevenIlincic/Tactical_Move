@@ -1,7 +1,4 @@
 extends Node2D 
-class_name VisionManager
-
-
 # Pamtićemo parove: { enemy: { player1: true, player2: true } }
 var last_frame_visible_enemies: Dictionary
 var current_frame_visible_enemies: Dictionary
@@ -38,12 +35,12 @@ func _check_is_enemy_entered_vision():
 					last_frame_visible_enemies[enemy] = {}
 				last_frame_visible_enemies[enemy][player] = 0
 				Signals.show_enemy.emit(enemy, player)
-			#var enemy_data = current_frame_visible_enemies[enemy].duplicate()
-			#enemy_data["counter"] = 0
+
 
 func _check_is_enemy_exited_vision():
 	var enemies_to_remove = []
 	var break_outer_loop: bool = false
+
 	for enemy in last_frame_visible_enemies:
 		var players_to_remove_from_enemy = []
 		if not current_frame_visible_enemies.has(enemy):
@@ -51,7 +48,7 @@ func _check_is_enemy_exited_vision():
 				if last_frame_visible_enemies[enemy][player] >= 5:
 					if enemy and player: #Provera da nije ubijen!
 						Signals.hide_enemy.emit(enemy, player)
-					players_to_remove_from_enemy.append(player)
+						players_to_remove_from_enemy.append(player)
 			
 					#last_frame_visible_enemies[enemy][player]["counter"] = 0
 				else:
@@ -79,12 +76,3 @@ func _on_enemy_seen_report(enemy: Soldier, player: Soldier):
 	if not current_frame_visible_enemies.has(enemy):
 		current_frame_visible_enemies[enemy] = {}
 	current_frame_visible_enemies[enemy][player] = true
-
-func on_enemy_killed(enemy: Soldier, player: Soldier):
-	pass
-	#if last_frame_visible_enemies.has(player):
-		#if last_frame_visible_enemies[player].has(enemy):
-			#last_frame_visible_enemies[player].erase(enemy)
-		#if last_frame_visible_enemies[player].is_empty():
-			#last_frame_visible_enemies.erase(player)
-	#print("U VISION: ", last_frame_visible_enemies)

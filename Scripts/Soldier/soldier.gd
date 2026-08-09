@@ -47,7 +47,6 @@ func _ready() -> void:
 	
 func _physics_process(delta: float) -> void:
 	vision_polygon.update_vision()
-	#print(is_walking, " ", has_enemies_in_sight())
 
 func connect_to_signals():
 	Signals.enemy_soldier_killed.connect(_on_enemy_soldier_killed)
@@ -55,10 +54,12 @@ func connect_to_signals():
 	Signals.hide_enemy.connect(_on_enemy_lost)
 
 func _on_enemy_soldier_killed(enemy_killed: Soldier, killed_by: Soldier):
-	enemy_killed.hitbox_collision_shape.disabled = true
+	#enemy_killed.hitbox_collision_shape.disabled = true
 	if enemies_in_sight.has(enemy_killed):
 		enemies_in_sight.erase(enemy_killed)
 	_on_enemy_lost(enemy_killed, self)
+	if self == enemy_killed:
+		killed_by.when_escaped()
 	enemy_killed.queue_free()
 func _select_next_enemy_to_shoot():
 	var lowest_hp_enemy: Soldier = null

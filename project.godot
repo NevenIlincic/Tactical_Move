@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 Signals="*uid://bsc3uuw8qrlyh"
 UpgradeManager="*uid://d1do4d5se6p6a"
+VisionManager="*uid://ew73ulpjh61n"
 
 [display]
 

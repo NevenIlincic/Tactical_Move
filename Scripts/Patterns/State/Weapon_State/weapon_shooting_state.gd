@@ -18,7 +18,6 @@ func update(delta: float):
 func shoot_target():
 	current_weapon.weapon_stats.current_ammo.base_value -= 1.0
 	current_weapon.enemy_to_shoot.soldier_stats.HP.base_value -= current_weapon.weapon_stats.damage.get_value()
-	print(current_weapon.weapon_owner, " PUCAO NA: ", current_weapon.enemy_to_shoot )
 	if current_weapon.enemy_to_shoot.soldier_stats.HP.base_value <= 0.0:
 		current_weapon.enemy_to_shoot.is_killed = true
 		on_target_killed(current_weapon.enemy_to_shoot, current_weapon.weapon_owner)

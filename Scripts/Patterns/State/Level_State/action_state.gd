@@ -1,7 +1,7 @@
 class_name ActionState extends State
 
 var level: Level
-var vision_manager: VisionManager
+#var vision_manager: VisionManager
 
 var initial_num_alive_enemies: int 
 var num_finished_moves: int
@@ -21,7 +21,7 @@ func _init(data: Array):
 	
 	connect_to_signals()
 	
-	vision_manager = VisionManager.new()
+	#vision_manager = VisionManager.new()
 	for player: Soldier in alive_soldiers.keys():	
 		player.do_actions()
 
@@ -34,7 +34,6 @@ func _unhandled_input(event: InputEvent):
 	pass
 
 func _physics_process(delta: float) -> void:
-	vision_manager.handle_enemy_visibility(delta)
 	var all_players_finished_moves: bool = true
 	
 	check_for_deletion()
@@ -50,18 +49,12 @@ func check_for_deletion():
 func _on_player_move_finished(soldier: Soldier):
 	if soldiers_in_action.has(soldier):
 		soldiers_in_action.erase(soldier)
-	
-	#if soldier.has_enemies_in_sight():
-		#print(soldier, " IMA IGRACA IZA!")
-		#soldiers_in_action[soldier] = true
-		#return
+
 	if soldiers_in_action.is_empty():
 		level.set_level_state(PlayerSetMoveState.new([level]))
 func _on_player_move_continued(soldier: Soldier):
 	soldiers_in_action[soldier] = true
 	
 func _on_soldier_killed(enemy: Soldier, killed_by: Soldier):
-	enemy.enemies_in_sight.clear()
+	#enemy.enemies_in_sight.clear()
 	_on_player_move_finished(enemy)
-	#initial_num_alive_enemies -= 1
-	#num_finished_moves += 1
