@@ -49,7 +49,7 @@ func check_for_deletion():
 func _on_player_move_finished(soldier: Soldier):
 	if soldiers_in_action.has(soldier):
 		soldiers_in_action.erase(soldier)
-
+	
 	if soldiers_in_action.is_empty():
 		level.set_level_state(PlayerSetMoveState.new([level]))
 func _on_player_move_continued(soldier: Soldier):

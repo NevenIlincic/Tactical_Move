@@ -12,7 +12,7 @@ var level: Level
 var rays: Array[RayCast2D] = []
 var facing_angle: float = 0.0
 
-var bullet_hit_point: Vector2
+var bullet_hit_point #Vector2/null
 
 func _ready() -> void:
 	enemy_target_line.add_point(Vector2.ZERO)
@@ -68,6 +68,7 @@ func update_vision():
 		points.append(current_point)
 		if raw_points.back().distance_to(current_point) > 0.5:
 			raw_points.append(current_point)
+			
 		
 	if points.size() > 3:
 		var triangles = Geometry2D.triangulate_polygon(points)
@@ -75,11 +76,11 @@ func update_vision():
 			self.polygon = points
 		else:
 			pass
-			
-	if enemy_target_line.get_point_count() == 1:
-		enemy_target_line.add_point(enemy_position)
-	else:
-		enemy_target_line.set_point_position(1, enemy_position)
+	
+	#if enemy_target_line.get_point_count() == 1:
+		#enemy_target_line.add_point(enemy_position)
+	#else:
+		#enemy_target_line.set_point_position(1, enemy_position)
 
 	
 func check_is_enemy_soldier_hit(current_soldier: Soldier, hit_soldier: Soldier):

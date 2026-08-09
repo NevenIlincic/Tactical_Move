@@ -177,7 +177,6 @@ func do_soldier_rotation(tween: Tween):
 	await tween.finished.connect(_on_rotation_stop)
 
 func _move():
-	is_walking = true
 	rotation_tween = create_tween()
 	move_tween = create_tween()
 	do_soldier_rotation(rotation_tween)
@@ -187,10 +186,12 @@ func _move():
 	if rotation_tween and rotation_tween.is_valid():
 		await rotation_tween.finished
 	is_walking = false
+	
 func do_movement(tween: Tween):
 	if len(player_path) <= 1:
 		tween.kill()
 		return
+	is_walking = true
 	var current_position = global_position	
 	for target_position in player_path:
 		var distance = current_position.distance_to(target_position)
@@ -201,7 +202,11 @@ func do_movement(tween: Tween):
 	await tween.finished.connect(_on_move_stop)
 
 func _on_rotation_stop():
-	pass
+	if has_enemies_in_sight():
+		Signals.player_move_continued.emit(self)
+	else:
+		if not is_soldier_walking():
+			Signals.player_move_finished.emit(self)
 
 
 func _on_move_stop():
@@ -212,13 +217,21 @@ func _on_move_stop():
 		await tween.finished
 		reset_after_move_looking_point()
 		set_player_looking_at()
-
+			
+	if has_enemies_in_sight():
+		Signals.player_move_continued.emit(self)
+	else:
+		Signals.player_move_finished.emit(self)
 func _on_actions_finished():
 	player_path.clear()
 	point_to_look = null
 	player_path.append(global_position)
-	if is_in_finished_state():
-		Signals.player_move_finished.emit(self)
+	#if is_in_finished_state():
+		#Signals.player_move_finished.emit(self)
+	#if has_enemies_in_sight():
+		#Signals.player_move_continued.emit(self)
+	#else:
+		#Signals.player_move_finished.emit(self)
 
 #TEMPLATE METHODS
 func do_while_action(delta: float):

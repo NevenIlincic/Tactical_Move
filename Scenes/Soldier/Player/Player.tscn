@@ -95,7 +95,6 @@ max_range = 1000.0
 fov_degrees = 60.0
 
 [node name="Enemy_Target_Line" type="Line2D" parent="Vision_Polygon" unique_id=1477870436]
-visible = false
 show_behind_parent = true
 texture_filter = 1
 texture_repeat = 2

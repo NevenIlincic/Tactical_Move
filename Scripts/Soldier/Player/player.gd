@@ -157,7 +157,6 @@ func reset_path():
 	#reset_after_move_looking_point()
 
 func _on_enemy_seen_extra(enemy: Soldier) -> void:
-	print(enemy, " ", enemy.num_seen_by)
 	(enemy as Enemy).show_enemy()
 	
 func _on_enemy_lost_extra(enemy: Soldier) -> void:
