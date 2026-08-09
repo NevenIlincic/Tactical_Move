@@ -16,16 +16,20 @@ func update(delta: float):
 		fire_timer = 1.0 / current_weapon.weapon_stats.fire_rate.get_value()
 
 func shoot_target():
+	draw_bullet()
 	current_weapon.weapon_stats.current_ammo.base_value -= 1.0
 	current_weapon.enemy_to_shoot.soldier_stats.HP.base_value -= current_weapon.weapon_stats.damage.get_value()
 	if current_weapon.enemy_to_shoot.soldier_stats.HP.base_value <= 0.0:
 		current_weapon.enemy_to_shoot.is_killed = true
 		on_target_killed(current_weapon.enemy_to_shoot, current_weapon.weapon_owner)
-		#current_weapon.weapon_owner.enemy_to_shoot.queue_free()
-		#current_weapon.enemy_to_shoot = null
 
 func check_can_shoot_target():
 	return current_weapon.enemy_to_shoot and not current_weapon.enemy_to_shoot.is_killed
 
 func on_target_killed(enemy_killed: Soldier, killed_by: Soldier):
 	Signals.enemy_soldier_killed.emit(enemy_killed, killed_by)
+
+func draw_bullet():
+	var starting_position: Vector2 = current_weapon.weapon_owner.global_position
+	var target_position: Vector2 = current_weapon.weapon_owner.vision_polygon.bullet_hit_point
+	current_weapon.weapon_owner.bullet_line.draw_bullet(starting_position, target_position)

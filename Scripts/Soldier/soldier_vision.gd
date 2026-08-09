@@ -12,6 +12,7 @@ var level: Level
 var rays: Array[RayCast2D] = []
 var facing_angle: float = 0.0
 
+var bullet_hit_point: Vector2
 
 func _ready() -> void:
 	enemy_target_line.add_point(Vector2.ZERO)
@@ -60,6 +61,7 @@ func update_vision():
 						Signals.report_enemy_seen.emit(hit_object, get_parent())
 						if not enemy_position and hit_object == get_parent().enemy_to_shoot:
 							enemy_position = current_point
+							bullet_hit_point = hit_object.global_position
 		else:
 			current_point = ray.target_position
 		
@@ -79,10 +81,12 @@ func update_vision():
 	else:
 		enemy_target_line.set_point_position(1, enemy_position)
 
+	
 func check_is_enemy_soldier_hit(current_soldier: Soldier, hit_soldier: Soldier):
 	return current_soldier.get_script() != hit_soldier.get_script()
 
 func reset_target_line():
 	enemy_target_line.remove_point(-1)
 
-	
+func draw_bullet_line():
+	pass

@@ -3,6 +3,7 @@ class_name Soldier extends Node2D
 
 @onready var vision_polygon: SoldierVision = $Vision_Polygon
 @onready var hitbox_collision_shape: CollisionShape2D = $Hitbox/Hitbox_Collision_Shape
+@onready var bullet_line: SoldierBulletLine = $Bullet_Line
 
 var is_in_active_state: bool = false
 var is_killed: bool = false
@@ -87,6 +88,7 @@ func has_enemies_in_sight() -> bool:
 func check_soldier_has_action():
 	if len(player_path) > 1 or point_to_look:
 		Signals.player_move_continued.emit(self)
+		
 func set_after_move_looking_point(point: Vector2):
 	after_move_looking_point = point
 func reset_after_move_looking_point():

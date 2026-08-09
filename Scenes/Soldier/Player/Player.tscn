@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://bldh4qpfu1l23" path="res://Sprites/Player/look_at_position.png" id="7_x56g5"]
 [ext_resource type="Texture2D" uid="uid://cynm5bschf8o1" path="res://Sprites/Player/move_to_position_marker.png" id="8_0eouq"]
 [ext_resource type="Texture2D" uid="uid://bxrsachv2vex3" path="res://Sprites/Player/after_move_look_at_position.png" id="9_3um6k"]
+[ext_resource type="Script" uid="uid://duyphgu7sdufm" path="res://Scenes/Soldier/soldier_bullet_line.gd" id="11_tk11s"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_06txj"]
 size = Vector2(60, 60)
@@ -55,6 +56,14 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_06txj"]
 radius = 16.0
 
+[sub_resource type="Curve" id="Curve_tk11s"]
+_limits = [0.0, 4.0, 0.0, 1.0]
+_data = [Vector2(0.015936255, 0), 0.0, 0.0, 0, 0, Vector2(1, 2.3471074), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_tk11s"]
+colors = PackedColorArray(1, 1, 0.43137255, 0, 1, 1, 0.43137255, 0.8039216)
+
 [node name="Player" type="Node2D" unique_id=1108589071 groups=["Player", "soldier"]]
 script = ExtResource("1_ft8w5")
 
@@ -86,6 +95,7 @@ max_range = 1000.0
 fov_degrees = 60.0
 
 [node name="Enemy_Target_Line" type="Line2D" parent="Vision_Polygon" unique_id=1477870436]
+visible = false
 show_behind_parent = true
 texture_filter = 1
 texture_repeat = 2
@@ -126,5 +136,14 @@ texture_mode = 1
 
 [node name="Hitbox_Collision_Shape" type="CollisionShape2D" parent="Hitbox" unique_id=206391692]
 shape = SubResource("CircleShape2D_06txj")
+
+[node name="Bullet_Line" type="Line2D" parent="." unique_id=660409682]
+top_level = true
+points = PackedVector2Array(0, 0)
+width = 3.0
+width_curve = SubResource("Curve_tk11s")
+default_color = Color(1, 1, 0.43137255, 0.8039216)
+gradient = SubResource("Gradient_tk11s")
+script = ExtResource("11_tk11s")
 
 [connection signal="input_event" from="Selection_Area" to="." method="_on_selection_area_input_event"]

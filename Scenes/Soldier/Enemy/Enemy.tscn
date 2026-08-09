@@ -4,12 +4,21 @@
 [ext_resource type="Texture2D" uid="uid://d1tdmtvde540b" path="res://Sprites/Enemy/enemy.png" id="1_i1u57"]
 [ext_resource type="Texture2D" uid="uid://uwcsyrtrt75l" path="res://Sprites/Path_Line/New Piskel-1.png - 2026-08-04T161338.290.png" id="3_02vxf"]
 [ext_resource type="Script" uid="uid://c386pr8tx5qep" path="res://Scripts/Soldier/soldier_vision.gd" id="3_fw0yv"]
+[ext_resource type="Script" uid="uid://duyphgu7sdufm" path="res://Scenes/Soldier/soldier_bullet_line.gd" id="5_cmdj1"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_02vxf"]
 radius = 20.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wy1ij"]
 radius = 16.0
+
+[sub_resource type="Curve" id="Curve_cmdj1"]
+_limits = [0.0, 4.0, 0.0, 1.0]
+_data = [Vector2(0.015936255, 0), 0.0, 0.0, 0, 0, Vector2(1, 2.3471074), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_cgwcb"]
+colors = PackedColorArray(1, 1, 0.43137255, 0, 1, 1, 0.43137255, 0.8039216)
 
 [node name="Enemy" type="Node2D" unique_id=1440065138 groups=["enemy_node", "soldier"]]
 script = ExtResource("1_02vxf")
@@ -51,3 +60,12 @@ disabled = true
 
 [node name="Hitbox_Collision_Shape" type="CollisionShape2D" parent="Hitbox" unique_id=781357414]
 shape = SubResource("CircleShape2D_wy1ij")
+
+[node name="Bullet_Line" type="Line2D" parent="." unique_id=1522048793]
+top_level = true
+points = PackedVector2Array(0, 0)
+width = 3.0
+width_curve = SubResource("Curve_cmdj1")
+default_color = Color(1, 1, 0.43137255, 0.8039216)
+gradient = SubResource("Gradient_cgwcb")
+script = ExtResource("5_cmdj1")
