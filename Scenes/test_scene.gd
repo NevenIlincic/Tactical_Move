@@ -15,16 +15,14 @@ var num_finished_player_turns: int = 0
 
 var current_state: State
 
-var nesto
+var cover_points: Array
+
 func _ready() -> void:
 	for player in get_tree().get_nodes_in_group("Player"):
 		if player is Player:
 			players[player] = true
-	#for enemy in get_tree().get_nodes_in_group("enemy_node"):
-		#if enemy is Enemy:
-			#enemies[enemy] = true
-	
-	#Signals.get_alive_enemies.emit(enemies)
+	cover_points = get_tree().get_nodes_in_group("a_star_point")
+
 	setup_grid()
 	connect_to_signals()
 	current_state = PlayerSetMoveState.new([self])
@@ -34,8 +32,11 @@ func _physics_process(delta: float) -> void:
 	current_state._physics_process(delta)
 
 func get_alive_players() -> Dictionary:
-	return players
-
+	var alive_players: Dictionary = {}
+	for player in get_tree().get_nodes_in_group("Player"):
+		alive_players[player] = true
+	return alive_players
+	
 func get_alive_enemies() -> Dictionary:
 	return enemies
 
@@ -74,7 +75,8 @@ func setup_grid():
 			
 	#for tile in list_occupied_tiles:
 		#grid.set_point_solid(tile, true)
-		
+
+
 			
 @onready var path_line: Line2D = $Path_Line
 var start_tile: Vector2i = Vector2i(0,0)

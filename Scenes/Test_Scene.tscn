@@ -153,6 +153,15 @@ script = ExtResource("12_grcoo")
 weapon_stats = ExtResource("13_tq75k")
 metadata/_custom_type_script = "uid://bmr38t2grjqqv"
 
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_6uspl"]
+vertices = PackedVector2Array(970, 586, 1145, 628.03125, 6.1484375, 631.96094, 886, 586, 842, 266, 842, 54, 886, 118, 1145, 13.921875, 970, 118, 758, 266, 118, 138, 758, 138, 15.84375, 5.0703125, 118, 54)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 3), PackedInt32Array(7, 1, 0, 8), PackedInt32Array(4, 3, 2, 9), PackedInt32Array(10, 11, 9, 2), PackedInt32Array(10, 2, 12, 13), PackedInt32Array(13, 12, 7, 5), PackedInt32Array(5, 7, 8, 6)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(6, -5, 1155, 4, 1155, 638, -4, 642)])
+parsed_geometry_type = 1
+parsed_collision_mask = 4294967041
+source_geometry_mode = 2
+source_geometry_group_name = &"wall"
+
 [node name="Node2D" type="Node2D" unique_id=1609049363 groups=["Level"]]
 script = ExtResource("1_4ms0o")
 
@@ -162,28 +171,28 @@ tile_set = SubResource("TileSet_06txj")
 
 [node name="Path_Line" type="Line2D" parent="." unique_id=780851806]
 
-[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1702938192]
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1702938192 groups=["wall"]]
 position = Vector2(928, 288)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1953621873]
 position = Vector2(0, 64)
 shape = SubResource("RectangleShape2D_06txj")
 
-[node name="StaticBody2D2" type="StaticBody2D" parent="." unique_id=1451802714]
+[node name="StaticBody2D2" type="StaticBody2D" parent="." unique_id=1451802714 groups=["wall"]]
 position = Vector2(480, 96)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2" unique_id=794179377]
 position = Vector2(-32, 0)
 shape = SubResource("RectangleShape2D_jjc5n")
 
-[node name="StaticBody2D3" type="StaticBody2D" parent="." unique_id=1690032868]
+[node name="StaticBody2D3" type="StaticBody2D" parent="." unique_id=1690032868 groups=["wall"]]
 position = Vector2(800, 160)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3" unique_id=357753609]
 shape = SubResource("RectangleShape2D_fhwqp")
 
 [node name="Player" parent="." unique_id=1108589071 instance=ExtResource("4_10mtb")]
-position = Vector2(67, 138)
+position = Vector2(92, 210)
 soldier_stats = SubResource("Resource_grcoo")
 weapons = Array[ExtResource("6_mykrp")]([SubResource("Resource_yn6en")])
 
@@ -194,7 +203,7 @@ soldier_stats = SubResource("Resource_6uspl")
 weapons = Array[ExtResource("6_mykrp")]([SubResource("Resource_gmncr")])
 
 [node name="Enemy2" parent="." unique_id=2085944523 instance=ExtResource("5_svcn8")]
-position = Vector2(275, 590)
+position = Vector2(706, 13)
 soldier_stats = SubResource("Resource_518se")
 weapons = Array[ExtResource("6_mykrp")]([SubResource("Resource_3vrl3")])
 
@@ -203,3 +212,24 @@ position = Vector2(1097, 446)
 current_engagement_rule = 2
 soldier_stats = SubResource("Resource_q2r4x")
 weapons = Array[ExtResource("6_mykrp")]([SubResource("Resource_kw30y")])
+
+[node name="Marker2D" type="Marker2D" parent="." unique_id=245030149 groups=["a_star_point"]]
+position = Vector2(783, 317)
+
+[node name="Marker2D2" type="Marker2D" parent="." unique_id=1202106414 groups=["a_star_point"]]
+position = Vector2(1047, 349)
+
+[node name="Marker2D3" type="Marker2D" parent="." unique_id=1217688864 groups=["a_star_point"]]
+position = Vector2(532, 232)
+
+[node name="Marker2D4" type="Marker2D" parent="." unique_id=692773227 groups=["a_star_point"]]
+position = Vector2(257, 236)
+
+[node name="Marker2D5" type="Marker2D" parent="." unique_id=1350548604 groups=["a_star_point"]]
+position = Vector2(866, 612)
+
+[node name="Marker2D6" type="Marker2D" parent="." unique_id=1929799977 groups=["a_star_point"]]
+position = Vector2(1003, 611)
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=424842699]
+navigation_polygon = SubResource("NavigationPolygon_6uspl")
