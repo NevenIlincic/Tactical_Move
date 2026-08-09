@@ -91,12 +91,6 @@ func gradually_remove_path_line():
 func move_player_look_at_line_start_position():
 	if player_look_at_line.get_point_count() > 0:
 		player_look_at_line.set_point_position(0, global_position)
-func set_player_looking_at():
-	if point_to_look:
-		if check_is_point_to_look_vector():	
-			look_at(point_to_look)
-		else:
-			look_at(point_to_look.global_position)
 
 func set_point_to_look(point):
 	point_to_look = point
@@ -121,12 +115,12 @@ func set_player_path(new_path: Array[Vector2]):
 	player_path = new_path
 
 #Executes when player confirmes end moves
-func do_actions():
-	is_walking = true
-	check_soldier_has_action()
-	player_look_at_line.reset_path()
-	await _move()
-	_on_actions_finished()
+#func do_actions():
+	#is_walking = true
+	#check_soldier_has_action()
+	#player_look_at_line.reset_path()
+	#await _move()
+	#_on_actions_finished()
 
 
 	#Signals.player_move_finished.emit(self)
@@ -135,7 +129,7 @@ func check_for_temporary_perks():
 
 func _pre_move_actions():
 	check_soldier_has_action()
-
+	player_look_at_line.reset_path()
 	
 func _on_selection_area_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.is_pressed() and event.button_index == MOUSE_BUTTON_LEFT:
@@ -163,6 +157,7 @@ func reset_path():
 	#reset_after_move_looking_point()
 
 func _on_enemy_seen_extra(enemy: Soldier) -> void:
+	print(enemy, " ", enemy.num_seen_by)
 	(enemy as Enemy).show_enemy()
 	
 func _on_enemy_lost_extra(enemy: Soldier) -> void:

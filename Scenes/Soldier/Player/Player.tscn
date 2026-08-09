@@ -90,12 +90,6 @@ width = 3.0
 texture = ExtResource("5_jmcll")
 texture_mode = 1
 
-[node name="Vision_Area" type="Area2D" parent="Vision_Polygon" unique_id=600177350]
-collision_layer = 4
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Vision_Polygon/Vision_Area" unique_id=1640132888]
-disabled = true
-
 [node name="Look_At_Position_Sprite" type="Sprite2D" parent="." unique_id=560975301]
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("4_ude3g")

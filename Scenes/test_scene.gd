@@ -14,9 +14,11 @@ var enemies: Dictionary = {} #Enemy
 var num_finished_player_turns: int = 0
 
 var current_state: State
+var vision_manager: VisionManager
 
 var nesto
 func _ready() -> void:
+	vision_manager = VisionManager.new()
 	for player in get_tree().get_nodes_in_group("Player"):
 		if player is Player:
 			players[player] = true
@@ -30,6 +32,7 @@ func _ready() -> void:
 	current_state = PlayerSetMoveState.new([self])
 
 func _physics_process(delta: float) -> void:
+	vision_manager.handle_enemy_visibility(delta)
 	current_state._physics_process(delta)
 
 func get_alive_players() -> Dictionary:

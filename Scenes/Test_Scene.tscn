@@ -183,7 +183,7 @@ position = Vector2(800, 160)
 shape = SubResource("RectangleShape2D_fhwqp")
 
 [node name="Player" parent="." unique_id=1108589071 instance=ExtResource("4_10mtb")]
-position = Vector2(67, 219)
+position = Vector2(67, 138)
 soldier_stats = SubResource("Resource_grcoo")
 weapons = Array[ExtResource("6_mykrp")]([SubResource("Resource_yn6en")])
 

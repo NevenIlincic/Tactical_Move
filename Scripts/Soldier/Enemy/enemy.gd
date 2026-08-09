@@ -6,11 +6,11 @@ class_name Enemy extends Soldier
 #FOR PLAYER
 var num_seen_by: int = 0
 
-func show_enemy():
+func when_spotted():
 	visible = true
-	num_seen_by +=1 
+	num_seen_by += 1 
 
-func hide_enemy():
+func when_escaped():
 	num_seen_by -= 1
 	if num_seen_by == 0:
 		visible = false
@@ -39,3 +39,8 @@ func check_enemy_looking_at():
 		look_at(enemy_to_shoot.global_position)
 	else:
 		look_at(point_to_look)
+
+func _on_enemy_lost_extra(enemy: Soldier) -> void:
+	pass
+	#print("OVDE")
+	#hide_enemy()

@@ -1,6 +1,5 @@
 class_name SoldierVision extends Polygon2D
 
-@onready var collision_polygon_2d: CollisionPolygon2D = $Vision_Area/CollisionPolygon2D
 @onready var enemy_target_line: Line2D = $Enemy_Target_Line
 
 @export var max_range: float = 300.0
@@ -72,7 +71,6 @@ func update_vision():
 		var triangles = Geometry2D.triangulate_polygon(points)
 		if not triangles.is_empty():
 			self.polygon = points
-			#collision_polygon_2d.polygon = points
 		else:
 			pass
 			
@@ -83,9 +81,6 @@ func update_vision():
 
 func check_is_enemy_soldier_hit(current_soldier: Soldier, hit_soldier: Soldier):
 	return current_soldier.get_script() != hit_soldier.get_script()
-	#if hit_soldier and hit_soldier is Enemy:
-		#if not currently_visible_enemies.has(hit_soldier):
-			#currently_visible_enemies[hit_soldier] = true
 
 func reset_target_line():
 	enemy_target_line.remove_point(-1)

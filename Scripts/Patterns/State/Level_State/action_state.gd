@@ -21,7 +21,7 @@ func _init(data: Array):
 	
 	connect_to_signals()
 	
-	vision_manager = VisionManager.new()
+	#vision_manager = VisionManager.new()
 	for player: Soldier in alive_soldiers.keys():	
 		player.do_actions()
 
@@ -34,7 +34,7 @@ func _unhandled_input(event: InputEvent):
 	pass
 
 func _physics_process(delta: float) -> void:
-	vision_manager.handle_enemy_visibility(delta)
+	#vision_manager.handle_enemy_visibility(delta)
 	var all_players_finished_moves: bool = true
 	
 	check_for_deletion()

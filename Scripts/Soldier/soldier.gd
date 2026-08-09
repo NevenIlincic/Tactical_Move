@@ -43,7 +43,7 @@ func _ready() -> void:
 	if not weapons.is_empty():
 		current_weapon = weapons[0]
 		current_weapon.set_weapon_owner(self)
-
+	
 func _physics_process(delta: float) -> void:
 	vision_polygon.update_vision()
 	#print(is_walking, " ", has_enemies_in_sight())
@@ -57,7 +57,6 @@ func _on_enemy_soldier_killed(enemy_killed: Soldier, killed_by: Soldier):
 	if enemies_in_sight.has(enemy_killed):
 		enemies_in_sight.erase(enemy_killed)
 	_on_enemy_lost(enemy_killed, self)
-
 func _select_next_enemy_to_shoot():
 	var lowest_hp_enemy: Soldier = null
 	var lowest_hp_value = INF
@@ -89,6 +88,13 @@ func set_after_move_looking_point(point: Vector2):
 func reset_after_move_looking_point():
 	after_move_looking_point = null
 
+func set_player_looking_at():
+	if point_to_look:
+		if check_is_point_to_look_vector():	
+			look_at(point_to_look)
+		else:
+			look_at(point_to_look.global_position)
+
 func check_is_enemy_in_sight():
 	if enemy_to_shoot:
 		if follow_enemy_with_rotation:
@@ -107,9 +113,11 @@ func _on_enemy_seen(enemy: Soldier, soldier: Soldier):
 		return
 	if is_in_finished_state():
 		Signals.player_move_continued.emit(self)
-	enemies_in_sight[enemy] = true
+	
+	if not enemies_in_sight.has(enemy):
+		enemies_in_sight[enemy] = true
+		enemy.when_spotted()
 	on_engagement_action(enemy)
-	_on_enemy_seen_extra(enemy)
 func _on_enemy_seen_extra(enemy: Soldier):
 	pass
 
@@ -121,11 +129,12 @@ func _on_enemy_lost(enemy: Soldier, soldier: Soldier):
 	if self != soldier or not enemy:
 		return
 	if enemies_in_sight.has(enemy):
+		enemy.when_escaped()
 		enemies_in_sight.erase(enemy)
 	
+	if is_in_finished_state():
+		Signals.player_move_finished.emit(self)
 	if enemies_in_sight.is_empty():
-		if is_in_finished_state():
-			Signals.player_move_finished.emit(self)
 		enemy_to_shoot = null
 		if not current_weapon.weapon_state is WeaponReloadState:
 			current_weapon.change_weapon_state(WeaponIdleState.new())
@@ -138,15 +147,18 @@ func _on_enemy_lost(enemy: Soldier, soldier: Soldier):
 	
 	current_weapon.change_enemy_to_shoot(enemy_to_shoot)
 	
-	_on_enemy_lost_extra(enemy)
+	#_on_enemy_lost_extra(enemy)
 	
 	if enemy.is_killed:
 		enemy.queue_free()
 
 func do_soldier_rotation(tween: Tween):
-	var target_point: Vector2 = global_position
-	if point_to_look:
-		target_point = point_to_look
+	#var target_point: Vector2 = global_position
+	if not point_to_look:
+		tween.kill()
+		return
+	
+	var target_point = point_to_look
 	var	target_angle = global_position.angle_to_point(target_point)
 	var start_angle = rotation
 	
@@ -168,6 +180,9 @@ func _move():
 		await rotation_tween.finished
 	is_walking = false
 func do_movement(tween: Tween):
+	if len(player_path) <= 1:
+		tween.kill()
+		return
 	var current_position = global_position	
 	for target_position in player_path:
 		var distance = current_position.distance_to(target_position)
@@ -178,11 +193,11 @@ func do_movement(tween: Tween):
 	await tween.finished.connect(_on_move_stop)
 
 func _on_rotation_stop():
-	if is_in_finished_state():
-		Signals.player_move_finished.emit(self)
+	pass
+	#if is_in_finished_state():
+		#Signals.player_move_finished.emit(self)
 
 func _on_move_stop():
-	is_walking = false
 	if after_move_looking_point:
 		point_to_look = after_move_looking_point
 		var tween: Tween = create_tween()
@@ -190,13 +205,13 @@ func _on_move_stop():
 		await tween.finished
 		reset_after_move_looking_point()
 		set_player_looking_at()
-	if is_in_finished_state():
-		Signals.player_move_finished.emit(self)
 
 func _on_actions_finished():
 	player_path.clear()
 	point_to_look = null
 	player_path.append(global_position)
+	if is_in_finished_state():
+		Signals.player_move_finished.emit(self)
 
 #TEMPLATE METHODS
 func do_while_action(delta: float):
@@ -213,8 +228,9 @@ func do_actions():
 	
 
 #HAS TO BE OVERRIDEN
+func when_spotted(): pass
+func when_escaped(): pass
 func _on_enemy_lost_extra(enemy: Soldier): pass
 func set_point_to_look(point): pass
-func set_player_looking_at(): pass
 func do_while_action_extra(): pass
 func _pre_move_actions(): pass
