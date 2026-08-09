@@ -52,6 +52,9 @@ _data = {
 &"RESET": SubResource("Animation_3um6k")
 }
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_06txj"]
+radius = 16.0
+
 [node name="Player" type="Node2D" unique_id=1108589071 groups=["Player", "soldier"]]
 script = ExtResource("1_ft8w5")
 
@@ -118,5 +121,10 @@ texture_filter = 1
 texture_repeat = 2
 texture = ExtResource("9_3um6k")
 texture_mode = 1
+
+[node name="Hitbox" type="StaticBody2D" parent="." unique_id=1767789613]
+
+[node name="Hitbox_Collision_Shape" type="CollisionShape2D" parent="Hitbox" unique_id=206391692]
+shape = SubResource("CircleShape2D_06txj")
 
 [connection signal="input_event" from="Selection_Area" to="." method="_on_selection_area_input_event"]

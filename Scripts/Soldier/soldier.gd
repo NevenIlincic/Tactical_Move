@@ -2,6 +2,7 @@
 class_name Soldier extends Node2D
 
 @onready var vision_polygon: SoldierVision = $Vision_Polygon
+@onready var hitbox_collision_shape: CollisionShape2D = $Hitbox/Hitbox_Collision_Shape
 
 var is_in_active_state: bool = false
 var is_killed: bool = false
@@ -54,9 +55,11 @@ func connect_to_signals():
 	Signals.hide_enemy.connect(_on_enemy_lost)
 
 func _on_enemy_soldier_killed(enemy_killed: Soldier, killed_by: Soldier):
+	enemy_killed.hitbox_collision_shape.disabled = true
 	if enemies_in_sight.has(enemy_killed):
 		enemies_in_sight.erase(enemy_killed)
 	_on_enemy_lost(enemy_killed, self)
+	enemy_killed.queue_free()
 func _select_next_enemy_to_shoot():
 	var lowest_hp_enemy: Soldier = null
 	var lowest_hp_value = INF
@@ -131,13 +134,15 @@ func _on_enemy_lost(enemy: Soldier, soldier: Soldier):
 	if enemies_in_sight.has(enemy):
 		enemy.when_escaped()
 		enemies_in_sight.erase(enemy)
-	
-	if is_in_finished_state():
-		Signals.player_move_finished.emit(self)
+		
 	if enemies_in_sight.is_empty():
 		enemy_to_shoot = null
 		if not current_weapon.weapon_state is WeaponReloadState:
 			current_weapon.change_weapon_state(WeaponIdleState.new())
+		
+		await get_tree().create_timer(0.2).timeout
+		if is_in_finished_state():
+			Signals.player_move_finished.emit(self)
 	else:
 		if enemy == enemy_to_shoot:
 			_select_next_enemy_to_shoot()
@@ -149,8 +154,8 @@ func _on_enemy_lost(enemy: Soldier, soldier: Soldier):
 	
 	#_on_enemy_lost_extra(enemy)
 	
-	if enemy.is_killed:
-		enemy.queue_free()
+	#if enemy.is_killed:
+		#enemy.queue_free()
 
 func do_soldier_rotation(tween: Tween):
 	#var target_point: Vector2 = global_position
@@ -194,8 +199,7 @@ func do_movement(tween: Tween):
 
 func _on_rotation_stop():
 	pass
-	#if is_in_finished_state():
-		#Signals.player_move_finished.emit(self)
+
 
 func _on_move_stop():
 	if after_move_looking_point:

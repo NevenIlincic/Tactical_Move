@@ -17,7 +17,7 @@ func when_escaped():
 
 func _ready() -> void:
 	super._ready()
-	#visible = false
+	visible = false
 	engagement_strategy = StopShootFollowingStrategy.new()
 	point_to_look = Vector2.ZERO
 

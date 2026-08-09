@@ -28,7 +28,7 @@ func setup_vision_rays() -> void:
 		ray.target_position = Vector2(max_range, 0).rotated(angle)
 		ray.collision_mask = wall_collision_mask
 		ray.enabled = true
-		ray.collide_with_areas = true
+		#ray.collide_with_areas = true
 		ray.set_collision_mask_value(3, false)
 		add_child(ray)
 		rays.append(ray)

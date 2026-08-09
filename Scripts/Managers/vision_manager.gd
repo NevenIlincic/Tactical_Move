@@ -14,6 +14,9 @@ func _init() -> void:
 func connect_to_signals():
 	Signals.report_enemy_seen.connect(_on_enemy_seen_report)
 
+func check_is_everyone_hidden():
+	return last_frame_visible_enemies.is_empty() and current_frame_visible_enemies.is_empty()
+
 func handle_enemy_visibility(delta: float):
 	_check_is_enemy_entered_vision()
 	_check_is_enemy_exited_vision()
@@ -76,3 +79,12 @@ func _on_enemy_seen_report(enemy: Soldier, player: Soldier):
 	if not current_frame_visible_enemies.has(enemy):
 		current_frame_visible_enemies[enemy] = {}
 	current_frame_visible_enemies[enemy][player] = true
+
+func on_enemy_killed(enemy: Soldier, player: Soldier):
+	pass
+	#if last_frame_visible_enemies.has(player):
+		#if last_frame_visible_enemies[player].has(enemy):
+			#last_frame_visible_enemies[player].erase(enemy)
+		#if last_frame_visible_enemies[player].is_empty():
+			#last_frame_visible_enemies.erase(player)
+	#print("U VISION: ", last_frame_visible_enemies)

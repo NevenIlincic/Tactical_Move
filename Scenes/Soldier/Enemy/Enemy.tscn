@@ -8,6 +8,9 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_02vxf"]
 radius = 20.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_wy1ij"]
+radius = 16.0
+
 [node name="Enemy" type="Node2D" unique_id=1440065138 groups=["enemy_node", "soldier"]]
 script = ExtResource("1_02vxf")
 
@@ -21,7 +24,6 @@ color = Color(0.5822249, 0.63125, 0.33140624, 0.19500001)
 polygon = PackedVector2Array(0, 0, -256, -256, 256, -256)
 script = ExtResource("3_fw0yv")
 max_range = 1000.0
-ray_count = 30.0
 
 [node name="Enemy_Target_Line" type="Line2D" parent="Vision_Polygon" unique_id=1406944396]
 visible = false
@@ -38,6 +40,14 @@ collision_layer = 4
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Vision_Polygon/Vision_Area" unique_id=664566003]
 
 [node name="Detection_Area" type="Area2D" parent="." unique_id=96710695 groups=["enemy"]]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Detection_Area" unique_id=1216236629]
+visible = false
 shape = SubResource("CircleShape2D_02vxf")
+disabled = true
+
+[node name="Hitbox" type="StaticBody2D" parent="." unique_id=1448689257]
+
+[node name="Hitbox_Collision_Shape" type="CollisionShape2D" parent="Hitbox" unique_id=781357414]
+shape = SubResource("CircleShape2D_wy1ij")

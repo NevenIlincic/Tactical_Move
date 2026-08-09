@@ -32,7 +32,7 @@ func _ready() -> void:
 	current_state = PlayerSetMoveState.new([self])
 
 func _physics_process(delta: float) -> void:
-	vision_manager.handle_enemy_visibility(delta)
+	#vision_manager.handle_enemy_visibility(delta)
 	current_state._physics_process(delta)
 
 func get_alive_players() -> Dictionary:
