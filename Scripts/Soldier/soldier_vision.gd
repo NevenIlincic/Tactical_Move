@@ -61,6 +61,7 @@ func update_vision():
 						Signals.report_enemy_seen.emit(hit_object, get_parent())
 						if not enemy_position and hit_object == get_parent().enemy_to_shoot:
 							enemy_position = current_point
+						if not bullet_hit_point:
 							bullet_hit_point = hit_object.global_position
 		else:
 			current_point = ray.target_position

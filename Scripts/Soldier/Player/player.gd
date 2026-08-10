@@ -4,6 +4,8 @@ var starting_tile: Vector2i
 var target_tile: Vector2i
 var is_selected: bool = false
 
+var allies_nearby: Dictionary = {} #{PLayer: true}
+
 #LINE PATH NODES
 @onready var player_path_line: PlayerPathLine = $Player_Path_Line
 @onready var player_look_at_line: PlayerLookAtLine = $Player_Look_At_Line
@@ -167,3 +169,19 @@ func _on_enemy_lost_extra(enemy: Soldier) -> void:
 
 
 	
+
+
+func _on_ally_detection_area_body_entered(body: Node2D) -> void:
+	var soldier = body.get_parent()
+	if soldier != self and body.is_in_group("player_hitbox") and soldier is Player:
+		if not allies_nearby.has(soldier):
+			allies_nearby[soldier] = true
+		if not soldier.allies_nearby.has(self):
+			soldier.allies_nearby[self] = true
+func _on_ally_detection_area_body_exited(body: Node2D) -> void:
+	var soldier = body.get_parent()
+	if soldier != self and body.is_in_group("player_hitbox") and soldier is Player:
+		if allies_nearby.has(soldier):
+			allies_nearby.erase(soldier)
+		if soldier.allies_nearby.has(self):
+			soldier.allies_nearby.erase(self)

@@ -20,7 +20,7 @@ metadata/_custom_type_script = "uid://bencr8mnns7ut"
 
 [sub_resource type="Resource" id="Resource_argnq"]
 script = ExtResource("2_xq73l")
-base_value = 350.0
+base_value = 150.0
 metadata/_custom_type_script = "uid://bencr8mnns7ut"
 
 [resource]

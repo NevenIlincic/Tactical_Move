@@ -64,6 +64,9 @@ point_count = 2
 [sub_resource type="Gradient" id="Gradient_tk11s"]
 colors = PackedColorArray(1, 1, 0.43137255, 0, 1, 1, 0.43137255, 0.8039216)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jjc5n"]
+size = Vector2(256, 248)
+
 [node name="Player" type="Node2D" unique_id=1108589071 groups=["Player", "soldier"]]
 script = ExtResource("1_ft8w5")
 
@@ -131,7 +134,7 @@ texture_repeat = 2
 texture = ExtResource("9_3um6k")
 texture_mode = 1
 
-[node name="Hitbox" type="StaticBody2D" parent="." unique_id=1767789613]
+[node name="Hitbox" type="StaticBody2D" parent="." unique_id=1767789613 groups=["player_hitbox"]]
 
 [node name="Hitbox_Collision_Shape" type="CollisionShape2D" parent="Hitbox" unique_id=206391692]
 shape = SubResource("CircleShape2D_06txj")
@@ -145,4 +148,12 @@ default_color = Color(1, 1, 0.43137255, 0.8039216)
 gradient = SubResource("Gradient_tk11s")
 script = ExtResource("11_tk11s")
 
+[node name="Ally_Detection_Area" type="Area2D" parent="." unique_id=996566538 groups=["ally_detection_area"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ally_Detection_Area" unique_id=1560835526]
+position = Vector2(0, -4)
+shape = SubResource("RectangleShape2D_jjc5n")
+
 [connection signal="input_event" from="Selection_Area" to="." method="_on_selection_area_input_event"]
+[connection signal="body_entered" from="Ally_Detection_Area" to="." method="_on_ally_detection_area_body_entered"]
+[connection signal="body_exited" from="Ally_Detection_Area" to="." method="_on_ally_detection_area_body_exited"]

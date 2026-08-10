@@ -55,7 +55,7 @@ func connect_to_signals():
 	Signals.hide_enemy.connect(_on_enemy_lost)
 
 func _on_enemy_soldier_killed(enemy_killed: Soldier, killed_by: Soldier):
-	#enemy_killed.hitbox_collision_shape.disabled = true
+	killed_by.vision_polygon.bullet_hit_point = null
 	if enemies_in_sight.has(enemy_killed):
 		enemies_in_sight.erase(enemy_killed)
 	_on_enemy_lost(enemy_killed, self)
@@ -67,7 +67,7 @@ func _select_next_enemy_to_shoot():
 	var lowest_hp_value = INF
 	
 	for enemy: Soldier in enemies_in_sight.keys():
-		var current_enemy_hp = enemy.HP
+		var current_enemy_hp = enemy.soldier_stats.HP.get_value()
 		if current_enemy_hp < lowest_hp_value:
 			lowest_hp_value = current_enemy_hp
 			lowest_hp_enemy = enemy
@@ -88,7 +88,9 @@ func has_enemies_in_sight() -> bool:
 func check_soldier_has_action():
 	if len(player_path) > 1 or point_to_look:
 		Signals.player_move_continued.emit(self)
-		
+
+
+
 func set_after_move_looking_point(point: Vector2):
 	after_move_looking_point = point
 func reset_after_move_looking_point():
@@ -113,6 +115,13 @@ func reset_path():
 	player_path.clear()
 	player_path.append(global_position)
 	reset_after_move_looking_point()
+
+func when_been_shoot_at(enemy: Soldier):
+	engagement_strategy = StopShootFollowingStrategy.new()
+	on_engagement_action(enemy)
+	var tween: Tween = create_tween()
+	do_soldier_rotation(tween)
+	await tween.finished
 
 func _on_enemy_seen(enemy: Soldier, soldier: Soldier):
 	if self != soldier:
@@ -148,6 +157,7 @@ func _on_enemy_lost(enemy: Soldier, soldier: Soldier):
 			Signals.player_move_finished.emit(self)
 	else:
 		if enemy == enemy_to_shoot:
+			await get_tree().create_timer(soldier_stats.reaction_time.get_value()).timeout
 			_select_next_enemy_to_shoot()
 		if not (current_weapon.weapon_state is WeaponReloadState
 			or current_weapon.weapon_state is WeaponShootState):
@@ -211,13 +221,15 @@ func _on_rotation_stop():
 
 func _on_move_stop():
 	if after_move_looking_point:
-		point_to_look = after_move_looking_point
+		if enemies_in_sight.is_empty():
+			point_to_look = after_move_looking_point
 		var tween: Tween = create_tween()
 		do_soldier_rotation(tween)
 		await tween.finished
 		reset_after_move_looking_point()
 		set_player_looking_at()
-			
+	
+	print(self, " ", enemies_in_sight)
 	if has_enemies_in_sight():
 		Signals.player_move_continued.emit(self)
 	else:
