@@ -4,6 +4,9 @@ var starting_tile: Vector2i
 var target_tile: Vector2i
 var is_selected: bool = false
 
+var is_set_for_move: bool = false
+var is_set_for_rotation: bool = false
+
 var allies_nearby: Dictionary = {} #{PLayer: true}
 
 #LINE PATH NODES

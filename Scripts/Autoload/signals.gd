@@ -13,6 +13,8 @@ signal set_tile_to_solid(tile: Vector2i)
 
 signal get_alive_enemies()
 
+signal player_interaction_reset()
+signal player_interaction()
 #PLAYER VISION
 signal report_enemy_seen(enemy: Soldier, player: Soldier)
 signal show_enemy(enemy: Soldier, player: Soldier)

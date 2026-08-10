@@ -8,8 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://y3pndfcq1kxo" path="res://Scenes/Soldier/Enemy/Enemy.tscn" id="5_svcn8"]
 [ext_resource type="Script" uid="uid://cp4iog725gtuq" path="res://Scripts/Soldier/Player/player_stats.gd" id="6_ltieu"]
 [ext_resource type="Script" uid="uid://cubw4ogrqm6po" path="res://Scripts/Weapon/weapon.gd" id="6_mykrp"]
-[ext_resource type="Script" uid="uid://bqnc1ha42r85" path="res://Scripts/Weapon/pistol.gd" id="7_88mxo"]
-[ext_resource type="Resource" uid="uid://ddj6vd6by3aw5" path="res://Resources/Weapon_Stats/Pistol_Stats.tres" id="8_argnq"]
 [ext_resource type="Script" uid="uid://bmr38t2grjqqv" path="res://Scripts/Weapon/m4a1_rifle.gd" id="12_grcoo"]
 [ext_resource type="Resource" uid="uid://ttdsvtwhyg75" path="res://Resources/Weapon_Stats/m4a1_Rifle_Stats.tres" id="13_tq75k"]
 
@@ -46,7 +44,7 @@ size = Vector2(64, 192)
 [sub_resource type="Resource" id="Resource_ofkpl"]
 resource_local_to_scene = true
 script = ExtResource("5_8c5ma")
-base_value = 30.0
+base_value = 100.0
 metadata/_custom_type_script = "uid://bencr8mnns7ut"
 
 [sub_resource type="Resource" id="Resource_ebsyv"]
@@ -56,7 +54,7 @@ metadata/_custom_type_script = "uid://bencr8mnns7ut"
 
 [sub_resource type="Resource" id="Resource_w2bir"]
 script = ExtResource("5_8c5ma")
-base_value = 0.4
+base_value = 0.2
 metadata/_custom_type_script = "uid://bencr8mnns7ut"
 
 [sub_resource type="Resource" id="Resource_nfmrh"]
@@ -74,69 +72,14 @@ HP = SubResource("Resource_ofkpl")
 metadata/_custom_type_script = "uid://cp4iog725gtuq"
 
 [sub_resource type="Resource" id="Resource_yn6en"]
-script = ExtResource("7_88mxo")
-weapon_stats = ExtResource("8_argnq")
-metadata/_custom_type_script = "uid://bqnc1ha42r85"
-
-[sub_resource type="Resource" id="Resource_tq75k"]
-resource_local_to_scene = true
-script = ExtResource("5_8c5ma")
-base_value = 100.0
-metadata/_custom_type_script = "uid://bencr8mnns7ut"
-
-[sub_resource type="Resource" id="Resource_stuxa"]
-script = ExtResource("5_8c5ma")
-base_value = 1000.0
-metadata/_custom_type_script = "uid://bencr8mnns7ut"
-
-[sub_resource type="Resource" id="Resource_42oyf"]
-script = ExtResource("5_8c5ma")
-base_value = 1.0
-metadata/_custom_type_script = "uid://bencr8mnns7ut"
-
-[sub_resource type="Resource" id="Resource_xq73l"]
-script = ExtResource("5_8c5ma")
-base_value = 250.0
-metadata/_custom_type_script = "uid://bencr8mnns7ut"
-
-[sub_resource type="Resource" id="Resource_6uspl"]
-resource_local_to_scene = true
-script = ExtResource("6_ltieu")
-speed = SubResource("Resource_xq73l")
-reaction_time = SubResource("Resource_42oyf")
-max_travel_distance = SubResource("Resource_stuxa")
-HP = SubResource("Resource_tq75k")
-metadata/_custom_type_script = "uid://cp4iog725gtuq"
-
-[sub_resource type="Resource" id="Resource_gmncr"]
 script = ExtResource("12_grcoo")
 weapon_stats = ExtResource("13_tq75k")
 metadata/_custom_type_script = "uid://bmr38t2grjqqv"
 
-[sub_resource type="Resource" id="Resource_513u8"]
-resource_local_to_scene = true
-script = ExtResource("5_8c5ma")
-base_value = 15.0
-metadata/_custom_type_script = "uid://bencr8mnns7ut"
-
-[sub_resource type="Resource" id="Resource_518se"]
-resource_local_to_scene = true
-script = ExtResource("6_ltieu")
-speed = SubResource("Resource_xq73l")
-reaction_time = SubResource("Resource_42oyf")
-max_travel_distance = SubResource("Resource_stuxa")
-HP = SubResource("Resource_513u8")
-metadata/_custom_type_script = "uid://cp4iog725gtuq"
-
-[sub_resource type="Resource" id="Resource_3vrl3"]
-script = ExtResource("7_88mxo")
-weapon_stats = ExtResource("8_argnq")
-metadata/_custom_type_script = "uid://bqnc1ha42r85"
-
 [sub_resource type="Resource" id="Resource_7tbrw"]
 resource_local_to_scene = true
 script = ExtResource("5_8c5ma")
-base_value = 20.0
+base_value = 100.0
 metadata/_custom_type_script = "uid://bencr8mnns7ut"
 
 [sub_resource type="Resource" id="Resource_q2r4x"]
@@ -161,6 +104,72 @@ parsed_geometry_type = 1
 parsed_collision_mask = 4294967041
 source_geometry_mode = 2
 source_geometry_group_name = &"wall"
+
+[sub_resource type="Resource" id="Resource_l3xug"]
+script = ExtResource("5_8c5ma")
+base_value = 20.0
+metadata/_custom_type_script = "uid://bencr8mnns7ut"
+
+[sub_resource type="Resource" id="Resource_518se"]
+script = ExtResource("5_8c5ma")
+base_value = 500.0
+metadata/_custom_type_script = "uid://bencr8mnns7ut"
+
+[sub_resource type="Resource" id="Resource_8c5ma"]
+script = ExtResource("5_8c5ma")
+base_value = 0.5
+metadata/_custom_type_script = "uid://bencr8mnns7ut"
+
+[sub_resource type="Resource" id="Resource_3y4ie"]
+script = ExtResource("5_8c5ma")
+base_value = 150.0
+metadata/_custom_type_script = "uid://bencr8mnns7ut"
+
+[sub_resource type="Resource" id="Resource_s8unp"]
+script = ExtResource("6_ltieu")
+speed = SubResource("Resource_3y4ie")
+reaction_time = SubResource("Resource_8c5ma")
+max_travel_distance = SubResource("Resource_518se")
+HP = SubResource("Resource_l3xug")
+metadata/_custom_type_script = "uid://cp4iog725gtuq"
+
+[sub_resource type="Resource" id="Resource_nja13"]
+script = ExtResource("12_grcoo")
+weapon_stats = ExtResource("13_tq75k")
+metadata/_custom_type_script = "uid://bmr38t2grjqqv"
+
+[sub_resource type="Resource" id="Resource_513u8"]
+script = ExtResource("5_8c5ma")
+base_value = 100.0
+metadata/_custom_type_script = "uid://bencr8mnns7ut"
+
+[sub_resource type="Resource" id="Resource_3vrl3"]
+script = ExtResource("5_8c5ma")
+base_value = 500.0
+metadata/_custom_type_script = "uid://bencr8mnns7ut"
+
+[sub_resource type="Resource" id="Resource_tq75k"]
+script = ExtResource("5_8c5ma")
+base_value = 0.5
+metadata/_custom_type_script = "uid://bencr8mnns7ut"
+
+[sub_resource type="Resource" id="Resource_ltieu"]
+script = ExtResource("5_8c5ma")
+base_value = 150.0
+metadata/_custom_type_script = "uid://bencr8mnns7ut"
+
+[sub_resource type="Resource" id="Resource_6uspl"]
+script = ExtResource("6_ltieu")
+speed = SubResource("Resource_ltieu")
+reaction_time = SubResource("Resource_tq75k")
+max_travel_distance = SubResource("Resource_3vrl3")
+HP = SubResource("Resource_513u8")
+metadata/_custom_type_script = "uid://cp4iog725gtuq"
+
+[sub_resource type="Resource" id="Resource_3u3yd"]
+script = ExtResource("12_grcoo")
+weapon_stats = ExtResource("13_tq75k")
+metadata/_custom_type_script = "uid://bmr38t2grjqqv"
 
 [node name="Node2D" type="Node2D" unique_id=1609049363 groups=["Level"]]
 script = ExtResource("1_4ms0o")
@@ -196,17 +205,6 @@ position = Vector2(1043, 393)
 soldier_stats = SubResource("Resource_grcoo")
 weapons = Array[ExtResource("6_mykrp")]([SubResource("Resource_yn6en")])
 
-[node name="Enemy3" parent="." unique_id=2042909401 instance=ExtResource("5_svcn8")]
-position = Vector2(702, 598)
-HP = 20.0
-soldier_stats = SubResource("Resource_6uspl")
-weapons = Array[ExtResource("6_mykrp")]([SubResource("Resource_gmncr")])
-
-[node name="Enemy2" parent="." unique_id=2085944523 instance=ExtResource("5_svcn8")]
-position = Vector2(706, 13)
-soldier_stats = SubResource("Resource_518se")
-weapons = Array[ExtResource("6_mykrp")]([SubResource("Resource_3vrl3")])
-
 [node name="Player2" parent="." unique_id=1802276897 instance=ExtResource("4_10mtb")]
 position = Vector2(1071, 453)
 current_engagement_rule = 2
@@ -234,3 +232,13 @@ position = Vector2(1003, 611)
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=424842699]
 visible = false
 navigation_polygon = SubResource("NavigationPolygon_6uspl")
+
+[node name="Enemy" parent="." unique_id=1440065138 instance=ExtResource("5_svcn8")]
+position = Vector2(210, 356)
+soldier_stats = SubResource("Resource_s8unp")
+weapons = Array[ExtResource("6_mykrp")]([SubResource("Resource_nja13")])
+
+[node name="Enemy2" parent="." unique_id=754966804 instance=ExtResource("5_svcn8")]
+position = Vector2(592, 464)
+soldier_stats = SubResource("Resource_6uspl")
+weapons = Array[ExtResource("6_mykrp")]([SubResource("Resource_3u3yd")])

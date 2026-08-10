@@ -14,8 +14,8 @@ func _init(data: Array):
 	level = data[0]
 	
 	alive_soldiers = level.get_alive_soldiers()
-	#soldiers_in_action = alive_soldiers.duplicate()
-	soldiers_in_action = {}
+	soldiers_in_action = alive_soldiers.duplicate(true)
+	#soldiers_in_action = {}
 	num_finished_moves = 0
 	initial_num_alive_enemies = len(alive_soldiers)
 	
@@ -29,7 +29,6 @@ func connect_to_signals():
 	Signals.player_move_finished.connect(_on_player_move_finished)
 	Signals.player_move_continued.connect(_on_player_move_continued)
 	Signals.enemy_soldier_killed.connect(_on_soldier_killed)
-	
 func _unhandled_input(event: InputEvent):
 	pass
 
@@ -52,9 +51,18 @@ func _on_player_move_finished(soldier: Soldier):
 	
 	if soldiers_in_action.is_empty():
 		level.set_level_state(PlayerSetMoveState.new([level]))
+		
 func _on_player_move_continued(soldier: Soldier):
 	soldiers_in_action[soldier] = true
 	
 func _on_soldier_killed(enemy: Soldier, killed_by: Soldier):
 	#enemy.enemies_in_sight.clear()
 	_on_player_move_finished(enemy)
+
+func disconnect_signals():
+	if Signals.player_move_finished.is_connected(_on_player_move_finished):
+		Signals.player_move_finished.disconnect(_on_player_move_finished)
+	if Signals.player_move_continued.is_connected(_on_player_move_continued):
+		Signals.player_move_continued.disconnect(_on_player_move_continued)
+	if Signals.enemy_soldier_killed.is_connected(_on_soldier_killed):
+		Signals.enemy_soldier_killed.disconnect(_on_soldier_killed)

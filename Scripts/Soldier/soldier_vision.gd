@@ -58,11 +58,11 @@ func update_vision():
 				if check_is_enemy_soldier_hit(get_parent(), hit_object):
 					if not currently_visible_enemies.has(hit_object):
 						currently_visible_enemies[hit_object] = true
-						Signals.report_enemy_seen.emit(hit_object, get_parent())
+						bullet_hit_point = hit_object.global_position
 						if not enemy_position and hit_object == get_parent().enemy_to_shoot:
 							enemy_position = current_point
-						if not bullet_hit_point:
-							bullet_hit_point = hit_object.global_position
+						Signals.report_enemy_seen.emit(hit_object, get_parent())
+						
 		else:
 			current_point = ray.target_position
 		

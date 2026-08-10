@@ -10,11 +10,14 @@ var player_selection_manager: PlayerSelectionManager
 var occupied_target_tiles: Dictionary = {} #{tile: {player_key: true } }
 var players_cause_collision: Dictionary = {}
 
+var players_set_for_move: Dictionary = {}
+var players_set_for_rotation: Dictionary = {}
 
 func _init(data: Array):
 	level = data[0]
 	alive_players = level.get_alive_players()
 	player_selection_manager = PlayerSelectionManager.new()
+
 	#fill_occupied_target_tiles_dict()
 
 func _unhandled_input(event: InputEvent):
@@ -24,7 +27,7 @@ func _unhandled_input(event: InputEvent):
 	if Input.is_action_just_pressed("move_confirm"):
 		if player_selection_manager.selected_player:
 			player_selection_manager.deselect_player()
-		if check_is_players_moving_possible():
+		if check_can_do_action():
 			#Signals.move_player.emit(level.tile_map)
 			level.set_level_state(ActionState.new([level]))
 		#else:
@@ -32,6 +35,8 @@ func _unhandled_input(event: InputEvent):
 		
 	if Input.is_action_pressed("drawing"):
 		if selected_player:
+			if not players_set_for_move.has(selected_player):
+				players_set_for_move[selected_player] = true
 			is_drawing = true
 	else:
 		if selected_player:
@@ -39,6 +44,7 @@ func _unhandled_input(event: InputEvent):
 		
 	if Input.is_action_just_pressed("reset_look_at_path") and selected_player:
 		selected_player.reset_point_to_look()
+		players_set_for_rotation.erase(selected_player)
 	
 	if Input.is_action_just_pressed("rotate_player_after_move") and selected_player and len(selected_player.player_path) > 1:
 		selected_player.set_after_move_looking_point(level.get_global_mouse_position())
@@ -46,11 +52,12 @@ func _unhandled_input(event: InputEvent):
 		selected_player.reset_after_move_looking_point()
 	
 	if Input.is_action_just_pressed("rotate_player") and selected_player:
-		#selected_player.look_at(level.get_global_mouse_position())
+		players_set_for_rotation[selected_player] = true
 		selected_player.set_point_to_look(level.get_global_mouse_position())
 	if Input.is_action_just_pressed("reset_path") and selected_player:
 			#_erase_from_occupated_tiles_dict(selected_player.player_path[-1], selected_player)
 		selected_player.reset_path()
+		players_set_for_move.erase(selected_player)
 
 
 
@@ -92,3 +99,8 @@ func check_is_players_moving_possible() -> bool:
 
 func _physics_process(delta: float):
 	pass
+
+func check_can_do_action() -> bool:
+	if players_set_for_move.is_empty() and players_set_for_rotation.is_empty():
+		return false
+	return true

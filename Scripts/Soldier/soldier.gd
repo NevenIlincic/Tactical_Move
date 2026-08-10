@@ -61,6 +61,7 @@ func _on_enemy_soldier_killed(enemy_killed: Soldier, killed_by: Soldier):
 	_on_enemy_lost(enemy_killed, self)
 	if self == enemy_killed:
 		killed_by.when_escaped()
+	enemy_killed.disconnect_from_signals()
 	enemy_killed.queue_free()
 func _select_next_enemy_to_shoot():
 	var lowest_hp_enemy: Soldier = null
@@ -88,9 +89,8 @@ func has_enemies_in_sight() -> bool:
 func check_soldier_has_action():
 	if len(player_path) > 1 or point_to_look:
 		Signals.player_move_continued.emit(self)
-
-
-
+	else:
+		Signals.player_move_finished.emit(self)
 func set_after_move_looking_point(point: Vector2):
 	after_move_looking_point = point
 func reset_after_move_looking_point():
@@ -117,11 +117,12 @@ func reset_path():
 	reset_after_move_looking_point()
 
 func when_been_shoot_at(enemy: Soldier):
-	engagement_strategy = StopShootFollowingStrategy.new()
-	on_engagement_action(enemy)
-	var tween: Tween = create_tween()
-	do_soldier_rotation(tween)
-	await tween.finished
+	if not enemy_to_shoot:
+		engagement_strategy = StopShootFollowingStrategy.new()
+		on_engagement_action(enemy)
+		var tween: Tween = create_tween()
+		do_soldier_rotation(tween)
+		await tween.finished
 
 func _on_enemy_seen(enemy: Soldier, soldier: Soldier):
 	if self != soldier:
@@ -218,7 +219,6 @@ func _on_rotation_stop():
 		if not is_soldier_walking():
 			Signals.player_move_finished.emit(self)
 
-
 func _on_move_stop():
 	if after_move_looking_point:
 		if enemies_in_sight.is_empty():
@@ -229,7 +229,7 @@ func _on_move_stop():
 		reset_after_move_looking_point()
 		set_player_looking_at()
 	
-	print(self, " ", enemies_in_sight)
+	#print(self, " ", enemies_in_sight)
 	if has_enemies_in_sight():
 		Signals.player_move_continued.emit(self)
 	else:
@@ -258,6 +258,14 @@ func do_actions():
 	await _move()
 	_on_actions_finished()
 	
+
+func disconnect_from_signals():
+	if Signals.enemy_soldier_killed.is_connected(_on_enemy_soldier_killed):
+		Signals.enemy_soldier_killed.disconnect(_on_enemy_soldier_killed)
+	if Signals.show_enemy.is_connected(_on_enemy_seen):
+		Signals.show_enemy.disconnect(_on_enemy_seen)
+	if Signals.hide_enemy.is_connected(_on_enemy_lost):
+		Signals.hide_enemy.disconnect(_on_enemy_lost)
 
 #HAS TO BE OVERRIDEN
 func when_spotted(): pass

@@ -9,10 +9,13 @@ var num_seen_by: int = 0
 #FOR ENEMY
 var alive_players: Dictionary = {}
 var level: Level
+var last_cover: Marker2D
 enum Intent{
 	ATTACK,
 	DEFEND
 }
+
+
 
 func when_spotted():
 	visible = true
@@ -53,13 +56,12 @@ func _pre_move_actions():
 	match intent:
 		Intent.DEFEND:
 			if soldier_stats.HP.get_value() < target.soldier_stats.HP.get_value():
-				if total_score > 1.5:
+				if total_score > 1.0:
 					var path: Array[Vector2] = []
 					for point in path_to_closest_cover:
 						path.append(point)
 					player_path = path	
-					set_after_move_looking_point(get_closest_cover()["closest_cover"].global_position)
-			set_point_to_look(cover_point)
+					set_after_move_looking_point(cover_point.global_position)
 		
 		Intent.ATTACK:
 			var path: Array[Vector2] = []
@@ -74,7 +76,7 @@ func _pre_move_actions():
 				look_at_point = target
 			set_point_to_look(look_at_point)
 			player_path = path
-
+	
 	check_soldier_has_action()
 	
 func check_enemy_looking_at():
@@ -118,12 +120,15 @@ func evaluate_best_move():
 			attack_score += clampf(10.0/(player.soldier_stats.HP.get_value() +1.0), 0.0, 3.0)
 			if player_hp < 30.0:
 				attack_score += attack_score * 0.5
+			else:
+				attack_score += attack_score * 0.2
 		else:
 			defense_score += clampf(10.0/(player.soldier_stats.HP.get_value() +1.0), 0.0, 3.0)
 			if current_HP < 30.0:
 				defense_score = 10.0 / current_HP
 		#DISTANCE
 		if max_travel_distance > distance_to_player:
+			attack_score += clampf(500.0/(distance_to_player*(player_allies_nearby+1)), 0.0, 3.0)
 			if distance_to_player > distance_to_closest_cover:
 				defense_score += clampf(500.0/ (distance_to_player*(player_allies_nearby+1)), 0.0, 3.0)
 			else:
@@ -184,13 +189,14 @@ func get_closest_cover():
 	var best_path = null
 	var best_length: float = INF
 	for cover: Marker2D in level.cover_points:
-		if player_path[-1] == cover.global_position:
+		if player_path[-1] == cover.global_position or cover == last_cover:
 			continue
 		var data: Dictionary = get_path_lenth_to_cover(cover)
 		if best_length > data["path_length"]:
 			best_length = data["path_length"]
 			best_cover = data["cover"]
 			best_path = data["path"]
+	last_cover = best_cover
 	return {
 		"shortest_path": best_path,
 		"minimum_length": best_length,
