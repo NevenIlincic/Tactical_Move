@@ -5,7 +5,9 @@ var level: Level
 
 var initial_num_alive_enemies: int 
 var num_finished_moves: int
+var num_player_finished_moves: int
 var alive_soldiers: Dictionary
+var alive_players: Dictionary
 
 var soldiers_in_action: Dictionary
 
@@ -14,11 +16,13 @@ func _init(data: Array):
 	level = data[0]
 	
 	alive_soldiers = level.get_alive_soldiers()
+	alive_players = level.get_alive_players()
 	soldiers_in_action = alive_soldiers.duplicate(true)
 	#soldiers_in_action = {}
 	num_finished_moves = 0
 	initial_num_alive_enemies = len(alive_soldiers)
 	
+	num_player_finished_moves = 0
 	connect_to_signals()
 	
 	#vision_manager = VisionManager.new()
@@ -29,6 +33,7 @@ func connect_to_signals():
 	Signals.player_move_finished.connect(_on_player_move_finished)
 	Signals.player_move_continued.connect(_on_player_move_continued)
 	Signals.enemy_soldier_killed.connect(_on_soldier_killed)
+	Signals.stop_enemy_actions.connect(_on_stop_enemy_actions)
 func _unhandled_input(event: InputEvent):
 	pass
 
@@ -48,6 +53,19 @@ func check_for_deletion():
 func _on_player_move_finished(soldier: Soldier):
 	if soldiers_in_action.has(soldier):
 		soldiers_in_action.erase(soldier)
+		
+	if soldier is Player:
+		num_player_finished_moves += 1
+		
+	if num_player_finished_moves == alive_players.size():
+		for enemy_soldier in soldiers_in_action:
+			if enemy_soldier is Enemy:
+				if enemy_soldier.enemies_in_sight.is_empty():
+					enemy_soldier._on_players_action_finished()
+					soldiers_in_action.erase(enemy_soldier)
+		#level.set_level_state(PlayerSetMoveState.new([level]))
+			
+		num_player_finished_moves = 0
 	
 	if soldiers_in_action.is_empty():
 		level.set_level_state(PlayerSetMoveState.new([level]))
@@ -58,6 +76,11 @@ func _on_player_move_continued(soldier: Soldier):
 func _on_soldier_killed(enemy: Soldier, killed_by: Soldier):
 	#enemy.enemies_in_sight.clear()
 	_on_player_move_finished(enemy)
+
+func _on_stop_enemy_actions(enemy_soldier: Soldier):
+	if soldiers_in_action.has(enemy_soldier):
+		soldiers_in_action.erase(enemy_soldier)
+	
 
 func disconnect_signals():
 	if Signals.player_move_finished.is_connected(_on_player_move_finished):

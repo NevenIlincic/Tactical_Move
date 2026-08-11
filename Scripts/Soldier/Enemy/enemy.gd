@@ -17,8 +17,6 @@ enum Intent{
 	DEFEND
 }
 
-
-
 func when_spotted():
 	visible = true
 	num_seen_by += 1 
@@ -34,6 +32,13 @@ func _ready() -> void:
 	engagement_strategy = StopShootFollowingStrategy.new()
 	point_to_look = Vector2.ZERO
 	level = get_tree().get_first_node_in_group("Level")
+	Signals.stop_enemy_actions.connect(_on_players_action_finished)
+
+func _on_players_action_finished():
+	reset_path()
+	if move_tween and is_instance_valid(move_tween):
+		move_tween.kill()
+	is_walking = false
 
 func set_point_to_look(point):
 	point_to_look = point

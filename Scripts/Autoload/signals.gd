@@ -5,6 +5,8 @@ signal move_player(path_tiles: Array[Vector2i], tile_map: TileMapLayer)
 signal set_selected_player(selected_player: Player)
 signal deselect_player(player: Player)
 
+signal stop_enemy_actions()
+
 #SOLDIER SIGNALS
 signal player_move_finished(soldier: Soldier) #When single soldier finishes his actions
 signal player_move_continued(soldier: Soldier)

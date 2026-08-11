@@ -181,7 +181,6 @@ func _on_enemy_lost(enemy: Soldier):
 		if not current_weapon.weapon_state is WeaponReloadState:
 			current_weapon.change_weapon_state(WeaponShootState.new())
 	
-	print(self, " ", enemy)
 	current_weapon.change_enemy_to_shoot(enemy_to_shoot)
 	
 	#_on_enemy_lost_extra(enemy)

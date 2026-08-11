@@ -213,6 +213,21 @@ size = Vector2(576, 64)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cl7co"]
 size = Vector2(64, 128)
 
+[sub_resource type="Resource" id="Resource_1q75p"]
+resource_local_to_scene = true
+script = ExtResource("5_8c5ma")
+base_value = 100.0
+metadata/_custom_type_script = "uid://bencr8mnns7ut"
+
+[sub_resource type="Resource" id="Resource_elm60"]
+resource_local_to_scene = true
+script = ExtResource("6_ltieu")
+speed = SubResource("Resource_nfmrh")
+reaction_time = SubResource("Resource_w2bir")
+max_travel_distance = SubResource("Resource_ebsyv")
+HP = SubResource("Resource_1q75p")
+metadata/_custom_type_script = "uid://cp4iog725gtuq"
+
 [node name="Node2D" type="Node2D" unique_id=1609049363 groups=["Level"]]
 script = ExtResource("1_4ms0o")
 
@@ -249,7 +264,7 @@ soldier_stats = SubResource("Resource_q2r4x")
 weapons = Array[ExtResource("6_mykrp")]([SubResource("Resource_yn6en")])
 
 [node name="Player2" parent="." unique_id=1802276897 instance=ExtResource("4_10mtb")]
-position = Vector2(854, 277)
+position = Vector2(1077, 257)
 current_engagement_rule = 2
 soldier_stats = SubResource("Resource_avk4t")
 weapons = Array[ExtResource("6_mykrp")]([SubResource("Resource_kw30y")])
@@ -340,3 +355,14 @@ weapons = Array[ExtResource("6_mykrp")]([SubResource("Resource_3u3yd")])
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1692743122]
 color = Color(0.6666667, 0.6666667, 0.74509805, 1)
+
+[node name="Enemy4" parent="." unique_id=388256567 instance=ExtResource("5_svcn8")]
+position = Vector2(541, 288)
+soldier_stats = SubResource("Resource_6uspl")
+weapons = Array[ExtResource("6_mykrp")]([SubResource("Resource_3u3yd")])
+
+[node name="Player3" parent="." unique_id=799965180 instance=ExtResource("4_10mtb")]
+position = Vector2(1049, 156)
+current_engagement_rule = 2
+soldier_stats = SubResource("Resource_elm60")
+weapons = Array[ExtResource("6_mykrp")]([SubResource("Resource_kw30y")])
