@@ -17,8 +17,8 @@ signal player_interaction_reset()
 signal player_interaction()
 #PLAYER VISION
 signal report_enemy_seen(enemy: Soldier, player: Soldier)
-signal show_enemy(enemy: Soldier, player: Soldier)
-signal hide_enemy(enemy: Soldier, player: Soldier)
+signal show_enemy(enemy: Soldier)
+signal hide_enemy(enemy: Soldier)
 signal enemy_killed(enemy_killed: Enemy, killed_by: Player)
 
 signal enemy_soldier_killed(enemy_killed: Soldier, killed_by: Soldier)

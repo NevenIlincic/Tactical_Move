@@ -71,12 +71,14 @@ func connect_to_signals():
 func _on_enemy_soldier_killed(enemy_killed: Soldier, killed_by: Soldier):
 	if enemies_in_sight.has(enemy_killed.soldier_id):
 		enemies_in_sight.erase(enemy_killed.soldier_id)
-	await _on_enemy_lost(enemy_killed, self)
+	if soldier_id != enemy_killed.soldier_id:
+		_on_enemy_lost(enemy_killed)
 		
 func when_killed():
 	if is_killed:
 		disconnect_from_signals()
 		queue_free()
+		Signals.player_move_finished.emit(self)
 func _select_next_enemy_to_shoot():
 	var lowest_hp_enemy: Soldier = null
 	var lowest_hp_value = INF
@@ -142,9 +144,9 @@ func when_been_shoot_at(enemy: Soldier):
 		do_soldier_rotation(tween)
 		await tween.finished
 
-func _on_enemy_seen(enemy: Soldier, soldier: Soldier):
-	if self != soldier:
-		return
+func _on_enemy_seen(enemy: Soldier):
+	#if soldier_id != soldier.soldier_id:
+		#return
 	if is_in_finished_state():
 		Signals.player_move_continued.emit(self)
 	
@@ -159,9 +161,7 @@ func on_engagement_action(enemy: Soldier):
 	if engagement_strategy:
 		engagement_strategy.execute(self, enemy)
 
-func _on_enemy_lost(enemy: Soldier, soldier: Soldier):
-	if self != soldier or not enemy:
-		return
+func _on_enemy_lost(enemy: Soldier):
 	if enemies_in_sight.has(enemy.soldier_id):
 		enemy.when_escaped()
 		enemies_in_sight.erase(enemy.soldier_id)
@@ -178,18 +178,16 @@ func _on_enemy_lost(enemy: Soldier, soldier: Soldier):
 		if enemy == enemy_to_shoot:
 			await get_tree().create_timer(soldier_stats.reaction_time.get_value()).timeout
 			_select_next_enemy_to_shoot()
-		if not (current_weapon.weapon_state is WeaponReloadState
-			or current_weapon.weapon_state is WeaponShootState):
+		if not current_weapon.weapon_state is WeaponReloadState:
 			current_weapon.change_weapon_state(WeaponShootState.new())
 	
-	if enemy_to_shoot and not is_instance_valid(enemy_to_shoot):
-		enemy_to_shoot = null
+	print(self, " ", enemy)
 	current_weapon.change_enemy_to_shoot(enemy_to_shoot)
 	
 	#_on_enemy_lost_extra(enemy)
 	
-	#if enemy.is_killed:
-		#enemy.queue_free()
+	if enemy.is_killed:
+		enemy.when_killed()
 
 func do_soldier_rotation(tween: Tween):
 	#var target_point: Vector2 = global_position

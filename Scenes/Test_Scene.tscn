@@ -249,7 +249,7 @@ soldier_stats = SubResource("Resource_q2r4x")
 weapons = Array[ExtResource("6_mykrp")]([SubResource("Resource_yn6en")])
 
 [node name="Player2" parent="." unique_id=1802276897 instance=ExtResource("4_10mtb")]
-position = Vector2(1096, 488)
+position = Vector2(854, 277)
 current_engagement_rule = 2
 soldier_stats = SubResource("Resource_avk4t")
 weapons = Array[ExtResource("6_mykrp")]([SubResource("Resource_kw30y")])
