@@ -9,7 +9,9 @@ var num_seen_by: int = 0
 #FOR ENEMY
 var alive_players: Dictionary = {}
 var level: Level
-var last_cover: Marker2D
+var recent_covers: Array[Marker2D] = []
+const MAX_RECENT_COVERS: int = 2
+
 enum Intent{
 	ATTACK,
 	DEFEND
@@ -94,6 +96,7 @@ func evaluate_best_move():
 	var map_rid = get_world_2d().navigation_map
 
 	var path_data: Dictionary = get_closest_cover()
+	#print(last_cover)
 	var path_to_closest_cover = path_data["shortest_path"]
 	var distance_to_closest_cover = path_data["minimum_length"] 
 	var cover_point: Marker2D = path_data["closest_cover"]
@@ -128,11 +131,11 @@ func evaluate_best_move():
 				defense_score = 10.0 / current_HP
 		#DISTANCE
 		if max_travel_distance > distance_to_player:
-			attack_score += clampf(500.0/(distance_to_player*(player_allies_nearby+1)), 0.0, 3.0)
+			attack_score += clampf(750.0/(distance_to_player*(player_allies_nearby+1)), 0.0, 3.0)
 			if distance_to_player > distance_to_closest_cover:
 				defense_score += clampf(500.0/ (distance_to_player*(player_allies_nearby+1)), 0.0, 3.0)
 			else:
-				attack_score += clampf(500.0/(distance_to_player*(player_allies_nearby+1)), 0.0, 3.0)
+				attack_score += clampf(750.0/(distance_to_player*(player_allies_nearby+1)), 0.0, 3.0)
 		else:
 			defense_score += clampf(500.0/ (distance_to_player*(player_allies_nearby+1)), 0.0, 3.0)
 		
@@ -189,14 +192,19 @@ func get_closest_cover():
 	var best_path = null
 	var best_length: float = INF
 	for cover: Marker2D in level.cover_points:
-		if player_path[-1] == cover.global_position or cover == last_cover:
+		if player_path[-1] == cover.global_position or cover in recent_covers:
 			continue
 		var data: Dictionary = get_path_lenth_to_cover(cover)
 		if best_length > data["path_length"]:
 			best_length = data["path_length"]
 			best_cover = data["cover"]
 			best_path = data["path"]
-	last_cover = best_cover
+		
+	if best_cover:
+		recent_covers.append(best_cover)
+		if recent_covers.size() > MAX_RECENT_COVERS:
+			recent_covers.pop_front()
+	
 	return {
 		"shortest_path": best_path,
 		"minimum_length": best_length,

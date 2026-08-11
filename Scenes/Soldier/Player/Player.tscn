@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://chy7dddrrr700"]
 
 [ext_resource type="Script" uid="uid://c1ym0y4pbnw4j" path="res://Scripts/Soldier/Player/player.gd" id="1_ft8w5"]
-[ext_resource type="Texture2D" uid="uid://c442lp23townj" path="res://Sprites/Player/player.png" id="1_s0eop"]
 [ext_resource type="Script" uid="uid://kkaaaj6uvi8u" path="res://Scripts/Line/player_path_line.gd" id="2_4wape"]
 [ext_resource type="Script" uid="uid://c386pr8tx5qep" path="res://Scripts/Soldier/soldier_vision.gd" id="4_t26db"]
+[ext_resource type="Texture2D" uid="uid://bdsxppa5xa3vi" path="res://Sprites/Player/Player_2.png" id="4_tk11s"]
 [ext_resource type="Texture2D" uid="uid://cp3f8t70d5twp" path="res://icon.svg" id="4_ude3g"]
 [ext_resource type="Texture2D" uid="uid://uwcsyrtrt75l" path="res://Sprites/Path_Line/New Piskel-1.png - 2026-08-04T161338.290.png" id="5_jmcll"]
 [ext_resource type="Script" uid="uid://b260cldj7kekv" path="res://Scripts/Line/player_look_at_line.gd" id="7_t26db"]
@@ -14,6 +14,9 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_06txj"]
 size = Vector2(60, 60)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_q6by2"]
+blend_mode = 1
 
 [sub_resource type="Animation" id="Animation_0eouq"]
 resource_name = "Position_Marker_Rotation"
@@ -80,10 +83,19 @@ texture = ExtResource("5_jmcll")
 texture_mode = 1
 script = ExtResource("2_4wape")
 
-[node name="Player_Sprite" type="Sprite2D" parent="." unique_id=1716240992]
+[node name="Move_To_Position_Marker" type="Sprite2D" parent="." unique_id=2107523401]
+top_level = true
 texture_filter = 1
 texture_repeat = 1
-texture = ExtResource("1_s0eop")
+texture = ExtResource("8_0eouq")
+
+[node name="Player_Sprite" type="Sprite2D" parent="." unique_id=1716240992]
+z_index = 1
+texture_repeat = 1
+position = Vector2(7.6293945e-06, -0.46153474)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("4_tk11s")
+offset = Vector2(-0.00030048078, 118.15355)
 
 [node name="Selection_Area" type="Area2D" parent="." unique_id=2041313350]
 
@@ -91,7 +103,8 @@ texture = ExtResource("1_s0eop")
 shape = SubResource("RectangleShape2D_06txj")
 
 [node name="Vision_Polygon" type="Polygon2D" parent="." unique_id=1560586749]
-color = Color(0.5822249, 0.63125, 0.33140624, 0.19500001)
+material = SubResource("CanvasItemMaterial_q6by2")
+color = Color(1, 1, 1, 0.4392157)
 polygon = PackedVector2Array(0, 0, -256, -256, 256, -256)
 script = ExtResource("4_t26db")
 max_range = 1000.0
@@ -106,6 +119,7 @@ texture = ExtResource("5_jmcll")
 texture_mode = 1
 
 [node name="Look_At_Position_Sprite" type="Sprite2D" parent="." unique_id=560975301]
+visible = false
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("4_ude3g")
 
@@ -117,12 +131,6 @@ width = 5.0
 texture = ExtResource("7_x56g5")
 texture_mode = 1
 script = ExtResource("7_t26db")
-
-[node name="Move_To_Position_Marker" type="Sprite2D" parent="." unique_id=2107523401]
-top_level = true
-texture_filter = 1
-texture_repeat = 1
-texture = ExtResource("8_0eouq")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=702569820]
 libraries/ = SubResource("AnimationLibrary_x56g5")
@@ -149,6 +157,7 @@ gradient = SubResource("Gradient_tk11s")
 script = ExtResource("11_tk11s")
 
 [node name="Ally_Detection_Area" type="Area2D" parent="." unique_id=996566538 groups=["ally_detection_area"]]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ally_Detection_Area" unique_id=1560835526]
 position = Vector2(0, -4)

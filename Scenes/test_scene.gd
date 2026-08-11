@@ -84,6 +84,8 @@ var start_tile: Vector2i = Vector2i(0,0)
 var is_drawing: bool = false
 
 func _unhandled_input(event: InputEvent) -> void:
+	if Input.is_action_just_pressed("quit"):
+		get_tree().quit()
 	current_state._unhandled_input(event)
 	
 func add_point_to_path(point: Vector2) -> void:

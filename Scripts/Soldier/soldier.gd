@@ -19,6 +19,8 @@ var player_path: Array[Vector2]
 var rotation_tween: Tween
 var move_tween: Tween
 
+var soldier_id: String 
+
 @export var soldier_stats: PlayerStats:
 	set(value):
 		soldier_stats = value
@@ -35,12 +37,24 @@ var temporary_upgrades: Array[UpgradeData] = []
 var permanent_upgrades: Array[UpgradeData] = []
 
 #LAYOUT
-@export var weapons: Array[Weapon]
-@export var current_weapon: Weapon
+#@export var weapons: Array[Weapon]
+#@export var current_weapon: Weapon
+@export var weapons: Array[Weapon]:
+	set(value):
+		weapons = value
+		for i in weapons.size():
+			if weapons[i]:
+				weapons[i] = weapons[i].duplicate(true)
 
+@export var current_weapon: Weapon:
+	set(value):
+		current_weapon = value
+		if current_weapon:
+			current_weapon = current_weapon.duplicate(true)
 func _ready() -> void:
 	connect_to_signals()
 	player_path.append(global_position)
+	soldier_id = str(Time.get_ticks_usec(), "_", randi())
 	
 	if not weapons.is_empty():
 		current_weapon = weapons[0]
@@ -55,23 +69,27 @@ func connect_to_signals():
 	Signals.hide_enemy.connect(_on_enemy_lost)
 
 func _on_enemy_soldier_killed(enemy_killed: Soldier, killed_by: Soldier):
-	killed_by.vision_polygon.bullet_hit_point = null
-	if enemies_in_sight.has(enemy_killed):
-		enemies_in_sight.erase(enemy_killed)
-	_on_enemy_lost(enemy_killed, self)
-	if self == enemy_killed:
-		killed_by.when_escaped()
-	enemy_killed.disconnect_from_signals()
-	enemy_killed.queue_free()
+	if enemies_in_sight.has(enemy_killed.soldier_id):
+		enemies_in_sight.erase(enemy_killed.soldier_id)
+	await _on_enemy_lost(enemy_killed, self)
+		
+func when_killed():
+	if is_killed:
+		disconnect_from_signals()
+		queue_free()
 func _select_next_enemy_to_shoot():
 	var lowest_hp_enemy: Soldier = null
 	var lowest_hp_value = INF
 	
-	for enemy: Soldier in enemies_in_sight.keys():
-		var current_enemy_hp = enemy.soldier_stats.HP.get_value()
+	for enemy_id: String in enemies_in_sight.keys():
+		if not is_instance_valid(enemies_in_sight[enemy_id]):
+			enemies_in_sight.erase(enemy_id)
+			continue
+		var current_enemy_hp = enemies_in_sight[enemy_id].soldier_stats.HP.get_value()
 		if current_enemy_hp < lowest_hp_value:
+			print(enemies_in_sight)
 			lowest_hp_value = current_enemy_hp
-			lowest_hp_enemy = enemy
+			lowest_hp_enemy = enemies_in_sight[enemy_id]
 			
 	enemy_to_shoot = lowest_hp_enemy
 
@@ -130,8 +148,8 @@ func _on_enemy_seen(enemy: Soldier, soldier: Soldier):
 	if is_in_finished_state():
 		Signals.player_move_continued.emit(self)
 	
-	if not enemies_in_sight.has(enemy):
-		enemies_in_sight[enemy] = true
+	if not enemies_in_sight.has(enemy.soldier_id):
+		enemies_in_sight[enemy.soldier_id] = enemy
 		enemy.when_spotted()
 	on_engagement_action(enemy)
 func _on_enemy_seen_extra(enemy: Soldier):
@@ -144,9 +162,9 @@ func on_engagement_action(enemy: Soldier):
 func _on_enemy_lost(enemy: Soldier, soldier: Soldier):
 	if self != soldier or not enemy:
 		return
-	if enemies_in_sight.has(enemy):
+	if enemies_in_sight.has(enemy.soldier_id):
 		enemy.when_escaped()
-		enemies_in_sight.erase(enemy)
+		enemies_in_sight.erase(enemy.soldier_id)
 		
 	if enemies_in_sight.is_empty():
 		enemy_to_shoot = null
@@ -164,6 +182,8 @@ func _on_enemy_lost(enemy: Soldier, soldier: Soldier):
 			or current_weapon.weapon_state is WeaponShootState):
 			current_weapon.change_weapon_state(WeaponShootState.new())
 	
+	if enemy_to_shoot and not is_instance_valid(enemy_to_shoot):
+		enemy_to_shoot = null
 	current_weapon.change_enemy_to_shoot(enemy_to_shoot)
 	
 	#_on_enemy_lost_extra(enemy)
@@ -206,7 +226,7 @@ func do_movement(tween: Tween):
 	var current_position = global_position	
 	for target_position in player_path:
 		var distance = current_position.distance_to(target_position)
-		var duration = distance / soldier_stats.speed.get_value()
+		var duration = distance / soldier_stats.speed.get_value() * 2
 		tween.tween_property(self, "global_position", target_position, duration)
 		
 		current_position = target_position
