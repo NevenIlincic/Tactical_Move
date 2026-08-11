@@ -185,7 +185,7 @@ func _on_enemy_lost(enemy: Soldier):
 	
 	#_on_enemy_lost_extra(enemy)
 	
-	if enemy.is_killed:
+	if enemy and enemy.is_killed:
 		enemy.when_killed()
 
 func do_soldier_rotation(tween: Tween):

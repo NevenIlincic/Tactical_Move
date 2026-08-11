@@ -15,8 +15,8 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_06txj"]
 size = Vector2(60, 60)
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_q6by2"]
-blend_mode = 1
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_rw7ms"]
+light_mode = 1
 
 [sub_resource type="Animation" id="Animation_0eouq"]
 resource_name = "Position_Marker_Rotation"
@@ -103,8 +103,10 @@ offset = Vector2(-0.00030048078, 118.15355)
 shape = SubResource("RectangleShape2D_06txj")
 
 [node name="Vision_Polygon" type="Polygon2D" parent="." unique_id=1560586749]
-material = SubResource("CanvasItemMaterial_q6by2")
-color = Color(1, 1, 1, 0.4392157)
+clip_children = 2
+material = SubResource("CanvasItemMaterial_rw7ms")
+use_parent_material = true
+color = Color(0.8156863, 0.9843137, 0.49411765, 0.28627452)
 polygon = PackedVector2Array(0, 0, -256, -256, 256, -256)
 script = ExtResource("4_t26db")
 max_range = 1000.0

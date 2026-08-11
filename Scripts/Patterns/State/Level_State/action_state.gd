@@ -56,18 +56,21 @@ func _on_player_move_finished(soldier: Soldier):
 		
 	if soldier is Player:
 		num_player_finished_moves += 1
-		
+	
+	var enemies_finished: Array[Soldier] = []
 	if num_player_finished_moves == alive_players.size():
 		for enemy_soldier in soldiers_in_action:
 			if enemy_soldier is Enemy:
 				if enemy_soldier.enemies_in_sight.is_empty():
 					enemy_soldier._on_players_action_finished()
-					soldiers_in_action.erase(enemy_soldier)
+					enemies_finished.append(enemy_soldier)
 		#level.set_level_state(PlayerSetMoveState.new([level]))
-			
-		num_player_finished_moves = 0
+		
+	for enemy in enemies_finished:
+		soldiers_in_action.erase(enemy)
 	
 	if soldiers_in_action.is_empty():
+		num_player_finished_moves = 0
 		level.set_level_state(PlayerSetMoveState.new([level]))
 		
 func _on_player_move_continued(soldier: Soldier):

@@ -136,15 +136,15 @@ func evaluate_best_move():
 				defense_score = 10.0 / current_HP
 		#DISTANCE
 		if max_travel_distance > distance_to_player:
-			attack_score += clampf(750.0/(distance_to_player*(player_allies_nearby+1)), 0.0, 3.0)
+			attack_score += clampf(500.0/(distance_to_player*(player_allies_nearby+1)), 0.0, 3.0)
 			if distance_to_player > distance_to_closest_cover:
 				defense_score += clampf(500.0/ (distance_to_player*(player_allies_nearby+1)), 0.0, 3.0)
 			else:
-				attack_score += clampf(750.0/(distance_to_player*(player_allies_nearby+1)), 0.0, 3.0)
+				attack_score += clampf(500.0/(distance_to_player*(player_allies_nearby+1)), 0.0, 3.0)
 		else:
 			defense_score += clampf(500.0/ (distance_to_player*(player_allies_nearby+1)), 0.0, 3.0)
 		
-		#print(self, " ", attack_score, " ", defense_score)
+		print(self, " ", attack_score, " ", defense_score)
 		if defense_score > attack_score:
 			intent_for_player = Intent.DEFEND
 		
