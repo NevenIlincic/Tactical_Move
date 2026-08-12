@@ -9,24 +9,42 @@ var confirmed_player_moves: int = 0
 
 var list_occupied_tiles: Array[Vector2i]
 
-var players: Array[Player]
+var players: Dictionary = {} #Player
+var enemies: Dictionary = {} #Enemy
 var num_finished_player_turns: int = 0
 
 var current_state: State
 
+var cover_points: Array
+
 func _ready() -> void:
 	for player in get_tree().get_nodes_in_group("Player"):
 		if player is Player:
-			var starting_tile: Vector2i = tile_map.local_to_map(tile_map.to_local(player.global_position))
-			player.starting_tile = starting_tile
-			players.append(player)
-		
+			players[player] = true
+	cover_points = get_tree().get_nodes_in_group("a_star_point")
+
 	setup_grid()
 	connect_to_signals()
-	current_state = PlayerSetMoveState.new([self, players])
+	current_state = PlayerSetMoveState.new([self])
 
-func get_alive_players() -> Array[Player]:
-	return players
+func _physics_process(delta: float) -> void:
+	VisionManager.handle_enemy_visibility(delta)
+	current_state._physics_process(delta)
+
+func get_alive_players() -> Dictionary:
+	var alive_players: Dictionary = {}
+	for player in get_tree().get_nodes_in_group("Player"):
+		alive_players[player] = true
+	return alive_players
+	
+func get_alive_enemies() -> Dictionary:
+	return enemies
+
+func get_alive_soldiers() -> Dictionary:
+	var alive_soldiers: Dictionary = {}
+	for soldier in get_tree().get_nodes_in_group("soldier"):
+		alive_soldiers[soldier] = true
+	return alive_soldiers
 
 func set_level_state(new_state: State):
 	if current_state:
@@ -40,27 +58,7 @@ func set_occupied_tiles_list():
 		list_occupied_tiles.append(starting_tile)
 		
 func connect_to_signals():
-	Signals.player_move_finished.connect(check_is_turn_finished)
-
-#func _on_deselect_player():
-	#selected_player.is_selected = false
-	#selected_player = null
-	#draw_path([])
-
-func check_is_turn_finished():
-	num_finished_player_turns += 1
-	if num_finished_player_turns == len(players):
-		num_finished_player_turns = 0
-		print("ZAVRSEN POTEZ!")
-
-#func set_selected_player(new_selected_player: Player):
-	##if selected_player:
-		##selected_player.is_selected = false
-		##selected_player.player_sprite.modulate.a = 1.0
-		###if len(selected_player.player_path) == 1:
-		##grid.set_point_solid(selected_player.player_path[-1], true)
-	#selected_player = new_selected_player
-	##grid.set_point_solid(selected_player.starting_tile, false)
+	pass
 
 func setup_grid():
 	grid.region = tile_map.get_used_rect()
@@ -77,7 +75,8 @@ func setup_grid():
 			
 	#for tile in list_occupied_tiles:
 		#grid.set_point_solid(tile, true)
-		
+
+
 			
 @onready var path_line: Line2D = $Path_Line
 var start_tile: Vector2i = Vector2i(0,0)
@@ -85,6 +84,8 @@ var start_tile: Vector2i = Vector2i(0,0)
 var is_drawing: bool = false
 
 func _unhandled_input(event: InputEvent) -> void:
+	if Input.is_action_just_pressed("quit"):
+		get_tree().quit()
 	current_state._unhandled_input(event)
 	
 func add_point_to_path(point: Vector2) -> void:
