@@ -1,0 +1,72 @@
+[gd_scene format=3 uid="uid://y3pndfcq1kxo"]
+
+[ext_resource type="Script" uid="uid://cgpj7hlgh52n1" path="res://Scripts/Soldier/Enemy/enemy.gd" id="1_02vxf"]
+[ext_resource type="Texture2D" uid="uid://d1tdmtvde540b" path="res://Sprites/Enemy/enemy.png" id="1_i1u57"]
+[ext_resource type="Texture2D" uid="uid://uwcsyrtrt75l" path="res://Sprites/Path_Line/New Piskel-1.png - 2026-08-04T161338.290.png" id="3_02vxf"]
+[ext_resource type="Script" uid="uid://c386pr8tx5qep" path="res://Scripts/Soldier/soldier_vision.gd" id="3_fw0yv"]
+[ext_resource type="Script" uid="uid://duyphgu7sdufm" path="res://Scenes/Soldier/soldier_bullet_line.gd" id="5_cmdj1"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_02vxf"]
+radius = 20.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wy1ij"]
+radius = 16.0
+
+[sub_resource type="Curve" id="Curve_cmdj1"]
+_limits = [0.0, 4.0, 0.0, 1.0]
+_data = [Vector2(0.015936255, 0), 0.0, 0.0, 0, 0, Vector2(1, 2.3471074), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_cgwcb"]
+colors = PackedColorArray(1, 1, 0.43137255, 0, 1, 1, 0.43137255, 0.8039216)
+
+[node name="Enemy" type="Node2D" unique_id=1440065138 groups=["enemy_node", "soldier"]]
+script = ExtResource("1_02vxf")
+
+[node name="Enemy_Sprite" type="Sprite2D" parent="." unique_id=1264594983]
+texture_filter = 1
+texture_repeat = 1
+texture = ExtResource("1_i1u57")
+
+[node name="Vision_Polygon" type="Polygon2D" parent="." unique_id=1604988782]
+color = Color(0.5822249, 0.63125, 0.33140624, 0.19500001)
+polygon = PackedVector2Array(0, 0, -256, -256, 256, -256)
+script = ExtResource("3_fw0yv")
+max_range = 1000.0
+ray_count = 50.0
+
+[node name="Enemy_Target_Line" type="Line2D" parent="Vision_Polygon" unique_id=1406944396]
+visible = false
+show_behind_parent = true
+texture_filter = 1
+texture_repeat = 2
+width = 3.0
+texture = ExtResource("3_02vxf")
+texture_mode = 1
+
+[node name="Vision_Area" type="Area2D" parent="Vision_Polygon" unique_id=771459024]
+collision_layer = 4
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Vision_Polygon/Vision_Area" unique_id=664566003]
+
+[node name="Detection_Area" type="Area2D" parent="." unique_id=96710695 groups=["enemy"]]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Detection_Area" unique_id=1216236629]
+visible = false
+shape = SubResource("CircleShape2D_02vxf")
+disabled = true
+
+[node name="Hitbox" type="StaticBody2D" parent="." unique_id=1448689257]
+
+[node name="Hitbox_Collision_Shape" type="CollisionShape2D" parent="Hitbox" unique_id=781357414]
+shape = SubResource("CircleShape2D_wy1ij")
+
+[node name="Bullet_Line" type="Line2D" parent="." unique_id=1522048793]
+top_level = true
+points = PackedVector2Array(0, 0)
+width = 3.0
+width_curve = SubResource("Curve_cmdj1")
+default_color = Color(1, 1, 0.43137255, 0.8039216)
+gradient = SubResource("Gradient_cgwcb")
+script = ExtResource("5_cmdj1")

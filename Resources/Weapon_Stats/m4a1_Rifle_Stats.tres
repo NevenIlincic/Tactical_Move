@@ -6,7 +6,7 @@
 [sub_resource type="Resource" id="Resource_eih0w"]
 resource_local_to_scene = true
 script = ExtResource("1_gmncr")
-base_value = 10.0
+base_value = 100.0
 metadata/_custom_type_script = "uid://bencr8mnns7ut"
 
 [sub_resource type="Resource" id="Resource_tg3ak"]
@@ -16,7 +16,7 @@ metadata/_custom_type_script = "uid://bencr8mnns7ut"
 
 [sub_resource type="Resource" id="Resource_sr62i"]
 script = ExtResource("1_gmncr")
-base_value = 3.0
+base_value = 10.0
 metadata/_custom_type_script = "uid://bencr8mnns7ut"
 
 [sub_resource type="Resource" id="Resource_woesj"]
@@ -25,7 +25,12 @@ metadata/_custom_type_script = "uid://bencr8mnns7ut"
 
 [sub_resource type="Resource" id="Resource_jre2x"]
 script = ExtResource("1_gmncr")
-base_value = 10.0
+base_value = 100.0
+metadata/_custom_type_script = "uid://bencr8mnns7ut"
+
+[sub_resource type="Resource" id="Resource_gmncr"]
+script = ExtResource("1_gmncr")
+base_value = 2.0
 metadata/_custom_type_script = "uid://bencr8mnns7ut"
 
 [resource]
@@ -35,4 +40,5 @@ max_ammo_capacity = SubResource("Resource_jre2x")
 fire_rate = SubResource("Resource_sr62i")
 damage = SubResource("Resource_tg3ak")
 hit_chance = SubResource("Resource_woesj")
+reload_time = SubResource("Resource_gmncr")
 metadata/_custom_type_script = "uid://dh5netn8c2b4e"

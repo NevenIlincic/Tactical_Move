@@ -1,9 +1,6 @@
-extends Polygon2D 
-class_name PlayerVision
+class_name SoldierVision extends Polygon2D
 
-@onready var vision_center_line: Line2D = $Vision_Center_Line
-@onready var collision_polygon_2d: CollisionPolygon2D = $Vision_Area/CollisionPolygon2D
-
+@onready var enemy_target_line: Line2D = $Enemy_Target_Line
 
 @export var max_range: float = 300.0
 @export var fov_degrees: float = 90.0
@@ -15,10 +12,11 @@ var level: Level
 var rays: Array[RayCast2D] = []
 var facing_angle: float = 0.0
 
-var enemies_seen_in_last_frame: Dictionary = {}
+var bullet_hit_point #Vector2/null
 
 func _ready() -> void:
-	vision_center_line.add_point(Vector2.ZERO)
+	enemy_target_line.add_point(Vector2.ZERO)
+	
 	setup_vision_rays()
 	level = get_tree().get_first_node_in_group("Level")
 
@@ -31,15 +29,16 @@ func setup_vision_rays() -> void:
 		ray.target_position = Vector2(max_range, 0).rotated(angle)
 		ray.collision_mask = wall_collision_mask
 		ray.enabled = true
-		ray.collide_with_areas = true
+		#ray.collide_with_areas = true
 		ray.set_collision_mask_value(3, false)
 		add_child(ray)
 		rays.append(ray)
 
-func update_vision() -> void:
-	#var points: PackedVector2Array = [Vector2.ZERO]
-	var raw_points: Array[Vector2] = [Vector2.ZERO]
+func update_vision():
+	var enemy_position: Vector2
 	var half_fov = deg_to_rad(fov_degrees / 2.0)
+	var raw_points: Array[Vector2] = [Vector2.ZERO]
+	var points = PackedVector2Array(raw_points)
 	var currently_visible_enemies: Dictionary = {}
 	
 	for i in rays.size():
@@ -55,29 +54,41 @@ func update_vision() -> void:
 		if ray.is_colliding():
 			current_point = ray.to_local(ray.get_collision_point())
 			var hit_object = ray.get_collider().get_parent()
-			if hit_object and hit_object is Enemy:
-				if not currently_visible_enemies.has(hit_object):
-					currently_visible_enemies[hit_object] = true					
-					Signals.report_enemy_seen.emit(hit_object, get_parent())
+			if hit_object and hit_object is Soldier:
+				if check_is_enemy_soldier_hit(get_parent(), hit_object):
+					if not currently_visible_enemies.has(hit_object):
+						currently_visible_enemies[hit_object] = true
+						bullet_hit_point = hit_object.global_position
+						if not enemy_position and hit_object == get_parent().enemy_to_shoot:
+							enemy_position = current_point
+						Signals.report_enemy_seen.emit(hit_object, get_parent())
+						
 		else:
 			current_point = ray.target_position
 		
-		#points.append(current_point)
+		points.append(current_point)
 		if raw_points.back().distance_to(current_point) > 0.5:
 			raw_points.append(current_point)
-		if i == rays.size() / 2:
-			if vision_center_line.get_point_count() > 1:
-				vision_center_line.set_point_position(1, current_point)
-			else:
-				vision_center_line.add_point(current_point)
+			
 		
-	var points = PackedVector2Array(raw_points)
 	if points.size() > 3:
 		var triangles = Geometry2D.triangulate_polygon(points)
 		if not triangles.is_empty():
 			self.polygon = points
-			#collision_polygon_2d.polygon = points
 		else:
 			pass
+	
+	#if enemy_target_line.get_point_count() == 1:
+		#enemy_target_line.add_point(enemy_position)
+	#else:
+		#enemy_target_line.set_point_position(1, enemy_position)
 
 	
+func check_is_enemy_soldier_hit(current_soldier: Soldier, hit_soldier: Soldier):
+	return current_soldier.get_script() != hit_soldier.get_script()
+
+func reset_target_line():
+	enemy_target_line.remove_point(-1)
+
+func draw_bullet_line():
+	pass

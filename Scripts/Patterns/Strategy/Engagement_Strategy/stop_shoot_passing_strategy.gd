@@ -1,6 +1,6 @@
 class_name StopShootPassingStrategy extends EngagementStrategy
 
-func execute(player: Player, enemy: Enemy):
+func execute(player: Soldier, enemy: Soldier):
 	if not player.enemy_to_shoot:
 		player.enemy_to_shoot = enemy
 		player.current_weapon.change_enemy_to_shoot(enemy)
@@ -12,7 +12,7 @@ func execute(player: Player, enemy: Enemy):
 	or player.current_weapon.weapon_state is WeaponShootState):
 		player.current_weapon.change_weapon_state(WeaponShootState.new())
 
-func stop_movement(player: Player):
+func stop_movement(player: Soldier):
 	UpgradeManager.remove_moving_penalty(player)
 	if player.move_tween and player.move_tween.is_valid():
 		player.move_tween.kill()
