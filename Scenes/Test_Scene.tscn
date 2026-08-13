@@ -18,6 +18,9 @@
 [ext_resource type="Resource" uid="uid://ttdsvtwhyg75" path="res://Resources/Weapon_Stats/m4a1_Rifle_Stats.tres" id="13_tq75k"]
 [ext_resource type="Script" uid="uid://bqnc1ha42r85" path="res://Scripts/Weapon/pistol.gd" id="17_513u8"]
 [ext_resource type="Resource" uid="uid://ddj6vd6by3aw5" path="res://Resources/Weapon_Stats/Pistol_Stats.tres" id="18_kw30y"]
+[ext_resource type="Texture2D" uid="uid://cyexu3fm2aq3s" path="res://Sprites/HUD/background.png" id="19_kw30y"]
+[ext_resource type="Texture2D" uid="uid://ba5pgw0e6nuhq" path="res://Sprites/Player/Avatars/male_soldier_1.png" id="20_ebsyv"]
+[ext_resource type="Texture2D" uid="uid://dk6hnkfrk8imb" path="res://Sprites/Player/Avatars/female_soldier.png" id="21_ebsyv"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_10mtb"]
 texture = ExtResource("2_mwjvy")
@@ -368,6 +371,7 @@ soldier_stats = SubResource("Resource_6uspl")
 weapons = Array[ExtResource("6_mykrp")]([SubResource("Resource_3u3yd")])
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1692743122]
+visible = false
 color = Color(0.6666667, 0.6666667, 0.74509805, 1)
 
 [node name="Enemy4" parent="." unique_id=388256567 instance=ExtResource("5_svcn8")]
@@ -380,3 +384,19 @@ position = Vector2(1049, 156)
 current_engagement_rule = 2
 soldier_stats = SubResource("Resource_elm60")
 weapons = Array[ExtResource("6_mykrp")]([SubResource("Resource_cmdj1")])
+
+[node name="Background" type="Sprite2D" parent="." unique_id=1861225955]
+position = Vector2(1136, 70)
+texture = ExtResource("19_kw30y")
+
+[node name="JaPixel" type="Sprite2D" parent="." unique_id=1165638485]
+position = Vector2(1075, 71)
+texture = ExtResource("20_ebsyv")
+
+[node name="Background2" type="Sprite2D" parent="." unique_id=592716912]
+position = Vector2(1134, 200)
+texture = ExtResource("19_kw30y")
+
+[node name="JaPixel2" type="Sprite2D" parent="." unique_id=678264847]
+position = Vector2(1073, 201)
+texture = ExtResource("21_ebsyv")
