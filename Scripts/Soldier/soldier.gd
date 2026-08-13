@@ -4,7 +4,9 @@ class_name Soldier extends Node2D
 @onready var vision_polygon: SoldierVision = $Vision_Polygon
 @onready var hitbox_collision_shape: CollisionShape2D = $Hitbox/Hitbox_Collision_Shape
 @onready var bullet_line: SoldierBulletLine = $Bullet_Line
+#BULLET SPAWN POINTS
 @onready var m4a1_rifle_bullet_spawn_point: Marker2D = $m4a1_rifle_bullet_spawn_point
+@onready var pistol_bullet_spawn_point: Marker2D = $pistol_bullet_spawn_point
 
 var is_in_active_state: bool = false
 var is_killed: bool = false

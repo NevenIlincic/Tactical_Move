@@ -16,6 +16,8 @@
 [ext_resource type="Texture2D" uid="uid://c4kxbpqlxpvur" path="res://Sprites/Tiles/New Piskel-2.png (49).png" id="6_ofkpl"]
 [ext_resource type="Script" uid="uid://bmr38t2grjqqv" path="res://Scripts/Weapon/m4a1_rifle.gd" id="12_grcoo"]
 [ext_resource type="Resource" uid="uid://ttdsvtwhyg75" path="res://Resources/Weapon_Stats/m4a1_Rifle_Stats.tres" id="13_tq75k"]
+[ext_resource type="Script" uid="uid://bqnc1ha42r85" path="res://Scripts/Weapon/pistol.gd" id="17_513u8"]
+[ext_resource type="Resource" uid="uid://ddj6vd6by3aw5" path="res://Resources/Weapon_Stats/Pistol_Stats.tres" id="18_kw30y"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_10mtb"]
 texture = ExtResource("2_mwjvy")
@@ -235,6 +237,11 @@ max_travel_distance = SubResource("Resource_ebsyv")
 HP = SubResource("Resource_1q75p")
 metadata/_custom_type_script = "uid://cp4iog725gtuq"
 
+[sub_resource type="Resource" id="Resource_cmdj1"]
+script = ExtResource("17_513u8")
+weapon_stats = ExtResource("18_kw30y")
+metadata/_custom_type_script = "uid://bqnc1ha42r85"
+
 [node name="Node2D" type="Node2D" unique_id=1609049363 groups=["Level"]]
 script = ExtResource("1_4ms0o")
 
@@ -372,4 +379,4 @@ weapons = Array[ExtResource("6_mykrp")]([SubResource("Resource_3u3yd")])
 position = Vector2(1049, 156)
 current_engagement_rule = 2
 soldier_stats = SubResource("Resource_elm60")
-weapons = Array[ExtResource("6_mykrp")]([SubResource("Resource_kw30y")])
+weapons = Array[ExtResource("6_mykrp")]([SubResource("Resource_cmdj1")])
