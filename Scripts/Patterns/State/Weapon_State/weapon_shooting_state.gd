@@ -35,6 +35,6 @@ func on_target_killed(enemy_killed: Soldier, killed_by: Soldier):
 
 func draw_bullet():
 	if current_weapon.weapon_owner and current_weapon.weapon_owner.vision_polygon.bullet_hit_point:
-		var starting_position: Vector2 = current_weapon.weapon_owner.global_position
+		var starting_position = current_weapon.get_bullet_spawn_point(current_weapon.weapon_owner)
 		var target_position: Vector2 = current_weapon.weapon_owner.vision_polygon.bullet_hit_point
 		current_weapon.weapon_owner.bullet_line.draw_bullet(starting_position, target_position)

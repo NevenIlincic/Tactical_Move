@@ -16,6 +16,8 @@ var weapon_owner: Soldier
 var weapon_state: WeaponState
 var enemy_to_shoot: Soldier
 
+var bullet_spawn_point: Vector2
+
 func _init():
 	change_weapon_state(WeaponIdleState.new())
 	
@@ -31,3 +33,6 @@ func change_enemy_to_shoot(enemy: Soldier):
 
 func update(delta: float):
 	weapon_state.update(delta)
+
+func get_bullet_spawn_point(soldier: Soldier):
+	pass
