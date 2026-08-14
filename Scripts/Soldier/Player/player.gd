@@ -18,6 +18,7 @@ var allies_nearby: Dictionary = {} #{PLayer: true}
 @onready var player_sprite: Sprite2D = $Player_Sprite
 @onready var move_to_position_marker: Sprite2D = $Move_To_Position_Marker
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
+@export var player_avatar: CompressedTexture2D
 
 ####PLAYER MOVES
 @onready var look_at_position_sprite: Sprite2D = $Look_At_Position_Sprite

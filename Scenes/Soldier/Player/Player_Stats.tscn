@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://dyh4j30522553"]
+
+[ext_resource type="Script" uid="uid://cjyx66lir3nk8" path="res://Scenes/Soldier/Player/player_stats.gd" id="1_1t72u"]
+[ext_resource type="Texture2D" uid="uid://cyexu3fm2aq3s" path="res://Sprites/HUD/background.png" id="1_i03bc"]
+[ext_resource type="Texture2D" uid="uid://dcjpq0yr88po1" path="res://Sprites/Player/Avatars/male_soldier.png" id="2_1t72u"]
+[ext_resource type="Texture2D" uid="uid://cr31y8uph8gtp" path="res://Sprites/Weapon/pistol.png" id="5_ss5un"]
+[ext_resource type="Texture2D" uid="uid://baqs766k8tj40" path="res://Sprites/HUD/download-3.png (1).png" id="9_3m3yq"]
+
+[node name="PlayerStats" type="Node2D" unique_id=882045817]
+script = ExtResource("1_1t72u")
+
+[node name="Background" type="Sprite2D" parent="." unique_id=104324732]
+position = Vector2(124, 0)
+scale = Vector2(1.96875, 1)
+texture = ExtResource("1_i03bc")
+
+[node name="Player_Avatar" type="Sprite2D" parent="." unique_id=1815090772]
+position = Vector2(-64, 0)
+texture = ExtResource("2_1t72u")
+
+[node name="Download2_png(2)" type="Sprite2D" parent="." unique_id=2085132682]
+position = Vector2(40, 32)
+scale = Vector2(0.4375, 0.4375)
+texture = ExtResource("5_ss5un")
+
+[node name="Download3_png(1)" type="Sprite2D" parent="." unique_id=1752116273]
+position = Vector2(64.00001, -32)
+scale = Vector2(0.9375, 1)
+texture = ExtResource("9_3m3yq")

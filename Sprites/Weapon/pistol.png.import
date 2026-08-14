@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ba5pgw0e6nuhq"
-path="res://.godot/imported/male_soldier_1.png-c084342584a8cd33eb83d629259a6039.ctex"
+uid="uid://cr31y8uph8gtp"
+path="res://.godot/imported/pistol.png-2e29a02476ea6c09a48575823ef1939e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Player/Avatars/male_soldier_1.png"
-dest_files=["res://.godot/imported/male_soldier_1.png-c084342584a8cd33eb83d629259a6039.ctex"]
+source_file="res://Sprites/Weapon/pistol.png"
+dest_files=["res://.godot/imported/pistol.png-2e29a02476ea6c09a48575823ef1939e.ctex"]
 
 [params]
 

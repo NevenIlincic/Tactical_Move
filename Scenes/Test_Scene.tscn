@@ -19,8 +19,10 @@
 [ext_resource type="Script" uid="uid://bqnc1ha42r85" path="res://Scripts/Weapon/pistol.gd" id="17_513u8"]
 [ext_resource type="Resource" uid="uid://ddj6vd6by3aw5" path="res://Resources/Weapon_Stats/Pistol_Stats.tres" id="18_kw30y"]
 [ext_resource type="Texture2D" uid="uid://cyexu3fm2aq3s" path="res://Sprites/HUD/background.png" id="19_kw30y"]
-[ext_resource type="Texture2D" uid="uid://ba5pgw0e6nuhq" path="res://Sprites/Player/Avatars/male_soldier_1.png" id="20_ebsyv"]
+[ext_resource type="Texture2D" uid="uid://dcjpq0yr88po1" path="res://Sprites/Player/Avatars/male_soldier.png" id="20_w2bir"]
 [ext_resource type="Texture2D" uid="uid://dk6hnkfrk8imb" path="res://Sprites/Player/Avatars/female_soldier.png" id="21_ebsyv"]
+[ext_resource type="Texture2D" uid="uid://c07go6e5fp3av" path="res://Sprites/Player/Avatars/male_soldier_3.png" id="22_w2bir"]
+[ext_resource type="PackedScene" uid="uid://dyh4j30522553" path="res://Scenes/Soldier/Player/Player_Stats.tscn" id="23_nfmrh"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_10mtb"]
 texture = ExtResource("2_mwjvy")
@@ -276,12 +278,14 @@ shape = SubResource("RectangleShape2D_fhwqp")
 
 [node name="Player" parent="." unique_id=1108589071 instance=ExtResource("4_10mtb")]
 position = Vector2(1043, 393)
+player_avatar = ExtResource("22_w2bir")
 current_engagement_rule = 2
 soldier_stats = SubResource("Resource_q2r4x")
 weapons = Array[ExtResource("6_mykrp")]([SubResource("Resource_yn6en")])
 
 [node name="Player2" parent="." unique_id=1802276897 instance=ExtResource("4_10mtb")]
 position = Vector2(1077, 257)
+player_avatar = ExtResource("21_ebsyv")
 current_engagement_rule = 2
 soldier_stats = SubResource("Resource_avk4t")
 weapons = Array[ExtResource("6_mykrp")]([SubResource("Resource_kw30y")])
@@ -381,22 +385,40 @@ weapons = Array[ExtResource("6_mykrp")]([SubResource("Resource_3u3yd")])
 
 [node name="Player3" parent="." unique_id=799965180 instance=ExtResource("4_10mtb")]
 position = Vector2(1049, 156)
+player_avatar = ExtResource("20_w2bir")
 current_engagement_rule = 2
 soldier_stats = SubResource("Resource_elm60")
 weapons = Array[ExtResource("6_mykrp")]([SubResource("Resource_cmdj1")])
 
 [node name="Background" type="Sprite2D" parent="." unique_id=1861225955]
+visible = false
 position = Vector2(1136, 70)
 texture = ExtResource("19_kw30y")
 
 [node name="JaPixel" type="Sprite2D" parent="." unique_id=1165638485]
+visible = false
 position = Vector2(1075, 71)
-texture = ExtResource("20_ebsyv")
+texture = ExtResource("20_w2bir")
 
 [node name="Background2" type="Sprite2D" parent="." unique_id=592716912]
+visible = false
 position = Vector2(1134, 200)
 texture = ExtResource("19_kw30y")
 
 [node name="JaPixel2" type="Sprite2D" parent="." unique_id=678264847]
+visible = false
 position = Vector2(1073, 201)
 texture = ExtResource("21_ebsyv")
+
+[node name="Background3" type="Sprite2D" parent="." unique_id=1411345163]
+visible = false
+position = Vector2(1134, 333)
+texture = ExtResource("19_kw30y")
+
+[node name="JaPixel3" type="Sprite2D" parent="." unique_id=486747501]
+visible = false
+position = Vector2(1073, 334)
+texture = ExtResource("22_w2bir")
+
+[node name="PlayerStats" parent="." unique_id=882045817 instance=ExtResource("23_nfmrh")]
+position = Vector2(128, 584)
