@@ -23,6 +23,7 @@
 [ext_resource type="Texture2D" uid="uid://dk6hnkfrk8imb" path="res://Sprites/Player/Avatars/female_soldier.png" id="21_ebsyv"]
 [ext_resource type="Texture2D" uid="uid://c07go6e5fp3av" path="res://Sprites/Player/Avatars/male_soldier_3.png" id="22_w2bir"]
 [ext_resource type="PackedScene" uid="uid://dyh4j30522553" path="res://Scenes/Soldier/Player/Player_Stats.tscn" id="23_nfmrh"]
+[ext_resource type="Script" uid="uid://jqj0nkq44djb" path="res://Scenes/camera_2d.gd" id="24_7tbrw"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_10mtb"]
 texture = ExtResource("2_mwjvy")
@@ -278,6 +279,7 @@ shape = SubResource("RectangleShape2D_fhwqp")
 
 [node name="Player" parent="." unique_id=1108589071 instance=ExtResource("4_10mtb")]
 position = Vector2(1043, 393)
+player_name = "Luke"
 player_avatar = ExtResource("22_w2bir")
 current_engagement_rule = 2
 soldier_stats = SubResource("Resource_q2r4x")
@@ -285,6 +287,7 @@ weapons = Array[ExtResource("6_mykrp")]([SubResource("Resource_yn6en")])
 
 [node name="Player2" parent="." unique_id=1802276897 instance=ExtResource("4_10mtb")]
 position = Vector2(1077, 257)
+player_name = "Valerie"
 player_avatar = ExtResource("21_ebsyv")
 current_engagement_rule = 2
 soldier_stats = SubResource("Resource_avk4t")
@@ -385,6 +388,7 @@ weapons = Array[ExtResource("6_mykrp")]([SubResource("Resource_3u3yd")])
 
 [node name="Player3" parent="." unique_id=799965180 instance=ExtResource("4_10mtb")]
 position = Vector2(1049, 156)
+player_name = "Nate"
 player_avatar = ExtResource("20_w2bir")
 current_engagement_rule = 2
 soldier_stats = SubResource("Resource_elm60")
@@ -420,5 +424,11 @@ visible = false
 position = Vector2(1073, 334)
 texture = ExtResource("22_w2bir")
 
-[node name="PlayerStats" parent="." unique_id=882045817 instance=ExtResource("23_nfmrh")]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=858137010]
+position = Vector2(576, 320)
+script = ExtResource("24_7tbrw")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1266865912]
+
+[node name="PlayerStats" parent="CanvasLayer" unique_id=882045817 instance=ExtResource("23_nfmrh")]
 position = Vector2(128, 584)

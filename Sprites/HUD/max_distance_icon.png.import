@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://baqs766k8tj40"
-path="res://.godot/imported/download-3.png (1).png-62dc6a94443391629918a4fa54dec7af.ctex"
+uid="uid://d1hablc0nksx6"
+path="res://.godot/imported/max_distance_icon.png-cf9a3cbe241ec143ad09afc6e9ab39a7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/HUD/download-3.png (1).png"
-dest_files=["res://.godot/imported/download-3.png (1).png-62dc6a94443391629918a4fa54dec7af.ctex"]
+source_file="res://Sprites/HUD/max_distance_icon.png"
+dest_files=["res://.godot/imported/max_distance_icon.png-cf9a3cbe241ec143ad09afc6e9ab39a7.ctex"]
 
 [params]
 

@@ -1,5 +1,6 @@
 class_name Player extends Soldier
 
+@export var player_name: String
 var starting_tile: Vector2i
 var target_tile: Vector2i
 var is_selected: bool = false

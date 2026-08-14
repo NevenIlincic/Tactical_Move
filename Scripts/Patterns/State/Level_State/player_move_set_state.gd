@@ -29,7 +29,9 @@ func _unhandled_input(event: InputEvent):
 			player_selection_manager.deselect_player()
 		if check_can_do_action():
 			#Signals.move_player.emit(level.tile_map)
+			Signals.action_started.emit()
 			level.set_level_state(ActionState.new([level]))
+			
 		#else:
 			#print(occupied_target_tiles)
 		

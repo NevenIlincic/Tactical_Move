@@ -32,4 +32,4 @@ signal hide_player(enemy: Enemy, player: Player)
 signal player_killed(enemy_killed: Player, killed_by: Enemy)
 
 
-signal show_player_stats(soldier: Player)
+signal action_started()
