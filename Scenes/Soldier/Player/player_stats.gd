@@ -3,7 +3,7 @@ extends Node2D
 @onready var player_avatar: Sprite2D = $Player_Avatar
 @onready var player_name_label: Label = $Player_Name_Label
 #AMMO
-@onready var ammo_label: Label = $Ammo_Label
+@onready var ammo_label: Label = $Ammo_Node/Ammo_Label
 #HP
 @onready var hp_bar: TextureProgressBar = $HP_Bar
 @onready var hp_percentage_label: Label = $HP_Bar/HP_Percentage_Label
@@ -15,6 +15,12 @@ extends Node2D
 @onready var reaction_time_label: Label = $Reaction_Time_Node/Reaction_Time_Label
 #MAX TRAVEL DISTANCE
 @onready var max_distance_label: Label = $Max_Distance_Node/Max_Distance_Label
+#WEAPON FIRE RATE
+@onready var fire_rate_label: Label = $Fire_Rate_Node/Fire_Rate_Label
+#WEAPON DAMAGE
+@onready var damage_label: Label = $Damage_Node/Damage_Label
+#WEAPON HIT CHANCE
+@onready var hit_chance_label: Label = $Hit_Chance_Node/Hit_Chance_Label
 
 func _ready() -> void:
 	Signals.set_selected_player.connect(_on_selected_player)
@@ -33,6 +39,9 @@ func _on_selected_player(player: Player):
 	reload_time_label.text = str(player.current_weapon.weapon_stats.reload_time.get_value(), "s")
 	reaction_time_label.text = str(player.soldier_stats.reaction_time.get_value(), "s")
 	max_distance_label.text = str(player.soldier_stats.max_travel_distance.get_value())
+	fire_rate_label.text = str(int(player.current_weapon.weapon_stats.fire_rate.get_value()), "rps")
+	damage_label.text = str(player.current_weapon.weapon_stats.damage.get_value())
+	hit_chance_label.text = str(player.current_weapon.weapon_stats.hit_chance.get_value(), "%")
 	show_stats()
 
 func _on_deselect_player():
