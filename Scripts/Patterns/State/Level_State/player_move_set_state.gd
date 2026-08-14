@@ -27,18 +27,13 @@ func _unhandled_input(event: InputEvent):
 	if Input.is_action_just_pressed("move_confirm"):
 		if player_selection_manager.selected_player:
 			player_selection_manager.deselect_player()
+		#print(players_set_for_move)
 		if check_can_do_action():
-			#Signals.move_player.emit(level.tile_map)
 			Signals.action_started.emit()
 			level.set_level_state(ActionState.new([level]))
-			
-		#else:
-			#print(occupied_target_tiles)
-		
+					
 	if Input.is_action_pressed("drawing"):
 		if selected_player:
-			if not players_set_for_move.has(selected_player):
-				players_set_for_move[selected_player] = true
 			is_drawing = true
 	else:
 		if selected_player:
@@ -80,7 +75,8 @@ func update_preview() -> void:
 				if not is_path_blocked(last_mouse_pos, mouse_pos):
 					var mouse_global_position: Vector2 = level.get_global_mouse_position()
 					player_selection_manager.selected_player.add_point_to_path(mouse_global_position)	
-				
+					if not players_set_for_move.has(player_selection_manager.selected_player):
+						players_set_for_move[player_selection_manager.selected_player] = true
 
 func is_path_blocked(from: Vector2, to: Vector2) -> bool:
 	var space_state = level.get_world_2d().direct_space_state

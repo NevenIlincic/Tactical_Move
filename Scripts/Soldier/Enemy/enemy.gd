@@ -144,7 +144,7 @@ func evaluate_best_move():
 		else:
 			defense_score += clampf(500.0/ (distance_to_player*(player_allies_nearby+1)), 0.0, 3.0)
 		
-		print(self, " ", attack_score, " ", defense_score)
+		#print(self, " ", attack_score, " ", defense_score)
 		if defense_score > attack_score:
 			intent_for_player = Intent.DEFEND
 		
