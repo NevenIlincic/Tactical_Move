@@ -47,6 +47,17 @@ func _ready() -> void:
 	animation_player.play("Position_Marker_Rotation")
 	move_to_position_marker.global_position = global_position	
 
+
+func set_player_sprite():
+	const PLAYER_M_4A_1_RIFLE = preload("uid://q7sw1jdmg3ev")
+	const PLAYER_SOLDIER_PISTOL = preload("uid://xobgolcljc7w")
+	
+	if current_weapon is Pistol:
+		player_sprite.texture = PLAYER_SOLDIER_PISTOL
+	elif current_weapon is m4a1Rifle:
+		player_sprite.texture = PLAYER_M_4A_1_RIFLE
+	
+
 func set_up_lines_data():
 	player_path_line.add_point(global_position)
 	player_look_at_line.add_point(global_position)

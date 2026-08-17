@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://dau8h2jtb2w5a" path="res://Sprites/HUD/fire-rate_icon.png" id="11_fhtql"]
 [ext_resource type="Texture2D" uid="uid://bl8n0a5b8nowm" path="res://Sprites/HUD/damage_icon.png" id="12_w7q5a"]
 [ext_resource type="Texture2D" uid="uid://baqatp3dbiqcp" path="res://Sprites/HUD/hit_chance_icon.png" id="13_t3mcf"]
+[ext_resource type="Texture2D" uid="uid://cce05fem7r7wu" path="res://Sprites/Weapon/m4a1_rifle.png" id="14_q3xov"]
 
 [node name="PlayerStats" type="Node2D" unique_id=882045817]
 script = ExtResource("1_1t72u")
@@ -26,7 +27,7 @@ texture = ExtResource("1_i03bc")
 position = Vector2(-64, 0)
 texture = ExtResource("2_1t72u")
 
-[node name="Download2_png(2)" type="Sprite2D" parent="." unique_id=2085132682]
+[node name="Pistol_Sprite" type="Sprite2D" parent="." unique_id=2085132682]
 position = Vector2(192, 6.9999995)
 scale = Vector2(0.4375, 0.4375)
 texture = ExtResource("5_ss5un")
@@ -179,3 +180,9 @@ offset_top = -13.0
 offset_right = 59.0
 offset_bottom = 10.0
 text = "10/30"
+
+[node name="m4a1_rifle_sprite" type="Sprite2D" parent="." unique_id=1776526028]
+position = Vector2(184.00002, 8)
+rotation = -0.56688166
+scale = Vector2(0.32957938, 0.32957938)
+texture = ExtResource("14_q3xov")

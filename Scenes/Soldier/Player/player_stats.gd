@@ -21,6 +21,9 @@ extends Node2D
 @onready var damage_label: Label = $Damage_Node/Damage_Label
 #WEAPON HIT CHANCE
 @onready var hit_chance_label: Label = $Hit_Chance_Node/Hit_Chance_Label
+#WEAPON SPRITE
+@onready var pistol_sprite: Sprite2D = $Pistol_Sprite
+@onready var m4a1_rifle_sprite: Sprite2D = $m4a1_rifle_sprite
 
 func _ready() -> void:
 	Signals.set_selected_player.connect(_on_selected_player)
@@ -42,7 +45,17 @@ func _on_selected_player(player: Player):
 	fire_rate_label.text = str(int(player.current_weapon.weapon_stats.fire_rate.get_value()), "rps")
 	damage_label.text = str(player.current_weapon.weapon_stats.damage.get_value())
 	hit_chance_label.text = str(player.current_weapon.weapon_stats.hit_chance.get_value(), "%")
+	set_weapon_sprite(player.current_weapon)
 	show_stats()
+
+
+func set_weapon_sprite(weapon: Weapon):
+	if weapon is Pistol:
+		pistol_sprite.visible = true
+		m4a1_rifle_sprite.visible = false
+	elif weapon is m4a1Rifle:
+		m4a1_rifle_sprite.visible = true
+		pistol_sprite.visible = false
 
 func _on_deselect_player():
 	hide_stats()

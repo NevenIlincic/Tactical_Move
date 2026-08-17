@@ -58,11 +58,12 @@ func _ready() -> void:
 	connect_to_signals()
 	player_path.append(global_position)
 	soldier_id = str(Time.get_ticks_usec(), "_", randi())
-	
 	if not weapons.is_empty():
 		current_weapon = weapons[0]
 		current_weapon.set_weapon_owner(self)
-	
+	set_player_sprite()
+
+
 func _physics_process(delta: float) -> void:
 	vision_polygon.update_vision()
 
@@ -294,3 +295,4 @@ func _on_enemy_lost_extra(enemy: Soldier): pass
 func set_point_to_look(point): pass
 func do_while_action_extra(): pass
 func _pre_move_actions(): pass
+func set_player_sprite(): pass
