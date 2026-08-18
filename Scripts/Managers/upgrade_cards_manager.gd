@@ -1,0 +1,84 @@
+extends Node
+
+const UPGRADE_CARD = preload("uid://c60uemqf7gdf2")
+
+const UPGRADE_ICONS: Dictionary = {
+	UpgradeData.UpgradeType.SPEED: preload("uid://dou87mqtbaj0r"),
+	UpgradeData.UpgradeType.MAX_AMMO: preload("uid://c8g306bg7ys0b"),
+	UpgradeData.UpgradeType.HIT_CHANCE: preload("uid://baqatp3dbiqcp"),
+	UpgradeData.UpgradeType.FIRE_RATE: preload("uid://dau8h2jtb2w5a"),
+	UpgradeData.UpgradeType.REACTION_TIME: preload("uid://c4enkpr2e4535"),
+	UpgradeData.UpgradeType.RELOAD_TIME: preload("uid://dyfgry1avttjy"),
+	UpgradeData.UpgradeType.WEAPON_DAMAGE: preload("uid://bl8n0a5b8nowm"),
+	UpgradeData.UpgradeType.TRAVEL_DISTANCE: preload("uid://d1hablc0nksx6")
+	
+}
+
+var available_permanent_upgrades: Dictionary = {} #{upgrade_id: UpgradeCard}
+
+func create_upgrade_card():
+	var all_upgrade_types = UpgradeData.UpgradeType.values()
+	var random_selected_type: UpgradeData.UpgradeType = all_upgrade_types.pick_random()
+	var upgrade_data: UpgradeData
+	var upgrade_reason: UpgradeData.UpgradeReason = UpgradeData.UpgradeReason.PERMANENT
+	var bonus_value: float = 0.0
+	
+	var all_modifiers_type = StatModifier.Type.values()
+	var random_modifier_type: StatModifier.Type = all_modifiers_type.pick_random()
+	
+	match random_selected_type:
+		UpgradeData.UpgradeType.SPEED:
+			if random_modifier_type == StatModifier.Type.FLAT:
+				bonus_value = randf_range(1.0, 20.0)
+			else:
+				bonus_value = randf_range(0.01, 0.1)
+		UpgradeData.UpgradeType.MAX_AMMO:
+			if random_modifier_type == StatModifier.Type.FLAT:
+				bonus_value = round(randf_range(1.0, 5.0))
+			else:
+				bonus_value = randf_range(0.05, 0.2)
+		UpgradeData.UpgradeType.HIT_CHANCE:
+			if random_modifier_type == StatModifier.Type.FLAT:
+				bonus_value = randf_range(0.1, 2.0)
+			else:
+				bonus_value = randf_range(0.03, 0.07)
+		UpgradeData.UpgradeType.FIRE_RATE:
+			if random_modifier_type == StatModifier.Type.FLAT:
+				bonus_value = randf_range(0.05, 0.2)
+			else:
+				bonus_value = randf_range(0.01, 0.15)
+		UpgradeData.UpgradeType.REACTION_TIME:
+			if random_modifier_type == StatModifier.Type.FLAT:
+				bonus_value = randf_range(-0.03, -0.1)
+			else:
+				bonus_value = randf_range(-0.05, -0.2)
+		UpgradeData.UpgradeType.RELOAD_TIME:
+			if random_modifier_type == StatModifier.Type.FLAT:
+				bonus_value = randf_range(-0.1, -0.3)
+			else:
+				bonus_value = randf_range(-0.05, -0.1)
+		UpgradeData.UpgradeType.WEAPON_DAMAGE:
+			if random_modifier_type == StatModifier.Type.FLAT:
+				bonus_value = randf_range(1.0, 5.0)
+			else:
+				bonus_value = randf_range(0.05, 0.12)
+		UpgradeData.UpgradeType.TRAVEL_DISTANCE:
+			if random_modifier_type == StatModifier.Type.FLAT:
+				bonus_value = randf_range(10.0, 35.0)
+			else:
+				bonus_value = randf_range(0.02, 0.15)
+	
+	bonus_value = snapped(bonus_value, 0.01)
+	
+	upgrade_data = UpgradeData.new(
+			bonus_value, random_selected_type, random_modifier_type, upgrade_reason
+		)
+	
+	var new_upgrade_card: UpgradeCard = UPGRADE_CARD.instantiate()
+	new_upgrade_card.unique_id = str(Time.get_ticks_usec(), "_", randi())
+	new_upgrade_card.upgrade_data = upgrade_data
+	new_upgrade_card.icon_texture = UPGRADE_ICONS[random_selected_type]
+	new_upgrade_card.is_applied = false
+	
+	upgrade_data.set_upgrade_card(new_upgrade_card)
+	available_permanent_upgrades[new_upgrade_card.unique_id] = new_upgrade_card

@@ -11,7 +11,7 @@ extends Resource
 			weapon_stats.damage = Stat.new(weapon_stats.damage.base_value)
 			weapon_stats.fire_rate = Stat.new(weapon_stats.fire_rate.base_value)
 			weapon_stats.hit_chance = Stat.new(weapon_stats.hit_chance.base_value)
-
+			weapon_stats.reload_time = Stat.new(weapon_stats.reload_time.base_value)
 var weapon_owner: Soldier
 var weapon_state: WeaponState
 var enemy_to_shoot: Soldier
@@ -34,5 +34,5 @@ func change_enemy_to_shoot(enemy: Soldier):
 func update(delta: float):
 	weapon_state.update(delta)
 
-func get_bullet_spawn_point(soldier: Soldier):
+func get_bullet_spawn_point(_soldier: Soldier):
 	pass

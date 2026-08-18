@@ -56,7 +56,7 @@ func _pre_move_actions():
 	var path_to_target = best_move["path_to_target"]
 	#COVER
 	var path_to_closest_cover = best_move["path_to_closest_cover"]
-	var distance_to_closest_cover: float = best_move["distance_to_closest_cover"]
+	var _distance_to_closest_cover: float = best_move["distance_to_closest_cover"]
 	var cover_point: Marker2D = best_move["closest_cover"]
 	
 	#print(self, " ", best_move)
@@ -92,7 +92,7 @@ func check_enemy_looking_at():
 	else:
 		look_at(point_to_look)
 
-func _on_enemy_lost_extra(enemy: Soldier) -> void:
+func _on_enemy_lost_extra(_enemy: Soldier) -> void:
 	pass
 	#print("OVDE")
 	#hide_enemy()
@@ -106,7 +106,7 @@ func evaluate_best_move():
 	var distance_to_closest_cover = path_data["minimum_length"] 
 	var cover_point: Marker2D = path_data["closest_cover"]
 	
-	var alive_players: Dictionary = level.get_alive_players()
+	alive_players = level.get_alive_players()
 	
 	var best_move: Dictionary = {}
 	var best_score: float = -9999.0
@@ -144,7 +144,7 @@ func evaluate_best_move():
 		else:
 			defense_score += clampf(500.0/ (distance_to_player*(player_allies_nearby+1)), 0.0, 3.0)
 		
-		print(self, " ", attack_score, " ", defense_score)
+		#print(self, " ", attack_score, " ", defense_score)
 		if defense_score > attack_score:
 			intent_for_player = Intent.DEFEND
 		

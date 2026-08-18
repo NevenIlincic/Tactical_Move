@@ -1,5 +1,6 @@
 class_name Player extends Soldier
 
+@export var player_name: String
 var starting_tile: Vector2i
 var target_tile: Vector2i
 var is_selected: bool = false
@@ -18,6 +19,7 @@ var allies_nearby: Dictionary = {} #{PLayer: true}
 @onready var player_sprite: Sprite2D = $Player_Sprite
 @onready var move_to_position_marker: Sprite2D = $Move_To_Position_Marker
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
+@export var player_avatar: CompressedTexture2D
 
 ####PLAYER MOVES
 @onready var look_at_position_sprite: Sprite2D = $Look_At_Position_Sprite
@@ -44,6 +46,17 @@ func _ready() -> void:
 	#MOVE TO POSITION MARKER
 	animation_player.play("Position_Marker_Rotation")
 	move_to_position_marker.global_position = global_position	
+
+
+func set_player_sprite():
+	const PLAYER_M_4A_1_RIFLE = preload("uid://q7sw1jdmg3ev")
+	const PLAYER_SOLDIER_PISTOL = preload("uid://xobgolcljc7w")
+	
+	if current_weapon is Pistol:
+		player_sprite.texture = PLAYER_SOLDIER_PISTOL
+	elif current_weapon is m4a1Rifle:
+		player_sprite.texture = PLAYER_M_4A_1_RIFLE
+	
 
 func set_up_lines_data():
 	player_path_line.add_point(global_position)

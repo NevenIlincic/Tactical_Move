@@ -14,7 +14,7 @@ func connect_to_signals():
 func check_is_everyone_hidden():
 	return last_frame_visible_enemies.is_empty() and current_frame_visible_enemies.is_empty()
 
-func handle_enemy_visibility(delta: float):
+func handle_enemy_visibility(_delta: float):
 	_check_is_enemy_entered_vision()
 	_check_is_enemy_exited_vision()
 	current_frame_visible_enemies.clear()
@@ -41,7 +41,7 @@ func _check_is_enemy_entered_vision():
 
 func _check_is_enemy_exited_vision():
 	var enemies_to_remove = []
-	var break_outer_loop: bool = false
+	#var break_outer_loop: bool = false
 
 	for enemy in last_frame_visible_enemies:
 		var players_to_remove_from_enemy = []
