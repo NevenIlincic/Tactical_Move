@@ -17,15 +17,24 @@ var current_state: State
 
 var cover_points: Array
 
+#MENU
+@onready var upgrade_menu: UpgradeMenu = $CanvasLayer/UpgradeMenu
+
+#FOR CONFIRMATION DIALOG
+@onready var confirmation_dialog: ConfirmDialog = $CanvasLayer/ConfirmationDialog
+var current_confirm_callback: Callable
+
+
 func _ready() -> void:
 	for player in get_tree().get_nodes_in_group("Player"):
 		if player is Player:
 			players[player] = true
 	cover_points = get_tree().get_nodes_in_group("a_star_point")
 
-	setup_grid()
+	#setup_grid()
 	connect_to_signals()
-	current_state = PlayerSetMoveState.new([self])
+	current_state = PreparationState.new([self])
+	AudioManager.set_current_level(self)
 
 func _physics_process(delta: float) -> void:
 	VisionManager.handle_enemy_visibility(delta)
@@ -58,8 +67,9 @@ func set_occupied_tiles_list():
 		list_occupied_tiles.append(starting_tile)
 		
 func connect_to_signals():
-	pass
-
+	Signals.open_upgrade_removal_confirmation_dialog.connect(_on_confirmation_dialog_opened)
+	confirmation_dialog.action_confirmed.connect(_on_action_confirmed)
+	confirmation_dialog.action_canceled.connect(_on_action_canceled)
 func setup_grid():
 	grid.region = tile_map.get_used_rect()
 	grid.cell_size = tile_map.tile_set.tile_size
@@ -102,3 +112,21 @@ func check_is_tile_in_boundsv(tile: Vector2i):
 	return grid.is_in_boundsv(tile) 
 func check_is_tile_solid(tile: Vector2i):
 	return grid.is_point_solid(tile)
+
+
+#CONFIRMATION DIALOG ACTIONS
+func _on_confirmation_dialog_opened(upgrade_card: UpgradeCard):
+	var dialog_text: String = "Are you sure you want to permanently remove this upgrade?"
+	confirmation_dialog.set_dialog_label_text(dialog_text)
+	confirmation_dialog.visible = true
+	current_confirm_callback = func():
+		Signals.permanent_upgrade_removed.emit(upgrade_card)
+		
+func _on_action_confirmed():
+	if current_confirm_callback.is_valid():
+		current_confirm_callback.call()
+		current_confirm_callback = Callable()
+	confirmation_dialog.visible = false
+func _on_action_canceled():
+	current_confirm_callback = Callable()
+	confirmation_dialog.visible = false

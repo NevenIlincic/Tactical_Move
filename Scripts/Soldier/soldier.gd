@@ -4,6 +4,9 @@ class_name Soldier extends Node2D
 @onready var vision_polygon: SoldierVision = $Vision_Polygon
 @onready var hitbox_collision_shape: CollisionShape2D = $Hitbox/Hitbox_Collision_Shape
 @onready var bullet_line: SoldierBulletLine = $Bullet_Line
+#BULLET SPAWN POINTS
+@onready var m4a1_rifle_bullet_spawn_point: Marker2D = $m4a1_rifle_bullet_spawn_point
+@onready var pistol_bullet_spawn_point: Marker2D = $pistol_bullet_spawn_point
 
 var is_in_active_state: bool = false
 var is_killed: bool = false
@@ -34,7 +37,7 @@ var soldier_id: String
 var engagement_strategy: EngagementStrategy
 #UPGRADE/PERKS
 var temporary_upgrades: Array[UpgradeData] = []
-var permanent_upgrades: Array[UpgradeData] = []
+var permanent_upgrades: Dictionary = {} #{unique_id: UpgradeCard}
 
 #LAYOUT
 #@export var weapons: Array[Weapon]
@@ -55,12 +58,13 @@ func _ready() -> void:
 	connect_to_signals()
 	player_path.append(global_position)
 	soldier_id = str(Time.get_ticks_usec(), "_", randi())
-	
 	if not weapons.is_empty():
 		current_weapon = weapons[0]
 		current_weapon.set_weapon_owner(self)
-	
-func _physics_process(delta: float) -> void:
+	set_player_sprite()
+
+
+func _physics_process(_delta: float) -> void:
 	vision_polygon.update_vision()
 
 func connect_to_signals():
@@ -68,7 +72,7 @@ func connect_to_signals():
 	Signals.show_enemy.connect(_on_enemy_seen)
 	Signals.hide_enemy.connect(_on_enemy_lost)
 
-func _on_enemy_soldier_killed(enemy_killed: Soldier, killed_by: Soldier):
+func _on_enemy_soldier_killed(enemy_killed: Soldier, _killed_by: Soldier):
 	if enemies_in_sight.has(enemy_killed.soldier_id):
 		enemies_in_sight.erase(enemy_killed.soldier_id)
 	if soldier_id != enemy_killed.soldier_id:
@@ -154,7 +158,7 @@ func _on_enemy_seen(enemy: Soldier):
 		enemies_in_sight[enemy.soldier_id] = enemy
 		enemy.when_spotted()
 	on_engagement_action(enemy)
-func _on_enemy_seen_extra(enemy: Soldier):
+func _on_enemy_seen_extra(_enemy: Soldier):
 	pass
 
 func on_engagement_action(enemy: Soldier):
@@ -291,3 +295,4 @@ func _on_enemy_lost_extra(enemy: Soldier): pass
 func set_point_to_look(point): pass
 func do_while_action_extra(): pass
 func _pre_move_actions(): pass
+func set_player_sprite(): pass

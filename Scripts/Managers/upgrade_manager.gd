@@ -1,6 +1,49 @@
 extends Node2D
 
-#Applied when player is moving
+func _get_player_stat_to_upgrade(upgrade_type: UpgradeData.UpgradeType, player: Player) -> Stat:
+	var stat_to_apply_on: Stat
+	match upgrade_type:
+		UpgradeData.UpgradeType.SPEED:
+			stat_to_apply_on = player.soldier_stats.speed
+		UpgradeData.UpgradeType.MAX_AMMO:
+			stat_to_apply_on = player.current_weapon.weapon_stats.max_ammo_capacity
+		UpgradeData.UpgradeType.HIT_CHANCE:
+			stat_to_apply_on = player.current_weapon.weapon_stats.hit_chance
+		UpgradeData.UpgradeType.FIRE_RATE:
+			stat_to_apply_on = player.current_weapon.weapon_stats.fire_rate
+		UpgradeData.UpgradeType.REACTION_TIME:
+			stat_to_apply_on = player.soldier_stats.reaction_time
+		UpgradeData.UpgradeType.RELOAD_TIME:
+			stat_to_apply_on = player.current_weapon.weapon_stats.reload_time
+		UpgradeData.UpgradeType.WEAPON_DAMAGE:
+			stat_to_apply_on = player.current_weapon.weapon_stats.damage
+		UpgradeData.UpgradeType.TRAVEL_DISTANCE:
+			stat_to_apply_on = player.soldier_stats.max_travel_distance
+	
+	return stat_to_apply_on
+
+#PERMANENT PERKS
+func apply_permanent_perk(upgrade_card: UpgradeCard, player: Player):
+	var upgrade_data: UpgradeData = upgrade_card.upgrade_data
+	var stat_to_apply_on: Stat = _get_player_stat_to_upgrade(upgrade_data.upgrade_type, player)
+	var stat_modifier: StatModifier = StatModifier.new(
+		upgrade_data.bonus_value, upgrade_data.modifier_type, upgrade_data
+	)
+	upgrade_data.set_applied_on_stat(stat_to_apply_on)
+	stat_to_apply_on.add_modifier(stat_modifier)
+	player.permanent_upgrades[upgrade_card.unique_id] = upgrade_card
+	
+	if UpgradeCardsManager.available_permanent_upgrades.has(upgrade_card.unique_id):
+		UpgradeCardsManager.available_permanent_upgrades.erase(upgrade_card.unique_id)
+
+func remove_permanent_perk(upgrade_card: UpgradeCard, player: Player):
+	var upgrade_data: UpgradeData = upgrade_card.upgrade_data
+	remove_perk(upgrade_data)
+	if player.permanent_upgrades.has(upgrade_card.unique_id):
+		player.permanent_upgrades.erase(upgrade_card.unique_id)
+		upgrade_card.queue_free()
+
+#Applied when player is moving	
 func apply_movement_penalty_perk(player: Soldier):
 	if len(player.player_path) > 1: #If player is moving
 		var hit_chance_perk: UpgradeData = UpgradeData.new(
@@ -20,7 +63,8 @@ func remove_temporary_perks(player: Soldier):
 		perks_to_remove.append(temporary_perk)
 	for perk in perks_to_remove:
 		player.temporary_upgrades.erase(perk)
-		
+
+
 func remove_perk(perk: UpgradeData):
 	if perk.applied_on_stat:
 		perk.applied_on_stat.remove_modifiers_from_source(perk)
@@ -38,13 +82,13 @@ func remove_moving_penalty(player: Soldier):
 #Triggers when player heals above 30% HP
 func remove_low_hp_penalty(player: Soldier):
 	var perks_to_remove: Array[UpgradeData] = []
-	for perk in player.permanent_upgrades:
+	for perk in player.temporary_upgrades:
 		if perk.upgrade_reason == UpgradeData.UpgradeReason.LOW_HP:
 			perks_to_remove.append(perk)
 			remove_perk(perk)
 	
 	for perk in perks_to_remove:
-		player.permanent_upgrades.erase(perk)
+		player.temporary_upgrades.erase(perk)
 
 #Triggers when player gets below 30% HP (SPEED -15%, HIT_CHANCE -25%, REACTION_TIME +0.5s, RELOAD_TIME: +20%)
 func apply_low_hp_penalty(player: Soldier):
@@ -85,7 +129,7 @@ func apply_low_hp_penalty(player: Soldier):
 	player.current_weapon.weapon_stats.reload_time.add_modifier(longer_reload_time_mod)
 	longer_reload_time_perk.set_applied_on_stat(player.current_weapon.weapon_stats.reload_time)
 	
-	player.permanent_upgrades.append(lower_speed_perk)
-	player.permanent_upgrades.append(lower_hit_chance_perk)
-	player.permanent_upgrades.append(longer_reaction_time_perk)
-	player.permanent_upgrades.append(longer_reload_time_perk)
+	player.temporary_upgrades.append(lower_speed_perk)
+	player.temporary_upgrades.append(lower_hit_chance_perk)
+	player.temporary_upgrades.append(longer_reaction_time_perk)
+	player.temporary_upgrades.append(longer_reload_time_perk)

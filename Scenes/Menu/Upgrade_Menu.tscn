@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://bmbr4kpa58muf"]
+
+[ext_resource type="Script" uid="uid://bqnh7y3dy871f" path="res://Scenes/Menu/upgrade_menu.gd" id="1_g8cg2"]
+[ext_resource type="PackedScene" uid="uid://q6uf7pve5vqm" path="res://Scenes/Dialog/Confirmation_Dialog.tscn" id="2_ycpti"]
+
+[node name="UpgradeMenu" type="Node2D" unique_id=90615393]
+script = ExtResource("1_g8cg2")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=966606452]
+offset_left = -88.0
+offset_top = -56.0
+offset_right = 1224.0
+offset_bottom = 744.0
+mouse_filter = 2
+color = Color(0.022979852, 0.022979895, 0.022979876, 0.3372549)
+
+[node name="Grid_Container_Available" type="GridContainer" parent="." unique_id=2114457193]
+offset_left = 64.0
+offset_top = 64.0
+offset_right = 640.0
+offset_bottom = 200.0
+mouse_filter = 2
+theme_override_constants/h_separation = 15
+theme_override_constants/v_separation = 150
+columns = 6
+
+[node name="Grid_Container_Applied" type="GridContainer" parent="." unique_id=1032657891]
+z_index = 1
+offset_left = 576.0
+offset_top = 504.0
+offset_right = 1152.0
+offset_bottom = 640.0
+columns = 6
+
+[node name="ConfirmationDialog" parent="." unique_id=2055501273 instance=ExtResource("2_ycpti")]
+visible = false

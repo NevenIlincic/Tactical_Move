@@ -70,3 +70,9 @@ width_curve = SubResource("Curve_cmdj1")
 default_color = Color(1, 1, 0.43137255, 0.8039216)
 gradient = SubResource("Gradient_cgwcb")
 script = ExtResource("5_cmdj1")
+
+[node name="m4a1_rifle_bullet_spawn_point" type="Marker2D" parent="." unique_id=1893409635]
+position = Vector2(49, -8)
+
+[node name="pistol_bullet_spawn_point" type="Marker2D" parent="." unique_id=1878688254]
+position = Vector2(29, -7)

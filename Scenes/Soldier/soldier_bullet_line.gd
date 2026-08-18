@@ -6,15 +6,11 @@ func draw_bullet(starting_position: Vector2, bullet_hit_point: Vector2):
 	var start_points = PackedVector2Array([starting_position, starting_position])
 	var end_points = PackedVector2Array([starting_position, bullet_hit_point])
 	
-	var audio: AudioStreamPlayer2D = AudioStreamPlayer2D.new()
-	audio.stream = M_4A_1_RIFLE_SOUND
-	add_child(audio)
-	audio.play()
+	AudioManager.play_gun_shoot_sound()
 	points = start_points
 	var tween: Tween = create_tween()
 	
 	tween.tween_property(self, "points", end_points, 0.05)
-	
 	tween.tween_callback(func(): points = start_points)
 
-	audio.finished.connect(func(): audio.queue_free())
+	#audio.finished.connect(func(): audio.queue_free())

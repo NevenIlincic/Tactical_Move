@@ -1,6 +1,5 @@
 extends Node
 
-
 signal move_player(path_tiles: Array[Vector2i], tile_map: TileMapLayer)
 signal set_selected_player(selected_player: Player)
 signal deselect_player(player: Player)
@@ -30,3 +29,16 @@ signal report_player_seen(player: Player)
 signal shoot_player(enemy: Enemy, player:Player)
 signal hide_player(enemy: Enemy, player: Player)
 signal player_killed(enemy_killed: Player, killed_by: Enemy)
+
+signal action_started()
+
+
+#ACTIONS
+signal open_upgrade_confirmation_dialog(upgrade_card: UpgradeCard)
+signal open_upgrade_removal_confirmation_dialog(upgrade_card: UpgradeCard)
+#UPGRADES
+signal permanent_upgrade_applied(upgrade_card: UpgradeCard)
+signal permanent_upgrade_removed(upgrade_card: UpgradeCard)
+#STATS
+signal update_ammo_stats_label(player: Player)
+signal update_HP_bar_stats_label(player: Player)

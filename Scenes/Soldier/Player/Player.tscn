@@ -3,9 +3,9 @@
 [ext_resource type="Script" uid="uid://c1ym0y4pbnw4j" path="res://Scripts/Soldier/Player/player.gd" id="1_ft8w5"]
 [ext_resource type="Script" uid="uid://kkaaaj6uvi8u" path="res://Scripts/Line/player_path_line.gd" id="2_4wape"]
 [ext_resource type="Script" uid="uid://c386pr8tx5qep" path="res://Scripts/Soldier/soldier_vision.gd" id="4_t26db"]
-[ext_resource type="Texture2D" uid="uid://bdsxppa5xa3vi" path="res://Sprites/Player/Player_2.png" id="4_tk11s"]
 [ext_resource type="Texture2D" uid="uid://cp3f8t70d5twp" path="res://icon.svg" id="4_ude3g"]
 [ext_resource type="Texture2D" uid="uid://uwcsyrtrt75l" path="res://Sprites/Path_Line/New Piskel-1.png - 2026-08-04T161338.290.png" id="5_jmcll"]
+[ext_resource type="Texture2D" uid="uid://xobgolcljc7w" path="res://Sprites/Player/Player_Soldier_Pistol.png" id="5_tk11s"]
 [ext_resource type="Script" uid="uid://b260cldj7kekv" path="res://Scripts/Line/player_look_at_line.gd" id="7_t26db"]
 [ext_resource type="Texture2D" uid="uid://bldh4qpfu1l23" path="res://Sprites/Player/look_at_position.png" id="7_x56g5"]
 [ext_resource type="Texture2D" uid="uid://cynm5bschf8o1" path="res://Sprites/Player/move_to_position_marker.png" id="8_0eouq"]
@@ -94,7 +94,7 @@ z_index = 1
 texture_repeat = 1
 position = Vector2(7.6293945e-06, -0.46153474)
 scale = Vector2(0.1, 0.1)
-texture = ExtResource("4_tk11s")
+texture = ExtResource("5_tk11s")
 offset = Vector2(-0.00030048078, 118.15355)
 
 [node name="Selection_Area" type="Area2D" parent="." unique_id=2041313350]
@@ -106,7 +106,7 @@ shape = SubResource("RectangleShape2D_06txj")
 clip_children = 2
 material = SubResource("CanvasItemMaterial_rw7ms")
 use_parent_material = true
-color = Color(0.8156863, 0.9843137, 0.49411765, 0.28627452)
+color = Color(1.59, 1.912, 0.983, 0.286)
 polygon = PackedVector2Array(0, 0, -256, -256, 256, -256)
 script = ExtResource("4_t26db")
 max_range = 1000.0
@@ -164,6 +164,14 @@ visible = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ally_Detection_Area" unique_id=1560835526]
 position = Vector2(0, -4)
 shape = SubResource("RectangleShape2D_jjc5n")
+
+[node name="m4a1_rifle_bullet_spawn_point" type="Marker2D" parent="." unique_id=1798696889]
+position = Vector2(49, -8)
+
+[node name="pistol_bullet_spawn_point" type="Marker2D" parent="." unique_id=2000225844]
+position = Vector2(29, -7)
+
+[node name="Player_Avatar" type="Sprite2D" parent="." unique_id=824355655]
 
 [connection signal="input_event" from="Selection_Area" to="." method="_on_selection_area_input_event"]
 [connection signal="body_entered" from="Ally_Detection_Area" to="." method="_on_ally_detection_area_body_entered"]

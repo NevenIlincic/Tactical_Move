@@ -1,0 +1,67 @@
+[gd_scene format=3 uid="uid://q6uf7pve5vqm"]
+
+[ext_resource type="Script" uid="uid://c4tpuks1o424b" path="res://Scenes/Dialog/confirmation_dialog.gd" id="1_pwcam"]
+[ext_resource type="Texture2D" uid="uid://cyexu3fm2aq3s" path="res://Sprites/HUD/background.png" id="1_xjf6g"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xjf6g"]
+bg_color = Color(0.40392157, 0.19607843, 0.09411765, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="ConfirmationDialog" type="Node2D" unique_id=2055501273]
+script = ExtResource("1_pwcam")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1951369022]
+offset_left = -112.0
+offset_top = -80.0
+offset_right = 1280.0
+offset_bottom = 704.0
+mouse_force_pass_scroll_events = false
+color = Color(1, 1, 1, 0)
+
+[node name="Panel" type="Panel" parent="." unique_id=896042710]
+offset_left = 248.0
+offset_top = 184.0
+offset_right = 904.0
+offset_bottom = 392.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_xjf6g")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=818268294]
+offset_left = 256.0
+offset_top = 192.0
+offset_right = 896.0
+offset_bottom = 384.0
+texture = ExtResource("1_xjf6g")
+
+[node name="Dialog_Text_Label" type="Label" parent="." unique_id=1840889244]
+offset_left = 256.0
+offset_top = 192.0
+offset_right = 896.0
+offset_bottom = 384.0
+theme_override_font_sizes/font_size = 32
+text = "Are you sure you want to do this action?"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Yes_Button" type="Button" parent="." unique_id=547641848]
+offset_left = 448.0
+offset_top = 320.0
+offset_right = 530.0
+offset_bottom = 390.0
+theme_override_font_sizes/font_size = 48
+text = "YES"
+flat = true
+
+[node name="No_Button" type="Button" parent="." unique_id=413612602]
+offset_left = 640.0
+offset_top = 320.0
+offset_right = 702.0
+offset_bottom = 390.0
+theme_override_font_sizes/font_size = 48
+text = "NO"
+flat = true
+
+[connection signal="pressed" from="Yes_Button" to="." method="_on_yes_button_pressed"]
+[connection signal="pressed" from="No_Button" to="." method="_on_no_button_pressed"]
