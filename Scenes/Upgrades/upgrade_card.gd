@@ -38,7 +38,7 @@ func _on_gui_input(event: InputEvent) -> void:
 			if not is_applied:
 				Signals.open_upgrade_confirmation_dialog.emit(self)
 			else:
-				Signals.permanent_upgrade_removed.emit(self)
+				Signals.open_upgrade_removal_confirmation_dialog.emit(self)
 
 
 func _on_mouse_entered() -> void:

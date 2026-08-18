@@ -35,6 +35,7 @@ signal action_started()
 
 #ACTIONS
 signal open_upgrade_confirmation_dialog(upgrade_card: UpgradeCard)
+signal open_upgrade_removal_confirmation_dialog(upgrade_card: UpgradeCard)
 #UPGRADES
 signal permanent_upgrade_applied(upgrade_card: UpgradeCard)
 signal permanent_upgrade_removed(upgrade_card: UpgradeCard)

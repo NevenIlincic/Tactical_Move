@@ -27,6 +27,7 @@
 [ext_resource type="Texture2D" uid="uid://5dn5fh731jps" path="res://Sprites/Player/Avatars/male_soldier_4.png" id="25_q2r4x"]
 [ext_resource type="PackedScene" uid="uid://bmbr4kpa58muf" path="res://Scenes/Menu/Upgrade_Menu.tscn" id="26_3y4ie"]
 [ext_resource type="PackedScene" uid="uid://bsv7rv63cgyf3" path="res://Scenes/Map_Assets/Cars/White_Car.tscn" id="28_3y4ie"]
+[ext_resource type="PackedScene" uid="uid://q6uf7pve5vqm" path="res://Scenes/Dialog/Confirmation_Dialog.tscn" id="29_3u3yd"]
 [ext_resource type="PackedScene" uid="uid://c0vgcvlc1hb3x" path="res://Scenes/Map_Assets/Cars/Red_Car.tscn" id="29_l3xug"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_10mtb"]
@@ -293,7 +294,6 @@ weapon_stats = ExtResource("13_tq75k")
 metadata/_custom_type_script = "uid://bmr38t2grjqqv"
 
 [node name="Node2D" type="Node2D" unique_id=1609049363 groups=["Level"]]
-position = Vector2(8, 24)
 script = ExtResource("1_4ms0o")
 
 [node name="TileMap" type="TileMapLayer" parent="." unique_id=1180536432]
@@ -449,6 +449,9 @@ script = ExtResource("24_7tbrw")
 [node name="UpgradeMenu" parent="CanvasLayer" unique_id=90615393 instance=ExtResource("26_3y4ie")]
 visible = false
 position = Vector2(-16, -8)
+
+[node name="ConfirmationDialog" parent="CanvasLayer" unique_id=2055501273 instance=ExtResource("29_3u3yd")]
+visible = false
 
 [node name="PlayerStats" parent="CanvasLayer" unique_id=882045817 instance=ExtResource("23_nfmrh")]
 offset_top = 584.0
