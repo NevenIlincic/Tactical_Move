@@ -26,4 +26,5 @@ func select_player(new_selected_player: Player):
 	deselect_player()
 	selected_player = new_selected_player
 	selected_player.player_sprite.modulate.a = 0.5
-	player_selection_changed.emit(old_player, selected_player)
+	if old_player:
+		player_selection_changed.emit(old_player, selected_player)

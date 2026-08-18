@@ -22,8 +22,13 @@ func shoot_target():
 	if check_is_target_hit():
 		if current_weapon.weapon_owner:
 			current_weapon.enemy_to_shoot.when_been_shoot_at(current_weapon.weapon_owner)
+		if current_weapon.enemy_to_shoot is Player:
+			Signals.update_HP_bar_stats_label.emit(current_weapon.enemy_to_shoot)
 		if current_weapon.enemy_to_shoot.soldier_stats.HP.base_value <= 0.0:
 			on_target_killed(current_weapon.enemy_to_shoot, current_weapon.weapon_owner)
+		
+	if current_weapon.weapon_owner is Player:
+		Signals.update_ammo_stats_label.emit(current_weapon.weapon_owner)
 func check_can_shoot_target():
 	return current_weapon.enemy_to_shoot and not current_weapon.enemy_to_shoot.is_killed
 

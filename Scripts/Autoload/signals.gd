@@ -33,4 +33,9 @@ signal player_killed(enemy_killed: Player, killed_by: Enemy)
 
 signal action_started()
 
+#UPGRADES
 signal permanent_upgrade_applied(upgrade_card: UpgradeCard)
+signal permanent_upgrade_removed(upgrade_card: UpgradeCard)
+#STATS
+signal update_ammo_stats_label(player: Player)
+signal update_HP_bar_stats_label(player: Player)

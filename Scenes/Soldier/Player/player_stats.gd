@@ -34,10 +34,19 @@ func _ready() -> void:
 	Signals.deselect_player.connect(_on_deselect_player)
 	Signals.action_started.connect(_on_action_started)
 	Signals.permanent_upgrade_applied.connect(_on_permanent_upgrade_applied)
+	Signals.permanent_upgrade_removed.connect(_on_permanent_upgrade_removed)
+	Signals.update_ammo_stats_label.connect(_on_player_shoot)
+	Signals.update_HP_bar_stats_label.connect(_on_player_hit)
 	hide_stats()
 	
 
 func _on_selected_player(player: Player):
+	update_stats_labels(player)
+	set_weapon_sprite(player.current_weapon)
+	set_applied_upgrades(player)
+	show_stats()
+
+func update_stats_labels(player: Player):
 	player_avatar.texture = player.player_avatar
 	player_name_label.text = player.player_name
 	ammo_label.text = str(int(player.current_weapon.weapon_stats.current_ammo.get_value()), "/", int(player.current_weapon.weapon_stats.max_ammo_capacity.get_value()))
@@ -50,10 +59,6 @@ func _on_selected_player(player: Player):
 	fire_rate_label.text = str(player.current_weapon.weapon_stats.fire_rate.get_value(), "rps")
 	damage_label.text = str(player.current_weapon.weapon_stats.damage.get_value())
 	hit_chance_label.text = str(player.current_weapon.weapon_stats.hit_chance.get_value(), "%")
-	set_weapon_sprite(player.current_weapon)
-	set_applied_upgrades(player)
-	show_stats()
-
 
 func set_weapon_sprite(weapon: Weapon):
 	if weapon is Pistol:
@@ -77,6 +82,7 @@ func show_stats():
 
 func _on_permanent_upgrade_applied(upgade_card: UpgradeCard):
 	grid_container_applied_upgrades.add_child(upgade_card)
+	update_stats_labels(PlayerSelectionManager.selected_player)
 
 func set_applied_upgrades(player: Player):
 	for child: UpgradeCard in grid_container_applied_upgrades.get_children():
@@ -84,5 +90,20 @@ func set_applied_upgrades(player: Player):
 	
 	for upgrade_card_id: String in player.permanent_upgrades:
 		var card: UpgradeCard = player.permanent_upgrades[upgrade_card_id]
-		print("OVDE")
 		grid_container_applied_upgrades.add_child(card)
+	
+func _on_permanent_upgrade_removed(upgrade_card: UpgradeCard):
+	if PlayerSelectionManager.selected_player:
+		UpgradeManager.remove_permanent_perk(upgrade_card, PlayerSelectionManager.selected_player)
+		update_stats_labels(PlayerSelectionManager.selected_player)
+
+func _on_player_shoot(player: Player):
+	if player == PlayerSelectionManager.selected_player:
+		ammo_label.text = str(int(player.current_weapon.weapon_stats.current_ammo.get_value()), "/", int(player.current_weapon.weapon_stats.max_ammo_capacity.get_value()))
+
+func _on_player_hit(player: Player):
+	if player == PlayerSelectionManager.selected_player:
+		hp_bar.value = player.soldier_stats.HP.base_value
+		hp_percentage_label.text = str(int(hp_bar.value), "%")
+		if hp_bar.value <= 0.0:
+			hide_stats()

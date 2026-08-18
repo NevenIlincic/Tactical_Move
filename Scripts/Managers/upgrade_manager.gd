@@ -11,7 +11,14 @@ func apply_permanent_perk(upgrade_card: UpgradeCard, player: Player):
 	
 	if UpgradeCardsManager.available_permanent_upgrades.has(upgrade_card.unique_id):
 		UpgradeCardsManager.available_permanent_upgrades.erase(upgrade_card.unique_id)
-	
+
+func remove_permanent_perk(upgrade_card: UpgradeCard, player: Player):
+	var upgrade_data: UpgradeData = upgrade_card.upgrade_data
+	remove_perk(upgrade_data)
+	if player.permanent_upgrades.has(upgrade_card.unique_id):
+		player.permanent_upgrades.erase(upgrade_card.unique_id)
+		upgrade_card.queue_free()
+
 #Applied when player is moving	
 func apply_movement_penalty_perk(player: Soldier):
 	if len(player.player_path) > 1: #If player is moving
@@ -32,7 +39,9 @@ func remove_temporary_perks(player: Soldier):
 		perks_to_remove.append(temporary_perk)
 	for perk in perks_to_remove:
 		player.temporary_upgrades.erase(perk)
-		
+
+
+	
 func remove_perk(perk: UpgradeData):
 	if perk.applied_on_stat:
 		perk.applied_on_stat.remove_modifiers_from_source(perk)
