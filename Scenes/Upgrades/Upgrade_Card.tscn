@@ -69,8 +69,7 @@ script = ExtResource("1_emjen")
 
 [node name="Upgrade_Frame_Sprite" type="Sprite2D" parent="." unique_id=348425672]
 clip_children = 2
-position = Vector2(44, 64)
-scale = Vector2(0.9166667, 1)
+position = Vector2(48.000004, 64)
 texture = ExtResource("2_tam8y")
 
 [node name="ColorRect" type="ColorRect" parent="Upgrade_Frame_Sprite" unique_id=699118356]
@@ -81,14 +80,14 @@ offset_bottom = 52.664978
 rotation = 0.7853982
 
 [node name="Upgrade_Icon" type="Sprite2D" parent="." unique_id=333455746]
-position = Vector2(43.999996, 40)
+position = Vector2(47.999996, 40)
 scale = Vector2(0.24999997, 0.25)
 texture = ExtResource("3_tam8y")
 
 [node name="Upgrade_Value_Label" type="Label" parent="." unique_id=1384556988]
 layout_mode = 0
 offset_top = 88.0
-offset_right = 88.0
+offset_right = 96.0
 offset_bottom = 112.0
 text = "5.0"
 horizontal_alignment = 1

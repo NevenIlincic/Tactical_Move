@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bmbr4kpa58muf"]
 
 [ext_resource type="Script" uid="uid://bqnh7y3dy871f" path="res://Scenes/Menu/upgrade_menu.gd" id="1_g8cg2"]
+[ext_resource type="PackedScene" uid="uid://q6uf7pve5vqm" path="res://Scenes/Dialog/Confirmation_Dialog.tscn" id="2_ycpti"]
 
 [node name="UpgradeMenu" type="Node2D" unique_id=90615393]
 script = ExtResource("1_g8cg2")
@@ -30,3 +31,6 @@ offset_top = 504.0
 offset_right = 1152.0
 offset_bottom = 640.0
 columns = 6
+
+[node name="ConfirmationDialog" parent="." unique_id=2055501273 instance=ExtResource("2_ycpti")]
+visible = false
