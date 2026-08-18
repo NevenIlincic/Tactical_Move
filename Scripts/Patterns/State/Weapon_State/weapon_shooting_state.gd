@@ -38,7 +38,7 @@ func on_target_killed(enemy_killed: Soldier, killed_by: Soldier):
 	killed_by.when_escaped()
 	Signals.enemy_soldier_killed.emit(enemy_killed, killed_by)
 	if killed_by is Player:
-		UpgradeCardsManager.create_upgrade_card(killed_by)
+		UpgradeCardsManager.create_upgrade_card()
 
 func draw_bullet():
 	if current_weapon.weapon_owner and current_weapon.weapon_owner.vision_polygon.bullet_hit_point:

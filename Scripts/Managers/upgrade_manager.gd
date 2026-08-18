@@ -1,12 +1,36 @@
 extends Node2D
 
+func _get_player_stat_to_upgrade(upgrade_type: UpgradeData.UpgradeType, player: Player) -> Stat:
+	var stat_to_apply_on: Stat
+	match upgrade_type:
+		UpgradeData.UpgradeType.SPEED:
+			stat_to_apply_on = player.soldier_stats.speed
+		UpgradeData.UpgradeType.MAX_AMMO:
+			stat_to_apply_on = player.current_weapon.weapon_stats.max_ammo_capacity
+		UpgradeData.UpgradeType.HIT_CHANCE:
+			stat_to_apply_on = player.current_weapon.weapon_stats.hit_chance
+		UpgradeData.UpgradeType.FIRE_RATE:
+			stat_to_apply_on = player.current_weapon.weapon_stats.fire_rate
+		UpgradeData.UpgradeType.REACTION_TIME:
+			stat_to_apply_on = player.soldier_stats.reaction_time
+		UpgradeData.UpgradeType.RELOAD_TIME:
+			stat_to_apply_on = player.current_weapon.weapon_stats.reload_time
+		UpgradeData.UpgradeType.WEAPON_DAMAGE:
+			stat_to_apply_on = player.current_weapon.weapon_stats.damage
+		UpgradeData.UpgradeType.TRAVEL_DISTANCE:
+			stat_to_apply_on = player.soldier_stats.max_travel_distance
+	
+	return stat_to_apply_on
+
 #PERMANENT PERKS
 func apply_permanent_perk(upgrade_card: UpgradeCard, player: Player):
 	var upgrade_data: UpgradeData = upgrade_card.upgrade_data
+	var stat_to_apply_on: Stat = _get_player_stat_to_upgrade(upgrade_data.upgrade_type, player)
 	var stat_modifier: StatModifier = StatModifier.new(
 		upgrade_data.bonus_value, upgrade_data.modifier_type, upgrade_data
 	)
-	upgrade_data.applied_on_stat.add_modifier(stat_modifier)
+	upgrade_data.set_applied_on_stat(stat_to_apply_on)
+	stat_to_apply_on.add_modifier(stat_modifier)
 	player.permanent_upgrades[upgrade_card.unique_id] = upgrade_card
 	
 	if UpgradeCardsManager.available_permanent_upgrades.has(upgrade_card.unique_id):
@@ -41,7 +65,6 @@ func remove_temporary_perks(player: Soldier):
 		player.temporary_upgrades.erase(perk)
 
 
-	
 func remove_perk(perk: UpgradeData):
 	if perk.applied_on_stat:
 		perk.applied_on_stat.remove_modifiers_from_source(perk)

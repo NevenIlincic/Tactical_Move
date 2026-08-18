@@ -34,5 +34,5 @@ func change_enemy_to_shoot(enemy: Soldier):
 func update(delta: float):
 	weapon_state.update(delta)
 
-func get_bullet_spawn_point(soldier: Soldier):
+func get_bullet_spawn_point(_soldier: Soldier):
 	pass
