@@ -25,6 +25,7 @@ func _unhandled_input(event: InputEvent):
 	#var selected_player = player_selection_manager.selected_player
 	if event is InputEventMouseMotion:
 		update_preview()
+
 	if Input.is_action_just_pressed("move_confirm"):
 		if PlayerSelectionManager.selected_player:
 			PlayerSelectionManager.deselect_player()
@@ -69,8 +70,10 @@ func update_preview() -> void:
 			var mouse_pos = level.tile_map.get_local_mouse_position()
 			var target_tile = level.tile_map.local_to_map(mouse_pos)
 			#
-			if not level.check_is_tile_in_boundsv(target_tile) or level.check_is_tile_solid(target_tile):
+			if check_is_mouse_over_wall():
 				return
+			#if not level.check_is_tile_in_boundsv(target_tile) or level.check_is_tile_solid(target_tile):
+				#return
 			var last_mouse_pos: Vector2 = PlayerSelectionManager.selected_player.player_path[-1]
 			if abs(last_mouse_pos.distance_to(mouse_pos)) > 10.0:
 				if not is_path_blocked(last_mouse_pos, mouse_pos):
@@ -96,10 +99,27 @@ func check_is_players_moving_possible() -> bool:
 			return false
 	return true
 
-func _physics_process(delta: float):
+func _physics_process(_delta: float):
 	pass
 
 func check_can_do_action() -> bool:
 	if players_set_for_move.is_empty() and players_set_for_rotation.is_empty():
 		return false
 	return true
+	
+func check_is_mouse_over_wall() -> bool:
+	var mouse_global_pos = level.get_global_mouse_position()
+	
+	var parameters = PhysicsPointQueryParameters2D.new()
+	parameters.position = mouse_global_pos
+	parameters.collide_with_bodies = true
+	# parameters.collision_mask = ...      
+	
+	var space_state = level.get_world_2d().direct_space_state
+	var results = space_state.intersect_point(parameters)
+	
+	for result in results:
+		var collider = result.collider
+		if collider.is_in_group("wall"):
+			return true
+	return false

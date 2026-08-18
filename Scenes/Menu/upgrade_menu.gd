@@ -19,11 +19,11 @@ func show_upgrade_menu():
 		if card.get_parent() == null:
 			grid_container_available.add_child(card)
 	
-	fill_applied_upgrades_grid()
+	#fill_applied_upgrades_grid()
 func hide_upgrade_menu():
 	visible = false
 
-func _on_changed_selected_player(old_player: Player, new_player: Player):
+func _on_changed_selected_player(_old_player: Player, _new_player: Player):
 	#clear_grid(grid_container_applied)
 	#fill_applied_upgrades_grid()
 	pass
@@ -38,10 +38,10 @@ func remove_card_from_grid(grid_container: GridContainer, upgrade_card: UpgradeC
 			grid_container.remove_child(child)
 			break
 
-func fill_applied_upgrades_grid():
-	if PlayerSelectionManager.selected_player:
-		for upgrade_card_id: String in PlayerSelectionManager.selected_player.permanent_upgrades:
-			var card: UpgradeCard = PlayerSelectionManager.selected_player.permanent_upgrades[upgrade_card_id]
+#func fill_applied_upgrades_grid():
+	#if PlayerSelectionManager.selected_player:
+		#for upgrade_card_id: String in PlayerSelectionManager.selected_player.permanent_upgrades:
+			#var card: UpgradeCard = PlayerSelectionManager.selected_player.permanent_upgrades[upgrade_card_id]
 			#grid_container_applied.add_child(card)
 
 func _on_permanent_upgrade_applied(upgrade_card: UpgradeCard):

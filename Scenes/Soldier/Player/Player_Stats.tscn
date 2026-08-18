@@ -155,9 +155,9 @@ texture = ExtResource("12_w7q5a")
 
 [node name="Damage_Label" type="Label" parent="Damage_Node" unique_id=148570676]
 offset_left = 16.0
-offset_top = -12.0
+offset_top = -11.0
 offset_right = 56.0
-offset_bottom = 11.0
+offset_bottom = 12.0
 text = "20"
 metadata/_edit_use_anchors_ = true
 
@@ -171,9 +171,9 @@ texture = ExtResource("13_t3mcf")
 
 [node name="Hit_Chance_Label" type="Label" parent="Hit_Chance_Node" unique_id=585657666]
 offset_left = 16.0
-offset_top = -16.0
+offset_top = -14.0
 offset_right = 56.0
-offset_bottom = 7.0
+offset_bottom = 9.0
 text = "80%"
 
 [node name="Ammo_Node" type="Node2D" parent="." unique_id=412936948]

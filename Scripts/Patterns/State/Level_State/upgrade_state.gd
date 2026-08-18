@@ -11,10 +11,10 @@ func _init(data: Array):
 	upgrade_menu.set_alive_players(alive_players)
 	upgrade_menu.show_upgrade_menu()
 
-func _unhandled_input(event: InputEvent):
+func _unhandled_input(_event: InputEvent):
 	if Input.is_action_just_pressed("move_confirm"):
 		upgrade_menu.hide_upgrade_menu()
 		level.set_level_state(PlayerSetMoveState.new([level]))
 	
-func _physics_process(delta: float):
+func _physics_process(_delta: float):
 	pass

@@ -64,7 +64,7 @@ func _ready() -> void:
 	set_player_sprite()
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	vision_polygon.update_vision()
 
 func connect_to_signals():
@@ -72,7 +72,7 @@ func connect_to_signals():
 	Signals.show_enemy.connect(_on_enemy_seen)
 	Signals.hide_enemy.connect(_on_enemy_lost)
 
-func _on_enemy_soldier_killed(enemy_killed: Soldier, killed_by: Soldier):
+func _on_enemy_soldier_killed(enemy_killed: Soldier, _killed_by: Soldier):
 	if enemies_in_sight.has(enemy_killed.soldier_id):
 		enemies_in_sight.erase(enemy_killed.soldier_id)
 	if soldier_id != enemy_killed.soldier_id:
@@ -158,7 +158,7 @@ func _on_enemy_seen(enemy: Soldier):
 		enemies_in_sight[enemy.soldier_id] = enemy
 		enemy.when_spotted()
 	on_engagement_action(enemy)
-func _on_enemy_seen_extra(enemy: Soldier):
+func _on_enemy_seen_extra(_enemy: Soldier):
 	pass
 
 func on_engagement_action(enemy: Soldier):
