@@ -17,6 +17,10 @@ var current_state: State
 
 var cover_points: Array
 
+#MENU
+@onready var upgrade_menu: UpgradeMenu = $CanvasLayer/UpgradeMenu
+
+
 func _ready() -> void:
 	for player in get_tree().get_nodes_in_group("Player"):
 		if player is Player:
@@ -25,7 +29,8 @@ func _ready() -> void:
 
 	setup_grid()
 	connect_to_signals()
-	current_state = PlayerSetMoveState.new([self])
+	current_state = PreparationState.new([self])
+	AudioManager.set_current_level(self)
 
 func _physics_process(delta: float) -> void:
 	VisionManager.handle_enemy_visibility(delta)

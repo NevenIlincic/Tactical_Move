@@ -37,7 +37,7 @@ var soldier_id: String
 var engagement_strategy: EngagementStrategy
 #UPGRADE/PERKS
 var temporary_upgrades: Array[UpgradeData] = []
-var permanent_upgrades: Array[UpgradeData] = []
+var permanent_upgrades: Dictionary = {} #{unique_id: UpgradeCard}
 
 #LAYOUT
 #@export var weapons: Array[Weapon]

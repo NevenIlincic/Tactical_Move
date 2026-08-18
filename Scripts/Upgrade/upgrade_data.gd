@@ -7,7 +7,9 @@ enum UpgradeType{
 	MAX_AMMO,
 	FIRE_RATE,
 	REACTION_TIME,
-	RELOAD_TIME
+	RELOAD_TIME,
+	WEAPON_DAMAGE,
+	TRAVEL_DISTANCE
 }
 
 enum UpgradeReason{
@@ -22,6 +24,7 @@ enum UpgradeReason{
 @export var upgrade_reason: UpgradeReason
 
 var applied_on_stat: Stat
+var upgrade_card: UpgradeCard
 
 var unique_id: String
 
@@ -34,3 +37,6 @@ func _init(value: float, u_type: UpgradeType, m_type: StatModifier.Type, u_reaso
 
 func set_applied_on_stat(applied_stat: Stat):
 	applied_on_stat = applied_stat
+
+func set_upgrade_card(u_card: UpgradeCard):
+	upgrade_card = u_card

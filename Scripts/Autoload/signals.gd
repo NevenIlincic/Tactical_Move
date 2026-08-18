@@ -31,5 +31,6 @@ signal shoot_player(enemy: Enemy, player:Player)
 signal hide_player(enemy: Enemy, player: Player)
 signal player_killed(enemy_killed: Player, killed_by: Enemy)
 
-
 signal action_started()
+
+signal permanent_upgrade_applied(upgrade_card: UpgradeCard)

@@ -6,7 +6,7 @@ var level: Level
 #Other variables
 var alive_players: Dictionary 
 var is_drawing: bool = false
-var player_selection_manager: PlayerSelectionManager
+#var player_selection_manager: PlayerSelectionManager
 var occupied_target_tiles: Dictionary = {} #{tile: {player_key: true } }
 var players_cause_collision: Dictionary = {}
 
@@ -16,17 +16,18 @@ var players_set_for_rotation: Dictionary = {}
 func _init(data: Array):
 	level = data[0]
 	alive_players = level.get_alive_players()
-	player_selection_manager = PlayerSelectionManager.new()
+	#player_selection_manager = PlayerSelectionManager.new()
 
 	#fill_occupied_target_tiles_dict()
 
 func _unhandled_input(event: InputEvent):
-	var selected_player = player_selection_manager.selected_player
+	var selected_player = PlayerSelectionManager.selected_player
+	#var selected_player = player_selection_manager.selected_player
 	if event is InputEventMouseMotion:
 		update_preview()
 	if Input.is_action_just_pressed("move_confirm"):
-		if player_selection_manager.selected_player:
-			player_selection_manager.deselect_player()
+		if PlayerSelectionManager.selected_player:
+			PlayerSelectionManager.deselect_player()
 		#print(players_set_for_move)
 		if check_can_do_action():
 			Signals.action_started.emit()
@@ -63,20 +64,20 @@ func is_adjacent(a: Vector2i, b: Vector2i) -> bool:
 	return (diff == Vector2i(1, 0)) or (diff == Vector2i(0, 1))
 
 func update_preview() -> void:
-	if player_selection_manager.selected_player:
+	if PlayerSelectionManager.selected_player:
 		if is_drawing:
 			var mouse_pos = level.tile_map.get_local_mouse_position()
 			var target_tile = level.tile_map.local_to_map(mouse_pos)
 			#
 			if not level.check_is_tile_in_boundsv(target_tile) or level.check_is_tile_solid(target_tile):
 				return
-			var last_mouse_pos: Vector2 = player_selection_manager.selected_player.player_path[-1]
+			var last_mouse_pos: Vector2 = PlayerSelectionManager.selected_player.player_path[-1]
 			if abs(last_mouse_pos.distance_to(mouse_pos)) > 10.0:
 				if not is_path_blocked(last_mouse_pos, mouse_pos):
 					var mouse_global_position: Vector2 = level.get_global_mouse_position()
-					player_selection_manager.selected_player.add_point_to_path(mouse_global_position)	
-					if not players_set_for_move.has(player_selection_manager.selected_player):
-						players_set_for_move[player_selection_manager.selected_player] = true
+					PlayerSelectionManager.selected_player.add_point_to_path(mouse_global_position)	
+					if not players_set_for_move.has(PlayerSelectionManager.selected_player):
+						players_set_for_move[PlayerSelectionManager.selected_player] = true
 
 func is_path_blocked(from: Vector2, to: Vector2) -> bool:
 	var space_state = level.get_world_2d().direct_space_state

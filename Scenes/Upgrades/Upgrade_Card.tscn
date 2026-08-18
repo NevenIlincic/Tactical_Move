@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://c60uemqf7gdf2"]
+
+[ext_resource type="Script" uid="uid://cnaqw8gtpipgf" path="res://Scenes/Upgrades/upgrade_card.gd" id="1_emjen"]
+[ext_resource type="Texture2D" uid="uid://dg7rc3dhn8qev" path="res://Sprites/Upgrades/New Piskel-1.png - 2026-08-18T144908.802.png" id="2_emjen"]
+[ext_resource type="Texture2D" uid="uid://dou87mqtbaj0r" path="res://Sprites/HUD/running_icon.png" id="3_tam8y"]
+
+[node name="UpgradeCard" type="Control" unique_id=2145213885]
+custom_minimum_size = Vector2(96, 128)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 96.0
+offset_bottom = 128.0
+script = ExtResource("1_emjen")
+
+[node name="Upgrade_Frame_Sprite" type="Sprite2D" parent="." unique_id=348425672]
+position = Vector2(48, 64)
+scale = Vector2(2, 2)
+texture = ExtResource("2_emjen")
+
+[node name="Upgrade_Icon" type="Sprite2D" parent="." unique_id=333455746]
+position = Vector2(48, 40)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("3_tam8y")
+
+[node name="Upgrade_Value_Label" type="Label" parent="." unique_id=1384556988]
+layout_mode = 0
+offset_top = 88.0
+offset_right = 96.0
+offset_bottom = 112.0
+text = "5.0"
+horizontal_alignment = 1
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]

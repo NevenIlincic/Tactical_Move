@@ -71,8 +71,8 @@ func _on_player_move_finished(soldier: Soldier):
 	
 	if soldiers_in_action.is_empty():
 		num_player_finished_moves = 0
-		level.set_level_state(PlayerSetMoveState.new([level]))
-		
+		#level.set_level_state(PlayerSetMoveState.new([level]))
+		level.set_level_state(PreparationState.new([level]))
 func _on_player_move_continued(soldier: Soldier):
 	soldiers_in_action[soldier] = true
 	

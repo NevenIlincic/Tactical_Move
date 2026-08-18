@@ -1,4 +1,4 @@
-extends Node2D
+extends Control
 
 @onready var player_avatar: Sprite2D = $Player_Avatar
 @onready var player_name_label: Label = $Player_Name_Label
@@ -25,10 +25,15 @@ extends Node2D
 @onready var pistol_sprite: Sprite2D = $Pistol_Sprite
 @onready var m4a1_rifle_sprite: Sprite2D = $m4a1_rifle_sprite
 
+#GRID CONTAINER
+@onready var grid_container_applied_upgrades: GridContainer = $Grid_Container_Applied_Upgrades
+
+
 func _ready() -> void:
 	Signals.set_selected_player.connect(_on_selected_player)
 	Signals.deselect_player.connect(_on_deselect_player)
 	Signals.action_started.connect(_on_action_started)
+	Signals.permanent_upgrade_applied.connect(_on_permanent_upgrade_applied)
 	hide_stats()
 	
 
@@ -42,10 +47,11 @@ func _on_selected_player(player: Player):
 	reload_time_label.text = str(player.current_weapon.weapon_stats.reload_time.get_value(), "s")
 	reaction_time_label.text = str(player.soldier_stats.reaction_time.get_value(), "s")
 	max_distance_label.text = str(player.soldier_stats.max_travel_distance.get_value())
-	fire_rate_label.text = str(int(player.current_weapon.weapon_stats.fire_rate.get_value()), "rps")
+	fire_rate_label.text = str(player.current_weapon.weapon_stats.fire_rate.get_value(), "rps")
 	damage_label.text = str(player.current_weapon.weapon_stats.damage.get_value())
 	hit_chance_label.text = str(player.current_weapon.weapon_stats.hit_chance.get_value(), "%")
 	set_weapon_sprite(player.current_weapon)
+	set_applied_upgrades(player)
 	show_stats()
 
 
@@ -68,3 +74,15 @@ func hide_stats():
 	visible = false
 func show_stats():
 	visible = true
+
+func _on_permanent_upgrade_applied(upgade_card: UpgradeCard):
+	grid_container_applied_upgrades.add_child(upgade_card)
+
+func set_applied_upgrades(player: Player):
+	for child: UpgradeCard in grid_container_applied_upgrades.get_children():
+		grid_container_applied_upgrades.remove_child(child)
+	
+	for upgrade_card_id: String in player.permanent_upgrades:
+		var card: UpgradeCard = player.permanent_upgrades[upgrade_card_id]
+		print("OVDE")
+		grid_container_applied_upgrades.add_child(card)

@@ -1,6 +1,18 @@
 extends Node2D
 
-#Applied when player is moving
+#PERMANENT PERKS
+func apply_permanent_perk(upgrade_card: UpgradeCard, player: Player):
+	var upgrade_data: UpgradeData = upgrade_card.upgrade_data
+	var stat_modifier: StatModifier = StatModifier.new(
+		upgrade_data.bonus_value, upgrade_data.modifier_type, upgrade_data
+	)
+	upgrade_data.applied_on_stat.add_modifier(stat_modifier)
+	player.permanent_upgrades[upgrade_card.unique_id] = upgrade_card
+	
+	if UpgradeCardsManager.available_permanent_upgrades.has(upgrade_card.unique_id):
+		UpgradeCardsManager.available_permanent_upgrades.erase(upgrade_card.unique_id)
+	
+#Applied when player is moving	
 func apply_movement_penalty_perk(player: Soldier):
 	if len(player.player_path) > 1: #If player is moving
 		var hit_chance_perk: UpgradeData = UpgradeData.new(
@@ -38,13 +50,13 @@ func remove_moving_penalty(player: Soldier):
 #Triggers when player heals above 30% HP
 func remove_low_hp_penalty(player: Soldier):
 	var perks_to_remove: Array[UpgradeData] = []
-	for perk in player.permanent_upgrades:
+	for perk in player.temporary_upgrades:
 		if perk.upgrade_reason == UpgradeData.UpgradeReason.LOW_HP:
 			perks_to_remove.append(perk)
 			remove_perk(perk)
 	
 	for perk in perks_to_remove:
-		player.permanent_upgrades.erase(perk)
+		player.temporary_upgrades.erase(perk)
 
 #Triggers when player gets below 30% HP (SPEED -15%, HIT_CHANCE -25%, REACTION_TIME +0.5s, RELOAD_TIME: +20%)
 func apply_low_hp_penalty(player: Soldier):
@@ -85,7 +97,7 @@ func apply_low_hp_penalty(player: Soldier):
 	player.current_weapon.weapon_stats.reload_time.add_modifier(longer_reload_time_mod)
 	longer_reload_time_perk.set_applied_on_stat(player.current_weapon.weapon_stats.reload_time)
 	
-	player.permanent_upgrades.append(lower_speed_perk)
-	player.permanent_upgrades.append(lower_hit_chance_perk)
-	player.permanent_upgrades.append(longer_reaction_time_perk)
-	player.permanent_upgrades.append(longer_reload_time_perk)
+	player.temporary_upgrades.append(lower_speed_perk)
+	player.temporary_upgrades.append(lower_hit_chance_perk)
+	player.temporary_upgrades.append(longer_reaction_time_perk)
+	player.temporary_upgrades.append(longer_reload_time_perk)
