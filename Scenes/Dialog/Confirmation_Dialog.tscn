@@ -18,6 +18,7 @@ offset_left = -112.0
 offset_top = -80.0
 offset_right = 1280.0
 offset_bottom = 704.0
+mouse_force_pass_scroll_events = false
 color = Color(1, 1, 1, 0)
 
 [node name="Panel" type="Panel" parent="." unique_id=896042710]
@@ -42,6 +43,7 @@ offset_bottom = 384.0
 theme_override_font_sizes/font_size = 32
 text = "Are you sure you want to do this action?"
 horizontal_alignment = 1
+autowrap_mode = 2
 
 [node name="Yes_Button" type="Button" parent="." unique_id=547641848]
 offset_left = 448.0

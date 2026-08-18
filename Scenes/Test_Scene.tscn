@@ -446,16 +446,16 @@ script = ExtResource("24_7tbrw")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1266865912]
 
+[node name="PlayerStats" parent="CanvasLayer" unique_id=882045817 instance=ExtResource("23_nfmrh")]
+offset_top = 584.0
+offset_bottom = 584.0
+
 [node name="UpgradeMenu" parent="CanvasLayer" unique_id=90615393 instance=ExtResource("26_3y4ie")]
 visible = false
 position = Vector2(-16, -8)
 
 [node name="ConfirmationDialog" parent="CanvasLayer" unique_id=2055501273 instance=ExtResource("29_3u3yd")]
 visible = false
-
-[node name="PlayerStats" parent="CanvasLayer" unique_id=882045817 instance=ExtResource("23_nfmrh")]
-offset_top = 584.0
-offset_bottom = 584.0
 
 [node name="Player4" parent="." unique_id=575771634 instance=ExtResource("4_10mtb")]
 position = Vector2(864, 344)
