@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://br30mnlvdlt6n"
-path="res://.godot/imported/stop_and_shoot_following_icon.png-8f70dd37b22e09838caa32de08e6e828.ctex"
+uid="uid://2p3kantbabm8"
+path="res://.godot/imported/Group (1).png-6bd33e7f5fa26f67b85c45d52814f6ab.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/HUD/Engagement_Menu/stop_and_shoot_following_icon.png"
-dest_files=["res://.godot/imported/stop_and_shoot_following_icon.png-8f70dd37b22e09838caa32de08e6e828.ctex"]
+source_file="res://Sprites/HUD/Group (1).png"
+dest_files=["res://.godot/imported/Group (1).png-6bd33e7f5fa26f67b85c45d52814f6ab.ctex"]
 
 [params]
 

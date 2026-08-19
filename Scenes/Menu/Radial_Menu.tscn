@@ -1,18 +1,26 @@
 [gd_scene format=3 uid="uid://d3gwg3d0gxd4w"]
 
+[ext_resource type="Texture2D" uid="uid://cyexu3fm2aq3s" path="res://Sprites/HUD/background.png" id="1_0blgu"]
 [ext_resource type="Texture2D" uid="uid://b0hk5gucidtjh" path="res://Sprites/HUD/Engagement_Menu/stop_and_shoot_icon.png" id="1_nr87h"]
-[ext_resource type="Texture2D" uid="uid://y3yekhjq5544" path="res://Sprites/HUD/Engagement_Menu/stop_and_shoot_following_icon.png" id="2_1g15a"]
 [ext_resource type="Texture2D" uid="uid://bmxe4wqdu1rfb" path="res://Sprites/HUD/Engagement_Menu/move_and_shoot_icon.png" id="3_0blgu"]
-[ext_resource type="Texture2D" uid="uid://uahkyrcb1vcj" path="res://Sprites/HUD/Engagement_Menu/move_and_shoot_following_icon.png" id="4_dl1pf"]
 [ext_resource type="Script" uid="uid://cgn5qmfcrqgry" path="res://Scenes/Menu/radial_menu.gd" id="5_mytm5"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_21aeu"]
+texture = ExtResource("1_0blgu")
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_pe4k2"]
 load_path = "res://.godot/imported/ignore_icon.png-a57bc3ac6de36ccb9de3882fb80e5392.ctex"
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_jktiq"]
+load_path = "res://.godot/imported/stop_and_shoot_following_icon.png-8f70dd37b22e09838caa32de08e6e828.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_1g15a"]
+load_path = "res://.godot/imported/move_and_shoot_following_icon.png-79ebe77f21b2b3327fe0871536dd3264.ctex"
+
 [node name="RadialMenu" type="PopupMenu" unique_id=321000128]
 oversampling_override = 1.0
 initial_position = 4
-size = Vector2i(462, 200)
+size = Vector2i(694, 200)
 visible = true
 theme_override_constants/indent = 0
 theme_override_constants/v_separation = 0
@@ -20,6 +28,7 @@ theme_override_constants/search_bar_separation = 0
 theme_override_constants/item_start_padding = 0
 theme_override_constants/icon_max_width = 32
 theme_override_constants/gutter_compact = 0
+theme_override_styles/panel = SubResource("StyleBoxTexture_21aeu")
 allow_search = false
 item_count = 5
 item_0/text = "Ignore enemies"
@@ -29,12 +38,12 @@ item_1/text = "Stop and shoot enemy in sight"
 item_1/icon = ExtResource("1_nr87h")
 item_1/id = 1
 item_2/text = "Stop, focus and shoot enemy"
-item_2/icon = ExtResource("2_1g15a")
+item_2/icon = SubResource("CompressedTexture2D_jktiq")
 item_2/id = 2
 item_3/text = "Move and shoot enemy in sight"
 item_3/icon = ExtResource("3_0blgu")
 item_3/id = 3
 item_4/text = "Move, focus and shoot enemy"
-item_4/icon = ExtResource("4_dl1pf")
+item_4/icon = SubResource("CompressedTexture2D_1g15a")
 item_4/id = 4
 script = ExtResource("5_mytm5")
