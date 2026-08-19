@@ -25,26 +25,22 @@ pivot_offset = Vector2(-128, 0)
 script = ExtResource("1_1t72u")
 
 [node name="Background" type="Sprite2D" parent="." unique_id=104324732]
-z_index = 99
 position = Vector2(7.6293945e-06, 0)
 scale = Vector2(1.96875, 1)
 texture = ExtResource("1_i03bc")
 offset = Vector2(62.984123, 0)
 
 [node name="Player_Avatar" type="Sprite2D" parent="." unique_id=1815090772]
-z_index = 99
 texture = ExtResource("2_1t72u")
 offset = Vector2(-64, 0)
 
 [node name="Pistol_Sprite" type="Sprite2D" parent="." unique_id=2085132682]
-z_index = 99
 position = Vector2(-7.6293945e-06, 7.6293945e-06)
 scale = Vector2(0.4375, 0.4375)
 texture = ExtResource("5_ss5un")
 offset = Vector2(438.85712, 15.999985)
 
 [node name="Player_Name_Label" type="Label" parent="." unique_id=2035158339]
-z_index = 99
 layout_mode = 0
 offset_left = -128.0
 offset_top = -56.0
@@ -54,14 +50,12 @@ text = "Nate"
 horizontal_alignment = 1
 
 [node name="Move_Speed_Icon" type="Sprite2D" parent="." unique_id=191204091]
-z_index = 99
 position = Vector2(-7.6293945e-06, 0)
 scale = Vector2(0.10714286, 0.10714286)
 texture = ExtResource("7_vcxfj")
 offset = Vector2(233.33337, -65.333374)
 
 [node name="HP_Bar" type="TextureProgressBar" parent="." unique_id=1875553936]
-z_index = 99
 layout_mode = 0
 offset_top = -58.0
 offset_right = 128.0
@@ -79,7 +73,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Move_Speed_Label" type="Label" parent="." unique_id=1308399395]
-z_index = 99
 layout_mode = 0
 offset_left = 35.0
 offset_top = -19.0
@@ -90,11 +83,9 @@ text = "250.0"
 horizontal_alignment = 1
 
 [node name="Reload_Icon" type="Node2D" parent="." unique_id=405323814]
-z_index = 99
 position = Vector2(272, -28)
 
 [node name="Reload_Time_Label" type="Label" parent="Reload_Icon" unique_id=398094810]
-z_index = 99
 offset_left = 17.0
 offset_top = -10.0
 offset_right = 57.0
@@ -102,13 +93,11 @@ offset_bottom = 13.0
 text = "3s"
 
 [node name="Group6" type="Sprite2D" parent="Reload_Icon" unique_id=1476212677]
-z_index = 99
 position = Vector2(4.3919783, -1.5133033)
 scale = Vector2(0.07504767, 0.07761281)
 texture = ExtResource("9_21aeu")
 
 [node name="Reaction_Time_Node" type="Node2D" parent="." unique_id=632908039]
-z_index = 99
 position = Vector2(8, 21)
 
 [node name="Reaction_Time_Icon" type="Sprite2D" parent="Reaction_Time_Node" unique_id=649515456]
@@ -126,17 +115,14 @@ horizontal_alignment = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="Max_Distance_Node" type="Node2D" parent="." unique_id=1106639208]
-z_index = 99
 position = Vector2(22, 20)
 
 [node name="Max_Distance_Icon" type="Sprite2D" parent="Max_Distance_Node" unique_id=1166080212]
-z_index = 99
 position = Vector2(2.000001, 2.000001)
 scale = Vector2(0.107142866, 0.107142866)
 texture = ExtResource("10_luigt")
 
 [node name="Max_Distance_Label" type="Label" parent="Max_Distance_Node" unique_id=287646158]
-z_index = 99
 offset_left = 14.0
 offset_top = -12.0
 offset_right = 54.0
@@ -146,17 +132,14 @@ horizontal_alignment = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="Fire_Rate_Node" type="Node2D" parent="." unique_id=2121599020]
-z_index = 99
 position = Vector2(270, -1)
 
 [node name="Fire_Rate_Icon" type="Sprite2D" parent="Fire_Rate_Node" unique_id=1056022214]
-z_index = 99
 position = Vector2(4, -3.000002)
 scale = Vector2(0.080356985, 0.069705024)
 texture = ExtResource("11_fhtql")
 
 [node name="Fire_Rate_Label" type="Label" parent="Fire_Rate_Node" unique_id=2003114895]
-z_index = 99
 offset_left = 18.0
 offset_top = -12.0
 offset_right = 58.0
@@ -165,16 +148,13 @@ text = "3 rps"
 metadata/_edit_use_anchors_ = true
 
 [node name="Damage_Node" type="Node2D" parent="." unique_id=438799726]
-z_index = 99
 position = Vector2(272, 25)
 
 [node name="Damage_Icon" type="Sprite2D" parent="Damage_Node" unique_id=1271097270]
-z_index = 99
 scale = Vector2(0.102678545, 0.102678545)
 texture = ExtResource("12_w7q5a")
 
 [node name="Damage_Label" type="Label" parent="Damage_Node" unique_id=148570676]
-z_index = 99
 offset_left = 16.0
 offset_top = -11.0
 offset_right = 56.0
@@ -183,17 +163,14 @@ text = "20"
 metadata/_edit_use_anchors_ = true
 
 [node name="Hit_Chance_Node" type="Node2D" parent="." unique_id=1114669804]
-z_index = 99
 position = Vector2(271, 55)
 
 [node name="Hit_Chance_Icon" type="Sprite2D" parent="Hit_Chance_Node" unique_id=920799777]
-z_index = 99
 position = Vector2(0, -3)
 scale = Vector2(0.089285634, 0.089285634)
 texture = ExtResource("13_t3mcf")
 
 [node name="Hit_Chance_Label" type="Label" parent="Hit_Chance_Node" unique_id=585657666]
-z_index = 99
 offset_left = 16.0
 offset_top = -14.0
 offset_right = 56.0
@@ -201,7 +178,6 @@ offset_bottom = 9.0
 text = "80%"
 
 [node name="Ammo_Node" type="Node2D" parent="." unique_id=412936948]
-z_index = 99
 position = Vector2(272, -49)
 
 [node name="Ammo" type="Sprite2D" parent="Ammo_Node" unique_id=1881746605]
@@ -216,7 +192,6 @@ offset_bottom = 10.0
 text = "10/30"
 
 [node name="m4a1_rifle_sprite" type="Sprite2D" parent="." unique_id=1776526028]
-z_index = 99
 position = Vector2(-111.999985, 104.00001)
 rotation = -0.56688166
 scale = Vector2(0.3295794, 0.3295794)
@@ -233,7 +208,6 @@ theme_override_constants/h_separation = 15
 columns = 6
 
 [node name="Engagement_Strategy_Icon" type="Sprite2D" parent="." unique_id=1028706703]
-z_index = 99
 position = Vector2(-112, -48)
 scale = Vector2(0.10714286, 0.10714286)
 texture = ExtResource("15_21aeu")

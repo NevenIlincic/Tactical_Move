@@ -83,6 +83,7 @@ func do_while_action_extra():
 	gradually_remove_path_line()
 
 func change_engagement_strategy(rule: EngagementRules):
+	current_engagement_rule = rule
 	match rule:
 		EngagementRules.IGNORE:
 			engagement_strategy = IgnoreEnemyStrategy.new()
@@ -95,6 +96,9 @@ func change_engagement_strategy(rule: EngagementRules):
 		EngagementRules.MOVE_AND_SHOT_FOLLOWING:
 			engagement_strategy = MoveShootFollowingStrategy.new()
 
+func set_engagement_strategy(strategy: EngagementStrategy):
+	engagement_strategy = strategy
+	print("POSTAVLJENO")
 #func check_is_enemy_in_sight():
 	#if enemy_to_shoot:
 		#if follow_enemy_with_rotation:

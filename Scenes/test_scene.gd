@@ -19,6 +19,7 @@ var cover_points: Array
 
 #MENU
 @onready var upgrade_menu: UpgradeMenu = $CanvasLayer/UpgradeMenu
+@onready var radial_menu: PopupMenu = $CanvasLayer/RadialMenu
 
 #FOR CONFIRMATION DIALOG
 @onready var confirmation_dialog: ConfirmDialog = $CanvasLayer/ConfirmationDialog
@@ -97,6 +98,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("quit"):
 		get_tree().quit()
 	current_state._unhandled_input(event)
+
 	
 func add_point_to_path(point: Vector2) -> void:
 	path_line.add_point(point)

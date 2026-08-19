@@ -28,6 +28,15 @@ extends Control
 #GRID CONTAINER
 @onready var grid_container_applied_upgrades: GridContainer = $Grid_Container_Applied_Upgrades
 
+#ENGAGEMENT STRATEGY ICON
+var engagement_strategy_icons: Dictionary = {
+	Player.EngagementRules.IGNORE: preload("uid://cfst0l2a1ts0o"),
+	Player.EngagementRules.STOP_AND_SHOT_IN_PASSING: preload("uid://b0hk5gucidtjh"),
+	Player.EngagementRules.STOP_AND_SHOT_FOLLOWING: preload("uid://y3yekhjq5544"),
+	Player.EngagementRules.MOVE_AND_SHOT_IN_PASSING: preload("uid://bmxe4wqdu1rfb"),
+	Player.EngagementRules.MOVE_AND_SHOT_FOLLOWING: preload("uid://uahkyrcb1vcj")
+}
+@onready var engagement_strategy_icon: Sprite2D = $Engagement_Strategy_Icon
 
 func _ready() -> void:
 	Signals.set_selected_player.connect(_on_selected_player)
@@ -37,6 +46,7 @@ func _ready() -> void:
 	Signals.permanent_upgrade_removed.connect(_on_permanent_upgrade_removed)
 	Signals.update_ammo_stats_label.connect(_on_player_shoot)
 	Signals.update_HP_bar_stats_label.connect(_on_player_hit)
+	Signals.engagement_strategy_changed.connect(_on_engagement_strategy_changed)
 	hide_stats()
 	
 
@@ -44,6 +54,7 @@ func _on_selected_player(player: Player):
 	update_stats_labels(player)
 	set_weapon_sprite(player.current_weapon)
 	set_applied_upgrades(player)
+	_on_engagement_strategy_changed(player)
 	show_stats()
 
 func update_stats_labels(player: Player):
@@ -107,3 +118,7 @@ func _on_player_hit(player: Player):
 		hp_percentage_label.text = str(int(hp_bar.value), "%")
 		if hp_bar.value <= 0.0:
 			hide_stats()
+
+func _on_engagement_strategy_changed(player: Player):
+	engagement_strategy_icon.texture = engagement_strategy_icons[player.current_engagement_rule]
+					
