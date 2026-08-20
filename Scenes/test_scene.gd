@@ -2,7 +2,7 @@ extends Node2D
 class_name Level
 
 var grid: AStarGrid2D = AStarGrid2D.new()
-@onready var tile_map: TileMapLayer = $TileMap
+@onready var tile_map: TileMapLayer = $TileMaps/TileMap
 
 var selected_player: Player
 var confirmed_player_moves: int = 0
