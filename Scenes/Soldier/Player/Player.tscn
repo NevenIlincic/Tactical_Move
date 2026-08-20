@@ -11,12 +11,10 @@
 [ext_resource type="Texture2D" uid="uid://cynm5bschf8o1" path="res://Sprites/Player/move_to_position_marker.png" id="8_0eouq"]
 [ext_resource type="Texture2D" uid="uid://bxrsachv2vex3" path="res://Sprites/Player/after_move_look_at_position.png" id="9_3um6k"]
 [ext_resource type="Script" uid="uid://duyphgu7sdufm" path="res://Scenes/Soldier/soldier_bullet_line.gd" id="11_tk11s"]
+[ext_resource type="Texture2D" uid="uid://crp281jh7dnh6" path="res://Sprites/Light/bela_kupa_60stepeni.png" id="12_q6by2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_06txj"]
 size = Vector2(60, 60)
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_rw7ms"]
-light_mode = 1
 
 [sub_resource type="Animation" id="Animation_0eouq"]
 resource_name = "Position_Marker_Rotation"
@@ -70,6 +68,9 @@ colors = PackedColorArray(1, 1, 0.43137255, 0, 1, 1, 0.43137255, 0.8039216)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jjc5n"]
 size = Vector2(256, 248)
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_76bep"]
+blend_mode = 3
+
 [node name="Player" type="Node2D" unique_id=1108589071 groups=["Player", "soldier"]]
 script = ExtResource("1_ft8w5")
 
@@ -101,24 +102,6 @@ offset = Vector2(-0.00030048078, 118.15355)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Selection_Area" unique_id=108256655]
 shape = SubResource("RectangleShape2D_06txj")
-
-[node name="Vision_Polygon" type="Polygon2D" parent="." unique_id=1560586749]
-clip_children = 2
-material = SubResource("CanvasItemMaterial_rw7ms")
-use_parent_material = true
-color = Color(1.59, 1.912, 0.983, 0.286)
-polygon = PackedVector2Array(0, 0, -256, -256, 256, -256)
-script = ExtResource("4_t26db")
-max_range = 1000.0
-fov_degrees = 60.0
-
-[node name="Enemy_Target_Line" type="Line2D" parent="Vision_Polygon" unique_id=1477870436]
-show_behind_parent = true
-texture_filter = 1
-texture_repeat = 2
-width = 3.0
-texture = ExtResource("5_jmcll")
-texture_mode = 1
 
 [node name="Look_At_Position_Sprite" type="Sprite2D" parent="." unique_id=560975301]
 visible = false
@@ -172,6 +155,34 @@ position = Vector2(49, -8)
 position = Vector2(29, -7)
 
 [node name="Player_Avatar" type="Sprite2D" parent="." unique_id=824355655]
+
+[node name="Vision_Polygon" type="Polygon2D" parent="." unique_id=1560586749]
+modulate = Color(0.7882353, 0.7764706, 0.6392157, 0.32156864)
+light_mask = 2
+material = SubResource("CanvasItemMaterial_76bep")
+use_parent_material = true
+color = Color(1, 1, 1, 0)
+polygon = PackedVector2Array(0, 0, -256, -256, 256, -256)
+script = ExtResource("4_t26db")
+max_range = 1000.0
+fov_degrees = 60.0
+
+[node name="Enemy_Target_Line" type="Line2D" parent="Vision_Polygon" unique_id=1477870436]
+show_behind_parent = true
+texture_filter = 1
+texture_repeat = 2
+width = 3.0
+texture = ExtResource("5_jmcll")
+texture_mode = 1
+
+[node name="PointLight2D" type="PointLight2D" parent="Vision_Polygon" unique_id=1183097337]
+position = Vector2(1.5258789e-05, 0.10325624)
+rotation = -1.5707964
+blend_mode = 2
+shadow_enabled = true
+texture = ExtResource("12_q6by2")
+offset = Vector2(226.10324, -5.2452087e-06)
+texture_scale = 0.5
 
 [connection signal="input_event" from="Selection_Area" to="." method="_on_selection_area_input_event"]
 [connection signal="body_entered" from="Ally_Detection_Area" to="." method="_on_ally_detection_area_body_entered"]

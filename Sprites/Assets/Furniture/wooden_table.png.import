@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://foexjrfcxil8"
-path="res://.godot/imported/Red_Car.png-bd25510a684323054ad5d6b051431007.ctex"
+uid="uid://fkr18ad8igyo"
+path="res://.godot/imported/wooden_table.png-875c93f4007796489b4e91007fdd8f69.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Cars/Red_Car.png"
-dest_files=["res://.godot/imported/Red_Car.png-bd25510a684323054ad5d6b051431007.ctex"]
+source_file="res://Sprites/Assets/Furniture/wooden_table.png"
+dest_files=["res://.godot/imported/wooden_table.png-875c93f4007796489b4e91007fdd8f69.ctex"]
 
 [params]
 

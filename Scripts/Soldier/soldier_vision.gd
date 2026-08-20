@@ -1,6 +1,7 @@
 class_name SoldierVision extends Polygon2D
 
 @onready var enemy_target_line: Line2D = $Enemy_Target_Line
+@onready var point_light_2d: PointLight2D = $PointLight2D
 
 @export var max_range: float = 300.0
 @export var fov_degrees: float = 90.0
@@ -19,7 +20,11 @@ func _ready() -> void:
 	
 	setup_vision_rays()
 	level = get_tree().get_first_node_in_group("Level")
-
+	
+	if point_light_2d:
+		point_light_2d.rotate(deg_to_rad(90))
+	
+	
 func setup_vision_rays() -> void:
 	var half_fov = deg_to_rad(fov_degrees / 2.0)
 	for i in ray_count:
@@ -40,6 +45,7 @@ func update_vision():
 	var raw_points: Array[Vector2] = [Vector2.ZERO]
 	var points = PackedVector2Array(raw_points)
 	var currently_visible_enemies: Dictionary = {}
+	
 	
 	for i in rays.size():
 		var t = float(i) / (rays.size() - 1)
@@ -70,19 +76,16 @@ func update_vision():
 		if raw_points.back().distance_to(current_point) > 0.5:
 			raw_points.append(current_point)
 			
-		
 	if points.size() > 3:
 		var triangles = Geometry2D.triangulate_polygon(points)
 		if not triangles.is_empty():
 			self.polygon = points
+
 		else:
 			pass
-	
-	#if enemy_target_line.get_point_count() == 1:
-		#enemy_target_line.add_point(enemy_position)
-	#else:
-		#enemy_target_line.set_point_position(1, enemy_position)
-
+			
+			
+		
 	
 func check_is_enemy_soldier_hit(current_soldier: Soldier, hit_soldier: Soldier):
 	return current_soldier.get_script() != hit_soldier.get_script()

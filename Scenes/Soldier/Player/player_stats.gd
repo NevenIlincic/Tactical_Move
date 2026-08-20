@@ -32,9 +32,9 @@ extends Control
 var engagement_strategy_icons: Dictionary = {
 	Player.EngagementRules.IGNORE: preload("uid://cfst0l2a1ts0o"),
 	Player.EngagementRules.STOP_AND_SHOT_IN_PASSING: preload("uid://b0hk5gucidtjh"),
-	Player.EngagementRules.STOP_AND_SHOT_FOLLOWING: preload("uid://y3yekhjq5544"),
+	Player.EngagementRules.STOP_AND_SHOT_FOLLOWING: preload("uid://br30mnlvdlt6n"),
 	Player.EngagementRules.MOVE_AND_SHOT_IN_PASSING: preload("uid://bmxe4wqdu1rfb"),
-	Player.EngagementRules.MOVE_AND_SHOT_FOLLOWING: preload("uid://uahkyrcb1vcj")
+	Player.EngagementRules.MOVE_AND_SHOT_FOLLOWING: preload("uid://b6a4qi0g7rg2b")
 }
 @onready var engagement_strategy_icon: Sprite2D = $Engagement_Strategy_Icon
 

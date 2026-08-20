@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://m2ja8xi8628c"
-path="res://.godot/imported/White_Car.png-8e901b635980d35537e03680a7dc234b.ctex"
+uid="uid://6igtf5ymt851"
+path="res://.godot/imported/New Piskel-2.png (56).png-5d02b616b580211942ecea8bade42b5f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Cars/White_Car.png"
-dest_files=["res://.godot/imported/White_Car.png-8e901b635980d35537e03680a7dc234b.ctex"]
+source_file="res://Sprites/Assets/Cars/New Piskel-2.png (56).png"
+dest_files=["res://.godot/imported/New Piskel-2.png (56).png-5d02b616b580211942ecea8bade42b5f.ctex"]
 
 [params]
 

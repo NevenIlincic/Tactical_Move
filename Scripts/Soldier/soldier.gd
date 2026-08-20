@@ -1,5 +1,6 @@
 #Base class for Player and Enemy
 class_name Soldier extends Node2D
+#@onready var vision_polygon: SoldierVision = $CanvasGroup/Vision_Polygon
 
 @onready var vision_polygon: SoldierVision = $Vision_Polygon
 @onready var hitbox_collision_shape: CollisionShape2D = $Hitbox/Hitbox_Collision_Shape

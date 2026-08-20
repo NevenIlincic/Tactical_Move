@@ -1,6 +1,9 @@
 [gd_scene format=3 uid="uid://c0vgcvlc1hb3x"]
 
-[ext_resource type="Texture2D" uid="uid://foexjrfcxil8" path="res://Sprites/Cars/Red_Car.png" id="1_egx2i"]
+[ext_resource type="Texture2D" uid="uid://foexjrfcxil8" path="res://Sprites/Assets/Cars/Red_Car.png" id="1_egx2i"]
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_lnsvv"]
+polygon = PackedVector2Array(-104, 32, -96, 40, 112, 40, 117, 24, 116, -32, 109, -44, -93, -43, -109, -30, -116, -7, -116, 8)
 
 [node name="RedCar" type="StaticBody2D" unique_id=573821789 groups=["wall"]]
 
@@ -9,3 +12,6 @@ texture = ExtResource("1_egx2i")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=413344469]
 polygon = PackedVector2Array(-96, -48, -112, -32, -120, -8, -120, 8, -104, 40, -88, 48, 112, 48, 120, 24, 120, -32, 112, -48)
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="." unique_id=559771269]
+occluder = SubResource("OccluderPolygon2D_lnsvv")

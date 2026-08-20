@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://di76hjbstq4th"]
 
-[ext_resource type="Texture2D" uid="uid://cjvwwa337p0in" path="res://Sprites/Cars/Blue_Car.png" id="1_b485g"]
+[ext_resource type="Texture2D" uid="uid://cjvwwa337p0in" path="res://Sprites/Assets/Cars/Blue_Car.png" id="1_b485g"]
 
 [node name="BlueCar" type="StaticBody2D" unique_id=1145836756 groups=["wall"]]
 
