@@ -36,7 +36,6 @@
 [ext_resource type="Texture2D" uid="uid://bo60888547asv" path="res://Sprites/Wall/New Piskel (30).png" id="31_xk5uc"]
 [ext_resource type="Texture2D" uid="uid://dws2prvoqt80s" path="res://Sprites/Wall/wall_tiles.png" id="32_avk4t"]
 [ext_resource type="Texture2D" uid="uid://fkr18ad8igyo" path="res://Sprites/Assets/Furniture/wooden_table.png" id="33_1q75p"]
-[ext_resource type="Texture2D" uid="uid://cnffjo3d1n3bg" path="res://Sprites/Assets/Door/door.png" id="34_elm60"]
 [ext_resource type="PackedScene" uid="uid://di76hjbstq4th" path="res://Scenes/Map_Assets/Cars/Blue_Car.tscn" id="37_vtp3d"]
 [ext_resource type="PackedScene" uid="uid://bm1ppd4si4asw" path="res://Scenes/Map_Assets/Door/Door.tscn" id="39_58pdj"]
 
@@ -282,9 +281,9 @@ weapon_stats = ExtResource("13_tq75k")
 metadata/_custom_type_script = "uid://bmr38t2grjqqv"
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_6uspl"]
-vertices = PackedVector2Array(842, 266, 842, 54, 886, 118, 886, 502, 958, 514.3594, 976.5469, 551.4531, 914, 530, 1402.3281, 162.54688, 1558.0078, 10.9609375, 1558.9766, 637.96094, 1398.7969, 188.74219, 1207.2109, 562, 1218, 529.6172, 1365.0469, 238.34375, 1337.9063, 259.02344, 1218, 469.64063, 1219.4688, 294.79688, 1217.2578, 327.42188, 1206.1797, 446, 842, 442.39844, 73, 502, 118, 442.39844, 73, 110, 118, 370.39844, 1054.8984, 383.1797, 987.8594, 446, 1022.72656, 393.57813, 1008.65625, 394.03125, 914, 118, 958, 494.3828, 964.77344, 349.60938, 967.2578, 466.60156, 960.0703, 317.0078, 46, 530, 52.148438, 530, 51.953125, 532.03125, 6.1484375, 632.03125, 458, 370.39844, 458, 266, 566, 266, 566, 330, 842, 370.39844, 650, 330, 650, 266, 714, 266, 118, 266, 374, 266, 374, 370.39844, 118, 182, 997.6406, 562, 896.02344, 530, 15.84375, 5.03125, 46, 110, 1197.4219, 231.90625, 1164.6563, 141.10156, 1174.9219, 218.70313, 981.3906, 379.89844, 1153.1563, 120.52344, 1052.6797, 259.25, 1221.8516, 39.703125, 1193.2266, 45.140625, 1169.9531, 62.890625, 118, 54, 1158.7031, 79.421875, 966.3828, 299.4922, 977.97656, 284.40625, 118, 138, 758, 138, 714, 182, 758, 266)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6), PackedInt32Array(7, 8, 9, 10), PackedInt32Array(10, 9, 11, 12, 13), PackedInt32Array(14, 13, 12, 15), PackedInt32Array(16, 14, 15, 17), PackedInt32Array(17, 15, 18), PackedInt32Array(19, 3, 20, 21), PackedInt32Array(21, 20, 22, 23), PackedInt32Array(24, 17, 18, 25), PackedInt32Array(26, 24, 25), PackedInt32Array(27, 26, 25), PackedInt32Array(4, 6, 28, 29), PackedInt32Array(30, 31, 29, 28, 32), PackedInt32Array(33, 34, 35, 36), PackedInt32Array(37, 38, 39, 40), PackedInt32Array(41, 37, 40, 42), PackedInt32Array(42, 43, 44, 41), PackedInt32Array(45, 46, 47, 23), PackedInt32Array(45, 23, 22), PackedInt32Array(48, 45, 22), PackedInt32Array(11, 9, 36, 49), PackedInt32Array(50, 6, 5, 49, 36, 35), PackedInt32Array(33, 36, 51, 52), PackedInt32Array(14, 16, 53), PackedInt32Array(54, 14, 53, 55), PackedInt32Array(56, 27, 25, 31), PackedInt32Array(57, 54, 55, 58, 28), PackedInt32Array(8, 7, 59), PackedInt32Array(51, 8, 59), PackedInt32Array(51, 59, 60), PackedInt32Array(51, 60, 61, 1), PackedInt32Array(22, 52, 51, 62), PackedInt32Array(63, 28, 2, 1, 61), PackedInt32Array(30, 56, 31), PackedInt32Array(64, 32, 28), PackedInt32Array(65, 64, 28), PackedInt32Array(58, 65, 28), PackedInt32Array(63, 57, 28), PackedInt32Array(51, 1, 62), PackedInt32Array(22, 62, 66), PackedInt32Array(48, 22, 66), PackedInt32Array(48, 66, 67, 68), PackedInt32Array(68, 67, 69, 44), PackedInt32Array(41, 44, 69), PackedInt32Array(41, 69, 0), PackedInt32Array(41, 0, 3), PackedInt32Array(41, 3, 19)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(6, -5, 1568, 1, 1569, 648, -4, 642)])
+vertices = PackedVector2Array(1221.8516, 39.703125, 1193.2266, 45.140625, -310, 10, -310, -330, 1565.9297, -358.0625, 842, 266, 842, 54, 886, 118, 886, 502, 1402.3281, 162.54688, 1559.0703, 638, 1398.7969, 188.74219, 1169.9531, 62.890625, 958, 514.3594, 976.5469, 551.4531, 914, 530, 1207.2109, 562, 1218, 529.6172, 1365.0469, 238.34375, 1337.9063, 259.02344, 1218, 469.64063, 1219.4688, 294.79688, 1217.2578, 327.42188, 1206.1797, 446, 842, 442.39844, 73, 502, 118, 442.39844, 73, 110, 118, 370.39844, 1054.8984, 383.1797, 987.8594, 446, 1022.72656, 393.57813, 1008.65625, 394.03125, 914, 118, 958, 494.3828, 964.77344, 349.60938, 967.2578, 466.60156, 960.0703, 317.0078, 46, 530, 52.148438, 530, 51.953125, 532.03125, -814.14844, 638, 46, 110, -450.6797, 152.46094, -462.5, 124.10156, -457.39844, 186.34375, -474.7422, 214.35156, -438, -74, -630, -74, -630, -246, -394, -246, -394, 10, -438, 10, 458, 370.39844, 458, 266, 566, 266, 566, 330, 842, 370.39844, 650, 330, 650, 266, 714, 266, 118, 266, 374, 266, 374, 370.39844, 118, 182, 997.6406, 562, 896.02344, 530, -490.84375, 223.71875, -509.39844, 227.82031, -582.8203, 199.10938, -702.5625, 151.64844, 1197.4219, 231.90625, 1164.6563, 141.10156, 1174.9219, 218.70313, 981.3906, 379.89844, 1153.1563, 120.52344, 1052.6797, 259.25, -829.84375, -373.9297, -714, -330, -714, 10, 1158.7031, 79.421875, -473.57813, 115.40625, 966.3828, 299.4922, 977.97656, 284.40625, 118, 54, 758, 266, 758, 138, 714, 182, 118, 138, -504.92188, 102.71875, -665.1406, 41.140625, -687.78906, 64.71875, -711.2969, 127.078125)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32Array(5, 6, 7, 8), PackedInt32Array(9, 4, 10, 11), PackedInt32Array(2, 1, 12, 6), PackedInt32Array(13, 14, 15), PackedInt32Array(11, 10, 16, 17, 18), PackedInt32Array(19, 18, 17, 20), PackedInt32Array(21, 19, 20, 22), PackedInt32Array(22, 20, 23), PackedInt32Array(24, 8, 25, 26), PackedInt32Array(26, 25, 27, 28), PackedInt32Array(29, 22, 23, 30), PackedInt32Array(31, 29, 30), PackedInt32Array(32, 31, 30), PackedInt32Array(13, 15, 33, 34), PackedInt32Array(35, 36, 34, 33, 37), PackedInt32Array(4, 9, 0), PackedInt32Array(38, 39, 40, 41), PackedInt32Array(42, 38, 43, 44), PackedInt32Array(45, 43, 38), PackedInt32Array(46, 45, 38), PackedInt32Array(47, 48, 49, 50), PackedInt32Array(47, 50, 51, 52), PackedInt32Array(53, 54, 55, 56), PackedInt32Array(57, 53, 56, 58), PackedInt32Array(58, 59, 60, 57), PackedInt32Array(61, 62, 63, 28), PackedInt32Array(61, 28, 27), PackedInt32Array(64, 61, 27), PackedInt32Array(16, 10, 41, 65), PackedInt32Array(66, 15, 14, 65, 41, 40), PackedInt32Array(46, 38, 41, 67), PackedInt32Array(68, 67, 41), PackedInt32Array(69, 68, 41), PackedInt32Array(70, 69, 41), PackedInt32Array(19, 21, 71), PackedInt32Array(72, 19, 71, 73), PackedInt32Array(74, 32, 30, 36), PackedInt32Array(75, 72, 73, 76, 33), PackedInt32Array(77, 4, 3, 78), PackedInt32Array(41, 77, 78, 79), PackedInt32Array(80, 33, 7, 6, 12), PackedInt32Array(2, 42, 44, 81, 51), PackedInt32Array(35, 74, 36), PackedInt32Array(82, 37, 33), PackedInt32Array(83, 82, 33), PackedInt32Array(76, 83, 33), PackedInt32Array(80, 75, 33), PackedInt32Array(2, 6, 84), PackedInt32Array(8, 24, 57), PackedInt32Array(5, 8, 57), PackedInt32Array(85, 5, 57), PackedInt32Array(85, 57, 60), PackedInt32Array(86, 85, 60, 87), PackedInt32Array(88, 86, 87, 64), PackedInt32Array(88, 64, 27), PackedInt32Array(84, 88, 27), PackedInt32Array(2, 84, 27, 42), PackedInt32Array(52, 51, 81), PackedInt32Array(79, 52, 81, 89), PackedInt32Array(79, 89, 90), PackedInt32Array(79, 90, 91), PackedInt32Array(79, 91, 92), PackedInt32Array(41, 79, 92), PackedInt32Array(41, 92, 70)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-840, -384, 1576, -368, 1569, 648, -824, 648)])
 parsed_geometry_type = 1
 parsed_collision_mask = 4294967041
 source_geometry_mode = 2
@@ -558,7 +557,7 @@ position = Vector2(800, 288)
 position = Vector2(160, 480)
 
 [node name="Enemy3" parent="." unique_id=1139274691 instance=ExtResource("5_svcn8")]
-position = Vector2(288, 160)
+position = Vector2(-520, -136)
 soldier_stats = SubResource("Resource_6uspl")
 weapons = Array[ExtResource("6_mykrp")]([SubResource("Resource_3u3yd")])
 
@@ -627,10 +626,6 @@ script = ExtResource("24_7tbrw")
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1551448888]
 color = Color(0.54901963, 0.5058824, 0.56078434, 1)
 
-[node name="Door3" type="Sprite2D" parent="." unique_id=1317835586]
-position = Vector2(-417, -6)
-texture = ExtResource("34_elm60")
-
 [node name="BlueCar" parent="." unique_id=1145836756 instance=ExtResource("37_vtp3d")]
 position = Vector2(-576, 136.00005)
 rotation = -2.761487
@@ -646,3 +641,15 @@ offset_left = 864.0
 offset_top = 124.0
 offset_right = 864.0
 offset_bottom = 124.0
+
+[node name="StaticBody2D10" type="StaticBody2D" parent="." unique_id=1355878011 groups=["wall"]]
+position = Vector2(-512, -160)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D10" unique_id=89262273]
+polygon = PackedVector2Array(64, 96, 64, 160, -192, 160, -192, -160, 192, -160, 192, 160, 128, 160, 128, -96, -128, -96, -128, 96)
+
+[node name="Door4" parent="." unique_id=1477713953 instance=ExtResource("39_58pdj")]
+offset_left = -416.0
+offset_top = -8.0
+offset_right = -416.0
+offset_bottom = -8.0

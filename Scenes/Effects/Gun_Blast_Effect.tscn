@@ -12,6 +12,13 @@ height = 8
 fill = 1
 fill_from = Vector2(0.5242537, 0.46455225)
 
+[sub_resource type="Curve" id="Curve_gr3gk"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.98192763, 0.82142854), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_qqij5"]
+curve = SubResource("Curve_gr3gk")
+
 [sub_resource type="Curve" id="Curve_alqoe"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
@@ -26,6 +33,7 @@ angle_max = 277.2
 direction = Vector3(0, 0, 0)
 spread = 0.0
 gravity = Vector3(0, 0, 0)
+alpha_curve = SubResource("CurveTexture_qqij5")
 emission_curve = SubResource("CurveTexture_7jdmd")
 
 [node name="GunBlastEffect" type="GPUParticles2D" unique_id=1793492474]
