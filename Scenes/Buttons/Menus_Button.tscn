@@ -1,0 +1,96 @@
+[gd_scene format=3 uid="uid://b6pfugr3kdl2v"]
+
+[ext_resource type="Script" uid="uid://ckxgq83pnv2yh" path="res://Scenes/Buttons/menus_button.gd" id="1_0dga4"]
+[ext_resource type="Texture2D" uid="uid://cyexu3fm2aq3s" path="res://Sprites/HUD/background.png" id="1_ku0np"]
+
+[sub_resource type="Animation" id="Animation_631qn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Texture_Rect/ColorRect:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(4.363637, -144)]
+}
+
+[sub_resource type="Animation" id="Animation_tam8y"]
+resource_name = "card_shine_effect"
+loop_mode = 1
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.06666667, 1),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"_on_animation_loop_started"
+}, {
+"args": [],
+"method": &"_on_animation_loop_finished"
+}]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Texture_Rect/ColorRect:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0009999999, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(4.363637, -144), Vector2(143.99998, -318.47388), Vector2(416, 17.526123)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0dga4"]
+_data = {
+&"RESET": SubResource("Animation_631qn"),
+&"card_shine_effect": SubResource("Animation_tam8y")
+}
+
+[node name="MenusButton" type="Node2D" unique_id=900227919]
+script = ExtResource("1_0dga4")
+
+[node name="Texture_Rect" type="TextureRect" parent="." unique_id=2052238204]
+clip_contents = true
+offset_top = -32.0
+offset_right = 256.0
+offset_bottom = 96.0
+scale = Vector2(1, 0.5)
+pivot_offset = Vector2(256.41156, 62.473877)
+texture = ExtResource("1_ku0np")
+
+[node name="ColorRect" type="ColorRect" parent="Texture_Rect" unique_id=1637214293]
+layout_mode = 0
+offset_left = 4.363637
+offset_top = -144.0
+offset_right = 15.018727
+offset_bottom = 260.74683
+rotation = 0.7853982
+
+[node name="Label" type="Label" parent="Texture_Rect" unique_id=186915603]
+layout_mode = 0
+offset_right = 254.89142
+offset_bottom = 130.51685
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 64
+text = "START"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=158801000]
+libraries/ = SubResource("AnimationLibrary_0dga4")
+
+[connection signal="gui_input" from="Texture_Rect" to="." method="_on_texture_rect_gui_input"]
+[connection signal="mouse_entered" from="Texture_Rect" to="." method="_on_texture_rect_mouse_entered"]
+[connection signal="mouse_exited" from="Texture_Rect" to="." method="_on_texture_rect_mouse_exited"]

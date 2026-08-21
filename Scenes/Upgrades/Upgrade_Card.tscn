@@ -75,7 +75,7 @@ texture = ExtResource("2_tam8y")
 [node name="ColorRect" type="ColorRect" parent="Upgrade_Frame_Sprite" unique_id=699118356]
 offset_left = 4.363637
 offset_top = -144.0
-offset_right = 15.9018755
+offset_right = 15.901633
 offset_bottom = 52.664978
 rotation = 0.7853982
 
