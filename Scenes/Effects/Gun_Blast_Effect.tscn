@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://b4siawy1vgojx"]
+
+[ext_resource type="Script" uid="uid://bfbeta2s78vk1" path="res://Scenes/Effects/gun_blast_effect.gd" id="1_alqoe"]
+
+[sub_resource type="Gradient" id="Gradient_go51y"]
+colors = PackedColorArray(0.6, 0, 0, 1, 1, 0.9647059, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_alqoe"]
+gradient = SubResource("Gradient_go51y")
+width = 8
+height = 8
+fill = 1
+fill_from = Vector2(0.5242537, 0.46455225)
+
+[sub_resource type="Curve" id="Curve_alqoe"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_7jdmd"]
+curve = SubResource("Curve_alqoe")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_7jdmd"]
+particle_flag_disable_z = true
+angle_min = -358.3
+angle_max = 277.2
+direction = Vector3(0, 0, 0)
+spread = 0.0
+gravity = Vector3(0, 0, 0)
+emission_curve = SubResource("CurveTexture_7jdmd")
+
+[node name="GunBlastEffect" type="GPUParticles2D" unique_id=1793492474]
+emitting = false
+amount = 5
+texture = SubResource("GradientTexture2D_alqoe")
+lifetime = 0.1
+one_shot = true
+speed_scale = 15.31
+process_material = SubResource("ParticleProcessMaterial_7jdmd")
+script = ExtResource("1_alqoe")
