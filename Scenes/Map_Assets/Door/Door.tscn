@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://bm1ppd4si4asw"]
+
+[ext_resource type="Texture2D" uid="uid://cnffjo3d1n3bg" path="res://Sprites/Assets/Door/door.png" id="1_3rqf7"]
+[ext_resource type="Script" uid="uid://danmdsxnajcl6" path="res://Scenes/Map_Assets/Door/door.gd" id="1_voded"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fhwqp"]
+size = Vector2(54, 5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jjc5n"]
+size = Vector2(54, 6)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_06txj"]
+polygon = PackedVector2Array(-32, -4, -32, 4, 32, 4, 32, -4)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_06txj"]
+size = Vector2(64, 17)
+
+[node name="Door" type="Control" unique_id=312792714]
+layout_mode = 3
+anchors_preset = 0
+pivot_offset = Vector2(-32, 0)
+script = ExtResource("1_voded")
+
+[node name="Bottom_Indicator" type="Area2D" parent="." unique_id=652057634]
+position = Vector2(0, 11)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bottom_Indicator" unique_id=1943503554]
+shape = SubResource("RectangleShape2D_fhwqp")
+
+[node name="Top_Indicator" type="Area2D" parent="." unique_id=417440998]
+position = Vector2(0, -13)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Top_Indicator" unique_id=1806920694]
+shape = SubResource("RectangleShape2D_jjc5n")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="." unique_id=877906216]
+occluder = SubResource("OccluderPolygon2D_06txj")
+
+[node name="Door_Sprite" type="Sprite2D" parent="." unique_id=1791589650]
+texture = ExtResource("1_3rqf7")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1706651745]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1549147716]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_06txj")
+
+[connection signal="area_entered" from="Bottom_Indicator" to="." method="_on_bottom_indicator_area_entered"]
+[connection signal="area_entered" from="Top_Indicator" to="." method="_on_top_indicator_area_entered"]

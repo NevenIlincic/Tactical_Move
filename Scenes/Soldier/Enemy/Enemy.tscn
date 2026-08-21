@@ -20,6 +20,9 @@ point_count = 2
 [sub_resource type="Gradient" id="Gradient_cgwcb"]
 colors = PackedColorArray(1, 1, 0.43137255, 0, 1, 1, 0.43137255, 0.8039216)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_06txj"]
+size = Vector2(34, 36)
+
 [node name="Enemy" type="Node2D" unique_id=1440065138 groups=["enemy_node", "soldier"]]
 script = ExtResource("1_02vxf")
 
@@ -80,3 +83,8 @@ collision_layer = 4
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Vision_Polygon/Vision_Area" unique_id=664566003]
 
 [node name="PointLight2D" type="PointLight2D" parent="Vision_Polygon" unique_id=1171120504]
+
+[node name="Door_Detection_Area" type="Area2D" parent="." unique_id=1757595917 groups=["door_detection_area"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Door_Detection_Area" unique_id=332521158]
+shape = SubResource("RectangleShape2D_06txj")
