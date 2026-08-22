@@ -75,6 +75,30 @@ blend_mode = 3
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q6by2"]
 size = Vector2(34, 36)
 
+[sub_resource type="Curve" id="Curve_gr3gk"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.98192763, 0.82142854), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_qqij5"]
+curve = SubResource("Curve_gr3gk")
+
+[sub_resource type="Curve" id="Curve_alqoe"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_7jdmd"]
+curve = SubResource("Curve_alqoe")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_rw7ms"]
+particle_flag_disable_z = true
+angle_min = -358.3
+angle_max = 277.2
+direction = Vector3(0, 0, 0)
+spread = 0.0
+gravity = Vector3(0, 0, 0)
+alpha_curve = SubResource("CurveTexture_qqij5")
+emission_curve = SubResource("CurveTexture_7jdmd")
+
 [node name="Player" type="Node2D" unique_id=1108589071 groups=["Player", "soldier"]]
 script = ExtResource("1_ft8w5")
 
@@ -180,7 +204,6 @@ texture = ExtResource("5_jmcll")
 texture_mode = 1
 
 [node name="PointLight2D" type="PointLight2D" parent="Vision_Polygon" unique_id=1183097337]
-position = Vector2(1.5258789e-05, 0.10325624)
 rotation = -1.5707964
 blend_mode = 2
 shadow_enabled = true
@@ -194,6 +217,7 @@ texture_scale = 0.5
 shape = SubResource("RectangleShape2D_q6by2")
 
 [node name="GunBlastEffect" parent="." unique_id=1793492474 instance=ExtResource("2_rw7ms")]
+process_material = SubResource("ParticleProcessMaterial_rw7ms")
 
 [connection signal="input_event" from="Selection_Area" to="." method="_on_selection_area_input_event"]
 [connection signal="body_entered" from="Ally_Detection_Area" to="." method="_on_ally_detection_area_body_entered"]
