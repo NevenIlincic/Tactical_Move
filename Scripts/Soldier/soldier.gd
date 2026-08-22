@@ -1,9 +1,11 @@
 #Base class for Player and Enemy
 class_name Soldier extends Node2D
+#@onready var vision_polygon: SoldierVision = $CanvasGroup/Vision_Polygon
 
 @onready var vision_polygon: SoldierVision = $Vision_Polygon
 @onready var hitbox_collision_shape: CollisionShape2D = $Hitbox/Hitbox_Collision_Shape
 @onready var bullet_line: SoldierBulletLine = $Bullet_Line
+@onready var gun_blast_effect: GunBlastEffect = $GunBlastEffect
 #BULLET SPAWN POINTS
 @onready var m4a1_rifle_bullet_spawn_point: Marker2D = $m4a1_rifle_bullet_spawn_point
 @onready var pistol_bullet_spawn_point: Marker2D = $pistol_bullet_spawn_point
@@ -75,6 +77,8 @@ func connect_to_signals():
 func _on_enemy_soldier_killed(enemy_killed: Soldier, _killed_by: Soldier):
 	if enemies_in_sight.has(enemy_killed.soldier_id):
 		enemies_in_sight.erase(enemy_killed.soldier_id)
+	if vision_polygon.bullet_hit_point:
+		vision_polygon.bullet_hit_point = null
 	if soldier_id != enemy_killed.soldier_id:
 		_on_enemy_lost(enemy_killed)
 		

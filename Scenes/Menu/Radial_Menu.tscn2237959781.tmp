@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://d3gwg3d0gxd4w"]
+
+[ext_resource type="Texture2D" uid="uid://b0hk5gucidtjh" path="res://Sprites/HUD/Engagement_Menu/stop_and_shoot_icon.png" id="1_nr87h"]
+[ext_resource type="Texture2D" uid="uid://y3yekhjq5544" path="res://Sprites/HUD/Engagement_Menu/stop_and_shoot_following_icon.png" id="2_1g15a"]
+[ext_resource type="Texture2D" uid="uid://bmxe4wqdu1rfb" path="res://Sprites/HUD/Engagement_Menu/move_and_shoot_icon.png" id="3_0blgu"]
+[ext_resource type="Texture2D" uid="uid://uahkyrcb1vcj" path="res://Sprites/HUD/Engagement_Menu/move_and_shoot_following_icon.png" id="4_dl1pf"]
+[ext_resource type="Script" uid="uid://cgn5qmfcrqgry" path="res://Scenes/Menu/radial_menu.gd" id="5_mytm5"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_pe4k2"]
+load_path = "res://.godot/imported/ignore_icon.png-a57bc3ac6de36ccb9de3882fb80e5392.ctex"
+
+[node name="RadialMenu" type="PopupMenu" unique_id=321000128]
+oversampling_override = 1.0
+size = Vector2i(462, 336)
+visible = true
+theme_override_constants/icon_max_width = 32
+allow_search = false
+item_count = 5
+item_0/text = "Ignore enemies"
+item_0/icon = SubResource("CompressedTexture2D_pe4k2")
+item_0/checkable = 2
+item_0/id = 0
+item_1/text = "Stop and shoot enemy in sight"
+item_1/icon = ExtResource("1_nr87h")
+item_1/checkable = 2
+item_1/id = 1
+item_2/text = "Stop, focus and shoot enemy"
+item_2/icon = ExtResource("2_1g15a")
+item_2/checkable = 2
+item_2/id = 2
+item_3/text = "Move and shoot enemy"
+item_3/icon = ExtResource("3_0blgu")
+item_3/checkable = 2
+item_3/id = 3
+item_4/text = "Move, focus and shoot enemy"
+item_4/icon = ExtResource("4_dl1pf")
+item_4/checkable = 2
+item_4/id = 4
+script = ExtResource("5_mytm5")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=920767165]

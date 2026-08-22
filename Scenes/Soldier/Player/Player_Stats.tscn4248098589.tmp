@@ -1,0 +1,213 @@
+[gd_scene format=3 uid="uid://dyh4j30522553"]
+
+[ext_resource type="Script" uid="uid://cjyx66lir3nk8" path="res://Scenes/Soldier/Player/player_stats.gd" id="1_1t72u"]
+[ext_resource type="Texture2D" uid="uid://cyexu3fm2aq3s" path="res://Sprites/HUD/background.png" id="1_i03bc"]
+[ext_resource type="Texture2D" uid="uid://dcjpq0yr88po1" path="res://Sprites/Player/Avatars/male_soldier.png" id="2_1t72u"]
+[ext_resource type="Texture2D" uid="uid://cr31y8uph8gtp" path="res://Sprites/Weapon/pistol.png" id="5_ss5un"]
+[ext_resource type="Texture2D" uid="uid://c8g306bg7ys0b" path="res://Sprites/HUD/ammo.png" id="6_a13ou"]
+[ext_resource type="Texture2D" uid="uid://dou87mqtbaj0r" path="res://Sprites/HUD/running_icon.png" id="7_vcxfj"]
+[ext_resource type="Texture2D" uid="uid://baqs766k8tj40" path="res://Sprites/HUD/HP_bar.png" id="9_3m3yq"]
+[ext_resource type="Texture2D" uid="uid://dyfgry1avttjy" path="res://Sprites/HUD/reload_icon.png" id="9_21aeu"]
+[ext_resource type="Texture2D" uid="uid://c4enkpr2e4535" path="res://Sprites/HUD/reaction_time_icon.png" id="9_luigt"]
+[ext_resource type="Texture2D" uid="uid://d1hablc0nksx6" path="res://Sprites/HUD/max_distance_icon.png" id="10_luigt"]
+[ext_resource type="Texture2D" uid="uid://dau8h2jtb2w5a" path="res://Sprites/HUD/fire-rate_icon.png" id="11_fhtql"]
+[ext_resource type="Texture2D" uid="uid://bl8n0a5b8nowm" path="res://Sprites/HUD/damage_icon.png" id="12_w7q5a"]
+[ext_resource type="Texture2D" uid="uid://baqatp3dbiqcp" path="res://Sprites/HUD/hit_chance_icon.png" id="13_t3mcf"]
+[ext_resource type="Texture2D" uid="uid://cce05fem7r7wu" path="res://Sprites/Weapon/m4a1_rifle.png" id="14_q3xov"]
+[ext_resource type="Texture2D" uid="uid://cfst0l2a1ts0o" path="res://Sprites/HUD/Engagement_Menu/ignore_icon.png" id="15_21aeu"]
+
+[node name="PlayerStats" type="Control" unique_id=1324960430]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 128.0
+offset_right = 128.0
+pivot_offset = Vector2(-128, 0)
+script = ExtResource("1_1t72u")
+
+[node name="Background" type="Sprite2D" parent="." unique_id=104324732]
+position = Vector2(7.6293945e-06, 0)
+scale = Vector2(1.96875, 1)
+texture = ExtResource("1_i03bc")
+offset = Vector2(62.984123, 0)
+
+[node name="Player_Avatar" type="Sprite2D" parent="." unique_id=1815090772]
+texture = ExtResource("2_1t72u")
+offset = Vector2(-64, 0)
+
+[node name="Pistol_Sprite" type="Sprite2D" parent="." unique_id=2085132682]
+position = Vector2(-7.6293945e-06, 7.6293945e-06)
+scale = Vector2(0.4375, 0.4375)
+texture = ExtResource("5_ss5un")
+offset = Vector2(438.85712, 15.999985)
+
+[node name="Player_Name_Label" type="Label" parent="." unique_id=2035158339]
+layout_mode = 0
+offset_left = -128.0
+offset_top = -56.0
+offset_bottom = -33.0
+pivot_offset = Vector2(128, 56)
+text = "Nate"
+horizontal_alignment = 1
+
+[node name="Move_Speed_Icon" type="Sprite2D" parent="." unique_id=191204091]
+position = Vector2(-7.6293945e-06, 0)
+scale = Vector2(0.10714286, 0.10714286)
+texture = ExtResource("7_vcxfj")
+offset = Vector2(233.33337, -65.333374)
+
+[node name="HP_Bar" type="TextureProgressBar" parent="." unique_id=1875553936]
+layout_mode = 0
+offset_top = -58.0
+offset_right = 128.0
+offset_bottom = -26.0
+pivot_offset = Vector2(0, 58)
+value = 100.0
+texture_progress = ExtResource("9_3m3yq")
+
+[node name="HP_Percentage_Label" type="Label" parent="HP_Bar" unique_id=221412413]
+layout_mode = 0
+offset_right = 128.0
+offset_bottom = 32.0
+text = "as"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Move_Speed_Label" type="Label" parent="." unique_id=1308399395]
+layout_mode = 0
+offset_left = 35.0
+offset_top = -19.0
+offset_right = 83.0
+offset_bottom = 4.0
+pivot_offset = Vector2(-35, 19)
+text = "250.0"
+horizontal_alignment = 1
+
+[node name="Reload_Icon" type="Node2D" parent="." unique_id=405323814]
+position = Vector2(272, -28)
+
+[node name="Reload_Time_Label" type="Label" parent="Reload_Icon" unique_id=398094810]
+offset_left = 17.0
+offset_top = -10.0
+offset_right = 57.0
+offset_bottom = 13.0
+text = "3s"
+
+[node name="Group6" type="Sprite2D" parent="Reload_Icon" unique_id=1476212677]
+position = Vector2(4.3919783, -1.5133033)
+scale = Vector2(0.07504767, 0.07761281)
+texture = ExtResource("9_21aeu")
+
+[node name="Reaction_Time_Node" type="Node2D" parent="." unique_id=632908039]
+position = Vector2(8, 21)
+
+[node name="Reaction_Time_Icon" type="Sprite2D" parent="Reaction_Time_Node" unique_id=649515456]
+position = Vector2(12.5, 29)
+scale = Vector2(0.17032969, 0.09615388)
+texture = ExtResource("9_luigt")
+
+[node name="Reaction_Time_Label" type="Label" parent="Reaction_Time_Node" unique_id=1013793301]
+offset_left = 28.0
+offset_top = 16.0
+offset_right = 68.0
+offset_bottom = 39.0
+text = "0.5s"
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Max_Distance_Node" type="Node2D" parent="." unique_id=1106639208]
+position = Vector2(22, 20)
+
+[node name="Max_Distance_Icon" type="Sprite2D" parent="Max_Distance_Node" unique_id=1166080212]
+position = Vector2(2.000001, 2.000001)
+scale = Vector2(0.107142866, 0.107142866)
+texture = ExtResource("10_luigt")
+
+[node name="Max_Distance_Label" type="Label" parent="Max_Distance_Node" unique_id=287646158]
+offset_left = 14.0
+offset_top = -12.0
+offset_right = 54.0
+offset_bottom = 11.0
+text = "1000.0"
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Fire_Rate_Node" type="Node2D" parent="." unique_id=2121599020]
+position = Vector2(270, -1)
+
+[node name="Fire_Rate_Icon" type="Sprite2D" parent="Fire_Rate_Node" unique_id=1056022214]
+position = Vector2(4, -3.000002)
+scale = Vector2(0.080356985, 0.069705024)
+texture = ExtResource("11_fhtql")
+
+[node name="Fire_Rate_Label" type="Label" parent="Fire_Rate_Node" unique_id=2003114895]
+offset_left = 18.0
+offset_top = -12.0
+offset_right = 58.0
+offset_bottom = 11.0
+text = "3 rps"
+metadata/_edit_use_anchors_ = true
+
+[node name="Damage_Node" type="Node2D" parent="." unique_id=438799726]
+position = Vector2(272, 25)
+
+[node name="Damage_Icon" type="Sprite2D" parent="Damage_Node" unique_id=1271097270]
+scale = Vector2(0.102678545, 0.102678545)
+texture = ExtResource("12_w7q5a")
+
+[node name="Damage_Label" type="Label" parent="Damage_Node" unique_id=148570676]
+offset_left = 16.0
+offset_top = -11.0
+offset_right = 56.0
+offset_bottom = 12.0
+text = "20"
+metadata/_edit_use_anchors_ = true
+
+[node name="Hit_Chance_Node" type="Node2D" parent="." unique_id=1114669804]
+position = Vector2(271, 55)
+
+[node name="Hit_Chance_Icon" type="Sprite2D" parent="Hit_Chance_Node" unique_id=920799777]
+position = Vector2(0, -3)
+scale = Vector2(0.089285634, 0.089285634)
+texture = ExtResource("13_t3mcf")
+
+[node name="Hit_Chance_Label" type="Label" parent="Hit_Chance_Node" unique_id=585657666]
+offset_left = 16.0
+offset_top = -14.0
+offset_right = 56.0
+offset_bottom = 9.0
+text = "80%"
+
+[node name="Ammo_Node" type="Node2D" parent="." unique_id=412936948]
+position = Vector2(272, -49)
+
+[node name="Ammo" type="Sprite2D" parent="Ammo_Node" unique_id=1881746605]
+scale = Vector2(0.071428575, 0.071428575)
+texture = ExtResource("6_a13ou")
+
+[node name="Ammo_Label" type="Label" parent="Ammo_Node" unique_id=327861521]
+offset_left = 16.0
+offset_top = -13.0
+offset_right = 59.0
+offset_bottom = 10.0
+text = "10/30"
+
+[node name="m4a1_rifle_sprite" type="Sprite2D" parent="." unique_id=1776526028]
+position = Vector2(-111.999985, 104.00001)
+rotation = -0.56688166
+scale = Vector2(0.3295794, 0.3295794)
+texture = ExtResource("14_q3xov")
+offset = Vector2(914.0497, 236.5729)
+
+[node name="Grid_Container_Applied_Upgrades" type="GridContainer" parent="." unique_id=298888765]
+layout_mode = 0
+offset_left = 448.0
+offset_top = -64.0
+offset_right = 1024.0
+offset_bottom = 64.0
+theme_override_constants/h_separation = 15
+columns = 6
+
+[node name="Engagement_Strategy_Icon" type="Sprite2D" parent="." unique_id=1028706703]
+position = Vector2(-112, -48)
+scale = Vector2(0.10714286, 0.10714286)
+texture = ExtResource("15_21aeu")

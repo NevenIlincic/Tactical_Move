@@ -1,6 +1,9 @@
 [gd_scene format=3 uid="uid://bsv7rv63cgyf3"]
 
-[ext_resource type="Texture2D" uid="uid://m2ja8xi8628c" path="res://Sprites/Cars/White_Car.png" id="1_2gc08"]
+[ext_resource type="Texture2D" uid="uid://m2ja8xi8628c" path="res://Sprites/Assets/Cars/White_Car.png" id="1_2gc08"]
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_fhwqp"]
+polygon = PackedVector2Array(-96, 44, -86, 47, 111, 45, 120, 23, 119, -38, 107, -51, -93, -50, -105, -42, -114, -31, -118, -2, -113, 27)
 
 [node name="Car" type="StaticBody2D" unique_id=75836846 groups=["wall"]]
 
@@ -9,3 +12,6 @@ texture = ExtResource("1_2gc08")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=1450214080]
 polygon = PackedVector2Array(107.207886, -51.482788, 119.02838, -38.05603, 120.22266, 22.85846, 111.20282, 45.099, -53.70691, 47.28174, -86.01752, 47.127197, -95.66028, 44.295654, -113.21588, 26.384766, -118.64728, -2.7957153, -113.684265, -30.998047, -104.716, -42.468384, -92.7926, -50.58203, -17.025269, -51.148254)
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="." unique_id=1517053065]
+occluder = SubResource("OccluderPolygon2D_fhwqp")

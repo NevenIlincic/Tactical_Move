@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cgpj7hlgh52n1" path="res://Scripts/Soldier/Enemy/enemy.gd" id="1_02vxf"]
 [ext_resource type="Texture2D" uid="uid://d1tdmtvde540b" path="res://Sprites/Enemy/enemy.png" id="1_i1u57"]
+[ext_resource type="PackedScene" uid="uid://b4siawy1vgojx" path="res://Scenes/Effects/Gun_Blast_Effect.tscn" id="2_cgwcb"]
 [ext_resource type="Texture2D" uid="uid://uwcsyrtrt75l" path="res://Sprites/Path_Line/New Piskel-1.png - 2026-08-04T161338.290.png" id="3_02vxf"]
 [ext_resource type="Script" uid="uid://c386pr8tx5qep" path="res://Scripts/Soldier/soldier_vision.gd" id="3_fw0yv"]
 [ext_resource type="Script" uid="uid://duyphgu7sdufm" path="res://Scenes/Soldier/soldier_bullet_line.gd" id="5_cmdj1"]
@@ -20,6 +21,33 @@ point_count = 2
 [sub_resource type="Gradient" id="Gradient_cgwcb"]
 colors = PackedColorArray(1, 1, 0.43137255, 0, 1, 1, 0.43137255, 0.8039216)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_06txj"]
+size = Vector2(34, 36)
+
+[sub_resource type="Curve" id="Curve_gr3gk"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.98192763, 0.82142854), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_qqij5"]
+curve = SubResource("Curve_gr3gk")
+
+[sub_resource type="Curve" id="Curve_alqoe"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_7jdmd"]
+curve = SubResource("Curve_alqoe")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_cgwcb"]
+particle_flag_disable_z = true
+angle_min = -358.3
+angle_max = 277.2
+direction = Vector3(0, 0, 0)
+spread = 0.0
+gravity = Vector3(0, 0, 0)
+alpha_curve = SubResource("CurveTexture_qqij5")
+emission_curve = SubResource("CurveTexture_7jdmd")
+
 [node name="Enemy" type="Node2D" unique_id=1440065138 groups=["enemy_node", "soldier"]]
 script = ExtResource("1_02vxf")
 
@@ -27,27 +55,6 @@ script = ExtResource("1_02vxf")
 texture_filter = 1
 texture_repeat = 1
 texture = ExtResource("1_i1u57")
-
-[node name="Vision_Polygon" type="Polygon2D" parent="." unique_id=1604988782]
-color = Color(0.5822249, 0.63125, 0.33140624, 0.19500001)
-polygon = PackedVector2Array(0, 0, -256, -256, 256, -256)
-script = ExtResource("3_fw0yv")
-max_range = 1000.0
-ray_count = 50.0
-
-[node name="Enemy_Target_Line" type="Line2D" parent="Vision_Polygon" unique_id=1406944396]
-visible = false
-show_behind_parent = true
-texture_filter = 1
-texture_repeat = 2
-width = 3.0
-texture = ExtResource("3_02vxf")
-texture_mode = 1
-
-[node name="Vision_Area" type="Area2D" parent="Vision_Polygon" unique_id=771459024]
-collision_layer = 4
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Vision_Polygon/Vision_Area" unique_id=664566003]
 
 [node name="Detection_Area" type="Area2D" parent="." unique_id=96710695 groups=["enemy"]]
 visible = false
@@ -76,3 +83,36 @@ position = Vector2(49, -8)
 
 [node name="pistol_bullet_spawn_point" type="Marker2D" parent="." unique_id=1878688254]
 position = Vector2(29, -7)
+
+[node name="Vision_Polygon" type="Polygon2D" parent="." unique_id=1604988782]
+visible = false
+light_mask = 2
+color = Color(0.5822249, 0.63125, 0.33140624, 0.19500001)
+polygon = PackedVector2Array(0, 0, -256, -256, 256, -256)
+script = ExtResource("3_fw0yv")
+max_range = 1000.0
+ray_count = 50.0
+
+[node name="Enemy_Target_Line" type="Line2D" parent="Vision_Polygon" unique_id=1406944396]
+visible = false
+show_behind_parent = true
+texture_filter = 1
+texture_repeat = 2
+width = 3.0
+texture = ExtResource("3_02vxf")
+texture_mode = 1
+
+[node name="Vision_Area" type="Area2D" parent="Vision_Polygon" unique_id=771459024]
+collision_layer = 4
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Vision_Polygon/Vision_Area" unique_id=664566003]
+
+[node name="PointLight2D" type="PointLight2D" parent="Vision_Polygon" unique_id=1171120504]
+
+[node name="Door_Detection_Area" type="Area2D" parent="." unique_id=1757595917 groups=["door_detection_area"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Door_Detection_Area" unique_id=332521158]
+shape = SubResource("RectangleShape2D_06txj")
+
+[node name="GunBlastEffect" parent="." unique_id=1793492474 instance=ExtResource("2_cgwcb")]
+process_material = SubResource("ParticleProcessMaterial_cgwcb")

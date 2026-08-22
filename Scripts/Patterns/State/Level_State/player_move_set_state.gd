@@ -16,6 +16,7 @@ var players_set_for_rotation: Dictionary = {}
 func _init(data: Array):
 	level = data[0]
 	alive_players = level.get_alive_players()
+	level.radial_menu.id_pressed.connect(_on_popup_menu_item_pressed)
 	#player_selection_manager = PlayerSelectionManager.new()
 
 	#fill_occupied_target_tiles_dict()
@@ -57,7 +58,9 @@ func _unhandled_input(event: InputEvent):
 			#_erase_from_occupated_tiles_dict(selected_player.player_path[-1], selected_player)
 		selected_player.reset_path()
 		players_set_for_move.erase(selected_player)
-
+	
+	if Input.is_action_just_pressed("popup") and selected_player:
+		level.radial_menu.popup()
 
 
 func is_adjacent(a: Vector2i, b: Vector2i) -> bool:
@@ -123,3 +126,22 @@ func check_is_mouse_over_wall() -> bool:
 		if collider.is_in_group("wall"):
 			return true
 	return false
+
+func _on_popup_menu_item_pressed(item_id: int):
+	match item_id:
+		0:
+			PlayerSelectionManager.selected_player.change_engagement_strategy(Player.EngagementRules.IGNORE)
+			#PlayerSelectionManager.selected_player.set_engagement_strategy(IgnoreEnemyStrategy.new())
+		1:
+			PlayerSelectionManager.selected_player.change_engagement_strategy(Player.EngagementRules.STOP_AND_SHOT_IN_PASSING)
+			#PlayerSelectionManager.selected_player.set_engagement_strategy(StopShootPassingStrategy.new())
+		2:
+			PlayerSelectionManager.selected_player.change_engagement_strategy(Player.EngagementRules.STOP_AND_SHOT_FOLLOWING)
+			#PlayerSelectionManager.selected_player.set_engagement_strategy(StopShootFollowingStrategy.new())
+		3:
+			PlayerSelectionManager.selected_player.change_engagement_strategy(Player.EngagementRules.MOVE_AND_SHOT_IN_PASSING)
+			#PlayerSelectionManager.selected_player.set_engagement_strategy(MoveShootPassingStrategy.new())
+		4:
+			PlayerSelectionManager.selected_player.change_engagement_strategy(Player.EngagementRules.MOVE_AND_SHOT_FOLLOWING)
+			#PlayerSelectionManager.selected_player.set_engagement_strategy(MoveShootFollowingStrategy.new())
+	Signals.engagement_strategy_changed.emit(PlayerSelectionManager.selected_player)

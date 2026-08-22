@@ -60,6 +60,7 @@ func _on_confirmation_dialog_opened(upgrade_card: UpgradeCard):
 		upgrade_card.is_applied = true
 		UpgradeManager.apply_permanent_perk(upgrade_card, PlayerSelectionManager.selected_player)
 		Signals.permanent_upgrade_applied.emit(upgrade_card)
+		AudioManager.play_upgrade_sound()
 	#remove_card_from_grid(grid_container_available, upgrade_card)
 
 func _on_action_confirmed():
