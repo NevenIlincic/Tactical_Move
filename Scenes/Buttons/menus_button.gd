@@ -26,6 +26,7 @@ func _on_texture_rect_mouse_entered() -> void:
 	tween.tween_property(texture_rect, "scale", Vector2(0.9, 0.5), 0.05).set_ease(Tween.EASE_IN)
 	animation_player.play("card_shine_effect")
 	is_mouse_hovered = true
+	AudioManager.play_button_hover_sound()
 
 
 func _on_texture_rect_mouse_exited() -> void:
@@ -36,6 +37,7 @@ func _on_texture_rect_mouse_exited() -> void:
 
 func _on_texture_rect_gui_input(event: InputEvent) -> void:
 		if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.is_pressed():
+			AudioManager.play_upgrade_sound()
 			match button_text:
 				"START":
 					get_tree().change_scene_to_file("res://Scenes/Test_Scene.tscn")

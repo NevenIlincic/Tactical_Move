@@ -46,6 +46,7 @@ func _on_mouse_entered() -> void:
 	tween.tween_property(self, "scale", Vector2(1.2, 1.2), 0.2).set_trans(Tween.TRANS_BACK)
 	animation_player.play("card_shine_effect")
 	is_mouse_hovered = true
+	AudioManager.play_button_hover_sound()
 	
 func _on_mouse_exited() -> void:
 	is_mouse_hovered = false

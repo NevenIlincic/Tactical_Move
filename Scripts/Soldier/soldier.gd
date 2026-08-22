@@ -14,6 +14,7 @@ var is_in_active_state: bool = false
 var is_killed: bool = false
 var is_walking: bool = false
 var follow_enemy_with_rotation = false
+var is_low_hp_penalty_applied: bool = false
 
 var enemy_to_shoot: Soldier
 var enemies_in_sight: Dictionary = {} #{Soldier: true}
@@ -34,8 +35,9 @@ var soldier_id: String
 			soldier_stats.speed = Stat.new(soldier_stats.speed.base_value)
 			soldier_stats.reaction_time = Stat.new(soldier_stats.reaction_time.base_value)
 			soldier_stats.max_travel_distance = Stat.new(soldier_stats.max_travel_distance.base_value)
-			soldier_stats.HP = Stat.new(soldier_stats.HP.base_value)
-			
+			soldier_stats.MAX_HP = Stat.new(soldier_stats.MAX_HP.base_value)
+			soldier_stats.HP = Stat.new(soldier_stats.MAX_HP.base_value)
+
 var engagement_strategy: EngagementStrategy
 #UPGRADE/PERKS
 var temporary_upgrades: Array[UpgradeData] = []
