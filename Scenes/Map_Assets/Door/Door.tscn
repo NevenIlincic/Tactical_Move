@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://cnffjo3d1n3bg" path="res://Sprites/Assets/Door/door.png" id="1_3rqf7"]
 [ext_resource type="Script" uid="uid://danmdsxnajcl6" path="res://Scenes/Map_Assets/Door/door.gd" id="1_voded"]
+[ext_resource type="AudioStream" uid="uid://dagrr1lqib1bk" path="res://Sound/Door/door_slam_sound.mp3" id="3_y4x0x"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fhwqp"]
 size = Vector2(54, 5)
@@ -44,6 +45,9 @@ texture = ExtResource("1_3rqf7")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1549147716]
 position = Vector2(0, -0.5)
 shape = SubResource("RectangleShape2D_06txj")
+
+[node name="Door_Slam_Sound" type="AudioStreamPlayer2D" parent="." unique_id=1631336601]
+stream = ExtResource("3_y4x0x")
 
 [connection signal="area_entered" from="Bottom_Indicator" to="." method="_on_bottom_indicator_area_entered"]
 [connection signal="area_entered" from="Top_Indicator" to="." method="_on_top_indicator_area_entered"]

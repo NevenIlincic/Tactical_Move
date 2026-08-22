@@ -78,8 +78,6 @@ size = Vector2(34, 36)
 [node name="Player" type="Node2D" unique_id=1108589071 groups=["Player", "soldier"]]
 script = ExtResource("1_ft8w5")
 
-[node name="GunBlastEffect" parent="." unique_id=1793492474 instance=ExtResource("2_rw7ms")]
-
 [node name="Player_Path_Line" type="Line2D" parent="." unique_id=2110637716]
 show_behind_parent = true
 top_level = true
@@ -194,6 +192,8 @@ texture_scale = 0.5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Door_Detection_Area" unique_id=233869902]
 shape = SubResource("RectangleShape2D_q6by2")
+
+[node name="GunBlastEffect" parent="." unique_id=1793492474 instance=ExtResource("2_rw7ms")]
 
 [connection signal="input_event" from="Selection_Area" to="." method="_on_selection_area_input_event"]
 [connection signal="body_entered" from="Ally_Detection_Area" to="." method="_on_ally_detection_area_body_entered"]

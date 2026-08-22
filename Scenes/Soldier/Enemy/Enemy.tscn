@@ -27,8 +27,6 @@ size = Vector2(34, 36)
 [node name="Enemy" type="Node2D" unique_id=1440065138 groups=["enemy_node", "soldier"]]
 script = ExtResource("1_02vxf")
 
-[node name="GunBlastEffect" parent="." unique_id=1793492474 instance=ExtResource("2_cgwcb")]
-
 [node name="Enemy_Sprite" type="Sprite2D" parent="." unique_id=1264594983]
 texture_filter = 1
 texture_repeat = 1
@@ -91,3 +89,5 @@ collision_layer = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Door_Detection_Area" unique_id=332521158]
 shape = SubResource("RectangleShape2D_06txj")
+
+[node name="GunBlastEffect" parent="." unique_id=1793492474 instance=ExtResource("2_cgwcb")]
