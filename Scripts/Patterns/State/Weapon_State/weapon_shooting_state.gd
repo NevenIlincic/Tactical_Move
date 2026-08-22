@@ -28,7 +28,6 @@ func shoot_target():
 		var current_hp: float = current_weapon.enemy_to_shoot.soldier_stats.HP.get_value()
 		var max_hp: float = current_weapon.enemy_to_shoot.soldier_stats.MAX_HP.get_value()
 		if not current_weapon.enemy_to_shoot.is_killed and current_hp / max_hp < 0.3 and not current_weapon.enemy_to_shoot.is_low_hp_penalty_applied:
-			print(current_weapon.enemy_to_shoot, " ", current_hp, " ", max_hp)
 			UpgradeManager.apply_low_hp_penalty(current_weapon.enemy_to_shoot)
 			if is_player_soldier:
 				Signals.player_low_hp_applied.emit(current_weapon.enemy_to_shoot)

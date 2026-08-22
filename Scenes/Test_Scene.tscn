@@ -436,6 +436,7 @@ tile_set = SubResource("TileSet_fhwqp")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1702938192 groups=["wall"]]
 position = Vector2(928, 288)
+collision_layer = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1953621873]
 position = Vector2(-28, 36)
@@ -443,6 +444,7 @@ shape = SubResource("RectangleShape2D_06txj")
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="." unique_id=1451802714 groups=["wall"]]
 position = Vector2(480, 96)
+collision_layer = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2" unique_id=794179377]
 position = Vector2(-32, 0)
@@ -450,6 +452,7 @@ shape = SubResource("RectangleShape2D_jjc5n")
 
 [node name="StaticBody2D3" type="StaticBody2D" parent="." unique_id=1690032868 groups=["wall"]]
 position = Vector2(800, 160)
+collision_layer = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3" unique_id=357753609]
 shape = SubResource("RectangleShape2D_fhwqp")
@@ -505,6 +508,7 @@ weapons = Array[ExtResource("6_mykrp")]([SubResource("Resource_3u3yd")])
 
 [node name="StaticBody2D4" type="StaticBody2D" parent="." unique_id=714018171 groups=["wall"]]
 position = Vector2(26, 323)
+collision_layer = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4" unique_id=888715709]
 position = Vector2(33.5, -3)
@@ -512,6 +516,7 @@ shape = SubResource("RectangleShape2D_moqms")
 
 [node name="StaticBody2D5" type="StaticBody2D" parent="." unique_id=1694365476 groups=["wall"]]
 position = Vector2(448, 224)
+collision_layer = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D5" unique_id=109451764]
 position = Vector2(-32, 0)
@@ -519,16 +524,19 @@ shape = SubResource("RectangleShape2D_8c5ma")
 
 [node name="StaticBody2D6" type="StaticBody2D" parent="." unique_id=497704669 groups=["wall"]]
 position = Vector2(416, 320)
+collision_layer = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D6" unique_id=2045453555]
 shape = SubResource("RectangleShape2D_cl7co")
 
 [node name="StaticBody2D7" type="StaticBody2D" parent="." unique_id=607675511 groups=["wall"]]
+collision_layer = 3
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D7" unique_id=275818317]
 polygon = PackedVector2Array(63, 522, 64, 512, 896, 512, 896, 520)
 
 [node name="StaticBody2D8" type="StaticBody2D" parent="." unique_id=1491801163 groups=["wall"]]
+collision_layer = 3
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D8" unique_id=1756831485]
 position = Vector2(292.49997, 274.36865)
@@ -536,6 +544,7 @@ scale = Vector2(0.39062503, 0.3173831)
 polygon = PackedVector2Array(-421.11996, 334.08008, -421.11996, 497.91992, 1381.1199, 497.91992, 1381.1199, 334.08008)
 
 [node name="StaticBody2D9" type="StaticBody2D" parent="." unique_id=1926806844 groups=["wall"]]
+collision_layer = 3
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D9" unique_id=709302965]
 polygon = PackedVector2Array(576, 256, 576, 320, 640, 320, 640, 256)
@@ -640,6 +649,7 @@ offset_bottom = 124.0
 
 [node name="StaticBody2D10" type="StaticBody2D" parent="." unique_id=1355878011 groups=["wall"]]
 position = Vector2(-512, -160)
+collision_layer = 3
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D10" unique_id=89262273]
 polygon = PackedVector2Array(64, 96, 64, 160, -192, 160, -192, -160, 192, -160, 192, 160, 128, 160, 128, -96, -128, -96, -128, 96)

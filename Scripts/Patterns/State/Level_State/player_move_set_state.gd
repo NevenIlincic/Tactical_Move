@@ -88,11 +88,11 @@ func update_preview() -> void:
 func is_path_blocked(from: Vector2, to: Vector2) -> bool:
 	var space_state = level.get_world_2d().direct_space_state
 	var query = PhysicsRayQueryParameters2D.create(from, to)
-	# query.collision_mask = 2 
+	query.collision_mask = 2 
 	var result = space_state.intersect_ray(query)
 	if not result.is_empty():
 		return true 
-		
+	
 	return false
 
 
