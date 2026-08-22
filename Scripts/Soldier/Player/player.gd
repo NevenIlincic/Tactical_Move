@@ -8,6 +8,8 @@ var is_selected: bool = false
 var is_set_for_move: bool = false
 var is_set_for_rotation: bool = false
 
+var is_queued_for_medic_healing: bool = false
+
 var allies_nearby: Dictionary = {} #{PLayer: true}
 
 #LINE PATH NODES
@@ -20,6 +22,7 @@ var allies_nearby: Dictionary = {} #{PLayer: true}
 @onready var move_to_position_marker: Sprite2D = $Move_To_Position_Marker
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @export var player_avatar: CompressedTexture2D
+@onready var healing_needed_sprite: Sprite2D = $Healing_Needed_Sprite
 
 ####PLAYER MOVES
 @onready var look_at_position_sprite: Sprite2D = $Look_At_Position_Sprite
@@ -39,6 +42,7 @@ enum EngagementRules {
 var rays: Array[RayCast2D] = []
 func _ready() -> void:
 	super._ready()
+	soldier_type = SoldierType.PLAYER
 	set_up_lines_data()
 	#connect_to_signals()
 	
@@ -98,7 +102,6 @@ func change_engagement_strategy(rule: EngagementRules):
 
 func set_engagement_strategy(strategy: EngagementStrategy):
 	engagement_strategy = strategy
-	print("POSTAVLJENO")
 #func check_is_enemy_in_sight():
 	#if enemy_to_shoot:
 		#if follow_enemy_with_rotation:
@@ -149,17 +152,30 @@ func set_player_path(new_path: Array[Vector2]):
 func check_for_temporary_perks():
 	UpgradeManager.apply_movement_penalty_perk(self)
 
+
+func check_soldier_has_action():
+	if is_queued_for_medic_healing:
+		reset_path()
+		Signals.player_move_finished.emit(self)
+		return
+	if len(player_path) > 1 or point_to_look:
+		Signals.player_move_continued.emit(self)
+	else:
+		Signals.player_move_finished.emit(self)
 func _pre_move_actions():
 	check_soldier_has_action()
 	player_look_at_line.reset_path()
 	
 func _on_selection_area_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.is_pressed() and event.button_index == MOUSE_BUTTON_LEFT:
-		is_selected = !is_selected
-		if is_selected:
-			Signals.set_selected_player.emit(self)
-		else:
-			Signals.deselect_player.emit()
+		_on_mouse_click(event)
+
+func _on_mouse_click(event: InputEvent):
+	is_selected = !is_selected
+	if is_selected:
+		Signals.set_selected_player.emit(self)
+	else:
+		Signals.deselect_player.emit()
 
 ##PATH_LINE
 func add_point_to_path(point: Vector2) -> void:
@@ -186,11 +202,16 @@ func _on_enemy_lost_extra(enemy: Soldier) -> void:
 		(enemy as Enemy).hide_enemy()
 	#point_to_look = null
 
+func check_is_healing_needed():
+	if soldier_stats.HP.base_value < soldier_stats.MAX_HP.base_value:
+		return true
+	return false
 
-
-	
-
-
+func can_soldier_move():
+	if is_queued_for_medic_healing:
+		reset_path()
+		return false
+	return true
 func _on_ally_detection_area_body_entered(body: Node2D) -> void:
 	var soldier = body.get_parent()
 	if soldier != self and body.is_in_group("player_hitbox") and soldier is Player:

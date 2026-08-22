@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://bxrsachv2vex3" path="res://Sprites/Player/after_move_look_at_position.png" id="9_3um6k"]
 [ext_resource type="Script" uid="uid://duyphgu7sdufm" path="res://Scenes/Soldier/soldier_bullet_line.gd" id="11_tk11s"]
 [ext_resource type="Texture2D" uid="uid://crp281jh7dnh6" path="res://Sprites/Light/bela_kupa_60stepeni.png" id="12_q6by2"]
+[ext_resource type="Texture2D" uid="uid://brl5iuqo7keov" path="res://Sprites/HUD/Player/healing_icon.png" id="14_esp8e"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_06txj"]
 size = Vector2(60, 60)
@@ -218,6 +219,14 @@ shape = SubResource("RectangleShape2D_q6by2")
 
 [node name="GunBlastEffect" parent="." unique_id=1793492474 instance=ExtResource("2_rw7ms")]
 process_material = SubResource("ParticleProcessMaterial_rw7ms")
+
+[node name="Healing_Needed_Sprite" type="Sprite2D" parent="." unique_id=872506951]
+visible = false
+z_index = 2
+texture_filter = 1
+position = Vector2(16, -16)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("14_esp8e")
 
 [connection signal="input_event" from="Selection_Area" to="." method="_on_selection_area_input_event"]
 [connection signal="body_entered" from="Ally_Detection_Area" to="." method="_on_ally_detection_area_body_entered"]

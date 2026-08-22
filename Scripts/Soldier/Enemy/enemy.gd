@@ -26,8 +26,15 @@ func when_escaped():
 	if num_seen_by == 0:
 		visible = false
 
+func check_soldier_has_action():
+	if len(player_path) > 1 or point_to_look:
+		Signals.player_move_continued.emit(self)
+	else:
+		Signals.player_move_finished.emit(self)
+
 func _ready() -> void:
 	super._ready()
+	soldier_type = SoldierType.ENEMY
 	#visible = false
 	engagement_strategy = StopShootFollowingStrategy.new()
 	point_to_look = Vector2.ZERO

@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://dvxglkihfxy2x"]
+
+[ext_resource type="PackedScene" uid="uid://chy7dddrrr700" path="res://Scenes/Soldier/Player/Player.tscn" id="1_2ddjp"]
+[ext_resource type="Script" uid="uid://b7whg4dgrsnvu" path="res://Scenes/Soldier/Player/medic_player.gd" id="2_jqc10"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_06txj"]
+size = Vector2(96, 96)
+
+[node name="MedicPlayer" unique_id=1108589071 instance=ExtResource("1_2ddjp")]
+script = ExtResource("2_jqc10")
+
+[node name="Medic_Apply_Area" type="Area2D" parent="." index="17" unique_id=1419835665]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Medic_Apply_Area" index="0" unique_id=1916169960]
+shape = SubResource("RectangleShape2D_06txj")
+
+[connection signal="body_entered" from="Medic_Apply_Area" to="." method="_on_medic_apply_area_body_entered"]
+[connection signal="body_exited" from="Medic_Apply_Area" to="." method="_on_medic_apply_area_body_exited"]

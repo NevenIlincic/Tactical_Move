@@ -28,7 +28,9 @@ func _init(data: Array):
 	#vision_manager = VisionManager.new()
 	for player: Soldier in alive_soldiers.keys():	
 		player.do_actions()
-
+	
+	level.action_state_label.visible = true
+	
 func connect_to_signals():
 	Signals.player_move_finished.connect(_on_player_move_finished)
 	Signals.player_move_continued.connect(_on_player_move_continued)
@@ -71,8 +73,13 @@ func _on_player_move_finished(soldier: Soldier):
 	
 	if soldiers_in_action.is_empty():
 		num_player_finished_moves = 0
+		for player: Player in alive_players:
+			player.is_queued_for_medic_healing = false
+			player.healing_needed_sprite.visible = false
 		#level.set_level_state(PlayerSetMoveState.new([level]))
+		level.action_state_label.visible = false
 		level.set_level_state(PreparationState.new([level]))
+		
 func _on_player_move_continued(soldier: Soldier):
 	soldiers_in_action[soldier] = true
 	

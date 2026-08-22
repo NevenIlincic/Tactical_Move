@@ -17,6 +17,9 @@ var current_state: State
 
 var cover_points: Array
 
+@onready var move_state_label: Label = $CanvasLayer/Move_State_Label
+@onready var action_state_label: Label = $CanvasLayer/Action_State_Label
+
 #MENU
 @onready var upgrade_menu: UpgradeMenu = $CanvasLayer/UpgradeMenu
 @onready var radial_menu: PopupMenu = $CanvasLayer/RadialMenu

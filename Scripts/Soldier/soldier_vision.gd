@@ -88,7 +88,7 @@ func update_vision():
 		
 	
 func check_is_enemy_soldier_hit(current_soldier: Soldier, hit_soldier: Soldier):
-	return current_soldier.get_script() != hit_soldier.get_script()
+	return current_soldier.soldier_type != hit_soldier.soldier_type
 
 func reset_target_line():
 	enemy_target_line.remove_point(-1)

@@ -18,7 +18,7 @@ func _init(data: Array):
 	alive_players = level.get_alive_players()
 	level.radial_menu.id_pressed.connect(_on_popup_menu_item_pressed)
 	#player_selection_manager = PlayerSelectionManager.new()
-
+	level.move_state_label.visible = true
 	#fill_occupied_target_tiles_dict()
 
 func _unhandled_input(event: InputEvent):
@@ -33,6 +33,7 @@ func _unhandled_input(event: InputEvent):
 		#print(players_set_for_move)
 		if check_can_do_action():
 			Signals.action_started.emit()
+			level.move_state_label.visible = false
 			level.set_level_state(ActionState.new([level]))
 					
 	if Input.is_action_pressed("drawing"):
