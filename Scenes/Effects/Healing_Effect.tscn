@@ -23,9 +23,9 @@ emission_curve = SubResource("CurveTexture_0rtqg")
 
 [node name="HealingEffect_Cross" type="GPUParticles2D" unique_id=718372442]
 emitting = false
-amount = 2
+amount = 3
 texture = ExtResource("1_0c1lx")
-lifetime = 2.0
+lifetime = 3.0
 one_shot = true
 speed_scale = 4.0
 explosiveness = 1.0

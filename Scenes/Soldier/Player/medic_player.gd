@@ -1,18 +1,38 @@
 class_name MedicPlayer extends Player
 
+signal check_can_heal()
+
+@onready var healing_area_indicator: Sprite2D = $Healing_Area_Indicator
+
 var allies_to_heal_nearby: Dictionary = {}
 
 const HEALING_AMOUNT: float = 250.0
+const HEALING_TIMEOUT_AMOUNT: float = 30.0
+var healing_timeout: float = 25.0
+var can_heal: bool = true
 
 func _ready() -> void:
 	super._ready()
+	check_can_heal.connect(_check_is_healing_available)
 
 func _pre_move_actions():
 	super._pre_move_actions()
-	do_healing()
+	if is_queued_for_medic_healing:
+		do_healing()
+
+func _check_is_healing_available(action_duration: float):
+	healing_timeout -= action_duration
+	
+	if healing_timeout <= 0.0:
+		can_heal = true
+		healing_area_indicator.visible = true
+		healing_timeout = 0.0
+
 
 ##HEALING
 func do_healing():
+	healing_timeout = HEALING_TIMEOUT_AMOUNT
+	healing_area_indicator.visible = false
 	for ally_id: String in allies_to_heal_nearby:
 		var ally: Player = allies_to_heal_nearby[ally_id]
 		if ally.is_queued_for_medic_healing:
@@ -20,6 +40,7 @@ func do_healing():
 func heal_player(player: Player):
 	player.soldier_stats.HP.base_value = minf(player.soldier_stats.HP.base_value + HEALING_AMOUNT, player.soldier_stats.MAX_HP.base_value)
 	player.healing_effect_cross.do_effect()
+	player.healing_needed_sprite.visible = false
 ###
 
 func _on_medic_apply_area_body_entered(body: Node2D) -> void:
@@ -41,7 +62,7 @@ func _on_medic_apply_area_body_exited(body: Node2D) -> void:
 			##ally.healing_needed_sprite.visible = true
 
 func _unhandled_input(event: InputEvent) -> void:
-	if Input.is_action_just_pressed("healing") and is_selected and not allies_to_heal_nearby.is_empty():
+	if Input.is_action_just_pressed("healing") and is_selected and not allies_to_heal_nearby.is_empty() and can_heal:
 		is_queued_for_medic_healing = !is_queued_for_medic_healing
 		for ally_id: String in allies_to_heal_nearby:
 			var ally: Player = allies_to_heal_nearby[ally_id]

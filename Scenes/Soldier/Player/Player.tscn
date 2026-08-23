@@ -101,7 +101,11 @@ gravity = Vector3(0, 0, 0)
 alpha_curve = SubResource("CurveTexture_qqij5")
 emission_curve = SubResource("CurveTexture_7jdmd")
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_58pdj"]
+light_mode = 1
+
 [node name="Player" type="Node2D" unique_id=1108589071 groups=["Player", "soldier"]]
+z_index = 2
 script = ExtResource("1_ft8w5")
 
 [node name="Player_Path_Line" type="Line2D" parent="." unique_id=2110637716]
@@ -225,6 +229,7 @@ process_material = SubResource("ParticleProcessMaterial_rw7ms")
 visible = false
 z_index = 2
 texture_filter = 1
+material = SubResource("CanvasItemMaterial_58pdj")
 position = Vector2(16, -16)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("14_esp8e")

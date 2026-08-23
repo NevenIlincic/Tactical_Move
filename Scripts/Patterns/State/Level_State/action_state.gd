@@ -12,6 +12,7 @@ var current_action_killed_players: Dictionary
 
 var soldiers_in_action: Dictionary
 
+var action_duration: float = 0.0
 
 func _init(data: Array):
 	level = data[0]
@@ -44,6 +45,7 @@ func _unhandled_input(event: InputEvent):
 	pass
 
 func _physics_process(delta: float) -> void:
+	action_duration += delta
 	var all_players_finished_moves: bool = true
 	
 	check_for_deletion()
@@ -81,6 +83,8 @@ func _on_player_move_finished(soldier: Soldier):
 			if not current_action_killed_players.has(player.soldier_id):
 				player.is_queued_for_medic_healing = false
 				player.healing_needed_sprite.visible = false
+				if player is MedicPlayer:
+					player._check_is_healing_available(action_duration)
 		#level.set_level_state(PlayerSetMoveState.new([level]))
 		level.action_state_label.visible = false
 		level.set_level_state(PreparationState.new([level]))

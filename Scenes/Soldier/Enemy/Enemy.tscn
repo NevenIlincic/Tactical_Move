@@ -49,6 +49,7 @@ alpha_curve = SubResource("CurveTexture_qqij5")
 emission_curve = SubResource("CurveTexture_7jdmd")
 
 [node name="Enemy" type="Node2D" unique_id=1440065138 groups=["enemy_node", "soldier"]]
+z_index = 2
 script = ExtResource("1_02vxf")
 
 [node name="Enemy_Sprite" type="Sprite2D" parent="." unique_id=1264594983]
