@@ -8,6 +8,7 @@ var num_finished_moves: int
 var num_player_finished_moves: int
 var alive_soldiers: Dictionary
 var alive_players: Dictionary
+var current_action_killed_players: Dictionary
 
 var soldiers_in_action: Dictionary
 
@@ -17,6 +18,7 @@ func _init(data: Array):
 	
 	alive_soldiers = level.get_alive_soldiers()
 	alive_players = level.get_alive_players()
+	current_action_killed_players = {}
 	soldiers_in_action = alive_soldiers.duplicate(true)
 	#soldiers_in_action = {}
 	num_finished_moves = 0
@@ -30,6 +32,8 @@ func _init(data: Array):
 		player.do_actions()
 	
 	level.action_state_label.visible = true
+	
+	
 	
 func connect_to_signals():
 	Signals.player_move_finished.connect(_on_player_move_finished)
@@ -74,8 +78,9 @@ func _on_player_move_finished(soldier: Soldier):
 	if soldiers_in_action.is_empty():
 		num_player_finished_moves = 0
 		for player: Player in alive_players:
-			player.is_queued_for_medic_healing = false
-			player.healing_needed_sprite.visible = false
+			if not current_action_killed_players.has(player.soldier_id):
+				player.is_queued_for_medic_healing = false
+				player.healing_needed_sprite.visible = false
 		#level.set_level_state(PlayerSetMoveState.new([level]))
 		level.action_state_label.visible = false
 		level.set_level_state(PreparationState.new([level]))
@@ -85,6 +90,7 @@ func _on_player_move_continued(soldier: Soldier):
 	
 func _on_soldier_killed(enemy: Soldier, killed_by: Soldier):
 	#enemy.enemies_in_sight.clear()
+	current_action_killed_players[enemy.soldier_id] = enemy
 	_on_player_move_finished(enemy)
 
 func _on_stop_enemy_actions(enemy_soldier: Soldier):

@@ -14,6 +14,7 @@
 [ext_resource type="Script" uid="uid://duyphgu7sdufm" path="res://Scenes/Soldier/soldier_bullet_line.gd" id="11_tk11s"]
 [ext_resource type="Texture2D" uid="uid://crp281jh7dnh6" path="res://Sprites/Light/bela_kupa_60stepeni.png" id="12_q6by2"]
 [ext_resource type="Texture2D" uid="uid://brl5iuqo7keov" path="res://Sprites/HUD/Player/healing_icon.png" id="14_esp8e"]
+[ext_resource type="PackedScene" uid="uid://bw1j5p7a3sj6j" path="res://Scenes/Effects/Healing_Effect.tscn" id="15_yq3hi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_06txj"]
 size = Vector2(60, 60)
@@ -227,6 +228,8 @@ texture_filter = 1
 position = Vector2(16, -16)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("14_esp8e")
+
+[node name="HealingEffect_Cross" parent="." unique_id=718372442 instance=ExtResource("15_yq3hi")]
 
 [connection signal="input_event" from="Selection_Area" to="." method="_on_selection_area_input_event"]
 [connection signal="body_entered" from="Ally_Detection_Area" to="." method="_on_ally_detection_area_body_entered"]

@@ -22,7 +22,9 @@ var allies_nearby: Dictionary = {} #{PLayer: true}
 @onready var move_to_position_marker: Sprite2D = $Move_To_Position_Marker
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @export var player_avatar: CompressedTexture2D
+#HEALING
 @onready var healing_needed_sprite: Sprite2D = $Healing_Needed_Sprite
+@onready var healing_effect_cross: HealingEffect = $HealingEffect_Cross
 
 ####PLAYER MOVES
 @onready var look_at_position_sprite: Sprite2D = $Look_At_Position_Sprite
@@ -153,11 +155,9 @@ func check_for_temporary_perks():
 	UpgradeManager.apply_movement_penalty_perk(self)
 
 
+
+
 func check_soldier_has_action():
-	if is_queued_for_medic_healing:
-		reset_path()
-		Signals.player_move_finished.emit(self)
-		return
 	if len(player_path) > 1 or point_to_look:
 		Signals.player_move_continued.emit(self)
 	else:
@@ -212,6 +212,7 @@ func can_soldier_move():
 		reset_path()
 		return false
 	return true
+	
 func _on_ally_detection_area_body_entered(body: Node2D) -> void:
 	var soldier = body.get_parent()
 	if soldier != self and body.is_in_group("player_hitbox") and soldier is Player:
