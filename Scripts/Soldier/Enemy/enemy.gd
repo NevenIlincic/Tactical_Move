@@ -120,7 +120,8 @@ func evaluate_best_move():
 	
 	var current_HP: float = soldier_stats.HP.get_value()
 	var max_travel_distance: float = soldier_stats.max_travel_distance.get_value()
-	for player: Player in alive_players:
+	for player_id: String in alive_players:
+		var player: Player = alive_players[player_id]
 		var intent_for_player: Intent = Intent.ATTACK
 		var path_to_player = NavigationServer2D.map_get_path(map_rid, global_position, player.global_position, true)
 		var distance_to_player: float = get_path_length(path_to_player)

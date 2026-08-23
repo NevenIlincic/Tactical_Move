@@ -26,6 +26,7 @@
 [ext_resource type="Texture2D" uid="uid://c07go6e5fp3av" path="res://Sprites/Player/Avatars/male_soldier_3.png" id="22_w2bir"]
 [ext_resource type="PackedScene" uid="uid://dyh4j30522553" path="res://Scenes/Soldier/Player/Player_Stats.tscn" id="23_nfmrh"]
 [ext_resource type="Script" uid="uid://jqj0nkq44djb" path="res://Scenes/camera_2d.gd" id="24_7tbrw"]
+[ext_resource type="Texture2D" uid="uid://daf3icuwxhg26" path="res://Sprites/HUD/Timer/timer_icon.png" id="25_gw302"]
 [ext_resource type="Texture2D" uid="uid://5dn5fh731jps" path="res://Sprites/Player/Avatars/male_soldier_4.png" id="25_q2r4x"]
 [ext_resource type="PackedScene" uid="uid://bmbr4kpa58muf" path="res://Scenes/Menu/Upgrade_Menu.tscn" id="26_3y4ie"]
 [ext_resource type="PackedScene" uid="uid://d3gwg3d0gxd4w" path="res://Scenes/Menu/Radial_Menu.tscn" id="27_3u3yd"]
@@ -657,6 +658,23 @@ visible = false
 offset_right = 40.0
 offset_bottom = 21.0
 text = "ACTION STATE"
+
+[node name="Timer" type="Node2D" parent="CanvasLayer" unique_id=839130681]
+position = Vector2(75, 0)
+
+[node name="Timer_Icon" type="Sprite2D" parent="CanvasLayer/Timer" unique_id=1345233427]
+texture_filter = 2
+position = Vector2(448, 32)
+scale = Vector2(0.17857143, 0.17857143)
+texture = ExtResource("25_gw302")
+
+[node name="Passed_Time_Label" type="Label" parent="CanvasLayer/Timer" unique_id=1841287299]
+offset_left = 472.0
+offset_top = 3.0
+offset_right = 567.0
+offset_bottom = 65.0
+theme_override_font_sizes/font_size = 48
+text = "0:0:0"
 
 [node name="Player4" parent="." unique_id=575771634 instance=ExtResource("4_10mtb")]
 position = Vector2(711, 334.99994)

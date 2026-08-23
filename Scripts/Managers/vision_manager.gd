@@ -36,7 +36,8 @@ func _check_is_enemy_entered_vision():
 					last_frame_visible_enemies[enemy] = {}
 				last_frame_visible_enemies[enemy][player] = 0
 				#Signals.show_enemy.emit(enemy, player)
-				player._on_enemy_seen(enemy)
+				if not player.is_queued_for_deletion():
+					player._on_enemy_seen(enemy)
 
 
 func _check_is_enemy_exited_vision():

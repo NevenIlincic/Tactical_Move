@@ -12,6 +12,8 @@ var is_queued_for_medic_healing: bool = false
 
 var allies_nearby: Dictionary = {} #{PLayer: true}
 
+var nesto: String = ""
+
 #LINE PATH NODES
 @onready var player_path_line: PlayerPathLine = $Player_Path_Line
 @onready var player_look_at_line: PlayerLookAtLine = $Player_Look_At_Line

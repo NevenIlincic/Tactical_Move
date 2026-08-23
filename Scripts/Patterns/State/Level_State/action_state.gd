@@ -45,6 +45,7 @@ func _unhandled_input(event: InputEvent):
 	pass
 
 func _physics_process(delta: float) -> void:
+	level.total_passed_time_millis += int(delta * 1000.0)
 	action_duration += delta
 	var all_players_finished_moves: bool = true
 	
@@ -79,8 +80,10 @@ func _on_player_move_finished(soldier: Soldier):
 	
 	if soldiers_in_action.is_empty():
 		num_player_finished_moves = 0
-		for player: Player in alive_players:
-			if not current_action_killed_players.has(player.soldier_id):
+		for player_id: String in alive_players:
+			#print(player.soldier_id, " ", current_action_killed_players)
+			if not current_action_killed_players.has(player_id):
+				var player: Player = alive_players[player_id]
 				player.is_queued_for_medic_healing = false
 				player.healing_needed_sprite.visible = false
 				if player is MedicPlayer:
@@ -94,6 +97,8 @@ func _on_player_move_continued(soldier: Soldier):
 	
 func _on_soldier_killed(enemy: Soldier, killed_by: Soldier):
 	#enemy.enemies_in_sight.clear()
+	if enemy is Player:
+		print("ID: ", enemy.soldier_id)
 	current_action_killed_players[enemy.soldier_id] = enemy
 	_on_player_move_finished(enemy)
 
