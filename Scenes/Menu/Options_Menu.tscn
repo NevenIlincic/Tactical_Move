@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://s56adyusiw24"]
+
+[ext_resource type="Script" uid="uid://br2b4yq0x0vgr" path="res://Scenes/Menu/options_menu.gd" id="1_pobh7"]
+
+[node name="OptionsMenu" type="Node2D" unique_id=1686594788]
+script = ExtResource("1_pobh7")

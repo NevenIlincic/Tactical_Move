@@ -12,7 +12,6 @@ var healing_timeout: float = 25.0
 var can_heal: bool = true
 
 func _ready() -> void:
-	nesto = "MEDIC"
 	super._ready()
 	check_can_heal.connect(_check_is_healing_available)
 

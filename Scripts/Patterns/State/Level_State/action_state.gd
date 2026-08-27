@@ -96,9 +96,6 @@ func _on_player_move_continued(soldier: Soldier):
 	soldiers_in_action[soldier] = true
 	
 func _on_soldier_killed(enemy: Soldier, killed_by: Soldier):
-	#enemy.enemies_in_sight.clear()
-	if enemy is Player:
-		print("ID: ", enemy.soldier_id)
 	current_action_killed_players[enemy.soldier_id] = enemy
 	_on_player_move_finished(enemy)
 

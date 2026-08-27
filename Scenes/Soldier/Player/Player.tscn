@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://c386pr8tx5qep" path="res://Scripts/Soldier/soldier_vision.gd" id="4_t26db"]
 [ext_resource type="Texture2D" uid="uid://cp3f8t70d5twp" path="res://icon.svg" id="4_ude3g"]
 [ext_resource type="Texture2D" uid="uid://uwcsyrtrt75l" path="res://Sprites/Path_Line/New Piskel-1.png - 2026-08-04T161338.290.png" id="5_jmcll"]
-[ext_resource type="Texture2D" uid="uid://xobgolcljc7w" path="res://Sprites/Player/Player_Soldier_Pistol.png" id="5_tk11s"]
+[ext_resource type="Texture2D" uid="uid://q7sw1jdmg3ev" path="res://Sprites/Player/Player_M4a1_rifle.png" id="5_yq3hi"]
 [ext_resource type="Script" uid="uid://b260cldj7kekv" path="res://Scripts/Line/player_look_at_line.gd" id="7_t26db"]
 [ext_resource type="Texture2D" uid="uid://bldh4qpfu1l23" path="res://Sprites/Player/look_at_position.png" id="7_x56g5"]
 [ext_resource type="Texture2D" uid="uid://cynm5bschf8o1" path="res://Sprites/Player/move_to_position_marker.png" id="8_0eouq"]
@@ -126,10 +126,10 @@ texture = ExtResource("8_0eouq")
 
 [node name="Player_Sprite" type="Sprite2D" parent="." unique_id=1716240992]
 z_index = 1
+texture_filter = 1
 texture_repeat = 1
-position = Vector2(7.6293945e-06, -0.46153474)
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("5_tk11s")
+position = Vector2(8, -120)
+texture = ExtResource("5_yq3hi")
 offset = Vector2(-0.00030048078, 118.15355)
 
 [node name="Selection_Area" type="Area2D" parent="." unique_id=2041313350]
@@ -183,10 +183,10 @@ position = Vector2(0, -4)
 shape = SubResource("RectangleShape2D_jjc5n")
 
 [node name="m4a1_rifle_bullet_spawn_point" type="Marker2D" parent="." unique_id=1798696889]
-position = Vector2(49, -8)
+position = Vector2(45, 7)
 
 [node name="pistol_bullet_spawn_point" type="Marker2D" parent="." unique_id=2000225844]
-position = Vector2(29, -7)
+position = Vector2(36, 7)
 
 [node name="Player_Avatar" type="Sprite2D" parent="." unique_id=824355655]
 
