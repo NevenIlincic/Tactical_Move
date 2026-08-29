@@ -1,75 +1,12 @@
-[gd_scene format=4 uid="uid://s56adyusiw24"]
+[gd_scene format=3 uid="uid://s56adyusiw24"]
 
 [ext_resource type="Script" uid="uid://br2b4yq0x0vgr" path="res://Scenes/Menu/options_menu.gd" id="1_pobh7"]
-[ext_resource type="Texture2D" uid="uid://dx4qogxo2oe5u" path="res://Sprites/Tiles/New Piskel-2.png (46).png" id="2_o75mi"]
-[ext_resource type="Texture2D" uid="uid://dovquimkexa2o" path="res://Sprites/Tiles/New Piskel-2.png (50).png" id="3_nkoq7"]
-[ext_resource type="Texture2D" uid="uid://by41vprbe8yxy" path="res://Sprites/Tiles/New Piskel-2.png (51).png" id="4_av6u3"]
-[ext_resource type="Texture2D" uid="uid://coidsrajfw0k4" path="res://Sprites/Tiles/concrete.png" id="5_7sy1p"]
-[ext_resource type="Texture2D" uid="uid://b57h4w4d5rop7" path="res://Sprites/Tiles/Interior/Dark_Ground.png" id="6_ktebc"]
-[ext_resource type="Texture2D" uid="uid://dm2e5uoe3m328" path="res://Sprites/Tiles/New Piskel-2.png (47).png" id="7_oo7d7"]
-[ext_resource type="Texture2D" uid="uid://dlkqyytxty7sg" path="res://Sprites/Tiles/New Piskel-2.png (48).png" id="8_grul4"]
-[ext_resource type="Texture2D" uid="uid://c4kxbpqlxpvur" path="res://Sprites/Tiles/New Piskel-2.png (49).png" id="9_circ6"]
-[ext_resource type="PackedScene" uid="uid://di76hjbstq4th" path="res://Scenes/Map_Assets/Cars/Blue_Car.tscn" id="10_uk171"]
+[ext_resource type="PackedScene" uid="uid://b6pfugr3kdl2v" path="res://Scenes/Buttons/Menus_Button.tscn" id="5_ehegv"]
 [ext_resource type="Texture2D" uid="uid://cyexu3fm2aq3s" path="res://Sprites/HUD/background.png" id="11_nkoq7"]
 [ext_resource type="Texture2D" uid="uid://jmhohtbrj7dy" path="res://Sprites/Button/button.png" id="12_av6u3"]
 [ext_resource type="PackedScene" uid="uid://iah5eecblfbi" path="res://Scenes/Buttons/Input_Button.tscn" id="13_ktebc"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jlqwe"]
-texture = ExtResource("2_o75mi")
-texture_region_size = Vector2i(64, 64)
-0:0/0 = 0
-0:0/0/custom_data_0 = true
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vy3l3"]
-texture = ExtResource("3_nkoq7")
-texture_region_size = Vector2i(64, 64)
-0:0/0 = 0
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_uf28e"]
-texture = ExtResource("4_av6u3")
-texture_region_size = Vector2i(64, 64)
-0:0/0 = 0
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_g2b3l"]
-texture = ExtResource("5_7sy1p")
-texture_region_size = Vector2i(64, 64)
-0:0/0 = 0
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0dmso"]
-texture = ExtResource("6_ktebc")
-texture_region_size = Vector2i(64, 64)
-0:0/0 = 0
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6w5wn"]
-texture = ExtResource("7_oo7d7")
-texture_region_size = Vector2i(64, 64)
-0:0/0 = 0
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_iu0ec"]
-texture = ExtResource("8_grul4")
-texture_region_size = Vector2i(64, 64)
-0:0/0 = 0
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qf2s1"]
-texture = ExtResource("9_circ6")
-texture_region_size = Vector2i(64, 64)
-0:0/0 = 0
-
-[sub_resource type="TileSet" id="TileSet_6oa8d"]
-tile_size = Vector2i(64, 64)
-custom_data_layer_0/name = "solid"
-custom_data_layer_0/type = 1
-sources/0 = SubResource("TileSetAtlasSource_jlqwe")
-sources/7 = SubResource("TileSetAtlasSource_6w5wn")
-sources/8 = SubResource("TileSetAtlasSource_iu0ec")
-sources/9 = SubResource("TileSetAtlasSource_qf2s1")
-sources/10 = SubResource("TileSetAtlasSource_vy3l3")
-sources/11 = SubResource("TileSetAtlasSource_uf28e")
-sources/18 = SubResource("TileSetAtlasSource_g2b3l")
-sources/4 = SubResource("TileSetAtlasSource_0dmso")
-
 [sub_resource type="Animation" id="Animation_av6u3"]
-length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -125,6 +62,30 @@ tracks/4/path = NodePath("Inputs_Tab/Inputs5:modulate")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Inputs_Menu:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Back_Button:modulate")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
@@ -193,6 +154,30 @@ tracks/4/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Inputs_Menu:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.5, 0.85),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Back_Button:modulate")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0.6, 0.95),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_av6u3"]
 _data = {
@@ -203,137 +188,11 @@ _data = {
 [node name="OptionsMenu" type="Node2D" unique_id=1686594788]
 script = ExtResource("1_pobh7")
 
-[node name="TileMaps" type="Node2D" parent="." unique_id=843027173]
-
-[node name="TileMap" type="TileMapLayer" parent="TileMaps" unique_id=1069454145]
-tile_map_data = PackedByteArray("AAATAAYAEgAAAAAAAAASAAYAEgAAAAAAAAARAAYAEgAAAAAAAAAQAAYAEgAAAAAAAAAQAAUAEgAAAAAAAAARAAUAEgAAAAAAAAASAAUAEgAAAAAAAAATAAUAEgAAAAAAAAATAAMAEgAAAAAAAAASAAMAEgAAAAAAAAARAAMAEgAAAAAAAAAQAAMAEgAAAAAAAAAQAAQAEgAAAAAAAAARAAQAEgAAAAAAAAASAAQAEgAAAAAAAAATAAQAEgAAAAAAAAAPAAMAEgAAAAAAAAAPAAIAEgAAAAAAAAAPAAQAEgAAAAAAAAAPAAUAEgAAAAAAAAAPAAYAEgAAAAAAAAATAAIAEgAAAAAAAAASAAIAEgAAAAAAAAARAAIAEgAAAAAAAAAQAAIAEgAAAAAAAAAAAAkAEgAAAAAAAAABAAkAEgAAAAAAAAACAAkAEgAAAAAAAAADAAkAEgAAAAAAAAAEAAkAEgAAAAAAAAAFAAkAEgAAAAAAAAAGAAkAEgAAAAAAAAAHAAkAEgAAAAAAAAAIAAkAEgAAAAAAAAAJAAkAEgAAAAAAAAAKAAkAEgAAAAAAAAALAAkAEgAAAAAAAAAMAAkAEgAAAAAAAAANAAkAEgAAAAAAAAAOAAkAEgAAAAAAAAAPAAkAEgAAAAAAAAAQAAkAEgAAAAAAAAARAAkAEgAAAAAAAAASAAkAEgAAAAAAAAATAAkAEgAAAAAAAAAPAAEAEgAAAAAAAAAQAAEAEgAAAAAAAAARAAEAEgAAAAAAAAASAAEAEgAAAAAAAAATAAEAEgAAAAAAAAAPAAAAEgAAAAAAAAAQAAAAEgAAAAAAAAARAAAAEgAAAAAAAAASAAAAEgAAAAAAAAATAAAAEgAAAAAAAAAAAAoAEgAAAAAAAAABAAoAEgAAAAAAAAACAAoAEgAAAAAAAAADAAoAEgAAAAAAAAAEAAoAEgAAAAAAAAAFAAoAEgAAAAAAAAAGAAoAEgAAAAAAAAAHAAoAEgAAAAAAAAAIAAoAEgAAAAAAAAAJAAoAEgAAAAAAAAAKAAoAEgAAAAAAAAALAAoAEgAAAAAAAAAMAAoAEgAAAAAAAAANAAoAEgAAAAAAAAAOAAoAEgAAAAAAAAAPAAoAEgAAAAAAAAAQAAoAEgAAAAAAAAARAAoAEgAAAAAAAAASAAoAEgAAAAAAAAATAAoAEgAAAAAAAAAAAAAAEgAAAAAAAAABAAAAEgAAAAAAAAACAAAAEgAAAAAAAAADAAAAEgAAAAAAAAAEAAAAEgAAAAAAAAAFAAAAEgAAAAAAAAAGAAAAEgAAAAAAAAAHAAAAEgAAAAAAAAAIAAAAEgAAAAAAAAAJAAAAEgAAAAAAAAAKAAAAEgAAAAAAAAALAAAAEgAAAAAAAAAMAAAAEgAAAAAAAAANAAAAEgAAAAAAAAAOAAAAEgAAAAAAAAAOAAEAEgAAAAAAAAD//wAAEgAAAAAAAAD//wEAEgAAAAAAAAD//wIAEgAAAAAAAAD//wMAEgAAAAAAAAD//wQAEgAAAAAAAAD//wUAEgAAAAAAAAD//wYAEgAAAAAAAAD//wgAEgAAAAAAAAD//wkAEgAAAAAAAAD+/wkAEgAAAAAAAAD+/wgAEgAAAAAAAAD+/wcAEgAAAAAAAAD+/wYAEgAAAAAAAAD+/wUAEgAAAAAAAAD+/wQAEgAAAAAAAAD+/wMAEgAAAAAAAAD+/wIAEgAAAAAAAAD+/wAAEgAAAAAAAAD+/wEAEgAAAAAAAAAPAAgAEgAAAAAAAAAQAAgAEgAAAAAAAAATAAgAEgAAAAAAAAASAAgAEgAAAAAAAAARAAgAEgAAAAAAAAASAAcAEgAAAAAAAAATAAcAEgAAAAAAAAARAAcAEgAAAAAAAAAQAAcAEgAAAAAAAAAPAAcAEgAAAAAAAAD//woAEgAAAAAAAAD+/woAEgAAAAAAAAABAAEAEgAAAAAAAAD+/wsAEgAAAAAAAAD//wsAEgAAAAAAAAAAAAsAEgAAAAAAAAABAAsAEgAAAAAAAAACAAsAEgAAAAAAAAADAAsAEgAAAAAAAAAEAAsAEgAAAAAAAAAFAAsAEgAAAAAAAAAGAAsAEgAAAAAAAAAHAAsAEgAAAAAAAAAIAAsAEgAAAAAAAAAJAAsAEgAAAAAAAAAKAAsAEgAAAAAAAAALAAsAEgAAAAAAAAAMAAsAEgAAAAAAAAANAAsAEgAAAAAAAAAOAAsAEgAAAAAAAAAPAAsAEgAAAAAAAAAQAAsAEgAAAAAAAAARAAsAEgAAAAAAAAASAAsAEgAAAAAAAAATAAsAEgAAAAAAAAD+/wwAEgAAAAAAAAD//wwAEgAAAAAAAAAAAAwAEgAAAAAAAAABAAwAEgAAAAAAAAACAAwAEgAAAAAAAAADAAwAEgAAAAAAAAAEAAwAEgAAAAAAAAAFAAwAEgAAAAAAAAAGAAwAEgAAAAAAAAAHAAwAEgAAAAAAAAAIAAwAEgAAAAAAAAAJAAwAEgAAAAAAAAAKAAwAEgAAAAAAAAALAAwAEgAAAAAAAAAMAAwAEgAAAAAAAAANAAwAEgAAAAAAAAAOAAwAEgAAAAAAAAAPAAwAEgAAAAAAAAAQAAwAEgAAAAAAAAARAAwAEgAAAAAAAAASAAwAEgAAAAAAAAATAAwAEgAAAAAAAAAUAAMAEgAAAAAAAAAUAAQAEgAAAAAAAAAUAAUAEgAAAAAAAAAUAAYAEgAAAAAAAAAUAAcAEgAAAAAAAAAUAAgAEgAAAAAAAAAUAAkAEgAAAAAAAAAUAAoAEgAAAAAAAAAUAAsAEgAAAAAAAAAUAAwAEgAAAAAAAAAVAAwAEgAAAAAAAAAWAAwAEgAAAAAAAAAXAAwAEgAAAAAAAAAYAAwAEgAAAAAAAAAYAAsAEgAAAAAAAAAYAAoAEgAAAAAAAAAXAAoAEgAAAAAAAAAWAAoAEgAAAAAAAAAWAAsAEgAAAAAAAAAVAAsAEgAAAAAAAAAXAAsAEgAAAAAAAAAVAAoAEgAAAAAAAAAVAAkAEgAAAAAAAAAWAAkAEgAAAAAAAAAXAAkAEgAAAAAAAAAYAAkAEgAAAAAAAAAYAAgAEgAAAAAAAAAXAAgAEgAAAAAAAAAWAAgAEgAAAAAAAAAVAAgAEgAAAAAAAAAVAAcAEgAAAAAAAAAWAAcAEgAAAAAAAAAXAAcAEgAAAAAAAAAYAAcAEgAAAAAAAAAYAAYAEgAAAAAAAAAXAAYAEgAAAAAAAAAWAAYAEgAAAAAAAAAVAAYAEgAAAAAAAAAVAAUAEgAAAAAAAAAWAAUAEgAAAAAAAAAXAAUAEgAAAAAAAAAYAAUAEgAAAAAAAAAYAAQAEgAAAAAAAAAXAAQAEgAAAAAAAAAWAAQAEgAAAAAAAAAWAAMAEgAAAAAAAAAVAAMAEgAAAAAAAAAXAAMAEgAAAAAAAAAYAAMAEgAAAAAAAAAYAAIAEgAAAAAAAAAXAAIAEgAAAAAAAAAWAAIAEgAAAAAAAAAWAAEAEgAAAAAAAAAVAAEAEgAAAAAAAAAUAAEAEgAAAAAAAAAUAAIAEgAAAAAAAAAUAAAAEgAAAAAAAAAVAAAAEgAAAAAAAAAWAAAAEgAAAAAAAAAXAAAAEgAAAAAAAAAYAAAAEgAAAAAAAAAYAAEAEgAAAAAAAAAXAAEAEgAAAAAAAAAVAAIAEgAAAAAAAAD9/wwAEgAAAAAAAAD9/wsAEgAAAAAAAAD9/woAEgAAAAAAAAD9/wkAEgAAAAAAAAD9/wgAEgAAAAAAAAD9/wcAEgAAAAAAAAD9/wYAEgAAAAAAAAD9/wUAEgAAAAAAAAD9/wQAEgAAAAAAAAD9/wMAEgAAAAAAAAD9/wIAEgAAAAAAAAD9/wEAEgAAAAAAAAD9/wAAEgAAAAAAAAD9////EgAAAAAAAAD+////EgAAAAAAAAD/////EgAAAAAAAAAAAP//EgAAAAAAAAABAP//EgAAAAAAAAACAP//EgAAAAAAAAADAP//EgAAAAAAAAAEAP//EgAAAAAAAAAFAP//EgAAAAAAAAAGAP//EgAAAAAAAAAHAP//EgAAAAAAAAAIAP//EgAAAAAAAAAJAP//EgAAAAAAAAAKAP//EgAAAAAAAAALAP//EgAAAAAAAAAMAP//EgAAAAAAAAANAP//EgAAAAAAAAAOAP//EgAAAAAAAAAPAP//EgAAAAAAAAAQAP//EgAAAAAAAAARAP//EgAAAAAAAAASAP//EgAAAAAAAAATAP//EgAAAAAAAAAUAP//EgAAAAAAAAAVAP//EgAAAAAAAAAWAP//EgAAAAAAAAAXAP//EgAAAAAAAAAYAP//EgAAAAAAAAAVAAQAEgAAAAAAAAD0/wgAEgAAAAAAAAD1/wgAEgAAAAAAAAD2/wgAEgAAAAAAAAD3/wgAEgAAAAAAAAD4/wgAEgAAAAAAAAD5/wgAEgAAAAAAAAD6/wgAEgAAAAAAAAD7/wgAEgAAAAAAAAD8/wgAEgAAAAAAAADz/wgAEgAAAAAAAADz/wkAEgAAAAAAAADz/woAEgAAAAAAAADz/wsAEgAAAAAAAADz/wwAEgAAAAAAAAD0/wwAEgAAAAAAAAD1/wwAEgAAAAAAAAD2/wwAEgAAAAAAAAD3/wwAEgAAAAAAAAD4/wwAEgAAAAAAAAD5/wwAEgAAAAAAAAD6/wwAEgAAAAAAAAD7/wwAEgAAAAAAAAD8/wwAEgAAAAAAAAD0/wkAEgAAAAAAAAD0/woAEgAAAAAAAAD0/wsAEgAAAAAAAAD1/wkAEgAAAAAAAAD1/woAEgAAAAAAAAD1/wsAEgAAAAAAAAD2/wkAEgAAAAAAAAD3/wkAEgAAAAAAAAD4/wkAEgAAAAAAAAD5/wkAEgAAAAAAAAD6/wkAEgAAAAAAAAD7/wkAEgAAAAAAAAD8/wkAEgAAAAAAAAD8/woAEgAAAAAAAAD7/woAEgAAAAAAAAD6/woAEgAAAAAAAAD5/woAEgAAAAAAAAD4/woAEgAAAAAAAAD3/woAEgAAAAAAAAD2/woAEgAAAAAAAAD2/wsAEgAAAAAAAAD3/wsAEgAAAAAAAAD4/wsAEgAAAAAAAAD5/wsAEgAAAAAAAAD6/wsAEgAAAAAAAAD7/wsAEgAAAAAAAAD8/wsAEgAAAAAAAADz/wcAEgAAAAAAAADz/wYAEgAAAAAAAADz/wUAEgAAAAAAAADz/wQAEgAAAAAAAADz/wMAEgAAAAAAAADz/wIAEgAAAAAAAAD0/wIAEgAAAAAAAAD1/wIAEgAAAAAAAAD2/wIAEgAAAAAAAAD3/wIAEgAAAAAAAAD4/wIAEgAAAAAAAAD5/wIAEgAAAAAAAAD6/wIAEgAAAAAAAAD7/wIAEgAAAAAAAAD8/wIAEgAAAAAAAADz/wEAEgAAAAAAAAD0/wEAEgAAAAAAAAD1/wEAEgAAAAAAAAD2/wEAEgAAAAAAAAD3/wEAEgAAAAAAAAD4/wEAEgAAAAAAAAD5/wEAEgAAAAAAAAD6/wEAEgAAAAAAAAD7/wEAEgAAAAAAAAD8/wEAEgAAAAAAAAD8/wAAEgAAAAAAAAD7/wAAEgAAAAAAAAD6/wAAEgAAAAAAAAD5/wAAEgAAAAAAAAD4/wAAEgAAAAAAAAD3/wAAEgAAAAAAAAD2/wAAEgAAAAAAAAD1/wAAEgAAAAAAAAD0/wAAEgAAAAAAAADz/wAAEgAAAAAAAADz//r/EgAAAAAAAAD0//r/EgAAAAAAAAD1//r/EgAAAAAAAAD2//r/EgAAAAAAAAD3//r/EgAAAAAAAAD4//r/EgAAAAAAAAD5//r/EgAAAAAAAAD6//r/EgAAAAAAAAD7//r/EgAAAAAAAADz//v/EgAAAAAAAADz//z/EgAAAAAAAADz//3/EgAAAAAAAADz//7/EgAAAAAAAADz////EgAAAAAAAAD0//v/EgAAAAAAAAD0//z/EgAAAAAAAAD0//3/EgAAAAAAAAD0//7/EgAAAAAAAAD0////EgAAAAAAAAD7//v/EgAAAAAAAAD7//z/EgAAAAAAAAD7//3/EgAAAAAAAAD7//7/EgAAAAAAAAD8//7/EgAAAAAAAAD8////EgAAAAAAAAD8//r/EgAAAAAAAAD8//v/EgAAAAAAAAD8//z/EgAAAAAAAAD8//3/EgAAAAAAAAD7////EgAAAAAAAAD5////BAAAAAAAAAD5//7/BAAAAAAAAAD5//3/BAAAAAAAAAD5//z/BAAAAAAAAAD4//z/BAAAAAAAAAD3//z/BAAAAAAAAAD2//z/BAAAAAAAAAD2//3/BAAAAAAAAAD3//3/BAAAAAAAAAD3//7/BAAAAAAAAAD4//7/BAAAAAAAAAD4//3/BAAAAAAAAAD2//7/BAAAAAAAAAD9//z/EgAAAAAAAAD9//3/EgAAAAAAAAD9//7/EgAAAAAAAAD9//v/EgAAAAAAAAD+//v/EgAAAAAAAAD///v/EgAAAAAAAAD///z/EgAAAAAAAAD///3/EgAAAAAAAAD///7/EgAAAAAAAAD+//3/EgAAAAAAAAD+//z/EgAAAAAAAAD+//r/EgAAAAAAAAD9//r/EgAAAAAAAAD+//7/EgAAAAAAAAAAAAEAEgAAAAAAAAAAAAIAEgAAAAAAAAAAAAYAEgAAAAAAAAAAAAgAEgAAAAAAAAABAAgAEgAAAAAAAAACAAgAEgAAAAAAAAADAAgAEgAAAAAAAAAEAAgAEgAAAAAAAAAFAAgAEgAAAAAAAAAGAAgAEgAAAAAAAAAHAAgAEgAAAAAAAAAIAAgAEgAAAAAAAAAJAAgAEgAAAAAAAAAKAAgAEgAAAAAAAAANAAgAEgAAAAAAAAAOAAgAEgAAAAAAAAAOAAIAEgAAAAAAAAAOAAMAEgAAAAAAAAAOAAQAEgAAAAAAAAAOAAUAEgAAAAAAAAAOAAYAEgAAAAAAAAAOAAcAEgAAAAAAAAACAAEAEgAAAAAAAAADAAEAEgAAAAAAAAAEAAEAEgAAAAAAAAAFAAEAEgAAAAAAAAAGAAEAEgAAAAAAAAAHAAEAEgAAAAAAAAAIAAEAEgAAAAAAAAAJAAEAEgAAAAAAAAAKAAEAEgAAAAAAAAALAAEAEgAAAAAAAAAMAAEAEgAAAAAAAAANAAEAEgAAAAAAAAANAAIAEgAAAAAAAAAMAAIAEgAAAAAAAAALAAIAEgAAAAAAAAAKAAIAEgAAAAAAAAAJAAIAEgAAAAAAAAAIAAIAEgAAAAAAAAAHAAIAEgAAAAAAAAAGAAIAEgAAAAAAAAAFAAIAEgAAAAAAAAAEAAIAEgAAAAAAAAADAAIAEgAAAAAAAAACAAIAEgAAAAAAAAABAAIAEgAAAAAAAAAFAAMAEgAAAAAAAAAGAAMAEgAAAAAAAAAHAAMAEgAAAAAAAAAIAAMAEgAAAAAAAAAJAAMAEgAAAAAAAAAKAAMAEgAAAAAAAAALAAMAEgAAAAAAAAAMAAMAEgAAAAAAAAANAAMAEgAAAAAAAAAMAAQAEgAAAAAAAAALAAQAEgAAAAAAAAAKAAQAEgAAAAAAAAAJAAQAEgAAAAAAAAAIAAQAEgAAAAAAAAAHAAQAEgAAAAAAAAAGAAQAEgAAAAAAAAAFAAQAEgAAAAAAAAAEAAQAEgAAAAAAAAADAAQAEgAAAAAAAAADAAMAEgAAAAAAAAACAAMAEgAAAAAAAAABAAMAEgAAAAAAAAAAAAMAEgAAAAAAAAAAAAUAEgAAAAAAAAABAAUAEgAAAAAAAAABAAQAEgAAAAAAAAACAAQAEgAAAAAAAAAAAAQAEgAAAAAAAAAEAAMAEgAAAAAAAAACAAUAEgAAAAAAAAADAAUAEgAAAAAAAAAEAAUAEgAAAAAAAAAHAAUAEgAAAAAAAAAGAAUAEgAAAAAAAAAFAAUAEgAAAAAAAAANAAQAEgAAAAAAAAALAAUAEgAAAAAAAAAKAAUAEgAAAAAAAAAJAAUAEgAAAAAAAAAIAAUAEgAAAAAAAAABAAYAEgAAAAAAAAACAAYAEgAAAAAAAAADAAYAEgAAAAAAAAAEAAYAEgAAAAAAAAAFAAYAEgAAAAAAAAAGAAYAEgAAAAAAAAAHAAYAEgAAAAAAAAAIAAYAEgAAAAAAAAAJAAYAEgAAAAAAAAAKAAYAEgAAAAAAAAALAAYAEgAAAAAAAAAMAAUAEgAAAAAAAAANAAUAEgAAAAAAAAAKAAcAEgAAAAAAAAALAAcAEgAAAAAAAAAMAAcAEgAAAAAAAAANAAcAEgAAAAAAAAAJAAcAEgAAAAAAAAAIAAcAEgAAAAAAAAAHAAcAEgAAAAAAAAAGAAcAEgAAAAAAAAALAAgAEgAAAAAAAAAMAAYAEgAAAAAAAAANAAYAEgAAAAAAAAAMAAgAEgAAAAAAAAD//wcAEgAAAAAAAAAAAAcAEgAAAAAAAAABAAcAEgAAAAAAAAACAAcAEgAAAAAAAAADAAcAEgAAAAAAAAAEAAcAEgAAAAAAAAAFAAcAEgAAAAAAAAAAAA0AEgAAAAAAAAABAA0AEgAAAAAAAAACAA0AEgAAAAAAAAADAA0AEgAAAAAAAAAEAA0AEgAAAAAAAAAFAA4AEgAAAAAAAAAGAA4AEgAAAAAAAAAHAA4AEgAAAAAAAAAIAA4AEgAAAAAAAAAJAA4AEgAAAAAAAAAKAA4AEgAAAAAAAAALAA4AEgAAAAAAAAAMAA4AEgAAAAAAAAANAA4AEgAAAAAAAAAOAA4AEgAAAAAAAAAPAA4AEgAAAAAAAAAQAA4AEgAAAAAAAAARAA4AEgAAAAAAAAARAA0AEgAAAAAAAAAQAA0AEgAAAAAAAAAPAA0AEgAAAAAAAAAOAA0AEgAAAAAAAAANAA0AEgAAAAAAAAAMAA0AEgAAAAAAAAALAA0AEgAAAAAAAAAKAA0AEgAAAAAAAAAJAA0AEgAAAAAAAAAIAA0AEgAAAAAAAAAHAA0AEgAAAAAAAAAGAA0AEgAAAAAAAAAFAA0AEgAAAAAAAAACAA4AEgAAAAAAAAABAA4AEgAAAAAAAAAAAA4AEgAAAAAAAAADAA4AEgAAAAAAAAAEAA4AEgAAAAAAAAAEAA8AEgAAAAAAAAADAA8AEgAAAAAAAAACAA8AEgAAAAAAAAABAA8AEgAAAAAAAAAAAA8AEgAAAAAAAAAAABAAEgAAAAAAAAABABAAEgAAAAAAAAACABAAEgAAAAAAAAADABAAEgAAAAAAAAAEABAAEgAAAAAAAAAFABAAEgAAAAAAAAAFAA8AEgAAAAAAAAAGAA8AEgAAAAAAAAAGABAAEgAAAAAAAAAHABAAEgAAAAAAAAAIABAAEgAAAAAAAAAIAA8AEgAAAAAAAAAHAA8AEgAAAAAAAAAJAA8AEgAAAAAAAAAKAA8AEgAAAAAAAAALAA8AEgAAAAAAAAALABAAEgAAAAAAAAAKABAAEgAAAAAAAAAMABAAEgAAAAAAAAANABAAEgAAAAAAAAAOAA8AEgAAAAAAAAAPAA8AEgAAAAAAAAANAA8AEgAAAAAAAAAMAA8AEgAAAAAAAAAJABAAEgAAAAAAAAAOABAAEgAAAAAAAAAPABAAEgAAAAAAAAAQABAAEgAAAAAAAAAQAA8AEgAAAAAAAAARAA8AEgAAAAAAAAARABAAEgAAAAAAAAARABEAEgAAAAAAAAAQABEAEgAAAAAAAAAQABIAEgAAAAAAAAAPABIAEgAAAAAAAAAOABIAEgAAAAAAAAANABIAEgAAAAAAAAAMABIAEgAAAAAAAAALABIAEgAAAAAAAAAKABIAEgAAAAAAAAAJABIAEgAAAAAAAAAIABIAEgAAAAAAAAAHABIAEgAAAAAAAAAGABIAEgAAAAAAAAAFABIAEgAAAAAAAAAEABIAEgAAAAAAAAADABIAEgAAAAAAAAACABIAEgAAAAAAAAABABIAEgAAAAAAAAABABEAEgAAAAAAAAAAABEAEgAAAAAAAAAAABIAEgAAAAAAAAACABEAEgAAAAAAAAADABEAEgAAAAAAAAAEABEAEgAAAAAAAAAFABEAEgAAAAAAAAAGABEAEgAAAAAAAAAHABEAEgAAAAAAAAAIABEAEgAAAAAAAAAJABEAEgAAAAAAAAAKABEAEgAAAAAAAAALABEAEgAAAAAAAAAMABEAEgAAAAAAAAANABEAEgAAAAAAAAAOABEAEgAAAAAAAAAPABEAEgAAAAAAAAARABIAEgAAAAAAAAAQABMAEgAAAAAAAAAPABMAEgAAAAAAAAAOABMAEgAAAAAAAAANABMAEgAAAAAAAAAMABMAEgAAAAAAAAALABMAEgAAAAAAAAAKABMAEgAAAAAAAAAJABMAEgAAAAAAAAAIABMAEgAAAAAAAAAHABMAEgAAAAAAAAAGABMAEgAAAAAAAAAAABMAEgAAAAAAAAABABMAEgAAAAAAAAACABMAEgAAAAAAAAADABMAEgAAAAAAAAAEABMAEgAAAAAAAAAFABMAEgAAAAAAAAARABMAEgAAAAAAAAASAA0AEgAAAAAAAAASAA4AEgAAAAAAAAASAA8AEgAAAAAAAAASABAAEgAAAAAAAAASABEAEgAAAAAAAAATAA0AEgAAAAAAAAATAA4AEgAAAAAAAAATAA8AEgAAAAAAAAATABAAEgAAAAAAAAATABEAEgAAAAAAAAAUAA0AEgAAAAAAAAAUAA4AEgAAAAAAAAAUAA8AEgAAAAAAAAAUABAAEgAAAAAAAAAUABEAEgAAAAAAAAAVAA4AEgAAAAAAAAAVAA8AEgAAAAAAAAAVABAAEgAAAAAAAAAVABEAEgAAAAAAAAAWAA4AEgAAAAAAAAAWAA8AEgAAAAAAAAAWABAAEgAAAAAAAAAXAA0AEgAAAAAAAAAXAA4AEgAAAAAAAAAXAA8AEgAAAAAAAAAXABAAEgAAAAAAAAAXABEAEgAAAAAAAAAYAA0AEgAAAAAAAAAYAA4AEgAAAAAAAAAYAA8AEgAAAAAAAAAYABAAEgAAAAAAAAAYABEAEgAAAAAAAAAWABEAEgAAAAAAAAA=")
-tile_set = SubResource("TileSet_6oa8d")
-
-[node name="BlueCar" parent="." unique_id=1145836756 instance=ExtResource("10_uk171")]
-position = Vector2(416, 984)
-
-[node name="Label" type="Label" parent="." unique_id=1748240472]
-offset_left = 576.0
-offset_top = 872.0
-offset_right = 632.0
-offset_bottom = 893.0
-text = "OPTIONS"
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=93000800]
 libraries/ = SubResource("AnimationLibrary_av6u3")
 
-[node name="Inputs_Tab" type="Node2D" parent="." unique_id=1090724165]
-
-[node name="Inputs" type="Node2D" parent="Inputs_Tab" unique_id=1909949166]
-modulate = Color(1, 1, 1, 0)
-
-[node name="Inputs_Button" type="TextureButton" parent="Inputs_Tab/Inputs" unique_id=1811131419]
-offset_left = 24.0
-offset_top = 24.000011
-offset_right = 280.0
-offset_bottom = 152.00002
-scale = Vector2(0.78105766, 0.32023573)
-texture_normal = ExtResource("12_av6u3")
-
-[node name="Input_Label" type="Label" parent="Inputs_Tab/Inputs" unique_id=715021113]
-offset_left = 28.689651
-offset_top = 28.992546
-offset_right = 220.68964
-offset_bottom = 60.992546
-theme_override_font_sizes/font_size = 24
-text = "INPUTS"
-horizontal_alignment = 1
-metadata/_edit_use_anchors_ = true
-
-[node name="Inputs2" type="Node2D" parent="Inputs_Tab" unique_id=2106812418]
-modulate = Color(1, 1, 1, 0)
-position = Vector2(232, 0)
-
-[node name="Inputs_Button" type="TextureButton" parent="Inputs_Tab/Inputs2" unique_id=1003803770]
-offset_left = 24.0
-offset_top = 24.000011
-offset_right = 280.0
-offset_bottom = 152.00002
-scale = Vector2(0.78105766, 0.32023573)
-texture_normal = ExtResource("12_av6u3")
-
-[node name="Input_Label" type="Label" parent="Inputs_Tab/Inputs2" unique_id=1703855915]
-offset_left = 28.689651
-offset_top = 28.992546
-offset_right = 220.68964
-offset_bottom = 60.992546
-theme_override_font_sizes/font_size = 24
-text = "INPUTS"
-horizontal_alignment = 1
-metadata/_edit_use_anchors_ = true
-
-[node name="Inputs3" type="Node2D" parent="Inputs_Tab" unique_id=981360680]
-modulate = Color(1, 1, 1, 0)
-position = Vector2(480, 0)
-
-[node name="Inputs_Button" type="TextureButton" parent="Inputs_Tab/Inputs3" unique_id=328089402]
-offset_left = 24.0
-offset_top = 24.000011
-offset_right = 280.0
-offset_bottom = 152.00002
-scale = Vector2(0.78105766, 0.32023573)
-texture_normal = ExtResource("12_av6u3")
-
-[node name="Input_Label" type="Label" parent="Inputs_Tab/Inputs3" unique_id=602713770]
-offset_left = 28.689651
-offset_top = 28.992546
-offset_right = 220.68964
-offset_bottom = 60.992546
-theme_override_font_sizes/font_size = 24
-text = "INPUTS"
-horizontal_alignment = 1
-metadata/_edit_use_anchors_ = true
-
-[node name="Inputs4" type="Node2D" parent="Inputs_Tab" unique_id=308576315]
-modulate = Color(1, 1, 1, 0)
-position = Vector2(720, 0)
-
-[node name="Inputs_Button" type="TextureButton" parent="Inputs_Tab/Inputs4" unique_id=409255318]
-offset_left = 24.0
-offset_top = 24.000011
-offset_right = 280.0
-offset_bottom = 152.00002
-scale = Vector2(0.78105766, 0.32023573)
-texture_normal = ExtResource("12_av6u3")
-
-[node name="Input_Label" type="Label" parent="Inputs_Tab/Inputs4" unique_id=692644500]
-offset_left = 28.689651
-offset_top = 28.992546
-offset_right = 220.68964
-offset_bottom = 60.992546
-theme_override_font_sizes/font_size = 24
-text = "INPUTS"
-horizontal_alignment = 1
-metadata/_edit_use_anchors_ = true
-
-[node name="Inputs5" type="Node2D" parent="Inputs_Tab" unique_id=667000780]
-modulate = Color(1, 1, 1, 0)
-position = Vector2(952, 0)
-
-[node name="Inputs_Button" type="TextureButton" parent="Inputs_Tab/Inputs5" unique_id=1191397201]
-offset_left = 24.0
-offset_top = 24.000011
-offset_right = 280.0
-offset_bottom = 152.00002
-scale = Vector2(0.78105766, 0.32023573)
-texture_normal = ExtResource("12_av6u3")
-
-[node name="Input_Label" type="Label" parent="Inputs_Tab/Inputs5" unique_id=1739217408]
-offset_left = 28.689651
-offset_top = 28.992546
-offset_right = 220.68964
-offset_bottom = 60.992546
-theme_override_font_sizes/font_size = 24
-text = "INPUTS"
-horizontal_alignment = 1
-metadata/_edit_use_anchors_ = true
-
 [node name="Inputs_Menu" type="Node2D" parent="." unique_id=1996078480]
+modulate = Color(1, 1, 1, 0)
 position = Vector2(31, 96)
 
 [node name="Inputs_Scroll_Container" type="ScrollContainer" parent="Inputs_Menu" unique_id=392701366]
@@ -490,7 +349,7 @@ texture = ExtResource("11_nkoq7")
 layout_mode = 0
 offset_right = 256.0
 offset_bottom = 56.0
-text = "CANCER ACTION KEY"
+text = "CANCEL ACTION KEY"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -550,6 +409,69 @@ action = "healing"
 [node name="Dummy_Control_Input7" type="Control" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer" unique_id=412237773]
 layout_mode = 2
 
+[node name="Level_State_Section" type="Control" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer" unique_id=229714307]
+layout_mode = 2
+
+[node name="Level_State_Label" type="Label" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Level_State_Section" unique_id=849087885]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 21.0
+theme_override_font_sizes/font_size = 32
+text = "LEVEL STATE:"
+
+[node name="Dummy_Control_Input12" type="Control" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer" unique_id=1892530275]
+layout_mode = 2
+
+[node name="Preparation_State_Input" type="Control" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer" unique_id=1108308211]
+layout_mode = 2
+
+[node name="Sprite" type="Sprite2D" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Preparation_State_Input" unique_id=962448363]
+position = Vector2(128, 27.999996)
+scale = Vector2(1.0092957, 0.43750006)
+texture = ExtResource("11_nkoq7")
+
+[node name="Preparation_State_Label" type="Label" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Preparation_State_Input" unique_id=2131642626]
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 56.0
+text = "SWITCH TO OBSERVATION STATE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="InputButton" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Preparation_State_Input" unique_id=1326833629 instance=ExtResource("13_ktebc")]
+layout_mode = 0
+offset_left = 265.0
+offset_right = 337.0
+action = "switch_to_preparation_state"
+
+[node name="Dummy_Control_Input13" type="Control" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer" unique_id=360501820]
+layout_mode = 2
+
+[node name="Move_State_Input" type="Control" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer" unique_id=1550950982]
+layout_mode = 2
+
+[node name="Sprite" type="Sprite2D" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Move_State_Input" unique_id=1977739786]
+position = Vector2(128, 27.999996)
+scale = Vector2(1.0092957, 0.43750006)
+texture = ExtResource("11_nkoq7")
+
+[node name="Move_State_Label" type="Label" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Move_State_Input" unique_id=1557335134]
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 56.0
+text = "SWITCH TO MOVE STATE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="InputButton" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Move_State_Input" unique_id=1335524832 instance=ExtResource("13_ktebc")]
+layout_mode = 0
+offset_left = 265.0
+offset_right = 337.0
+action = "switch_to_move_state"
+
+[node name="Dummy_Control_Input15" type="Control" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer" unique_id=1380464600]
+layout_mode = 2
+
 [node name="Upgrade_Menu_Input" type="Control" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer" unique_id=1007023577]
 layout_mode = 2
 
@@ -574,43 +496,8 @@ offset_right = 337.0
 offset_bottom = 55.0
 action = "upgrade_menu"
 
-[node name="Dummy_Control_Input8" type="Control" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer" unique_id=898204054]
+[node name="Dummy_Control_Input14" type="Control" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer" unique_id=1831728269]
 layout_mode = 2
-
-[node name="Level_State_Section" type="Control" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer" unique_id=229714307]
-layout_mode = 2
-
-[node name="Level_State_Label" type="Label" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Level_State_Section" unique_id=849087885]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 21.0
-theme_override_font_sizes/font_size = 32
-text = "LEVEL STATE:"
-
-[node name="Dummy_Control_Input9" type="Control" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer" unique_id=1559749760]
-layout_mode = 2
-
-[node name="Move_State_Input" type="Control" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer" unique_id=1550950982]
-layout_mode = 2
-
-[node name="Sprite" type="Sprite2D" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Move_State_Input" unique_id=1977739786]
-position = Vector2(128, 27.999996)
-scale = Vector2(1.0092957, 0.43750006)
-texture = ExtResource("11_nkoq7")
-
-[node name="Move_State_Label" type="Label" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Move_State_Input" unique_id=1557335134]
-layout_mode = 0
-offset_right = 256.0
-offset_bottom = 56.0
-text = "SWITCH TO MOVE STATE"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="InputButton" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Move_State_Input" unique_id=1335524832 instance=ExtResource("13_ktebc")]
-layout_mode = 0
-offset_left = 265.0
-offset_right = 337.0
-action = "move_confirm"
 
 [node name="Action_State_Input" type="Control" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer" unique_id=1306904921]
 layout_mode = 2
@@ -624,7 +511,7 @@ texture = ExtResource("11_nkoq7")
 layout_mode = 0
 offset_right = 256.0
 offset_bottom = 56.0
-text = "SWITCH TO OBSERVATION STATE"
+text = "START ACTION"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -633,28 +520,6 @@ layout_mode = 0
 offset_left = 265.0
 offset_right = 337.0
 action = "move_confirm"
-
-[node name="Preparation_State_Input" type="Control" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer" unique_id=1108308211]
-layout_mode = 2
-
-[node name="Sprite" type="Sprite2D" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Preparation_State_Input" unique_id=962448363]
-position = Vector2(128, 27.999996)
-scale = Vector2(1.0092957, 0.43750006)
-texture = ExtResource("11_nkoq7")
-
-[node name="Preparation_State_Label" type="Label" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Preparation_State_Input" unique_id=2131642626]
-layout_mode = 0
-offset_right = 256.0
-offset_bottom = 56.0
-text = "SWITCH TO OBSERVATION STATE"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="InputButton" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Preparation_State_Input" unique_id=1326833629 instance=ExtResource("13_ktebc")]
-layout_mode = 0
-offset_left = 265.0
-offset_right = 337.0
-action = "switch_to_preparation_state"
 
 [node name="Dummy_Control_Input10" type="Control" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer" unique_id=29004432]
 layout_mode = 2
@@ -750,4 +615,120 @@ layout_mode = 2
 [node name="Dummy_Control_Input2" type="Control" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer" unique_id=1937067725]
 layout_mode = 2
 
-[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[node name="Inputs_Tab" type="Node2D" parent="." unique_id=1090724165]
+
+[node name="Inputs" type="Node2D" parent="Inputs_Tab" unique_id=1909949166]
+modulate = Color(1, 1, 1, 0)
+
+[node name="Inputs_Button" type="TextureButton" parent="Inputs_Tab/Inputs" unique_id=1811131419]
+offset_left = 24.0
+offset_top = 24.000011
+offset_right = 280.0
+offset_bottom = 152.00002
+scale = Vector2(0.78105766, 0.32023573)
+texture_normal = ExtResource("12_av6u3")
+
+[node name="Input_Label" type="Label" parent="Inputs_Tab/Inputs" unique_id=715021113]
+offset_left = 28.689651
+offset_top = 28.992546
+offset_right = 220.68964
+offset_bottom = 60.992546
+theme_override_font_sizes/font_size = 24
+text = "INPUTS"
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Inputs2" type="Node2D" parent="Inputs_Tab" unique_id=2106812418]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(232, 0)
+
+[node name="Inputs_Button" type="TextureButton" parent="Inputs_Tab/Inputs2" unique_id=1003803770]
+offset_left = 24.0
+offset_top = 24.000011
+offset_right = 280.0
+offset_bottom = 152.00002
+scale = Vector2(0.78105766, 0.32023573)
+texture_normal = ExtResource("12_av6u3")
+
+[node name="Input_Label" type="Label" parent="Inputs_Tab/Inputs2" unique_id=1703855915]
+offset_left = 28.689651
+offset_top = 28.992546
+offset_right = 220.68964
+offset_bottom = 60.992546
+theme_override_font_sizes/font_size = 24
+text = "AUDIO"
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Inputs3" type="Node2D" parent="Inputs_Tab" unique_id=981360680]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(480, 0)
+
+[node name="Inputs_Button" type="TextureButton" parent="Inputs_Tab/Inputs3" unique_id=328089402]
+offset_left = 24.0
+offset_top = 24.000011
+offset_right = 280.0
+offset_bottom = 152.00002
+scale = Vector2(0.78105766, 0.32023573)
+texture_normal = ExtResource("12_av6u3")
+
+[node name="Input_Label" type="Label" parent="Inputs_Tab/Inputs3" unique_id=602713770]
+offset_left = 28.689651
+offset_top = 28.992546
+offset_right = 220.68964
+offset_bottom = 60.992546
+theme_override_font_sizes/font_size = 24
+text = "VIDEO"
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Inputs4" type="Node2D" parent="Inputs_Tab" unique_id=308576315]
+visible = false
+modulate = Color(1, 1, 1, 0)
+position = Vector2(720, 0)
+
+[node name="Inputs_Button" type="TextureButton" parent="Inputs_Tab/Inputs4" unique_id=409255318]
+offset_left = 24.0
+offset_top = 24.000011
+offset_right = 280.0
+offset_bottom = 152.00002
+scale = Vector2(0.78105766, 0.32023573)
+texture_normal = ExtResource("12_av6u3")
+
+[node name="Input_Label" type="Label" parent="Inputs_Tab/Inputs4" unique_id=692644500]
+offset_left = 28.689651
+offset_top = 28.992546
+offset_right = 220.68964
+offset_bottom = 60.992546
+theme_override_font_sizes/font_size = 24
+text = "INPUTS"
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Inputs5" type="Node2D" parent="Inputs_Tab" unique_id=667000780]
+visible = false
+modulate = Color(1, 1, 1, 0)
+position = Vector2(952, 0)
+
+[node name="Inputs_Button" type="TextureButton" parent="Inputs_Tab/Inputs5" unique_id=1191397201]
+offset_left = 24.0
+offset_top = 24.000011
+offset_right = 280.0
+offset_bottom = 152.00002
+scale = Vector2(0.78105766, 0.32023573)
+texture_normal = ExtResource("12_av6u3")
+
+[node name="Input_Label" type="Label" parent="Inputs_Tab/Inputs5" unique_id=1739217408]
+offset_left = 28.689651
+offset_top = 28.992546
+offset_right = 220.68964
+offset_bottom = 60.992546
+theme_override_font_sizes/font_size = 24
+text = "INPUTS"
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Back_Button" parent="." unique_id=900227919 instance=ExtResource("5_ehegv")]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(902, 514)
+button_text = "BACK"

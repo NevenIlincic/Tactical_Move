@@ -26,7 +26,7 @@ func _on_animation_loop_started():
 
 func _on_texture_rect_mouse_entered() -> void:
 	var tween: Tween = create_tween()
-	tween.tween_property(texture_rect, "scale", Vector2(0.9, 0.5), 0.05).set_ease(Tween.EASE_IN)
+	tween.tween_property(label, "scale", Vector2(1.4, 1.4), 0.05).set_ease(Tween.EASE_IN)
 	animation_player.play("card_shine_effect")
 	is_mouse_hovered = true
 	AudioManager.play_button_hover_sound()
@@ -35,7 +35,8 @@ func _on_texture_rect_mouse_entered() -> void:
 func _on_texture_rect_mouse_exited() -> void:
 	is_mouse_hovered = false
 	var tween: Tween = create_tween()
-	tween.tween_property(texture_rect, "scale", Vector2(1.0, 0.5), 0.05).set_ease(Tween.EASE_OUT)
+	tween.tween_property(label, "scale", Vector2(1.0, 1.0), 0.05).set_ease(Tween.EASE_IN)
+	
 
 
 func _on_texture_rect_gui_input(event: InputEvent) -> void:
@@ -47,3 +48,5 @@ func _on_texture_rect_gui_input(event: InputEvent) -> void:
 				"OPTIONS":
 					transition_to_options_screen.emit()
 					#get_tree().change_scene_to_file("res://Scenes/Menu/Options_Menu.tscn")
+				"BACK":
+					transition_to_main_screen.emit()
