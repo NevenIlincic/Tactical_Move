@@ -92,6 +92,9 @@ func remove_low_hp_penalty(player: Soldier):
 
 #Triggers when player gets below 30% HP (SPEED -15%, HIT_CHANCE -25%, REACTION_TIME +0.5s, RELOAD_TIME: +20%)
 func apply_low_hp_penalty(player: Soldier):
+	if player.is_low_hp_penalty_applied:
+		return 
+	player.is_low_hp_penalty_applied = true
 	#SPEED
 	var lower_speed_perk: UpgradeData = UpgradeData.new(
 		-0.15, UpgradeData.UpgradeType.SPEED, StatModifier.Type.PERCENT, UpgradeData.UpgradeReason.LOW_HP

@@ -43,5 +43,6 @@ signal permanent_upgrade_removed(upgrade_card: UpgradeCard)
 signal update_ammo_stats_label(player: Player)
 signal update_HP_bar_stats_label(player: Player)
 signal engagement_strategy_changed(player: Player)
+signal player_low_hp_applied(player: Player)
 
 signal dark(points: Array)

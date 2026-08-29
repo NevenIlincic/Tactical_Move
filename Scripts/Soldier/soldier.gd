@@ -2,6 +2,12 @@
 class_name Soldier extends Node2D
 #@onready var vision_polygon: SoldierVision = $CanvasGroup/Vision_Polygon
 
+enum SoldierType{
+	PLAYER,
+	ENEMY
+}
+var soldier_type: SoldierType
+
 @onready var vision_polygon: SoldierVision = $Vision_Polygon
 @onready var hitbox_collision_shape: CollisionShape2D = $Hitbox/Hitbox_Collision_Shape
 @onready var bullet_line: SoldierBulletLine = $Bullet_Line
@@ -14,6 +20,7 @@ var is_in_active_state: bool = false
 var is_killed: bool = false
 var is_walking: bool = false
 var follow_enemy_with_rotation = false
+var is_low_hp_penalty_applied: bool = false
 
 var enemy_to_shoot: Soldier
 var enemies_in_sight: Dictionary = {} #{Soldier: true}
@@ -34,8 +41,9 @@ var soldier_id: String
 			soldier_stats.speed = Stat.new(soldier_stats.speed.base_value)
 			soldier_stats.reaction_time = Stat.new(soldier_stats.reaction_time.base_value)
 			soldier_stats.max_travel_distance = Stat.new(soldier_stats.max_travel_distance.base_value)
-			soldier_stats.HP = Stat.new(soldier_stats.HP.base_value)
-			
+			soldier_stats.MAX_HP = Stat.new(soldier_stats.MAX_HP.base_value)
+			soldier_stats.HP = Stat.new(soldier_stats.MAX_HP.base_value)
+
 var engagement_strategy: EngagementStrategy
 #UPGRADE/PERKS
 var temporary_upgrades: Array[UpgradeData] = []
@@ -115,10 +123,11 @@ func has_enemies_in_sight() -> bool:
 	return not enemies_in_sight.is_empty()
 
 func check_soldier_has_action():
-	if len(player_path) > 1 or point_to_look:
-		Signals.player_move_continued.emit(self)
-	else:
-		Signals.player_move_finished.emit(self)
+	pass
+	#if len(player_path) > 1 or point_to_look:
+		#Signals.player_move_continued.emit(self)
+	#else:
+		#Signals.player_move_finished.emit(self)
 func set_after_move_looking_point(point: Vector2):
 	after_move_looking_point = point
 func reset_after_move_looking_point():
@@ -300,3 +309,4 @@ func set_point_to_look(point): pass
 func do_while_action_extra(): pass
 func _pre_move_actions(): pass
 func set_player_sprite(): pass
+func can_soldier_move(): pass

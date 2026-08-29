@@ -1,5 +1,8 @@
-extends Node2D
+class_name NavigationButton extends Node2D
 
+
+signal transition_to_main_screen()
+signal transition_to_options_screen()
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var texture_rect: TextureRect = $Texture_Rect
@@ -23,19 +26,27 @@ func _on_animation_loop_started():
 
 func _on_texture_rect_mouse_entered() -> void:
 	var tween: Tween = create_tween()
-	tween.tween_property(texture_rect, "scale", Vector2(0.9, 0.5), 0.05).set_ease(Tween.EASE_IN)
+	tween.tween_property(label, "scale", Vector2(1.4, 1.4), 0.05).set_ease(Tween.EASE_IN)
 	animation_player.play("card_shine_effect")
 	is_mouse_hovered = true
+	AudioManager.play_button_hover_sound()
 
 
 func _on_texture_rect_mouse_exited() -> void:
 	is_mouse_hovered = false
 	var tween: Tween = create_tween()
-	tween.tween_property(texture_rect, "scale", Vector2(1.0, 0.5), 0.05).set_ease(Tween.EASE_OUT)
+	tween.tween_property(label, "scale", Vector2(1.0, 1.0), 0.05).set_ease(Tween.EASE_IN)
+	
 
 
 func _on_texture_rect_gui_input(event: InputEvent) -> void:
 		if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.is_pressed():
+			AudioManager.play_upgrade_sound()
 			match button_text:
 				"START":
 					get_tree().change_scene_to_file("res://Scenes/Test_Scene.tscn")
+				"OPTIONS":
+					transition_to_options_screen.emit()
+					#get_tree().change_scene_to_file("res://Scenes/Menu/Options_Menu.tscn")
+				"BACK":
+					transition_to_main_screen.emit()

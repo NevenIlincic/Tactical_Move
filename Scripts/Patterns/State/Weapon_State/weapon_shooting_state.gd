@@ -16,19 +16,23 @@ func update(delta: float):
 		fire_timer = 1.0 / current_weapon.weapon_stats.fire_rate.get_value()
 
 func shoot_target():
-	if current_weapon.weapon_owner is Enemy:
-		print(current_weapon.weapon_owner.vision_polygon.bullet_hit_point)
 	draw_bullet()
 	current_weapon.weapon_stats.current_ammo.base_value -= 1.0
-	current_weapon.enemy_to_shoot.soldier_stats.HP.base_value -= current_weapon.weapon_stats.damage.get_value()
 	if check_is_target_hit():
+		current_weapon.enemy_to_shoot.soldier_stats.HP.base_value -= current_weapon.weapon_stats.damage.get_value()
+		var is_player_soldier: bool = current_weapon.enemy_to_shoot is Player
 		if current_weapon.weapon_owner:
 			current_weapon.enemy_to_shoot.when_been_shoot_at(current_weapon.weapon_owner)
-		if current_weapon.enemy_to_shoot is Player:
+		if is_player_soldier:
 			Signals.update_HP_bar_stats_label.emit(current_weapon.enemy_to_shoot)
+		var current_hp: float = current_weapon.enemy_to_shoot.soldier_stats.HP.get_value()
+		var max_hp: float = current_weapon.enemy_to_shoot.soldier_stats.MAX_HP.get_value()
+		if not current_weapon.enemy_to_shoot.is_killed and current_hp / max_hp < 0.3 and not current_weapon.enemy_to_shoot.is_low_hp_penalty_applied:
+			UpgradeManager.apply_low_hp_penalty(current_weapon.enemy_to_shoot)
+			if is_player_soldier:
+				Signals.player_low_hp_applied.emit(current_weapon.enemy_to_shoot)
 		if current_weapon.enemy_to_shoot.soldier_stats.HP.base_value <= 0.0:
 			on_target_killed(current_weapon.enemy_to_shoot, current_weapon.weapon_owner)
-		
 	if current_weapon.weapon_owner is Player:
 		Signals.update_ammo_stats_label.emit(current_weapon.weapon_owner)
 func check_can_shoot_target():

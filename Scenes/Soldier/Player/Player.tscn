@@ -6,13 +6,15 @@
 [ext_resource type="Script" uid="uid://c386pr8tx5qep" path="res://Scripts/Soldier/soldier_vision.gd" id="4_t26db"]
 [ext_resource type="Texture2D" uid="uid://cp3f8t70d5twp" path="res://icon.svg" id="4_ude3g"]
 [ext_resource type="Texture2D" uid="uid://uwcsyrtrt75l" path="res://Sprites/Path_Line/New Piskel-1.png - 2026-08-04T161338.290.png" id="5_jmcll"]
-[ext_resource type="Texture2D" uid="uid://xobgolcljc7w" path="res://Sprites/Player/Player_Soldier_Pistol.png" id="5_tk11s"]
+[ext_resource type="Texture2D" uid="uid://q7sw1jdmg3ev" path="res://Sprites/Player/Player_M4a1_rifle.png" id="5_yq3hi"]
 [ext_resource type="Script" uid="uid://b260cldj7kekv" path="res://Scripts/Line/player_look_at_line.gd" id="7_t26db"]
 [ext_resource type="Texture2D" uid="uid://bldh4qpfu1l23" path="res://Sprites/Player/look_at_position.png" id="7_x56g5"]
 [ext_resource type="Texture2D" uid="uid://cynm5bschf8o1" path="res://Sprites/Player/move_to_position_marker.png" id="8_0eouq"]
 [ext_resource type="Texture2D" uid="uid://bxrsachv2vex3" path="res://Sprites/Player/after_move_look_at_position.png" id="9_3um6k"]
 [ext_resource type="Script" uid="uid://duyphgu7sdufm" path="res://Scenes/Soldier/soldier_bullet_line.gd" id="11_tk11s"]
 [ext_resource type="Texture2D" uid="uid://crp281jh7dnh6" path="res://Sprites/Light/bela_kupa_60stepeni.png" id="12_q6by2"]
+[ext_resource type="Texture2D" uid="uid://brl5iuqo7keov" path="res://Sprites/HUD/Player/healing_icon.png" id="14_esp8e"]
+[ext_resource type="PackedScene" uid="uid://bw1j5p7a3sj6j" path="res://Scenes/Effects/Healing_Effect.tscn" id="15_yq3hi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_06txj"]
 size = Vector2(60, 60)
@@ -99,7 +101,11 @@ gravity = Vector3(0, 0, 0)
 alpha_curve = SubResource("CurveTexture_qqij5")
 emission_curve = SubResource("CurveTexture_7jdmd")
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_58pdj"]
+light_mode = 1
+
 [node name="Player" type="Node2D" unique_id=1108589071 groups=["Player", "soldier"]]
+z_index = 2
 script = ExtResource("1_ft8w5")
 
 [node name="Player_Path_Line" type="Line2D" parent="." unique_id=2110637716]
@@ -120,10 +126,10 @@ texture = ExtResource("8_0eouq")
 
 [node name="Player_Sprite" type="Sprite2D" parent="." unique_id=1716240992]
 z_index = 1
+texture_filter = 1
 texture_repeat = 1
-position = Vector2(7.6293945e-06, -0.46153474)
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("5_tk11s")
+position = Vector2(8, -120)
+texture = ExtResource("5_yq3hi")
 offset = Vector2(-0.00030048078, 118.15355)
 
 [node name="Selection_Area" type="Area2D" parent="." unique_id=2041313350]
@@ -177,10 +183,10 @@ position = Vector2(0, -4)
 shape = SubResource("RectangleShape2D_jjc5n")
 
 [node name="m4a1_rifle_bullet_spawn_point" type="Marker2D" parent="." unique_id=1798696889]
-position = Vector2(49, -8)
+position = Vector2(45, 7)
 
 [node name="pistol_bullet_spawn_point" type="Marker2D" parent="." unique_id=2000225844]
-position = Vector2(29, -7)
+position = Vector2(36, 7)
 
 [node name="Player_Avatar" type="Sprite2D" parent="." unique_id=824355655]
 
@@ -218,6 +224,17 @@ shape = SubResource("RectangleShape2D_q6by2")
 
 [node name="GunBlastEffect" parent="." unique_id=1793492474 instance=ExtResource("2_rw7ms")]
 process_material = SubResource("ParticleProcessMaterial_rw7ms")
+
+[node name="Healing_Needed_Sprite" type="Sprite2D" parent="." unique_id=872506951]
+visible = false
+z_index = 2
+texture_filter = 1
+material = SubResource("CanvasItemMaterial_58pdj")
+position = Vector2(16, -16)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("14_esp8e")
+
+[node name="HealingEffect_Cross" parent="." unique_id=718372442 instance=ExtResource("15_yq3hi")]
 
 [connection signal="input_event" from="Selection_Area" to="." method="_on_selection_area_input_event"]
 [connection signal="body_entered" from="Ally_Detection_Area" to="." method="_on_ally_detection_area_body_entered"]

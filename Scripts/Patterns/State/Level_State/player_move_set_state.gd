@@ -10,15 +10,13 @@ var is_drawing: bool = false
 var occupied_target_tiles: Dictionary = {} #{tile: {player_key: true } }
 var players_cause_collision: Dictionary = {}
 
-var players_set_for_move: Dictionary = {}
-var players_set_for_rotation: Dictionary = {}
-
 func _init(data: Array):
 	level = data[0]
+
 	alive_players = level.get_alive_players()
 	level.radial_menu.id_pressed.connect(_on_popup_menu_item_pressed)
 	#player_selection_manager = PlayerSelectionManager.new()
-
+	level.current_state_label.text = "MOVE STATE"
 	#fill_occupied_target_tiles_dict()
 
 func _unhandled_input(event: InputEvent):
@@ -26,15 +24,22 @@ func _unhandled_input(event: InputEvent):
 	#var selected_player = player_selection_manager.selected_player
 	if event is InputEventMouseMotion:
 		update_preview()
-
+	
+	if Input.is_action_just_pressed("switch_to_preparation_state"):
+		level.set_level_state(PreparationState.new([level]))
+		return
+	if Input.is_action_just_pressed("upgrade_menu"):
+		level.set_level_state(UpgradeState.new([level]))
+		return
+	
 	if Input.is_action_just_pressed("move_confirm"):
 		if PlayerSelectionManager.selected_player:
 			PlayerSelectionManager.deselect_player()
-		#print(players_set_for_move)
 		if check_can_do_action():
 			Signals.action_started.emit()
 			level.set_level_state(ActionState.new([level]))
-					
+			return
+	
 	if Input.is_action_pressed("drawing"):
 		if selected_player:
 			is_drawing = true
@@ -44,7 +49,7 @@ func _unhandled_input(event: InputEvent):
 		
 	if Input.is_action_just_pressed("reset_look_at_path") and selected_player:
 		selected_player.reset_point_to_look()
-		players_set_for_rotation.erase(selected_player)
+		level.players_set_for_rotation.erase(selected_player)
 	
 	if Input.is_action_just_pressed("rotate_player_after_move") and selected_player and len(selected_player.player_path) > 1:
 		selected_player.set_after_move_looking_point(level.get_global_mouse_position())
@@ -52,12 +57,12 @@ func _unhandled_input(event: InputEvent):
 		selected_player.reset_after_move_looking_point()
 	
 	if Input.is_action_just_pressed("rotate_player") and selected_player:
-		players_set_for_rotation[selected_player] = true
+		level.players_set_for_rotation[selected_player] = true
 		selected_player.set_point_to_look(level.get_global_mouse_position())
 	if Input.is_action_just_pressed("reset_path") and selected_player:
 			#_erase_from_occupated_tiles_dict(selected_player.player_path[-1], selected_player)
 		selected_player.reset_path()
-		players_set_for_move.erase(selected_player)
+		level.players_set_for_move.erase(selected_player)
 	
 	if Input.is_action_just_pressed("popup") and selected_player:
 		level.radial_menu.popup()
@@ -82,17 +87,17 @@ func update_preview() -> void:
 				if not is_path_blocked(last_mouse_pos, mouse_pos):
 					var mouse_global_position: Vector2 = level.get_global_mouse_position()
 					PlayerSelectionManager.selected_player.add_point_to_path(mouse_global_position)	
-					if not players_set_for_move.has(PlayerSelectionManager.selected_player):
-						players_set_for_move[PlayerSelectionManager.selected_player] = true
+					if not level.players_set_for_move.has(PlayerSelectionManager.selected_player):
+						level.players_set_for_move[PlayerSelectionManager.selected_player] = true
 
 func is_path_blocked(from: Vector2, to: Vector2) -> bool:
 	var space_state = level.get_world_2d().direct_space_state
 	var query = PhysicsRayQueryParameters2D.create(from, to)
-	# query.collision_mask = 2 
+	query.collision_mask = 2 
 	var result = space_state.intersect_ray(query)
 	if not result.is_empty():
 		return true 
-		
+	
 	return false
 
 
@@ -106,7 +111,7 @@ func _physics_process(_delta: float):
 	pass
 
 func check_can_do_action() -> bool:
-	if players_set_for_move.is_empty() and players_set_for_rotation.is_empty():
+	if level.players_set_for_move.is_empty() and level.players_set_for_rotation.is_empty():
 		return false
 	return true
 	

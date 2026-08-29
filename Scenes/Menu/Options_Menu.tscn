@@ -1,0 +1,734 @@
+[gd_scene format=3 uid="uid://s56adyusiw24"]
+
+[ext_resource type="Script" uid="uid://br2b4yq0x0vgr" path="res://Scenes/Menu/options_menu.gd" id="1_pobh7"]
+[ext_resource type="PackedScene" uid="uid://b6pfugr3kdl2v" path="res://Scenes/Buttons/Menus_Button.tscn" id="5_ehegv"]
+[ext_resource type="Texture2D" uid="uid://cyexu3fm2aq3s" path="res://Sprites/HUD/background.png" id="11_nkoq7"]
+[ext_resource type="Texture2D" uid="uid://jmhohtbrj7dy" path="res://Sprites/Button/button.png" id="12_av6u3"]
+[ext_resource type="PackedScene" uid="uid://iah5eecblfbi" path="res://Scenes/Buttons/Input_Button.tscn" id="13_ktebc"]
+
+[sub_resource type="Animation" id="Animation_av6u3"]
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Inputs_Tab/Inputs:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Inputs_Tab/Inputs2:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Inputs_Tab/Inputs3:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Inputs_Tab/Inputs4:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Inputs_Tab/Inputs5:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Inputs_Menu:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Back_Button:modulate")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_nkoq7"]
+resource_name = "Tabs_Appear_Animation"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Inputs_Tab/Inputs:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.35),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Inputs_Tab/Inputs2:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1, 0.45),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Inputs_Tab/Inputs3:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.2, 0.55),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Inputs_Tab/Inputs4:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.3, 0.65),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Inputs_Tab/Inputs5:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.4, 0.75),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Inputs_Menu:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.5, 0.85),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Back_Button:modulate")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0.6, 0.95),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_av6u3"]
+_data = {
+&"RESET": SubResource("Animation_av6u3"),
+&"Tabs_Appear_Animation": SubResource("Animation_nkoq7")
+}
+
+[node name="OptionsMenu" type="Node2D" unique_id=1686594788]
+script = ExtResource("1_pobh7")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=93000800]
+libraries/ = SubResource("AnimationLibrary_av6u3")
+
+[node name="Inputs_Menu" type="Node2D" parent="." unique_id=1996078480]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(31, 96)
+
+[node name="Inputs_Scroll_Container" type="ScrollContainer" parent="Inputs_Menu" unique_id=392701366]
+offset_right = 808.0
+offset_bottom = 504.0
+scroll_vertical = 100
+
+[node name="GridContainer" type="GridContainer" parent="Inputs_Menu/Inputs_Scroll_Container" unique_id=1057969820]
+layout_mode = 2
+theme_override_constants/h_separation = 400
+theme_override_constants/v_separation = 75
+columns = 2
+
+[node name="Section_Control2" type="Control" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer" unique_id=1598518420]
+layout_mode = 2
+
+[node name="Player_Movement_Label" type="Label" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Section_Control2" unique_id=1229507870]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 21.0
+theme_override_font_sizes/font_size = 32
+text = "PLAYER ACTIONS:"
+
+[node name="Dummy_Control_Input5" type="Control" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer" unique_id=743542385]
+layout_mode = 2
+
+[node name="Player_Look_At_Input" type="Control" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer" unique_id=1170449983]
+layout_mode = 2
+
+[node name="Sprite" type="Sprite2D" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Player_Look_At_Input" unique_id=595661997]
+position = Vector2(128, 26)
+scale = Vector2(1.0092957, 0.43750006)
+texture = ExtResource("11_nkoq7")
+
+[node name="Rotation_Label" type="Label" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Player_Look_At_Input" unique_id=1779051000]
+layout_mode = 0
+offset_left = 1.0
+offset_top = -3.0
+offset_right = 257.0
+offset_bottom = 53.0
+text = "PLAYER LOOK AT POINT WHILE ACTION"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="InputButton" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Player_Look_At_Input" unique_id=56206551 instance=ExtResource("13_ktebc")]
+layout_mode = 0
+offset_left = 265.0
+offset_top = -3.0
+offset_right = 337.0
+offset_bottom = 53.0
+action = "rotate_player"
+
+[node name="Player_Look_At_Input_Reset" type="Control" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer" unique_id=1307029259]
+layout_mode = 2
+
+[node name="Sprite" type="Sprite2D" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Player_Look_At_Input_Reset" unique_id=1751821043]
+position = Vector2(128, 26)
+scale = Vector2(1.0092957, 0.43750006)
+texture = ExtResource("11_nkoq7")
+
+[node name="Reset_Action_Label" type="Label" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Player_Look_At_Input_Reset" unique_id=155748931]
+layout_mode = 0
+offset_left = -1.0
+offset_top = -3.0
+offset_right = 257.0
+offset_bottom = 53.0
+text = "CANCEL ACTION KEY"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="InputButton" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Player_Look_At_Input_Reset" unique_id=1289596022 instance=ExtResource("13_ktebc")]
+layout_mode = 0
+offset_left = 265.0
+offset_top = -3.0
+offset_right = 337.0
+offset_bottom = 53.0
+action = "reset_look_at_path"
+
+[node name="Player_Look_At_Input_After_Move" type="Control" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer" unique_id=1397882562]
+layout_mode = 2
+
+[node name="Sprite" type="Sprite2D" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Player_Look_At_Input_After_Move" unique_id=1960656527]
+position = Vector2(128, 27.999996)
+scale = Vector2(1.0092957, 0.43750006)
+texture = ExtResource("11_nkoq7")
+
+[node name="Look_At-After_Move_Label" type="Label" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Player_Look_At_Input_After_Move" unique_id=1474013753]
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 56.0
+text = "PLAYER LOOK AT POINT AFTER MOVE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="InputButton" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Player_Look_At_Input_After_Move" unique_id=571610304 instance=ExtResource("13_ktebc")]
+layout_mode = 0
+offset_left = 265.0
+offset_right = 337.0
+action = "rotate_player_after_move"
+
+[node name="Player_Look_At_Input_After_Move_Reset" type="Control" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer" unique_id=1335849443]
+layout_mode = 2
+
+[node name="Sprite" type="Sprite2D" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Player_Look_At_Input_After_Move_Reset" unique_id=331285234]
+position = Vector2(128, 27.999996)
+scale = Vector2(1.0092957, 0.43750006)
+texture = ExtResource("11_nkoq7")
+
+[node name="Look_At-After_Move_Label" type="Label" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Player_Look_At_Input_After_Move_Reset" unique_id=1427863380]
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 56.0
+text = "CANCEL ACTION KEY"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="InputButton" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Player_Look_At_Input_After_Move_Reset" unique_id=1810717720 instance=ExtResource("13_ktebc")]
+layout_mode = 0
+offset_left = 265.0
+offset_right = 337.0
+action = "reset_rotate_player_after_move"
+
+[node name="Draw_Player_Path_Input" type="Control" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer" unique_id=1320707932]
+layout_mode = 2
+
+[node name="Sprite" type="Sprite2D" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Draw_Player_Path_Input" unique_id=1920631250]
+position = Vector2(128, 27.999996)
+scale = Vector2(1.0092957, 0.43750006)
+texture = ExtResource("11_nkoq7")
+
+[node name="Draw_Path_Label" type="Label" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Draw_Player_Path_Input" unique_id=181827775]
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 56.0
+text = "DRAW PLAYER PATH"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="InputButton" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Draw_Player_Path_Input" unique_id=1775570299 instance=ExtResource("13_ktebc")]
+layout_mode = 0
+offset_left = 265.0
+offset_right = 337.0
+action = "drawing"
+
+[node name="Draw_Player_Path_Input_Reset" type="Control" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer" unique_id=686289657]
+layout_mode = 2
+
+[node name="Sprite" type="Sprite2D" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Draw_Player_Path_Input_Reset" unique_id=1011771352]
+position = Vector2(128, 27.999996)
+scale = Vector2(1.0092957, 0.43750006)
+texture = ExtResource("11_nkoq7")
+
+[node name="Draw_Path_Label" type="Label" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Draw_Player_Path_Input_Reset" unique_id=1621628244]
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 56.0
+text = "CANCEL ACTION KEY"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="InputButton" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Draw_Player_Path_Input_Reset" unique_id=1653576951 instance=ExtResource("13_ktebc")]
+layout_mode = 0
+offset_left = 265.0
+offset_right = 337.0
+action = "reset_path"
+
+[node name="Strategy_Selection_Input" type="Control" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer" unique_id=1150096899]
+layout_mode = 2
+
+[node name="Sprite" type="Sprite2D" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Strategy_Selection_Input" unique_id=1319477476]
+position = Vector2(128, 27.999996)
+scale = Vector2(1.0092957, 0.43750006)
+texture = ExtResource("11_nkoq7")
+
+[node name="Strategy_Selection_Label" type="Label" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Strategy_Selection_Input" unique_id=866197446]
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 56.0
+text = "OPEN STRATEGY SELECTION MENU"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="InputButton" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Strategy_Selection_Input" unique_id=1476053795 instance=ExtResource("13_ktebc")]
+layout_mode = 0
+offset_left = 265.0
+offset_right = 337.0
+action = "popup"
+
+[node name="Dummy_Control_Input6" type="Control" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer" unique_id=1857905449]
+layout_mode = 2
+
+[node name="Toggle_Medic_Healing_Input" type="Control" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer" unique_id=2118250759]
+layout_mode = 2
+
+[node name="Sprite" type="Sprite2D" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Toggle_Medic_Healing_Input" unique_id=634006512]
+position = Vector2(128, 27.999996)
+scale = Vector2(1.0092957, 0.43750006)
+texture = ExtResource("11_nkoq7")
+
+[node name="Toggle_Medic_Healing_Label" type="Label" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Toggle_Medic_Healing_Input" unique_id=2066712723]
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 56.0
+text = "TOGGLE MEDIC HEALING"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="InputButton" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Toggle_Medic_Healing_Input" unique_id=363053934 instance=ExtResource("13_ktebc")]
+layout_mode = 0
+offset_left = 265.0
+offset_right = 337.0
+action = "healing"
+
+[node name="Dummy_Control_Input7" type="Control" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer" unique_id=412237773]
+layout_mode = 2
+
+[node name="Level_State_Section" type="Control" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer" unique_id=229714307]
+layout_mode = 2
+
+[node name="Level_State_Label" type="Label" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Level_State_Section" unique_id=849087885]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 21.0
+theme_override_font_sizes/font_size = 32
+text = "LEVEL STATE:"
+
+[node name="Dummy_Control_Input12" type="Control" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer" unique_id=1892530275]
+layout_mode = 2
+
+[node name="Preparation_State_Input" type="Control" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer" unique_id=1108308211]
+layout_mode = 2
+
+[node name="Sprite" type="Sprite2D" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Preparation_State_Input" unique_id=962448363]
+position = Vector2(128, 27.999996)
+scale = Vector2(1.0092957, 0.43750006)
+texture = ExtResource("11_nkoq7")
+
+[node name="Preparation_State_Label" type="Label" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Preparation_State_Input" unique_id=2131642626]
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 56.0
+text = "SWITCH TO OBSERVATION STATE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="InputButton" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Preparation_State_Input" unique_id=1326833629 instance=ExtResource("13_ktebc")]
+layout_mode = 0
+offset_left = 265.0
+offset_right = 337.0
+action = "switch_to_preparation_state"
+
+[node name="Dummy_Control_Input13" type="Control" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer" unique_id=360501820]
+layout_mode = 2
+
+[node name="Move_State_Input" type="Control" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer" unique_id=1550950982]
+layout_mode = 2
+
+[node name="Sprite" type="Sprite2D" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Move_State_Input" unique_id=1977739786]
+position = Vector2(128, 27.999996)
+scale = Vector2(1.0092957, 0.43750006)
+texture = ExtResource("11_nkoq7")
+
+[node name="Move_State_Label" type="Label" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Move_State_Input" unique_id=1557335134]
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 56.0
+text = "SWITCH TO MOVE STATE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="InputButton" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Move_State_Input" unique_id=1335524832 instance=ExtResource("13_ktebc")]
+layout_mode = 0
+offset_left = 265.0
+offset_right = 337.0
+action = "switch_to_move_state"
+
+[node name="Dummy_Control_Input15" type="Control" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer" unique_id=1380464600]
+layout_mode = 2
+
+[node name="Upgrade_Menu_Input" type="Control" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer" unique_id=1007023577]
+layout_mode = 2
+
+[node name="Sprite" type="Sprite2D" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Upgrade_Menu_Input" unique_id=996634074]
+position = Vector2(128, 27.999996)
+scale = Vector2(1.0092957, 0.43750006)
+texture = ExtResource("11_nkoq7")
+
+[node name="Upgrade_Menu_Label" type="Label" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Upgrade_Menu_Input" unique_id=88334857]
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 56.0
+text = "OPEN UPGRADE MENU"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="InputButton" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Upgrade_Menu_Input" unique_id=1119366659 instance=ExtResource("13_ktebc")]
+layout_mode = 0
+offset_left = 265.0
+offset_top = -1.0
+offset_right = 337.0
+offset_bottom = 55.0
+action = "upgrade_menu"
+
+[node name="Dummy_Control_Input14" type="Control" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer" unique_id=1831728269]
+layout_mode = 2
+
+[node name="Action_State_Input" type="Control" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer" unique_id=1306904921]
+layout_mode = 2
+
+[node name="Sprite" type="Sprite2D" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Action_State_Input" unique_id=2075573838]
+position = Vector2(128, 27.999996)
+scale = Vector2(1.0092957, 0.43750006)
+texture = ExtResource("11_nkoq7")
+
+[node name="Action_State_Label" type="Label" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Action_State_Input" unique_id=1744993759]
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 56.0
+text = "START ACTION"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="InputButton" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Action_State_Input" unique_id=1258766465 instance=ExtResource("13_ktebc")]
+layout_mode = 0
+offset_left = 265.0
+offset_right = 337.0
+action = "move_confirm"
+
+[node name="Dummy_Control_Input10" type="Control" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer" unique_id=29004432]
+layout_mode = 2
+
+[node name="Section_Control" type="Control" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer" unique_id=858464098]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Section_Control" unique_id=845088001]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 21.0
+theme_override_font_sizes/font_size = 32
+text = "CAMERA:"
+
+[node name="Control2" type="Control" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer" unique_id=1826169738]
+layout_mode = 2
+
+[node name="Camera_Zoom_In_Input" type="Control" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer" unique_id=931844490]
+layout_mode = 2
+
+[node name="Sprite" type="Sprite2D" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Camera_Zoom_In_Input" unique_id=1125956267]
+position = Vector2(128, 27.999996)
+scale = Vector2(1.0092957, 0.43750006)
+texture = ExtResource("11_nkoq7")
+
+[node name="Camera_Zoom_In_Label" type="Label" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Camera_Zoom_In_Input" unique_id=1527321981]
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 56.0
+text = "CAMERA ZOOM IN"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="InputButton" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Camera_Zoom_In_Input" unique_id=1246712235 instance=ExtResource("13_ktebc")]
+layout_mode = 0
+offset_left = 265.0
+offset_right = 337.0
+action = "zoom_camera_in"
+
+[node name="Dummy_Control_Input3" type="Control" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer" unique_id=105176870]
+layout_mode = 2
+
+[node name="Camera_Zoom_Out_Input" type="Control" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer" unique_id=1573109284]
+layout_mode = 2
+
+[node name="Sprite" type="Sprite2D" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Camera_Zoom_Out_Input" unique_id=296542610]
+position = Vector2(128, 27.999996)
+scale = Vector2(1.0092957, 0.43750006)
+texture = ExtResource("11_nkoq7")
+
+[node name="Camera_Zoom_Out_Label" type="Label" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Camera_Zoom_Out_Input" unique_id=543609325]
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 56.0
+text = "CAMERA ZOOM OUT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="InputButton" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Camera_Zoom_Out_Input" unique_id=207583125 instance=ExtResource("13_ktebc")]
+layout_mode = 0
+offset_left = 265.0
+offset_right = 337.0
+action = "zoom_camera_out"
+
+[node name="Dummy_Control_Input4" type="Control" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer" unique_id=1027081517]
+layout_mode = 2
+
+[node name="Camera_Drag_Input" type="Control" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer" unique_id=1623777151]
+layout_mode = 2
+
+[node name="Sprite" type="Sprite2D" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Camera_Drag_Input" unique_id=2001264285]
+position = Vector2(128, 27.999996)
+scale = Vector2(1.0092957, 0.43750006)
+texture = ExtResource("11_nkoq7")
+
+[node name="Camera_Move_Label" type="Label" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Camera_Drag_Input" unique_id=895316275]
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 56.0
+text = "MOVE CAMERA"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="InputButton" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Camera_Drag_Input" unique_id=29231548 instance=ExtResource("13_ktebc")]
+layout_mode = 0
+offset_left = 265.0
+offset_right = 337.0
+action = "camera_drag"
+
+[node name="Dummy_Control_Input" type="Control" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer" unique_id=896591287]
+layout_mode = 2
+
+[node name="Dummy_Control_Input2" type="Control" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer" unique_id=1937067725]
+layout_mode = 2
+
+[node name="Inputs_Tab" type="Node2D" parent="." unique_id=1090724165]
+
+[node name="Inputs" type="Node2D" parent="Inputs_Tab" unique_id=1909949166]
+modulate = Color(1, 1, 1, 0)
+
+[node name="Inputs_Button" type="TextureButton" parent="Inputs_Tab/Inputs" unique_id=1811131419]
+offset_left = 24.0
+offset_top = 24.000011
+offset_right = 280.0
+offset_bottom = 152.00002
+scale = Vector2(0.78105766, 0.32023573)
+texture_normal = ExtResource("12_av6u3")
+
+[node name="Input_Label" type="Label" parent="Inputs_Tab/Inputs" unique_id=715021113]
+offset_left = 28.689651
+offset_top = 28.992546
+offset_right = 220.68964
+offset_bottom = 60.992546
+theme_override_font_sizes/font_size = 24
+text = "INPUTS"
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Inputs2" type="Node2D" parent="Inputs_Tab" unique_id=2106812418]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(232, 0)
+
+[node name="Inputs_Button" type="TextureButton" parent="Inputs_Tab/Inputs2" unique_id=1003803770]
+offset_left = 24.0
+offset_top = 24.000011
+offset_right = 280.0
+offset_bottom = 152.00002
+scale = Vector2(0.78105766, 0.32023573)
+texture_normal = ExtResource("12_av6u3")
+
+[node name="Input_Label" type="Label" parent="Inputs_Tab/Inputs2" unique_id=1703855915]
+offset_left = 28.689651
+offset_top = 28.992546
+offset_right = 220.68964
+offset_bottom = 60.992546
+theme_override_font_sizes/font_size = 24
+text = "AUDIO"
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Inputs3" type="Node2D" parent="Inputs_Tab" unique_id=981360680]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(480, 0)
+
+[node name="Inputs_Button" type="TextureButton" parent="Inputs_Tab/Inputs3" unique_id=328089402]
+offset_left = 24.0
+offset_top = 24.000011
+offset_right = 280.0
+offset_bottom = 152.00002
+scale = Vector2(0.78105766, 0.32023573)
+texture_normal = ExtResource("12_av6u3")
+
+[node name="Input_Label" type="Label" parent="Inputs_Tab/Inputs3" unique_id=602713770]
+offset_left = 28.689651
+offset_top = 28.992546
+offset_right = 220.68964
+offset_bottom = 60.992546
+theme_override_font_sizes/font_size = 24
+text = "VIDEO"
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Inputs4" type="Node2D" parent="Inputs_Tab" unique_id=308576315]
+visible = false
+modulate = Color(1, 1, 1, 0)
+position = Vector2(720, 0)
+
+[node name="Inputs_Button" type="TextureButton" parent="Inputs_Tab/Inputs4" unique_id=409255318]
+offset_left = 24.0
+offset_top = 24.000011
+offset_right = 280.0
+offset_bottom = 152.00002
+scale = Vector2(0.78105766, 0.32023573)
+texture_normal = ExtResource("12_av6u3")
+
+[node name="Input_Label" type="Label" parent="Inputs_Tab/Inputs4" unique_id=692644500]
+offset_left = 28.689651
+offset_top = 28.992546
+offset_right = 220.68964
+offset_bottom = 60.992546
+theme_override_font_sizes/font_size = 24
+text = "INPUTS"
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Inputs5" type="Node2D" parent="Inputs_Tab" unique_id=667000780]
+visible = false
+modulate = Color(1, 1, 1, 0)
+position = Vector2(952, 0)
+
+[node name="Inputs_Button" type="TextureButton" parent="Inputs_Tab/Inputs5" unique_id=1191397201]
+offset_left = 24.0
+offset_top = 24.000011
+offset_right = 280.0
+offset_bottom = 152.00002
+scale = Vector2(0.78105766, 0.32023573)
+texture_normal = ExtResource("12_av6u3")
+
+[node name="Input_Label" type="Label" parent="Inputs_Tab/Inputs5" unique_id=1739217408]
+offset_left = 28.689651
+offset_top = 28.992546
+offset_right = 220.68964
+offset_bottom = 60.992546
+theme_override_font_sizes/font_size = 24
+text = "INPUTS"
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Back_Button" parent="." unique_id=900227919 instance=ExtResource("5_ehegv")]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(902, 514)
+button_text = "BACK"

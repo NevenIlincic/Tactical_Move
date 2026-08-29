@@ -26,8 +26,15 @@ func when_escaped():
 	if num_seen_by == 0:
 		visible = false
 
+func check_soldier_has_action():
+	if len(player_path) > 1 or point_to_look:
+		Signals.player_move_continued.emit(self)
+	else:
+		Signals.player_move_finished.emit(self)
+
 func _ready() -> void:
 	super._ready()
+	soldier_type = SoldierType.ENEMY
 	#visible = false
 	engagement_strategy = StopShootFollowingStrategy.new()
 	point_to_look = Vector2.ZERO
@@ -113,7 +120,8 @@ func evaluate_best_move():
 	
 	var current_HP: float = soldier_stats.HP.get_value()
 	var max_travel_distance: float = soldier_stats.max_travel_distance.get_value()
-	for player: Player in alive_players:
+	for player_id: String in alive_players:
+		var player: Player = alive_players[player_id]
 		var intent_for_player: Intent = Intent.ATTACK
 		var path_to_player = NavigationServer2D.map_get_path(map_rid, global_position, player.global_position, true)
 		var distance_to_player: float = get_path_length(path_to_player)
