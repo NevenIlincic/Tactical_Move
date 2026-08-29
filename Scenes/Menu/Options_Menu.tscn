@@ -339,7 +339,7 @@ position = Vector2(31, 96)
 [node name="Inputs_Scroll_Container" type="ScrollContainer" parent="Inputs_Menu" unique_id=392701366]
 offset_right = 808.0
 offset_bottom = 504.0
-scroll_vertical = 200
+scroll_vertical = 100
 
 [node name="GridContainer" type="GridContainer" parent="Inputs_Menu/Inputs_Scroll_Container" unique_id=1057969820]
 layout_mode = 2
@@ -607,6 +607,28 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="InputButton" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Move_State_Input" unique_id=1335524832 instance=ExtResource("13_ktebc")]
+layout_mode = 0
+offset_left = 265.0
+offset_right = 337.0
+action = "move_confirm"
+
+[node name="Action_State_Input" type="Control" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer" unique_id=1306904921]
+layout_mode = 2
+
+[node name="Sprite" type="Sprite2D" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Action_State_Input" unique_id=2075573838]
+position = Vector2(128, 27.999996)
+scale = Vector2(1.0092957, 0.43750006)
+texture = ExtResource("11_nkoq7")
+
+[node name="Action_State_Label" type="Label" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Action_State_Input" unique_id=1744993759]
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 56.0
+text = "SWITCH TO OBSERVATION STATE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="InputButton" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Action_State_Input" unique_id=1258766465 instance=ExtResource("13_ktebc")]
 layout_mode = 0
 offset_left = 265.0
 offset_right = 337.0

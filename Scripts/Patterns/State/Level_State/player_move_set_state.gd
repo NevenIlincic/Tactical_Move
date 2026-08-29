@@ -16,7 +16,7 @@ func _init(data: Array):
 	alive_players = level.get_alive_players()
 	level.radial_menu.id_pressed.connect(_on_popup_menu_item_pressed)
 	#player_selection_manager = PlayerSelectionManager.new()
-	level.move_state_label.visible = true
+	level.current_state_label.text = "MOVE STATE"
 	#fill_occupied_target_tiles_dict()
 
 func _unhandled_input(event: InputEvent):
@@ -26,21 +26,17 @@ func _unhandled_input(event: InputEvent):
 		update_preview()
 	
 	if Input.is_action_just_pressed("switch_to_preparation_state"):
-		level.move_state_label.visible = false
 		level.set_level_state(PreparationState.new([level]))
 		return
 	if Input.is_action_just_pressed("upgrade_menu"):
-		level.move_state_label.visible = false
 		level.set_level_state(UpgradeState.new([level]))
 		return
 	
 	if Input.is_action_just_pressed("move_confirm"):
 		if PlayerSelectionManager.selected_player:
 			PlayerSelectionManager.deselect_player()
-		#print(players_set_for_move)
 		if check_can_do_action():
 			Signals.action_started.emit()
-			level.move_state_label.visible = false
 			level.set_level_state(ActionState.new([level]))
 			return
 	

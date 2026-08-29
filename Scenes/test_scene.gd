@@ -20,10 +20,8 @@ var current_state: State
 var cover_points: Array
 
 #LABELS
-@onready var move_state_label: Label = $CanvasLayer/Move_State_Label
-@onready var action_state_label: Label = $CanvasLayer/Action_State_Label
 @onready var passed_time_label: Label = $CanvasLayer/Timer/Passed_Time_Label
-@onready var prepare_state_label: Label = $CanvasLayer/Prepare_State_Label
+@onready var current_state_label: Label = $CanvasLayer/Current_State_Label
 
 var total_passed_time_millis: int = 0
 var total_passed_time_seconds: int = 0
@@ -137,6 +135,11 @@ func check_is_tile_in_boundsv(tile: Vector2i):
 func check_is_tile_solid(tile: Vector2i):
 	return grid.is_point_solid(tile)
 
+#CAN SWITCH TO ACTION STATE?
+func check_can_do_action() -> bool:
+	if players_set_for_move.is_empty() and players_set_for_rotation.is_empty():
+		return false
+	return true
 
 #CONFIRMATION DIALOG ACTIONS
 func _on_confirmation_dialog_opened(upgrade_card: UpgradeCard):

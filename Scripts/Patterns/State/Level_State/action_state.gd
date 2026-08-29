@@ -33,7 +33,7 @@ func _init(data: Array):
 	for player: Soldier in alive_soldiers.keys():	
 		player.do_actions()
 	
-	level.action_state_label.visible = true
+	level.current_state_label.text = "ACTION STATE"
 	
 	
 	
@@ -89,8 +89,6 @@ func _on_player_move_finished(soldier: Soldier):
 				player.healing_needed_sprite.visible = false
 				if player is MedicPlayer:
 					player._check_is_healing_available(action_duration)
-		#level.set_level_state(PlayerSetMoveState.new([level]))
-		level.action_state_label.visible = false
 		level.set_level_state(PreparationState.new([level]))
 		
 func _on_player_move_continued(soldier: Soldier):
