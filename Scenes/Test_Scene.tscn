@@ -659,6 +659,12 @@ offset_right = 40.0
 offset_bottom = 21.0
 text = "ACTION STATE"
 
+[node name="Prepare_State_Label" type="Label" parent="CanvasLayer" unique_id=470216343]
+visible = false
+offset_right = 90.0
+offset_bottom = 21.0
+text = "PREPARATION STATE"
+
 [node name="Timer" type="Node2D" parent="CanvasLayer" unique_id=839130681]
 position = Vector2(75, 0)
 

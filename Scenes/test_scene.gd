@@ -21,6 +21,7 @@ var cover_points: Array
 @onready var move_state_label: Label = $CanvasLayer/Move_State_Label
 @onready var action_state_label: Label = $CanvasLayer/Action_State_Label
 @onready var passed_time_label: Label = $CanvasLayer/Timer/Passed_Time_Label
+@onready var prepare_state_label: Label = $CanvasLayer/Prepare_State_Label
 
 var total_passed_time_millis: int = 0
 var total_passed_time_seconds: int = 0

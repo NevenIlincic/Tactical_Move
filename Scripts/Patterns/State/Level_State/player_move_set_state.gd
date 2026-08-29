@@ -26,7 +26,12 @@ func _unhandled_input(event: InputEvent):
 	#var selected_player = player_selection_manager.selected_player
 	if event is InputEventMouseMotion:
 		update_preview()
-
+	
+	if Input.is_action_just_pressed("switch_to_preparation_state"):
+		level.move_state_label.visible = false
+		level.set_level_state(PreparationState.new([level]))
+		return
+	
 	if Input.is_action_just_pressed("move_confirm"):
 		if PlayerSelectionManager.selected_player:
 			PlayerSelectionManager.deselect_player()
@@ -35,7 +40,7 @@ func _unhandled_input(event: InputEvent):
 			Signals.action_started.emit()
 			level.move_state_label.visible = false
 			level.set_level_state(ActionState.new([level]))
-					
+	
 	if Input.is_action_pressed("drawing"):
 		if selected_player:
 			is_drawing = true

@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://iah5eecblfbi"]
+
+[ext_resource type="Script" uid="uid://bsae51b06joy6" path="res://Scripts/Buttons/input_button.gd" id="1_5sqc0"]
+
+[node name="InputButton" type="Button" unique_id=56206551 groups=["input_button"]]
+offset_right = 72.0
+offset_bottom = 56.0
+focus_mode = 0
+text = "RMB"
+script = ExtResource("1_5sqc0")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

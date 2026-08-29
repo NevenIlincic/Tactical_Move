@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://di76hjbstq4th" path="res://Scenes/Map_Assets/Cars/Blue_Car.tscn" id="10_uk171"]
 [ext_resource type="Texture2D" uid="uid://cyexu3fm2aq3s" path="res://Sprites/HUD/background.png" id="11_nkoq7"]
 [ext_resource type="Texture2D" uid="uid://jmhohtbrj7dy" path="res://Sprites/Button/button.png" id="12_av6u3"]
+[ext_resource type="PackedScene" uid="uid://iah5eecblfbi" path="res://Scenes/Buttons/Input_Button.tscn" id="13_ktebc"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jlqwe"]
 texture = ExtResource("2_o75mi")
@@ -333,11 +334,12 @@ horizontal_alignment = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="Inputs_Menu" type="Node2D" parent="." unique_id=1996078480]
-position = Vector2(0, 96)
+position = Vector2(31, 96)
 
 [node name="Inputs_Scroll_Container" type="ScrollContainer" parent="Inputs_Menu" unique_id=392701366]
 offset_right = 808.0
 offset_bottom = 504.0
+scroll_vertical = 100
 
 [node name="GridContainer" type="GridContainer" parent="Inputs_Menu/Inputs_Scroll_Container" unique_id=1057969820]
 layout_mode = 2
@@ -362,47 +364,53 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="Sprite" type="Sprite2D" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Player_Look_At_Input" unique_id=595661997]
-position = Vector2(128, 27.999996)
+position = Vector2(128, 26)
 scale = Vector2(1.0092957, 0.43750006)
 texture = ExtResource("11_nkoq7")
 
 [node name="Rotation_Label" type="Label" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Player_Look_At_Input" unique_id=1779051000]
 layout_mode = 0
-offset_right = 256.0
-offset_bottom = 56.0
+offset_left = 1.0
+offset_top = -3.0
+offset_right = 257.0
+offset_bottom = 53.0
 text = "PLAYER LOOK AT POINT WHILE ACTION"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Player_Look_At_Button" type="Button" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Player_Look_At_Input" unique_id=1414975369]
+[node name="InputButton" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Player_Look_At_Input" unique_id=56206551 instance=ExtResource("13_ktebc")]
 layout_mode = 0
-offset_left = 264.0
-offset_right = 336.0
-offset_bottom = 56.0
-text = "RMB"
+offset_left = 265.0
+offset_top = -3.0
+offset_right = 337.0
+offset_bottom = 53.0
+action = "rotate_player"
 
 [node name="Player_Look_At_Input_Reset" type="Control" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer" unique_id=1307029259]
 layout_mode = 2
 
 [node name="Sprite" type="Sprite2D" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Player_Look_At_Input_Reset" unique_id=1751821043]
-position = Vector2(128, 27.999996)
+position = Vector2(128, 26)
 scale = Vector2(1.0092957, 0.43750006)
 texture = ExtResource("11_nkoq7")
 
 [node name="Reset_Action_Label" type="Label" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Player_Look_At_Input_Reset" unique_id=155748931]
 layout_mode = 0
-offset_right = 256.0
-offset_bottom = 56.0
+offset_left = -1.0
+offset_top = -3.0
+offset_right = 257.0
+offset_bottom = 53.0
 text = "CANCEL ACTION KEY"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Player_Look_At_Reset_Button" type="Button" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Player_Look_At_Input_Reset" unique_id=1674812536]
+[node name="InputButton" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Player_Look_At_Input_Reset" unique_id=1289596022 instance=ExtResource("13_ktebc")]
 layout_mode = 0
-offset_left = 264.0
-offset_right = 336.0
-offset_bottom = 56.0
-text = "RMB"
+offset_left = 265.0
+offset_top = -3.0
+offset_right = 337.0
+offset_bottom = 53.0
+action = "reset_look_at_path"
 
 [node name="Player_Look_At_Input_After_Move" type="Control" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer" unique_id=1397882562]
 layout_mode = 2
@@ -420,12 +428,11 @@ text = "PLAYER LOOK AT POINT AFTER MOVE"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Player_Look_At_After_Move_Button" type="Button" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Player_Look_At_Input_After_Move" unique_id=229694468]
+[node name="InputButton" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Player_Look_At_Input_After_Move" unique_id=571610304 instance=ExtResource("13_ktebc")]
 layout_mode = 0
-offset_left = 264.0
-offset_right = 336.0
-offset_bottom = 56.0
-text = "RMB"
+offset_left = 265.0
+offset_right = 337.0
+action = "rotate_player_after_move"
 
 [node name="Player_Look_At_Input_After_Move_Reset" type="Control" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer" unique_id=1335849443]
 layout_mode = 2
@@ -443,12 +450,11 @@ text = "CANCEL ACTION KEY"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Player_Look_At_After_Move_Reset_Button" type="Button" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Player_Look_At_Input_After_Move_Reset" unique_id=634296505]
+[node name="InputButton" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Player_Look_At_Input_After_Move_Reset" unique_id=1810717720 instance=ExtResource("13_ktebc")]
 layout_mode = 0
-offset_left = 264.0
-offset_right = 336.0
-offset_bottom = 56.0
-text = "RMB"
+offset_left = 265.0
+offset_right = 337.0
+action = "reset_rotate_player_after_move"
 
 [node name="Draw_Player_Path_Input" type="Control" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer" unique_id=1320707932]
 layout_mode = 2
@@ -466,12 +472,11 @@ text = "DRAW PLAYER PATH"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Player_Draw_Path_Button" type="Button" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Draw_Player_Path_Input" unique_id=592893446]
+[node name="InputButton" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Draw_Player_Path_Input" unique_id=1775570299 instance=ExtResource("13_ktebc")]
 layout_mode = 0
-offset_left = 264.0
-offset_right = 336.0
-offset_bottom = 56.0
-text = "RMB"
+offset_left = 265.0
+offset_right = 337.0
+action = "drawing"
 
 [node name="Draw_Player_Path_Input_Reset" type="Control" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer" unique_id=686289657]
 layout_mode = 2
@@ -489,12 +494,11 @@ text = "CANCER ACTION KEY"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Player_Draw_Path_Reset_Button" type="Button" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Draw_Player_Path_Input_Reset" unique_id=172444700]
+[node name="InputButton" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Draw_Player_Path_Input_Reset" unique_id=1653576951 instance=ExtResource("13_ktebc")]
 layout_mode = 0
-offset_left = 264.0
-offset_right = 336.0
-offset_bottom = 56.0
-text = "RMB"
+offset_left = 265.0
+offset_right = 337.0
+action = "reset_path"
 
 [node name="Strategy_Selection_Input" type="Control" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer" unique_id=1150096899]
 layout_mode = 2
@@ -512,40 +516,13 @@ text = "OPEN STRATEGY SELECTION MENU"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Strategy_Selection_Button" type="Button" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Strategy_Selection_Input" unique_id=1478541582]
+[node name="InputButton" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Strategy_Selection_Input" unique_id=1476053795 instance=ExtResource("13_ktebc")]
 layout_mode = 0
-offset_left = 264.0
-offset_right = 336.0
-offset_bottom = 56.0
-text = "RMB"
+offset_left = 265.0
+offset_right = 337.0
+action = "popup"
 
 [node name="Dummy_Control_Input6" type="Control" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer" unique_id=1857905449]
-layout_mode = 2
-
-[node name="Upgrade_Menu_Input" type="Control" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer" unique_id=1007023577]
-layout_mode = 2
-
-[node name="Sprite" type="Sprite2D" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Upgrade_Menu_Input" unique_id=996634074]
-position = Vector2(128, 27.999996)
-scale = Vector2(1.0092957, 0.43750006)
-texture = ExtResource("11_nkoq7")
-
-[node name="Upgrade_Menu_Label" type="Label" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Upgrade_Menu_Input" unique_id=88334857]
-layout_mode = 0
-offset_right = 256.0
-offset_bottom = 56.0
-text = "OPEN UPGRADE MENU"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Upgrade_Menu_Button" type="Button" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Upgrade_Menu_Input" unique_id=784551428]
-layout_mode = 0
-offset_left = 264.0
-offset_right = 336.0
-offset_bottom = 56.0
-text = "RMB"
-
-[node name="Dummy_Control_Input7" type="Control" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer" unique_id=412237773]
 layout_mode = 2
 
 [node name="Toggle_Medic_Healing_Input" type="Control" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer" unique_id=2118250759]
@@ -564,14 +541,65 @@ text = "TOGGLE MEDIC HEALING"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Toggle_Medic_Healing_Button" type="Button" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Toggle_Medic_Healing_Input" unique_id=1788942983]
+[node name="InputButton" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Toggle_Medic_Healing_Input" unique_id=363053934 instance=ExtResource("13_ktebc")]
 layout_mode = 0
-offset_left = 264.0
-offset_right = 336.0
+offset_left = 265.0
+offset_right = 337.0
+action = "healing"
+
+[node name="Dummy_Control_Input7" type="Control" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer" unique_id=412237773]
+layout_mode = 2
+
+[node name="Upgrade_Menu_Input" type="Control" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer" unique_id=1007023577]
+layout_mode = 2
+
+[node name="Sprite" type="Sprite2D" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Upgrade_Menu_Input" unique_id=996634074]
+position = Vector2(128, 27.999996)
+scale = Vector2(1.0092957, 0.43750006)
+texture = ExtResource("11_nkoq7")
+
+[node name="Upgrade_Menu_Label" type="Label" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Upgrade_Menu_Input" unique_id=88334857]
+layout_mode = 0
+offset_right = 256.0
 offset_bottom = 56.0
-text = "RMB"
+text = "OPEN UPGRADE MENU"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="InputButton" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Upgrade_Menu_Input" unique_id=1119366659 instance=ExtResource("13_ktebc")]
+layout_mode = 0
+offset_left = 265.0
+offset_top = -1.0
+offset_right = 337.0
+offset_bottom = 55.0
+action = "upgrade_menu"
 
 [node name="Dummy_Control_Input8" type="Control" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer" unique_id=898204054]
+layout_mode = 2
+
+[node name="Move_State_Input" type="Control" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer" unique_id=1550950982]
+layout_mode = 2
+
+[node name="Sprite" type="Sprite2D" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Move_State_Input" unique_id=1977739786]
+position = Vector2(128, 27.999996)
+scale = Vector2(1.0092957, 0.43750006)
+texture = ExtResource("11_nkoq7")
+
+[node name="Move_State_Label" type="Label" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Move_State_Input" unique_id=1557335134]
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 56.0
+text = "SWITCH TO MOVE STATE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="InputButton" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Move_State_Input" unique_id=1335524832 instance=ExtResource("13_ktebc")]
+layout_mode = 0
+offset_left = 265.0
+offset_right = 337.0
+action = "move_confirm"
+
+[node name="Dummy_Control_Input9" type="Control" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer" unique_id=806904854]
 layout_mode = 2
 
 [node name="Section_Control" type="Control" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer" unique_id=858464098]
@@ -603,12 +631,11 @@ text = "CAMERA ZOOM IN"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Camera_Zoom_In_Button" type="Button" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Camera_Zoom_In_Input" unique_id=1562806553]
+[node name="InputButton" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Camera_Zoom_In_Input" unique_id=1246712235 instance=ExtResource("13_ktebc")]
 layout_mode = 0
-offset_left = 264.0
-offset_right = 336.0
-offset_bottom = 56.0
-text = "RMB"
+offset_left = 265.0
+offset_right = 337.0
+action = "zoom_camera_in"
 
 [node name="Dummy_Control_Input3" type="Control" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer" unique_id=105176870]
 layout_mode = 2
@@ -629,12 +656,11 @@ text = "CAMERA ZOOM OUT"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Camera_Zoom_Out_Button" type="Button" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Camera_Zoom_Out_Input" unique_id=1060852273]
+[node name="InputButton" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Camera_Zoom_Out_Input" unique_id=207583125 instance=ExtResource("13_ktebc")]
 layout_mode = 0
-offset_left = 264.0
-offset_right = 336.0
-offset_bottom = 56.0
-text = "RMB"
+offset_left = 265.0
+offset_right = 337.0
+action = "zoom_camera_out"
 
 [node name="Dummy_Control_Input4" type="Control" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer" unique_id=1027081517]
 layout_mode = 2
@@ -655,12 +681,11 @@ text = "MOVE CAMERA"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Camera_Move_Button" type="Button" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Camera_Drag_Input" unique_id=528253251]
+[node name="InputButton" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Camera_Drag_Input" unique_id=29231548 instance=ExtResource("13_ktebc")]
 layout_mode = 0
-offset_left = 264.0
-offset_right = 336.0
-offset_bottom = 56.0
-text = "RMB"
+offset_left = 265.0
+offset_right = 337.0
+action = "camera_drag"
 
 [node name="Dummy_Control_Input" type="Control" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer" unique_id=896591287]
 layout_mode = 2
