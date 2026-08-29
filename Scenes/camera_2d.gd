@@ -11,12 +11,16 @@ func _unhandled_input(event: InputEvent) -> void:
 		is_dragging = true
 	if Input.is_action_just_released("camera_drag"):
 		is_dragging = false
-	if event is InputEventMouseButton:
-		if event.pressed:
-			if event.button_index == MOUSE_BUTTON_WHEEL_UP:
-				_zoom_in()
-			elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
-				_zoom_out()
+	if Input.is_action_just_pressed("zoom_camera_in"):
+		_zoom_in()
+	if Input.is_action_just_pressed("zoom_camera_out"):
+		_zoom_out()
+	#if event is InputEventMouseButton:
+		#if event.pressed:
+			#if event.button_index == MOUSE_BUTTON_WHEEL_UP:
+				#_zoom_in()
+			#elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
+				#_zoom_out()
 			
 	elif event is InputEventMouseMotion and is_dragging:
 		position -= event.relative / zoom

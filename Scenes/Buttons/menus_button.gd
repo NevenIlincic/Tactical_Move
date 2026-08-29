@@ -1,5 +1,8 @@
-extends Node2D
+class_name NavigationButton extends Node2D
 
+
+signal transition_to_main_screen()
+signal transition_to_options_screen()
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var texture_rect: TextureRect = $Texture_Rect
@@ -42,4 +45,5 @@ func _on_texture_rect_gui_input(event: InputEvent) -> void:
 				"START":
 					get_tree().change_scene_to_file("res://Scenes/Test_Scene.tscn")
 				"OPTIONS":
-					get_tree().change_scene_to_file("res://Scenes/Menu/Options_Menu.tscn")
+					transition_to_options_screen.emit()
+					#get_tree().change_scene_to_file("res://Scenes/Menu/Options_Menu.tscn")
