@@ -16,7 +16,8 @@ var action_duration: float = 0.0
 
 func _init(data: Array):
 	level = data[0]
-	
+	level.players_set_for_move = {}
+	level.players_set_for_rotation = {}
 	alive_soldiers = level.get_alive_soldiers()
 	alive_players = level.get_alive_players()
 	current_action_killed_players = {}

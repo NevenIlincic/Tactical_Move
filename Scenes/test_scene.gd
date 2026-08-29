@@ -11,6 +11,8 @@ var list_occupied_tiles: Array[Vector2i]
 
 var players: Dictionary = {} #Player
 var enemies: Dictionary = {} #Enemy
+var players_set_for_move: Dictionary = {}
+var players_set_for_rotation: Dictionary = {}
 var num_finished_player_turns: int = 0
 
 var current_state: State
@@ -43,7 +45,11 @@ func _ready() -> void:
 
 	#setup_grid()
 	connect_to_signals()
-	current_state = PreparationState.new([self])
+	current_state = PreparationState.new([
+		self,
+		players_set_for_move,
+		players_set_for_rotation
+		])
 	AudioManager.set_current_level(self)
 
 func _physics_process(delta: float) -> void:

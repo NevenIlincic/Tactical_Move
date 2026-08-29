@@ -663,7 +663,7 @@ text = "ACTION STATE"
 visible = false
 offset_right = 90.0
 offset_bottom = 21.0
-text = "PREPARATION STATE"
+text = "OBSERVATION STATE"
 
 [node name="Timer" type="Node2D" parent="CanvasLayer" unique_id=839130681]
 position = Vector2(75, 0)

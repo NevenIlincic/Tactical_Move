@@ -339,7 +339,7 @@ position = Vector2(31, 96)
 [node name="Inputs_Scroll_Container" type="ScrollContainer" parent="Inputs_Menu" unique_id=392701366]
 offset_right = 808.0
 offset_bottom = 504.0
-scroll_vertical = 100
+scroll_vertical = 200
 
 [node name="GridContainer" type="GridContainer" parent="Inputs_Menu/Inputs_Scroll_Container" unique_id=1057969820]
 layout_mode = 2
@@ -577,6 +577,19 @@ action = "upgrade_menu"
 [node name="Dummy_Control_Input8" type="Control" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer" unique_id=898204054]
 layout_mode = 2
 
+[node name="Level_State_Section" type="Control" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer" unique_id=229714307]
+layout_mode = 2
+
+[node name="Level_State_Label" type="Label" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Level_State_Section" unique_id=849087885]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 21.0
+theme_override_font_sizes/font_size = 32
+text = "LEVEL STATE:"
+
+[node name="Dummy_Control_Input9" type="Control" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer" unique_id=1559749760]
+layout_mode = 2
+
 [node name="Move_State_Input" type="Control" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer" unique_id=1550950982]
 layout_mode = 2
 
@@ -599,7 +612,29 @@ offset_left = 265.0
 offset_right = 337.0
 action = "move_confirm"
 
-[node name="Dummy_Control_Input9" type="Control" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer" unique_id=806904854]
+[node name="Preparation_State_Input" type="Control" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer" unique_id=1108308211]
+layout_mode = 2
+
+[node name="Sprite" type="Sprite2D" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Preparation_State_Input" unique_id=962448363]
+position = Vector2(128, 27.999996)
+scale = Vector2(1.0092957, 0.43750006)
+texture = ExtResource("11_nkoq7")
+
+[node name="Preparation_State_Label" type="Label" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Preparation_State_Input" unique_id=2131642626]
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 56.0
+text = "SWITCH TO OBSERVATION STATE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="InputButton" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Preparation_State_Input" unique_id=1326833629 instance=ExtResource("13_ktebc")]
+layout_mode = 0
+offset_left = 265.0
+offset_right = 337.0
+action = "switch_to_preparation_state"
+
+[node name="Dummy_Control_Input10" type="Control" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer" unique_id=29004432]
 layout_mode = 2
 
 [node name="Section_Control" type="Control" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer" unique_id=858464098]
