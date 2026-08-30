@@ -28,7 +28,6 @@ func _check_is_healing_available(action_duration: float):
 		return
 	is_timeout_active = false
 	
-	print("OVDE")
 	healing_timeout -= action_duration
 	if healing_timeout <= 0.0:
 		can_heal = true

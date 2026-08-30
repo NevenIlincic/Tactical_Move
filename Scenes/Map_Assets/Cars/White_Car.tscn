@@ -6,6 +6,7 @@
 polygon = PackedVector2Array(-96, 44, -86, 47, 111, 45, 120, 23, 119, -38, 107, -51, -93, -50, -105, -42, -114, -31, -118, -2, -113, 27)
 
 [node name="Car" type="StaticBody2D" unique_id=75836846 groups=["wall"]]
+collision_layer = 3
 
 [node name="Car_1" type="Sprite2D" parent="." unique_id=692086700]
 texture = ExtResource("1_2gc08")
