@@ -55,16 +55,17 @@ func _ready() -> void:
 
 
 func set_player_sprite():
-	const PLAYER_SOLDIER_PISTOL = preload("uid://xobgolcljc7w")
-	#const PLAYER_SOLDIER_M_4A_1_RIFLE = preload("uid://cuergk33h7trx")
-	const PLAYER_SOLDIER_M_4A_1_RIFLE_SPRITES = preload("uid://cofk5d3mox6jp")
-	
-	if current_weapon is Pistol:
-		player_sprite.hframes = 1
-		player_sprite.texture = PLAYER_SOLDIER_PISTOL
-	elif current_weapon is m4a1Rifle:
-		player_sprite.hframes = 7
-		player_sprite.texture = PLAYER_SOLDIER_M_4A_1_RIFLE_SPRITES
+	pass
+	#const PLAYER_SOLDIER_PISTOL = preload("uid://xobgolcljc7w")
+	##const PLAYER_SOLDIER_M_4A_1_RIFLE = preload("uid://cuergk33h7trx")
+	#const PLAYER_SOLDIER_M_4A_1_RIFLE_SPRITES = preload("uid://cofk5d3mox6jp")
+	#
+	#if current_weapon is Pistol:
+		#player_sprite.hframes = 1
+		#player_sprite.texture = PLAYER_SOLDIER_PISTOL
+	#elif current_weapon is m4a1Rifle:
+		#player_sprite.hframes = 7
+		#player_sprite.texture = PLAYER_SOLDIER_M_4A_1_RIFLE_SPRITES
 	
 
 func set_up_lines_data():
