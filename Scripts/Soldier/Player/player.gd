@@ -55,13 +55,16 @@ func _ready() -> void:
 
 
 func set_player_sprite():
-	const PLAYER_M_4A_1_RIFLE = preload("uid://q7sw1jdmg3ev")
 	const PLAYER_SOLDIER_PISTOL = preload("uid://xobgolcljc7w")
+	#const PLAYER_SOLDIER_M_4A_1_RIFLE = preload("uid://cuergk33h7trx")
+	const PLAYER_SOLDIER_M_4A_1_RIFLE_SPRITES = preload("uid://cofk5d3mox6jp")
 	
 	if current_weapon is Pistol:
+		player_sprite.hframes = 1
 		player_sprite.texture = PLAYER_SOLDIER_PISTOL
 	elif current_weapon is m4a1Rifle:
-		player_sprite.texture = PLAYER_M_4A_1_RIFLE
+		player_sprite.hframes = 7
+		player_sprite.texture = PLAYER_SOLDIER_M_4A_1_RIFLE_SPRITES
 	
 
 func set_up_lines_data():
@@ -227,3 +230,9 @@ func _on_ally_detection_area_body_exited(body: Node2D) -> void:
 			allies_nearby.erase(soldier)
 		if soldier.allies_nearby.has(self):
 			soldier.allies_nearby.erase(self)
+
+func do_before_movement():
+	animation_player.play("running_animation")
+func do_after_movement():
+	player_sprite.frame = 0
+	animation_player.stop()

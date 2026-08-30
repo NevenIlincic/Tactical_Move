@@ -236,6 +236,7 @@ func do_movement(tween: Tween):
 	if len(player_path) <= 1:
 		tween.kill()
 		return
+	do_before_movement()
 	is_walking = true
 	var current_position = global_position	
 	for target_position in player_path:
@@ -244,6 +245,7 @@ func do_movement(tween: Tween):
 		tween.tween_property(self, "global_position", target_position, duration)
 		
 		current_position = target_position
+
 	await tween.finished.connect(_on_move_stop)
 
 func _on_rotation_stop():
@@ -268,6 +270,8 @@ func _on_move_stop():
 		Signals.player_move_continued.emit(self)
 	else:
 		Signals.player_move_finished.emit(self)
+		
+	do_after_movement()
 func _on_actions_finished():
 	player_path.clear()
 	point_to_look = null
@@ -310,3 +314,5 @@ func do_while_action_extra(): pass
 func _pre_move_actions(): pass
 func set_player_sprite(): pass
 func can_soldier_move(): pass
+func do_before_movement(): pass
+func do_after_movement(): pass

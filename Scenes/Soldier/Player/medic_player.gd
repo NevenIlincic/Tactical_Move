@@ -41,6 +41,8 @@ func heal_player(player: Player):
 	player.soldier_stats.HP.base_value = minf(player.soldier_stats.HP.base_value + HEALING_AMOUNT, player.soldier_stats.MAX_HP.base_value)
 	player.healing_effect_cross.do_effect()
 	player.healing_needed_sprite.visible = false
+	if player.soldier_stats.HP.base_value / player.soldier_stats.MAX_HP.base_value >= 0.3:
+		UpgradeManager.remove_low_hp_penalty(player)
 ###
 
 func _on_medic_apply_area_body_entered(body: Node2D) -> void:

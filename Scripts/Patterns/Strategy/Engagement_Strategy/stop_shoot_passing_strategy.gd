@@ -20,3 +20,4 @@ func stop_movement(player: Soldier):
 		player.move_tween.kill()
 	player.is_walking = false
 	player.reset_path()
+	player.do_after_movement()
