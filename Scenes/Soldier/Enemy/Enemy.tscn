@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://y3pndfcq1kxo"]
 
 [ext_resource type="Script" uid="uid://cgpj7hlgh52n1" path="res://Scripts/Soldier/Enemy/enemy.gd" id="1_02vxf"]
-[ext_resource type="Texture2D" uid="uid://dnly40vchvf7t" path="res://Sprites/Enemy/enemy_128x128.png" id="2_2i7on"]
+[ext_resource type="Texture2D" uid="uid://cj7du6skub5ll" path="res://Sprites/Enemy/enemy_soldier_walking_sprites.png" id="2_2i7on"]
 [ext_resource type="PackedScene" uid="uid://b4siawy1vgojx" path="res://Scenes/Effects/Gun_Blast_Effect.tscn" id="2_cgwcb"]
 [ext_resource type="Texture2D" uid="uid://uwcsyrtrt75l" path="res://Sprites/Path_Line/New Piskel-1.png - 2026-08-04T161338.290.png" id="3_02vxf"]
 [ext_resource type="Script" uid="uid://c386pr8tx5qep" path="res://Scripts/Soldier/soldier_vision.gd" id="3_fw0yv"]
@@ -48,6 +48,44 @@ gravity = Vector3(0, 0, 0)
 alpha_curve = SubResource("CurveTexture_qqij5")
 emission_curve = SubResource("CurveTexture_7jdmd")
 
+[sub_resource type="Animation" id="Animation_2i7on"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Enemy_Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_cgwcb"]
+resource_name = "running_animation"
+loop_mode = 1
+step = 0.071428575
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Enemy_Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.071428575, 0.14285715, 0.21428573, 0.2857143, 0.35714287, 0.42857146, 0.5, 0.5714286, 0.6428572, 0.71428573, 0.7857143, 0.8571429, 0.92857146),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 0, 1, 2, 3, 4, 5, 6]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2wdta"]
+_data = {
+&"RESET": SubResource("Animation_2i7on"),
+&"running_animation": SubResource("Animation_cgwcb")
+}
+
 [node name="Enemy" type="Node2D" unique_id=1440065138 groups=["enemy_node", "soldier"]]
 z_index = 2
 script = ExtResource("1_02vxf")
@@ -55,7 +93,9 @@ script = ExtResource("1_02vxf")
 [node name="Enemy_Sprite" type="Sprite2D" parent="." unique_id=1264594983]
 texture_filter = 1
 texture_repeat = 1
+position = Vector2(6, 1)
 texture = ExtResource("2_2i7on")
+hframes = 7
 
 [node name="Detection_Area" type="Area2D" parent="." unique_id=96710695 groups=["enemy"]]
 visible = false
@@ -80,7 +120,7 @@ gradient = SubResource("Gradient_cgwcb")
 script = ExtResource("5_cmdj1")
 
 [node name="m4a1_rifle_bullet_spawn_point" type="Marker2D" parent="." unique_id=1893409635]
-position = Vector2(49, 9)
+position = Vector2(40, 4)
 
 [node name="pistol_bullet_spawn_point" type="Marker2D" parent="." unique_id=1878688254]
 position = Vector2(29, 9)
@@ -117,3 +157,6 @@ shape = SubResource("RectangleShape2D_06txj")
 
 [node name="GunBlastEffect" parent="." unique_id=1793492474 instance=ExtResource("2_cgwcb")]
 process_material = SubResource("ParticleProcessMaterial_cgwcb")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1539685322]
+libraries/ = SubResource("AnimationLibrary_2wdta")

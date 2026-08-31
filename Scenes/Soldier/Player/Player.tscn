@@ -153,6 +153,7 @@ script = ExtResource("2_4wape")
 top_level = true
 texture_filter = 1
 texture_repeat = 1
+scale = Vector2(1.5, 1.5)
 texture = ExtResource("8_0eouq")
 
 [node name="Player_Sprite" type="Sprite2D" parent="." unique_id=1716240992]
@@ -215,7 +216,7 @@ position = Vector2(0, -4)
 shape = SubResource("RectangleShape2D_jjc5n")
 
 [node name="m4a1_rifle_bullet_spawn_point" type="Marker2D" parent="." unique_id=1798696889]
-position = Vector2(45, 7)
+position = Vector2(34, 4)
 
 [node name="pistol_bullet_spawn_point" type="Marker2D" parent="." unique_id=2000225844]
 position = Vector2(36, 7)
@@ -267,6 +268,9 @@ scale = Vector2(0.5, 0.5)
 texture = ExtResource("14_esp8e")
 
 [node name="HealingEffect_Cross" parent="." unique_id=718372442 instance=ExtResource("15_yq3hi")]
+
+[node name="Position_Marker_AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1121704710]
+libraries/ = SubResource("AnimationLibrary_x56g5")
 
 [connection signal="input_event" from="Selection_Area" to="." method="_on_selection_area_input_event"]
 [connection signal="body_entered" from="Ally_Detection_Area" to="." method="_on_ally_detection_area_body_entered"]

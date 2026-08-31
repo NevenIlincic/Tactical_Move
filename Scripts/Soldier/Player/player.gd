@@ -21,6 +21,8 @@ var allies_nearby: Dictionary = {} #{PLayer: true}
 @onready var player_sprite: Sprite2D = $Player_Sprite
 @onready var move_to_position_marker: Sprite2D = $Move_To_Position_Marker
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var position_marker_animation_player: AnimationPlayer = $Position_Marker_AnimationPlayer
+
 @export var player_avatar: CompressedTexture2D
 #HEALING
 @onready var healing_needed_sprite: Sprite2D = $Healing_Needed_Sprite
@@ -50,7 +52,8 @@ func _ready() -> void:
 	
 	change_engagement_strategy(current_engagement_rule)
 	#MOVE TO POSITION MARKER
-	animation_player.play("Position_Marker_Rotation")
+	#animation_player.play("Position_Marker_Rotation")
+	position_marker_animation_player.play("Position_Marker_Rotation")
 	move_to_position_marker.global_position = global_position	
 
 

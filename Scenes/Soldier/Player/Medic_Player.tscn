@@ -15,6 +15,9 @@ player_avatar = ExtResource("3_3go7f")
 [node name="Player_Sprite" parent="." index="2" unique_id=1716240992]
 texture = ExtResource("4_ibbrm")
 
+[node name="pistol_bullet_spawn_point" parent="." index="12" unique_id=2000225844]
+position = Vector2(26, 5)
+
 [node name="Medic_Apply_Area" type="Area2D" parent="." index="17" unique_id=1419835665]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Medic_Apply_Area" index="0" unique_id=1916169960]
