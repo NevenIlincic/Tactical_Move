@@ -48,6 +48,9 @@ func _on_players_action_finished():
 	if move_tween and is_instance_valid(move_tween):
 		move_tween.kill()
 	is_walking = false
+	if animation_player.is_playing():
+		animation_player.stop()
+		enemy_sprite.frame = 0
 
 func set_point_to_look(point):
 	point_to_look = point
