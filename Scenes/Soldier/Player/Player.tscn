@@ -15,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://brl5iuqo7keov" path="res://Sprites/HUD/Player/healing_icon.png" id="14_esp8e"]
 [ext_resource type="PackedScene" uid="uid://bw1j5p7a3sj6j" path="res://Scenes/Effects/Healing_Effect.tscn" id="15_yq3hi"]
 [ext_resource type="Texture2D" uid="uid://cofk5d3mox6jp" path="res://Sprites/Player/player_soldier_m4a1_rifle_sprites.png" id="16_8bdxw"]
+[ext_resource type="Texture2D" uid="uid://bwyo2vvivf5ai" path="res://Sprites/Player/player_dying_sprites.png" id="16_cifhn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_06txj"]
 size = Vector2(60, 60)
@@ -62,6 +63,35 @@ tracks/1/keys = {
 "update": 1,
 "values": [0]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Dying_Sprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_8bdxw"]
+resource_name = "dying_animation"
+length = 1.0000333631366491
+step = 0.33333334
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Dying_Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.33333334, 0.6666667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
 
 [sub_resource type="Animation" id="Animation_yq3hi"]
 resource_name = "running_animation"
@@ -85,6 +115,7 @@ tracks/0/keys = {
 _data = {
 &"Position_Marker_Rotation": SubResource("Animation_0eouq"),
 &"RESET": SubResource("Animation_3um6k"),
+&"dying_animation": SubResource("Animation_8bdxw"),
 &"running_animation": SubResource("Animation_yq3hi")
 }
 
@@ -280,7 +311,14 @@ libraries/ = SubResource("AnimationLibrary_x56g5")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Medic_Detection_Area" unique_id=1240614037]
 shape = SubResource("RectangleShape2D_fhwqp")
 
+[node name="Dying_Sprite" type="Sprite2D" parent="." unique_id=1339253334]
+visible = false
+texture_filter = 1
+texture = ExtResource("16_cifhn")
+hframes = 3
+
 [connection signal="input_event" from="Selection_Area" to="." method="_on_selection_area_input_event"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="body_entered" from="Ally_Detection_Area" to="." method="_on_ally_detection_area_body_entered"]
 [connection signal="body_exited" from="Ally_Detection_Area" to="." method="_on_ally_detection_area_body_exited"]
 [connection signal="area_entered" from="Medic_Detection_Area" to="." method="_on_medic_detection_area_area_entered"]

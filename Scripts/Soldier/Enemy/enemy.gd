@@ -4,6 +4,7 @@ class_name Enemy extends Soldier
 @onready var enemy_sprite: Sprite2D = $Enemy_Sprite
 @export var HP: float = 100.0
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var dying_sprite: Sprite2D = $Dying_Sprite
 
 #FOR PLAYER
 var num_seen_by: int = 0
@@ -240,3 +241,18 @@ func do_before_movement():
 func do_after_movement():
 	enemy_sprite.frame = 0
 	animation_player.stop()
+
+func on_soldier_killed():
+	enemy_sprite.visible = false
+	dying_sprite.visible = true
+	hitbox_collision_shape.disabled = true
+	vision_polygon.disable_rays()
+	vision_polygon.visible = false
+	enemies_in_sight.clear()
+	enemy_to_shoot = null
+	animation_player.play("dying_animation")
+
+
+func _on_animation_player_animation_finished(anim_name: StringName) -> void:
+	if anim_name == "dying_animation":
+		queue_free()

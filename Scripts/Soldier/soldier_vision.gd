@@ -38,6 +38,10 @@ func setup_vision_rays() -> void:
 		ray.set_collision_mask_value(3, false)
 		add_child(ray)
 		rays.append(ray)
+		
+func disable_rays():
+	for ray: RayCast2D in rays:
+		ray.enabled = false
 
 func update_vision():
 	var enemy_position: Vector2
@@ -61,6 +65,8 @@ func update_vision():
 			current_point = ray.to_local(ray.get_collision_point())
 			var hit_object = ray.get_collider().get_parent()
 			if hit_object and hit_object is Soldier:
+				if hit_object.is_killed:
+					return
 				if check_is_enemy_soldier_hit(get_parent(), hit_object):
 					if not currently_visible_enemies.has(hit_object):
 						currently_visible_enemies[hit_object] = true

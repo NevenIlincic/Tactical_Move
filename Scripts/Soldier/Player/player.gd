@@ -19,9 +19,11 @@ var allies_nearby: Dictionary = {} #{PLayer: true}
 
 #OTHER NODES
 @onready var player_sprite: Sprite2D = $Player_Sprite
+@onready var dying_sprite: Sprite2D = $Dying_Sprite
 @onready var move_to_position_marker: Sprite2D = $Move_To_Position_Marker
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var position_marker_animation_player: AnimationPlayer = $Position_Marker_AnimationPlayer
+@onready var point_light_2d: PointLight2D = $Vision_Polygon/PointLight2D
 
 @export var player_avatar: CompressedTexture2D
 #HEALING
@@ -241,10 +243,26 @@ func do_after_movement():
 	player_sprite.frame = 0
 	animation_player.stop()
 
-
+func on_soldier_killed():
+	player_sprite.visible = false
+	dying_sprite.visible = true
+	hitbox_collision_shape.disabled = true
+	move_to_position_marker.visible = false
+	vision_polygon.disable_rays()
+	vision_polygon.visible = false
+	point_light_2d.enabled = false
+	enemies_in_sight.clear()
+	enemy_to_shoot = null
+	animation_player.play("dying_animation")
+	
 
 func _on_medic_detection_area_area_entered(area: Area2D) -> void:
 	if area.is_in_group("medic_detection_area"):
 		var soldier: Player = area.get_parent()
 		if soldier != self:
 			soldier.allies_to_heal_nearby[soldier_id] = self
+
+
+func _on_animation_player_animation_finished(anim_name: StringName) -> void:
+	if anim_name == "dying_animation":
+		queue_free()

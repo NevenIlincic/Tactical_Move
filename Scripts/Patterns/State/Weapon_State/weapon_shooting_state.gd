@@ -11,7 +11,7 @@ func update(delta: float):
 		current_weapon.change_weapon_state(WeaponReloadState.new())
 		return
 	fire_timer -= delta
-	if fire_timer <= 0.0 and check_can_shoot_target():
+	if fire_timer <= 0.0 and check_can_shoot_target() and not current_weapon.weapon_owner.is_killed:
 		shoot_target()
 		fire_timer = 1.0 / current_weapon.weapon_stats.fire_rate.get_value()
 

@@ -8,6 +8,7 @@ enum SoldierType{
 }
 var soldier_type: SoldierType
 
+
 @onready var vision_polygon: SoldierVision = $Vision_Polygon
 @onready var hitbox_collision_shape: CollisionShape2D = $Hitbox/Hitbox_Collision_Shape
 @onready var bullet_line: SoldierBulletLine = $Bullet_Line
@@ -93,8 +94,10 @@ func _on_enemy_soldier_killed(enemy_killed: Soldier, _killed_by: Soldier):
 func when_killed():
 	if is_killed:
 		disconnect_from_signals()
-		queue_free()
 		Signals.player_move_finished.emit(self)
+		on_soldier_killed()
+			
+		#queue_free()
 func _select_next_enemy_to_shoot():
 	var lowest_hp_enemy: Soldier = null
 	var lowest_hp_value = INF
@@ -316,3 +319,4 @@ func set_player_sprite(): pass
 func can_soldier_move(): pass
 func do_before_movement(): pass
 func do_after_movement(): pass
+func on_soldier_killed(): pass
