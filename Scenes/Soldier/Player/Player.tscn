@@ -6,7 +6,6 @@
 [ext_resource type="Script" uid="uid://c386pr8tx5qep" path="res://Scripts/Soldier/soldier_vision.gd" id="4_t26db"]
 [ext_resource type="Texture2D" uid="uid://cp3f8t70d5twp" path="res://icon.svg" id="4_ude3g"]
 [ext_resource type="Texture2D" uid="uid://uwcsyrtrt75l" path="res://Sprites/Path_Line/New Piskel-1.png - 2026-08-04T161338.290.png" id="5_jmcll"]
-[ext_resource type="Texture2D" uid="uid://q7sw1jdmg3ev" path="res://Sprites/Player/Player_M4a1_rifle.png" id="5_yq3hi"]
 [ext_resource type="Script" uid="uid://b260cldj7kekv" path="res://Scripts/Line/player_look_at_line.gd" id="7_t26db"]
 [ext_resource type="Texture2D" uid="uid://bldh4qpfu1l23" path="res://Sprites/Player/look_at_position.png" id="7_x56g5"]
 [ext_resource type="Texture2D" uid="uid://cynm5bschf8o1" path="res://Sprites/Player/move_to_position_marker.png" id="8_0eouq"]
@@ -15,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://crp281jh7dnh6" path="res://Sprites/Light/bela_kupa_60stepeni.png" id="12_q6by2"]
 [ext_resource type="Texture2D" uid="uid://brl5iuqo7keov" path="res://Sprites/HUD/Player/healing_icon.png" id="14_esp8e"]
 [ext_resource type="PackedScene" uid="uid://bw1j5p7a3sj6j" path="res://Scenes/Effects/Healing_Effect.tscn" id="15_yq3hi"]
+[ext_resource type="Texture2D" uid="uid://cofk5d3mox6jp" path="res://Sprites/Player/player_soldier_m4a1_rifle_sprites.png" id="16_8bdxw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_06txj"]
 size = Vector2(60, 60)
@@ -50,11 +50,42 @@ tracks/0/keys = {
 "update": 0,
 "values": [0.0]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Player_Sprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_yq3hi"]
+resource_name = "running_animation"
+length = 1.0000071875609458
+loop_mode = 1
+step = 0.071428575
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Player_Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.071428575, 0.14285715, 0.21428575, 0.2857143, 0.35714287, 0.4285715, 0.5, 0.5714286, 0.6428572, 0.71428573, 0.7857143, 0.857143, 0.9285715),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 0, 1, 2, 3, 4, 5, 6]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_x56g5"]
 _data = {
 &"Position_Marker_Rotation": SubResource("Animation_0eouq"),
-&"RESET": SubResource("Animation_3um6k")
+&"RESET": SubResource("Animation_3um6k"),
+&"running_animation": SubResource("Animation_yq3hi")
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_06txj"]
@@ -104,6 +135,9 @@ emission_curve = SubResource("CurveTexture_7jdmd")
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_58pdj"]
 light_mode = 1
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fhwqp"]
+size = Vector2(48, 48)
+
 [node name="Player" type="Node2D" unique_id=1108589071 groups=["Player", "soldier"]]
 z_index = 2
 script = ExtResource("1_ft8w5")
@@ -122,15 +156,17 @@ script = ExtResource("2_4wape")
 top_level = true
 texture_filter = 1
 texture_repeat = 1
+scale = Vector2(1.5, 1.5)
 texture = ExtResource("8_0eouq")
 
 [node name="Player_Sprite" type="Sprite2D" parent="." unique_id=1716240992]
 z_index = 1
 texture_filter = 1
 texture_repeat = 1
-position = Vector2(8, -120)
-texture = ExtResource("5_yq3hi")
+position = Vector2(4, -117)
+texture = ExtResource("16_8bdxw")
 offset = Vector2(-0.00030048078, 118.15355)
+hframes = 7
 
 [node name="Selection_Area" type="Area2D" parent="." unique_id=2041313350]
 
@@ -183,7 +219,7 @@ position = Vector2(0, -4)
 shape = SubResource("RectangleShape2D_jjc5n")
 
 [node name="m4a1_rifle_bullet_spawn_point" type="Marker2D" parent="." unique_id=1798696889]
-position = Vector2(45, 7)
+position = Vector2(34, 4)
 
 [node name="pistol_bullet_spawn_point" type="Marker2D" parent="." unique_id=2000225844]
 position = Vector2(36, 7)
@@ -236,6 +272,15 @@ texture = ExtResource("14_esp8e")
 
 [node name="HealingEffect_Cross" parent="." unique_id=718372442 instance=ExtResource("15_yq3hi")]
 
+[node name="Position_Marker_AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1121704710]
+libraries/ = SubResource("AnimationLibrary_x56g5")
+
+[node name="Medic_Detection_Area" type="Area2D" parent="." unique_id=1241310332]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Medic_Detection_Area" unique_id=1240614037]
+shape = SubResource("RectangleShape2D_fhwqp")
+
 [connection signal="input_event" from="Selection_Area" to="." method="_on_selection_area_input_event"]
 [connection signal="body_entered" from="Ally_Detection_Area" to="." method="_on_ally_detection_area_body_entered"]
 [connection signal="body_exited" from="Ally_Detection_Area" to="." method="_on_ally_detection_area_body_exited"]
+[connection signal="area_entered" from="Medic_Detection_Area" to="." method="_on_medic_detection_area_area_entered"]

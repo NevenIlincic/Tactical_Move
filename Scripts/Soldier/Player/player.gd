@@ -21,6 +21,8 @@ var allies_nearby: Dictionary = {} #{PLayer: true}
 @onready var player_sprite: Sprite2D = $Player_Sprite
 @onready var move_to_position_marker: Sprite2D = $Move_To_Position_Marker
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var position_marker_animation_player: AnimationPlayer = $Position_Marker_AnimationPlayer
+
 @export var player_avatar: CompressedTexture2D
 #HEALING
 @onready var healing_needed_sprite: Sprite2D = $Healing_Needed_Sprite
@@ -50,18 +52,23 @@ func _ready() -> void:
 	
 	change_engagement_strategy(current_engagement_rule)
 	#MOVE TO POSITION MARKER
-	animation_player.play("Position_Marker_Rotation")
+	#animation_player.play("Position_Marker_Rotation")
+	position_marker_animation_player.play("Position_Marker_Rotation")
 	move_to_position_marker.global_position = global_position	
 
 
 func set_player_sprite():
-	const PLAYER_M_4A_1_RIFLE = preload("uid://q7sw1jdmg3ev")
-	const PLAYER_SOLDIER_PISTOL = preload("uid://xobgolcljc7w")
-	
-	if current_weapon is Pistol:
-		player_sprite.texture = PLAYER_SOLDIER_PISTOL
-	elif current_weapon is m4a1Rifle:
-		player_sprite.texture = PLAYER_M_4A_1_RIFLE
+	pass
+	#const PLAYER_SOLDIER_PISTOL = preload("uid://xobgolcljc7w")
+	##const PLAYER_SOLDIER_M_4A_1_RIFLE = preload("uid://cuergk33h7trx")
+	#const PLAYER_SOLDIER_M_4A_1_RIFLE_SPRITES = preload("uid://cofk5d3mox6jp")
+	#
+	#if current_weapon is Pistol:
+		#player_sprite.hframes = 1
+		#player_sprite.texture = PLAYER_SOLDIER_PISTOL
+	#elif current_weapon is m4a1Rifle:
+		#player_sprite.hframes = 7
+		#player_sprite.texture = PLAYER_SOLDIER_M_4A_1_RIFLE_SPRITES
 	
 
 func set_up_lines_data():
@@ -227,3 +234,17 @@ func _on_ally_detection_area_body_exited(body: Node2D) -> void:
 			allies_nearby.erase(soldier)
 		if soldier.allies_nearby.has(self):
 			soldier.allies_nearby.erase(self)
+
+func do_before_movement():
+	animation_player.play("running_animation")
+func do_after_movement():
+	player_sprite.frame = 0
+	animation_player.stop()
+
+
+
+func _on_medic_detection_area_area_entered(area: Area2D) -> void:
+	if area.is_in_group("medic_detection_area"):
+		var soldier: Player = area.get_parent()
+		if soldier != self:
+			soldier.allies_to_heal_nearby[soldier_id] = self

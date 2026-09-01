@@ -3,6 +3,8 @@ class_name Enemy extends Soldier
 #SCENE NODES
 @onready var enemy_sprite: Sprite2D = $Enemy_Sprite
 @export var HP: float = 100.0
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
+
 #FOR PLAYER
 var num_seen_by: int = 0
 
@@ -46,6 +48,9 @@ func _on_players_action_finished():
 	if move_tween and is_instance_valid(move_tween):
 		move_tween.kill()
 	is_walking = false
+	if animation_player.is_playing():
+		animation_player.stop()
+		enemy_sprite.frame = 0
 
 func set_point_to_look(point):
 	point_to_look = point
@@ -229,3 +234,9 @@ func get_path_length(path):
 	for i in range(path.size() - 1):
 		total_length += path[i].distance_to(path[i + 1])
 	return total_length
+
+func do_before_movement():
+	animation_player.play("running_animation")
+func do_after_movement():
+	enemy_sprite.frame = 0
+	animation_player.stop()
