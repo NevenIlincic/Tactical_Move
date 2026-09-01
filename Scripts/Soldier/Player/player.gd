@@ -240,3 +240,11 @@ func do_before_movement():
 func do_after_movement():
 	player_sprite.frame = 0
 	animation_player.stop()
+
+
+
+func _on_medic_detection_area_area_entered(area: Area2D) -> void:
+	if area.is_in_group("medic_detection_area"):
+		var soldier: Player = area.get_parent()
+		if soldier != self:
+			soldier.allies_to_heal_nearby[soldier_id] = self

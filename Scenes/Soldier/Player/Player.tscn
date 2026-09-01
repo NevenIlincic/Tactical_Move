@@ -135,6 +135,9 @@ emission_curve = SubResource("CurveTexture_7jdmd")
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_58pdj"]
 light_mode = 1
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fhwqp"]
+size = Vector2(48, 48)
+
 [node name="Player" type="Node2D" unique_id=1108589071 groups=["Player", "soldier"]]
 z_index = 2
 script = ExtResource("1_ft8w5")
@@ -272,6 +275,12 @@ texture = ExtResource("14_esp8e")
 [node name="Position_Marker_AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1121704710]
 libraries/ = SubResource("AnimationLibrary_x56g5")
 
+[node name="Medic_Detection_Area" type="Area2D" parent="." unique_id=1241310332]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Medic_Detection_Area" unique_id=1240614037]
+shape = SubResource("RectangleShape2D_fhwqp")
+
 [connection signal="input_event" from="Selection_Area" to="." method="_on_selection_area_input_event"]
 [connection signal="body_entered" from="Ally_Detection_Area" to="." method="_on_ally_detection_area_body_entered"]
 [connection signal="body_exited" from="Ally_Detection_Area" to="." method="_on_ally_detection_area_body_exited"]
+[connection signal="area_entered" from="Medic_Detection_Area" to="." method="_on_medic_detection_area_area_entered"]

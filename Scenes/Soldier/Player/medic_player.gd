@@ -56,7 +56,6 @@ func _on_medic_apply_area_body_entered(body: Node2D) -> void:
 	var soldier = body.get_parent()
 	if soldier != self and body.is_in_group("player_hitbox") and soldier is Player:
 		allies_to_heal_nearby[soldier.soldier_id] = soldier
-
 func _on_medic_apply_area_body_exited(body: Node2D) -> void:
 	var soldier = body.get_parent()
 	if soldier != self and body.is_in_group("player_hitbox") and soldier is Player:

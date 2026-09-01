@@ -8,7 +8,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_06txj"]
 size = Vector2(96, 96)
 
-[node name="MedicPlayer" unique_id=1108589071 instance=ExtResource("1_2ddjp")]
+[node name="MedicPlayer" unique_id=1108589071 groups=["Medic"] instance=ExtResource("1_2ddjp")]
 script = ExtResource("2_jqc10")
 player_avatar = ExtResource("3_3go7f")
 
@@ -30,6 +30,8 @@ texture_filter = 1
 position = Vector2(0, 1.4305115e-06)
 scale = Vector2(3, 3)
 texture = ExtResource("3_3go7f")
+
+[node name="Medic_Detection_Area" parent="." index="22" unique_id=1241310332 groups=["medic_detection_area"]]
 
 [connection signal="body_entered" from="Medic_Apply_Area" to="." method="_on_medic_apply_area_body_entered"]
 [connection signal="body_exited" from="Medic_Apply_Area" to="." method="_on_medic_apply_area_body_exited"]
