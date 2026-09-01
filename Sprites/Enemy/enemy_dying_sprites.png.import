@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://crkf6i8s2lmn6"
-path="res://.godot/imported/enemy_soldier_walking_sprites.png-d731419ecd4fecf051c93038f10c73b8.ctex"
+uid="uid://cj7du6skub5ll"
+path="res://.godot/imported/enemy_dying_sprites.png-11c6a0da050778c1e9daf218e98b1501.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Enemy/enemy_soldier_walking_sprites.png"
-dest_files=["res://.godot/imported/enemy_soldier_walking_sprites.png-d731419ecd4fecf051c93038f10c73b8.ctex"]
+source_file="res://Sprites/Enemy/enemy_dying_sprites.png"
+dest_files=["res://.godot/imported/enemy_dying_sprites.png-11c6a0da050778c1e9daf218e98b1501.ctex"]
 
 [params]
 

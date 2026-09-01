@@ -1,12 +1,12 @@
 [gd_scene format=3 uid="uid://y3pndfcq1kxo"]
 
 [ext_resource type="Script" uid="uid://cgpj7hlgh52n1" path="res://Scripts/Soldier/Enemy/enemy.gd" id="1_02vxf"]
-[ext_resource type="Texture2D" uid="uid://cj7du6skub5ll" path="res://Sprites/Enemy/enemy_soldier_walking_sprites.png" id="2_2i7on"]
+[ext_resource type="Texture2D" uid="uid://crkf6i8s2lmn6" path="res://Sprites/Enemy/enemy_soldier_walking_sprites.png" id="2_2i7on"]
 [ext_resource type="PackedScene" uid="uid://b4siawy1vgojx" path="res://Scenes/Effects/Gun_Blast_Effect.tscn" id="2_cgwcb"]
 [ext_resource type="Texture2D" uid="uid://uwcsyrtrt75l" path="res://Sprites/Path_Line/New Piskel-1.png - 2026-08-04T161338.290.png" id="3_02vxf"]
 [ext_resource type="Script" uid="uid://c386pr8tx5qep" path="res://Scripts/Soldier/soldier_vision.gd" id="3_fw0yv"]
 [ext_resource type="Script" uid="uid://duyphgu7sdufm" path="res://Scenes/Soldier/soldier_bullet_line.gd" id="5_cmdj1"]
-[ext_resource type="Texture2D" uid="uid://bwyo2vvivf5ai" path="res://Sprites/Player/player_dying_sprites.png" id="7_2i7on"]
+[ext_resource type="Texture2D" uid="uid://cj7du6skub5ll" path="res://Sprites/Enemy/enemy_dying_sprites.png" id="7_2i7on"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_02vxf"]
 radius = 20.0
@@ -194,6 +194,7 @@ libraries/ = SubResource("AnimationLibrary_2wdta")
 [node name="Dying_Sprite" type="Sprite2D" parent="." unique_id=652083718]
 visible = false
 texture_filter = 1
+position = Vector2(13, 0)
 texture = ExtResource("7_2i7on")
 hframes = 3
 

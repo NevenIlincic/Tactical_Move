@@ -598,7 +598,7 @@ collision_layer = 3
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D8" unique_id=1756831485]
 position = Vector2(292.49997, 274.36865)
 scale = Vector2(0.39062503, 0.3173831)
-polygon = PackedVector2Array(-421.11996, 334.08008, -421.11996, 497.91992, 1381.1199, 497.91992, 1381.1199, 334.08008)
+polygon = PackedVector2Array(-421.11996, 334.08008, -421.1199, 547.0718, 1381.1199, 547.0718, 1381.1199, 334.08008)
 
 [node name="StaticBody2D9" type="StaticBody2D" parent="." unique_id=1926806844 groups=["wall"]]
 collision_layer = 3

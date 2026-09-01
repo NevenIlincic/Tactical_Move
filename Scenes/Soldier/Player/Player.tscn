@@ -15,7 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://brl5iuqo7keov" path="res://Sprites/HUD/Player/healing_icon.png" id="14_esp8e"]
 [ext_resource type="PackedScene" uid="uid://bw1j5p7a3sj6j" path="res://Scenes/Effects/Healing_Effect.tscn" id="15_yq3hi"]
 [ext_resource type="Texture2D" uid="uid://cofk5d3mox6jp" path="res://Sprites/Player/player_soldier_m4a1_rifle_sprites.png" id="16_8bdxw"]
-[ext_resource type="Texture2D" uid="uid://bwyo2vvivf5ai" path="res://Sprites/Player/player_dying_sprites.png" id="16_cifhn"]
+[ext_resource type="Texture2D" uid="uid://bul8qv1rsnp6o" path="res://Sprites/Player/player_dying_sprites.png" id="16_cifhn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_06txj"]
 size = Vector2(60, 60)
@@ -314,6 +314,7 @@ shape = SubResource("RectangleShape2D_fhwqp")
 [node name="Dying_Sprite" type="Sprite2D" parent="." unique_id=1339253334]
 visible = false
 texture_filter = 1
+position = Vector2(4, 1)
 texture = ExtResource("16_cifhn")
 hframes = 3
 
