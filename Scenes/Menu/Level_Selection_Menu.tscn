@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://dju38dowp0jfy" path="res://Sprites/Level_Covers/House.png" id="2_w6mgx"]
 [ext_resource type="PackedScene" uid="uid://dx3kt52m4smv1" path="res://Scenes/Buttons/Level_Selection_Button.tscn" id="3_yqc5b"]
 [ext_resource type="Texture2D" uid="uid://cm4b0evnpuj61" path="res://Sprites/Level_Covers/Training_Course.png" id="5_4552k"]
-[ext_resource type="Texture2D" uid="uid://b5qf2tenv1fn2" path="res://Sprites/Level_Covers/Parking_Lot.png" id="6_ve437"]
+[ext_resource type="Texture2D" uid="uid://chuc7spn23j05" path="res://Sprites/Level_Covers/Parking_Lot.png" id="6_ve437"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4552k"]
 draw_center = false

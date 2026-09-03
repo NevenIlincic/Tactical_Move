@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://chy7dddrrr700" path="res://Scenes/Soldier/Player/Player.tscn" id="1_2ddjp"]
 [ext_resource type="Script" uid="uid://b7whg4dgrsnvu" path="res://Scenes/Soldier/Player/medic_player.gd" id="2_jqc10"]
 [ext_resource type="Texture2D" uid="uid://cu4qg8rcm0xut" path="res://Sprites/HUD/Player/healing_area_indicator.png" id="3_3go7f"]
+[ext_resource type="Texture2D" uid="uid://dcjpq0yr88po1" path="res://Sprites/Player/Avatars/male_soldier.png" id="3_sm8ne"]
 [ext_resource type="Texture2D" uid="uid://jc4u6cofkstv" path="res://Sprites/Player/Medic/medic_pistol_sprites.png" id="4_ibbrm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_06txj"]
@@ -10,7 +11,7 @@ size = Vector2(96, 96)
 
 [node name="MedicPlayer" unique_id=1108589071 groups=["Medic"] instance=ExtResource("1_2ddjp")]
 script = ExtResource("2_jqc10")
-player_avatar = ExtResource("3_3go7f")
+player_avatar = ExtResource("3_sm8ne")
 
 [node name="Player_Sprite" parent="." index="2" unique_id=1716240992]
 texture = ExtResource("4_ibbrm")

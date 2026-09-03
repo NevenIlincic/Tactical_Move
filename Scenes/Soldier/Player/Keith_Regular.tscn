@@ -1,0 +1,89 @@
+[gd_scene format=3 uid="uid://bsxjq5u2glxba"]
+
+[ext_resource type="PackedScene" uid="uid://chy7dddrrr700" path="res://Scenes/Soldier/Player/Player.tscn" id="1_vxaiv"]
+[ext_resource type="Texture2D" uid="uid://5dn5fh731jps" path="res://Sprites/Player/Avatars/male_soldier_4.png" id="2_g26ux"]
+[ext_resource type="Script" uid="uid://bencr8mnns7ut" path="res://Scripts/Patterns/Stat/stat.gd" id="3_q8iut"]
+[ext_resource type="Script" uid="uid://cp4iog725gtuq" path="res://Scripts/Soldier/Player/player_stats.gd" id="4_drmau"]
+[ext_resource type="Script" uid="uid://cubw4ogrqm6po" path="res://Scripts/Weapon/weapon.gd" id="5_b0g1u"]
+[ext_resource type="Script" uid="uid://bmr38t2grjqqv" path="res://Scripts/Weapon/m4a1_rifle.gd" id="6_6p8x8"]
+[ext_resource type="Script" uid="uid://dh5netn8c2b4e" path="res://Scripts/Weapon/weapon_stats.gd" id="7_51km5"]
+
+[sub_resource type="Resource" id="Resource_pfggv"]
+script = ExtResource("3_q8iut")
+base_value = 250.0
+metadata/_custom_type_script = "uid://bencr8mnns7ut"
+
+[sub_resource type="Resource" id="Resource_umy8h"]
+script = ExtResource("3_q8iut")
+base_value = 750.0
+metadata/_custom_type_script = "uid://bencr8mnns7ut"
+
+[sub_resource type="Resource" id="Resource_oy8b1"]
+script = ExtResource("3_q8iut")
+base_value = 0.2
+metadata/_custom_type_script = "uid://bencr8mnns7ut"
+
+[sub_resource type="Resource" id="Resource_i3tfk"]
+script = ExtResource("3_q8iut")
+base_value = 250.0
+metadata/_custom_type_script = "uid://bencr8mnns7ut"
+
+[sub_resource type="Resource" id="Resource_vxaiv"]
+script = ExtResource("4_drmau")
+speed = SubResource("Resource_i3tfk")
+reaction_time = SubResource("Resource_oy8b1")
+max_travel_distance = SubResource("Resource_umy8h")
+MAX_HP = SubResource("Resource_pfggv")
+metadata/_custom_type_script = "uid://cp4iog725gtuq"
+
+[sub_resource type="Resource" id="Resource_q8iut"]
+script = ExtResource("3_q8iut")
+base_value = 30.0
+metadata/_custom_type_script = "uid://bencr8mnns7ut"
+
+[sub_resource type="Resource" id="Resource_6p8x8"]
+script = ExtResource("3_q8iut")
+base_value = 45.0
+metadata/_custom_type_script = "uid://bencr8mnns7ut"
+
+[sub_resource type="Resource" id="Resource_b0g1u"]
+script = ExtResource("3_q8iut")
+base_value = 9.0
+metadata/_custom_type_script = "uid://bencr8mnns7ut"
+
+[sub_resource type="Resource" id="Resource_51km5"]
+script = ExtResource("3_q8iut")
+base_value = 90.0
+metadata/_custom_type_script = "uid://bencr8mnns7ut"
+
+[sub_resource type="Resource" id="Resource_drmau"]
+script = ExtResource("3_q8iut")
+base_value = 30.0
+metadata/_custom_type_script = "uid://bencr8mnns7ut"
+
+[sub_resource type="Resource" id="Resource_pdq8q"]
+script = ExtResource("3_q8iut")
+base_value = 3.0
+metadata/_custom_type_script = "uid://bencr8mnns7ut"
+
+[sub_resource type="Resource" id="Resource_g26ux"]
+script = ExtResource("7_51km5")
+current_ammo = SubResource("Resource_q8iut")
+max_ammo_capacity = SubResource("Resource_drmau")
+fire_rate = SubResource("Resource_b0g1u")
+damage = SubResource("Resource_6p8x8")
+hit_chance = SubResource("Resource_51km5")
+reload_time = SubResource("Resource_pdq8q")
+metadata/_custom_type_script = "uid://dh5netn8c2b4e"
+
+[sub_resource type="Resource" id="Resource_v6pem"]
+script = ExtResource("6_6p8x8")
+weapon_stats = SubResource("Resource_g26ux")
+metadata/_custom_type_script = "uid://bmr38t2grjqqv"
+
+[node name="Keith_Regular" unique_id=1108589071 instance=ExtResource("1_vxaiv")]
+player_name = "Keith"
+player_avatar = ExtResource("2_g26ux")
+current_engagement_rule = 2
+soldier_stats = SubResource("Resource_vxaiv")
+weapons = Array[ExtResource("5_b0g1u")]([SubResource("Resource_v6pem")])
