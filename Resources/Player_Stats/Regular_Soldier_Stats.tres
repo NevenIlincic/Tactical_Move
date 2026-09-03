@@ -3,10 +3,9 @@
 [ext_resource type="Script" uid="uid://cp4iog725gtuq" path="res://Scripts/Soldier/Player/player_stats.gd" id="1_81ppm"]
 [ext_resource type="Script" uid="uid://bencr8mnns7ut" path="res://Scripts/Patterns/Stat/stat.gd" id="1_sf78t"]
 
-[sub_resource type="Resource" id="Resource_8c5ma"]
-resource_local_to_scene = true
+[sub_resource type="Resource" id="Resource_sf78t"]
 script = ExtResource("1_sf78t")
-base_value = 30.0
+base_value = 100.0
 metadata/_custom_type_script = "uid://bencr8mnns7ut"
 
 [sub_resource type="Resource" id="Resource_stuxa"]
@@ -30,5 +29,5 @@ script = ExtResource("1_81ppm")
 speed = SubResource("Resource_xq73l")
 reaction_time = SubResource("Resource_42oyf")
 max_travel_distance = SubResource("Resource_stuxa")
-HP = SubResource("Resource_8c5ma")
+MAX_HP = SubResource("Resource_sf78t")
 metadata/_custom_type_script = "uid://cp4iog725gtuq"

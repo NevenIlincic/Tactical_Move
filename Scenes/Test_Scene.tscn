@@ -41,43 +41,43 @@
 [ext_resource type="PackedScene" uid="uid://dvxglkihfxy2x" path="res://Scenes/Soldier/Player/Medic_Player.tscn" id="39_gw302"]
 [ext_resource type="Script" uid="uid://dh5netn8c2b4e" path="res://Scripts/Weapon/weapon_stats.gd" id="40_gw302"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_10mtb"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gw302"]
 texture = ExtResource("2_mwjvy")
 texture_region_size = Vector2i(64, 64)
 0:0/0 = 0
 0:0/0/custom_data_0 = true
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3vrl3"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_b662g"]
 texture = ExtResource("3_grcoo")
 texture_region_size = Vector2i(64, 64)
 0:0/0 = 0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6uspl"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hm1bt"]
 texture = ExtResource("4_tq75k")
 texture_region_size = Vector2i(64, 64)
 0:0/0 = 0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_l3xug"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lnsvv"]
 texture = ExtResource("7_3y4ie")
 texture_region_size = Vector2i(64, 64)
 0:0/0 = 0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_58pdj"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_76bep"]
 texture = ExtResource("6_jygqt")
 texture_region_size = Vector2i(64, 64)
 0:0/0 = 0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ofkpl"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ur0lx"]
 texture = ExtResource("4_yn6en")
 texture_region_size = Vector2i(64, 64)
 0:0/0 = 0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_grcoo"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_u6o8x"]
 texture = ExtResource("5_yn6en")
 texture_region_size = Vector2i(64, 64)
 0:0/0 = 0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tq75k"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_d1jbo"]
 texture = ExtResource("6_ofkpl")
 texture_region_size = Vector2i(64, 64)
 0:0/0 = 0
@@ -86,14 +86,14 @@ texture_region_size = Vector2i(64, 64)
 tile_size = Vector2i(64, 64)
 custom_data_layer_0/name = "solid"
 custom_data_layer_0/type = 1
-sources/0 = SubResource("TileSetAtlasSource_10mtb")
-sources/7 = SubResource("TileSetAtlasSource_ofkpl")
-sources/8 = SubResource("TileSetAtlasSource_grcoo")
-sources/9 = SubResource("TileSetAtlasSource_tq75k")
-sources/10 = SubResource("TileSetAtlasSource_3vrl3")
-sources/11 = SubResource("TileSetAtlasSource_6uspl")
-sources/18 = SubResource("TileSetAtlasSource_l3xug")
-sources/4 = SubResource("TileSetAtlasSource_58pdj")
+sources/0 = SubResource("TileSetAtlasSource_gw302")
+sources/7 = SubResource("TileSetAtlasSource_ur0lx")
+sources/8 = SubResource("TileSetAtlasSource_u6o8x")
+sources/9 = SubResource("TileSetAtlasSource_d1jbo")
+sources/10 = SubResource("TileSetAtlasSource_b662g")
+sources/11 = SubResource("TileSetAtlasSource_hm1bt")
+sources/18 = SubResource("TileSetAtlasSource_lnsvv")
+sources/4 = SubResource("TileSetAtlasSource_76bep")
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_lnsvv"]
 polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, 8, 16, 8, -8, -16, -8)
@@ -131,7 +131,7 @@ polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ur0lx"]
 polygon = PackedVector2Array(-16, -16, -8, -16, -8, -8, -16, -8)
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_avk4t"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_h3xea"]
 texture = ExtResource("31_xk5uc")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
@@ -159,7 +159,7 @@ texture_region_size = Vector2i(32, 32)
 2:3/0 = 0
 2:3/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_ur0lx")
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1q75p"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2dwoe"]
 texture = ExtResource("32_avk4t")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
@@ -182,15 +182,15 @@ texture_region_size = Vector2i(32, 32)
 [sub_resource type="TileSet" id="TileSet_jjc5n"]
 tile_size = Vector2i(32, 32)
 occlusion_layer_0/light_mask = 1
-sources/4 = SubResource("TileSetAtlasSource_avk4t")
-sources/5 = SubResource("TileSetAtlasSource_1q75p")
+sources/4 = SubResource("TileSetAtlasSource_h3xea")
+sources/5 = SubResource("TileSetAtlasSource_2dwoe")
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vtp3d"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_uxill"]
 texture = ExtResource("13_us5gr")
 texture_region_size = Vector2i(64, 64)
 0:0/0 = 0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ir5aq"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mem7m"]
 texture = ExtResource("12_elm60")
 texture_region_size = Vector2i(64, 64)
 0:0/0 = 0
@@ -198,7 +198,7 @@ texture_region_size = Vector2i(64, 64)
 0:1/0 = 0
 1:1/0 = 0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_us5gr"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fqn4b"]
 texture = ExtResource("13_ir5aq")
 texture_region_size = Vector2i(64, 64)
 0:0/0 = 0
@@ -206,17 +206,17 @@ texture_region_size = Vector2i(64, 64)
 0:1/0 = 0
 1:1/0 = 0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jygqt"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_sx7x6"]
 texture = ExtResource("14_us5gr")
 texture_region_size = Vector2i(64, 64)
 0:0/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_fhwqp"]
 tile_size = Vector2i(64, 64)
-sources/12 = SubResource("TileSetAtlasSource_vtp3d")
-sources/13 = SubResource("TileSetAtlasSource_ir5aq")
-sources/14 = SubResource("TileSetAtlasSource_us5gr")
-sources/15 = SubResource("TileSetAtlasSource_jygqt")
+sources/12 = SubResource("TileSetAtlasSource_uxill")
+sources/13 = SubResource("TileSetAtlasSource_mem7m")
+sources/14 = SubResource("TileSetAtlasSource_fqn4b")
+sources/15 = SubResource("TileSetAtlasSource_sx7x6")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_06txj"]
 size = Vector2(8, 392)
@@ -247,7 +247,7 @@ script = ExtResource("5_8c5ma")
 base_value = 250.0
 metadata/_custom_type_script = "uid://bencr8mnns7ut"
 
-[sub_resource type="Resource" id="Resource_b662g"]
+[sub_resource type="Resource" id="Resource_uhnvm"]
 resource_local_to_scene = true
 script = ExtResource("6_ltieu")
 speed = SubResource("Resource_nfmrh")
@@ -266,7 +266,7 @@ script = ExtResource("5_8c5ma")
 base_value = 100.0
 metadata/_custom_type_script = "uid://bencr8mnns7ut"
 
-[sub_resource type="Resource" id="Resource_ur0lx"]
+[sub_resource type="Resource" id="Resource_tg6q3"]
 resource_local_to_scene = true
 script = ExtResource("6_ltieu")
 speed = SubResource("Resource_nfmrh")
@@ -289,32 +289,32 @@ parsed_collision_mask = 4294967041
 source_geometry_mode = 2
 source_geometry_group_name = &"wall"
 
-[sub_resource type="Resource" id="Resource_hm1bt"]
+[sub_resource type="Resource" id="Resource_8b03y"]
 script = ExtResource("5_8c5ma")
 base_value = 20.0
 metadata/_custom_type_script = "uid://bencr8mnns7ut"
 
-[sub_resource type="Resource" id="Resource_518se"]
+[sub_resource type="Resource" id="Resource_ploxg"]
 script = ExtResource("5_8c5ma")
 base_value = 1000.0
 metadata/_custom_type_script = "uid://bencr8mnns7ut"
 
-[sub_resource type="Resource" id="Resource_8c5ma"]
+[sub_resource type="Resource" id="Resource_37g1s"]
 script = ExtResource("5_8c5ma")
 base_value = 0.5
 metadata/_custom_type_script = "uid://bencr8mnns7ut"
 
-[sub_resource type="Resource" id="Resource_3y4ie"]
+[sub_resource type="Resource" id="Resource_d2fdr"]
 script = ExtResource("5_8c5ma")
 base_value = 150.0
 metadata/_custom_type_script = "uid://bencr8mnns7ut"
 
 [sub_resource type="Resource" id="Resource_s8unp"]
 script = ExtResource("6_ltieu")
-speed = SubResource("Resource_3y4ie")
-reaction_time = SubResource("Resource_8c5ma")
-max_travel_distance = SubResource("Resource_518se")
-MAX_HP = SubResource("Resource_hm1bt")
+speed = SubResource("Resource_d2fdr")
+reaction_time = SubResource("Resource_37g1s")
+max_travel_distance = SubResource("Resource_ploxg")
+MAX_HP = SubResource("Resource_8b03y")
 metadata/_custom_type_script = "uid://cp4iog725gtuq"
 
 [sub_resource type="Resource" id="Resource_nja13"]
@@ -322,32 +322,32 @@ script = ExtResource("12_grcoo")
 weapon_stats = ExtResource("13_tq75k")
 metadata/_custom_type_script = "uid://bmr38t2grjqqv"
 
-[sub_resource type="Resource" id="Resource_lnsvv"]
+[sub_resource type="Resource" id="Resource_tho2i"]
 script = ExtResource("5_8c5ma")
 base_value = 100.0
 metadata/_custom_type_script = "uid://bencr8mnns7ut"
 
-[sub_resource type="Resource" id="Resource_3vrl3"]
+[sub_resource type="Resource" id="Resource_56rnl"]
 script = ExtResource("5_8c5ma")
 base_value = 1000.0
 metadata/_custom_type_script = "uid://bencr8mnns7ut"
 
-[sub_resource type="Resource" id="Resource_tq75k"]
+[sub_resource type="Resource" id="Resource_ifs1h"]
 script = ExtResource("5_8c5ma")
 base_value = 0.5
 metadata/_custom_type_script = "uid://bencr8mnns7ut"
 
-[sub_resource type="Resource" id="Resource_ltieu"]
+[sub_resource type="Resource" id="Resource_1vcrt"]
 script = ExtResource("5_8c5ma")
 base_value = 150.0
 metadata/_custom_type_script = "uid://bencr8mnns7ut"
 
 [sub_resource type="Resource" id="Resource_6uspl"]
 script = ExtResource("6_ltieu")
-speed = SubResource("Resource_ltieu")
-reaction_time = SubResource("Resource_tq75k")
-max_travel_distance = SubResource("Resource_3vrl3")
-MAX_HP = SubResource("Resource_lnsvv")
+speed = SubResource("Resource_1vcrt")
+reaction_time = SubResource("Resource_ifs1h")
+max_travel_distance = SubResource("Resource_56rnl")
+MAX_HP = SubResource("Resource_tho2i")
 metadata/_custom_type_script = "uid://cp4iog725gtuq"
 
 [sub_resource type="Resource" id="Resource_3u3yd"]
@@ -384,7 +384,7 @@ script = ExtResource("5_8c5ma")
 base_value = 225.0
 metadata/_custom_type_script = "uid://bencr8mnns7ut"
 
-[sub_resource type="Resource" id="Resource_u6o8x"]
+[sub_resource type="Resource" id="Resource_snny7"]
 resource_local_to_scene = true
 script = ExtResource("6_ltieu")
 speed = SubResource("Resource_xq73l")
@@ -398,32 +398,32 @@ script = ExtResource("12_grcoo")
 weapon_stats = ExtResource("13_tq75k")
 metadata/_custom_type_script = "uid://bmr38t2grjqqv"
 
-[sub_resource type="Resource" id="Resource_uxill"]
+[sub_resource type="Resource" id="Resource_8ewtv"]
 script = ExtResource("5_8c5ma")
 base_value = 100.0
 metadata/_custom_type_script = "uid://bencr8mnns7ut"
 
-[sub_resource type="Resource" id="Resource_58pdj"]
+[sub_resource type="Resource" id="Resource_mjd8r"]
 script = ExtResource("5_8c5ma")
 base_value = 500.0
 metadata/_custom_type_script = "uid://bencr8mnns7ut"
 
-[sub_resource type="Resource" id="Resource_gw302"]
+[sub_resource type="Resource" id="Resource_ber0r"]
 script = ExtResource("5_8c5ma")
 base_value = 0.6
 metadata/_custom_type_script = "uid://bencr8mnns7ut"
 
-[sub_resource type="Resource" id="Resource_2dwoe"]
+[sub_resource type="Resource" id="Resource_6rxou"]
 script = ExtResource("5_8c5ma")
 base_value = 250.0
 metadata/_custom_type_script = "uid://bencr8mnns7ut"
 
 [sub_resource type="Resource" id="Resource_h3xea"]
 script = ExtResource("6_ltieu")
-speed = SubResource("Resource_2dwoe")
-reaction_time = SubResource("Resource_gw302")
-max_travel_distance = SubResource("Resource_58pdj")
-MAX_HP = SubResource("Resource_uxill")
+speed = SubResource("Resource_6rxou")
+reaction_time = SubResource("Resource_ber0r")
+max_travel_distance = SubResource("Resource_mjd8r")
+MAX_HP = SubResource("Resource_8ewtv")
 metadata/_custom_type_script = "uid://cp4iog725gtuq"
 
 [sub_resource type="Resource" id="Resource_sx7x6"]
@@ -520,7 +520,7 @@ rotation = 7.9307876
 player_name = "Luke"
 player_avatar = ExtResource("22_w2bir")
 current_engagement_rule = 2
-soldier_stats = SubResource("Resource_b662g")
+soldier_stats = SubResource("Resource_uhnvm")
 weapons = Array[ExtResource("6_mykrp")]([SubResource("Resource_yn6en")])
 
 [node name="Player2" parent="." unique_id=1802276897 instance=ExtResource("4_10mtb")]
@@ -528,7 +528,7 @@ position = Vector2(1320, 368)
 player_name = "Valerie"
 player_avatar = ExtResource("21_ebsyv")
 current_engagement_rule = 2
-soldier_stats = SubResource("Resource_ur0lx")
+soldier_stats = SubResource("Resource_tg6q3")
 weapons = Array[ExtResource("6_mykrp")]([SubResource("Resource_kw30y")])
 
 [node name="Marker2D" type="Marker2D" parent="." unique_id=245030149 groups=["a_star_point"]]
@@ -675,7 +675,7 @@ rotation = 0.7831249
 player_name = "Keith"
 player_avatar = ExtResource("25_q2r4x")
 current_engagement_rule = 2
-soldier_stats = SubResource("Resource_u6o8x")
+soldier_stats = SubResource("Resource_snny7")
 weapons = Array[ExtResource("6_mykrp")]([SubResource("Resource_ir5aq")])
 
 [node name="Car" parent="." unique_id=75836846 instance=ExtResource("28_3y4ie")]
