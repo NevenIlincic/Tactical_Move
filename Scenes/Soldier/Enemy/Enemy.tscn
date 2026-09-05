@@ -125,6 +125,9 @@ _data = {
 &"running_animation": SubResource("Animation_cgwcb")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jjc5n"]
+size = Vector2(1408, 1024)
+
 [node name="Enemy" type="Node2D" unique_id=1440065138 groups=["enemy_node", "soldier"]]
 z_index = 2
 script = ExtResource("1_02vxf")
@@ -209,4 +212,12 @@ position = Vector2(13, 0)
 texture = ExtResource("7_2i7on")
 hframes = 3
 
+[node name="Rays_Activation_Area" type="Area2D" parent="." unique_id=428950901]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rays_Activation_Area" unique_id=546425416]
+shape = SubResource("RectangleShape2D_jjc5n")
+
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="body_entered" from="Rays_Activation_Area" to="." method="_on_rays_activation_area_body_entered"]
+[connection signal="body_exited" from="Rays_Activation_Area" to="." method="_on_rays_activation_area_body_exited"]

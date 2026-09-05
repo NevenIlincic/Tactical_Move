@@ -8,6 +8,8 @@ class_name SoldierVision extends Polygon2D
 @export var ray_count: float = 75
 @export var wall_collision_mask: int= 1
 
+var are_rays_enabled: bool = false
+
 var level: Level
 
 var rays: Array[RayCast2D] = []
@@ -32,7 +34,9 @@ func setup_vision_rays() -> void:
 		var angle = -half_fov + t * (2 * half_fov)
 		var ray = RayCast2D.new()
 		ray.target_position = Vector2(max_range, 0).rotated(angle)
-		ray.collision_mask = wall_collision_mask
+		#ray.collision_mask = wall_collision_mask
+		ray.set_collision_mask_value(1, true)
+		ray.set_collision_mask_value(2, true)
 		ray.enabled = true
 		#ray.collide_with_areas = true
 		ray.set_collision_mask_value(3, false)
@@ -42,6 +46,12 @@ func setup_vision_rays() -> void:
 func disable_rays():
 	for ray: RayCast2D in rays:
 		ray.enabled = false
+		are_rays_enabled = false
+
+func enable_rays():
+	for ray: RayCast2D in rays:
+		ray.enabled = true
+		are_rays_enabled = true
 
 func update_vision():
 	var enemy_position: Vector2

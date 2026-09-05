@@ -14,6 +14,7 @@ var alive_players: Dictionary = {}
 var level: Level
 var recent_covers: Array[Marker2D] = []
 const MAX_RECENT_COVERS: int = 2
+var close_players: Dictionary = {}
 
 enum Intent{
 	ATTACK,
@@ -38,12 +39,14 @@ func check_soldier_has_action():
 func _ready() -> void:
 	super._ready()
 	soldier_type = SoldierType.ENEMY
-	#visible = false
+	visible = false
 	engagement_strategy = StopShootFollowingStrategy.new()
 	point_to_look = Vector2.ZERO
 	level = get_tree().get_first_node_in_group("Level")
 	Signals.stop_enemy_actions.connect(_on_players_action_finished)
-
+		
+	if close_players.is_empty():
+		vision_polygon.disable_rays()
 func _on_players_action_finished():
 	reset_path()
 	if move_tween and is_instance_valid(move_tween):
@@ -60,6 +63,8 @@ func set_point_to_look(point):
 
 
 func _pre_move_actions():
+	if close_players.is_empty():
+		return
 	var best_move = evaluate_best_move()
 	var total_score: float = best_move["total_score"]
 	var intent: Intent = best_move["intent"]
@@ -72,7 +77,6 @@ func _pre_move_actions():
 	var _distance_to_closest_cover: float = best_move["distance_to_closest_cover"]
 	var cover_point: Marker2D = best_move["closest_cover"]
 	
-	#print(self, " ", best_move)
 	match intent:
 		Intent.DEFEND:
 			if soldier_stats.HP.get_value() < target.soldier_stats.HP.get_value():
@@ -107,14 +111,12 @@ func check_enemy_looking_at():
 
 func _on_enemy_lost_extra(_enemy: Soldier) -> void:
 	pass
-	#print("OVDE")
 	#hide_enemy()
 
 func evaluate_best_move():
 	var map_rid = get_world_2d().navigation_map
 
 	var path_data: Dictionary = get_closest_cover()
-	#print(last_cover)
 	var path_to_closest_cover = path_data["shortest_path"]
 	var distance_to_closest_cover = path_data["minimum_length"] 
 	var cover_point: Marker2D = path_data["closest_cover"]
@@ -126,7 +128,7 @@ func evaluate_best_move():
 	
 	var current_HP: float = soldier_stats.HP.get_value()
 	var max_travel_distance: float = soldier_stats.max_travel_distance.get_value()
-	for player_id: String in alive_players:
+	for player_id: String in close_players:
 		var player: Player = alive_players[player_id]
 		var intent_for_player: Intent = Intent.ATTACK
 		var path_to_player = NavigationServer2D.map_get_path(map_rid, global_position, player.global_position, true)
@@ -158,7 +160,6 @@ func evaluate_best_move():
 		else:
 			defense_score += clampf(500.0/ (distance_to_player*(player_allies_nearby+1)), 0.0, 3.0)
 		
-		#print(self, " ", attack_score, " ", defense_score)
 		if defense_score > attack_score:
 			intent_for_player = Intent.DEFEND
 		
@@ -256,3 +257,23 @@ func on_soldier_killed():
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "dying_animation":
 		queue_free()
+
+
+
+func _on_rays_activation_area_body_entered(body: Node2D) -> void:
+	var soldier = body.get_parent()
+	if soldier != self and body.is_in_group("player_hitbox") and soldier is Player:
+		close_players[soldier.soldier_id] = soldier
+		if not vision_polygon.are_rays_enabled:
+			vision_polygon.enable_rays()
+
+
+
+
+func _on_rays_activation_area_body_exited(body: Node2D) -> void:
+	var soldier = body.get_parent()
+	if soldier != self and body.is_in_group("player_hitbox") and soldier is Player:
+		if close_players.has(soldier.soldier_id):
+			close_players.erase(soldier.soldier_id)
+		if vision_polygon.are_rays_enabled:
+			vision_polygon.disable_rays()

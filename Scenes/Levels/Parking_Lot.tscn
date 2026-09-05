@@ -154,6 +154,35 @@ size = Vector2(130, 1968)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fhwqp"]
 size = Vector2(4016, 64)
 
+[sub_resource type="Resource" id="Resource_t3ino"]
+script = ExtResource("2_hbrkw")
+base_value = 100.0
+metadata/_custom_type_script = "uid://bencr8mnns7ut"
+
+[sub_resource type="Resource" id="Resource_quyte"]
+script = ExtResource("2_hbrkw")
+base_value = 1000.0
+metadata/_custom_type_script = "uid://bencr8mnns7ut"
+
+[sub_resource type="Resource" id="Resource_d4ttm"]
+script = ExtResource("2_hbrkw")
+base_value = 0.4
+metadata/_custom_type_script = "uid://bencr8mnns7ut"
+
+[sub_resource type="Resource" id="Resource_acrrq"]
+script = ExtResource("2_hbrkw")
+base_value = 100.0
+metadata/_custom_type_script = "uid://bencr8mnns7ut"
+
+[sub_resource type="Resource" id="Resource_athwu"]
+resource_local_to_scene = true
+script = ExtResource("3_cguhg")
+speed = SubResource("Resource_acrrq")
+reaction_time = SubResource("Resource_d4ttm")
+max_travel_distance = SubResource("Resource_quyte")
+MAX_HP = SubResource("Resource_t3ino")
+metadata/_custom_type_script = "uid://cp4iog725gtuq"
+
 [sub_resource type="Resource" id="Resource_sf78t"]
 script = ExtResource("2_hbrkw")
 base_value = 100.0
@@ -173,15 +202,6 @@ metadata/_custom_type_script = "uid://bencr8mnns7ut"
 script = ExtResource("2_hbrkw")
 base_value = 400.0
 metadata/_custom_type_script = "uid://bencr8mnns7ut"
-
-[sub_resource type="Resource" id="Resource_athwu"]
-resource_local_to_scene = true
-script = ExtResource("3_cguhg")
-speed = SubResource("Resource_xq73l")
-reaction_time = SubResource("Resource_42oyf")
-max_travel_distance = SubResource("Resource_stuxa")
-MAX_HP = SubResource("Resource_sf78t")
-metadata/_custom_type_script = "uid://cp4iog725gtuq"
 
 [sub_resource type="Resource" id="Resource_8rupe"]
 resource_local_to_scene = true
@@ -408,7 +428,7 @@ max_travel_distance = SubResource("Resource_stuxa")
 MAX_HP = SubResource("Resource_sf78t")
 metadata/_custom_type_script = "uid://cp4iog725gtuq"
 
-[sub_resource type="Resource" id="Resource_t3ino"]
+[sub_resource type="Resource" id="Resource_a8omr"]
 resource_local_to_scene = true
 script = ExtResource("3_cguhg")
 speed = SubResource("Resource_xq73l")
@@ -430,6 +450,9 @@ tile_set = SubResource("TileSet_jjc5n")
 [node name="Wall_Layer" type="TileMapLayer" parent="TileMaps" parent_id_path=PackedInt32Array(641455981) index="2" unique_id=507179540]
 tile_map_data = PackedByteArray("AAAcAAkABAACAAEAAAABAAMABAAAAAMAAADP/wUABAABAAEAAADP/wYABAABAAEAAADP/wcABAABAAEAAADP/wgABAABAAEAAADP/wkABAABAAEAAADP/woABAABAAEAAADP/wsABAABAAEAAADP/wwABAABAAEAAADP/w0ABAABAAEAAADP/w4ABAABAAEAAADP/w8ABAABAAEAAADP/xAABAABAAEAAADP/xEABAABAAEAAADP/xIABAABAAEAAADP/xMABAABAAEAAADP/xQABAABAAEAAADP/xUABAABAAEAAADP/xYABAABAAEAAADP/xcABAABAAEAAADP//j/BAABAAEAAADP//n/BAABAAEAAADP//r/BAABAAEAAADP//v/BAABAAEAAADP//z/BAABAAEAAADP//3/BAABAAEAAADP//7/BAABAAEAAADP////BAABAAEAAADP/wAABAABAAEAAADP/wEABAABAAEAAADP/wIABAABAAEAAADP/wMABAABAAEAAADP/wQABAABAAEAAADP/+7/BAABAAEAAADP/+3/BAABAAEAAADP//b/BAABAAEAAADP//X/BAABAAEAAADP//T/BAABAAEAAADP//P/BAABAAEAAADP//L/BAABAAEAAADP//H/BAABAAEAAADP//D/BAABAAEAAADP/+//BAABAAEAAADP//f/BAABAAEAAADP/+z/BAABAAEAAADP/+v/BAABAAEAAADP/+r/BAABAAEAAADP/+n/BAABAAEAAADP/+j/BAABAAEAAADP/+f/BAABAAEAAADP/+b/BAABAAEAAADP/+X/BAABAAEAAADP/+T/BAABAAEAAADP/+P/BAABAAEAAADP/+L/BAABAAEAAADP/+H/BAABAAEAAADP/+D/BAABAAEAAADP/9//BAABAAEAAADP/97/BAABAAEAAADP/93/BAAAAAMAAADQ/93/BAABAAIAAADR/93/BAABAAIAAADS/93/BAABAAIAAADT/93/BAABAAIAAADU/93/BAABAAIAAADV/93/BAABAAIAAADW/93/BAABAAIAAADX/93/BAABAAIAAADY/93/BAABAAIAAADZ/93/BAABAAIAAADa/93/BAABAAIAAADb/93/BAABAAIAAADc/93/BAABAAIAAADd/93/BAABAAIAAADe/93/BAABAAIAAADf/93/BAABAAIAAADg/93/BAABAAIAAADh/93/BAABAAIAAADi/93/BAABAAIAAADj/93/BAABAAIAAADk/93/BAABAAIAAADl/93/BAABAAIAAADm/93/BAABAAIAAADn/93/BAABAAIAAADo/93/BAABAAIAAADp/93/BAABAAIAAADq/93/BAABAAIAAADr/93/BAABAAIAAADs/93/BAABAAIAAADt/93/BAABAAIAAADu/93/BAABAAIAAADv/93/BAABAAIAAADw/93/BAABAAIAAADx/93/BAABAAIAAADy/93/BAABAAIAAADz/93/BAABAAIAAAD0/93/BAABAAIAAAD1/93/BAABAAIAAAD2/93/BAABAAIAAAD3/93/BAABAAIAAAD4/93/BAABAAIAAAD5/93/BAABAAIAAAD6/93/BAABAAIAAAD7/93/BAABAAIAAAD8/93/BAABAAIAAAD9/93/BAABAAIAAAD+/93/BAABAAIAAAD//93/BAABAAIAAAAAAN3/BAABAAIAAAABAN3/BAABAAIAAAACAN3/BAABAAIAAAAFAN3/BAABAAIAAAAGAN3/BAABAAIAAAADAN3/BAABAAIAAAAEAN3/BAABAAIAAAAHAN3/BAABAAIAAAAIAN3/BAABAAIAAAAJAN3/BAABAAIAAAAKAN3/BAABAAIAAAALAN3/BAABAAIAAAAMAN3/BAABAAIAAAANAN3/BAABAAIAAAAOAN3/BAABAAIAAAAPAN3/BAABAAIAAAAQAN3/BAABAAIAAAARAN3/BAABAAIAAAASAN3/BAABAAIAAAATAN3/BAABAAIAAAAUAN3/BAABAAIAAAAVAN3/BAABAAIAAAAWAN3/BAABAAIAAAAXAN3/BAABAAIAAAAYAN3/BAABAAIAAAAZAN3/BAABAAIAAAAaAN3/BAABAAIAAAAbAN3/BAABAAIAAAAcAN3/BAABAAIAAAAdAN3/BAABAAIAAAAeAN3/BAABAAIAAAAgAN3/BAABAAIAAAAfAN3/BAABAAIAAAAhAN3/BAABAAIAAAAiAN3/BAABAAIAAAAjAN3/BAABAAIAAAAkAN3/BAABAAIAAAAlAN3/BAABAAIAAAAmAN3/BAABAAIAAAAnAN3/BAABAAIAAAAoAN3/BAABAAIAAAApAN3/BAABAAIAAAAqAN3/BAABAAIAAAArAN3/BAABAAIAAAAsAN3/BAABAAIAAAAtAN3/BAABAAIAAAAuAN3/BAABAAIAAAAvAN3/BAABAAIAAAAwAN3/BAABAAIAAAAxAN3/BAABAAIAAAAyAN3/BAABAAIAAAAzAN3/BAABAAIAAAA0AN3/BAABAAIAAAA1AN3/BAABAAIAAAA2AN3/BAABAAIAAAA3AN3/BAABAAIAAAA4AN3/BAABAAIAAAA5AN3/BAABAAIAAAA7AN3/BAABAAIAAAA8AN3/BAABAAIAAAA9AN3/BAABAAIAAAA+AN3/BAABAAIAAAA/AN3/BAABAAIAAABAAN3/BAABAAIAAABBAN3/BAABAAIAAAA6AN3/BAABAAIAAABCAN3/BAABAAIAAABDAN3/BAABAAIAAABEAN3/BAABAAIAAABFAN3/BAABAAIAAABGAN3/BAACAAIAAABGAN7/BAACAAEAAABGAN//BAACAAEAAABGAOD/BAACAAEAAABGAOH/BAACAAEAAABGAOL/BAACAAEAAABGAPn/BAACAAEAAABGAPj/BAACAAEAAABGAPf/BAACAAEAAABGAPb/BAACAAEAAABGAPX/BAACAAEAAABGAPT/BAACAAEAAABGAPP/BAACAAEAAABGAPL/BAACAAEAAABGAPH/BAACAAEAAABGAPD/BAACAAEAAABGAO//BAACAAEAAABGAO7/BAACAAEAAABGAO3/BAACAAEAAABGAOz/BAACAAEAAABGAOv/BAACAAEAAABGAOr/BAACAAEAAABGAOn/BAACAAEAAABGAOj/BAACAAEAAABGAOf/BAACAAEAAABGAOb/BAACAAEAAABGAOX/BAACAAEAAABGAOT/BAACAAEAAABGAOP/BAACAAEAAABGAPr/BAACAAEAAABGAPv/BAACAAEAAABGAPz/BAACAAEAAABGAP3/BAACAAEAAABGAP7/BAACAAEAAABGAP//BAACAAEAAABGAAAABAACAAEAAABGAAEABAACAAEAAABGAAIABAACAAEAAABGAAMABAACAAEAAABGAAQABAACAAEAAABGAAUABAACAAEAAABGAAYABAACAAEAAABGAAcABAACAAEAAABGAAgABAACAAEAAABGAAkABAACAAEAAABGAAoABAACAAEAAABGAAsABAACAAEAAABGAAwABAACAAEAAABGAA0ABAACAAEAAABGAA4ABAACAAEAAABGAA8ABAACAAEAAABGABAABAACAAEAAABGABEABAACAAEAAABGABIABAACAAEAAABGABMABAACAAEAAABGABQABAACAAEAAABGABUABAACAAEAAABGABYABAACAAEAAABGABcABAACAAEAAABGABgABAACAAMAAABFABgABAAAAAIAAABEABgABAAAAAIAAABDABgABAAAAAIAAABCABgABAAAAAIAAABBABgABAAAAAIAAABAABgABAAAAAIAAAA/ABgABAAAAAIAAAA+ABgABAAAAAIAAAA9ABgABAAAAAIAAAA8ABgABAAAAAIAAAA7ABgABAAAAAIAAAA6ABgABAAAAAIAAAA5ABgABAAAAAIAAAA4ABgABAAAAAIAAAA3ABgABAAAAAIAAAA2ABgABAAAAAIAAAA1ABgABAAAAAIAAAA0ABgABAAAAAIAAAAzABgABAAAAAIAAAAyABgABAAAAAIAAAAxABgABAAAAAIAAAAwABgABAAAAAIAAAAvABgABAAAAAIAAAAuABgABAAAAAIAAAAtABgABAAAAAIAAAAsABgABAAAAAIAAAArABgABAAAAAIAAAAqABgABAAAAAIAAAApABgABAAAAAIAAAAoABgABAAAAAIAAAAnABgABAAAAAIAAAAmABgABAAAAAIAAAAlABgABAAAAAIAAAAkABgABAAAAAIAAAAjABgABAAAAAIAAAAiABgABAAAAAIAAAAhABgABAAAAAIAAAAgABgABAAAAAIAAAAfABgABAAAAAIAAAAeABgABAAAAAIAAAAdABgABAAAAAIAAAAcABgABAAAAAIAAAAbABgABAAAAAIAAAAaABgABAAAAAIAAAAZABgABAAAAAIAAAAYABgABAAAAAIAAAAXABgABAAAAAIAAAAWABgABAAAAAIAAAAVABgABAAAAAIAAAAUABgABAAAAAIAAAATABgABAAAAAIAAAASABgABAAAAAIAAAARABgABAAAAAIAAAAQABgABAAAAAIAAAAPABgABAAAAAIAAAAOABgABAAAAAIAAAANABgABAAAAAIAAAAMABgABAAAAAIAAAALABgABAAAAAIAAAAKABgABAAAAAIAAAAJABgABAAAAAIAAAAIABgABAAAAAIAAAAHABgABAAAAAIAAAAGABgABAAAAAIAAAAFABgABAAAAAIAAAAEABgABAAAAAIAAAADABgABAAAAAIAAAACABgABAAAAAIAAAABABgABAAAAAIAAAAAABgABAAAAAIAAAD//xgABAAAAAIAAAD+/xgABAAAAAIAAAD9/xgABAAAAAIAAAD8/xgABAAAAAIAAAD7/xgABAAAAAIAAAD6/xgABAAAAAIAAAD5/xgABAAAAAIAAAD4/xgABAAAAAIAAAD3/xgABAAAAAIAAAD2/xgABAAAAAIAAAD1/xgABAAAAAIAAAD0/xgABAAAAAIAAADz/xgABAAAAAIAAADy/xgABAAAAAIAAADx/xgABAAAAAIAAADw/xgABAAAAAIAAADv/xgABAAAAAIAAADu/xgABAAAAAIAAADt/xgABAAAAAIAAADs/xgABAAAAAIAAADr/xgABAAAAAIAAADq/xgABAAAAAIAAADp/xgABAAAAAIAAADo/xgABAAAAAIAAADn/xgABAAAAAIAAADm/xgABAAAAAIAAADl/xgABAAAAAIAAADk/xgABAAAAAIAAADj/xgABAAAAAIAAADi/xgABAAAAAIAAADh/xgABAAAAAIAAADg/xgABAAAAAIAAADf/xgABAAAAAIAAADe/xgABAAAAAIAAADd/xgABAAAAAIAAADc/xgABAAAAAIAAADb/xgABAAAAAIAAADa/xgABAAAAAIAAADZ/xgABAAAAAIAAADY/xgABAAAAAIAAADX/xgABAAAAAIAAADW/xgABAAAAAIAAADV/xgABAAAAAIAAADU/xgABAAAAAIAAADT/xgABAAAAAIAAADS/xgABAAAAAIAAADR/xgABAAAAAIAAADQ/xgABAAAAAIAAADP/xgABAABAAMAAAA=")
 tile_set = SubResource("TileSet_40dy8")
+
+[node name="Camera2D" parent="." index="3" unique_id=1824573650]
+position = Vector2(-960, 432)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." index="6" unique_id=1163608297 groups=["wall"]]
 position = Vector2(-1656, -224)
@@ -545,111 +568,111 @@ position = Vector2(-696.00006, 504)
 rotation = 0.6425413
 scale = Vector2(0.99999994, 0.99999994)
 
-[node name="RedCar3" parent="Cars" index="19" unique_id=14870559 instance=ExtResource("6_f7ggt")]
-position = Vector2(-200.00003, 440)
-rotation = 2.9442701
-
-[node name="RedCar4" parent="Cars" index="20" unique_id=1284600369 instance=ExtResource("6_f7ggt")]
+[node name="RedCar4" parent="Cars" index="19" unique_id=1284600369 instance=ExtResource("6_f7ggt")]
 position = Vector2(-1352, -383.99997)
 rotation = 0.033971008
 
-[node name="RedCar5" parent="Cars" index="21" unique_id=1412589806 instance=ExtResource("6_f7ggt")]
+[node name="RedCar5" parent="Cars" index="20" unique_id=1412589806 instance=ExtResource("6_f7ggt")]
 position = Vector2(-656, -784)
 rotation = -1.3969786
 
-[node name="RedCar6" parent="Cars" index="22" unique_id=1821388354 instance=ExtResource("6_f7ggt")]
+[node name="RedCar6" parent="Cars" index="21" unique_id=1821388354 instance=ExtResource("6_f7ggt")]
 position = Vector2(935.99994, 304.00012)
 rotation = 0.6425413
 scale = Vector2(0.99999994, 0.99999994)
 
-[node name="RedCar7" parent="Cars" index="23" unique_id=1095471370 instance=ExtResource("6_f7ggt")]
+[node name="RedCar7" parent="Cars" index="22" unique_id=1095471370 instance=ExtResource("6_f7ggt")]
 position = Vector2(1456, -136)
 rotation = 2.9442701
 
-[node name="RedCar8" parent="Cars" index="24" unique_id=1863847741 instance=ExtResource("6_f7ggt")]
+[node name="RedCar8" parent="Cars" index="23" unique_id=1863847741 instance=ExtResource("6_f7ggt")]
 position = Vector2(640, -672)
 rotation = -1.402613
 
-[node name="BlueCar" parent="Cars" index="25" unique_id=645473167 instance=ExtResource("7_6m215")]
+[node name="BlueCar" parent="Cars" index="24" unique_id=645473167 instance=ExtResource("7_6m215")]
 position = Vector2(392, -200)
 rotation = 1.6220406
 
-[node name="BlueCar2" parent="Cars" index="26" unique_id=310907195 instance=ExtResource("7_6m215")]
+[node name="BlueCar2" parent="Cars" index="25" unique_id=310907195 instance=ExtResource("7_6m215")]
 position = Vector2(-392, 280)
 rotation = 2.4125867
 
-[node name="BlueCar3" parent="Cars" index="27" unique_id=1863299918 instance=ExtResource("7_6m215")]
+[node name="BlueCar3" parent="Cars" index="26" unique_id=1863299918 instance=ExtResource("7_6m215")]
 position = Vector2(744, 24)
 rotation = 2.4125867
 
-[node name="BlueCar4" parent="Cars" index="28" unique_id=1591532410 instance=ExtResource("7_6m215")]
+[node name="BlueCar4" parent="Cars" index="27" unique_id=1591532410 instance=ExtResource("7_6m215")]
 position = Vector2(-648, -304.00003)
 rotation = 2.8661714
 
-[node name="BlueCar5" parent="Cars" index="29" unique_id=1233040983 instance=ExtResource("7_6m215")]
+[node name="BlueCar5" parent="Cars" index="28" unique_id=1233040983 instance=ExtResource("7_6m215")]
 position = Vector2(1072, -135.99997)
 rotation = -2.0542805
 
-[node name="BlueCar6" parent="Cars" index="30" unique_id=1236093036 instance=ExtResource("7_6m215")]
+[node name="BlueCar6" parent="Cars" index="29" unique_id=1236093036 instance=ExtResource("7_6m215")]
 position = Vector2(15.999939, 152.00003)
 rotation = 2.8661714
 
-[node name="BlueCar7" parent="Cars" index="31" unique_id=759523930 instance=ExtResource("7_6m215")]
+[node name="BlueCar7" parent="Cars" index="30" unique_id=759523930 instance=ExtResource("7_6m215")]
 position = Vector2(-1200, -807.99994)
 rotation = -2.2541392
 
-[node name="BlueCar8" parent="Cars" index="32" unique_id=1254700796 instance=ExtResource("7_6m215")]
+[node name="BlueCar8" parent="Cars" index="31" unique_id=1254700796 instance=ExtResource("7_6m215")]
 position = Vector2(1311.9999, -583.9999)
 rotation = 2.8661714
 
-[node name="GreenCar8" parent="Cars" index="33" unique_id=694013618 instance=ExtResource("15_qjrri")]
+[node name="GreenCar8" parent="Cars" index="32" unique_id=694013618 instance=ExtResource("15_qjrri")]
 position = Vector2(1736, -440)
 rotation = -0.8992492
 
-[node name="GreenCar9" parent="Cars" index="34" unique_id=1822398708 instance=ExtResource("15_qjrri")]
+[node name="GreenCar9" parent="Cars" index="33" unique_id=1822398708 instance=ExtResource("15_qjrri")]
 position = Vector2(1848, 296)
 rotation = -0.8691625
 
-[node name="RedCar9" parent="Cars" index="35" unique_id=573821789 instance=ExtResource("6_f7ggt")]
+[node name="RedCar9" parent="Cars" index="34" unique_id=573821789 instance=ExtResource("6_f7ggt")]
 position = Vector2(1680, 584)
 rotation = 3.1302953
 scale = Vector2(0.9999999, 0.9999999)
 
-[node name="Car9" parent="Cars" index="36" unique_id=75836846 instance=ExtResource("4_cguhg")]
+[node name="Car9" parent="Cars" index="35" unique_id=75836846 instance=ExtResource("4_cguhg")]
 position = Vector2(976, -936)
 
-[node name="BlueCar11" parent="Cars" index="37" unique_id=1145836756 instance=ExtResource("7_6m215")]
+[node name="BlueCar11" parent="Cars" index="36" unique_id=1145836756 instance=ExtResource("7_6m215")]
 position = Vector2(1656, -864)
 
-[node name="GreenCar10" parent="Cars" index="38" unique_id=519588422 instance=ExtResource("15_qjrri")]
+[node name="GreenCar10" parent="Cars" index="37" unique_id=519588422 instance=ExtResource("15_qjrri")]
 position = Vector2(1024, -496)
 
-[node name="Car10" parent="Cars" index="39" unique_id=1463882372 instance=ExtResource("4_cguhg")]
+[node name="Car10" parent="Cars" index="38" unique_id=1463882372 instance=ExtResource("4_cguhg")]
 position = Vector2(240, -976)
 
-[node name="BlueCar12" parent="Cars" index="40" unique_id=1782287377 instance=ExtResource("7_6m215")]
+[node name="BlueCar12" parent="Cars" index="39" unique_id=1782287377 instance=ExtResource("7_6m215")]
 position = Vector2(1680, 80)
 rotation = 0.78354543
 scale = Vector2(0.9999999, 0.9999999)
 
-[node name="Car11" parent="Cars" index="41" unique_id=723139812 instance=ExtResource("4_cguhg")]
+[node name="Car11" parent="Cars" index="40" unique_id=723139812 instance=ExtResource("4_cguhg")]
 position = Vector2(1360, -344)
 
-[node name="BlueCar13" parent="Cars" index="42" unique_id=1579833804 instance=ExtResource("7_6m215")]
+[node name="BlueCar13" parent="Cars" index="41" unique_id=1579833804 instance=ExtResource("7_6m215")]
 position = Vector2(1888, -680)
 
-[node name="GreenCar11" parent="Cars" index="43" unique_id=1732448555 instance=ExtResource("15_qjrri")]
+[node name="GreenCar11" parent="Cars" index="42" unique_id=1732448555 instance=ExtResource("15_qjrri")]
 position = Vector2(2016, -184)
 rotation = 0.6907465
 scale = Vector2(0.9999999, 0.9999999)
 
-[node name="BlueCar14" parent="Cars" index="44" unique_id=1400715345 instance=ExtResource("7_6m215")]
+[node name="BlueCar14" parent="Cars" index="43" unique_id=1400715345 instance=ExtResource("7_6m215")]
 position = Vector2(1487.9999, 272)
 rotation = -1.4905548
 
-[node name="GreenCar12" parent="Cars" index="45" unique_id=1091637654 instance=ExtResource("15_qjrri")]
+[node name="GreenCar12" parent="Cars" index="44" unique_id=1091637654 instance=ExtResource("15_qjrri")]
 position = Vector2(-440.00003, -528)
 rotation = 0.44905403
+
+[node name="Enemy" parent="Cars" index="45" unique_id=1440065138 instance=ExtResource("18_8rupe")]
+position = Vector2(-168, 512)
+soldier_stats = SubResource("Resource_athwu")
 
 [node name="Covers" type="Node2D" parent="." index="11" unique_id=1861194503]
 
@@ -729,7 +752,7 @@ position = Vector2(1112, 344)
 position = Vector2(-64, -136)
 
 [node name="Marker2D26" type="Marker2D" parent="Covers" index="25" unique_id=99886886 groups=["a_star_point"]]
-position = Vector2(-32, 392)
+position = Vector2(-112, 440)
 
 [node name="Marker2D27" type="Marker2D" parent="Covers" index="26" unique_id=1966944512 groups=["a_star_point"]]
 position = Vector2(-552, 136)
@@ -756,7 +779,7 @@ position = Vector2(2120, -240)
 position = Vector2(1952, 136)
 
 [node name="Marker2D35" type="Marker2D" parent="Covers" index="34" unique_id=799309888 groups=["a_star_point"]]
-position = Vector2(-240, 232)
+position = Vector2(-224, 312)
 
 [node name="Marker2D36" type="Marker2D" parent="Covers" index="35" unique_id=834226926 groups=["a_star_point"]]
 position = Vector2(-544, 512)
@@ -773,122 +796,123 @@ position = Vector2(-1120, -232)
 [node name="Marker2D40" type="Marker2D" parent="Covers" index="39" unique_id=1178297190 groups=["a_star_point"]]
 position = Vector2(-256, -184)
 
-[node name="Enemy" parent="." index="12" unique_id=1440065138 instance=ExtResource("18_8rupe")]
+[node name="Enemy" parent="." index="12" unique_id=552445046 instance=ExtResource("18_8rupe")]
 position = Vector2(-280, -520)
-soldier_stats = SubResource("Resource_athwu")
+soldier_stats = SubResource("Resource_8rupe")
 
 [node name="Enemy2" parent="." index="13" unique_id=787504631 instance=ExtResource("18_8rupe")]
 position = Vector2(832, -360)
-soldier_stats = SubResource("Resource_8rupe")
+soldier_stats = SubResource("Resource_077o1")
 
 [node name="Enemy3" parent="." index="14" unique_id=758759581 instance=ExtResource("18_8rupe")]
 position = Vector2(400, 328)
-soldier_stats = SubResource("Resource_077o1")
+soldier_stats = SubResource("Resource_5v6xh")
 
 [node name="Enemy4" parent="." index="15" unique_id=1872244140 instance=ExtResource("18_8rupe")]
 position = Vector2(-544, 144)
-soldier_stats = SubResource("Resource_5v6xh")
+soldier_stats = SubResource("Resource_40dy8")
 
 [node name="Enemy5" parent="." index="16" unique_id=853955010 instance=ExtResource("18_8rupe")]
 position = Vector2(1320, 480)
-soldier_stats = SubResource("Resource_40dy8")
+soldier_stats = SubResource("Resource_aouqr")
 
 [node name="Enemy6" parent="." index="17" unique_id=213673433 instance=ExtResource("18_8rupe")]
 position = Vector2(1336, -728)
-soldier_stats = SubResource("Resource_aouqr")
+soldier_stats = SubResource("Resource_878lv")
 
 [node name="Enemy7" parent="." index="18" unique_id=752157580 instance=ExtResource("18_8rupe")]
 position = Vector2(896, -8)
-soldier_stats = SubResource("Resource_878lv")
-
-[node name="Enemy8" parent="." index="19" unique_id=682697515 instance=ExtResource("18_8rupe")]
-position = Vector2(-104, 512)
 soldier_stats = SubResource("Resource_4fuc8")
 
-[node name="Enemy9" parent="." index="20" unique_id=1500936557 instance=ExtResource("18_8rupe")]
+[node name="Enemy9" parent="." index="19" unique_id=1500936557 instance=ExtResource("18_8rupe")]
 position = Vector2(-48, -784)
 soldier_stats = SubResource("Resource_nq88h")
 
-[node name="Enemy10" parent="." index="21" unique_id=703056201 instance=ExtResource("18_8rupe")]
+[node name="Enemy10" parent="." index="20" unique_id=703056201 instance=ExtResource("18_8rupe")]
 position = Vector2(1560, -224)
 soldier_stats = SubResource("Resource_etlx1")
 
-[node name="Enemy11" parent="." index="22" unique_id=289955834 instance=ExtResource("18_8rupe")]
+[node name="Enemy11" parent="." index="21" unique_id=289955834 instance=ExtResource("18_8rupe")]
 position = Vector2(1752, -944)
 soldier_stats = SubResource("Resource_jy6gc")
 
-[node name="Enemy12" parent="." index="23" unique_id=1485013341 instance=ExtResource("18_8rupe")]
+[node name="Enemy12" parent="." index="22" unique_id=1485013341 instance=ExtResource("18_8rupe")]
 position = Vector2(-616, -936)
 soldier_stats = SubResource("Resource_n35qy")
 
-[node name="Enemy13" parent="." index="24" unique_id=416403189 instance=ExtResource("18_8rupe")]
+[node name="Enemy13" parent="." index="23" unique_id=416403189 instance=ExtResource("18_8rupe")]
 position = Vector2(-1352, -488)
 soldier_stats = SubResource("Resource_3fecc")
 
-[node name="Enemy14" parent="." index="25" unique_id=797988549 instance=ExtResource("18_8rupe")]
+[node name="Enemy14" parent="." index="24" unique_id=797988549 instance=ExtResource("18_8rupe")]
 position = Vector2(448, 72)
 soldier_stats = SubResource("Resource_vmin3")
 
-[node name="Enemy15" parent="." index="26" unique_id=86042158 instance=ExtResource("18_8rupe")]
+[node name="Enemy15" parent="." index="25" unique_id=86042158 instance=ExtResource("18_8rupe")]
 position = Vector2(448, -336)
 soldier_stats = SubResource("Resource_hgyyy")
 
-[node name="Enemy16" parent="." index="27" unique_id=1786877190 instance=ExtResource("18_8rupe")]
+[node name="Enemy16" parent="." index="26" unique_id=1786877190 instance=ExtResource("18_8rupe")]
 position = Vector2(1528, 104)
 soldier_stats = SubResource("Resource_m2t5e")
 
-[node name="Enemy17" parent="." index="28" unique_id=117584560 instance=ExtResource("18_8rupe")]
+[node name="Enemy17" parent="." index="27" unique_id=117584560 instance=ExtResource("18_8rupe")]
 position = Vector2(-272, 344)
 soldier_stats = SubResource("Resource_hwo32")
 
-[node name="Enemy18" parent="." index="29" unique_id=769589217 instance=ExtResource("18_8rupe")]
+[node name="Enemy18" parent="." index="28" unique_id=769589217 instance=ExtResource("18_8rupe")]
 position = Vector2(728, -656)
 soldier_stats = SubResource("Resource_da7sd")
 
-[node name="Enemy19" parent="." index="30" unique_id=1649110480 instance=ExtResource("18_8rupe")]
+[node name="Enemy19" parent="." index="29" unique_id=1649110480 instance=ExtResource("18_8rupe")]
 position = Vector2(1320, -456)
 soldier_stats = SubResource("Resource_6x6tq")
 
-[node name="Enemy20" parent="." index="31" unique_id=150518619 instance=ExtResource("18_8rupe")]
+[node name="Enemy20" parent="." index="30" unique_id=150518619 instance=ExtResource("18_8rupe")]
 position = Vector2(-784, -168)
+rotation = 1.666733
 soldier_stats = SubResource("Resource_163pi")
 
-[node name="MedicPlayer" parent="." index="32" unique_id=1108589071 instance=ExtResource("14_j14y5")]
+[node name="MedicPlayer" parent="." index="31" unique_id=1108589071 instance=ExtResource("14_j14y5")]
 position = Vector2(-1352, 504)
 
-[node name="Player" parent="." index="33" unique_id=1216521491 instance=ExtResource("15_r6fuj")]
+[node name="Player" parent="." index="32" unique_id=1216521491 instance=ExtResource("15_r6fuj")]
 position = Vector2(-1256, 528)
 
-[node name="Luke_Regular" parent="." index="34" unique_id=1814064655 instance=ExtResource("16_r6fuj")]
+[node name="Luke_Regular" parent="." index="33" unique_id=1814064655 instance=ExtResource("16_r6fuj")]
 position = Vector2(-1296, 672)
 
-[node name="Keith_Regular" parent="." index="35" unique_id=1041637267 instance=ExtResource("17_athwu")]
+[node name="Keith_Regular" parent="." index="34" unique_id=1041637267 instance=ExtResource("17_athwu")]
 position = Vector2(-1440, 600)
 
-[node name="Enemy21" parent="." index="36" unique_id=768718264 instance=ExtResource("18_8rupe")]
+[node name="Enemy21" parent="." index="35" unique_id=768718264 instance=ExtResource("18_8rupe")]
 position = Vector2(272, -592)
 soldier_stats = SubResource("Resource_66gtq")
 
-[node name="Enemy22" parent="." index="37" unique_id=2104561142 instance=ExtResource("18_8rupe")]
+[node name="Enemy22" parent="." index="36" unique_id=2104561142 instance=ExtResource("18_8rupe")]
 position = Vector2(864, 352)
 soldier_stats = SubResource("Resource_puynb")
 
-[node name="Enemy23" parent="." index="38" unique_id=780948872 instance=ExtResource("18_8rupe")]
+[node name="Enemy23" parent="." index="37" unique_id=780948872 instance=ExtResource("18_8rupe")]
 position = Vector2(1512, -392)
 soldier_stats = SubResource("Resource_spk3u")
 
-[node name="Enemy24" parent="." index="39" unique_id=428224322 instance=ExtResource("18_8rupe")]
+[node name="Enemy24" parent="." index="38" unique_id=428224322 instance=ExtResource("18_8rupe")]
 position = Vector2(-560, -424)
 soldier_stats = SubResource("Resource_ghoyb")
 
-[node name="Enemy25" parent="." index="40" unique_id=1144683424 instance=ExtResource("18_8rupe")]
+[node name="Enemy25" parent="." index="39" unique_id=1144683424 instance=ExtResource("18_8rupe")]
 position = Vector2(-904, -720)
 soldier_stats = SubResource("Resource_dm3x4")
 
-[node name="Enemy26" parent="." index="41" unique_id=1116575713 instance=ExtResource("18_8rupe")]
+[node name="Enemy26" parent="." index="40" unique_id=1116575713 instance=ExtResource("18_8rupe")]
 position = Vector2(1000, -584)
 soldier_stats = SubResource("Resource_c74tn")
 
-[node name="Enemy27" parent="." index="42" unique_id=526817753 instance=ExtResource("18_8rupe")]
+[node name="Enemy27" parent="." index="41" unique_id=526817753 instance=ExtResource("18_8rupe")]
 position = Vector2(176, 104)
-soldier_stats = SubResource("Resource_t3ino")
+soldier_stats = SubResource("Resource_a8omr")
+
+[node name="RedCar" parent="." index="42" unique_id=80409699 instance=ExtResource("6_f7ggt")]
+position = Vector2(-240, 448)
+rotation = 5.50811

@@ -108,7 +108,6 @@ func _select_next_enemy_to_shoot():
 			continue
 		var current_enemy_hp = enemies_in_sight[enemy_id].soldier_stats.HP.get_value()
 		if current_enemy_hp < lowest_hp_value:
-			print(enemies_in_sight)
 			lowest_hp_value = current_enemy_hp
 			lowest_hp_enemy = enemies_in_sight[enemy_id]
 			
@@ -268,7 +267,6 @@ func _on_move_stop():
 		reset_after_move_looking_point()
 		set_player_looking_at()
 	
-	#print(self, " ", enemies_in_sight)
 	if has_enemies_in_sight():
 		Signals.player_move_continued.emit(self)
 	else:

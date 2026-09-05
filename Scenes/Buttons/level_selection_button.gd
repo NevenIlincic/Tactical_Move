@@ -47,6 +47,8 @@ func _on_texture_rect_gui_input(event: InputEvent) -> void:
 			match button_text:
 				"House":
 					get_tree().change_scene_to_file("res://Scenes/Test_Scene.tscn")
+				"Parking Lot":
+					get_tree().change_scene_to_file("res://Scenes/Levels/Parking_Lot.tscn")
 				#"START":
 					#transition_to_level_selection_screen.emit()
 					##get_tree().change_scene_to_file("res://Scenes/Test_Scene.tscn")

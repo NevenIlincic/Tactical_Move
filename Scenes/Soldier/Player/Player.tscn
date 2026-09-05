@@ -265,7 +265,7 @@ use_parent_material = true
 color = Color(1, 1, 1, 0)
 polygon = PackedVector2Array(0, 0, -256, -256, 256, -256)
 script = ExtResource("4_t26db")
-max_range = 1000.0
+max_range = 900.0
 fov_degrees = 60.0
 
 [node name="Enemy_Target_Line" type="Line2D" parent="Vision_Polygon" unique_id=1477870436]
@@ -281,8 +281,7 @@ rotation = -1.5707964
 blend_mode = 2
 shadow_enabled = true
 texture = ExtResource("12_q6by2")
-offset = Vector2(226.10324, -5.2452087e-06)
-texture_scale = 0.5
+offset = Vector2(448, 0)
 
 [node name="Door_Detection_Area" type="Area2D" parent="." unique_id=1442483156 groups=["door_detection_area"]]
 

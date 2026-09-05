@@ -81,7 +81,7 @@ script = ExtResource("6_e8qr7")
 weapon_stats = SubResource("Resource_fk2xi")
 metadata/_custom_type_script = "uid://bmr38t2grjqqv"
 
-[node name="Player" unique_id=1108589071 instance=ExtResource("1_0xntc")]
+[node name="Valerie_Regular" unique_id=1108589071 instance=ExtResource("1_0xntc")]
 player_name = "Valerie"
 player_avatar = ExtResource("2_k5kmv")
 current_engagement_rule = 2

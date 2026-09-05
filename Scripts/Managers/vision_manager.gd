@@ -2,6 +2,7 @@ extends Node2D
 # Pamtićemo parove: { enemy: { player1: true, player2: true } }
 var last_frame_visible_enemies: Dictionary
 var current_frame_visible_enemies: Dictionary
+const FRAMES_LIMIT: int = 5
 
 func _init() -> void:
 	last_frame_visible_enemies = {}
@@ -48,8 +49,8 @@ func _check_is_enemy_exited_vision():
 		var players_to_remove_from_enemy = []
 		if not current_frame_visible_enemies.has(enemy):
 			for player in last_frame_visible_enemies[enemy]:
-				if last_frame_visible_enemies[enemy][player] >= 5:
-					if enemy and player: #Provera da nije ubijen!
+				if last_frame_visible_enemies[enemy][player] >= FRAMES_LIMIT:
+					if enemy and player:
 						player._on_enemy_lost(enemy)
 						#Signals.hide_enemy.emit(enemy, player)
 						players_to_remove_from_enemy.append(player)
@@ -60,7 +61,7 @@ func _check_is_enemy_exited_vision():
 		else:
 			for player in last_frame_visible_enemies[enemy]:
 				if not current_frame_visible_enemies[enemy].has(player):
-					if last_frame_visible_enemies[enemy][player] >= 5:
+					if last_frame_visible_enemies[enemy][player] >= FRAMES_LIMIT:
 						if enemy and player:
 							player._on_enemy_lost(enemy)
 							#Signals.hide_enemy.emit(enemy, player)

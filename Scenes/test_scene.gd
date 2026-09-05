@@ -49,6 +49,7 @@ func _ready() -> void:
 	AudioManager.set_current_level(self)
 
 func _physics_process(delta: float) -> void:
+	#print(Engine.get_frames_per_second())
 	VisionManager.handle_enemy_visibility(delta)
 	current_state._physics_process(delta)
 	if total_passed_time_millis >= 1000.0:
