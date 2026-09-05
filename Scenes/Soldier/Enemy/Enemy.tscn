@@ -212,7 +212,7 @@ position = Vector2(13, 0)
 texture = ExtResource("7_2i7on")
 hframes = 3
 
-[node name="Rays_Activation_Area" type="Area2D" parent="." unique_id=428950901]
+[node name="Rays_Activation_Area" type="Area2D" parent="." unique_id=428950901 groups=["enemy_rays_activation_area"]]
 visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Rays_Activation_Area" unique_id=546425416]

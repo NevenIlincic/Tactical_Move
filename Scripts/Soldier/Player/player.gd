@@ -4,6 +4,7 @@ class_name Player extends Soldier
 var starting_tile: Vector2i
 var target_tile: Vector2i
 var is_selected: bool = false
+@onready var hitbox: StaticBody2D = $Hitbox
 
 var is_set_for_move: bool = false
 var is_set_for_rotation: bool = false
@@ -266,3 +267,15 @@ func _on_medic_detection_area_area_entered(area: Area2D) -> void:
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "dying_animation":
 		queue_free()
+
+
+func _on_selection_area_area_entered(area: Area2D) -> void:
+	if area.is_in_group("enemy_rays_activation_area"):
+		var enemy: Enemy = area.get_parent()
+		enemy._on_rays_activation_area_body_entered(hitbox)
+
+
+func _on_selection_area_area_exited(area: Area2D) -> void:
+	if area.is_in_group("enemy_rays_activation_area"):
+		var enemy: Enemy = area.get_parent()
+		enemy._on_rays_activation_area_body_exited(hitbox)

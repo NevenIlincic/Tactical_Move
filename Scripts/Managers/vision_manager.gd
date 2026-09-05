@@ -2,7 +2,7 @@ extends Node2D
 # Pamtićemo parove: { enemy: { player1: true, player2: true } }
 var last_frame_visible_enemies: Dictionary
 var current_frame_visible_enemies: Dictionary
-const FRAMES_LIMIT: int = 5
+const FRAMES_LIMIT: int = 50
 
 func _init() -> void:
 	last_frame_visible_enemies = {}

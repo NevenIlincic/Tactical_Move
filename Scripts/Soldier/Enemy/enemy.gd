@@ -39,7 +39,7 @@ func check_soldier_has_action():
 func _ready() -> void:
 	super._ready()
 	soldier_type = SoldierType.ENEMY
-	visible = false
+	#visible = false
 	engagement_strategy = StopShootFollowingStrategy.new()
 	point_to_look = Vector2.ZERO
 	level = get_tree().get_first_node_in_group("Level")
@@ -129,7 +129,7 @@ func evaluate_best_move():
 	var current_HP: float = soldier_stats.HP.get_value()
 	var max_travel_distance: float = soldier_stats.max_travel_distance.get_value()
 	for player_id: String in close_players:
-		var player: Player = alive_players[player_id]
+		var player: Player = close_players[player_id]
 		var intent_for_player: Intent = Intent.ATTACK
 		var path_to_player = NavigationServer2D.map_get_path(map_rid, global_position, player.global_position, true)
 		var distance_to_player: float = get_path_length(path_to_player)
@@ -176,7 +176,6 @@ func evaluate_best_move():
 				"closest_cover": cover_point,
 				"distance_to_closest_cover": distance_to_closest_cover
 			}
-	
 	return best_move
 func get_nearest_marker(from_position: Vector2, markers: Array) -> Marker2D:
 	var nearest_marker: Marker2D = null
@@ -252,6 +251,7 @@ func on_soldier_killed():
 	enemies_in_sight.clear()
 	enemy_to_shoot = null
 	animation_player.play("dying_animation")
+	
 
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
@@ -275,5 +275,6 @@ func _on_rays_activation_area_body_exited(body: Node2D) -> void:
 	if soldier != self and body.is_in_group("player_hitbox") and soldier is Player:
 		if close_players.has(soldier.soldier_id):
 			close_players.erase(soldier.soldier_id)
-		if vision_polygon.are_rays_enabled:
-			vision_polygon.disable_rays()
+		if close_players.is_empty():
+			if vision_polygon.are_rays_enabled:
+				vision_polygon.disable_rays()

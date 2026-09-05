@@ -293,6 +293,10 @@ func do_while_action(delta: float):
 	do_while_action_extra()
 
 func do_actions():
+	if is_killed:
+		Signals.player_move_finished.emit(self)
+		queue_free()
+		return
 	_pre_move_actions()
 	await _move()
 	_on_actions_finished()

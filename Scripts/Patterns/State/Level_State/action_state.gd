@@ -70,7 +70,7 @@ func _on_player_move_finished(soldier: Soldier):
 	var enemies_finished: Array[Soldier] = []
 	if num_player_finished_moves == alive_players.size():
 		for enemy_soldier in soldiers_in_action:
-			if not current_action_killed_players.has(enemy_soldier.soldier_id) and enemy_soldier is Enemy:
+			if is_instance_valid(enemy_soldier) and not enemy_soldier.is_queued_for_deletion() and enemy_soldier is Enemy:
 				if enemy_soldier.enemies_in_sight.is_empty():
 					enemy_soldier._on_players_action_finished()
 					enemies_finished.append(enemy_soldier)
