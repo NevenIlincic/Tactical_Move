@@ -24,7 +24,8 @@ func deselect_player():
 func select_player(new_selected_player: Player):
 	var old_player: Player = selected_player
 	deselect_player()
-	selected_player = new_selected_player
-	selected_player.player_sprite.modulate.a = 0.5
-	if old_player:
-		player_selection_changed.emit(old_player, selected_player)
+	if not new_selected_player.is_killed:
+		selected_player = new_selected_player
+		selected_player.player_sprite.modulate.a = 0.5
+		if old_player:
+			player_selection_changed.emit(old_player, selected_player)

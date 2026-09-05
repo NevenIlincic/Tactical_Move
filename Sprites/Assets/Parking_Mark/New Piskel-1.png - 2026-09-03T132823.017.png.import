@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://gvmk7pgk7mlc"
-path="res://.godot/imported/Player_Soldier_m4a1_rifle.png-857c2399a4804ad9e0cd92c5296d2e6e.ctex"
+uid="uid://di4bdbjdq8j8h"
+path="res://.godot/imported/New Piskel-1.png - 2026-09-03T132823.017.png-d0f3b618a1acff7e5bc28307afd9344b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Player/Player_Soldier_m4a1_rifle.png"
-dest_files=["res://.godot/imported/Player_Soldier_m4a1_rifle.png-857c2399a4804ad9e0cd92c5296d2e6e.ctex"]
+source_file="res://Sprites/Assets/Parking_Mark/New Piskel-1.png - 2026-09-03T132823.017.png"
+dest_files=["res://.godot/imported/New Piskel-1.png - 2026-09-03T132823.017.png-d0f3b618a1acff7e5bc28307afd9344b.ctex"]
 
 [params]
 

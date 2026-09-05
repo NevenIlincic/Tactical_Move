@@ -225,12 +225,12 @@ offset = Vector2(914.0497, 236.5729)
 
 [node name="Grid_Container_Applied_Upgrades" type="GridContainer" parent="." unique_id=298888765]
 layout_mode = 0
-offset_left = 448.0
+offset_left = 392.0
 offset_top = -64.0
-offset_right = 1024.0
+offset_right = 968.0
 offset_bottom = 64.0
 mouse_filter = 2
-theme_override_constants/h_separation = 15
+theme_override_constants/h_separation = 5
 columns = 6
 
 [node name="Engagement_Strategy_Icon" type="Sprite2D" parent="." unique_id=1028706703]

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://gvmk7pgk7mlc"
-path="res://.godot/imported/Player_Soldier_m4a1_rifle.png-857c2399a4804ad9e0cd92c5296d2e6e.ctex"
+uid="uid://bul8qv1rsnp6o"
+path="res://.godot/imported/player_dying_sprites.png-76baf70d1f75c9b6b511958b392ccf47.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Player/Player_Soldier_m4a1_rifle.png"
-dest_files=["res://.godot/imported/Player_Soldier_m4a1_rifle.png-857c2399a4804ad9e0cd92c5296d2e6e.ctex"]
+source_file="res://Sprites/Player/player_dying_sprites.png"
+dest_files=["res://.godot/imported/player_dying_sprites.png-76baf70d1f75c9b6b511958b392ccf47.ctex"]
 
 [params]
 

@@ -8,6 +8,7 @@ enum SoldierType{
 }
 var soldier_type: SoldierType
 
+
 @onready var vision_polygon: SoldierVision = $Vision_Polygon
 @onready var hitbox_collision_shape: CollisionShape2D = $Hitbox/Hitbox_Collision_Shape
 @onready var bullet_line: SoldierBulletLine = $Bullet_Line
@@ -93,8 +94,10 @@ func _on_enemy_soldier_killed(enemy_killed: Soldier, _killed_by: Soldier):
 func when_killed():
 	if is_killed:
 		disconnect_from_signals()
-		queue_free()
 		Signals.player_move_finished.emit(self)
+		on_soldier_killed()
+			
+		#queue_free()
 func _select_next_enemy_to_shoot():
 	var lowest_hp_enemy: Soldier = null
 	var lowest_hp_value = INF
@@ -105,7 +108,6 @@ func _select_next_enemy_to_shoot():
 			continue
 		var current_enemy_hp = enemies_in_sight[enemy_id].soldier_stats.HP.get_value()
 		if current_enemy_hp < lowest_hp_value:
-			print(enemies_in_sight)
 			lowest_hp_value = current_enemy_hp
 			lowest_hp_enemy = enemies_in_sight[enemy_id]
 			
@@ -265,7 +267,6 @@ func _on_move_stop():
 		reset_after_move_looking_point()
 		set_player_looking_at()
 	
-	#print(self, " ", enemies_in_sight)
 	if has_enemies_in_sight():
 		Signals.player_move_continued.emit(self)
 	else:
@@ -292,6 +293,10 @@ func do_while_action(delta: float):
 	do_while_action_extra()
 
 func do_actions():
+	if is_killed:
+		Signals.player_move_finished.emit(self)
+		queue_free()
+		return
 	_pre_move_actions()
 	await _move()
 	_on_actions_finished()
@@ -316,3 +321,4 @@ func set_player_sprite(): pass
 func can_soldier_move(): pass
 func do_before_movement(): pass
 func do_after_movement(): pass
+func on_soldier_killed(): pass

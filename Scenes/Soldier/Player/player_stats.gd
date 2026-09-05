@@ -54,12 +54,13 @@ func connect_to_signals():
 	Signals.player_low_hp_applied.connect(_on_low_hp_applied)
 
 func _on_selected_player(player: Player):
-	set_player_avatar(player.player_avatar)
-	update_stats_labels(player)
-	set_weapon_sprite(player.current_weapon)
-	set_applied_upgrades(player)
-	_on_engagement_strategy_changed(player)
-	show_stats()
+	if not player.is_killed:
+		set_player_avatar(player.player_avatar)
+		update_stats_labels(player)
+		set_weapon_sprite(player.current_weapon)
+		set_applied_upgrades(player)
+		_on_engagement_strategy_changed(player)
+		show_stats()
 
 func set_player_avatar(avatar_texture: CompressedTexture2D):
 	player_avatar.texture = avatar_texture

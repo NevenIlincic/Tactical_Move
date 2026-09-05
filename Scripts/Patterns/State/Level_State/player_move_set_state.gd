@@ -40,32 +40,31 @@ func _unhandled_input(event: InputEvent):
 			level.set_level_state(ActionState.new([level]))
 			return
 	
-	if Input.is_action_pressed("drawing"):
-		if selected_player:
+	if selected_player and not selected_player.is_killed:
+		if Input.is_action_pressed("drawing"):
 			is_drawing = true
-	else:
-		if selected_player:
+		else:
 			is_drawing = false
 		
-	if Input.is_action_just_pressed("reset_look_at_path") and selected_player:
-		selected_player.reset_point_to_look()
-		level.players_set_for_rotation.erase(selected_player)
-	
-	if Input.is_action_just_pressed("rotate_player_after_move") and selected_player and len(selected_player.player_path) > 1:
-		selected_player.set_after_move_looking_point(level.get_global_mouse_position())
-	if Input.is_action_just_pressed("reset_rotate_player_after_move") and selected_player:
-		selected_player.reset_after_move_looking_point()
-	
-	if Input.is_action_just_pressed("rotate_player") and selected_player:
-		level.players_set_for_rotation[selected_player] = true
-		selected_player.set_point_to_look(level.get_global_mouse_position())
-	if Input.is_action_just_pressed("reset_path") and selected_player:
-			#_erase_from_occupated_tiles_dict(selected_player.player_path[-1], selected_player)
-		selected_player.reset_path()
-		level.players_set_for_move.erase(selected_player)
-	
-	if Input.is_action_just_pressed("popup") and selected_player:
-		level.radial_menu.popup()
+		if Input.is_action_just_pressed("reset_look_at_path"):
+			selected_player.reset_point_to_look()
+			level.players_set_for_rotation.erase(selected_player)
+		
+		if Input.is_action_just_pressed("rotate_player_after_move") and len(selected_player.player_path) > 1:
+			selected_player.set_after_move_looking_point(level.get_global_mouse_position())
+		if Input.is_action_just_pressed("reset_rotate_player_after_move"):
+			selected_player.reset_after_move_looking_point()
+		
+		if Input.is_action_just_pressed("rotate_player"):
+			level.players_set_for_rotation[selected_player] = true
+			selected_player.set_point_to_look(level.get_global_mouse_position())
+		if Input.is_action_just_pressed("reset_path"):
+				#_erase_from_occupated_tiles_dict(selected_player.player_path[-1], selected_player)
+			selected_player.reset_path()
+			level.players_set_for_move.erase(selected_player)
+		
+		if Input.is_action_just_pressed("popup"):
+			level.radial_menu.popup()
 
 
 func is_adjacent(a: Vector2i, b: Vector2i) -> bool:

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://gvmk7pgk7mlc"
-path="res://.godot/imported/Player_Soldier_m4a1_rifle.png-857c2399a4804ad9e0cd92c5296d2e6e.ctex"
+uid="uid://dyq8g2g3eq0ke"
+path="res://.godot/imported/Green_Car.png-aa3e4ca03237f8dce417bf09cccca2c7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Player/Player_Soldier_m4a1_rifle.png"
-dest_files=["res://.godot/imported/Player_Soldier_m4a1_rifle.png-857c2399a4804ad9e0cd92c5296d2e6e.ctex"]
+source_file="res://Sprites/Assets/Cars/Green_Car.png"
+dest_files=["res://.godot/imported/Green_Car.png-aa3e4ca03237f8dce417bf09cccca2c7.ctex"]
 
 [params]
 

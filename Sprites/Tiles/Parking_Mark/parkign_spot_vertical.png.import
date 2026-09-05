@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://gvmk7pgk7mlc"
-path="res://.godot/imported/Player_Soldier_m4a1_rifle.png-857c2399a4804ad9e0cd92c5296d2e6e.ctex"
+uid="uid://da6yfuhhbkars"
+path="res://.godot/imported/parkign_spot_vertical.png-2f20f98e899c06c17f5b4dabd2168693.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Player/Player_Soldier_m4a1_rifle.png"
-dest_files=["res://.godot/imported/Player_Soldier_m4a1_rifle.png-857c2399a4804ad9e0cd92c5296d2e6e.ctex"]
+source_file="res://Sprites/Tiles/Parking_Mark/parkign_spot_vertical.png"
+dest_files=["res://.godot/imported/parkign_spot_vertical.png-2f20f98e899c06c17f5b4dabd2168693.ctex"]
 
 [params]
 

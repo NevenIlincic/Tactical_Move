@@ -1,7 +1,6 @@
 extends Node2D 
 class_name Level
 
-var grid: AStarGrid2D = AStarGrid2D.new()
 @onready var tile_map: TileMapLayer = $TileMaps/TileMap
 
 var selected_player: Player
@@ -41,7 +40,6 @@ func _ready() -> void:
 			players[player] = true
 	cover_points = get_tree().get_nodes_in_group("a_star_point")
 
-	#setup_grid()
 	connect_to_signals()
 	current_state = PreparationState.new([
 		self,
@@ -51,6 +49,7 @@ func _ready() -> void:
 	AudioManager.set_current_level(self)
 
 func _physics_process(delta: float) -> void:
+	#print(Engine.get_frames_per_second())
 	VisionManager.handle_enemy_visibility(delta)
 	current_state._physics_process(delta)
 	if total_passed_time_millis >= 1000.0:
@@ -91,23 +90,6 @@ func connect_to_signals():
 	Signals.open_upgrade_removal_confirmation_dialog.connect(_on_confirmation_dialog_opened)
 	confirmation_dialog.action_confirmed.connect(_on_action_confirmed)
 	confirmation_dialog.action_canceled.connect(_on_action_canceled)
-func setup_grid():
-	grid.region = tile_map.get_used_rect()
-	grid.cell_size = tile_map.tile_set.tile_size
-	grid.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_NEVER
-	grid.default_compute_heuristic = AStarGrid2D.HEURISTIC_MANHATTAN
-	grid.default_estimate_heuristic = AStarGrid2D.HEURISTIC_MANHATTAN
-	grid.update()
-	
-	for cell in tile_map.get_used_cells():
-		var tile_data = tile_map.get_cell_tile_data(cell)
-		if tile_data.get_custom_data("solid"):
-			grid.set_point_solid(cell, true)
-			
-	#for tile in list_occupied_tiles:
-		#grid.set_point_solid(tile, true)
-
-
 			
 @onready var path_line: Line2D = $Path_Line
 var start_tile: Vector2i = Vector2i(0,0)
@@ -124,16 +106,6 @@ func add_point_to_path(point: Vector2) -> void:
 	path_line.add_point(point)
 func reset_path():
 	path_line.points = []
-
-func free_tile(tile: Vector2i):
-	grid.set_point_solid(tile, false)
-func occupy_tile(tile: Vector2i):
-	grid.set_point_solid(tile, true)	
-
-func check_is_tile_in_boundsv(tile: Vector2i):
-	return grid.is_in_boundsv(tile) 
-func check_is_tile_solid(tile: Vector2i):
-	return grid.is_point_solid(tile)
 
 #CAN SWITCH TO ACTION STATE?
 func check_can_do_action() -> bool:

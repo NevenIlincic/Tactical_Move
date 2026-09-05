@@ -1,11 +1,21 @@
 [gd_scene format=3 uid="uid://y3pndfcq1kxo"]
 
 [ext_resource type="Script" uid="uid://cgpj7hlgh52n1" path="res://Scripts/Soldier/Enemy/enemy.gd" id="1_02vxf"]
-[ext_resource type="Texture2D" uid="uid://cj7du6skub5ll" path="res://Sprites/Enemy/enemy_soldier_walking_sprites.png" id="2_2i7on"]
+[ext_resource type="Texture2D" uid="uid://crkf6i8s2lmn6" path="res://Sprites/Enemy/enemy_soldier_walking_sprites.png" id="2_2i7on"]
+[ext_resource type="Resource" uid="uid://bqytja2sqng4q" path="res://Resources/Player_Stats/Regular_Soldier_Stats.tres" id="2_5e0s2"]
 [ext_resource type="PackedScene" uid="uid://b4siawy1vgojx" path="res://Scenes/Effects/Gun_Blast_Effect.tscn" id="2_cgwcb"]
+[ext_resource type="Script" uid="uid://cubw4ogrqm6po" path="res://Scripts/Weapon/weapon.gd" id="3_1kajf"]
 [ext_resource type="Texture2D" uid="uid://uwcsyrtrt75l" path="res://Sprites/Path_Line/New Piskel-1.png - 2026-08-04T161338.290.png" id="3_02vxf"]
 [ext_resource type="Script" uid="uid://c386pr8tx5qep" path="res://Scripts/Soldier/soldier_vision.gd" id="3_fw0yv"]
+[ext_resource type="Script" uid="uid://bmr38t2grjqqv" path="res://Scripts/Weapon/m4a1_rifle.gd" id="4_v1ooi"]
 [ext_resource type="Script" uid="uid://duyphgu7sdufm" path="res://Scenes/Soldier/soldier_bullet_line.gd" id="5_cmdj1"]
+[ext_resource type="Resource" uid="uid://ttdsvtwhyg75" path="res://Resources/Weapon_Stats/m4a1_Rifle_Stats.tres" id="5_l07se"]
+[ext_resource type="Texture2D" uid="uid://cj7du6skub5ll" path="res://Sprites/Enemy/enemy_dying_sprites.png" id="7_2i7on"]
+
+[sub_resource type="Resource" id="Resource_8rupe"]
+script = ExtResource("4_v1ooi")
+weapon_stats = ExtResource("5_l07se")
+metadata/_custom_type_script = "uid://bmr38t2grjqqv"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_02vxf"]
 radius = 20.0
@@ -62,6 +72,34 @@ tracks/0/keys = {
 "update": 1,
 "values": [0]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Dying_Sprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_2wdta"]
+resource_name = "dying_animation"
+step = 0.33333334
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Dying_Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.33333334, 0.6666667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
 
 [sub_resource type="Animation" id="Animation_cgwcb"]
 resource_name = "running_animation"
@@ -83,12 +121,18 @@ tracks/0/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2wdta"]
 _data = {
 &"RESET": SubResource("Animation_2i7on"),
+&"dying_animation": SubResource("Animation_2wdta"),
 &"running_animation": SubResource("Animation_cgwcb")
 }
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jjc5n"]
+size = Vector2(1408, 1024)
 
 [node name="Enemy" type="Node2D" unique_id=1440065138 groups=["enemy_node", "soldier"]]
 z_index = 2
 script = ExtResource("1_02vxf")
+soldier_stats = ExtResource("2_5e0s2")
+weapons = Array[ExtResource("3_1kajf")]([SubResource("Resource_8rupe")])
 
 [node name="Enemy_Sprite" type="Sprite2D" parent="." unique_id=1264594983]
 texture_filter = 1
@@ -160,3 +204,20 @@ process_material = SubResource("ParticleProcessMaterial_cgwcb")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1539685322]
 libraries/ = SubResource("AnimationLibrary_2wdta")
+
+[node name="Dying_Sprite" type="Sprite2D" parent="." unique_id=652083718]
+visible = false
+texture_filter = 1
+position = Vector2(13, 0)
+texture = ExtResource("7_2i7on")
+hframes = 3
+
+[node name="Rays_Activation_Area" type="Area2D" parent="." unique_id=428950901 groups=["enemy_rays_activation_area"]]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rays_Activation_Area" unique_id=546425416]
+shape = SubResource("RectangleShape2D_jjc5n")
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="body_entered" from="Rays_Activation_Area" to="." method="_on_rays_activation_area_body_entered"]
+[connection signal="body_exited" from="Rays_Activation_Area" to="." method="_on_rays_activation_area_body_exited"]

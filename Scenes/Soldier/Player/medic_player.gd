@@ -68,6 +68,10 @@ func _on_medic_apply_area_body_exited(body: Node2D) -> void:
 		##var ally: Player = allies_to_heal_nearby[ally_id]
 		##if ally.check_is_healing_needed():
 			##ally.healing_needed_sprite.visible = true
+func on_soldier_killed():
+	super.on_soldier_killed()
+	healing_area_indicator.visible = false
+	
 
 func _unhandled_input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("healing") and is_selected and not allies_to_heal_nearby.is_empty() and can_heal:
