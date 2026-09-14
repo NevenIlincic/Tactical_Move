@@ -34,6 +34,9 @@ var total_passed_minutes: int = 0
 @onready var confirmation_dialog: ConfirmDialog = $CanvasLayer/ConfirmationDialog
 var current_confirm_callback: Callable
 
+#OTHER NODES
+@onready var camera_reset_position_marker: Marker2D = $Camera_Reset_Position_Marker
+@onready var camera: Camera2D = $Camera2D
 
 func _ready() -> void:
 	for player in get_tree().get_nodes_in_group("Player"):
@@ -100,6 +103,8 @@ var is_drawing: bool = false
 func _unhandled_input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("pause_menu"):
 		pause_menu.show_pause_menu()
+	if Input.is_action_just_pressed("reset_camera_position"):
+		camera.global_position = camera_reset_position_marker.global_position
 	#if Input.is_action_just_pressed("quit"):
 		#get_tree().quit()
 	current_state._unhandled_input(event)

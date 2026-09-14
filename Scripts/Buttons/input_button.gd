@@ -36,6 +36,8 @@ func get_action_bind_key():
 					text = "MOUSE WHEEL UP"
 				MOUSE_BUTTON_WHEEL_DOWN:
 					text = "MOUSE WHEEL DOWN"
+				MOUSE_BUTTON_MIDDLE:
+					text = "MMB"
 			break
 
 

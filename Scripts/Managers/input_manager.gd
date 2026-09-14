@@ -41,5 +41,7 @@ func get_action_bind_key(action: String) -> String:
 					action_text = "MOUSE WHEEL UP"
 				MOUSE_BUTTON_WHEEL_DOWN:
 					action_text = "MOUSE WHEEL DOWN"
+				MOUSE_BUTTON_MIDDLE:
+					action_text = "MMB"
 			break
 	return action_text

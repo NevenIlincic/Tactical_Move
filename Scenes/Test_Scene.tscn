@@ -708,3 +708,6 @@ player_name = "Nate"
 current_engagement_rule = 1
 soldier_stats = SubResource("Resource_h3xea")
 weapons = Array[ExtResource("6_mykrp")]([SubResource("Resource_mem7m")])
+
+[node name="Camera_Reset_Position_Marker" type="Marker2D" parent="." unique_id=1105308391]
+position = Vector2(576, 320)

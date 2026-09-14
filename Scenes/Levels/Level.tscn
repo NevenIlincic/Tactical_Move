@@ -79,3 +79,6 @@ script = ExtResource("34_slepp")
 color = Color(0.54901963, 0.5058824, 0.56078434, 1)
 
 [node name="Path_Line" type="Line2D" parent="." unique_id=597328806]
+
+[node name="Camera_Reset_Position_Marker" type="Marker2D" parent="." unique_id=1479611963]
+position = Vector2(576, 320)

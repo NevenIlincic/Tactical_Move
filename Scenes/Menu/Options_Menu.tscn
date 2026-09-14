@@ -198,7 +198,7 @@ position = Vector2(31, 96)
 [node name="Inputs_Scroll_Container" type="ScrollContainer" parent="Inputs_Menu" unique_id=392701366]
 offset_right = 808.0
 offset_bottom = 504.0
-scroll_vertical = 500
+scroll_vertical = 696
 
 [node name="GridContainer" type="GridContainer" parent="Inputs_Menu/Inputs_Scroll_Container" unique_id=1057969820]
 layout_mode = 2
@@ -639,7 +639,32 @@ action = "camera_drag"
 [node name="Dummy_Control_Input" type="Control" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer" unique_id=896591287]
 layout_mode = 2
 
+[node name="Reset_Camera_Position_Input" type="Control" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer" unique_id=95181105]
+layout_mode = 2
+
+[node name="Sprite" type="Sprite2D" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Reset_Camera_Position_Input" unique_id=525604054]
+position = Vector2(128, 27.999996)
+scale = Vector2(1.0092957, 0.43750006)
+texture = ExtResource("11_nkoq7")
+
+[node name="Reset_Camera_Position_Label" type="Label" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Reset_Camera_Position_Input" unique_id=732985166]
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 56.0
+text = "RESET CAMERA"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="InputButton" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Reset_Camera_Position_Input" unique_id=1152546645 instance=ExtResource("13_ktebc")]
+layout_mode = 0
+offset_left = 265.0
+offset_right = 337.0
+action = "reset_camera_position"
+
 [node name="Dummy_Control_Input2" type="Control" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer" unique_id=1937067725]
+layout_mode = 2
+
+[node name="Dummy_Control_Input8" type="Control" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer" unique_id=1918905500]
 layout_mode = 2
 
 [node name="Inputs_Tab" type="Node2D" parent="." unique_id=1090724165]
