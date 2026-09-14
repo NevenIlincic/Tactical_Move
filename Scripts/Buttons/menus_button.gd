@@ -4,7 +4,9 @@ class_name NavigationButton extends Node2D
 signal transition_to_main_screen()
 signal transition_to_options_screen()
 signal transition_to_level_selection_screen()
+signal resume_game()
 
+@onready var appear_effect_animation_player: AnimationPlayer = $Appear_Effect_AnimationPlayer
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var texture_rect: TextureRect = $Texture_Rect
 @onready var label: Label = $Texture_Rect/Label
@@ -52,3 +54,7 @@ func _on_texture_rect_gui_input(event: InputEvent) -> void:
 					#get_tree().change_scene_to_file("res://Scenes/Menu/Options_Menu.tscn")
 				"BACK":
 					transition_to_main_screen.emit()
+				"LEAVE":
+					transition_to_main_screen.emit()
+				"RESUME":
+					resume_game.emit()

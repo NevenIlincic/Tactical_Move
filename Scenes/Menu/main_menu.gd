@@ -19,14 +19,13 @@ extends Node2D
 @onready var main_menu_point_light_1: PointLight2D = $Main_Menu_Point_Light_1
 @onready var main_menu_point_light_2: PointLight2D = $Main_Menu_Point_Light_2
 ########
-func _unhandled_input(event: InputEvent) -> void:
-	if Input.is_action_just_pressed("quit"):
-		get_tree().quit()
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	connect_to_signals()
 	options_menu.visible = false
+	level_selection_button.appear_effect_animation_player.play("appear_animation")
+	options_button.appear_effect_animation_player.play("appear_animation")
 
 
 func connect_to_signals():
@@ -43,7 +42,7 @@ func _on_options_button_pressed():
 	var tween: Tween = create_tween()
 	tween.tween_property(camera, "global_position", option_camera_position.global_position, 0.4)
 	tween.finished.connect(func():
-		options_menu.visible = true
+		#options_menu.visible = true
 		options_menu.play_appear_animation()
 		)
 

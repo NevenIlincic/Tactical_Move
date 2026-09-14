@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dhnsrmoddn8sp"]
 
 [ext_resource type="Script" uid="uid://b58hel4nndam5" path="res://Scenes/test_scene.gd" id="1_echjq"]
+[ext_resource type="PackedScene" uid="uid://diubehftswotg" path="res://Scenes/Menu/Pause_Menu.tscn" id="8_etd3f"]
 [ext_resource type="PackedScene" uid="uid://dyh4j30522553" path="res://Scenes/Soldier/Player/Player_Stats.tscn" id="25_wr6c8"]
 [ext_resource type="PackedScene" uid="uid://bmbr4kpa58muf" path="res://Scenes/Menu/Upgrade_Menu.tscn" id="26_u4xmi"]
 [ext_resource type="PackedScene" uid="uid://q6uf7pve5vqm" path="res://Scenes/Dialog/Confirmation_Dialog.tscn" id="27_bvxha"]
@@ -23,6 +24,7 @@ script = ExtResource("1_echjq")
 [node name="TileMaps" type="Node2D" parent="." unique_id=641455981]
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=1722953161]
+visible = false
 navigation_polygon = SubResource("NavigationPolygon_1d4wk")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1849002311]
@@ -67,6 +69,8 @@ offset_bottom = 65.0
 theme_override_font_sizes/font_size = 48
 text = "0:0:0"
 
+[node name="PauseMenu" parent="CanvasLayer" unique_id=487446487 instance=ExtResource("8_etd3f")]
+
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1824573650]
 position = Vector2(984, 320)
 script = ExtResource("34_slepp")
@@ -75,3 +79,6 @@ script = ExtResource("34_slepp")
 color = Color(0.54901963, 0.5058824, 0.56078434, 1)
 
 [node name="Path_Line" type="Line2D" parent="." unique_id=597328806]
+
+[node name="Camera_Reset_Position_Marker" type="Marker2D" parent="." unique_id=1479611963]
+position = Vector2(576, 320)
