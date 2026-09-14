@@ -198,7 +198,7 @@ position = Vector2(31, 96)
 [node name="Inputs_Scroll_Container" type="ScrollContainer" parent="Inputs_Menu" unique_id=392701366]
 offset_right = 808.0
 offset_bottom = 504.0
-scroll_vertical = 100
+scroll_vertical = 500
 
 [node name="GridContainer" type="GridContainer" parent="Inputs_Menu/Inputs_Scroll_Container" unique_id=1057969820]
 layout_mode = 2
@@ -495,6 +495,33 @@ offset_top = -1.0
 offset_right = 337.0
 offset_bottom = 55.0
 action = "upgrade_menu"
+
+[node name="Dummy_Control_Input16" type="Control" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer" unique_id=972991199]
+layout_mode = 2
+
+[node name="Upgrade_Menu_Input2" type="Control" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer" unique_id=545811687]
+layout_mode = 2
+
+[node name="Sprite" type="Sprite2D" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Upgrade_Menu_Input2" unique_id=391819789]
+position = Vector2(128, 27.999996)
+scale = Vector2(1.0092957, 0.43750006)
+texture = ExtResource("11_nkoq7")
+
+[node name="Upgrade_Menu_Label" type="Label" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Upgrade_Menu_Input2" unique_id=405418557]
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 56.0
+text = "OPEN PAUSE MENU"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="InputButton" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Upgrade_Menu_Input2" unique_id=491172613 instance=ExtResource("13_ktebc")]
+layout_mode = 0
+offset_left = 265.0
+offset_top = -1.0
+offset_right = 337.0
+offset_bottom = 55.0
+action = "pause_menu"
 
 [node name="Dummy_Control_Input14" type="Control" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer" unique_id=1831728269]
 layout_mode = 2

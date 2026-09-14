@@ -19,9 +19,6 @@ extends Node2D
 @onready var main_menu_point_light_1: PointLight2D = $Main_Menu_Point_Light_1
 @onready var main_menu_point_light_2: PointLight2D = $Main_Menu_Point_Light_2
 ########
-func _unhandled_input(event: InputEvent) -> void:
-	if Input.is_action_just_pressed("quit"):
-		get_tree().quit()
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
