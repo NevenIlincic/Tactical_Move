@@ -729,6 +729,5 @@ horizontal_alignment = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="Back_Button" parent="." unique_id=900227919 instance=ExtResource("5_ehegv")]
-modulate = Color(1, 1, 1, 0)
-position = Vector2(902, 514)
+position = Vector2(896, 512)
 button_text = "BACK"

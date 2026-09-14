@@ -27,6 +27,8 @@ func _unhandled_input(event: InputEvent) -> void:
 func _ready() -> void:
 	connect_to_signals()
 	options_menu.visible = false
+	level_selection_button.appear_effect_animation_player.play("appear_animation")
+	options_button.appear_effect_animation_player.play("appear_animation")
 
 
 func connect_to_signals():
@@ -43,7 +45,7 @@ func _on_options_button_pressed():
 	var tween: Tween = create_tween()
 	tween.tween_property(camera, "global_position", option_camera_position.global_position, 0.4)
 	tween.finished.connect(func():
-		options_menu.visible = true
+		#options_menu.visible = true
 		options_menu.play_appear_animation()
 		)
 

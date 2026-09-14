@@ -17,6 +17,7 @@ func _ready() -> void:
 		input_remap_manager.input_key_changed.connect(button.check_is_same_action_key_bind)
 
 func play_appear_animation():
+	visible = true
 	animation_player.play("Tabs_Appear_Animation")
 
 func reset_appear_animation():
@@ -25,5 +26,3 @@ func reset_appear_animation():
 
 func _unhandled_input(event: InputEvent) -> void:
 	input_remap_manager._unhandled_input(event)
-	if Input.is_action_just_pressed("quit"):
-		get_tree().change_scene_to_file("res://Scenes/Menu/Main_Menu.tscn")

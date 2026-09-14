@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://diubehftswotg"]
+
+[ext_resource type="PackedScene" uid="uid://b6pfugr3kdl2v" path="res://Scenes/Buttons/Menus_Button.tscn" id="1_5mlm2"]
+[ext_resource type="Script" uid="uid://dudwpob6f2kns" path="res://Scenes/Menu/pause_menu.gd" id="1_ugqog"]
+[ext_resource type="PackedScene" uid="uid://s56adyusiw24" path="res://Scenes/Menu/Options_Menu.tscn" id="3_x61ip"]
+
+[node name="PauseMenu" type="Node2D" unique_id=487446487]
+process_mode = 2
+z_index = 99
+script = ExtResource("1_ugqog")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=2113018452]
+offset_right = 1152.0
+offset_bottom = 640.0
+color = Color(0.25490198, 0.25490198, 0.25490198, 0.3254902)
+
+[node name="OptionsMenu" parent="." unique_id=1686594788 instance=ExtResource("3_x61ip")]
+visible = false
+
+[node name="ResumeButton" parent="." unique_id=900227919 instance=ExtResource("1_5mlm2")]
+position = Vector2(896, 424)
+button_text = "RESUME"

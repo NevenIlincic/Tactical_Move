@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://cp4iog725gtuq" path="res://Scripts/Soldier/Player/player_stats.gd" id="6_ltieu"]
 [ext_resource type="Script" uid="uid://cubw4ogrqm6po" path="res://Scripts/Weapon/weapon.gd" id="6_mykrp"]
 [ext_resource type="Texture2D" uid="uid://coidsrajfw0k4" path="res://Sprites/Tiles/concrete.png" id="7_3y4ie"]
+[ext_resource type="PackedScene" uid="uid://diubehftswotg" path="res://Scenes/Menu/Pause_Menu.tscn" id="11_ir5aq"]
 [ext_resource type="Texture2D" uid="uid://c4135vaiolep5" path="res://Sprites/Tiles/Grass/Grass_Corners_128x128.png" id="12_elm60"]
 [ext_resource type="Script" uid="uid://bmr38t2grjqqv" path="res://Scripts/Weapon/m4a1_rifle.gd" id="12_grcoo"]
 [ext_resource type="Texture2D" uid="uid://cjlwwyc44rr32" path="res://Sprites/Tiles/Grass/Grass_One_Corner_Side.png" id="13_ir5aq"]
@@ -214,7 +215,7 @@ script = ExtResource("5_8c5ma")
 base_value = 250.0
 metadata/_custom_type_script = "uid://bencr8mnns7ut"
 
-[sub_resource type="Resource" id="Resource_elm60"]
+[sub_resource type="Resource" id="Resource_us5gr"]
 resource_local_to_scene = true
 script = ExtResource("6_ltieu")
 speed = SubResource("Resource_nfmrh")
@@ -233,7 +234,7 @@ script = ExtResource("5_8c5ma")
 base_value = 100.0
 metadata/_custom_type_script = "uid://bencr8mnns7ut"
 
-[sub_resource type="Resource" id="Resource_us5gr"]
+[sub_resource type="Resource" id="Resource_vtp3d"]
 resource_local_to_scene = true
 script = ExtResource("6_ltieu")
 speed = SubResource("Resource_nfmrh")
@@ -351,7 +352,7 @@ script = ExtResource("5_8c5ma")
 base_value = 225.0
 metadata/_custom_type_script = "uid://bencr8mnns7ut"
 
-[sub_resource type="Resource" id="Resource_vtp3d"]
+[sub_resource type="Resource" id="Resource_58pdj"]
 resource_local_to_scene = true
 script = ExtResource("6_ltieu")
 speed = SubResource("Resource_xq73l")
@@ -487,7 +488,7 @@ rotation = 7.9307876
 player_name = "Luke"
 player_avatar = ExtResource("22_w2bir")
 current_engagement_rule = 2
-soldier_stats = SubResource("Resource_elm60")
+soldier_stats = SubResource("Resource_us5gr")
 weapons = Array[ExtResource("6_mykrp")]([SubResource("Resource_yn6en")])
 
 [node name="Player2" parent="." unique_id=1802276897 instance=ExtResource("4_10mtb")]
@@ -495,7 +496,7 @@ position = Vector2(1320, 368)
 player_name = "Valerie"
 player_avatar = ExtResource("21_ebsyv")
 current_engagement_rule = 2
-soldier_stats = SubResource("Resource_us5gr")
+soldier_stats = SubResource("Resource_vtp3d")
 weapons = Array[ExtResource("6_mykrp")]([SubResource("Resource_kw30y")])
 
 [node name="Marker2D" type="Marker2D" parent="." unique_id=245030149 groups=["a_star_point"]]
@@ -636,13 +637,15 @@ offset_bottom = 65.0
 theme_override_font_sizes/font_size = 48
 text = "0:0:0"
 
+[node name="PauseMenu" parent="CanvasLayer" unique_id=487446487 instance=ExtResource("11_ir5aq")]
+
 [node name="Player4" parent="." unique_id=575771634 instance=ExtResource("4_10mtb")]
 position = Vector2(711, 334.99994)
 rotation = 0.7831249
 player_name = "Keith"
 player_avatar = ExtResource("25_q2r4x")
 current_engagement_rule = 2
-soldier_stats = SubResource("Resource_vtp3d")
+soldier_stats = SubResource("Resource_58pdj")
 weapons = Array[ExtResource("6_mykrp")]([SubResource("Resource_ir5aq")])
 
 [node name="Car" parent="." unique_id=75836846 instance=ExtResource("28_3y4ie")]

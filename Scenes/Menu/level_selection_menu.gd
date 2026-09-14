@@ -7,6 +7,7 @@ class_name LevelSelectionMenu extends Node2D
 
 func _ready() -> void:
 	connect_to_signals()
+	level_selection_back_button.appear_effect_animation_player.play("appear_animation")
 	
 func connect_to_signals():
 	for control_node: Control in v_box_container.get_children():

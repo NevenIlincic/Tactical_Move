@@ -28,6 +28,7 @@ var total_passed_minutes: int = 0
 #MENU
 @onready var upgrade_menu: UpgradeMenu = $CanvasLayer/UpgradeMenu
 @onready var radial_menu: PopupMenu = $CanvasLayer/RadialMenu
+@onready var pause_menu: PauseMenu = $CanvasLayer/PauseMenu
 
 #FOR CONFIRMATION DIALOG
 @onready var confirmation_dialog: ConfirmDialog = $CanvasLayer/ConfirmationDialog
@@ -97,8 +98,10 @@ var start_tile: Vector2i = Vector2i(0,0)
 var is_drawing: bool = false
 
 func _unhandled_input(event: InputEvent) -> void:
-	if Input.is_action_just_pressed("quit"):
-		get_tree().quit()
+	if Input.is_action_just_pressed("pause_menu"):
+		pause_menu.show_pause_menu()
+	#if Input.is_action_just_pressed("quit"):
+		#get_tree().quit()
 	current_state._unhandled_input(event)
 
 	

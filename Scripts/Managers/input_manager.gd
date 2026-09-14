@@ -7,7 +7,7 @@ var activated_button: InputButton
 func _unhandled_input(event: InputEvent) -> void:
 	if activated_button:
 		if event is InputEventKey or event is InputEventMouseButton:
-			if event.keycode == KEY_ESCAPE:
+			if event is InputEventKey and event.keycode == KEY_ESCAPE:
 				return
 			InputMap.action_erase_events(activated_button.action)
 			InputMap.action_add_event(activated_button.action, event)
