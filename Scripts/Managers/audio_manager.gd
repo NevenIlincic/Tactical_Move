@@ -10,31 +10,23 @@ var current_level: Level
 func set_current_level(level: Level):
 	current_level = level
 
-func play_gun_shoot_sound():
-	var audio: AudioStreamPlayer2D = AudioStreamPlayer2D.new()
-	audio.stream = M_4A_1_RIFLE_SOUND
-	#current_level.add_child(audio)
+func _play_sound(stream_sound: Resource, volume: float = 10.0):
+	var audio: AudioStreamPlayer = AudioStreamPlayer.new()
+	audio.stream = stream_sound
+	audio.process_mode = Node.PROCESS_MODE_ALWAYS
+	#audio.volume_db = volume
 	get_tree().root.add_child(audio)
 	audio.play()
 	audio.finished.connect(func(): audio.queue_free())
+
+func play_gun_shoot_sound():
+	_play_sound(M_4A_1_RIFLE_SOUND)
 
 func play_upgrade_sound():
-	var audio: AudioStreamPlayer2D = AudioStreamPlayer2D.new()
-	audio.stream = BUTTON_SOUND
-	get_tree().root.add_child(audio)
-	audio.play()
-	audio.finished.connect(func(): audio.queue_free())
+	_play_sound(BUTTON_SOUND)
 
 func play_button_hover_sound():
-	var audio: AudioStreamPlayer2D = AudioStreamPlayer2D.new()
-	audio.stream = BUTTON_HOVER_SOUND
-	get_tree().root.add_child(audio)
-	audio.play()
-	audio.finished.connect(func(): audio.queue_free())
+	_play_sound(BUTTON_HOVER_SOUND)
 
 func play_kill_sound():
-	var audio: AudioStreamPlayer2D = AudioStreamPlayer2D.new()
-	audio.stream = KILL_SOUND
-	get_tree().root.add_child(audio)
-	audio.play()
-	audio.finished.connect(func(): audio.queue_free())
+	_play_sound(KILL_SOUND)

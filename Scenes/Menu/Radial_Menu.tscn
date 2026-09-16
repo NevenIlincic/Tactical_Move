@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://cyexu3fm2aq3s" path="res://Sprites/HUD/background.png" id="1_0blgu"]
 [ext_resource type="Texture2D" uid="uid://b0hk5gucidtjh" path="res://Sprites/HUD/Engagement_Menu/stop_and_shoot_icon.png" id="1_nr87h"]
 [ext_resource type="Texture2D" uid="uid://bmxe4wqdu1rfb" path="res://Sprites/HUD/Engagement_Menu/move_and_shoot_icon.png" id="3_0blgu"]
-[ext_resource type="Script" uid="uid://cgn5qmfcrqgry" path="res://Scenes/Menu/radial_menu.gd" id="5_mytm5"]
+[ext_resource type="Script" uid="uid://cgn5qmfcrqgry" path="res://Scripts/Menus/radial_menu.gd" id="5_mytm5"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_21aeu"]
 texture = ExtResource("1_0blgu")
