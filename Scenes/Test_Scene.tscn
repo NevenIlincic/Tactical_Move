@@ -1,7 +1,6 @@
 [gd_scene format=4 uid="uid://cmghvc8etnar1"]
 
 [ext_resource type="Script" uid="uid://b58hel4nndam5" path="res://Scenes/test_scene.gd" id="1_4ms0o"]
-[ext_resource type="PackedScene" uid="uid://chy7dddrrr700" path="res://Scenes/Soldier/Player/Player.tscn" id="4_10mtb"]
 [ext_resource type="Texture2D" uid="uid://by41vprbe8yxy" path="res://Sprites/Tiles/New Piskel-2.png (51).png" id="4_tq75k"]
 [ext_resource type="Script" uid="uid://bencr8mnns7ut" path="res://Scripts/Patterns/Stat/stat.gd" id="5_8c5ma"]
 [ext_resource type="PackedScene" uid="uid://y3pndfcq1kxo" path="res://Scenes/Soldier/Enemy/Enemy.tscn" id="5_svcn8"]
@@ -16,25 +15,24 @@
 [ext_resource type="Resource" uid="uid://ttdsvtwhyg75" path="res://Resources/Weapon_Stats/m4a1_Rifle_Stats.tres" id="13_tq75k"]
 [ext_resource type="Texture2D" uid="uid://b0ys5hsblpl5u" path="res://Sprites/Tiles/Grass/Grass.png" id="13_us5gr"]
 [ext_resource type="Texture2D" uid="uid://dabjh4v6265n0" path="res://Sprites/Tiles/Grass/New Piskel-1.png - 2026-08-21T000520.022.png" id="14_us5gr"]
-[ext_resource type="Script" uid="uid://bqnc1ha42r85" path="res://Scripts/Weapon/pistol.gd" id="17_513u8"]
-[ext_resource type="Texture2D" uid="uid://dk6hnkfrk8imb" path="res://Sprites/Player/Avatars/female_soldier.png" id="21_ebsyv"]
-[ext_resource type="Texture2D" uid="uid://c07go6e5fp3av" path="res://Sprites/Player/Avatars/male_soldier_3.png" id="22_w2bir"]
 [ext_resource type="PackedScene" uid="uid://dyh4j30522553" path="res://Scenes/Soldier/Player/Player_Stats.tscn" id="23_nfmrh"]
 [ext_resource type="Script" uid="uid://jqj0nkq44djb" path="res://Scenes/camera_2d.gd" id="24_7tbrw"]
 [ext_resource type="Texture2D" uid="uid://daf3icuwxhg26" path="res://Sprites/HUD/Timer/timer_icon.png" id="25_gw302"]
-[ext_resource type="Texture2D" uid="uid://5dn5fh731jps" path="res://Sprites/Player/Avatars/male_soldier_4.png" id="25_q2r4x"]
 [ext_resource type="PackedScene" uid="uid://bmbr4kpa58muf" path="res://Scenes/Menu/Upgrade_Menu.tscn" id="26_3y4ie"]
+[ext_resource type="PackedScene" uid="uid://xsp0v8p2pc4e" path="res://Scenes/Menu/End_Game_Menu.tscn" id="26_us5gr"]
 [ext_resource type="PackedScene" uid="uid://d3gwg3d0gxd4w" path="res://Scenes/Menu/Radial_Menu.tscn" id="27_3u3yd"]
 [ext_resource type="PackedScene" uid="uid://bsv7rv63cgyf3" path="res://Scenes/Map_Assets/Cars/White_Car.tscn" id="28_3y4ie"]
 [ext_resource type="PackedScene" uid="uid://q6uf7pve5vqm" path="res://Scenes/Dialog/Confirmation_Dialog.tscn" id="29_3u3yd"]
 [ext_resource type="PackedScene" uid="uid://c0vgcvlc1hb3x" path="res://Scenes/Map_Assets/Cars/Red_Car.tscn" id="29_l3xug"]
+[ext_resource type="PackedScene" uid="uid://brfg83jmoawos" path="res://Scenes/Soldier/Player/Nate_Medic.tscn" id="30_1q75p"]
+[ext_resource type="PackedScene" uid="uid://cjloixtn6v5rp" path="res://Scenes/Soldier/Player/Valerie_Regular.tscn" id="31_elm60"]
 [ext_resource type="Texture2D" uid="uid://bo60888547asv" path="res://Sprites/Wall/New Piskel (30).png" id="31_xk5uc"]
 [ext_resource type="Texture2D" uid="uid://dws2prvoqt80s" path="res://Sprites/Wall/wall_tiles.png" id="32_avk4t"]
+[ext_resource type="PackedScene" uid="uid://bpg5m07qvbc3m" path="res://Scenes/Soldier/Player/Luke_Regular.tscn" id="32_ir5aq"]
 [ext_resource type="Texture2D" uid="uid://fkr18ad8igyo" path="res://Sprites/Assets/Furniture/wooden_table.png" id="33_1q75p"]
+[ext_resource type="PackedScene" uid="uid://bsxjq5u2glxba" path="res://Scenes/Soldier/Player/Keith_Regular.tscn" id="33_us5gr"]
 [ext_resource type="PackedScene" uid="uid://di76hjbstq4th" path="res://Scenes/Map_Assets/Cars/Blue_Car.tscn" id="37_vtp3d"]
 [ext_resource type="PackedScene" uid="uid://bm1ppd4si4asw" path="res://Scenes/Map_Assets/Door/Door.tscn" id="39_58pdj"]
-[ext_resource type="PackedScene" uid="uid://dvxglkihfxy2x" path="res://Scenes/Soldier/Player/Medic_Player.tscn" id="39_gw302"]
-[ext_resource type="Script" uid="uid://dh5netn8c2b4e" path="res://Scripts/Weapon/weapon_stats.gd" id="40_gw302"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_elm60"]
 texture = ExtResource("4_tq75k")
@@ -195,59 +193,6 @@ size = Vector2(640, 64)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fhwqp"]
 size = Vector2(64, 192)
 
-[sub_resource type="Resource" id="Resource_jygqt"]
-script = ExtResource("5_8c5ma")
-base_value = 200.0
-metadata/_custom_type_script = "uid://bencr8mnns7ut"
-
-[sub_resource type="Resource" id="Resource_ebsyv"]
-script = ExtResource("5_8c5ma")
-base_value = 1000.0
-metadata/_custom_type_script = "uid://bencr8mnns7ut"
-
-[sub_resource type="Resource" id="Resource_w2bir"]
-script = ExtResource("5_8c5ma")
-base_value = 0.2
-metadata/_custom_type_script = "uid://bencr8mnns7ut"
-
-[sub_resource type="Resource" id="Resource_nfmrh"]
-script = ExtResource("5_8c5ma")
-base_value = 250.0
-metadata/_custom_type_script = "uid://bencr8mnns7ut"
-
-[sub_resource type="Resource" id="Resource_us5gr"]
-resource_local_to_scene = true
-script = ExtResource("6_ltieu")
-speed = SubResource("Resource_nfmrh")
-reaction_time = SubResource("Resource_w2bir")
-max_travel_distance = SubResource("Resource_ebsyv")
-MAX_HP = SubResource("Resource_jygqt")
-metadata/_custom_type_script = "uid://cp4iog725gtuq"
-
-[sub_resource type="Resource" id="Resource_yn6en"]
-script = ExtResource("12_grcoo")
-weapon_stats = ExtResource("13_tq75k")
-metadata/_custom_type_script = "uid://bmr38t2grjqqv"
-
-[sub_resource type="Resource" id="Resource_eih0w"]
-script = ExtResource("5_8c5ma")
-base_value = 100.0
-metadata/_custom_type_script = "uid://bencr8mnns7ut"
-
-[sub_resource type="Resource" id="Resource_vtp3d"]
-resource_local_to_scene = true
-script = ExtResource("6_ltieu")
-speed = SubResource("Resource_nfmrh")
-reaction_time = SubResource("Resource_w2bir")
-max_travel_distance = SubResource("Resource_ebsyv")
-MAX_HP = SubResource("Resource_eih0w")
-metadata/_custom_type_script = "uid://cp4iog725gtuq"
-
-[sub_resource type="Resource" id="Resource_kw30y"]
-script = ExtResource("12_grcoo")
-weapon_stats = ExtResource("13_tq75k")
-metadata/_custom_type_script = "uid://bmr38t2grjqqv"
-
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_6uspl"]
 vertices = PackedVector2Array(1221.8516, 39.703125, 1193.2266, 45.140625, -310, 10, -310, -330, 1565.9297, -358.0625, 842, 266, 842, 54, 886, 118, 886, 502, 1402.3281, 162.54688, 1559.0703, 638, 1398.7969, 188.74219, 1169.9531, 62.890625, 958, 514.3594, 976.5469, 551.4531, 914, 530, 1207.2109, 562, 1218, 529.6172, 1365.0469, 238.34375, 1337.9063, 259.02344, 1218, 469.64063, 1219.4688, 294.79688, 1217.2578, 327.42188, 1206.1797, 446, 842, 442.39844, 73, 502, 118, 442.39844, 73, 110, 118, 370.39844, 1054.8984, 383.1797, 987.8594, 446, 1022.72656, 393.57813, 1008.65625, 394.03125, 914, 118, 958, 494.3828, 964.77344, 349.60938, 967.2578, 466.60156, 960.0703, 317.0078, 46, 530, 52.148438, 530, 51.953125, 532.03125, -814.14844, 638, 46, 110, -450.6797, 152.46094, -462.5, 124.10156, -457.39844, 186.34375, -474.7422, 214.35156, -438, -74, -630, -74, -630, -246, -394, -246, -394, 10, -438, 10, 458, 370.39844, 458, 266, 566, 266, 566, 330, 842, 370.39844, 650, 330, 650, 266, 714, 266, 118, 266, 374, 266, 374, 370.39844, 118, 182, 997.6406, 562, 896.02344, 530, -490.84375, 223.71875, -509.39844, 227.82031, -582.8203, 199.10938, -702.5625, 151.64844, 1197.4219, 231.90625, 1164.6563, 141.10156, 1174.9219, 218.70313, 981.3906, 379.89844, 1153.1563, 120.52344, 1052.6797, 259.25, -829.84375, -373.9297, -714, -330, -714, 10, 1158.7031, 79.421875, -473.57813, 115.40625, 966.3828, 299.4922, 977.97656, 284.40625, 118, 54, 758, 266, 758, 138, 714, 182, 118, 138, -504.92188, 102.71875, -665.1406, 41.140625, -687.78906, 64.71875, -711.2969, 127.078125)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32Array(5, 6, 7, 8), PackedInt32Array(9, 4, 10, 11), PackedInt32Array(2, 1, 12, 6), PackedInt32Array(13, 14, 15), PackedInt32Array(11, 10, 16, 17, 18), PackedInt32Array(19, 18, 17, 20), PackedInt32Array(21, 19, 20, 22), PackedInt32Array(22, 20, 23), PackedInt32Array(24, 8, 25, 26), PackedInt32Array(26, 25, 27, 28), PackedInt32Array(29, 22, 23, 30), PackedInt32Array(31, 29, 30), PackedInt32Array(32, 31, 30), PackedInt32Array(13, 15, 33, 34), PackedInt32Array(35, 36, 34, 33, 37), PackedInt32Array(4, 9, 0), PackedInt32Array(38, 39, 40, 41), PackedInt32Array(42, 38, 43, 44), PackedInt32Array(45, 43, 38), PackedInt32Array(46, 45, 38), PackedInt32Array(47, 48, 49, 50), PackedInt32Array(47, 50, 51, 52), PackedInt32Array(53, 54, 55, 56), PackedInt32Array(57, 53, 56, 58), PackedInt32Array(58, 59, 60, 57), PackedInt32Array(61, 62, 63, 28), PackedInt32Array(61, 28, 27), PackedInt32Array(64, 61, 27), PackedInt32Array(16, 10, 41, 65), PackedInt32Array(66, 15, 14, 65, 41, 40), PackedInt32Array(46, 38, 41, 67), PackedInt32Array(68, 67, 41), PackedInt32Array(69, 68, 41), PackedInt32Array(70, 69, 41), PackedInt32Array(19, 21, 71), PackedInt32Array(72, 19, 71, 73), PackedInt32Array(74, 32, 30, 36), PackedInt32Array(75, 72, 73, 76, 33), PackedInt32Array(77, 4, 3, 78), PackedInt32Array(41, 77, 78, 79), PackedInt32Array(80, 33, 7, 6, 12), PackedInt32Array(2, 42, 44, 81, 51), PackedInt32Array(35, 74, 36), PackedInt32Array(82, 37, 33), PackedInt32Array(83, 82, 33), PackedInt32Array(76, 83, 33), PackedInt32Array(80, 75, 33), PackedInt32Array(2, 6, 84), PackedInt32Array(8, 24, 57), PackedInt32Array(5, 8, 57), PackedInt32Array(85, 5, 57), PackedInt32Array(85, 57, 60), PackedInt32Array(86, 85, 60, 87), PackedInt32Array(88, 86, 87, 64), PackedInt32Array(88, 64, 27), PackedInt32Array(84, 88, 27), PackedInt32Array(2, 84, 27, 42), PackedInt32Array(52, 51, 81), PackedInt32Array(79, 52, 81, 89), PackedInt32Array(79, 89, 90), PackedInt32Array(79, 90, 91), PackedInt32Array(79, 91, 92), PackedInt32Array(41, 79, 92), PackedInt32Array(41, 92, 70)])
@@ -332,113 +277,6 @@ size = Vector2(576, 64)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cl7co"]
 size = Vector2(64, 128)
 
-[sub_resource type="Resource" id="Resource_76bep"]
-script = ExtResource("5_8c5ma")
-base_value = 250.0
-metadata/_custom_type_script = "uid://bencr8mnns7ut"
-
-[sub_resource type="Resource" id="Resource_stuxa"]
-script = ExtResource("5_8c5ma")
-base_value = 1000.0
-metadata/_custom_type_script = "uid://bencr8mnns7ut"
-
-[sub_resource type="Resource" id="Resource_42oyf"]
-script = ExtResource("5_8c5ma")
-base_value = 0.4
-metadata/_custom_type_script = "uid://bencr8mnns7ut"
-
-[sub_resource type="Resource" id="Resource_xq73l"]
-script = ExtResource("5_8c5ma")
-base_value = 225.0
-metadata/_custom_type_script = "uid://bencr8mnns7ut"
-
-[sub_resource type="Resource" id="Resource_58pdj"]
-resource_local_to_scene = true
-script = ExtResource("6_ltieu")
-speed = SubResource("Resource_xq73l")
-reaction_time = SubResource("Resource_42oyf")
-max_travel_distance = SubResource("Resource_stuxa")
-MAX_HP = SubResource("Resource_76bep")
-metadata/_custom_type_script = "uid://cp4iog725gtuq"
-
-[sub_resource type="Resource" id="Resource_ir5aq"]
-script = ExtResource("12_grcoo")
-weapon_stats = ExtResource("13_tq75k")
-metadata/_custom_type_script = "uid://bmr38t2grjqqv"
-
-[sub_resource type="Resource" id="Resource_8ewtv"]
-script = ExtResource("5_8c5ma")
-base_value = 100.0
-metadata/_custom_type_script = "uid://bencr8mnns7ut"
-
-[sub_resource type="Resource" id="Resource_mjd8r"]
-script = ExtResource("5_8c5ma")
-base_value = 500.0
-metadata/_custom_type_script = "uid://bencr8mnns7ut"
-
-[sub_resource type="Resource" id="Resource_ber0r"]
-script = ExtResource("5_8c5ma")
-base_value = 0.6
-metadata/_custom_type_script = "uid://bencr8mnns7ut"
-
-[sub_resource type="Resource" id="Resource_6rxou"]
-script = ExtResource("5_8c5ma")
-base_value = 250.0
-metadata/_custom_type_script = "uid://bencr8mnns7ut"
-
-[sub_resource type="Resource" id="Resource_h3xea"]
-script = ExtResource("6_ltieu")
-speed = SubResource("Resource_6rxou")
-reaction_time = SubResource("Resource_ber0r")
-max_travel_distance = SubResource("Resource_mjd8r")
-MAX_HP = SubResource("Resource_8ewtv")
-metadata/_custom_type_script = "uid://cp4iog725gtuq"
-
-[sub_resource type="Resource" id="Resource_sx7x6"]
-script = ExtResource("5_8c5ma")
-base_value = 10.0
-metadata/_custom_type_script = "uid://bencr8mnns7ut"
-
-[sub_resource type="Resource" id="Resource_jre2x"]
-script = ExtResource("5_8c5ma")
-base_value = 15.0
-metadata/_custom_type_script = "uid://bencr8mnns7ut"
-
-[sub_resource type="Resource" id="Resource_olc07"]
-script = ExtResource("5_8c5ma")
-base_value = 2.0
-metadata/_custom_type_script = "uid://bencr8mnns7ut"
-
-[sub_resource type="Resource" id="Resource_sr62i"]
-script = ExtResource("5_8c5ma")
-base_value = 65.0
-metadata/_custom_type_script = "uid://bencr8mnns7ut"
-
-[sub_resource type="Resource" id="Resource_3n8jy"]
-script = ExtResource("5_8c5ma")
-base_value = 10.0
-metadata/_custom_type_script = "uid://bencr8mnns7ut"
-
-[sub_resource type="Resource" id="Resource_tg3ak"]
-script = ExtResource("5_8c5ma")
-base_value = 2.0
-metadata/_custom_type_script = "uid://bencr8mnns7ut"
-
-[sub_resource type="Resource" id="Resource_fqn4b"]
-script = ExtResource("40_gw302")
-current_ammo = SubResource("Resource_sx7x6")
-max_ammo_capacity = SubResource("Resource_3n8jy")
-fire_rate = SubResource("Resource_olc07")
-damage = SubResource("Resource_jre2x")
-hit_chance = SubResource("Resource_sr62i")
-reload_time = SubResource("Resource_tg3ak")
-metadata/_custom_type_script = "uid://dh5netn8c2b4e"
-
-[sub_resource type="Resource" id="Resource_mem7m"]
-script = ExtResource("17_513u8")
-weapon_stats = SubResource("Resource_fqn4b")
-metadata/_custom_type_script = "uid://bqnc1ha42r85"
-
 [node name="Node2D" type="Node2D" unique_id=1609049363 groups=["Level"]]
 script = ExtResource("1_4ms0o")
 
@@ -481,23 +319,6 @@ collision_layer = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3" unique_id=357753609]
 shape = SubResource("RectangleShape2D_fhwqp")
-
-[node name="Player" parent="." unique_id=1108589071 instance=ExtResource("4_10mtb")]
-position = Vector2(0, 72.00001)
-rotation = 7.9307876
-player_name = "Luke"
-player_avatar = ExtResource("22_w2bir")
-current_engagement_rule = 2
-soldier_stats = SubResource("Resource_us5gr")
-weapons = Array[ExtResource("6_mykrp")]([SubResource("Resource_yn6en")])
-
-[node name="Player2" parent="." unique_id=1802276897 instance=ExtResource("4_10mtb")]
-position = Vector2(1320, 368)
-player_name = "Valerie"
-player_avatar = ExtResource("21_ebsyv")
-current_engagement_rule = 2
-soldier_stats = SubResource("Resource_vtp3d")
-weapons = Array[ExtResource("6_mykrp")]([SubResource("Resource_kw30y")])
 
 [node name="Marker2D" type="Marker2D" parent="." unique_id=245030149 groups=["a_star_point"]]
 position = Vector2(160, 160)
@@ -639,14 +460,8 @@ text = "0:0:0"
 
 [node name="PauseMenu" parent="CanvasLayer" unique_id=487446487 instance=ExtResource("11_ir5aq")]
 
-[node name="Player4" parent="." unique_id=575771634 instance=ExtResource("4_10mtb")]
-position = Vector2(711, 334.99994)
-rotation = 0.7831249
-player_name = "Keith"
-player_avatar = ExtResource("25_q2r4x")
-current_engagement_rule = 2
-soldier_stats = SubResource("Resource_58pdj")
-weapons = Array[ExtResource("6_mykrp")]([SubResource("Resource_ir5aq")])
+[node name="EndGameMenu" parent="CanvasLayer" unique_id=705450075 instance=ExtResource("26_us5gr")]
+visible = false
 
 [node name="Car" parent="." unique_id=75836846 instance=ExtResource("28_3y4ie")]
 position = Vector2(1088, 312)
@@ -701,13 +516,17 @@ offset_top = -8.0
 offset_right = -416.0
 offset_bottom = -8.0
 
-[node name="MedicPlayer" parent="." unique_id=1546686257 instance=ExtResource("39_gw302")]
-z_index = 0
-position = Vector2(824, 16)
-player_name = "Nate"
-current_engagement_rule = 1
-soldier_stats = SubResource("Resource_h3xea")
-weapons = Array[ExtResource("6_mykrp")]([SubResource("Resource_mem7m")])
-
 [node name="Camera_Reset_Position_Marker" type="Marker2D" parent="." unique_id=1105308391]
 position = Vector2(576, 320)
+
+[node name="MedicPlayer" parent="." unique_id=1108589071 instance=ExtResource("30_1q75p")]
+position = Vector2(872, 64)
+
+[node name="Valerie_Regular" parent="." unique_id=495495978 instance=ExtResource("31_elm60")]
+position = Vector2(-56, 96)
+
+[node name="Luke_Regular" parent="." unique_id=589206871 instance=ExtResource("32_ir5aq")]
+position = Vector2(728, 320)
+
+[node name="Keith_Regular" parent="." unique_id=2037414245 instance=ExtResource("33_us5gr")]
+position = Vector2(208, 160)

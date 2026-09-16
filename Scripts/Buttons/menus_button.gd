@@ -5,6 +5,7 @@ signal transition_to_main_screen()
 signal transition_to_options_screen()
 signal transition_to_level_selection_screen()
 signal resume_game()
+signal retry_level()
 
 @onready var appear_effect_animation_player: AnimationPlayer = $Appear_Effect_AnimationPlayer
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
@@ -58,3 +59,10 @@ func _on_texture_rect_gui_input(event: InputEvent) -> void:
 					transition_to_main_screen.emit()
 				"RESUME":
 					resume_game.emit()
+				"RETRY":
+					retry_level.emit()
+
+func hide_button():
+	visible = false
+func show_button():
+	visible = true

@@ -39,6 +39,7 @@ func check_can_shoot_target():
 	return current_weapon.enemy_to_shoot and not current_weapon.enemy_to_shoot.is_killed
 
 func on_target_killed(enemy_killed: Soldier, killed_by: Soldier):
+	AudioManager.play_kill_sound()
 	enemy_killed.is_killed = true
 	killed_by.vision_polygon.bullet_hit_point = null
 	killed_by.when_escaped()

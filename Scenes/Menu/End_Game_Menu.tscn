@@ -1,0 +1,69 @@
+[gd_scene format=3 uid="uid://xsp0v8p2pc4e"]
+
+[ext_resource type="Shader" uid="uid://bikarqtjl68fg" path="res://Shaders/Blur.gdshader" id="1_etgea"]
+[ext_resource type="Script" uid="uid://cbdcox33fwvn4" path="res://Scenes/Menu/end_game_menu.gd" id="1_w8sc4"]
+[ext_resource type="Texture2D" uid="uid://cyexu3fm2aq3s" path="res://Sprites/HUD/background.png" id="2_g6cqx"]
+[ext_resource type="PackedScene" uid="uid://b6pfugr3kdl2v" path="res://Scenes/Buttons/Menus_Button.tscn" id="3_xqvgb"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jrg6d"]
+shader = ExtResource("1_etgea")
+shader_parameter/blur_amount = 2.50000011875
+
+[node name="EndGameMenu" type="Node2D" unique_id=705450075]
+process_mode = 2
+script = ExtResource("1_w8sc4")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1369424324]
+process_mode = 2
+material = SubResource("ShaderMaterial_jrg6d")
+offset_left = -40.0
+offset_top = -24.0
+offset_right = 1184.0
+offset_bottom = 672.0
+
+[node name="Level_Stats_Background" type="TextureRect" parent="." unique_id=41847658]
+offset_left = 320.0
+offset_top = 96.0
+offset_right = 896.0
+offset_bottom = 320.0
+texture = ExtResource("2_g6cqx")
+expand_mode = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Level_Stats_Background" unique_id=775908413]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 72.0
+offset_right = 256.0
+offset_bottom = 238.0
+theme_override_constants/separation = 10
+
+[node name="Total_Time_Label" type="Label" parent="Level_Stats_Background/VBoxContainer" unique_id=734591780]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Total time: "
+
+[node name="Enemies_Killed_Label" type="Label" parent="Level_Stats_Background/VBoxContainer" unique_id=1066850606]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Enemies killed: "
+
+[node name="Ally_Soldiers_Killed_Label" type="Label" parent="Level_Stats_Background/VBoxContainer" unique_id=933255550]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Ally soldiers killed: "
+
+[node name="Level_Completed_Failed_Label" type="Label" parent="Level_Stats_Background" unique_id=1809886819]
+layout_mode = 0
+offset_right = 576.0
+offset_bottom = 42.0
+theme_override_font_sizes/font_size = 48
+text = "LEVEL COMPLETED"
+horizontal_alignment = 1
+
+[node name="Level_Selection_Button" parent="." unique_id=900227919 instance=ExtResource("3_xqvgb")]
+position = Vector2(320, 384)
+button_text = "LEAVE"
+
+[node name="Retry_Button" parent="." unique_id=932874124 instance=ExtResource("3_xqvgb")]
+position = Vector2(640, 384)
+button_text = "RETRY"
