@@ -54,6 +54,7 @@ metadata/_custom_type_script = "uid://bencr8mnns7ut"
 [sub_resource type="Resource" id="Resource_rdb40"]
 script = ExtResource("3_ag2js")
 base_value = 95.0
+max_value = 100.0
 metadata/_custom_type_script = "uid://bencr8mnns7ut"
 
 [sub_resource type="Resource" id="Resource_e4o8c"]
@@ -84,6 +85,5 @@ metadata/_custom_type_script = "uid://bmr38t2grjqqv"
 [node name="Luke_Regular" unique_id=1108589071 instance=ExtResource("1_muhm5")]
 player_name = "Luke"
 player_avatar = ExtResource("2_3estw")
-current_engagement_rule = 2
 soldier_stats = SubResource("Resource_4v3j1")
 weapons = Array[ExtResource("5_7g5cs")]([SubResource("Resource_12w32")])

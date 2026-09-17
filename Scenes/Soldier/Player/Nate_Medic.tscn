@@ -53,6 +53,7 @@ metadata/_custom_type_script = "uid://bencr8mnns7ut"
 [sub_resource type="Resource" id="Resource_tkd3y"]
 script = ExtResource("2_742hb")
 base_value = 65.0
+max_value = 100.0
 metadata/_custom_type_script = "uid://bencr8mnns7ut"
 
 [sub_resource type="Resource" id="Resource_svm7k"]
@@ -82,6 +83,5 @@ metadata/_custom_type_script = "uid://bqnc1ha42r85"
 
 [node name="MedicPlayer" unique_id=1108589071 instance=ExtResource("1_gh3fj")]
 player_name = "Nate"
-current_engagement_rule = 2
 soldier_stats = SubResource("Resource_fomf5")
 weapons = Array[ExtResource("4_2oome")]([SubResource("Resource_ppie2")])

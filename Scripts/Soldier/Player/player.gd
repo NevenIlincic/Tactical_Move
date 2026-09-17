@@ -152,7 +152,6 @@ func set_player_path(new_path: Array[Vector2]):
 	player_path = new_path
 
 func do_when_shot_at():
-	print("OVDE")
 	if engagement_strategy is IgnoreEnemyStrategy:
 		engagement_strategy = StopShootFollowingStrategy.new()
 		current_engagement_rule = EngagementRules.STOP_AND_SHOT_FOLLOWING

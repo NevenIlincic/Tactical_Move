@@ -10,6 +10,8 @@ class_name EndGameMenu extends Node2D
 @onready var level_selection_button: NavigationButton = $Level_Selection_Button
 @onready var retry_button: NavigationButton = $Retry_Button
 
+var finished_level: Level
+
 func _ready() -> void:
 	connect_to_signals()
 
@@ -18,12 +20,12 @@ func connect_to_signals():
 	retry_button.retry_level.connect(_on_retry_button_pressed)
 	
 func show_end_game_menu(level: Level):
+	finished_level = level
 	get_tree().paused = true
 	visible = true
 	total_time_label.text = str("Total time: ", level.total_passed_minutes, "m ", level.total_passed_time_seconds, "s ", level.total_passed_time_millis, "ms" )
 	enemies_killed_label.text = str("Enemies killed: ", level.get_num_killed_enemies(), "/", level.initial_num_enemies)
 	ally_soldiers_killed_label.text = str("Ally soldiers killed: ", level.get_num_killed_players(), "/", level.initial_num_players)
-
 func hide_end_game_menu():
 	get_tree().paused = false
 	visible = false
@@ -41,9 +43,11 @@ func on_level_completed(level: Level):
 	level_selection_button.appear_effect_animation_player.play("appear_animation")
 	
 func _on_level_selection_button_pressed():
+	#finished_level.queue_free()
 	get_tree().paused = false
 	get_tree().change_scene_to_file("res://Scenes/Menu/Main_Menu.tscn")
 
 func _on_retry_button_pressed():
+	#finished_level.queue_free()
 	get_tree().paused = false
 	get_tree().reload_current_scene()

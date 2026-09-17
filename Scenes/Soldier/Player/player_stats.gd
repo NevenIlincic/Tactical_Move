@@ -83,7 +83,7 @@ func update_stats_labels(player: Player):
 		max_distance_label.text = str(player.soldier_stats.max_travel_distance.get_value())
 		fire_rate_label.text = str(player.current_weapon.weapon_stats.fire_rate.get_value(), "rps")
 		damage_label.text = str(player.current_weapon.weapon_stats.damage.get_value())
-		hit_chance_label.text = str(player.current_weapon.weapon_stats.hit_chance.get_value(), "%")
+		hit_chance_label.text = str(player.current_weapon.weapon_stats.hit_chance.get_value(), "/", int(player.current_weapon.weapon_stats.hit_chance.max_value))
 
 func set_weapon_sprite(weapon: Weapon):
 	if weapon is Pistol:
