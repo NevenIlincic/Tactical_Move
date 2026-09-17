@@ -1,4 +1,4 @@
-extends Node2D
+class_name TabButton extends Node2D
 
 @onready var input_label: Label = $Input_Label
 @onready var inputs_button: TextureButton = $Inputs_Button

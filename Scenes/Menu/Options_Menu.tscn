@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://b1mx4xphkl7cw" path="res://Scenes/Menu/option_tabs.gd" id="4_k0apt"]
 [ext_resource type="Script" uid="uid://b4wpvtdbstpya" path="res://Scripts/Buttons/tab_buttons.gd" id="5_0sjke"]
 [ext_resource type="PackedScene" uid="uid://b6pfugr3kdl2v" path="res://Scenes/Buttons/Menus_Button.tscn" id="5_ehegv"]
+[ext_resource type="Script" uid="uid://bp3qo6kc4jx74" path="res://Scenes/Menu/audio_slider.gd" id="8_n6evs"]
 [ext_resource type="Texture2D" uid="uid://cyexu3fm2aq3s" path="res://Sprites/HUD/background.png" id="11_nkoq7"]
 [ext_resource type="Texture2D" uid="uid://jmhohtbrj7dy" path="res://Sprites/Button/button.png" id="12_av6u3"]
 [ext_resource type="PackedScene" uid="uid://iah5eecblfbi" path="res://Scenes/Buttons/Input_Button.tscn" id="13_ktebc"]
@@ -12,7 +13,7 @@
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Tabs/Inputs_Tab:modulate")
+tracks/0/path = NodePath("Tabs/Inputs_Tab_Button:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -24,7 +25,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Tabs/Audio_Tab:modulate")
+tracks/1/path = NodePath("Tabs/Audio_Tab_Button:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -36,7 +37,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Tabs/Video_Tab:modulate")
+tracks/2/path = NodePath("Tabs/Video_Tab_Button:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -99,7 +100,7 @@ resource_name = "Tabs_Appear_Animation"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Tabs/Inputs_Tab:modulate")
+tracks/0/path = NodePath("Tabs/Inputs_Tab_Button:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -111,7 +112,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Tabs/Audio_Tab:modulate")
+tracks/1/path = NodePath("Tabs/Audio_Tab_Button:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -123,7 +124,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Tabs/Video_Tab:modulate")
+tracks/2/path = NodePath("Tabs/Video_Tab_Button:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -192,6 +193,30 @@ _data = {
 [sub_resource type="ButtonGroup" id="ButtonGroup_0sjke"]
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_k0apt"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_k0apt"]
+texture = ExtResource("11_nkoq7")
+expand_margin_left = 250.0
+expand_margin_top = 25.0
+expand_margin_bottom = 25.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wekyc"]
+bg_color = Color(0.80784315, 0.41960785, 0.14509805, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_top = 20.0
+expand_margin_bottom = 20.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o75mi"]
+bg_color = Color(0.73333335, 0.41960785, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_top = 20.0
+expand_margin_bottom = 20.0
 
 [node name="OptionsMenu" type="Node2D" unique_id=1686594788]
 script = ExtResource("1_pobh7")
@@ -678,11 +703,11 @@ layout_mode = 2
 [node name="Tabs" type="Node2D" parent="." unique_id=1090724165]
 script = ExtResource("4_k0apt")
 
-[node name="Inputs_Tab" type="Node2D" parent="Tabs" unique_id=1909949166]
+[node name="Inputs_Tab_Button" type="Node2D" parent="Tabs" unique_id=1909949166]
 modulate = Color(1, 1, 1, 0)
 script = ExtResource("5_0sjke")
 
-[node name="Inputs_Button" type="TextureButton" parent="Tabs/Inputs_Tab" unique_id=1811131419]
+[node name="Inputs_Button" type="TextureButton" parent="Tabs/Inputs_Tab_Button" unique_id=1811131419]
 offset_left = 24.0
 offset_top = 24.000011
 offset_right = 280.0
@@ -693,7 +718,7 @@ button_pressed = true
 button_group = SubResource("ButtonGroup_ehegv")
 texture_normal = ExtResource("12_av6u3")
 
-[node name="Input_Label" type="Label" parent="Tabs/Inputs_Tab" unique_id=715021113]
+[node name="Input_Label" type="Label" parent="Tabs/Inputs_Tab_Button" unique_id=715021113]
 offset_left = 28.689651
 offset_top = 28.992546
 offset_right = 220.68964
@@ -704,12 +729,12 @@ text = "INPUTS"
 horizontal_alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="Audio_Tab" type="Node2D" parent="Tabs" unique_id=2106812418]
+[node name="Audio_Tab_Button" type="Node2D" parent="Tabs" unique_id=2106812418]
 modulate = Color(1, 1, 1, 0)
 position = Vector2(232, 0)
 script = ExtResource("5_0sjke")
 
-[node name="Inputs_Button" type="TextureButton" parent="Tabs/Audio_Tab" unique_id=1003803770]
+[node name="Inputs_Button" type="TextureButton" parent="Tabs/Audio_Tab_Button" unique_id=1003803770]
 offset_left = 24.0
 offset_top = 24.000011
 offset_right = 280.0
@@ -719,7 +744,7 @@ toggle_mode = true
 button_group = SubResource("ButtonGroup_0sjke")
 texture_normal = ExtResource("12_av6u3")
 
-[node name="Input_Label" type="Label" parent="Tabs/Audio_Tab" unique_id=1703855915]
+[node name="Input_Label" type="Label" parent="Tabs/Audio_Tab_Button" unique_id=1703855915]
 offset_left = 28.689651
 offset_top = 28.992546
 offset_right = 220.68964
@@ -730,12 +755,12 @@ text = "AUDIO"
 horizontal_alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="Video_Tab" type="Node2D" parent="Tabs" unique_id=981360680]
+[node name="Video_Tab_Button" type="Node2D" parent="Tabs" unique_id=981360680]
 modulate = Color(1, 1, 1, 0)
 position = Vector2(480, 0)
 script = ExtResource("5_0sjke")
 
-[node name="Inputs_Button" type="TextureButton" parent="Tabs/Video_Tab" unique_id=328089402]
+[node name="Inputs_Button" type="TextureButton" parent="Tabs/Video_Tab_Button" unique_id=328089402]
 offset_left = 24.0
 offset_top = 24.000011
 offset_right = 280.0
@@ -745,7 +770,7 @@ toggle_mode = true
 button_group = SubResource("ButtonGroup_k0apt")
 texture_normal = ExtResource("12_av6u3")
 
-[node name="Input_Label" type="Label" parent="Tabs/Video_Tab" unique_id=602713770]
+[node name="Input_Label" type="Label" parent="Tabs/Video_Tab_Button" unique_id=602713770]
 offset_left = 28.689651
 offset_top = 28.992546
 offset_right = 220.68964
@@ -806,6 +831,173 @@ metadata/_edit_use_anchors_ = true
 position = Vector2(896, 512)
 button_text = "BACK"
 
-[connection signal="toggled" from="Tabs/Inputs_Tab/Inputs_Button" to="Tabs/Inputs_Tab" method="_on_inputs_button_toggled"]
-[connection signal="toggled" from="Tabs/Audio_Tab/Inputs_Button" to="Tabs/Audio_Tab" method="_on_inputs_button_toggled"]
-[connection signal="toggled" from="Tabs/Video_Tab/Inputs_Button" to="Tabs/Video_Tab" method="_on_inputs_button_toggled"]
+[node name="Audio_Menu" type="Node2D" parent="." unique_id=1589735054]
+visible = false
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Audio_Menu" unique_id=279637512]
+offset_left = 24.0
+offset_top = 128.0
+offset_right = 512.0
+offset_bottom = 480.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Audio_Menu/ScrollContainer" unique_id=1869702930]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+offset_transform_enabled = true
+theme_override_constants/separation = 75
+
+[node name="Control" type="Control" parent="Audio_Menu/ScrollContainer/VBoxContainer" unique_id=1950715617]
+layout_mode = 2
+script = ExtResource("8_n6evs")
+bus_name = "Master"
+
+[node name="Slider" type="HSlider" parent="Audio_Menu/ScrollContainer/VBoxContainer/Control" unique_id=408694751]
+texture_filter = 1
+texture_repeat = 1
+layout_mode = 0
+offset_left = 248.0
+offset_right = 456.0
+offset_bottom = 56.0
+theme_override_styles/slider = SubResource("StyleBoxTexture_k0apt")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_wekyc")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_o75mi")
+value = 100.0
+
+[node name="Slider_Value_Label" type="Label" parent="Audio_Menu/ScrollContainer/VBoxContainer/Control" unique_id=1646728598]
+layout_mode = 0
+offset_left = 248.0
+offset_right = 456.0
+offset_bottom = 56.0
+theme_override_font_sizes/font_size = 24
+text = "100%"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Audio_Setting_Label" type="Label" parent="Audio_Menu/ScrollContainer/VBoxContainer/Control" unique_id=2004781668]
+layout_mode = 0
+offset_right = 240.0
+offset_bottom = 56.0
+text = "MASTER"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Control2" type="Control" parent="Audio_Menu/ScrollContainer/VBoxContainer" unique_id=864176122]
+layout_mode = 2
+script = ExtResource("8_n6evs")
+bus_name = "Background_Music"
+
+[node name="Slider" type="HSlider" parent="Audio_Menu/ScrollContainer/VBoxContainer/Control2" unique_id=532796629]
+texture_filter = 1
+texture_repeat = 1
+layout_mode = 0
+offset_left = 248.0
+offset_right = 456.0
+offset_bottom = 56.0
+theme_override_styles/slider = SubResource("StyleBoxTexture_k0apt")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_wekyc")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_o75mi")
+value = 100.0
+
+[node name="Slider_Value_Label" type="Label" parent="Audio_Menu/ScrollContainer/VBoxContainer/Control2" unique_id=956339984]
+layout_mode = 0
+offset_left = 248.0
+offset_right = 456.0
+offset_bottom = 56.0
+theme_override_font_sizes/font_size = 24
+text = "100%"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Audio_Setting_Label" type="Label" parent="Audio_Menu/ScrollContainer/VBoxContainer/Control2" unique_id=1540203158]
+layout_mode = 0
+offset_right = 240.0
+offset_bottom = 56.0
+text = "BACKGROUND MUSIC"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Control3" type="Control" parent="Audio_Menu/ScrollContainer/VBoxContainer" unique_id=1759794195]
+layout_mode = 2
+script = ExtResource("8_n6evs")
+bus_name = "Effects"
+
+[node name="Slider" type="HSlider" parent="Audio_Menu/ScrollContainer/VBoxContainer/Control3" unique_id=1814867112]
+texture_filter = 1
+texture_repeat = 1
+layout_mode = 0
+offset_left = 248.0
+offset_right = 456.0
+offset_bottom = 56.0
+theme_override_styles/slider = SubResource("StyleBoxTexture_k0apt")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_wekyc")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_o75mi")
+value = 100.0
+
+[node name="Slider_Value_Label" type="Label" parent="Audio_Menu/ScrollContainer/VBoxContainer/Control3" unique_id=454941698]
+layout_mode = 0
+offset_left = 248.0
+offset_right = 456.0
+offset_bottom = 56.0
+theme_override_font_sizes/font_size = 24
+text = "100%"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Audio_Setting_Label" type="Label" parent="Audio_Menu/ScrollContainer/VBoxContainer/Control3" unique_id=1453616184]
+layout_mode = 0
+offset_right = 240.0
+offset_bottom = 56.0
+text = "EFFECTS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Control4" type="Control" parent="Audio_Menu/ScrollContainer/VBoxContainer" unique_id=1888628923]
+layout_mode = 2
+script = ExtResource("8_n6evs")
+bus_name = "HUD_Effects"
+
+[node name="Slider" type="HSlider" parent="Audio_Menu/ScrollContainer/VBoxContainer/Control4" unique_id=1997127214]
+texture_filter = 1
+texture_repeat = 1
+layout_mode = 0
+offset_left = 248.0
+offset_right = 456.0
+offset_bottom = 56.0
+theme_override_styles/slider = SubResource("StyleBoxTexture_k0apt")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_wekyc")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_o75mi")
+value = 100.0
+
+[node name="Slider_Value_Label" type="Label" parent="Audio_Menu/ScrollContainer/VBoxContainer/Control4" unique_id=760959179]
+layout_mode = 0
+offset_left = 248.0
+offset_right = 456.0
+offset_bottom = 56.0
+theme_override_font_sizes/font_size = 24
+text = "100%"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Audio_Setting_Label" type="Label" parent="Audio_Menu/ScrollContainer/VBoxContainer/Control4" unique_id=1238077117]
+layout_mode = 0
+offset_right = 240.0
+offset_bottom = 56.0
+text = "HUD EFFECTS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Video_Menu" type="Node2D" parent="." unique_id=809832490]
+visible = false
+
+[node name="Label" type="Label" parent="Video_Menu" unique_id=1774109662]
+offset_left = 264.0
+offset_top = 280.0
+offset_right = 422.0
+offset_bottom = 301.0
+theme_override_font_sizes/font_size = 32
+text = "YET TO BE IMPLEMENTED"
+
+[connection signal="toggled" from="Tabs/Inputs_Tab_Button/Inputs_Button" to="Tabs/Inputs_Tab_Button" method="_on_inputs_button_toggled"]
+[connection signal="toggled" from="Tabs/Audio_Tab_Button/Inputs_Button" to="Tabs/Audio_Tab_Button" method="_on_inputs_button_toggled"]
+[connection signal="toggled" from="Tabs/Video_Tab_Button/Inputs_Button" to="Tabs/Video_Tab_Button" method="_on_inputs_button_toggled"]

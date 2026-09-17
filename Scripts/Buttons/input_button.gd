@@ -40,9 +40,7 @@ func get_action_bind_key():
 					text = "MMB"
 			break
 
-
 func _on_pressed() -> void:
-
 	if input_remap_manager.check_is_other_button_already_pressed():
 		return
 	text = "Waiting..."
