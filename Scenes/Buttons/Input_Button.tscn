@@ -6,7 +6,6 @@
 offset_right = 72.0
 offset_bottom = 56.0
 focus_mode = 0
-text = "RMB"
 script = ExtResource("1_5sqc0")
 
 [connection signal="pressed" from="." to="." method="_on_pressed"]

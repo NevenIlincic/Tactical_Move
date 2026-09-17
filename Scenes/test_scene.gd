@@ -14,9 +14,17 @@ var players_set_for_move: Dictionary = {}
 var players_set_for_rotation: Dictionary = {}
 var num_finished_player_turns: int = 0
 
+var initial_num_players: int;
+var players_killed: int = 0
+var initial_num_enemies: int;
+var enemies_killed: int = 0
+
 var current_state: State
 
 var cover_points: Array
+
+#BOOLEANS
+var is_level_completed: bool = false
 
 #LABELS
 @onready var passed_time_label: Label = $CanvasLayer/Timer/Passed_Time_Label
@@ -29,6 +37,7 @@ var total_passed_minutes: int = 0
 @onready var upgrade_menu: UpgradeMenu = $CanvasLayer/UpgradeMenu
 @onready var radial_menu: PopupMenu = $CanvasLayer/RadialMenu
 @onready var pause_menu: PauseMenu = $CanvasLayer/PauseMenu
+@onready var end_game_menu: EndGameMenu = $CanvasLayer/EndGameMenu
 
 #FOR CONFIRMATION DIALOG
 @onready var confirmation_dialog: ConfirmDialog = $CanvasLayer/ConfirmationDialog
@@ -37,6 +46,8 @@ var current_confirm_callback: Callable
 #OTHER NODES
 @onready var camera_reset_position_marker: Marker2D = $Camera_Reset_Position_Marker
 @onready var camera: Camera2D = $Camera2D
+
+
 
 func _ready() -> void:
 	for player in get_tree().get_nodes_in_group("Player"):
@@ -50,8 +61,12 @@ func _ready() -> void:
 		players_set_for_move,
 		players_set_for_rotation
 		])
+	
+	initial_num_players = get_alive_players().size()
+	initial_num_enemies = get_alive_enemies().size()
 	AudioManager.set_current_level(self)
-
+	
+	
 func _physics_process(delta: float) -> void:
 	#print(Engine.get_frames_per_second())
 	VisionManager.handle_enemy_visibility(delta)
@@ -71,7 +86,10 @@ func get_alive_players() -> Dictionary:
 	return alive_players
 	
 func get_alive_enemies() -> Dictionary:
-	return enemies
+	var alive_enemies: Dictionary = {}
+	for enemy: Enemy in get_tree().get_nodes_in_group("enemy_node"):
+		alive_enemies[enemy.soldier_id] = enemy
+	return alive_enemies
 
 func get_alive_soldiers() -> Dictionary:
 	var alive_soldiers: Dictionary = {}
@@ -101,7 +119,7 @@ var start_tile: Vector2i = Vector2i(0,0)
 var is_drawing: bool = false
 
 func _unhandled_input(event: InputEvent) -> void:
-	if Input.is_action_just_pressed("pause_menu"):
+	if Input.is_action_just_pressed("pause_menu") and not is_level_completed:
 		pause_menu.show_pause_menu()
 	if Input.is_action_just_pressed("reset_camera_position"):
 		camera.global_position = camera_reset_position_marker.global_position
@@ -137,3 +155,23 @@ func _on_action_confirmed():
 func _on_action_canceled():
 	current_confirm_callback = Callable()
 	confirmation_dialog.visible = false
+
+func level_completed():
+	is_level_completed = true
+	await start_end_game_timer()
+	end_game_menu.on_level_completed(self)
+func level_failed():
+	is_level_completed = true
+	await start_end_game_timer()
+	end_game_menu.on_level_failed(self)
+
+func start_end_game_timer():
+	await get_tree().create_timer(1.0).timeout
+
+func get_total_time_label() -> Label:
+	return passed_time_label
+
+func get_num_killed_players() -> int:
+	return players_killed
+func get_num_killed_enemies() -> int:
+	return enemies_killed

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://d2irtjn3gf4a1"]
 
-[ext_resource type="Script" uid="uid://h4natj2o6s8x" path="res://Scenes/Menu/level_selection_menu.gd" id="1_8cq7g"]
+[ext_resource type="Script" uid="uid://h4natj2o6s8x" path="res://Scripts/Menus/level_selection_menu.gd" id="1_8cq7g"]
 [ext_resource type="PackedScene" uid="uid://b6pfugr3kdl2v" path="res://Scenes/Buttons/Menus_Button.tscn" id="1_yoamj"]
 [ext_resource type="Texture2D" uid="uid://dju38dowp0jfy" path="res://Sprites/Level_Covers/House.png" id="2_w6mgx"]
 [ext_resource type="PackedScene" uid="uid://dx3kt52m4smv1" path="res://Scenes/Buttons/Level_Selection_Button.tscn" id="3_yqc5b"]
