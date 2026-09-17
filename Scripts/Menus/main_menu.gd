@@ -26,7 +26,7 @@ func _ready() -> void:
 	options_menu.visible = false
 	level_selection_button.appear_effect_animation_player.play("appear_animation")
 	options_button.appear_effect_animation_player.play("appear_animation")
-
+	AudioManager.play_background_music(AudioManager.BACKGROUND_MUSIC_MENU_1)
 
 func connect_to_signals():
 	level_selection_button.transition_to_level_selection_screen.connect(_on_level_selection_button_pressed)

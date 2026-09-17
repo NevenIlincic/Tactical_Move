@@ -65,6 +65,7 @@ func _ready() -> void:
 	initial_num_players = get_alive_players().size()
 	initial_num_enemies = get_alive_enemies().size()
 	AudioManager.set_current_level(self)
+	AudioManager.play_background_music(AudioManager.BACKGROUND_MUSIC_LEVEL)
 	
 	
 func _physics_process(delta: float) -> void:

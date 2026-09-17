@@ -108,16 +108,17 @@ func _on_stop_enemy_actions(enemy_soldier: Soldier):
 		soldiers_in_action.erase(enemy_soldier)
 
 func check_is_level_completed(enemy: Soldier):
-	if enemy is Player:
-		level.players_killed += 1
-		initial_num_alive_players -= 1
-		if initial_num_alive_players <= 0:
-			level.level_failed()
+	if enemy is Player and level != null:
+			level.players_killed += 1
+			initial_num_alive_players -= 1
+			if initial_num_alive_players <= 0:
+				level.level_failed()
 	else:
-		level.enemies_killed += 1
-		initial_num_alive_enemies -= 1
-		if initial_num_alive_enemies <= 0:
-			level.level_completed()
+		if level != null:
+			level.enemies_killed += 1
+			initial_num_alive_enemies -= 1
+			if initial_num_alive_enemies <= 0:
+				level.level_completed()
 
 
 func disconnect_signals():

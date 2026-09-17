@@ -46,7 +46,7 @@ func _on_texture_rect_gui_input(event: InputEvent) -> void:
 			AudioManager.play_upgrade_sound()
 			match button_text:
 				"House":
-					get_tree().change_scene_to_file("res://Scenes/Test_Scene.tscn")
+					get_tree().change_scene_to_file("res://Scenes/Levels/House.tscn")
 				"Parking Lot":
 					get_tree().change_scene_to_file("res://Scenes/Levels/Parking_Lot.tscn")
 				#"START":
