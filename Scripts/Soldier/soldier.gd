@@ -157,7 +157,7 @@ func reset_path():
 
 func when_been_shoot_at(enemy: Soldier):
 	if not enemy_to_shoot:
-		engagement_strategy = StopShootFollowingStrategy.new()
+		do_when_shot_at()			
 		on_engagement_action(enemy)
 		var tween: Tween = create_tween()
 		do_soldier_rotation(tween)
@@ -322,3 +322,4 @@ func can_soldier_move(): pass
 func do_before_movement(): pass
 func do_after_movement(): pass
 func on_soldier_killed(): pass
+func do_when_shot_at(): pass

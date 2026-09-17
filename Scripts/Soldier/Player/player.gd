@@ -42,7 +42,7 @@ enum EngagementRules {
 	MOVE_AND_SHOT_FOLLOWING # Nastavlja (ako postoji) i prati rotiranjem dok ne izgubi iz vidokruga
 }
 
-@export var current_engagement_rule: EngagementRules = EngagementRules.IGNORE
+@export var current_engagement_rule: EngagementRules = EngagementRules.STOP_AND_SHOT_FOLLOWING
 
 #####
 #VISION (FOW)
@@ -151,6 +151,12 @@ func reset_point_to_look():
 func set_player_path(new_path: Array[Vector2]):
 	player_path = new_path
 
+func do_when_shot_at():
+	print("OVDE")
+	if engagement_strategy is IgnoreEnemyStrategy:
+		engagement_strategy = StopShootFollowingStrategy.new()
+		current_engagement_rule = EngagementRules.STOP_AND_SHOT_FOLLOWING
+			
 #Executes when player confirmes end moves
 #func do_actions():
 	#is_walking = true
