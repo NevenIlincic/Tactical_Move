@@ -73,3 +73,5 @@ color = Color(0.54901963, 0.5058824, 0.56078434, 1)
 
 [node name="Camera_Reset_Position_Marker" type="Marker2D" parent="." unique_id=1479611963]
 position = Vector2(576, 320)
+
+[node name="Camera_Start_Position_Marker" type="Marker2D" parent="." unique_id=816834425]

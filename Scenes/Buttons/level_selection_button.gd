@@ -45,6 +45,8 @@ func _on_texture_rect_gui_input(event: InputEvent) -> void:
 		if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.is_pressed():
 			AudioManager.play_upgrade_sound()
 			match button_text:
+				"Training Course":
+					get_tree().change_scene_to_file("res://Scenes/Levels/Training_Course.tscn")
 				"House":
 					get_tree().change_scene_to_file("res://Scenes/Levels/House.tscn")
 				"Parking Lot":

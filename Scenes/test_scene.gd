@@ -45,6 +45,7 @@ var current_confirm_callback: Callable
 
 #OTHER NODES
 @onready var camera_reset_position_marker: Marker2D = $Camera_Reset_Position_Marker
+@onready var camera_start_position_marker: Marker2D = $Camera_Start_Position_Marker
 @onready var camera: Camera2D = $Camera2D
 
 
@@ -62,6 +63,8 @@ func _ready() -> void:
 		players_set_for_move,
 		players_set_for_rotation
 		])
+	
+	camera.global_position = camera_start_position_marker.global_position
 	
 	initial_num_players = get_alive_players().size()
 	initial_num_enemies = get_alive_enemies().size()

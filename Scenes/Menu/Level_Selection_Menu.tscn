@@ -55,7 +55,7 @@ theme_override_constants/separation = 75
 layout_mode = 2
 
 [node name="LevelSelectionButton" parent="ScrollContainer/VBoxContainer/Training_Course" unique_id=634833237 instance=ExtResource("3_yqc5b")]
-button_text = "Training Corse"
+button_text = "Training Course"
 level_cover_texture = ExtResource("5_4552k")
 
 [node name="Level_1" type="Control" parent="ScrollContainer/VBoxContainer" unique_id=433825490]

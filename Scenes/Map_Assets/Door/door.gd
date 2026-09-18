@@ -2,18 +2,22 @@ class_name Door extends Control
 
 var is_opened: bool = false
 @onready var door_slam_sound: AudioStreamPlayer2D = $Door_Slam_Sound
+@export var can_open: bool = true
+
 
 func top_indicator_activated():
-	if not is_opened:
+	if not is_opened and can_open:
 		is_opened = true
-		rotation_degrees = 90
+		#rotation += rad_to_deg(90.0)
+		rotation_degrees -= 90
 		door_slam_sound.play()
 
 	#print(area.is_in_group("soldier"))
 func bottom_indicator_activated():
-	if not is_opened:
+	if not is_opened and can_open:
 		is_opened = true
-		rotation_degrees = -90
+		rotation_degrees += 90
+		#rotation -= rad_to_deg(90.0)
 		door_slam_sound.play()
 
 
