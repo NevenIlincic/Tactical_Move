@@ -4,11 +4,16 @@ class_name Player extends Soldier
 var starting_tile: Vector2i
 var target_tile: Vector2i
 var is_selected: bool = false
+@onready var hitbox: StaticBody2D = $Hitbox
 
 var is_set_for_move: bool = false
 var is_set_for_rotation: bool = false
 
+var is_queued_for_medic_healing: bool = false
+
 var allies_nearby: Dictionary = {} #{PLayer: true}
+
+var is_mouse_hovered: bool = false
 
 #LINE PATH NODES
 @onready var player_path_line: PlayerPathLine = $Player_Path_Line
@@ -17,9 +22,16 @@ var allies_nearby: Dictionary = {} #{PLayer: true}
 
 #OTHER NODES
 @onready var player_sprite: Sprite2D = $Player_Sprite
+@onready var dying_sprite: Sprite2D = $Dying_Sprite
 @onready var move_to_position_marker: Sprite2D = $Move_To_Position_Marker
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var position_marker_animation_player: AnimationPlayer = $Position_Marker_AnimationPlayer
+@onready var point_light_2d: PointLight2D = $Vision_Polygon/PointLight2D
+
 @export var player_avatar: CompressedTexture2D
+#HEALING
+@onready var healing_needed_sprite: Sprite2D = $Healing_Needed_Sprite
+@onready var healing_effect_cross: HealingEffect = $HealingEffect_Cross
 
 ####PLAYER MOVES
 @onready var look_at_position_sprite: Sprite2D = $Look_At_Position_Sprite
@@ -32,30 +44,40 @@ enum EngagementRules {
 	MOVE_AND_SHOT_FOLLOWING # Nastavlja (ako postoji) i prati rotiranjem dok ne izgubi iz vidokruga
 }
 
-@export var current_engagement_rule: EngagementRules = EngagementRules.IGNORE
+@export var current_engagement_rule: EngagementRules = EngagementRules.STOP_AND_SHOT_FOLLOWING
 
 #####
 #VISION (FOW)
 var rays: Array[RayCast2D] = []
 func _ready() -> void:
 	super._ready()
+	soldier_type = SoldierType.PLAYER
 	set_up_lines_data()
 	#connect_to_signals()
 	
 	change_engagement_strategy(current_engagement_rule)
 	#MOVE TO POSITION MARKER
-	animation_player.play("Position_Marker_Rotation")
+	#animation_player.play("Position_Marker_Rotation")
+	position_marker_animation_player.play("Position_Marker_Rotation")
 	move_to_position_marker.global_position = global_position	
 
 
+func _unhandled_input(event: InputEvent) -> void:
+	if Input.is_action_just_pressed("select_player") and is_mouse_hovered:
+		_on_mouse_click()
+
 func set_player_sprite():
-	const PLAYER_M_4A_1_RIFLE = preload("uid://q7sw1jdmg3ev")
-	const PLAYER_SOLDIER_PISTOL = preload("uid://xobgolcljc7w")
-	
-	if current_weapon is Pistol:
-		player_sprite.texture = PLAYER_SOLDIER_PISTOL
-	elif current_weapon is m4a1Rifle:
-		player_sprite.texture = PLAYER_M_4A_1_RIFLE
+	pass
+	#const PLAYER_SOLDIER_PISTOL = preload("uid://xobgolcljc7w")
+	##const PLAYER_SOLDIER_M_4A_1_RIFLE = preload("uid://cuergk33h7trx")
+	#const PLAYER_SOLDIER_M_4A_1_RIFLE_SPRITES = preload("uid://cofk5d3mox6jp")
+	#
+	#if current_weapon is Pistol:
+		#player_sprite.hframes = 1
+		#player_sprite.texture = PLAYER_SOLDIER_PISTOL
+	#elif current_weapon is m4a1Rifle:
+		#player_sprite.hframes = 7
+		#player_sprite.texture = PLAYER_SOLDIER_M_4A_1_RIFLE_SPRITES
 	
 
 func set_up_lines_data():
@@ -83,6 +105,7 @@ func do_while_action_extra():
 	gradually_remove_path_line()
 
 func change_engagement_strategy(rule: EngagementRules):
+	current_engagement_rule = rule
 	match rule:
 		EngagementRules.IGNORE:
 			engagement_strategy = IgnoreEnemyStrategy.new()
@@ -95,6 +118,8 @@ func change_engagement_strategy(rule: EngagementRules):
 		EngagementRules.MOVE_AND_SHOT_FOLLOWING:
 			engagement_strategy = MoveShootFollowingStrategy.new()
 
+func set_engagement_strategy(strategy: EngagementStrategy):
+	engagement_strategy = strategy
 #func check_is_enemy_in_sight():
 	#if enemy_to_shoot:
 		#if follow_enemy_with_rotation:
@@ -132,6 +157,11 @@ func reset_point_to_look():
 func set_player_path(new_path: Array[Vector2]):
 	player_path = new_path
 
+func do_when_shot_at():
+	if engagement_strategy is IgnoreEnemyStrategy:
+		engagement_strategy = StopShootFollowingStrategy.new()
+		current_engagement_rule = EngagementRules.STOP_AND_SHOT_FOLLOWING
+			
 #Executes when player confirmes end moves
 #func do_actions():
 	#is_walking = true
@@ -145,17 +175,30 @@ func set_player_path(new_path: Array[Vector2]):
 func check_for_temporary_perks():
 	UpgradeManager.apply_movement_penalty_perk(self)
 
+
+
+
+func check_soldier_has_action():
+	if has_enemies_in_sight():
+		on_engagement_action(_select_next_enemy_to_shoot())
+		Signals.player_move_continued.emit(self)
+		print(self)
+		return
+	if len(player_path) > 1 or point_to_look:
+		Signals.player_move_continued.emit(self)
+		return
+	else:
+		Signals.player_move_finished.emit(self)
 func _pre_move_actions():
 	check_soldier_has_action()
 	player_look_at_line.reset_path()
 	
-func _on_selection_area_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
-	if event is InputEventMouseButton and event.is_pressed() and event.button_index == MOUSE_BUTTON_LEFT:
-		is_selected = !is_selected
-		if is_selected:
-			Signals.set_selected_player.emit(self)
-		else:
-			Signals.deselect_player.emit()
+func _on_mouse_click():
+	is_selected = !is_selected
+	if is_selected:
+		Signals.set_selected_player.emit(self)
+	else:
+		Signals.deselect_player.emit()
 
 ##PATH_LINE
 func add_point_to_path(point: Vector2) -> void:
@@ -182,11 +225,17 @@ func _on_enemy_lost_extra(enemy: Soldier) -> void:
 		(enemy as Enemy).hide_enemy()
 	#point_to_look = null
 
+func check_is_healing_needed():
+	if soldier_stats.HP.base_value < soldier_stats.MAX_HP.base_value:
+		return true
+	return false
 
-
+func can_soldier_move():
+	if is_queued_for_medic_healing:
+		reset_path()
+		return false
+	return true
 	
-
-
 func _on_ally_detection_area_body_entered(body: Node2D) -> void:
 	var soldier = body.get_parent()
 	if soldier != self and body.is_in_group("player_hitbox") and soldier is Player:
@@ -201,3 +250,55 @@ func _on_ally_detection_area_body_exited(body: Node2D) -> void:
 			allies_nearby.erase(soldier)
 		if soldier.allies_nearby.has(self):
 			soldier.allies_nearby.erase(self)
+
+func do_before_movement():
+	animation_player.play("running_animation")
+	UpgradeManager.apply_movement_penalty_perk(self)
+func do_after_movement():
+	player_sprite.frame = 0
+	animation_player.stop()
+	UpgradeManager.remove_moving_penalty(self)
+
+func on_soldier_killed():
+	player_sprite.visible = false
+	dying_sprite.visible = true
+	hitbox_collision_shape.disabled = true
+	move_to_position_marker.visible = false
+	vision_polygon.disable_rays()
+	vision_polygon.visible = false
+	point_light_2d.enabled = false
+	enemies_in_sight.clear()
+	enemy_to_shoot = null
+	animation_player.play("dying_animation")
+	
+
+func _on_medic_detection_area_area_entered(area: Area2D) -> void:
+	if area.is_in_group("medic_detection_area"):
+		var soldier: Player = area.get_parent()
+		if soldier != self:
+			soldier.allies_to_heal_nearby[soldier_id] = self
+
+
+func _on_animation_player_animation_finished(anim_name: StringName) -> void:
+	if anim_name == "dying_animation":
+		queue_free()
+
+
+func _on_selection_area_area_entered(area: Area2D) -> void:
+	if area.is_in_group("enemy_rays_activation_area"):
+		var enemy: Enemy = area.get_parent()
+		enemy._on_rays_activation_area_body_entered(hitbox)
+
+
+func _on_selection_area_area_exited(area: Area2D) -> void:
+	if area.is_in_group("enemy_rays_activation_area"):
+		var enemy: Enemy = area.get_parent()
+		enemy._on_rays_activation_area_body_exited(hitbox)
+
+
+func _on_selection_area_mouse_entered() -> void:
+	is_mouse_hovered = true
+
+
+func _on_selection_area_mouse_exited() -> void:
+	is_mouse_hovered = false

@@ -1,0 +1,97 @@
+[gd_scene format=3 uid="uid://dx3kt52m4smv1"]
+
+[ext_resource type="Script" uid="uid://c7h3v886fgdvy" path="res://Scenes/Buttons/level_selection_button.gd" id="1_bw1xc"]
+[ext_resource type="Texture2D" uid="uid://cyexu3fm2aq3s" path="res://Sprites/HUD/background.png" id="2_3d2sa"]
+
+[sub_resource type="Animation" id="Animation_631qn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Texture_Rect/ColorRect:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(4.363637, -144)]
+}
+
+[sub_resource type="Animation" id="Animation_tam8y"]
+resource_name = "card_shine_effect"
+loop_mode = 1
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.06666667, 1),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"_on_animation_loop_started"
+}, {
+"args": [],
+"method": &"_on_animation_loop_finished"
+}]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Texture_Rect/ColorRect:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0009999999, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(4.363637, -144), Vector2(143.99998, -318.47388), Vector2(416, 17.526123)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5l604"]
+_data = {
+&"RESET": SubResource("Animation_631qn"),
+&"card_shine_effect": SubResource("Animation_tam8y")
+}
+
+[node name="LevelSelectionButton" type="Node2D" unique_id=634833237]
+script = ExtResource("1_bw1xc")
+
+[node name="Texture_Rect" type="TextureRect" parent="." unique_id=1961460880]
+clip_contents = true
+offset_top = -32.0
+offset_right = 256.0
+offset_bottom = 96.0
+scale = Vector2(1, 0.5)
+pivot_offset = Vector2(256.41156, 62.473877)
+texture = ExtResource("2_3d2sa")
+
+[node name="ColorRect" type="ColorRect" parent="Texture_Rect" unique_id=988282815]
+layout_mode = 0
+offset_left = 4.363637
+offset_top = -144.0
+offset_right = 15.018727
+offset_bottom = 260.74683
+rotation = 0.7853982
+
+[node name="Label" type="Label" parent="Texture_Rect" unique_id=1533614904]
+layout_mode = 0
+offset_right = 254.89142
+offset_bottom = 130.51685
+pivot_offset = Vector2(128, 65.52612)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 32
+text = "Training Course"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1169565147]
+libraries/ = SubResource("AnimationLibrary_5l604")
+
+[connection signal="gui_input" from="Texture_Rect" to="." method="_on_texture_rect_gui_input"]
+[connection signal="mouse_entered" from="Texture_Rect" to="." method="_on_texture_rect_mouse_entered"]
+[connection signal="mouse_exited" from="Texture_Rect" to="." method="_on_texture_rect_mouse_exited"]

@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://diubehftswotg"]
+
+[ext_resource type="PackedScene" uid="uid://b6pfugr3kdl2v" path="res://Scenes/Buttons/Menus_Button.tscn" id="1_5mlm2"]
+[ext_resource type="Script" uid="uid://dudwpob6f2kns" path="res://Scripts/Menus/pause_menu.gd" id="1_ugqog"]
+[ext_resource type="Shader" uid="uid://bikarqtjl68fg" path="res://Shaders/Blur.gdshader" id="2_jyox7"]
+[ext_resource type="PackedScene" uid="uid://s56adyusiw24" path="res://Scenes/Menu/Options_Menu.tscn" id="3_x61ip"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_06txj"]
+shader = ExtResource("2_jyox7")
+shader_parameter/blur_amount = 2.50000011875
+
+[node name="PauseMenu" type="Node2D" unique_id=487446487]
+process_mode = 2
+z_index = 999
+script = ExtResource("1_ugqog")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=2113018452]
+material = SubResource("ShaderMaterial_06txj")
+offset_left = -128.0
+offset_top = -128.0
+offset_right = 1264.0
+offset_bottom = 728.0
+color = Color(0.25490198, 0.25490198, 0.25490198, 0.3254902)
+
+[node name="OptionsMenu" parent="." unique_id=1686594788 instance=ExtResource("3_x61ip")]
+visible = false
+
+[node name="Retry_Button" parent="." unique_id=900227919 instance=ExtResource("1_5mlm2")]
+position = Vector2(896, 424)
+button_text = "RETRY"
+
+[node name="Game_Paused_Label" type="Label" parent="." unique_id=1732563858]
+texture_filter = 1
+texture_repeat = 1
+offset_left = 952.0
+offset_top = 16.0
+offset_right = 1136.0
+offset_bottom = 58.0
+theme_override_font_sizes/font_size = 32
+text = "GAME PAUSED"
+
+[node name="Resume_Button" parent="." unique_id=2108533494 instance=ExtResource("1_5mlm2")]
+position = Vector2(896, 336)
+button_text = "RESUME"

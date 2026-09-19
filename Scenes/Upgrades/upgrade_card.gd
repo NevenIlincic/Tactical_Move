@@ -35,10 +35,11 @@ func set_upgrade_value_label():
 func _on_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.is_pressed():
 		if PlayerSelectionManager.selected_player:
-			if not is_applied:
+			if not is_applied and PlayerSelectionManager.selected_player.permanent_upgrades.size() < 6:
 				Signals.open_upgrade_confirmation_dialog.emit(self)
 			else:
-				Signals.open_upgrade_removal_confirmation_dialog.emit(self)
+				if is_applied:
+					Signals.open_upgrade_removal_confirmation_dialog.emit(self)
 
 
 func _on_mouse_entered() -> void:
@@ -46,6 +47,7 @@ func _on_mouse_entered() -> void:
 	tween.tween_property(self, "scale", Vector2(1.2, 1.2), 0.2).set_trans(Tween.TRANS_BACK)
 	animation_player.play("card_shine_effect")
 	is_mouse_hovered = true
+	AudioManager.play_button_hover_sound()
 	
 func _on_mouse_exited() -> void:
 	is_mouse_hovered = false

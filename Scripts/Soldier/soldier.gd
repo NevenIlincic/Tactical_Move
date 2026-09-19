@@ -1,9 +1,18 @@
 #Base class for Player and Enemy
 class_name Soldier extends Node2D
+#@onready var vision_polygon: SoldierVision = $CanvasGroup/Vision_Polygon
+
+enum SoldierType{
+	PLAYER,
+	ENEMY
+}
+var soldier_type: SoldierType
+
 
 @onready var vision_polygon: SoldierVision = $Vision_Polygon
 @onready var hitbox_collision_shape: CollisionShape2D = $Hitbox/Hitbox_Collision_Shape
 @onready var bullet_line: SoldierBulletLine = $Bullet_Line
+@onready var gun_blast_effect: GunBlastEffect = $GunBlastEffect
 #BULLET SPAWN POINTS
 @onready var m4a1_rifle_bullet_spawn_point: Marker2D = $m4a1_rifle_bullet_spawn_point
 @onready var pistol_bullet_spawn_point: Marker2D = $pistol_bullet_spawn_point
@@ -12,6 +21,7 @@ var is_in_active_state: bool = false
 var is_killed: bool = false
 var is_walking: bool = false
 var follow_enemy_with_rotation = false
+var is_low_hp_penalty_applied: bool = false
 
 var enemy_to_shoot: Soldier
 var enemies_in_sight: Dictionary = {} #{Soldier: true}
@@ -32,8 +42,9 @@ var soldier_id: String
 			soldier_stats.speed = Stat.new(soldier_stats.speed.base_value)
 			soldier_stats.reaction_time = Stat.new(soldier_stats.reaction_time.base_value)
 			soldier_stats.max_travel_distance = Stat.new(soldier_stats.max_travel_distance.base_value)
-			soldier_stats.HP = Stat.new(soldier_stats.HP.base_value)
-			
+			soldier_stats.MAX_HP = Stat.new(soldier_stats.MAX_HP.base_value)
+			soldier_stats.HP = Stat.new(soldier_stats.MAX_HP.base_value)
+
 var engagement_strategy: EngagementStrategy
 #UPGRADE/PERKS
 var temporary_upgrades: Array[UpgradeData] = []
@@ -75,15 +86,20 @@ func connect_to_signals():
 func _on_enemy_soldier_killed(enemy_killed: Soldier, _killed_by: Soldier):
 	if enemies_in_sight.has(enemy_killed.soldier_id):
 		enemies_in_sight.erase(enemy_killed.soldier_id)
+	if vision_polygon.bullet_hit_point:
+		vision_polygon.bullet_hit_point = null
 	if soldier_id != enemy_killed.soldier_id:
 		_on_enemy_lost(enemy_killed)
 		
 func when_killed():
 	if is_killed:
 		disconnect_from_signals()
-		queue_free()
 		Signals.player_move_finished.emit(self)
-func _select_next_enemy_to_shoot():
+		on_soldier_killed()
+			
+		#queue_free()
+func _select_next_enemy_to_shoot() -> Soldier:
+	var selected_enemy: Soldier = null
 	var lowest_hp_enemy: Soldier = null
 	var lowest_hp_value = INF
 	
@@ -93,12 +109,12 @@ func _select_next_enemy_to_shoot():
 			continue
 		var current_enemy_hp = enemies_in_sight[enemy_id].soldier_stats.HP.get_value()
 		if current_enemy_hp < lowest_hp_value:
-			print(enemies_in_sight)
 			lowest_hp_value = current_enemy_hp
 			lowest_hp_enemy = enemies_in_sight[enemy_id]
 			
-	enemy_to_shoot = lowest_hp_enemy
-
+	selected_enemy = lowest_hp_enemy
+	return selected_enemy
+	
 func is_soldier_walking() -> bool:
 	return is_walking
 
@@ -111,10 +127,11 @@ func has_enemies_in_sight() -> bool:
 	return not enemies_in_sight.is_empty()
 
 func check_soldier_has_action():
-	if len(player_path) > 1 or point_to_look:
-		Signals.player_move_continued.emit(self)
-	else:
-		Signals.player_move_finished.emit(self)
+	pass
+	#if len(player_path) > 1 or point_to_look:
+		#Signals.player_move_continued.emit(self)
+	#else:
+		#Signals.player_move_finished.emit(self)
 func set_after_move_looking_point(point: Vector2):
 	after_move_looking_point = point
 func reset_after_move_looking_point():
@@ -142,7 +159,7 @@ func reset_path():
 
 func when_been_shoot_at(enemy: Soldier):
 	if not enemy_to_shoot:
-		engagement_strategy = StopShootFollowingStrategy.new()
+		do_when_shot_at()			
 		on_engagement_action(enemy)
 		var tween: Tween = create_tween()
 		do_soldier_rotation(tween)
@@ -181,7 +198,7 @@ func _on_enemy_lost(enemy: Soldier):
 	else:
 		if enemy == enemy_to_shoot:
 			await get_tree().create_timer(soldier_stats.reaction_time.get_value()).timeout
-			_select_next_enemy_to_shoot()
+			enemy_to_shoot = _select_next_enemy_to_shoot()
 		if not current_weapon.weapon_state is WeaponReloadState:
 			current_weapon.change_weapon_state(WeaponShootState.new())
 	
@@ -223,6 +240,7 @@ func do_movement(tween: Tween):
 	if len(player_path) <= 1:
 		tween.kill()
 		return
+	do_before_movement()
 	is_walking = true
 	var current_position = global_position	
 	for target_position in player_path:
@@ -231,6 +249,7 @@ func do_movement(tween: Tween):
 		tween.tween_property(self, "global_position", target_position, duration)
 		
 		current_position = target_position
+
 	await tween.finished.connect(_on_move_stop)
 
 func _on_rotation_stop():
@@ -250,11 +269,12 @@ func _on_move_stop():
 		reset_after_move_looking_point()
 		set_player_looking_at()
 	
-	#print(self, " ", enemies_in_sight)
 	if has_enemies_in_sight():
 		Signals.player_move_continued.emit(self)
 	else:
 		Signals.player_move_finished.emit(self)
+		
+	do_after_movement()
 func _on_actions_finished():
 	player_path.clear()
 	point_to_look = null
@@ -275,6 +295,10 @@ func do_while_action(delta: float):
 	do_while_action_extra()
 
 func do_actions():
+	if is_killed:
+		Signals.player_move_finished.emit(self)
+		queue_free()
+		return
 	_pre_move_actions()
 	await _move()
 	_on_actions_finished()
@@ -296,3 +320,8 @@ func set_point_to_look(point): pass
 func do_while_action_extra(): pass
 func _pre_move_actions(): pass
 func set_player_sprite(): pass
+func can_soldier_move(): pass
+func do_before_movement(): pass
+func do_after_movement(): pass
+func on_soldier_killed(): pass
+func do_when_shot_at(): pass

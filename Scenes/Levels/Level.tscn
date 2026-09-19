@@ -1,0 +1,77 @@
+[gd_scene format=3 uid="uid://dhnsrmoddn8sp"]
+
+[ext_resource type="Script" uid="uid://b58hel4nndam5" path="res://Scenes/test_scene.gd" id="1_echjq"]
+[ext_resource type="PackedScene" uid="uid://xsp0v8p2pc4e" path="res://Scenes/Menu/End_Game_Menu.tscn" id="8_d3u4r"]
+[ext_resource type="PackedScene" uid="uid://diubehftswotg" path="res://Scenes/Menu/Pause_Menu.tscn" id="8_etd3f"]
+[ext_resource type="PackedScene" uid="uid://dyh4j30522553" path="res://Scenes/Soldier/Player/Player_Stats.tscn" id="25_wr6c8"]
+[ext_resource type="PackedScene" uid="uid://bmbr4kpa58muf" path="res://Scenes/Menu/Upgrade_Menu.tscn" id="26_u4xmi"]
+[ext_resource type="PackedScene" uid="uid://q6uf7pve5vqm" path="res://Scenes/Dialog/Confirmation_Dialog.tscn" id="27_bvxha"]
+[ext_resource type="PackedScene" uid="uid://d3gwg3d0gxd4w" path="res://Scenes/Menu/Radial_Menu.tscn" id="28_ywepe"]
+[ext_resource type="Texture2D" uid="uid://daf3icuwxhg26" path="res://Sprites/HUD/Timer/timer_icon.png" id="29_3u0pf"]
+[ext_resource type="Script" uid="uid://jqj0nkq44djb" path="res://Scenes/camera_2d.gd" id="34_slepp"]
+
+[node name="Level" type="Node2D" unique_id=1509814780 groups=["Level"]]
+script = ExtResource("1_echjq")
+
+[node name="TileMaps" type="Node2D" parent="." unique_id=641455981]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1849002311]
+
+[node name="PlayerStats" parent="CanvasLayer" unique_id=1324960430 instance=ExtResource("25_wr6c8")]
+visible = false
+offset_top = 584.0
+offset_bottom = 584.0
+
+[node name="UpgradeMenu" parent="CanvasLayer" unique_id=90615393 instance=ExtResource("26_u4xmi")]
+visible = false
+position = Vector2(-16, -8)
+
+[node name="ConfirmationDialog" parent="CanvasLayer" unique_id=2055501273 instance=ExtResource("27_bvxha")]
+visible = false
+
+[node name="RadialMenu" parent="CanvasLayer" unique_id=321000128 instance=ExtResource("28_ywepe")]
+initial_position = 0
+position = Vector2i(345, 220)
+size = Vector2i(694, 1148)
+visible = false
+
+[node name="Current_State_Label" type="Label" parent="CanvasLayer" unique_id=470699354]
+offset_right = 152.0
+offset_bottom = 40.0
+text = "OBSERVATION STATE"
+
+[node name="Timer" type="Node2D" parent="CanvasLayer" unique_id=213848848]
+position = Vector2(75, 0)
+
+[node name="Timer_Icon" type="Sprite2D" parent="CanvasLayer/Timer" unique_id=2059573217]
+texture_filter = 2
+position = Vector2(448, 32)
+scale = Vector2(0.17857143, 0.17857143)
+texture = ExtResource("29_3u0pf")
+
+[node name="Passed_Time_Label" type="Label" parent="CanvasLayer/Timer" unique_id=1760768758]
+offset_left = 472.0
+offset_top = 3.0
+offset_right = 567.0
+offset_bottom = 65.0
+theme_override_font_sizes/font_size = 48
+text = "0:0:0"
+
+[node name="PauseMenu" parent="CanvasLayer" unique_id=487446487 instance=ExtResource("8_etd3f")]
+
+[node name="EndGameMenu" parent="CanvasLayer" unique_id=705450075 instance=ExtResource("8_d3u4r")]
+visible = false
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1824573650]
+position = Vector2(984, 320)
+script = ExtResource("34_slepp")
+
+[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1420828885]
+color = Color(0.54901963, 0.5058824, 0.56078434, 1)
+
+[node name="Path_Line" type="Line2D" parent="." unique_id=597328806]
+
+[node name="Camera_Reset_Position_Marker" type="Marker2D" parent="." unique_id=1479611963]
+position = Vector2(576, 320)
+
+[node name="Camera_Start_Position_Marker" type="Marker2D" parent="." unique_id=816834425]

@@ -4,6 +4,8 @@ func execute(player: Soldier, enemy: Soldier):
 	if not player.enemy_to_shoot:
 		player.enemy_to_shoot = enemy
 		player.current_weapon.change_enemy_to_shoot(enemy)
+		player.vision_polygon.bullet_hit_point = enemy.global_position
+
 	
 	player.set_point_to_look(enemy)
 	#if player.rotation_tween and player.rotation_tween.is_valid():

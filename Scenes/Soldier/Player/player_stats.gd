@@ -28,8 +28,21 @@ extends Control
 #GRID CONTAINER
 @onready var grid_container_applied_upgrades: GridContainer = $Grid_Container_Applied_Upgrades
 
+#ENGAGEMENT STRATEGY ICON
+var engagement_strategy_icons: Dictionary = {
+	Player.EngagementRules.IGNORE: preload("uid://cfst0l2a1ts0o"),
+	Player.EngagementRules.STOP_AND_SHOT_IN_PASSING: preload("uid://b0hk5gucidtjh"),
+	Player.EngagementRules.STOP_AND_SHOT_FOLLOWING: preload("uid://br30mnlvdlt6n"),
+	Player.EngagementRules.MOVE_AND_SHOT_IN_PASSING: preload("uid://bmxe4wqdu1rfb"),
+	Player.EngagementRules.MOVE_AND_SHOT_FOLLOWING: preload("uid://b6a4qi0g7rg2b")
+}
+@onready var engagement_strategy_icon: Sprite2D = $Engagement_Strategy_Icon
 
 func _ready() -> void:
+	connect_to_signals()
+	hide_stats()
+	
+func connect_to_signals():
 	Signals.set_selected_player.connect(_on_selected_player)
 	Signals.deselect_player.connect(_on_deselect_player)
 	Signals.action_started.connect(_on_action_started)
@@ -37,28 +50,41 @@ func _ready() -> void:
 	Signals.permanent_upgrade_removed.connect(_on_permanent_upgrade_removed)
 	Signals.update_ammo_stats_label.connect(_on_player_shoot)
 	Signals.update_HP_bar_stats_label.connect(_on_player_hit)
-	hide_stats()
-	
+	Signals.engagement_strategy_changed.connect(_on_engagement_strategy_changed)
+	Signals.player_low_hp_applied.connect(_on_low_hp_applied)
+	Signals.movement_penalty_applied_removed.connect(_on_movement_changed)
 
 func _on_selected_player(player: Player):
-	update_stats_labels(player)
-	set_weapon_sprite(player.current_weapon)
-	set_applied_upgrades(player)
-	show_stats()
+	if not player.is_killed:
+		set_player_avatar(player.player_avatar)
+		update_stats_labels(player)
+		set_weapon_sprite(player.current_weapon)
+		set_applied_upgrades(player)
+		_on_engagement_strategy_changed(player)
+		show_stats()
+
+func set_player_avatar(avatar_texture: CompressedTexture2D):
+	player_avatar.texture = avatar_texture
+
+func set_hp_bar_values(player: Player):
+	var current_hp: float = player.soldier_stats.HP.base_value
+	var max_hp: float = player.soldier_stats.MAX_HP.base_value
+	hp_bar.value = player.soldier_stats.HP.base_value / player.soldier_stats.MAX_HP.base_value * 100
+	hp_percentage_label.text = str(current_hp,"/", max_hp, "  ",  int(hp_bar.value), "%")
+
 
 func update_stats_labels(player: Player):
-	player_avatar.texture = player.player_avatar
-	player_name_label.text = player.player_name
-	ammo_label.text = str(int(player.current_weapon.weapon_stats.current_ammo.get_value()), "/", int(player.current_weapon.weapon_stats.max_ammo_capacity.get_value()))
-	hp_bar.value = player.soldier_stats.HP.base_value
-	hp_percentage_label.text = str(int(hp_bar.value), "%")
-	move_speed_label.text = str(player.soldier_stats.speed.get_value())
-	reload_time_label.text = str(player.current_weapon.weapon_stats.reload_time.get_value(), "s")
-	reaction_time_label.text = str(player.soldier_stats.reaction_time.get_value(), "s")
-	max_distance_label.text = str(player.soldier_stats.max_travel_distance.get_value())
-	fire_rate_label.text = str(player.current_weapon.weapon_stats.fire_rate.get_value(), "rps")
-	damage_label.text = str(player.current_weapon.weapon_stats.damage.get_value())
-	hit_chance_label.text = str(player.current_weapon.weapon_stats.hit_chance.get_value(), "%")
+	if check_is_player_matching_selected_player(player):
+		player_name_label.text = player.player_name
+		ammo_label.text = str(int(player.current_weapon.weapon_stats.current_ammo.get_value()), "/", int(player.current_weapon.weapon_stats.max_ammo_capacity.get_value()))
+		move_speed_label.text = str(player.soldier_stats.speed.get_value())
+		set_hp_bar_values(player)
+		reload_time_label.text = str(player.current_weapon.weapon_stats.reload_time.get_value(), "s")
+		reaction_time_label.text = str(player.soldier_stats.reaction_time.get_value(), "s")
+		max_distance_label.text = str(player.soldier_stats.max_travel_distance.get_value())
+		fire_rate_label.text = str(player.current_weapon.weapon_stats.fire_rate.get_value(), "rps")
+		damage_label.text = str(player.current_weapon.weapon_stats.damage.get_value())
+		hit_chance_label.text = str(player.current_weapon.weapon_stats.hit_chance.get_value(), "/", int(player.current_weapon.weapon_stats.hit_chance.max_value))
 
 func set_weapon_sprite(weapon: Weapon):
 	if weapon is Pistol:
@@ -98,12 +124,24 @@ func _on_permanent_upgrade_removed(upgrade_card: UpgradeCard):
 		update_stats_labels(PlayerSelectionManager.selected_player)
 
 func _on_player_shoot(player: Player):
-	if player == PlayerSelectionManager.selected_player:
+	if check_is_player_matching_selected_player(player):
 		ammo_label.text = str(int(player.current_weapon.weapon_stats.current_ammo.get_value()), "/", int(player.current_weapon.weapon_stats.max_ammo_capacity.get_value()))
 
 func _on_player_hit(player: Player):
-	if player == PlayerSelectionManager.selected_player:
-		hp_bar.value = player.soldier_stats.HP.base_value
-		hp_percentage_label.text = str(int(hp_bar.value), "%")
+	if check_is_player_matching_selected_player(player):
+		set_hp_bar_values(player)
 		if hp_bar.value <= 0.0:
 			hide_stats()
+
+func _on_engagement_strategy_changed(player: Player):
+	if check_is_player_matching_selected_player(player):
+		engagement_strategy_icon.texture = engagement_strategy_icons[player.current_engagement_rule]
+	
+func _on_low_hp_applied(player: Player):
+	update_stats_labels(player)				
+
+func check_is_player_matching_selected_player(player: Player):
+	return PlayerSelectionManager.selected_player == player
+
+func _on_movement_changed(player: Player):
+	hit_chance_label.text = str(player.current_weapon.weapon_stats.hit_chance.get_value(), "/", int(player.current_weapon.weapon_stats.hit_chance.max_value))

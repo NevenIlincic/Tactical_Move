@@ -2,21 +2,23 @@
 
 [ext_resource type="Script" uid="uid://c1ym0y4pbnw4j" path="res://Scripts/Soldier/Player/player.gd" id="1_ft8w5"]
 [ext_resource type="Script" uid="uid://kkaaaj6uvi8u" path="res://Scripts/Line/player_path_line.gd" id="2_4wape"]
+[ext_resource type="PackedScene" uid="uid://b4siawy1vgojx" path="res://Scenes/Effects/Gun_Blast_Effect.tscn" id="2_rw7ms"]
 [ext_resource type="Script" uid="uid://c386pr8tx5qep" path="res://Scripts/Soldier/soldier_vision.gd" id="4_t26db"]
 [ext_resource type="Texture2D" uid="uid://cp3f8t70d5twp" path="res://icon.svg" id="4_ude3g"]
 [ext_resource type="Texture2D" uid="uid://uwcsyrtrt75l" path="res://Sprites/Path_Line/New Piskel-1.png - 2026-08-04T161338.290.png" id="5_jmcll"]
-[ext_resource type="Texture2D" uid="uid://xobgolcljc7w" path="res://Sprites/Player/Player_Soldier_Pistol.png" id="5_tk11s"]
 [ext_resource type="Script" uid="uid://b260cldj7kekv" path="res://Scripts/Line/player_look_at_line.gd" id="7_t26db"]
 [ext_resource type="Texture2D" uid="uid://bldh4qpfu1l23" path="res://Sprites/Player/look_at_position.png" id="7_x56g5"]
 [ext_resource type="Texture2D" uid="uid://cynm5bschf8o1" path="res://Sprites/Player/move_to_position_marker.png" id="8_0eouq"]
 [ext_resource type="Texture2D" uid="uid://bxrsachv2vex3" path="res://Sprites/Player/after_move_look_at_position.png" id="9_3um6k"]
 [ext_resource type="Script" uid="uid://duyphgu7sdufm" path="res://Scenes/Soldier/soldier_bullet_line.gd" id="11_tk11s"]
+[ext_resource type="Texture2D" uid="uid://crp281jh7dnh6" path="res://Sprites/Light/bela_kupa_60stepeni.png" id="12_q6by2"]
+[ext_resource type="Texture2D" uid="uid://brl5iuqo7keov" path="res://Sprites/HUD/Player/healing_icon.png" id="14_esp8e"]
+[ext_resource type="PackedScene" uid="uid://bw1j5p7a3sj6j" path="res://Scenes/Effects/Healing_Effect.tscn" id="15_yq3hi"]
+[ext_resource type="Texture2D" uid="uid://cofk5d3mox6jp" path="res://Sprites/Player/player_soldier_m4a1_rifle_sprites.png" id="16_8bdxw"]
+[ext_resource type="Texture2D" uid="uid://bul8qv1rsnp6o" path="res://Sprites/Player/player_dying_sprites.png" id="16_cifhn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_06txj"]
 size = Vector2(60, 60)
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_rw7ms"]
-light_mode = 1
 
 [sub_resource type="Animation" id="Animation_0eouq"]
 resource_name = "Position_Marker_Rotation"
@@ -49,11 +51,72 @@ tracks/0/keys = {
 "update": 0,
 "values": [0.0]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Player_Sprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Dying_Sprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_8bdxw"]
+resource_name = "dying_animation"
+length = 1.0000333631366491
+step = 0.33333334
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Dying_Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.33333334, 0.6666667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+
+[sub_resource type="Animation" id="Animation_yq3hi"]
+resource_name = "running_animation"
+length = 1.0000071875609458
+loop_mode = 1
+step = 0.071428575
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Player_Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.071428575, 0.14285715, 0.21428575, 0.2857143, 0.35714287, 0.4285715, 0.5, 0.5714286, 0.6428572, 0.71428573, 0.7857143, 0.857143, 0.9285715),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 0, 1, 2, 3, 4, 5, 6]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_x56g5"]
 _data = {
 &"Position_Marker_Rotation": SubResource("Animation_0eouq"),
-&"RESET": SubResource("Animation_3um6k")
+&"RESET": SubResource("Animation_3um6k"),
+&"dying_animation": SubResource("Animation_8bdxw"),
+&"running_animation": SubResource("Animation_yq3hi")
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_06txj"]
@@ -70,7 +133,44 @@ colors = PackedColorArray(1, 1, 0.43137255, 0, 1, 1, 0.43137255, 0.8039216)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jjc5n"]
 size = Vector2(256, 248)
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_76bep"]
+blend_mode = 3
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q6by2"]
+size = Vector2(34, 36)
+
+[sub_resource type="Curve" id="Curve_gr3gk"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.98192763, 0.82142854), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_qqij5"]
+curve = SubResource("Curve_gr3gk")
+
+[sub_resource type="Curve" id="Curve_alqoe"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_7jdmd"]
+curve = SubResource("Curve_alqoe")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_rw7ms"]
+particle_flag_disable_z = true
+angle_min = -358.3
+angle_max = 277.2
+direction = Vector3(0, 0, 0)
+spread = 0.0
+gravity = Vector3(0, 0, 0)
+alpha_curve = SubResource("CurveTexture_qqij5")
+emission_curve = SubResource("CurveTexture_7jdmd")
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_58pdj"]
+light_mode = 1
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fhwqp"]
+size = Vector2(48, 48)
+
 [node name="Player" type="Node2D" unique_id=1108589071 groups=["Player", "soldier"]]
+z_index = 2
 script = ExtResource("1_ft8w5")
 
 [node name="Player_Path_Line" type="Line2D" parent="." unique_id=2110637716]
@@ -87,38 +187,22 @@ script = ExtResource("2_4wape")
 top_level = true
 texture_filter = 1
 texture_repeat = 1
+scale = Vector2(1.5, 1.5)
 texture = ExtResource("8_0eouq")
 
 [node name="Player_Sprite" type="Sprite2D" parent="." unique_id=1716240992]
 z_index = 1
+texture_filter = 1
 texture_repeat = 1
-position = Vector2(7.6293945e-06, -0.46153474)
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("5_tk11s")
+position = Vector2(4, -117)
+texture = ExtResource("16_8bdxw")
 offset = Vector2(-0.00030048078, 118.15355)
+hframes = 7
 
 [node name="Selection_Area" type="Area2D" parent="." unique_id=2041313350]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Selection_Area" unique_id=108256655]
 shape = SubResource("RectangleShape2D_06txj")
-
-[node name="Vision_Polygon" type="Polygon2D" parent="." unique_id=1560586749]
-clip_children = 2
-material = SubResource("CanvasItemMaterial_rw7ms")
-use_parent_material = true
-color = Color(1.59, 1.912, 0.983, 0.286)
-polygon = PackedVector2Array(0, 0, -256, -256, 256, -256)
-script = ExtResource("4_t26db")
-max_range = 1000.0
-fov_degrees = 60.0
-
-[node name="Enemy_Target_Line" type="Line2D" parent="Vision_Polygon" unique_id=1477870436]
-show_behind_parent = true
-texture_filter = 1
-texture_repeat = 2
-width = 3.0
-texture = ExtResource("5_jmcll")
-texture_mode = 1
 
 [node name="Look_At_Position_Sprite" type="Sprite2D" parent="." unique_id=560975301]
 visible = false
@@ -166,13 +250,78 @@ position = Vector2(0, -4)
 shape = SubResource("RectangleShape2D_jjc5n")
 
 [node name="m4a1_rifle_bullet_spawn_point" type="Marker2D" parent="." unique_id=1798696889]
-position = Vector2(49, -8)
+position = Vector2(34, 4)
 
 [node name="pistol_bullet_spawn_point" type="Marker2D" parent="." unique_id=2000225844]
-position = Vector2(29, -7)
+position = Vector2(36, 7)
 
 [node name="Player_Avatar" type="Sprite2D" parent="." unique_id=824355655]
 
-[connection signal="input_event" from="Selection_Area" to="." method="_on_selection_area_input_event"]
+[node name="Vision_Polygon" type="Polygon2D" parent="." unique_id=1560586749]
+modulate = Color(0.7882353, 0.7764706, 0.6392157, 0.32156864)
+light_mask = 2
+material = SubResource("CanvasItemMaterial_76bep")
+use_parent_material = true
+color = Color(1, 1, 1, 0)
+polygon = PackedVector2Array(0, 0, -256, -256, 256, -256)
+script = ExtResource("4_t26db")
+max_range = 900.0
+fov_degrees = 60.0
+
+[node name="Enemy_Target_Line" type="Line2D" parent="Vision_Polygon" unique_id=1477870436]
+show_behind_parent = true
+texture_filter = 1
+texture_repeat = 2
+width = 3.0
+texture = ExtResource("5_jmcll")
+texture_mode = 1
+
+[node name="PointLight2D" type="PointLight2D" parent="Vision_Polygon" unique_id=1183097337]
+rotation = -1.5707964
+blend_mode = 2
+shadow_enabled = true
+texture = ExtResource("12_q6by2")
+offset = Vector2(448, 0)
+
+[node name="Door_Detection_Area" type="Area2D" parent="." unique_id=1442483156 groups=["door_detection_area"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Door_Detection_Area" unique_id=233869902]
+shape = SubResource("RectangleShape2D_q6by2")
+
+[node name="GunBlastEffect" parent="." unique_id=1793492474 instance=ExtResource("2_rw7ms")]
+process_material = SubResource("ParticleProcessMaterial_rw7ms")
+
+[node name="Healing_Needed_Sprite" type="Sprite2D" parent="." unique_id=872506951]
+visible = false
+z_index = 2
+texture_filter = 1
+material = SubResource("CanvasItemMaterial_58pdj")
+position = Vector2(16, -16)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("14_esp8e")
+
+[node name="HealingEffect_Cross" parent="." unique_id=718372442 instance=ExtResource("15_yq3hi")]
+
+[node name="Position_Marker_AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1121704710]
+libraries/ = SubResource("AnimationLibrary_x56g5")
+
+[node name="Medic_Detection_Area" type="Area2D" parent="." unique_id=1241310332]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Medic_Detection_Area" unique_id=1240614037]
+shape = SubResource("RectangleShape2D_fhwqp")
+
+[node name="Dying_Sprite" type="Sprite2D" parent="." unique_id=1339253334]
+visible = false
+texture_filter = 1
+position = Vector2(4, 1)
+texture = ExtResource("16_cifhn")
+hframes = 3
+
+[connection signal="area_entered" from="Selection_Area" to="." method="_on_selection_area_area_entered"]
+[connection signal="area_exited" from="Selection_Area" to="." method="_on_selection_area_area_exited"]
+[connection signal="mouse_entered" from="Selection_Area" to="." method="_on_selection_area_mouse_entered"]
+[connection signal="mouse_exited" from="Selection_Area" to="." method="_on_selection_area_mouse_exited"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="body_entered" from="Ally_Detection_Area" to="." method="_on_ally_detection_area_body_entered"]
 [connection signal="body_exited" from="Ally_Detection_Area" to="." method="_on_ally_detection_area_body_exited"]
+[connection signal="area_entered" from="Medic_Detection_Area" to="." method="_on_medic_detection_area_area_entered"]

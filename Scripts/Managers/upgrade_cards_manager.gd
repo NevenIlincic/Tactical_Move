@@ -16,6 +16,9 @@ const UPGRADE_ICONS: Dictionary = {
 
 var available_permanent_upgrades: Dictionary = {} #{upgrade_id: UpgradeCard}
 
+func clear_available_permanent_upgrades():
+	available_permanent_upgrades.clear()
+
 func create_upgrade_card():
 	var all_upgrade_types = UpgradeData.UpgradeType.values()
 	var random_selected_type: UpgradeData.UpgradeType = all_upgrade_types.pick_random()

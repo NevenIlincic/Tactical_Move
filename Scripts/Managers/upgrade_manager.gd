@@ -55,7 +55,7 @@ func apply_movement_penalty_perk(player: Soldier):
 		)
 		player.current_weapon.weapon_stats.hit_chance.add_modifier(hit_chance_mod)
 		player.temporary_upgrades.append(hit_chance_perk)
-
+		Signals.movement_penalty_applied_removed.emit(player)
 func remove_temporary_perks(player: Soldier):
 	var perks_to_remove: Array[UpgradeData] = []
 	for temporary_perk in player.temporary_upgrades:
@@ -78,6 +78,7 @@ func remove_moving_penalty(player: Soldier):
 			remove_perk(perk)
 			break
 	player.temporary_upgrades.erase(moving_perk)
+	Signals.movement_penalty_applied_removed.emit(player)
 
 #Triggers when player heals above 30% HP
 func remove_low_hp_penalty(player: Soldier):
@@ -92,6 +93,9 @@ func remove_low_hp_penalty(player: Soldier):
 
 #Triggers when player gets below 30% HP (SPEED -15%, HIT_CHANCE -25%, REACTION_TIME +0.5s, RELOAD_TIME: +20%)
 func apply_low_hp_penalty(player: Soldier):
+	if player.is_low_hp_penalty_applied:
+		return 
+	player.is_low_hp_penalty_applied = true
 	#SPEED
 	var lower_speed_perk: UpgradeData = UpgradeData.new(
 		-0.15, UpgradeData.UpgradeType.SPEED, StatModifier.Type.PERCENT, UpgradeData.UpgradeReason.LOW_HP
@@ -133,3 +137,18 @@ func apply_low_hp_penalty(player: Soldier):
 	player.temporary_upgrades.append(lower_hit_chance_perk)
 	player.temporary_upgrades.append(longer_reaction_time_perk)
 	player.temporary_upgrades.append(longer_reload_time_perk)
+	#TRAVEL DISTANCE
+	var shorter_travel_distance_perk: UpgradeData = UpgradeData.new(
+		-0.2, UpgradeData.UpgradeType.TRAVEL_DISTANCE, StatModifier.Type.PERCENT, UpgradeData.UpgradeReason.LOW_HP
+	)
+	var shorter_travel_distance_mod: StatModifier = StatModifier.new(
+		shorter_travel_distance_perk.bonus_value, shorter_travel_distance_perk.modifier_type, shorter_travel_distance_perk
+	)
+	player.soldier_stats.max_travel_distance.add_modifier(shorter_travel_distance_mod)
+	shorter_travel_distance_perk.set_applied_on_stat(player.soldier_stats.max_travel_distance)
+	
+	player.temporary_upgrades.append(lower_speed_perk)
+	player.temporary_upgrades.append(lower_hit_chance_perk)
+	player.temporary_upgrades.append(longer_reaction_time_perk)
+	player.temporary_upgrades.append(longer_reload_time_perk)
+	player.temporary_upgrades.append(shorter_travel_distance_perk)

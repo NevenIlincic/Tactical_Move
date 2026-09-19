@@ -1,8 +1,7 @@
 extends Node2D 
 class_name Level
 
-var grid: AStarGrid2D = AStarGrid2D.new()
-@onready var tile_map: TileMapLayer = $TileMap
+@onready var tile_map: TileMapLayer = $TileMaps/TileMap
 
 var selected_player: Player
 var confirmed_player_moves: int = 0
@@ -11,43 +10,91 @@ var list_occupied_tiles: Array[Vector2i]
 
 var players: Dictionary = {} #Player
 var enemies: Dictionary = {} #Enemy
+var players_set_for_move: Dictionary = {}
+var players_set_for_rotation: Dictionary = {}
 var num_finished_player_turns: int = 0
+
+var initial_num_players: int;
+var players_killed: int = 0
+var initial_num_enemies: int;
+var enemies_killed: int = 0
 
 var current_state: State
 
 var cover_points: Array
 
+#BOOLEANS
+var is_level_completed: bool = false
+
+#LABELS
+@onready var passed_time_label: Label = $CanvasLayer/Timer/Passed_Time_Label
+@onready var current_state_label: Label = $CanvasLayer/Current_State_Label
+
+var total_passed_time_millis: int = 0
+var total_passed_time_seconds: int = 0
+var total_passed_minutes: int = 0
 #MENU
 @onready var upgrade_menu: UpgradeMenu = $CanvasLayer/UpgradeMenu
+@onready var radial_menu: PopupMenu = $CanvasLayer/RadialMenu
+@onready var pause_menu: PauseMenu = $CanvasLayer/PauseMenu
+@onready var end_game_menu: EndGameMenu = $CanvasLayer/EndGameMenu
 
 #FOR CONFIRMATION DIALOG
 @onready var confirmation_dialog: ConfirmDialog = $CanvasLayer/ConfirmationDialog
 var current_confirm_callback: Callable
 
+#OTHER NODES
+@onready var camera_reset_position_marker: Marker2D = $Camera_Reset_Position_Marker
+@onready var camera_start_position_marker: Marker2D = $Camera_Start_Position_Marker
+@onready var camera: Camera2D = $Camera2D
+
+
 
 func _ready() -> void:
+	UpgradeCardsManager.clear_available_permanent_upgrades()
 	for player in get_tree().get_nodes_in_group("Player"):
 		if player is Player:
 			players[player] = true
 	cover_points = get_tree().get_nodes_in_group("a_star_point")
 
-	#setup_grid()
 	connect_to_signals()
-	current_state = PreparationState.new([self])
+	current_state = PreparationState.new([
+		self,
+		players_set_for_move,
+		players_set_for_rotation
+		])
+	
+	camera.global_position = camera_start_position_marker.global_position
+	
+	initial_num_players = get_alive_players().size()
+	initial_num_enemies = get_alive_enemies().size()
 	AudioManager.set_current_level(self)
-
+	AudioManager.play_background_music(AudioManager.BACKGROUND_MUSIC_LEVEL)
+	
+	
 func _physics_process(delta: float) -> void:
+	#print(Engine.get_frames_per_second())
 	VisionManager.handle_enemy_visibility(delta)
 	current_state._physics_process(delta)
+	if total_passed_time_millis >= 1000.0:
+		total_passed_time_millis = 0.0
+		total_passed_time_seconds += 1
+		if total_passed_time_seconds >= 60:
+			total_passed_time_seconds = 0
+			total_passed_minutes += 1
+	passed_time_label.text = str(total_passed_minutes, ":", total_passed_time_seconds, ":", total_passed_time_millis)
 
 func get_alive_players() -> Dictionary:
 	var alive_players: Dictionary = {}
 	for player in get_tree().get_nodes_in_group("Player"):
-		alive_players[player] = true
+		alive_players[player.soldier_id] = player
 	return alive_players
 	
 func get_alive_enemies() -> Dictionary:
-	return enemies
+	var alive_enemies: Dictionary = {}
+	for enemy: Enemy in get_tree().get_nodes_in_group("enemy_node"):
+		alive_enemies[enemy.soldier_id] = enemy
+	return alive_enemies
 
 func get_alive_soldiers() -> Dictionary:
 	var alive_soldiers: Dictionary = {}
@@ -70,23 +117,6 @@ func connect_to_signals():
 	Signals.open_upgrade_removal_confirmation_dialog.connect(_on_confirmation_dialog_opened)
 	confirmation_dialog.action_confirmed.connect(_on_action_confirmed)
 	confirmation_dialog.action_canceled.connect(_on_action_canceled)
-func setup_grid():
-	grid.region = tile_map.get_used_rect()
-	grid.cell_size = tile_map.tile_set.tile_size
-	grid.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_NEVER
-	grid.default_compute_heuristic = AStarGrid2D.HEURISTIC_MANHATTAN
-	grid.default_estimate_heuristic = AStarGrid2D.HEURISTIC_MANHATTAN
-	grid.update()
-	
-	for cell in tile_map.get_used_cells():
-		var tile_data = tile_map.get_cell_tile_data(cell)
-		if tile_data.get_custom_data("solid"):
-			grid.set_point_solid(cell, true)
-			
-	#for tile in list_occupied_tiles:
-		#grid.set_point_solid(tile, true)
-
-
 			
 @onready var path_line: Line2D = $Path_Line
 var start_tile: Vector2i = Vector2i(0,0)
@@ -94,25 +124,25 @@ var start_tile: Vector2i = Vector2i(0,0)
 var is_drawing: bool = false
 
 func _unhandled_input(event: InputEvent) -> void:
-	if Input.is_action_just_pressed("quit"):
-		get_tree().quit()
+	if Input.is_action_just_pressed("pause_menu") and not is_level_completed:
+		pause_menu.show_pause_menu()
+	if Input.is_action_just_pressed("reset_camera_position"):
+		camera.global_position = camera_start_position_marker.global_position
+	#if Input.is_action_just_pressed("quit"):
+		#get_tree().quit()
 	current_state._unhandled_input(event)
+
 	
 func add_point_to_path(point: Vector2) -> void:
 	path_line.add_point(point)
 func reset_path():
 	path_line.points = []
 
-func free_tile(tile: Vector2i):
-	grid.set_point_solid(tile, false)
-func occupy_tile(tile: Vector2i):
-	grid.set_point_solid(tile, true)	
-
-func check_is_tile_in_boundsv(tile: Vector2i):
-	return grid.is_in_boundsv(tile) 
-func check_is_tile_solid(tile: Vector2i):
-	return grid.is_point_solid(tile)
-
+#CAN SWITCH TO ACTION STATE?
+func check_can_do_action() -> bool:
+	if players_set_for_move.is_empty() and players_set_for_rotation.is_empty():
+		return false
+	return true
 
 #CONFIRMATION DIALOG ACTIONS
 func _on_confirmation_dialog_opened(upgrade_card: UpgradeCard):
@@ -130,3 +160,23 @@ func _on_action_confirmed():
 func _on_action_canceled():
 	current_confirm_callback = Callable()
 	confirmation_dialog.visible = false
+
+func level_completed():
+	is_level_completed = true
+	await start_end_game_timer()
+	end_game_menu.on_level_completed(self)
+func level_failed():
+	is_level_completed = true
+	await start_end_game_timer()
+	end_game_menu.on_level_failed(self)
+
+func start_end_game_timer():
+	await get_tree().create_timer(1.0).timeout
+
+func get_total_time_label() -> Label:
+	return passed_time_label
+
+func get_num_killed_players() -> int:
+	return players_killed
+func get_num_killed_enemies() -> int:
+	return enemies_killed

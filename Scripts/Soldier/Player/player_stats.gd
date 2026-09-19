@@ -4,4 +4,5 @@ extends Resource
 @export var speed: Stat
 @export var reaction_time: Stat
 @export var max_travel_distance: Stat
-@export var HP: Stat
+var HP: Stat
+@export var MAX_HP: Stat
