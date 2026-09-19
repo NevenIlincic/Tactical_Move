@@ -170,7 +170,7 @@ sources/15 = SubResource("TileSetAtlasSource_rblaa")
 script = ExtResource("2_3th1t")
 
 [node name="Keith_Regular" parent="." index="0" unique_id=1560366945 instance=ExtResource("12_ckni2")]
-position = Vector2(-608, 544)
+position = Vector2(-682, 501)
 
 [node name="Door" parent="." index="1" unique_id=312792714 instance=ExtResource("13_ckni2")]
 offset_left = -385.0
@@ -236,7 +236,7 @@ appearing_order = 5
 [node name="Move_Player_Tutorial" parent="CanvasLayer/Tutorial_Labels_Group" index="6" unique_id=581823792 instance=ExtResource("14_oiwn7")]
 visible = false
 key_action = "drawing"
-dialog_text = "WHILE IN MOVE STATE AND SELECTED SOLDIER, HOLD AND DRAG TO DRAW PATH"
+dialog_text = "WHILE IN MOVE STATE AND SOLDIER IS SELECTED, HOLD AND DRAG TO DRAW PATH"
 appearing_order = 6
 
 [node name="Look_After_Move_Tutorial" parent="CanvasLayer/Tutorial_Labels_Group" index="7" unique_id=379819045 instance=ExtResource("14_oiwn7")]
@@ -279,7 +279,7 @@ is_activated_by_pressing = true
 [node name="Healing_Tutorial" parent="CanvasLayer/Tutorial_Labels_Group" index="13" unique_id=812630079 instance=ExtResource("14_oiwn7")]
 visible = false
 key_action = "healing"
-dialog_text = "IF MEDIC IS PRESENT AND ALLY SOLDIER IS WOUNDED, TOGGLE HEALING ALLIES IN HEALING AREA."
+dialog_text = "IF MEDIC IS PRESENT (AND SELECTED) AND ALLY SOLDIER IS WOUNDED, TOGGLE HEALING FOR ALLIES IN HEALING AREA. MEDIC WILL HEAL ALL WOUNDED SOLDIERS IN AREA WHEN ACTION STARTS."
 appearing_order = 13
 
 [node name="Upgrade_Menu_Tutorial" parent="CanvasLayer/Tutorial_Labels_Group" index="14" unique_id=221401703 instance=ExtResource("14_oiwn7")]
@@ -303,7 +303,7 @@ appearing_order = 16
 [node name="Action_Start_Tutorial" parent="CanvasLayer/Tutorial_Labels_Group" index="17" unique_id=996397032 instance=ExtResource("14_oiwn7")]
 visible = false
 key_action = "move_confirm"
-dialog_text = "IF YOU INTERACTED WITH AT LEAST ONE PLAYER, YOU CAN START TURN."
+dialog_text = "IF YOU INTERACTED WITH AT LEAST ONE PLAYER (SET PATH OR POINT TO LOOK AT), YOU CAN START TURN."
 appearing_order = 17
 
 [node name="Input_Binds_Next_Step_1" parent="CanvasLayer/Tutorial_Labels_Group" index="18" unique_id=240259264 instance=ExtResource("14_oiwn7")]
