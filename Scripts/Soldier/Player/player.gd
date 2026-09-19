@@ -13,6 +13,8 @@ var is_queued_for_medic_healing: bool = false
 
 var allies_nearby: Dictionary = {} #{PLayer: true}
 
+var is_mouse_hovered: bool = false
+
 #LINE PATH NODES
 @onready var player_path_line: PlayerPathLine = $Player_Path_Line
 @onready var player_look_at_line: PlayerLookAtLine = $Player_Look_At_Line
@@ -42,7 +44,7 @@ enum EngagementRules {
 	MOVE_AND_SHOT_FOLLOWING # Nastavlja (ako postoji) i prati rotiranjem dok ne izgubi iz vidokruga
 }
 
-@export var current_engagement_rule: EngagementRules = EngagementRules.IGNORE
+@export var current_engagement_rule: EngagementRules = EngagementRules.STOP_AND_SHOT_FOLLOWING
 
 #####
 #VISION (FOW)
@@ -59,6 +61,10 @@ func _ready() -> void:
 	position_marker_animation_player.play("Position_Marker_Rotation")
 	move_to_position_marker.global_position = global_position	
 
+
+func _unhandled_input(event: InputEvent) -> void:
+	if Input.is_action_just_pressed("select_player") and is_mouse_hovered:
+		_on_mouse_click()
 
 func set_player_sprite():
 	pass
@@ -151,6 +157,11 @@ func reset_point_to_look():
 func set_player_path(new_path: Array[Vector2]):
 	player_path = new_path
 
+func do_when_shot_at():
+	if engagement_strategy is IgnoreEnemyStrategy:
+		engagement_strategy = StopShootFollowingStrategy.new()
+		current_engagement_rule = EngagementRules.STOP_AND_SHOT_FOLLOWING
+			
 #Executes when player confirmes end moves
 #func do_actions():
 	#is_walking = true
@@ -168,19 +179,21 @@ func check_for_temporary_perks():
 
 
 func check_soldier_has_action():
+	if has_enemies_in_sight():
+		on_engagement_action(_select_next_enemy_to_shoot())
+		Signals.player_move_continued.emit(self)
+		print(self)
+		return
 	if len(player_path) > 1 or point_to_look:
 		Signals.player_move_continued.emit(self)
+		return
 	else:
 		Signals.player_move_finished.emit(self)
 func _pre_move_actions():
 	check_soldier_has_action()
 	player_look_at_line.reset_path()
 	
-func _on_selection_area_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
-	if event is InputEventMouseButton and event.is_pressed() and event.button_index == MOUSE_BUTTON_LEFT:
-		_on_mouse_click(event)
-
-func _on_mouse_click(event: InputEvent):
+func _on_mouse_click():
 	is_selected = !is_selected
 	if is_selected:
 		Signals.set_selected_player.emit(self)
@@ -240,9 +253,11 @@ func _on_ally_detection_area_body_exited(body: Node2D) -> void:
 
 func do_before_movement():
 	animation_player.play("running_animation")
+	UpgradeManager.apply_movement_penalty_perk(self)
 func do_after_movement():
 	player_sprite.frame = 0
 	animation_player.stop()
+	UpgradeManager.remove_moving_penalty(self)
 
 func on_soldier_killed():
 	player_sprite.visible = false
@@ -279,3 +294,11 @@ func _on_selection_area_area_exited(area: Area2D) -> void:
 	if area.is_in_group("enemy_rays_activation_area"):
 		var enemy: Enemy = area.get_parent()
 		enemy._on_rays_activation_area_body_exited(hitbox)
+
+
+func _on_selection_area_mouse_entered() -> void:
+	is_mouse_hovered = true
+
+
+func _on_selection_area_mouse_exited() -> void:
+	is_mouse_hovered = false

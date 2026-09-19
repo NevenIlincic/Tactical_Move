@@ -45,11 +45,13 @@ var current_confirm_callback: Callable
 
 #OTHER NODES
 @onready var camera_reset_position_marker: Marker2D = $Camera_Reset_Position_Marker
+@onready var camera_start_position_marker: Marker2D = $Camera_Start_Position_Marker
 @onready var camera: Camera2D = $Camera2D
 
 
 
 func _ready() -> void:
+	UpgradeCardsManager.clear_available_permanent_upgrades()
 	for player in get_tree().get_nodes_in_group("Player"):
 		if player is Player:
 			players[player] = true
@@ -62,9 +64,12 @@ func _ready() -> void:
 		players_set_for_rotation
 		])
 	
+	camera.global_position = camera_start_position_marker.global_position
+	
 	initial_num_players = get_alive_players().size()
 	initial_num_enemies = get_alive_enemies().size()
 	AudioManager.set_current_level(self)
+	AudioManager.play_background_music(AudioManager.BACKGROUND_MUSIC_LEVEL)
 	
 	
 func _physics_process(delta: float) -> void:
@@ -122,7 +127,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("pause_menu") and not is_level_completed:
 		pause_menu.show_pause_menu()
 	if Input.is_action_just_pressed("reset_camera_position"):
-		camera.global_position = camera_reset_position_marker.global_position
+		camera.global_position = camera_start_position_marker.global_position
 	#if Input.is_action_just_pressed("quit"):
 		#get_tree().quit()
 	current_state._unhandled_input(event)

@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://cwpyasd3xa4jl"]
+
+[ext_resource type="PackedScene" uid="uid://bsxjq5u2glxba" path="res://Scenes/Soldier/Player/Keith_Regular.tscn" id="1_fkmn8"]
+
+[node name="Keith_Regular" unique_id=1108589071 instance=ExtResource("1_fkmn8")]

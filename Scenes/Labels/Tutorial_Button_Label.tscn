@@ -1,0 +1,55 @@
+[gd_scene format=3 uid="uid://sle28fdvjlhu"]
+
+[ext_resource type="Script" uid="uid://dqygpomcgwsnq" path="res://Scenes/Labels/tutorial_button_label.gd" id="1_c4lga"]
+[ext_resource type="Texture2D" uid="uid://cyexu3fm2aq3s" path="res://Sprites/HUD/background.png" id="2_d2ajl"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d2ajl"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(0, 0, 0, 0.25490198)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="Tutorial_Dialog" type="Node2D" unique_id=1600195212]
+script = ExtResource("1_c4lga")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=55109325]
+offset_left = 8.0
+offset_right = 1144.0
+offset_bottom = 88.0
+texture = ExtResource("2_d2ajl")
+expand_mode = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TextureRect" unique_id=1448434568]
+custom_minimum_size = Vector2(750, 0)
+propagate_maximum_size = false
+layout_mode = 0
+offset_left = 8.0
+offset_right = 198.0
+offset_bottom = 88.0
+theme_override_constants/separation = 20
+
+[node name="Action_Label" type="Label" parent="TextureRect/HBoxContainer" unique_id=1671916754]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 0, 1)
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_d2ajl")
+text = "LMB"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Dialog_Label" type="Label" parent="TextureRect/HBoxContainer" unique_id=1588769436]
+custom_minimum_size = Vector2(1000, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "SELECT SOLDIER"
+vertical_alignment = 1
+autowrap_mode = 2

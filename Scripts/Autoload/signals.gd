@@ -44,5 +44,6 @@ signal update_ammo_stats_label(player: Player)
 signal update_HP_bar_stats_label(player: Player)
 signal engagement_strategy_changed(player: Player)
 signal player_low_hp_applied(player: Player)
+signal movement_penalty_applied_removed(player: Soldier)
 
 signal dark(points: Array)

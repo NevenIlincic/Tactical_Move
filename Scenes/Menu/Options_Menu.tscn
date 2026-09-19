@@ -255,7 +255,6 @@ position = Vector2(31, 96)
 [node name="Inputs_Scroll_Container" type="ScrollContainer" parent="Inputs_Menu" unique_id=392701366]
 offset_right = 808.0
 offset_bottom = 504.0
-scroll_vertical = 100
 
 [node name="GridContainer" type="GridContainer" parent="Inputs_Menu/Inputs_Scroll_Container" unique_id=1057969820]
 layout_mode = 2
@@ -276,6 +275,35 @@ text = "PLAYER ACTIONS:"
 [node name="Dummy_Control_Input5" type="Control" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer" unique_id=743542385]
 layout_mode = 2
 
+[node name="Select_Player_Inptu" type="Control" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer" unique_id=2053650216]
+layout_mode = 2
+
+[node name="Sprite" type="Sprite2D" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Select_Player_Inptu" unique_id=72209203]
+position = Vector2(128, 26)
+scale = Vector2(1.0092957, 0.43750006)
+texture = ExtResource("11_nkoq7")
+
+[node name="Select_Player_Label" type="Label" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Select_Player_Inptu" unique_id=1306842179]
+layout_mode = 0
+offset_left = 1.0
+offset_top = -3.0
+offset_right = 257.0
+offset_bottom = 53.0
+text = "SELECT PLAYER SOLDIER"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="InputButton" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Select_Player_Inptu" unique_id=56206551 instance=ExtResource("13_ktebc")]
+layout_mode = 0
+offset_left = 265.0
+offset_top = -3.0
+offset_right = 337.0
+offset_bottom = 53.0
+action = "select_player"
+
+[node name="Dummy_Control_Input9" type="Control" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer" unique_id=8393414]
+layout_mode = 2
+
 [node name="Player_Look_At_Input" type="Control" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer" unique_id=1170449983]
 layout_mode = 2
 
@@ -294,7 +322,7 @@ text = "PLAYER LOOK AT POINT WHILE ACTION"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="InputButton" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Player_Look_At_Input" unique_id=56206551 instance=ExtResource("13_ktebc")]
+[node name="InputButton" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer/Player_Look_At_Input" unique_id=1138457978 instance=ExtResource("13_ktebc")]
 layout_mode = 0
 offset_left = 265.0
 offset_top = -3.0

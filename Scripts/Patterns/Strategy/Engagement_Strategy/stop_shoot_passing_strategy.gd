@@ -15,7 +15,6 @@ func execute(player: Soldier, enemy: Soldier):
 		player.current_weapon.change_weapon_state(WeaponShootState.new())
 
 func stop_movement(player: Soldier):
-	UpgradeManager.remove_moving_penalty(player)
 	if player.move_tween and player.move_tween.is_valid():
 		player.move_tween.kill()
 	player.is_walking = false

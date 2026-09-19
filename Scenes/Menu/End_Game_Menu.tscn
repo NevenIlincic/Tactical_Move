@@ -11,6 +11,7 @@ shader_parameter/blur_amount = 2.50000011875
 
 [node name="EndGameMenu" type="Node2D" unique_id=705450075]
 process_mode = 2
+z_index = 999
 script = ExtResource("1_w8sc4")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1369424324]
