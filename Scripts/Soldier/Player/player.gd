@@ -253,9 +253,11 @@ func _on_ally_detection_area_body_exited(body: Node2D) -> void:
 
 func do_before_movement():
 	animation_player.play("running_animation")
+	UpgradeManager.apply_movement_penalty_perk(self)
 func do_after_movement():
 	player_sprite.frame = 0
 	animation_player.stop()
+	UpgradeManager.remove_moving_penalty(self)
 
 func on_soldier_killed():
 	player_sprite.visible = false

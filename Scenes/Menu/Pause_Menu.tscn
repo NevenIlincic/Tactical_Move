@@ -25,9 +25,9 @@ color = Color(0.25490198, 0.25490198, 0.25490198, 0.3254902)
 [node name="OptionsMenu" parent="." unique_id=1686594788 instance=ExtResource("3_x61ip")]
 visible = false
 
-[node name="ResumeButton" parent="." unique_id=900227919 instance=ExtResource("1_5mlm2")]
+[node name="Retry_Button" parent="." unique_id=900227919 instance=ExtResource("1_5mlm2")]
 position = Vector2(896, 424)
-button_text = "RESUME"
+button_text = "RETRY"
 
 [node name="Game_Paused_Label" type="Label" parent="." unique_id=1732563858]
 texture_filter = 1
@@ -38,3 +38,7 @@ offset_right = 1136.0
 offset_bottom = 58.0
 theme_override_font_sizes/font_size = 32
 text = "GAME PAUSED"
+
+[node name="Resume_Button" parent="." unique_id=2108533494 instance=ExtResource("1_5mlm2")]
+position = Vector2(896, 336)
+button_text = "RESUME"

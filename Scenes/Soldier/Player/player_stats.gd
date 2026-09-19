@@ -52,6 +52,7 @@ func connect_to_signals():
 	Signals.update_HP_bar_stats_label.connect(_on_player_hit)
 	Signals.engagement_strategy_changed.connect(_on_engagement_strategy_changed)
 	Signals.player_low_hp_applied.connect(_on_low_hp_applied)
+	Signals.movement_penalty_applied_removed.connect(_on_movement_changed)
 
 func _on_selected_player(player: Player):
 	if not player.is_killed:
@@ -141,3 +142,6 @@ func _on_low_hp_applied(player: Player):
 
 func check_is_player_matching_selected_player(player: Player):
 	return PlayerSelectionManager.selected_player == player
+
+func _on_movement_changed(player: Player):
+	hit_chance_label.text = str(player.current_weapon.weapon_stats.hit_chance.get_value(), "/", int(player.current_weapon.weapon_stats.hit_chance.max_value))
