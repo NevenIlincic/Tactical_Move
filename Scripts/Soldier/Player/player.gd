@@ -13,6 +13,8 @@ var is_queued_for_medic_healing: bool = false
 
 var allies_nearby: Dictionary = {} #{PLayer: true}
 
+var is_mouse_hovered: bool = false
+
 #LINE PATH NODES
 @onready var player_path_line: PlayerPathLine = $Player_Path_Line
 @onready var player_look_at_line: PlayerLookAtLine = $Player_Look_At_Line
@@ -59,6 +61,10 @@ func _ready() -> void:
 	position_marker_animation_player.play("Position_Marker_Rotation")
 	move_to_position_marker.global_position = global_position	
 
+
+func _unhandled_input(event: InputEvent) -> void:
+	if Input.is_action_just_pressed("select_player") and is_mouse_hovered:
+		_on_mouse_click()
 
 func set_player_sprite():
 	pass
@@ -181,11 +187,7 @@ func _pre_move_actions():
 	check_soldier_has_action()
 	player_look_at_line.reset_path()
 	
-func _on_selection_area_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
-	if event is InputEventMouseButton and event.is_pressed() and event.button_index == MOUSE_BUTTON_LEFT:
-		_on_mouse_click(event)
-
-func _on_mouse_click(event: InputEvent):
+func _on_mouse_click():
 	is_selected = !is_selected
 	if is_selected:
 		Signals.set_selected_player.emit(self)
@@ -284,3 +286,11 @@ func _on_selection_area_area_exited(area: Area2D) -> void:
 	if area.is_in_group("enemy_rays_activation_area"):
 		var enemy: Enemy = area.get_parent()
 		enemy._on_rays_activation_area_body_exited(hitbox)
+
+
+func _on_selection_area_mouse_entered() -> void:
+	is_mouse_hovered = true
+
+
+func _on_selection_area_mouse_exited() -> void:
+	is_mouse_hovered = false

@@ -74,6 +74,7 @@ func on_soldier_killed():
 	
 
 func _unhandled_input(event: InputEvent) -> void:
+	super._unhandled_input(event)
 	if Input.is_action_just_pressed("healing") and is_selected and not allies_to_heal_nearby.is_empty() and can_heal:
 		var i: int = 0
 		is_queued_for_medic_healing = !is_queued_for_medic_healing

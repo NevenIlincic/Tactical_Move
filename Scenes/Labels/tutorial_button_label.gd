@@ -4,6 +4,7 @@ class_name TutorialTextDialog extends Node2D
 @export var dialog_text: String
 @export var appearing_order: int 
 @export var action_key_exists: bool = true
+@export var is_activated_by_pressing: bool = false
 
 @onready var texture_rect: TextureRect = $TextureRect
 @onready var h_box_container: HBoxContainer = $TextureRect/HBoxContainer
@@ -13,6 +14,7 @@ class_name TutorialTextDialog extends Node2D
 @onready var dialog_label: Label = $TextureRect/HBoxContainer/Dialog_Label
 
 signal key_action_pressed()
+signal key_action_released()
 
 
 
@@ -23,13 +25,12 @@ func _ready() -> void:
 	
 
 func _unhandled_input(event: InputEvent) -> void:
-	if not action_key_exists:
-		if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.is_pressed():
-			key_action_pressed.emit()
-			return
-	else:
+	if not is_activated_by_pressing:
 		if Input.is_action_just_released(key_action):
-			key_action_pressed.emit()
+			key_action_released.emit()
+	else:
+		if Input.is_action_just_pressed(key_action):
+			key_action_released.emit()
 
 func get_action_bind_key():
 	var events = InputMap.action_get_events(key_action)

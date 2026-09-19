@@ -81,7 +81,7 @@ script = ExtResource("5_h25au")
 weapon_stats = SubResource("Resource_fk2xi")
 metadata/_custom_type_script = "uid://bqnc1ha42r85"
 
-[node name="MedicPlayer" unique_id=1108589071 instance=ExtResource("1_gh3fj")]
+[node name="Nate_Medic" unique_id=1108589071 instance=ExtResource("1_gh3fj")]
 player_name = "Nate"
 soldier_stats = SubResource("Resource_fomf5")
 weapons = Array[ExtResource("4_2oome")]([SubResource("Resource_ppie2")])
