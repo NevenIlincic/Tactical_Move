@@ -268,29 +268,47 @@ key_action = "reset_path"
 dialog_text = "RESET SELECTED PLAYER PATH"
 appearing_order = 11
 
-[node name="Upgrade_Menu_Tutorial" parent="CanvasLayer/Tutorial_Labels_Group" index="12" unique_id=221401703 instance=ExtResource("14_oiwn7")]
+[node name="Engagement_Strategy_Tutorial" parent="CanvasLayer/Tutorial_Labels_Group" index="12" unique_id=2009291415 instance=ExtResource("14_oiwn7")]
+visible = false
+key_action = "popup"
+dialog_text = "WHILE SELECTED SOLDIER, CHANGE THE SOLDIER's ENGAGEMENT STRATEGY."
+appearing_order = 12
+
+[node name="Healing_Tutorial" parent="CanvasLayer/Tutorial_Labels_Group" index="13" unique_id=812630079 instance=ExtResource("14_oiwn7")]
+visible = false
+key_action = "healing"
+dialog_text = "IF MEDIC IS PRESENT AND ALLY SOLDIER IS WOUNDED, TOGGLE HEALING ALLIES IN HEALING AREA."
+appearing_order = 13
+
+[node name="Upgrade_Menu_Tutorial" parent="CanvasLayer/Tutorial_Labels_Group" index="14" unique_id=221401703 instance=ExtResource("14_oiwn7")]
 visible = false
 key_action = "upgrade_menu"
 dialog_text = "OPEN UPGRADE MENU"
-appearing_order = 12
+appearing_order = 14
 
-[node name="Upgrade_Menu_Step_1_Tutorial" parent="CanvasLayer/Tutorial_Labels_Group" index="13" unique_id=1838511316 instance=ExtResource("14_oiwn7")]
+[node name="Upgrade_Menu_Step_1_Tutorial" parent="CanvasLayer/Tutorial_Labels_Group" index="15" unique_id=1838511316 instance=ExtResource("14_oiwn7")]
 visible = false
 key_action = "next_tutorial_step"
 dialog_text = "AFTER KILLING ENEMY SOLDIER YOU WILL GET RANDOM UPGRADE CARD. YOU CAN APPLY MAX 6 UPGRADES PER PLAYER. IF PLAYER HAS MAX AMOUNT OF UPGRADES, YOU'LL HAVE TO REMOVE AN UPGRADE IN ORDER TO APPLY NEW ONE."
-appearing_order = 13
+appearing_order = 15
 
-[node name="Preparation_State_Tutorial" parent="CanvasLayer/Tutorial_Labels_Group" index="14" unique_id=1099256031 instance=ExtResource("14_oiwn7")]
+[node name="Preparation_State_Tutorial" parent="CanvasLayer/Tutorial_Labels_Group" index="16" unique_id=1099256031 instance=ExtResource("14_oiwn7")]
 visible = false
 key_action = "switch_to_preparation_state"
 dialog_text = "SWITCH TO OBSERVATION STATE."
-appearing_order = 14
+appearing_order = 16
 
-[node name="Action_Start_Tutorial" parent="CanvasLayer/Tutorial_Labels_Group" index="15" unique_id=996397032 instance=ExtResource("14_oiwn7")]
+[node name="Action_Start_Tutorial" parent="CanvasLayer/Tutorial_Labels_Group" index="17" unique_id=996397032 instance=ExtResource("14_oiwn7")]
 visible = false
 key_action = "move_confirm"
 dialog_text = "IF YOU INTERACTED WITH AT LEAST ONE PLAYER, YOU CAN START TURN."
-appearing_order = 15
+appearing_order = 17
+
+[node name="Input_Binds_Next_Step_1" parent="CanvasLayer/Tutorial_Labels_Group" index="18" unique_id=240259264 instance=ExtResource("14_oiwn7")]
+visible = false
+key_action = "next_tutorial_step"
+dialog_text = "YOU CAN CHANGE BINDS IN OPTION/PAUSE MENU."
+appearing_order = 18
 
 [node name="Camera_Start_Position_Marker" parent="." index="8" unique_id=816834425]
 position = Vector2(-577, 419)
