@@ -98,7 +98,8 @@ func when_killed():
 		on_soldier_killed()
 			
 		#queue_free()
-func _select_next_enemy_to_shoot():
+func _select_next_enemy_to_shoot() -> Soldier:
+	var selected_enemy: Soldier = null
 	var lowest_hp_enemy: Soldier = null
 	var lowest_hp_value = INF
 	
@@ -111,8 +112,9 @@ func _select_next_enemy_to_shoot():
 			lowest_hp_value = current_enemy_hp
 			lowest_hp_enemy = enemies_in_sight[enemy_id]
 			
-	enemy_to_shoot = lowest_hp_enemy
-
+	selected_enemy = lowest_hp_enemy
+	return selected_enemy
+	
 func is_soldier_walking() -> bool:
 	return is_walking
 
@@ -196,7 +198,7 @@ func _on_enemy_lost(enemy: Soldier):
 	else:
 		if enemy == enemy_to_shoot:
 			await get_tree().create_timer(soldier_stats.reaction_time.get_value()).timeout
-			_select_next_enemy_to_shoot()
+			enemy_to_shoot = _select_next_enemy_to_shoot()
 		if not current_weapon.weapon_state is WeaponReloadState:
 			current_weapon.change_weapon_state(WeaponShootState.new())
 	

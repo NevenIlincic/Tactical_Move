@@ -179,8 +179,14 @@ func check_for_temporary_perks():
 
 
 func check_soldier_has_action():
+	if has_enemies_in_sight():
+		on_engagement_action(_select_next_enemy_to_shoot())
+		Signals.player_move_continued.emit(self)
+		print(self)
+		return
 	if len(player_path) > 1 or point_to_look:
 		Signals.player_move_continued.emit(self)
+		return
 	else:
 		Signals.player_move_finished.emit(self)
 func _pre_move_actions():

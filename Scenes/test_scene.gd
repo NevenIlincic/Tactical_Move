@@ -127,7 +127,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("pause_menu") and not is_level_completed:
 		pause_menu.show_pause_menu()
 	if Input.is_action_just_pressed("reset_camera_position"):
-		camera.global_position = camera_reset_position_marker.global_position
+		camera.global_position = camera_start_position_marker.global_position
 	#if Input.is_action_just_pressed("quit"):
 		#get_tree().quit()
 	current_state._unhandled_input(event)
