@@ -35,30 +35,6 @@ colors = PackedColorArray(1, 1, 0.43137255, 0, 1, 1, 0.43137255, 0.8039216)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_06txj"]
 size = Vector2(34, 36)
 
-[sub_resource type="Curve" id="Curve_gr3gk"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.98192763, 0.82142854), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_qqij5"]
-curve = SubResource("Curve_gr3gk")
-
-[sub_resource type="Curve" id="Curve_alqoe"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_7jdmd"]
-curve = SubResource("Curve_alqoe")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_cgwcb"]
-particle_flag_disable_z = true
-angle_min = -358.3
-angle_max = 277.2
-direction = Vector3(0, 0, 0)
-spread = 0.0
-gravity = Vector3(0, 0, 0)
-alpha_curve = SubResource("CurveTexture_qqij5")
-emission_curve = SubResource("CurveTexture_7jdmd")
-
 [sub_resource type="Animation" id="Animation_2i7on"]
 length = 0.001
 tracks/0/type = "value"
@@ -128,6 +104,30 @@ _data = {
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jjc5n"]
 size = Vector2(1408, 1024)
+
+[sub_resource type="Curve" id="Curve_1kajf"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.98192763, 0.82142854), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_qqij5"]
+curve = SubResource("Curve_1kajf")
+
+[sub_resource type="Curve" id="Curve_v1ooi"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_7jdmd"]
+curve = SubResource("Curve_v1ooi")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_l07se"]
+particle_flag_disable_z = true
+angle_min = -358.3
+angle_max = 277.2
+direction = Vector3(0, 0, 0)
+spread = 0.0
+gravity = Vector3(0, 0, 0)
+alpha_curve = SubResource("CurveTexture_qqij5")
+emission_curve = SubResource("CurveTexture_7jdmd")
 
 [node name="Enemy" type="Node2D" unique_id=1440065138 groups=["enemy_node", "soldier"]]
 z_index = 2
@@ -200,9 +200,6 @@ collision_layer = 4
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Door_Detection_Area" unique_id=332521158]
 shape = SubResource("RectangleShape2D_06txj")
 
-[node name="GunBlastEffect" parent="." unique_id=1793492474 instance=ExtResource("2_cgwcb")]
-process_material = SubResource("ParticleProcessMaterial_cgwcb")
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1539685322]
 libraries/ = SubResource("AnimationLibrary_2wdta")
 
@@ -229,6 +226,12 @@ texture_filter = 1
 texture_repeat = 1
 position = Vector2(7, 0)
 texture = ExtResource("12_1kajf")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=504575328]
+follow_viewport_enabled = true
+
+[node name="GunBlastEffect" parent="CanvasLayer" unique_id=1793492474 instance=ExtResource("2_cgwcb")]
+process_material = SubResource("ParticleProcessMaterial_l07se")
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="body_entered" from="Rays_Activation_Area" to="." method="_on_rays_activation_area_body_entered"]

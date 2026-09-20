@@ -21,7 +21,8 @@ var soldier_type: SoldierType
 @onready var bullet_line: SoldierBulletLine = $Bullet_Line
 
 #EFFECTS
-@onready var gun_blast_effect: GunBlastEffect = $GunBlastEffect
+#@onready var gun_blast_effect: GunBlastEffect = $GunBlastEffect
+@onready var gun_blast_effect: GunBlastEffect = $CanvasLayer/GunBlastEffect
 
 #BULLET SPAWN POINTS
 @onready var m4a1_rifle_bullet_spawn_point: Marker2D = $m4a1_rifle_bullet_spawn_point

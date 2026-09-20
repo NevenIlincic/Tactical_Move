@@ -60,8 +60,7 @@ script = ExtResource("1_alqoe")
 [node name="PointLight2D" type="PointLight2D" parent="." unique_id=291150145]
 texture_filter = 1
 enabled = false
-color = Color(1.5038263, 1.449612, 0, 1)
-blend_mode = 2
+color = Color(1.5039519, 1.3127227, 0, 0.24313726)
 shadow_enabled = true
 texture = SubResource("GradientTexture2D_go51y")
 texture_scale = 1.5

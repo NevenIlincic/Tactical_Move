@@ -140,18 +140,24 @@ blend_mode = 3
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q6by2"]
 size = Vector2(34, 36)
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_58pdj"]
+light_mode = 1
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fhwqp"]
+size = Vector2(48, 48)
+
 [sub_resource type="Curve" id="Curve_gr3gk"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.98192763, 0.82142854), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_qqij5"]
+[sub_resource type="CurveTexture" id="CurveTexture_cifhn"]
 curve = SubResource("Curve_gr3gk")
 
 [sub_resource type="Curve" id="Curve_alqoe"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_7jdmd"]
+[sub_resource type="CurveTexture" id="CurveTexture_vvysc"]
 curve = SubResource("Curve_alqoe")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_rw7ms"]
@@ -161,14 +167,8 @@ angle_max = 277.2
 direction = Vector3(0, 0, 0)
 spread = 0.0
 gravity = Vector3(0, 0, 0)
-alpha_curve = SubResource("CurveTexture_qqij5")
-emission_curve = SubResource("CurveTexture_7jdmd")
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_58pdj"]
-light_mode = 1
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_fhwqp"]
-size = Vector2(48, 48)
+alpha_curve = SubResource("CurveTexture_cifhn")
+emission_curve = SubResource("CurveTexture_vvysc")
 
 [node name="Player" type="Node2D" unique_id=1108589071 groups=["Player", "soldier"]]
 z_index = 2
@@ -259,8 +259,8 @@ position = Vector2(36, 7)
 [node name="Player_Avatar" type="Sprite2D" parent="." unique_id=824355655]
 
 [node name="Vision_Polygon" type="Polygon2D" parent="." unique_id=1560586749]
-modulate = Color(0.7882353, 0.7764706, 0.6392157, 0.32156864)
-light_mask = 2
+modulate = Color(0.7882353, 0.7764706, 0.6392157, 0)
+light_mask = 3
 material = SubResource("CanvasItemMaterial_76bep")
 use_parent_material = true
 color = Color(1, 1, 1, 0)
@@ -288,9 +288,6 @@ offset = Vector2(448, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Door_Detection_Area" unique_id=233869902]
 shape = SubResource("RectangleShape2D_q6by2")
-
-[node name="GunBlastEffect" parent="." unique_id=1793492474 instance=ExtResource("2_rw7ms")]
-process_material = SubResource("ParticleProcessMaterial_rw7ms")
 
 [node name="Healing_Needed_Sprite" type="Sprite2D" parent="." unique_id=872506951]
 visible = false
@@ -328,6 +325,12 @@ texture_filter = 1
 texture_repeat = 1
 position = Vector2(7, 0)
 texture = ExtResource("17_cifhn")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=290687053]
+follow_viewport_enabled = true
+
+[node name="GunBlastEffect" parent="CanvasLayer" unique_id=1793492474 instance=ExtResource("2_rw7ms")]
+process_material = SubResource("ParticleProcessMaterial_rw7ms")
 
 [connection signal="area_entered" from="Selection_Area" to="." method="_on_selection_area_area_entered"]
 [connection signal="area_exited" from="Selection_Area" to="." method="_on_selection_area_area_exited"]

@@ -1,10 +1,10 @@
 class_name MuzzleCocoon extends RigidBody2D
 
 const IMPULSE_MIN_VALUE: float = 100.0
-const IMPULSE_MAX_VALUE: float = 250.0
+const IMPULSE_MAX_VALUE: float = 150.0
 const TORQUE_IMPULSE_MIN_VALUE: float = -50.0
 const TORQUE_IMPULSE_MAX_VALUE: float = 50.0
-const LINEAR_DAMP: float = 4.0
+const LINEAR_DAMP_VALUE: float = 4.0
 
 @onready var muzzle_sprite: Sprite2D = $Muzzle_Sprite
 
@@ -18,7 +18,7 @@ func do_dropout_effect(starting_position: Vector2, player_rotation: float):
 	apply_impulse(dropout_direction * impuls)
 	apply_torque_impulse(randf_range(TORQUE_IMPULSE_MIN_VALUE, TORQUE_IMPULSE_MAX_VALUE))
 	
-	linear_damp = 4.0
+	linear_damp = LINEAR_DAMP_VALUE
 	
 	if muzzle_sprite:
 		var tween = create_tween()

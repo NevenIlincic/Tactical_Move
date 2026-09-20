@@ -2,12 +2,16 @@ class_name GunBlastEffect extends GPUParticles2D
 
 @onready var point_light_2d: PointLight2D = $PointLight2D
 
+signal effect_triggered()
+
 func do_effect(position: Vector2):
 	global_position = position
 	emitting = true
+	effect_triggered.emit(position)
+	
 	point_light_2d.enabled = true
-
 	var tween = create_tween()
+
 
 	tween.tween_property(point_light_2d, "energy", 1.5, 0.05)
 	tween.tween_property(point_light_2d, "energy", 1.0, 0.05)
