@@ -1,7 +1,7 @@
 [gd_scene format=4 uid="uid://d0gu6ucepjvex"]
 
 [ext_resource type="PackedScene" uid="uid://dhnsrmoddn8sp" path="res://Scenes/Levels/Level.tscn" id="1_jr8ct"]
-[ext_resource type="Texture2D" uid="uid://by41vprbe8yxy" path="res://Sprites/Tiles/New Piskel-2.png (51).png" id="2_dodo2"]
+[ext_resource type="Texture2D" uid="uid://by41vprbe8yxy" path="res://Sprites/Tiles/wood.png" id="2_dodo2"]
 [ext_resource type="Texture2D" uid="uid://coidsrajfw0k4" path="res://Sprites/Tiles/concrete.png" id="3_4w7dd"]
 [ext_resource type="Texture2D" uid="uid://b57h4w4d5rop7" path="res://Sprites/Tiles/Interior/Dark_Ground.png" id="4_uoqvf"]
 [ext_resource type="Texture2D" uid="uid://bo60888547asv" path="res://Sprites/Wall/New Piskel (30).png" id="5_pa2hw"]

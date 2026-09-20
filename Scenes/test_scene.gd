@@ -107,11 +107,11 @@ func set_level_state(new_state: State):
 		current_state.queue_free()
 	current_state = new_state
 
-func set_occupied_tiles_list():
-	list_occupied_tiles.clear()
-	for player in players:
-		var starting_tile: Vector2i = tile_map.local_to_map(tile_map.to_local(player.global_position))
-		list_occupied_tiles.append(starting_tile)
+#func set_occupied_tiles_list():
+	#list_occupied_tiles.clear()
+	#for player in players:
+		#var starting_tile: Vector2i = tile_map.local_to_map(tile_map.to_local(player.global_position))
+		#list_occupied_tiles.append(starting_tile)
 		
 func connect_to_signals():
 	Signals.open_upgrade_removal_confirmation_dialog.connect(_on_confirmation_dialog_opened)

@@ -176,7 +176,8 @@ light_mask = 2
 color = Color(0.5822249, 0.63125, 0.33140624, 0.19500001)
 polygon = PackedVector2Array(0, 0, -256, -256, 256, -256)
 script = ExtResource("3_fw0yv")
-max_range = 1000.0
+max_range = 900.0
+fov_degrees = 60.0
 ray_count = 50.0
 
 [node name="Enemy_Target_Line" type="Line2D" parent="Vision_Polygon" unique_id=1406944396]

@@ -1,7 +1,7 @@
 [gd_scene format=4 uid="uid://cmghvc8etnar1"]
 
 [ext_resource type="Script" uid="uid://b58hel4nndam5" path="res://Scenes/test_scene.gd" id="1_4ms0o"]
-[ext_resource type="Texture2D" uid="uid://by41vprbe8yxy" path="res://Sprites/Tiles/New Piskel-2.png (51).png" id="4_tq75k"]
+[ext_resource type="Texture2D" uid="uid://by41vprbe8yxy" path="res://Sprites/Tiles/wood.png" id="4_tq75k"]
 [ext_resource type="Script" uid="uid://bencr8mnns7ut" path="res://Scripts/Patterns/Stat/stat.gd" id="5_8c5ma"]
 [ext_resource type="PackedScene" uid="uid://y3pndfcq1kxo" path="res://Scenes/Soldier/Enemy/Enemy.tscn" id="5_svcn8"]
 [ext_resource type="Texture2D" uid="uid://b57h4w4d5rop7" path="res://Sprites/Tiles/Interior/Dark_Ground.png" id="6_jygqt"]
