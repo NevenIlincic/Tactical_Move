@@ -6,6 +6,8 @@ class_name Soldier extends Node2D
 @onready var muzzle_dropout_spawn_point: Marker2D = $Muzzle_Dropout_Spawn_Point
 const MUZZLE_COCOON = preload("uid://dqqyoom4gsr0e")
 
+@onready var hit_sprite: Sprite2D = $Hit_Sprite
+
 
 enum SoldierType{
 	PLAYER,
@@ -166,6 +168,7 @@ func reset_path():
 	reset_after_move_looking_point()
 
 func when_been_shoot_at(enemy: Soldier):
+	do_hit_effect()
 	if not enemy_to_shoot:
 		do_when_shot_at()			
 		on_engagement_action(enemy)
@@ -310,7 +313,7 @@ func do_actions():
 	_pre_move_actions()
 	await _move()
 	_on_actions_finished()
-	
+
 
 func disconnect_from_signals():
 	if Signals.enemy_soldier_killed.is_connected(_on_enemy_soldier_killed):
@@ -333,3 +336,4 @@ func do_before_movement(): pass
 func do_after_movement(): pass
 func on_soldier_killed(): pass
 func do_when_shot_at(): pass
+func do_hit_effect(): pass

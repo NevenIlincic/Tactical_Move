@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cjyx66lir3nk8" path="res://Scenes/Soldier/Player/player_stats.gd" id="1_1t72u"]
 [ext_resource type="Texture2D" uid="uid://cyexu3fm2aq3s" path="res://Sprites/HUD/background.png" id="1_i03bc"]
-[ext_resource type="Texture2D" uid="uid://dcjpq0yr88po1" path="res://Sprites/Player/Avatars/male_soldier.png" id="2_1t72u"]
+[ext_resource type="Texture2D" uid="uid://dcjpq0yr88po1" path="res://Sprites/Soldier/Player/Avatars/male_soldier.png" id="2_1t72u"]
 [ext_resource type="Texture2D" uid="uid://cr31y8uph8gtp" path="res://Sprites/Weapon/pistol.png" id="5_ss5un"]
 [ext_resource type="Texture2D" uid="uid://c8g306bg7ys0b" path="res://Sprites/HUD/ammo.png" id="6_a13ou"]
 [ext_resource type="Texture2D" uid="uid://dou87mqtbaj0r" path="res://Sprites/HUD/running_icon.png" id="7_vcxfj"]

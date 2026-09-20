@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dk6hnkfrk8imb"
-path="res://.godot/imported/female_soldier.png-b5145b3fa187bd1f532e38771cbc8295.ctex"
+uid="uid://drqsoj7yweuy2"
+path="res://.godot/imported/light_texture.png-7a089b5e5edabc8ffa7aefec975f6314.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Player/Avatars/female_soldier.png"
-dest_files=["res://.godot/imported/female_soldier.png-b5145b3fa187bd1f532e38771cbc8295.ctex"]
+source_file="res://Sprites/Soldier/Player/light_texture.png"
+dest_files=["res://.godot/imported/light_texture.png-7a089b5e5edabc8ffa7aefec975f6314.ctex"]
 
 [params]
 

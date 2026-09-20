@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bul8qv1rsnp6o"
-path="res://.godot/imported/player_dying_sprites.png-76baf70d1f75c9b6b511958b392ccf47.ctex"
+uid="uid://d1k6yblmluefj"
+path="res://.godot/imported/soldier_hit_effect.png-1e53ae89b23e1010e44bf7d8b33d3cc5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Player/player_dying_sprites.png"
-dest_files=["res://.godot/imported/player_dying_sprites.png-76baf70d1f75c9b6b511958b392ccf47.ctex"]
+source_file="res://Sprites/Soldier/soldier_hit_effect.png"
+dest_files=["res://.godot/imported/soldier_hit_effect.png-1e53ae89b23e1010e44bf7d8b33d3cc5.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://jc4u6cofkstv"
-path="res://.godot/imported/medic_pistol_sprites.png-d96d71d8dd183db782d16f95ca4c19fa.ctex"
+uid="uid://d1tdmtvde540b"
+path="res://.godot/imported/enemy.png-9382defa8e0b4e722fe2a7062d77f6d4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Player/Medic/medic_pistol_sprites.png"
-dest_files=["res://.godot/imported/medic_pistol_sprites.png-d96d71d8dd183db782d16f95ca4c19fa.ctex"]
+source_file="res://Sprites/Soldier/Enemy/enemy.png"
+dest_files=["res://.godot/imported/enemy.png-9382defa8e0b4e722fe2a7062d77f6d4.ctex"]
 
 [params]
 

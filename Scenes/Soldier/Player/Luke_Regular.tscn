@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bpg5m07qvbc3m"]
 
 [ext_resource type="PackedScene" uid="uid://chy7dddrrr700" path="res://Scenes/Soldier/Player/Player.tscn" id="1_muhm5"]
-[ext_resource type="Texture2D" uid="uid://c07go6e5fp3av" path="res://Sprites/Player/Avatars/male_soldier_3.png" id="2_3estw"]
+[ext_resource type="Texture2D" uid="uid://c07go6e5fp3av" path="res://Sprites/Soldier/Player/Avatars/male_soldier_3.png" id="2_3estw"]
 [ext_resource type="Script" uid="uid://bencr8mnns7ut" path="res://Scripts/Patterns/Stat/stat.gd" id="3_ag2js"]
 [ext_resource type="Script" uid="uid://cp4iog725gtuq" path="res://Scripts/Soldier/Player/player_stats.gd" id="4_12w32"]
 [ext_resource type="Script" uid="uid://cubw4ogrqm6po" path="res://Scripts/Weapon/weapon.gd" id="5_7g5cs"]

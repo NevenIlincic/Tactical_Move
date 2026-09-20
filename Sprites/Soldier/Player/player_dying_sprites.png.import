@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c442lp23townj"
-path="res://.godot/imported/player.png-8f2913c02cf9a99f5056a099d9c84f4f.ctex"
+uid="uid://bul8qv1rsnp6o"
+path="res://.godot/imported/player_dying_sprites.png-3cebcb2512456e64c5ad55ed31abfa8d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Player/player.png"
-dest_files=["res://.godot/imported/player.png-8f2913c02cf9a99f5056a099d9c84f4f.ctex"]
+source_file="res://Sprites/Soldier/Player/player_dying_sprites.png"
+dest_files=["res://.godot/imported/player_dying_sprites.png-3cebcb2512456e64c5ad55ed31abfa8d.ctex"]
 
 [params]
 

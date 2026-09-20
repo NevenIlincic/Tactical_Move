@@ -113,6 +113,14 @@ func _on_enemy_lost_extra(_enemy: Soldier) -> void:
 	pass
 	#hide_enemy()
 
+func do_hit_effect():
+	enemy_sprite.visible = false
+	hit_sprite.visible = true
+	get_tree().create_timer(0.1).timeout.connect(func(): 
+		enemy_sprite.visible = true
+		hit_sprite.visible = false
+		)
+
 func evaluate_best_move():
 	var map_rid = get_world_2d().navigation_map
 

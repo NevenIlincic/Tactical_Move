@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://gvmk7pgk7mlc"
-path="res://.godot/imported/Player_Soldier_m4a1_rifle.png-857c2399a4804ad9e0cd92c5296d2e6e.ctex"
+uid="uid://dk6hnkfrk8imb"
+path="res://.godot/imported/female_soldier.png-a1cfa632637ae3cde0c22b4795027f2e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Player/Player_Soldier_m4a1_rifle.png"
-dest_files=["res://.godot/imported/Player_Soldier_m4a1_rifle.png-857c2399a4804ad9e0cd92c5296d2e6e.ctex"]
+source_file="res://Sprites/Soldier/Player/Avatars/female_soldier.png"
+dest_files=["res://.godot/imported/female_soldier.png-a1cfa632637ae3cde0c22b4795027f2e.ctex"]
 
 [params]
 

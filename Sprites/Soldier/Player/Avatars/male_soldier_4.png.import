@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://uh5f1enu47sn"
-path="res://.godot/imported/New Piskel-2.png (55).png-cdacd37ed8069d102832e2a0048ec02e.ctex"
+uid="uid://5dn5fh731jps"
+path="res://.godot/imported/male_soldier_4.png-41a690987ad4d3bd02fd0c2e281da627.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Enemy/New Piskel-2.png (55).png"
-dest_files=["res://.godot/imported/New Piskel-2.png (55).png-cdacd37ed8069d102832e2a0048ec02e.ctex"]
+source_file="res://Sprites/Soldier/Player/Avatars/male_soldier_4.png"
+dest_files=["res://.godot/imported/male_soldier_4.png-41a690987ad4d3bd02fd0c2e281da627.ctex"]
 
 [params]
 

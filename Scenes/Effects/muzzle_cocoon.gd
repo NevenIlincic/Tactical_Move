@@ -1,7 +1,7 @@
 class_name MuzzleCocoon extends RigidBody2D
 
 const IMPULSE_MIN_VALUE: float = 100.0
-const IMPULSE_MAX_VALUE: float = 150.0
+const IMPULSE_MAX_VALUE: float = 250.0
 const TORQUE_IMPULSE_MIN_VALUE: float = -50.0
 const TORQUE_IMPULSE_MAX_VALUE: float = 50.0
 const LINEAR_DAMP: float = 4.0
