@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Cards_And_Moves"
-run/main_scene="uid://cy1p48gg0002y"
+run/main_scene="uid://d0gu6ucepjvex"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
 

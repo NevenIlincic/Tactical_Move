@@ -317,6 +317,9 @@ position = Vector2(4, 1)
 texture = ExtResource("16_cifhn")
 hframes = 3
 
+[node name="Muzzle_Dropout_Spawn_Point" type="Marker2D" parent="." unique_id=1450579700]
+position = Vector2(13, 5)
+
 [connection signal="area_entered" from="Selection_Area" to="." method="_on_selection_area_area_entered"]
 [connection signal="area_exited" from="Selection_Area" to="." method="_on_selection_area_area_exited"]
 [connection signal="mouse_entered" from="Selection_Area" to="." method="_on_selection_area_mouse_entered"]

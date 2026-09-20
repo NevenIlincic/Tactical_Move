@@ -218,6 +218,9 @@ visible = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Rays_Activation_Area" unique_id=546425416]
 shape = SubResource("RectangleShape2D_jjc5n")
 
+[node name="Muzzle_Dropout_Spawn_Point" type="Marker2D" parent="." unique_id=1233462994]
+position = Vector2(13, 5)
+
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="body_entered" from="Rays_Activation_Area" to="." method="_on_rays_activation_area_body_entered"]
 [connection signal="body_exited" from="Rays_Activation_Area" to="." method="_on_rays_activation_area_body_exited"]

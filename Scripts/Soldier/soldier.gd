@@ -2,6 +2,11 @@
 class_name Soldier extends Node2D
 #@onready var vision_polygon: SoldierVision = $CanvasGroup/Vision_Polygon
 
+#MUZZLE EFFECT
+@onready var muzzle_dropout_spawn_point: Marker2D = $Muzzle_Dropout_Spawn_Point
+const MUZZLE_COCOON = preload("uid://dqqyoom4gsr0e")
+
+
 enum SoldierType{
 	PLAYER,
 	ENEMY
@@ -12,7 +17,10 @@ var soldier_type: SoldierType
 @onready var vision_polygon: SoldierVision = $Vision_Polygon
 @onready var hitbox_collision_shape: CollisionShape2D = $Hitbox/Hitbox_Collision_Shape
 @onready var bullet_line: SoldierBulletLine = $Bullet_Line
+
+#EFFECTS
 @onready var gun_blast_effect: GunBlastEffect = $GunBlastEffect
+
 #BULLET SPAWN POINTS
 @onready var m4a1_rifle_bullet_spawn_point: Marker2D = $m4a1_rifle_bullet_spawn_point
 @onready var pistol_bullet_spawn_point: Marker2D = $pistol_bullet_spawn_point
