@@ -88,3 +88,6 @@ player_name = "Keith"
 player_avatar = ExtResource("2_g26ux")
 soldier_stats = SubResource("Resource_vxaiv")
 weapons = Array[ExtResource("5_b0g1u")]([SubResource("Resource_v6pem")])
+
+[node name="Player_Path_Line" parent="." index="0" unique_id=2110637716]
+default_color = Color(7.3286095, 7.3286095, 7.3286095, 1)

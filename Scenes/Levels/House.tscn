@@ -251,7 +251,7 @@ weapon_stats = ExtResource("16_pc65a")
 metadata/_custom_type_script = "uid://bmr38t2grjqqv"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5o8og"]
-size = Vector2(7, 400)
+size = Vector2(24, 400)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gkt43"]
 size = Vector2(576, 64)
@@ -339,7 +339,7 @@ position = Vector2(26, 323)
 collision_layer = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4" index="0" unique_id=110358197]
-position = Vector2(33.5, -3)
+position = Vector2(34, -3)
 shape = SubResource("RectangleShape2D_5o8og")
 
 [node name="StaticBody2D5" type="StaticBody2D" parent="." index="18" unique_id=85164539 groups=["wall"]]
@@ -361,7 +361,7 @@ shape = SubResource("RectangleShape2D_yxivt")
 collision_layer = 3
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D7" index="0" unique_id=248856073]
-polygon = PackedVector2Array(63, 522, 64, 512, 896, 512, 896, 520)
+polygon = PackedVector2Array(63, 522, 64, 504, 896, 504, 896, 520)
 
 [node name="StaticBody2D8" type="StaticBody2D" parent="." index="21" unique_id=1886692827 groups=["wall"]]
 collision_layer = 3
