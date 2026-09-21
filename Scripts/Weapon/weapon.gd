@@ -36,3 +36,6 @@ func update(delta: float):
 
 func get_bullet_spawn_point(_soldier: Soldier):
 	pass
+
+func check_has_bullets() -> bool:
+	return weapon_stats.current_ammo.base_value > 0

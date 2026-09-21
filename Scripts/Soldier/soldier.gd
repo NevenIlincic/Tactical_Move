@@ -201,9 +201,10 @@ func _on_enemy_lost(enemy: Soldier):
 		
 	if enemies_in_sight.is_empty():
 		enemy_to_shoot = null
-		if not current_weapon.weapon_state is WeaponReloadState:
+		#if not current_weapon.weapon_state is WeaponReloadState:
+		if current_weapon.check_has_bullets():	
 			current_weapon.change_weapon_state(WeaponIdleState.new())
-		
+			
 		await get_tree().create_timer(0.2).timeout
 		if is_in_finished_state():
 			Signals.player_move_finished.emit(self)
@@ -311,6 +312,7 @@ func do_actions():
 		Signals.player_move_finished.emit(self)
 		queue_free()
 		return
+	
 	_pre_move_actions()
 	await _move()
 	_on_actions_finished()

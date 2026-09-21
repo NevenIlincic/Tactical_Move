@@ -182,7 +182,6 @@ func check_soldier_has_action():
 	if has_enemies_in_sight():
 		on_engagement_action(_select_next_enemy_to_shoot())
 		Signals.player_move_continued.emit(self)
-		print(self)
 		return
 	if len(player_path) > 1 or point_to_look:
 		Signals.player_move_continued.emit(self)
@@ -208,6 +207,10 @@ func add_point_to_path(point: Vector2) -> void:
 		move_to_position_marker.global_position = point
 		player_look_at_line_after_move.set_point_position(0, point)
 
+
+func disconnect_from_signals():
+	super.disconnect_from_signals()
+	
 
 func reset_path():
 	super.reset_path()

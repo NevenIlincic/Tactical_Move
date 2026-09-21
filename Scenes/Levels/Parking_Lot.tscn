@@ -900,7 +900,7 @@ position = Vector2(-784, -168)
 rotation = 1.666733
 soldier_stats = SubResource("Resource_163pi")
 
-[node name="Player" parent="." index="31" unique_id=1216521491 instance=ExtResource("15_r6fuj")]
+[node name="Valerie_Regular" parent="." index="31" unique_id=1216521491 instance=ExtResource("15_r6fuj")]
 position = Vector2(-1256, 528)
 
 [node name="MedicPlayer" parent="." index="32" unique_id=1108589071 instance=ExtResource("14_j14y5")]

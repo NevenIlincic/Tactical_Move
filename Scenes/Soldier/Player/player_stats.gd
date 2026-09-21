@@ -1,4 +1,4 @@
-extends Control
+class_name PlayerStatsHUD extends Control
 
 @onready var player_avatar: Sprite2D = $Player_Avatar
 @onready var player_name_label: Label = $Player_Name_Label
@@ -53,6 +53,30 @@ func connect_to_signals():
 	Signals.engagement_strategy_changed.connect(_on_engagement_strategy_changed)
 	Signals.player_low_hp_applied.connect(_on_low_hp_applied)
 	Signals.movement_penalty_applied_removed.connect(_on_movement_changed)
+
+func disconnect_from_signals():
+	if Signals.set_selected_player.is_connected(_on_selected_player):
+		Signals.set_selected_player.disconnect(_on_selected_player)
+	if Signals.deselect_player.is_connected(_on_deselect_player):
+		Signals.deselect_player.disconnect(_on_deselect_player)
+	if Signals.action_started.is_connected(_on_action_started):
+		Signals.action_started.disconnect(_on_action_started)
+	if Signals.permanent_upgrade_applied.is_connected(_on_permanent_upgrade_applied):
+		Signals.permanent_upgrade_applied.disconnect(_on_permanent_upgrade_applied)
+	if Signals.permanent_upgrade_removed.is_connected(_on_permanent_upgrade_removed):
+		Signals.permanent_upgrade_removed.disconnect(_on_permanent_upgrade_removed)
+	if Signals.update_ammo_stats_label.is_connected(_on_player_shoot):
+		Signals.update_ammo_stats_label.disconnect(_on_player_shoot)
+	if Signals.update_HP_bar_stats_label.is_connected(_on_player_hit):
+		Signals.update_HP_bar_stats_label.disconnect(_on_player_hit)
+	if Signals.engagement_strategy_changed.is_connected(_on_engagement_strategy_changed):
+		Signals.engagement_strategy_changed.disconnect(_on_engagement_strategy_changed)
+	if Signals.player_low_hp_applied.is_connected(_on_low_hp_applied):
+		Signals.player_low_hp_applied.disconnect(_on_low_hp_applied)
+	if Signals.movement_penalty_applied_removed.is_connected(_on_movement_changed):
+		Signals.movement_penalty_applied_removed.disconnect(_on_movement_changed)
+
+
 
 func _on_selected_player(player: Player):
 	if not player.is_killed:

@@ -47,6 +47,7 @@ var current_confirm_callback: Callable
 @onready var camera_reset_position_marker: Marker2D = $Camera_Reset_Position_Marker
 @onready var camera_start_position_marker: Marker2D = $Camera_Start_Position_Marker
 @onready var camera: Camera2D = $Camera2D
+@onready var player_stats: PlayerStatsHUD = $CanvasLayer/PlayerStats
 
 
 
@@ -162,10 +163,12 @@ func _on_action_canceled():
 	confirmation_dialog.visible = false
 
 func level_completed():
+	player_stats.disconnect_from_signals()
 	is_level_completed = true
 	await start_end_game_timer()
 	end_game_menu.on_level_completed(self)
 func level_failed():
+	player_stats.disconnect_from_signals()
 	is_level_completed = true
 	await start_end_game_timer()
 	end_game_menu.on_level_failed(self)
