@@ -92,7 +92,7 @@ func update_preview() -> void:
 func is_path_blocked(from: Vector2, to: Vector2) -> bool:
 	var space_state = level.get_world_2d().direct_space_state
 	var query = PhysicsRayQueryParameters2D.create(from, to)
-	query.collision_mask = 2 
+	query.collision_mask = 2 | 8
 	var result = space_state.intersect_ray(query)
 	if not result.is_empty():
 		return true 
@@ -120,8 +120,7 @@ func check_is_mouse_over_wall() -> bool:
 	var parameters = PhysicsPointQueryParameters2D.new()
 	parameters.position = mouse_global_pos
 	parameters.collide_with_bodies = true
-	# parameters.collision_mask = ...      
-	
+	 	
 	var space_state = level.get_world_2d().direct_space_state
 	var results = space_state.intersect_point(parameters)
 	

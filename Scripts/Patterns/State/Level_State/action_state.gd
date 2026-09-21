@@ -87,7 +87,7 @@ func _on_player_move_finished(soldier: Soldier):
 		num_player_finished_moves = 0
 		for player_id: String in alive_players:
 			#print(player.soldier_id, " ", current_action_killed_players)
-			if not current_action_killed_players.has(player_id):
+			if not current_action_killed_players.has(player_id) and is_instance_valid(alive_players[player_id]) or not alive_players[player_id].is_queued_for_deletion():
 				var player: Player = alive_players[player_id]
 				player.is_queued_for_medic_healing = false
 				player.healing_needed_sprite.visible = false

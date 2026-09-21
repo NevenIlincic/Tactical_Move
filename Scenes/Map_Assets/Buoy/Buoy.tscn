@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://2tedvi37fqab"]
+
+[ext_resource type="Script" uid="uid://b18yibwu2cw4h" path="res://Scenes/Levels/ball.gd" id="1_518sh"]
+[ext_resource type="Texture2D" uid="uid://cvtxutkbnkche" path="res://Sprites/Tiles/Buoy/Buoy.png" id="2_1e0jw"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_06txj"]
+radius = 16.0
+
+[node name="Buoy" type="RigidBody2D" unique_id=492921547]
+gravity_scale = 0.0
+contact_monitor = true
+max_contacts_reported = 1
+linear_damp = 4.0
+script = ExtResource("1_518sh")
+
+[node name="Buoy_Sprite" type="Sprite2D" parent="." unique_id=843491505]
+texture_filter = 1
+texture_repeat = 1
+texture = ExtResource("2_1e0jw")
+hframes = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1888613985]
+shape = SubResource("CircleShape2D_06txj")
