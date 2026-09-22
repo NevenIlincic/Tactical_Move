@@ -146,11 +146,11 @@ theme_override_font_sizes/font_size = 32
 text = "Neven Ilinčić (demo)"
 
 [node name="Level_Selection_Button" parent="." unique_id=900227919 instance=ExtResource("15_4cq6o")]
-position = Vector2(896, 424)
+position = Vector2(896, 392)
 button_text = "START"
 
 [node name="Options_Button" parent="." unique_id=2106830909 instance=ExtResource("15_4cq6o")]
-position = Vector2(896, 512)
+position = Vector2(896, 480)
 button_text = "OPTIONS"
 
 [node name="BlueCar" parent="." unique_id=1145836756 instance=ExtResource("15_wuwrm")]
@@ -184,3 +184,7 @@ blend_mode = 2
 shadow_enabled = true
 texture = ExtResource("10_hj5rx")
 texture_scale = 1.41
+
+[node name="Quit_Button" parent="." unique_id=407185381 instance=ExtResource("15_4cq6o")]
+position = Vector2(896, 568)
+button_text = "QUIT"

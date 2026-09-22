@@ -61,6 +61,8 @@ func _on_texture_rect_gui_input(event: InputEvent) -> void:
 					resume_game.emit()
 				"RETRY":
 					retry_level.emit()
+				"QUIT":
+					get_tree().quit()
 
 func hide_button():
 	visible = false

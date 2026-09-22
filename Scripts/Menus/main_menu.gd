@@ -12,6 +12,7 @@ extends Node2D
 ####### BUTTONS
 @onready var options_button: NavigationButton = $Options_Button
 @onready var level_selection_button: NavigationButton = $Level_Selection_Button
+@onready var quit_button: NavigationButton = $Quit_Button
 
 
 ###
@@ -26,6 +27,7 @@ func _ready() -> void:
 	options_menu.visible = false
 	level_selection_button.appear_effect_animation_player.play("appear_animation")
 	options_button.appear_effect_animation_player.play("appear_animation")
+	quit_button.appear_effect_animation_player.play("appear_animation")
 	AudioManager.play_background_music(AudioManager.BACKGROUND_MUSIC_MENU_1)
 
 func connect_to_signals():
