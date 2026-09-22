@@ -93,6 +93,7 @@ func _on_player_move_finished(soldier: Soldier):
 				player.healing_needed_sprite.visible = false
 				if player is MedicPlayer:
 					player._check_is_healing_available(action_duration)
+		
 		level.set_level_state(PreparationState.new([level]))
 	
 func _on_player_move_continued(soldier: Soldier):
