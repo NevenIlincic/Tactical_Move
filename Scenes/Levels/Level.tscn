@@ -58,9 +58,18 @@ theme_override_font_sizes/font_size = 48
 text = "0:0:0"
 
 [node name="PauseMenu" parent="CanvasLayer" unique_id=487446487 instance=ExtResource("8_etd3f")]
+visible = false
 
 [node name="EndGameMenu" parent="CanvasLayer" unique_id=705450075 instance=ExtResource("8_d3u4r")]
 visible = false
+
+[node name="FPS_Label" type="Label" parent="CanvasLayer" unique_id=1445502002]
+offset_left = 728.0
+offset_top = 24.0
+offset_right = 768.0
+offset_bottom = 45.0
+theme_override_font_sizes/font_size = 32
+text = "FPS:"
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1824573650]
 position = Vector2(984, 320)

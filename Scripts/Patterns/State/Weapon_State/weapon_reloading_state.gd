@@ -16,4 +16,6 @@ func update(delta: float):
 func on_reload_finished():
 	if not current_weapon.weapon_state is WeaponShootState:
 		current_weapon.weapon_stats.current_ammo.base_value = current_weapon.weapon_stats.max_ammo_capacity.get_value()
+		if current_weapon.weapon_owner is Player:
+			Signals.update_ammo_stats_label.emit(current_weapon.weapon_owner)
 		current_weapon.change_weapon_state(WeaponShootState.new())

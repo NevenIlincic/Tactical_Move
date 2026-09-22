@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://y3pndfcq1kxo"]
 
 [ext_resource type="Script" uid="uid://cgpj7hlgh52n1" path="res://Scripts/Soldier/Enemy/enemy.gd" id="1_02vxf"]
-[ext_resource type="Texture2D" uid="uid://crkf6i8s2lmn6" path="res://Sprites/Enemy/enemy_soldier_walking_sprites.png" id="2_2i7on"]
+[ext_resource type="Texture2D" uid="uid://crkf6i8s2lmn6" path="res://Sprites/Soldier/Enemy/enemy_soldier_walking_sprites.png" id="2_2i7on"]
 [ext_resource type="Resource" uid="uid://bqytja2sqng4q" path="res://Resources/Player_Stats/Regular_Soldier_Stats.tres" id="2_5e0s2"]
 [ext_resource type="PackedScene" uid="uid://b4siawy1vgojx" path="res://Scenes/Effects/Gun_Blast_Effect.tscn" id="2_cgwcb"]
 [ext_resource type="Script" uid="uid://cubw4ogrqm6po" path="res://Scripts/Weapon/weapon.gd" id="3_1kajf"]
@@ -10,7 +10,8 @@
 [ext_resource type="Script" uid="uid://bmr38t2grjqqv" path="res://Scripts/Weapon/m4a1_rifle.gd" id="4_v1ooi"]
 [ext_resource type="Script" uid="uid://duyphgu7sdufm" path="res://Scenes/Soldier/soldier_bullet_line.gd" id="5_cmdj1"]
 [ext_resource type="Resource" uid="uid://ttdsvtwhyg75" path="res://Resources/Weapon_Stats/m4a1_Rifle_Stats.tres" id="5_l07se"]
-[ext_resource type="Texture2D" uid="uid://cj7du6skub5ll" path="res://Sprites/Enemy/enemy_dying_sprites.png" id="7_2i7on"]
+[ext_resource type="Texture2D" uid="uid://cj7du6skub5ll" path="res://Sprites/Soldier/Enemy/enemy_dying_sprites.png" id="7_2i7on"]
+[ext_resource type="Texture2D" uid="uid://d1k6yblmluefj" path="res://Sprites/Soldier/soldier_hit_effect.png" id="12_1kajf"]
 
 [sub_resource type="Resource" id="Resource_8rupe"]
 script = ExtResource("4_v1ooi")
@@ -33,30 +34,6 @@ colors = PackedColorArray(1, 1, 0.43137255, 0, 1, 1, 0.43137255, 0.8039216)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_06txj"]
 size = Vector2(34, 36)
-
-[sub_resource type="Curve" id="Curve_gr3gk"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.98192763, 0.82142854), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_qqij5"]
-curve = SubResource("Curve_gr3gk")
-
-[sub_resource type="Curve" id="Curve_alqoe"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_7jdmd"]
-curve = SubResource("Curve_alqoe")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_cgwcb"]
-particle_flag_disable_z = true
-angle_min = -358.3
-angle_max = 277.2
-direction = Vector3(0, 0, 0)
-spread = 0.0
-gravity = Vector3(0, 0, 0)
-alpha_curve = SubResource("CurveTexture_qqij5")
-emission_curve = SubResource("CurveTexture_7jdmd")
 
 [sub_resource type="Animation" id="Animation_2i7on"]
 length = 0.001
@@ -128,6 +105,30 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jjc5n"]
 size = Vector2(1408, 1024)
 
+[sub_resource type="Curve" id="Curve_1kajf"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.98192763, 0.82142854), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_qqij5"]
+curve = SubResource("Curve_1kajf")
+
+[sub_resource type="Curve" id="Curve_v1ooi"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_7jdmd"]
+curve = SubResource("Curve_v1ooi")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_l07se"]
+particle_flag_disable_z = true
+angle_min = -358.3
+angle_max = 277.2
+direction = Vector3(0, 0, 0)
+spread = 0.0
+gravity = Vector3(0, 0, 0)
+alpha_curve = SubResource("CurveTexture_qqij5")
+emission_curve = SubResource("CurveTexture_7jdmd")
+
 [node name="Enemy" type="Node2D" unique_id=1440065138 groups=["enemy_node", "soldier"]]
 z_index = 2
 script = ExtResource("1_02vxf")
@@ -175,8 +176,9 @@ light_mask = 2
 color = Color(0.5822249, 0.63125, 0.33140624, 0.19500001)
 polygon = PackedVector2Array(0, 0, -256, -256, 256, -256)
 script = ExtResource("3_fw0yv")
-max_range = 1000.0
-ray_count = 50.0
+max_range = 900.0
+fov_degrees = 60.0
+ray_count = 20.0
 
 [node name="Enemy_Target_Line" type="Line2D" parent="Vision_Polygon" unique_id=1406944396]
 visible = false
@@ -199,9 +201,6 @@ collision_layer = 4
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Door_Detection_Area" unique_id=332521158]
 shape = SubResource("RectangleShape2D_06txj")
 
-[node name="GunBlastEffect" parent="." unique_id=1793492474 instance=ExtResource("2_cgwcb")]
-process_material = SubResource("ParticleProcessMaterial_cgwcb")
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1539685322]
 libraries/ = SubResource("AnimationLibrary_2wdta")
 
@@ -217,6 +216,23 @@ visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Rays_Activation_Area" unique_id=546425416]
 shape = SubResource("RectangleShape2D_jjc5n")
+
+[node name="Muzzle_Dropout_Spawn_Point" type="Marker2D" parent="." unique_id=1233462994]
+position = Vector2(13, 5)
+
+[node name="Hit_Sprite" type="Sprite2D" parent="." unique_id=2068118952]
+visible = false
+z_index = 99
+texture_filter = 1
+texture_repeat = 1
+position = Vector2(7, 0)
+texture = ExtResource("12_1kajf")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=504575328]
+follow_viewport_enabled = true
+
+[node name="GunBlastEffect" parent="CanvasLayer" unique_id=1793492474 instance=ExtResource("2_cgwcb")]
+process_material = SubResource("ParticleProcessMaterial_l07se")
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="body_entered" from="Rays_Activation_Area" to="." method="_on_rays_activation_area_body_entered"]

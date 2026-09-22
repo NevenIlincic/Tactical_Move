@@ -31,6 +31,9 @@ func when_escaped():
 		visible = false
 
 func check_soldier_has_action():
+	if close_players.is_empty():
+		Signals.player_move_finished.emit(self)
+		return
 	if len(player_path) > 1 or point_to_look:
 		Signals.player_move_continued.emit(self)
 	else:
@@ -39,7 +42,7 @@ func check_soldier_has_action():
 func _ready() -> void:
 	super._ready()
 	soldier_type = SoldierType.ENEMY
-	#visible = false
+	visible = false
 	engagement_strategy = StopShootFollowingStrategy.new()
 	point_to_look = Vector2.ZERO
 	level = get_tree().get_first_node_in_group("Level")
@@ -112,6 +115,14 @@ func check_enemy_looking_at():
 func _on_enemy_lost_extra(_enemy: Soldier) -> void:
 	pass
 	#hide_enemy()
+
+func do_hit_effect():
+	enemy_sprite.visible = false
+	hit_sprite.visible = true
+	get_tree().create_timer(0.1).timeout.connect(func(): 
+		enemy_sprite.visible = true
+		hit_sprite.visible = false
+		)
 
 func evaluate_best_move():
 	var map_rid = get_world_2d().navigation_map

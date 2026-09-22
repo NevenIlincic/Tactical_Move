@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://cydprti8j10vt"]
+
+[ext_resource type="Texture2D" uid="uid://b68youbxghibt" path="res://Sprites/Assets/Sunbed/Sun_Bed.png" id="1_j25bh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_06txj"]
+size = Vector2(96, 64)
+
+[node name="Sunbed" type="StaticBody2D" unique_id=1196354017]
+collision_layer = 8
+
+[node name="Sunbed_Sprite" type="Sprite2D" parent="." unique_id=1369801314]
+texture_filter = 1
+texture_repeat = 1
+texture = ExtResource("1_j25bh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=542712936]
+shape = SubResource("RectangleShape2D_06txj")

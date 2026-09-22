@@ -47,8 +47,9 @@ var current_confirm_callback: Callable
 @onready var camera_reset_position_marker: Marker2D = $Camera_Reset_Position_Marker
 @onready var camera_start_position_marker: Marker2D = $Camera_Start_Position_Marker
 @onready var camera: Camera2D = $Camera2D
+@onready var player_stats: PlayerStatsHUD = $CanvasLayer/PlayerStats
 
-
+@onready var fps_label: Label = $CanvasLayer/FPS_Label
 
 func _ready() -> void:
 	UpgradeCardsManager.clear_available_permanent_upgrades()
@@ -70,10 +71,13 @@ func _ready() -> void:
 	initial_num_enemies = get_alive_enemies().size()
 	AudioManager.set_current_level(self)
 	AudioManager.play_background_music(AudioManager.BACKGROUND_MUSIC_LEVEL)
-	
-	
+
+var check_vision: bool = false
+
 func _physics_process(delta: float) -> void:
+	fps_label.text = str("FPS: ", Engine.get_frames_per_second())
 	#print(Engine.get_frames_per_second())
+	
 	VisionManager.handle_enemy_visibility(delta)
 	current_state._physics_process(delta)
 	if total_passed_time_millis >= 1000.0:
@@ -107,11 +111,11 @@ func set_level_state(new_state: State):
 		current_state.queue_free()
 	current_state = new_state
 
-func set_occupied_tiles_list():
-	list_occupied_tiles.clear()
-	for player in players:
-		var starting_tile: Vector2i = tile_map.local_to_map(tile_map.to_local(player.global_position))
-		list_occupied_tiles.append(starting_tile)
+#func set_occupied_tiles_list():
+	#list_occupied_tiles.clear()
+	#for player in players:
+		#var starting_tile: Vector2i = tile_map.local_to_map(tile_map.to_local(player.global_position))
+		#list_occupied_tiles.append(starting_tile)
 		
 func connect_to_signals():
 	Signals.open_upgrade_removal_confirmation_dialog.connect(_on_confirmation_dialog_opened)
@@ -162,10 +166,12 @@ func _on_action_canceled():
 	confirmation_dialog.visible = false
 
 func level_completed():
+	player_stats.disconnect_from_signals()
 	is_level_completed = true
 	await start_end_game_timer()
 	end_game_menu.on_level_completed(self)
 func level_failed():
+	player_stats.disconnect_from_signals()
 	is_level_completed = true
 	await start_end_game_timer()
 	end_game_menu.on_level_failed(self)

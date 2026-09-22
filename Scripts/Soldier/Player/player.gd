@@ -158,7 +158,7 @@ func set_player_path(new_path: Array[Vector2]):
 	player_path = new_path
 
 func do_when_shot_at():
-	if engagement_strategy is IgnoreEnemyStrategy:
+	if engagement_strategy is IgnoreEnemyStrategy or engagement_strategy is StopShootPassingStrategy:
 		engagement_strategy = StopShootFollowingStrategy.new()
 		current_engagement_rule = EngagementRules.STOP_AND_SHOT_FOLLOWING
 			
@@ -182,7 +182,6 @@ func check_soldier_has_action():
 	if has_enemies_in_sight():
 		on_engagement_action(_select_next_enemy_to_shoot())
 		Signals.player_move_continued.emit(self)
-		print(self)
 		return
 	if len(player_path) > 1 or point_to_look:
 		Signals.player_move_continued.emit(self)
@@ -208,6 +207,10 @@ func add_point_to_path(point: Vector2) -> void:
 		move_to_position_marker.global_position = point
 		player_look_at_line_after_move.set_point_position(0, point)
 
+
+func disconnect_from_signals():
+	super.disconnect_from_signals()
+	
 
 func reset_path():
 	super.reset_path()
@@ -271,6 +274,14 @@ func on_soldier_killed():
 	enemy_to_shoot = null
 	animation_player.play("dying_animation")
 	
+
+func do_hit_effect():
+	player_sprite.visible = false
+	hit_sprite.visible = true
+	get_tree().create_timer(0.2).timeout.connect(func(): 
+		player_sprite.visible = true
+		hit_sprite.visible = false
+		)
 
 func _on_medic_detection_area_area_entered(area: Area2D) -> void:
 	if area.is_in_group("medic_detection_area"):

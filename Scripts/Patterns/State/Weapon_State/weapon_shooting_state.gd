@@ -54,6 +54,13 @@ func draw_bullet():
 		var target_position: Vector2 = current_weapon.weapon_owner.vision_polygon.bullet_hit_point
 		current_weapon.weapon_owner.bullet_line.draw_bullet(starting_position, target_position)
 		current_weapon.weapon_owner.gun_blast_effect.do_effect(starting_position)
+		if current_weapon.weapon_owner.visible:
+			draw_muzzle_drop()
 func check_is_target_hit():
 	var probability: float = randf() * 100
 	return probability <= current_weapon.weapon_stats.hit_chance.get_value()
+
+func draw_muzzle_drop():
+	var muzzle_dropout: MuzzleCocoon = current_weapon.weapon_owner.MUZZLE_COCOON.instantiate()
+	current_weapon.weapon_owner.get_tree().current_scene.add_child(muzzle_dropout)
+	muzzle_dropout.do_dropout_effect(current_weapon.weapon_owner.muzzle_dropout_spawn_point.global_position, current_weapon.weapon_owner.global_rotation)

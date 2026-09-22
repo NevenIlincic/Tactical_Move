@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://dqqyoom4gsr0e"]
+
+[ext_resource type="Texture2D" uid="uid://ccol5fav4tgk0" path="res://Sprites/Bullet/Bullet.png" id="1_6osxi"]
+[ext_resource type="Script" uid="uid://bm5aoc243e0mf" path="res://Scenes/Effects/muzzle_cocoon.gd" id="1_oemcn"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_06txj"]
+size = Vector2(8, 4)
+
+[node name="MuzzleCocoon" type="RigidBody2D" unique_id=881968415]
+script = ExtResource("1_oemcn")
+
+[node name="Muzzle_Sprite" type="Sprite2D" parent="." unique_id=109742273]
+texture_filter = 1
+texture_repeat = 1
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_6osxi")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1630765028]
+shape = SubResource("RectangleShape2D_06txj")

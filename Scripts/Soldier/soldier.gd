@@ -2,6 +2,13 @@
 class_name Soldier extends Node2D
 #@onready var vision_polygon: SoldierVision = $CanvasGroup/Vision_Polygon
 
+#MUZZLE EFFECT
+@onready var muzzle_dropout_spawn_point: Marker2D = $Muzzle_Dropout_Spawn_Point
+const MUZZLE_COCOON = preload("uid://dqqyoom4gsr0e")
+
+@onready var hit_sprite: Sprite2D = $Hit_Sprite
+
+
 enum SoldierType{
 	PLAYER,
 	ENEMY
@@ -12,7 +19,11 @@ var soldier_type: SoldierType
 @onready var vision_polygon: SoldierVision = $Vision_Polygon
 @onready var hitbox_collision_shape: CollisionShape2D = $Hitbox/Hitbox_Collision_Shape
 @onready var bullet_line: SoldierBulletLine = $Bullet_Line
-@onready var gun_blast_effect: GunBlastEffect = $GunBlastEffect
+
+#EFFECTS
+#@onready var gun_blast_effect: GunBlastEffect = $GunBlastEffect
+@onready var gun_blast_effect: GunBlastEffect = $CanvasLayer/GunBlastEffect
+
 #BULLET SPAWN POINTS
 @onready var m4a1_rifle_bullet_spawn_point: Marker2D = $m4a1_rifle_bullet_spawn_point
 @onready var pistol_bullet_spawn_point: Marker2D = $pistol_bullet_spawn_point
@@ -158,6 +169,7 @@ func reset_path():
 	reset_after_move_looking_point()
 
 func when_been_shoot_at(enemy: Soldier):
+	do_hit_effect()
 	if not enemy_to_shoot:
 		do_when_shot_at()			
 		on_engagement_action(enemy)
@@ -189,9 +201,10 @@ func _on_enemy_lost(enemy: Soldier):
 		
 	if enemies_in_sight.is_empty():
 		enemy_to_shoot = null
-		if not current_weapon.weapon_state is WeaponReloadState:
+		#if not current_weapon.weapon_state is WeaponReloadState:
+		if current_weapon.check_has_bullets():	
 			current_weapon.change_weapon_state(WeaponIdleState.new())
-		
+			
 		await get_tree().create_timer(0.2).timeout
 		if is_in_finished_state():
 			Signals.player_move_finished.emit(self)
@@ -299,10 +312,11 @@ func do_actions():
 		Signals.player_move_finished.emit(self)
 		queue_free()
 		return
+	
 	_pre_move_actions()
 	await _move()
 	_on_actions_finished()
-	
+
 
 func disconnect_from_signals():
 	if Signals.enemy_soldier_killed.is_connected(_on_enemy_soldier_killed):
@@ -325,3 +339,4 @@ func do_before_movement(): pass
 func do_after_movement(): pass
 func on_soldier_killed(): pass
 func do_when_shot_at(): pass
+func do_hit_effect(): pass
