@@ -49,6 +49,7 @@ var current_confirm_callback: Callable
 @onready var camera: Camera2D = $Camera2D
 @onready var player_stats: PlayerStatsHUD = $CanvasLayer/PlayerStats
 
+@onready var fps_label: Label = $CanvasLayer/FPS_Label
 
 func _ready() -> void:
 	UpgradeCardsManager.clear_available_permanent_upgrades()
@@ -70,9 +71,13 @@ func _ready() -> void:
 	initial_num_enemies = get_alive_enemies().size()
 	AudioManager.set_current_level(self)
 	AudioManager.play_background_music(AudioManager.BACKGROUND_MUSIC_LEVEL)
-		
+
+var check_vision: bool = false
+
 func _physics_process(delta: float) -> void:
+	fps_label.text = str("FPS: ", Engine.get_frames_per_second())
 	#print(Engine.get_frames_per_second())
+	
 	VisionManager.handle_enemy_visibility(delta)
 	current_state._physics_process(delta)
 	if total_passed_time_millis >= 1000.0:

@@ -11,9 +11,9 @@ config_version=5
 [application]
 
 config/name="Cards_And_Moves"
-run/main_scene="uid://dppjp6wm7ut70"
+run/main_scene="uid://d0gu6ucepjvex"
 config/features=PackedStringArray("4.7", "GL Compatibility")
-config/icon="res://icon.svg"
+config/icon="uid://gvmk7pgk7mlc"
 
 [autoload]
 
@@ -27,9 +27,8 @@ PlayerSelectionManager="*uid://bmky30kaktiyu"
 [display]
 
 window/size/viewport_height=640
-window/size/mode=3
 window/stretch/mode="canvas_items"
-window/stretch/aspect="expand"
+window/stretch/aspect="ignore"
 
 [gui]
 

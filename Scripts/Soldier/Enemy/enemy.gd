@@ -31,6 +31,9 @@ func when_escaped():
 		visible = false
 
 func check_soldier_has_action():
+	if close_players.is_empty():
+		Signals.player_move_finished.emit(self)
+		return
 	if len(player_path) > 1 or point_to_look:
 		Signals.player_move_continued.emit(self)
 	else:
@@ -39,7 +42,7 @@ func check_soldier_has_action():
 func _ready() -> void:
 	super._ready()
 	soldier_type = SoldierType.ENEMY
-	#visible = false
+	visible = false
 	engagement_strategy = StopShootFollowingStrategy.new()
 	point_to_look = Vector2.ZERO
 	level = get_tree().get_first_node_in_group("Level")

@@ -6,7 +6,7 @@ signal check_can_heal()
 
 var allies_to_heal_nearby: Dictionary = {}
 
-const HEALING_AMOUNT: float = 250.0
+const HEALING_AMOUNT: float = 45.0
 const HEALING_TIMEOUT_AMOUNT: float = 30.0
 var healing_timeout: float = 0.0
 var can_heal: bool = true
