@@ -51,6 +51,8 @@ var current_confirm_callback: Callable
 
 @onready var fps_label: Label = $CanvasLayer/FPS_Label
 
+
+
 func _ready() -> void:
 	UpgradeCardsManager.clear_available_permanent_upgrades()
 	for player in get_tree().get_nodes_in_group("Player"):
@@ -72,8 +74,16 @@ func _ready() -> void:
 	AudioManager.set_current_level(self)
 	AudioManager.play_background_music(AudioManager.BACKGROUND_MUSIC_LEVEL)
 
-var check_vision: bool = false
+	set_vision_polygons()
+	
+const VISION_POLYGON = preload("uid://bjx1wow4vot1m")
+@onready var vision_polygons_node: Node2D = $CanvasGroup/Vision_Polygons_Node
 
+func set_vision_polygons():
+	for player: Player in players:
+		var vision_polygon: PlayerVisionPolygon = VISION_POLYGON.instantiate()
+		vision_polygons_node.add_child(vision_polygon)
+		vision_polygon.set_soldier(player)
 func _physics_process(delta: float) -> void:
 	fps_label.text = str("FPS: ", Engine.get_frames_per_second())
 	#print(Engine.get_frames_per_second())
@@ -87,6 +97,8 @@ func _physics_process(delta: float) -> void:
 			total_passed_time_seconds = 0
 			total_passed_minutes += 1
 	passed_time_label.text = str(total_passed_minutes, ":", total_passed_time_seconds, ":", total_passed_time_millis)
+	
+
 
 func get_alive_players() -> Dictionary:
 	var alive_players: Dictionary = {}

@@ -429,6 +429,9 @@ tile_set = SubResource("TileSet_q44no")
 tile_map_data = PackedByteArray("AAArAAoAAAAAAAAAAAArAAsAAAAAAAAAAAAsAAsAAAAAAAAAAAAsAAoAAAAAAAAAAAAsAAwAAAAAAAAAAAAsAA0AAAAAAAAAAAArAA0AAAAAAAAAAAArAAwAAAAAAAAAAAAVAAUABQAAAAAAAAAWAAUABQABAAAAAAAVAAYABQAAAAEAAAAWAAYABQABAAEAAAD4/wMADgAAAAAAAAD5/wMADgAAAAAAAAD6/wMADgAAAAAAAAD7/wMADgAAAAAAAAD8/wMADgAAAAAAAAD9/wMADQABAAAAAAD4/wQADwAAAAAAAAD4/wUADwAAAAAAAAD5/wQADwAAAAAAAAD5/wUADwAAAAAAAAD6/wQADwAAAAAAAAD6/wUADwAAAAAAAAD7/wQADwAAAAAAAAD7/wUADwAAAAAAAAD8/wQADAAAAAAAAAD8/wUADAAAAAAAAAD9/wQADgABAAEAAAD9/wUADgABAAEAAAD4/wYADwAAAAAAAAD4/wcADgAAAAEAAAD5/wYADwAAAAAAAAD5/wcADgAAAAEAAAD6/wYADwAAAAAAAAD6/wcADgAAAAEAAAD7/wYADwAAAAAAAAD7/wcADgAAAAEAAAD8/wYADwAAAAAAAAD8/wcADgAAAAEAAAD9/wYADgABAAEAAAD9/wcADQABAAEAAAD2/wMADgAAAAAAAAD3/wMADgAAAAAAAAD1/wMADgAAAAAAAAD2/wQADwAAAAAAAAD2/wUADwAAAAAAAAD3/wQADwAAAAAAAAD3/wUADwAAAAAAAAD0/wUADgABAAAAAAD1/wQADwAAAAAAAAD1/wUADwAAAAAAAAD2/wYADwAAAAAAAAD2/wcADgAAAAEAAAD3/wYADwAAAAAAAAD3/wcADgAAAAEAAAD0/wYADgABAAAAAAD0/wcADQAAAAEAAAD1/wYADAAAAAAAAAD1/wcADgAAAAEAAAD0/wMADQAAAAAAAAD0/wQADgABAAAAAAA=")
 tile_set = SubResource("TileSet_wcwi6")
 
+[node name="CanvasModulate" parent="." index="3" unique_id=1420828885]
+visible = false
+
 [node name="StaticBody2D" type="StaticBody2D" parent="." index="6" unique_id=1881679868 groups=["wall"]]
 position = Vector2(928, 288)
 collision_layer = 3
@@ -547,16 +550,17 @@ rotation = -2.6022253
 position = Vector2(1544, 768)
 rotation = 3.8747728
 
-[node name="NavigationRegion2D" type="NavigationRegion2D" parent="." index="26" unique_id=139603122]
+[node name="Nate_Medic" parent="." index="26" unique_id=1108589071 instance=ExtResource("21_anmmq")]
+position = Vector2(1320.0001, 736)
+rotation = -2.329266
+scale = Vector2(0.9999999, 0.9999999)
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="." index="27" unique_id=139603122]
 visible = false
 navigation_polygon = SubResource("NavigationPolygon_vn3yt")
 
-[node name="Camera_Start_Position_Marker" parent="." index="27" unique_id=816834425]
+[node name="Camera_Start_Position_Marker" parent="." index="28" unique_id=816834425]
 position = Vector2(1256, 576)
-
-[node name="Nate_Medic" parent="." index="28" unique_id=1108589071 instance=ExtResource("21_anmmq")]
-position = Vector2(1488.0001, 792)
-rotation = -2.329266
 
 [node name="Covers" type="Node2D" parent="." index="29" unique_id=2074276636]
 
@@ -706,3 +710,13 @@ position = Vector2(-312, -344)
 rotation = 0.8475856
 scale = Vector2(0.99999994, 0.99999994)
 soldier_stats = SubResource("Resource_uf6cy")
+
+[node name="CanvasGroup" type="CanvasGroup" parent="." index="32" unique_id=211903318]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasGroup" index="0" unique_id=242708230]
+offset_right = 1880.0
+offset_bottom = 840.0
+mouse_filter = 2
+color = Color(0.101960786, 0.03529412, 0.08235294, 0.5058824)
+
+[node name="Vision_Polygons_Node" type="Node2D" parent="CanvasGroup" index="1" unique_id=1364661368]

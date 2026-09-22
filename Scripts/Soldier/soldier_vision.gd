@@ -1,5 +1,7 @@
 class_name SoldierVision extends Polygon2D
 
+signal update_polygon_points(points: PackedVector2Array, new_position: Vector2, new_rotation: float, )
+
 @onready var enemy_target_line: Line2D = $Enemy_Target_Line
 @onready var point_light_2d: PointLight2D = $PointLight2D
 
@@ -84,21 +86,23 @@ func update_vision():
 						if not enemy_position and hit_object == get_parent().enemy_to_shoot:
 							enemy_position = current_point
 						Signals.report_enemy_seen.emit(hit_object, get_parent())
-						
+				else:
+					current_point = ray.target_position
 		else:
 			current_point = ray.target_position
 		
 		points.append(current_point)
 		if raw_points.back().distance_to(current_point) > 0.5:
 			raw_points.append(current_point)
-			
+	
+	
 	if points.size() > 3:
-		var triangles = Geometry2D.triangulate_polygon(points)
-		if not triangles.is_empty():
-			self.polygon = points
-
-		else:
-			pass
+		update_polygon_points.emit(points, global_position, global_rotation)
+		#var triangles = Geometry2D.triangulate_polygon(points)
+		#if not triangles.is_empty():
+			#self.polygon = points
+		#else:
+			#pass
 			
 			
 		
