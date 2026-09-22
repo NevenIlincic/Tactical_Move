@@ -180,6 +180,7 @@ top_level = true
 texture_filter = 1
 texture_repeat = 2
 width = 5.0
+default_color = Color(7.3286095, 7.3286095, 7.3286095, 1)
 texture = ExtResource("5_jmcll")
 texture_mode = 1
 script = ExtResource("2_4wape")

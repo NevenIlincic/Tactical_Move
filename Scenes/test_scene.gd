@@ -50,7 +50,6 @@ var current_confirm_callback: Callable
 @onready var player_stats: PlayerStatsHUD = $CanvasLayer/PlayerStats
 
 
-
 func _ready() -> void:
 	UpgradeCardsManager.clear_available_permanent_upgrades()
 	for player in get_tree().get_nodes_in_group("Player"):
@@ -71,8 +70,7 @@ func _ready() -> void:
 	initial_num_enemies = get_alive_enemies().size()
 	AudioManager.set_current_level(self)
 	AudioManager.play_background_music(AudioManager.BACKGROUND_MUSIC_LEVEL)
-	
-	
+		
 func _physics_process(delta: float) -> void:
 	#print(Engine.get_frames_per_second())
 	VisionManager.handle_enemy_visibility(delta)

@@ -10,7 +10,7 @@
 
 [sub_resource type="Resource" id="Resource_ag2js"]
 script = ExtResource("3_ag2js")
-base_value = 220.0
+base_value = 100.0
 metadata/_custom_type_script = "uid://bencr8mnns7ut"
 
 [sub_resource type="Resource" id="Resource_ni7tm"]

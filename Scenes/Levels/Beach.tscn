@@ -335,13 +335,46 @@ MAX_HP = SubResource("Resource_sf78t")
 metadata/_custom_type_script = "uid://cp4iog725gtuq"
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_7v413"]
-vertices = PackedVector2Array(-787.4922, -715.2422, -718.28906, -837.9531, -681.10156, -856.3125, -602, 182.15625, -793.3125, -543.7031, -919.3906, -405.2422, -856.8125, -471.46875, -822.60156, -476.17188, -922.1797, -326.4375, -888.9531, -478.6875, -929.40625, -421.39063, -738.27344, -838.0469, -943.5703, -433.4922, -903.0625, -490.84375, -766.0078, -847.4531, -817.1719, -728.96094, -1526.0625, 197.82031, -1533.9375, -1086, -785.40625, -1086, -904.1719, -714.5, -669.39844, -1086, -602, -1086, -670.4531, -877.35156, -795.0703, -509.9297, -799.65625, -496.6328, -927.34375, -197.75781, -947.6406, -181.36719, -1014.2578, -182.92188, -1044, -196.49219, -883.7969, -730.78906, -786.5, -868.14844, -975.75, -440.57813, -913.0078, -507.0625, -1038.9297, -368.0625, -909.8828, -585.8281, -1009.9375, -435.71094, -1037.3281, -401.84375, -1032.7813, -415.15625)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32Array(5, 6, 7, 3, 8), PackedInt32Array(9, 6, 5, 10), PackedInt32Array(11, 1, 0), PackedInt32Array(9, 10, 12, 13), PackedInt32Array(14, 11, 0, 15), PackedInt32Array(16, 17, 18, 19), PackedInt32Array(20, 21, 3, 22), PackedInt32Array(2, 22, 3), PackedInt32Array(23, 4, 3), PackedInt32Array(24, 23, 3), PackedInt32Array(7, 24, 3), PackedInt32Array(25, 8, 3), PackedInt32Array(26, 25, 3), PackedInt32Array(26, 3, 16, 27), PackedInt32Array(28, 27, 16), PackedInt32Array(14, 15, 29, 30), PackedInt32Array(13, 12, 31, 32), PackedInt32Array(33, 28, 16), PackedInt32Array(34, 32, 31, 35), PackedInt32Array(36, 33, 16), PackedInt32Array(18, 30, 29, 19), PackedInt32Array(16, 19, 34, 37), PackedInt32Array(37, 36, 16), PackedInt32Array(37, 34, 35)])
+vertices = PackedVector2Array(-787.4922, -715.2422, -718.28906, -837.9531, -681.10156, -856.3125, -618, 166, -793.3125, -543.7031, -919.3906, -405.2422, -856.8125, -471.46875, -822.60156, -476.17188, -922.1797, -326.4375, -1468, -190, -1194, -254, -1148, -254, -1044, -196.49219, -1148, -146, -1194, -146, -888.9531, -478.6875, -929.40625, -421.39063, -738.27344, -838.0469, -1038.9297, -368.0625, -1148, -722, -1037.3281, -401.84375, -1032.7813, -415.15625, -1468, -382, -1194, -722, -1468, -338, -1468, -594, -1468, -638, -1009.9375, -435.71094, -1468, -786, -1194, -822, -1150, -822, -943.5703, -433.4922, -903.0625, -490.84375, -766.0078, -847.4531, -817.1719, -728.96094, -1526.2578, 166, -1533.8828, -1076, -1514, -1076, -1514, -830, -1150, -1076, -785.46094, -1076, -786.5, -868.14844, -883.7969, -730.78906, -904.1719, -714.5, -1470, -830, -1470, -1076, -1194, -1076, -1514, -638, -1514, -594, -1514, -382, -1514, -338, -669.4531, -1076, -618, -1076, -670.4531, -877.35156, -795.0703, -509.9297, -799.65625, -496.6328, -927.34375, -197.75781, -1148, 166, -947.6406, -181.36719, -1014.2578, -182.92188, -1194, 166, -1468, 166, -1468, -146, -1514, -190, -1514, -146, -1514, 166, -975.75, -440.57813, -913.0078, -507.0625, -909.8828, -585.8281, -1514, -786)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32Array(5, 6, 7, 3, 8), PackedInt32Array(9, 10, 11, 12, 13, 14), PackedInt32Array(15, 6, 5, 16), PackedInt32Array(17, 1, 0), PackedInt32Array(18, 12, 11, 19), PackedInt32Array(20, 18, 19), PackedInt32Array(21, 20, 19), PackedInt32Array(22, 23, 10, 24), PackedInt32Array(23, 22, 25), PackedInt32Array(26, 23, 25), PackedInt32Array(27, 21, 19), PackedInt32Array(23, 26, 28, 29, 30), PackedInt32Array(10, 9, 24), PackedInt32Array(15, 16, 31, 32), PackedInt32Array(33, 17, 0, 34), PackedInt32Array(35, 36, 37, 38), PackedInt32Array(30, 39, 40, 41, 42, 43), PackedInt32Array(44, 45, 46, 29, 28), PackedInt32Array(47, 26, 25, 48), PackedInt32Array(49, 22, 24, 50), PackedInt32Array(51, 52, 3, 53), PackedInt32Array(2, 53, 3), PackedInt32Array(54, 4, 3), PackedInt32Array(55, 54, 3), PackedInt32Array(7, 55, 3), PackedInt32Array(56, 8, 3), PackedInt32Array(56, 3, 57, 58), PackedInt32Array(58, 57, 13, 59), PackedInt32Array(12, 59, 13), PackedInt32Array(14, 60, 61, 62), PackedInt32Array(9, 14, 62, 63), PackedInt32Array(63, 62, 64), PackedInt32Array(64, 65, 35), PackedInt32Array(32, 66, 27, 19, 67), PackedInt32Array(33, 34, 42, 41), PackedInt32Array(30, 43, 68, 19), PackedInt32Array(32, 31, 66), PackedInt32Array(68, 67, 19), PackedInt32Array(30, 19, 23), PackedInt32Array(44, 28, 69, 38), PackedInt32Array(35, 38, 69), PackedInt32Array(35, 69, 47), PackedInt32Array(35, 47, 48), PackedInt32Array(35, 48, 49), PackedInt32Array(35, 49, 50), PackedInt32Array(35, 50, 63), PackedInt32Array(35, 63, 64)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-1536, 208, -592, 192, -592, -1096, -1544, -1096)])
 parsed_geometry_type = 1
 parsed_collision_mask = 4294967041
 source_geometry_mode = 2
 source_geometry_group_name = &"wall"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_06txj"]
+size = Vector2(1642, 34)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_baqr5"]
+size = Vector2(24, 256)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jjc5n"]
+size = Vector2(29, 1304)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fhwqp"]
+size = Vector2(1656, 26)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_moqms"]
+size = Vector2(48, 1328)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cl7co"]
+size = Vector2(26, 128)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vjavo"]
+size = Vector2(26, 192)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s8jax"]
+size = Vector2(26, 128)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v6i7x"]
+size = Vector2(26, 320)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a3d5x"]
+size = Vector2(26, 448)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y5qdj"]
+size = Vector2(26, 320)
 
 [node name="Beach" unique_id=1509814780 instance=ExtResource("1_dmph1")]
 
@@ -393,7 +426,36 @@ texture_filter = 1
 texture_repeat = 1
 texture = ExtResource("9_ir4b2")
 
-[node name="Sunbeds" type="Node2D" parent="." index="10" unique_id=1145385191]
+[node name="Bouys" type="Node2D" parent="." index="10" unique_id=273501396]
+
+[node name="Buoy" parent="Bouys" index="0" unique_id=492921547 instance=ExtResource("13_4sk3f")]
+position = Vector2(280, 872)
+
+[node name="Buoy2" parent="Bouys" index="1" unique_id=385147590 instance=ExtResource("13_4sk3f")]
+position = Vector2(288, 400)
+
+[node name="Buoy3" parent="Bouys" index="2" unique_id=1524922595 instance=ExtResource("13_4sk3f")]
+position = Vector2(200, 600)
+
+[node name="Buoy4" parent="Bouys" index="3" unique_id=1529144164 instance=ExtResource("13_4sk3f")]
+position = Vector2(520, 336)
+
+[node name="Buoy5" parent="Bouys" index="4" unique_id=111870046 instance=ExtResource("13_4sk3f")]
+position = Vector2(248, 1096)
+
+[node name="Buoy6" parent="Bouys" index="5" unique_id=1046623102 instance=ExtResource("13_4sk3f")]
+position = Vector2(320, 128)
+
+[node name="Buoy7" parent="Bouys" index="6" unique_id=189874254 instance=ExtResource("13_4sk3f")]
+position = Vector2(672, 616)
+
+[node name="Buoy8" parent="Bouys" index="7" unique_id=1807503369 instance=ExtResource("13_4sk3f")]
+position = Vector2(592, 1112)
+
+[node name="Buoy9" parent="Bouys" index="8" unique_id=1573033908 instance=ExtResource("13_4sk3f")]
+position = Vector2(552, 232)
+
+[node name="Sunbeds" type="Node2D" parent="." index="11" unique_id=1145385191]
 
 [node name="Sunbed" parent="Sunbeds" index="0" unique_id=1196354017 instance=ExtResource("13_s3s1g")]
 position = Vector2(432, 416)
@@ -455,7 +517,7 @@ position = Vector2(592, 800)
 [node name="Sunbed20" parent="Sunbeds" index="19" unique_id=1262450396 instance=ExtResource("13_s3s1g")]
 position = Vector2(592, 672)
 
-[node name="Cars" type="Node2D" parent="." index="11" unique_id=1509257185]
+[node name="Cars" type="Node2D" parent="." index="12" unique_id=1509257185]
 
 [node name="BlueCar" parent="Cars" index="0" unique_id=1145836756 instance=ExtResource("15_w5isb")]
 position = Vector2(1352, 496.00006)
@@ -468,35 +530,6 @@ rotation = 1.6135905
 [node name="RedCar" parent="Cars" index="2" unique_id=573821789 instance=ExtResource("17_4sk3f")]
 position = Vector2(1472, 128)
 rotation = -1.5657905
-
-[node name="Bouys" type="Node2D" parent="." index="12" unique_id=273501396]
-
-[node name="Buoy" parent="Bouys" index="0" unique_id=492921547 instance=ExtResource("13_4sk3f")]
-position = Vector2(280, 872)
-
-[node name="Buoy2" parent="Bouys" index="1" unique_id=385147590 instance=ExtResource("13_4sk3f")]
-position = Vector2(288, 400)
-
-[node name="Buoy3" parent="Bouys" index="2" unique_id=1524922595 instance=ExtResource("13_4sk3f")]
-position = Vector2(200, 600)
-
-[node name="Buoy4" parent="Bouys" index="3" unique_id=1529144164 instance=ExtResource("13_4sk3f")]
-position = Vector2(520, 336)
-
-[node name="Buoy5" parent="Bouys" index="4" unique_id=111870046 instance=ExtResource("13_4sk3f")]
-position = Vector2(248, 1096)
-
-[node name="Buoy6" parent="Bouys" index="5" unique_id=1046623102 instance=ExtResource("13_4sk3f")]
-position = Vector2(320, 128)
-
-[node name="Buoy7" parent="Bouys" index="6" unique_id=189874254 instance=ExtResource("13_4sk3f")]
-position = Vector2(672, 616)
-
-[node name="Buoy8" parent="Bouys" index="7" unique_id=1807503369 instance=ExtResource("13_4sk3f")]
-position = Vector2(592, 1112)
-
-[node name="Buoy9" parent="Bouys" index="8" unique_id=1573033908 instance=ExtResource("13_4sk3f")]
-position = Vector2(552, 232)
 
 [node name="Covers" type="Node2D" parent="." index="13" unique_id=1013119842]
 
@@ -598,5 +631,102 @@ soldier_stats = SubResource("Resource_7x8cp")
 visible = false
 position = Vector2(2200, 1096)
 navigation_polygon = SubResource("NavigationPolygon_7v413")
+
+[node name="Walls" type="Node2D" parent="." index="16" unique_id=87098497]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Walls" index="0" unique_id=2139807219 groups=["wall"]]
+collision_layer = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/StaticBody2D" index="0" unique_id=163491153]
+position = Vector2(811, -7)
+shape = SubResource("RectangleShape2D_06txj")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="Walls" index="1" unique_id=2040845649 groups=["wall"]]
+position = Vector2(712, 128)
+collision_layer = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/StaticBody2D2" index="0" unique_id=1788385774]
+position = Vector2(-4, 0)
+shape = SubResource("RectangleShape2D_baqr5")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="Walls" index="2" unique_id=1375111676 groups=["wall"]]
+position = Vector2(1032, 136)
+collision_layer = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/StaticBody2D3" index="0" unique_id=872637505]
+position = Vector2(-4, 0)
+shape = SubResource("RectangleShape2D_baqr5")
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="Walls" index="3" unique_id=1479023622 groups=["wall"]]
+position = Vector2(1608, 624)
+collision_layer = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/StaticBody2D4" index="0" unique_id=1205063056]
+position = Vector2(-1.5, 20)
+shape = SubResource("RectangleShape2D_jjc5n")
+
+[node name="StaticBody2D5" type="StaticBody2D" parent="Walls" index="4" unique_id=1211463979 groups=["wall"]]
+position = Vector2(808, 1288)
+collision_layer = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/StaticBody2D5" index="0" unique_id=598956399]
+position = Vector2(4, -3)
+shape = SubResource("RectangleShape2D_fhwqp")
+
+[node name="StaticBody2D6" type="StaticBody2D" parent="Walls" index="5" unique_id=1910992272 groups=["wall"]]
+position = Vector2(8, 648)
+collision_layer = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/StaticBody2D6" index="0" unique_id=855846325]
+position = Vector2(-8, -16)
+shape = SubResource("RectangleShape2D_moqms")
+
+[node name="StaticBody2D7" type="StaticBody2D" parent="Walls" index="6" unique_id=1064893120 groups=["wall"]]
+position = Vector2(712, 384)
+collision_layer = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/StaticBody2D7" index="0" unique_id=781002960]
+position = Vector2(-3, 0)
+shape = SubResource("RectangleShape2D_cl7co")
+
+[node name="StaticBody2D8" type="StaticBody2D" parent="Walls" index="7" unique_id=1741657540 groups=["wall"]]
+position = Vector2(712, 608)
+collision_layer = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/StaticBody2D8" index="0" unique_id=1808452778]
+position = Vector2(-3, 0)
+shape = SubResource("RectangleShape2D_vjavo")
+
+[node name="StaticBody2D9" type="StaticBody2D" parent="Walls" index="8" unique_id=303239826 groups=["wall"]]
+position = Vector2(712, 832)
+collision_layer = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/StaticBody2D9" index="0" unique_id=618951420]
+position = Vector2(-3, 0)
+shape = SubResource("RectangleShape2D_s8jax")
+
+[node name="StaticBody2D10" type="StaticBody2D" parent="Walls" index="9" unique_id=1209618504 groups=["wall"]]
+position = Vector2(712, 1088)
+collision_layer = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/StaticBody2D10" index="0" unique_id=419070653]
+position = Vector2(-3, 32)
+shape = SubResource("RectangleShape2D_v6i7x")
+
+[node name="StaticBody2D11" type="StaticBody2D" parent="Walls" index="10" unique_id=431702877 groups=["wall"]]
+position = Vector2(1032, 576)
+collision_layer = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/StaticBody2D11" index="0" unique_id=591342703]
+position = Vector2(-3, 32)
+shape = SubResource("RectangleShape2D_a3d5x")
+
+[node name="StaticBody2D12" type="StaticBody2D" parent="Walls" index="11" unique_id=1818557223 groups=["wall"]]
+position = Vector2(1032, 1128)
+collision_layer = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/StaticBody2D12" index="0" unique_id=2018040703]
+position = Vector2(-3, -8)
+shape = SubResource("RectangleShape2D_y5qdj")
 
 [connection signal="body_entered" from="Beach_Ball" to="Beach_Ball" method="_on_body_entered"]
