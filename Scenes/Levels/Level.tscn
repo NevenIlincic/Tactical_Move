@@ -64,10 +64,9 @@ visible = false
 visible = false
 
 [node name="FPS_Label" type="Label" parent="CanvasLayer" unique_id=1445502002]
-offset_left = 728.0
-offset_top = 24.0
-offset_right = 768.0
-offset_bottom = 45.0
+offset_left = 1032.0
+offset_right = 1087.0
+offset_bottom = 42.0
 theme_override_font_sizes/font_size = 32
 text = "FPS:"
 

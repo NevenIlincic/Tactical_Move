@@ -75,7 +75,7 @@ func _ready() -> void:
 var check_vision: bool = false
 
 func _physics_process(delta: float) -> void:
-	fps_label.text = str("FPS: ", Engine.get_frames_per_second())
+	fps_label.text = str("FPS: ", int(Engine.get_frames_per_second()))
 	#print(Engine.get_frames_per_second())
 	
 	VisionManager.handle_enemy_visibility(delta)
