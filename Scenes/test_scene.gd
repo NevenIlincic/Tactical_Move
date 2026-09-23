@@ -84,12 +84,27 @@ func set_vision_polygons():
 		var vision_polygon: PlayerVisionPolygon = VISION_POLYGON.instantiate()
 		vision_polygons_node.add_child(vision_polygon)
 		vision_polygon.set_soldier(player)
+		
+var i: int = 0
 func _physics_process(delta: float) -> void:
 	fps_label.text = str("FPS: ", Engine.get_frames_per_second())
 	#print(Engine.get_frames_per_second())
 	
+	#VisionManager.handle_enemy_visibility(delta)
+	if i == 0:
+		current_state.update(delta)
+	i = (i+1) % 2
+	#if total_passed_time_millis >= 1000.0:
+		#total_passed_time_millis = 0.0
+		#total_passed_time_seconds += 1
+		#if total_passed_time_seconds >= 60:
+			#total_passed_time_seconds = 0
+			#total_passed_minutes += 1
+	#passed_time_label.text = str(total_passed_minutes, ":", total_passed_time_seconds, ":", total_passed_time_millis)
+	#
+func _process(delta: float) -> void:
+	#fps_label.text = str("FPS: ", Engine.get_frames_per_second())
 	VisionManager.handle_enemy_visibility(delta)
-	current_state._physics_process(delta)
 	if total_passed_time_millis >= 1000.0:
 		total_passed_time_millis = 0.0
 		total_passed_time_seconds += 1
@@ -98,7 +113,6 @@ func _physics_process(delta: float) -> void:
 			total_passed_minutes += 1
 	passed_time_label.text = str(total_passed_minutes, ":", total_passed_time_seconds, ":", total_passed_time_millis)
 	
-
 
 func get_alive_players() -> Dictionary:
 	var alive_players: Dictionary = {}
@@ -114,8 +128,8 @@ func get_alive_enemies() -> Dictionary:
 
 func get_alive_soldiers() -> Dictionary:
 	var alive_soldiers: Dictionary = {}
-	for soldier in get_tree().get_nodes_in_group("soldier"):
-		alive_soldiers[soldier] = true
+	for soldier: Soldier in get_tree().get_nodes_in_group("soldier"):
+		alive_soldiers[soldier.soldier_id] = soldier
 	return alive_soldiers
 
 func set_level_state(new_state: State):

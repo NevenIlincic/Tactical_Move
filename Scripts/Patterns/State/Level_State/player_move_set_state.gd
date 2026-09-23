@@ -106,7 +106,7 @@ func check_is_players_moving_possible() -> bool:
 			return false
 	return true
 
-func _physics_process(_delta: float):
+func update(_delta: float):
 	pass
 
 func check_can_do_action() -> bool:

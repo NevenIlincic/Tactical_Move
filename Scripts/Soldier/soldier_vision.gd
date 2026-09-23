@@ -3,14 +3,13 @@ class_name SoldierVision extends Polygon2D
 signal update_polygon_points(points: PackedVector2Array, new_position: Vector2, new_rotation: float, )
 
 @onready var enemy_target_line: Line2D = $Enemy_Target_Line
-@onready var point_light_2d: PointLight2D = $PointLight2D
 
 @export var max_range: float = 300.0
 @export var fov_degrees: float = 90.0
 @export var ray_count: float = 75
 @export var wall_collision_mask: int= 1
 
-var are_rays_enabled: bool = false
+var are_rays_enabled: bool = true
 
 var level: Level
 
@@ -19,15 +18,18 @@ var facing_angle: float = 0.0
 
 var bullet_hit_point #Vector2/null
 
+var parent_soldier: Soldier
+
+var is_vision_enabled: bool = false
 func _ready() -> void:
 	enemy_target_line.add_point(Vector2.ZERO)
+	parent_soldier = get_parent()
 	
 	setup_vision_rays()
 	level = get_tree().get_first_node_in_group("Level")
 	
-	if point_light_2d:
-		point_light_2d.rotate(deg_to_rad(90))
-	
+	##
+	query.collision_mask = 1
 	
 func setup_vision_rays() -> void:
 	var half_fov = deg_to_rad(fov_degrees / 2.0)
@@ -54,59 +56,105 @@ func enable_rays():
 	for ray: RayCast2D in rays:
 		ray.enabled = true
 		are_rays_enabled = true
-
-func update_vision():
-	var enemy_position: Vector2
-	var half_fov = deg_to_rad(fov_degrees / 2.0)
-	var raw_points: Array[Vector2] = [Vector2.ZERO]
-	var points = PackedVector2Array(raw_points)
-	var currently_visible_enemies: Dictionary = {}
-	
-	
-	for i in rays.size():
-		var t = float(i) / (rays.size() - 1)
-		var angle = facing_angle - half_fov + t * (2 * half_fov)
-		var ray = rays[i]
-		
-		ray.target_position = Vector2(max_range, 0).rotated(angle)
-		ray.force_raycast_update()
-		
-		var current_point: Vector2
-		
-		if ray.is_colliding():
-			current_point = ray.to_local(ray.get_collision_point())
-			var hit_object = ray.get_collider().get_parent()
-			if hit_object and hit_object is Soldier:
-				if hit_object.is_killed:
-					return
-				if check_is_enemy_soldier_hit(get_parent(), hit_object):
-					if not currently_visible_enemies.has(hit_object):
-						currently_visible_enemies[hit_object] = true
-						bullet_hit_point = hit_object.global_position
-						if not enemy_position and hit_object == get_parent().enemy_to_shoot:
-							enemy_position = current_point
-						Signals.report_enemy_seen.emit(hit_object, get_parent())
-				else:
-					current_point = ray.target_position
-		else:
-			current_point = ray.target_position
-		
-		points.append(current_point)
-		if raw_points.back().distance_to(current_point) > 0.5:
-			raw_points.append(current_point)
-	
-	
-	if points.size() > 3:
-		update_polygon_points.emit(points, global_position, global_rotation)
-		#var triangles = Geometry2D.triangulate_polygon(points)
-		#if not triangles.is_empty():
-			#self.polygon = points
+#ORIGINAL
+#func update_vision():
+	#if not is_vision_enabled:
+		#return
+	#var enemy_position: Vector2
+	#var half_fov = deg_to_rad(fov_degrees / 2.0)
+	#var raw_points: Array[Vector2] = [Vector2.ZERO]
+	#var points = PackedVector2Array(raw_points)
+	#var currently_visible_enemies: Dictionary = {}
+	#
+	#
+	#for i in rays.size():
+		#var ray = rays[i]
+		##var t = float(i) / (rays.size() - 1)
+		##var angle = facing_angle - half_fov + t * (2 * half_fov)
+		##var ray = rays[i]
+		##
+		##ray.target_position = Vector2(max_range, 0).rotated(angle)
+		#ray.force_raycast_update()
+		#
+		#var current_point: Vector2
+		#
+		#if ray.is_colliding():
+			#current_point = ray.to_local(ray.get_collision_point())
+			#var hit_object = ray.get_collider().get_parent()
+			#if hit_object and hit_object is Soldier:
+				#if hit_object.is_killed:
+					#return
+				#if check_is_enemy_soldier_hit(parent_soldier, hit_object):
+					#if not currently_visible_enemies.has(hit_object):
+						#currently_visible_enemies[hit_object] = true
+						#bullet_hit_point = hit_object.global_position
+						#if not enemy_position and hit_object == parent_soldier.enemy_to_shoot:
+							#enemy_position = current_point
+						#Signals.report_enemy_seen.emit(hit_object, parent_soldier)
+				#else:
+					#current_point = ray.target_position
 		#else:
-			#pass
-			
-			
-		
+			#current_point = ray.target_position
+		#
+		#points.append(current_point)
+		#if raw_points.back().distance_to(current_point) > 0.5:
+			#raw_points.append(current_point)
+	#
+	#
+	#if points.size() > 3:
+		#update_polygon_points.emit(points, global_position, global_rotation)
+		##var triangles = Geometry2D.triangulate_polygon(points)
+		##if not triangles.is_empty():
+			##self.polygon = points
+		##else:
+			##pass
+
+#####
+var space_state: PhysicsDirectSpaceState2D
+var query := PhysicsRayQueryParameters2D.new()
+func update_vision():
+	space_state = get_world_2d().direct_space_state
 	
+	var num_rays := rays.size() # ili fiksni broj npr. 20
+	var points := PackedVector2Array()
+	points.resize(num_rays + 2)
+	points[0] = Vector2.ZERO # Centar vida
+	
+	var step := deg_to_rad(fov_degrees) / num_rays
+	var start_angle := -deg_to_rad(fov_degrees)/ 2.0
+	
+	for i in range(num_rays):
+		var angle := start_angle + i * step
+		var dir := Vector2.RIGHT.rotated(angle)
+		
+		# Postavljamo parametre za zrak u kodu
+		query.from = global_position
+		query.to = global_position + dir.rotated(global_rotation) * max_range
+		
+		var result := space_state.intersect_ray(query)
+		
+		if result:
+			# Prevaramo pogodak u lokalne koordinate
+			points[i + 1] = to_local(result.position)
+		else:
+			points[i + 1] = dir * max_range
+
+	update_polygon_points.emit(points, global_position, global_rotation)
+	#
+	#if points.size() > 3:
+		#update_polygon_points.emit(points, global_position, global_rotation)
+		##var triangles = Geometry2D.triangulate_polygon(points)
+		##if not triangles.is_empty():
+			##self.polygon = points
+		##else:
+			##pass
+
+					
+func enable_vision():
+	is_vision_enabled = true
+func disable_vision():
+	is_vision_enabled = false
+
 func check_is_enemy_soldier_hit(current_soldier: Soldier, hit_soldier: Soldier):
 	return current_soldier.soldier_type != hit_soldier.soldier_type
 
@@ -115,3 +163,4 @@ func reset_target_line():
 
 func draw_bullet_line():
 	pass
+####################################################################

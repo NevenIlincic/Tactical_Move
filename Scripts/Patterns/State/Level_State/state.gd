@@ -9,4 +9,4 @@ func _init(data: Array);
 func _unhandled_input(event: InputEvent);
 
 @abstract
-func _physics_process(delta: float);
+func update(delta: float);

@@ -26,7 +26,6 @@ var is_mouse_hovered: bool = false
 @onready var move_to_position_marker: Sprite2D = $Move_To_Position_Marker
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var position_marker_animation_player: AnimationPlayer = $Position_Marker_AnimationPlayer
-@onready var point_light_2d: PointLight2D = $Vision_Polygon/PointLight2D
 
 @export var player_avatar: CompressedTexture2D
 #HEALING
@@ -269,7 +268,7 @@ func on_soldier_killed():
 	move_to_position_marker.visible = false
 	vision_polygon.disable_rays()
 	vision_polygon.visible = false
-	point_light_2d.enabled = false
+	#point_light_2d.enabled = false
 	enemies_in_sight.clear()
 	enemy_to_shoot = null
 	animation_player.play("dying_animation")
