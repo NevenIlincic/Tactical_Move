@@ -6,6 +6,11 @@ extends Camera2D
 
 var is_dragging: bool = false
 
+@onready var color_rect: ColorRect = $"../CanvasLayer2/CanvasGroup/ColorRect"
+#
+func _ready() -> void:
+	_update_color_rect_transform()
+
 func _unhandled_input(event: InputEvent) -> void:
 	if Input.is_action_pressed("camera_drag"):
 		is_dragging = true
@@ -24,11 +29,24 @@ func _unhandled_input(event: InputEvent) -> void:
 			
 	elif event is InputEventMouseMotion and is_dragging:
 		position -= event.relative / zoom
+		_update_color_rect_transform()
 
 func _zoom_in() -> void:
 	var new_zoom = zoom + Vector2(zoom_speed, zoom_speed)
 	zoom = new_zoom.clamp(Vector2(min_zoom, min_zoom), Vector2(max_zoom, max_zoom))
-
+	_update_color_rect_transform()
 func _zoom_out() -> void:
 	var new_zoom = zoom - Vector2(zoom_speed, zoom_speed)
 	zoom = new_zoom.clamp(Vector2(min_zoom, min_zoom), Vector2(max_zoom, max_zoom))
+	_update_color_rect_transform()
+func _update_color_rect_transform() -> void:
+	if not color_rect:
+		return
+
+	var viewport_size = get_viewport_rect().size
+	
+	var world_size = viewport_size / zoom
+	
+	color_rect.size = world_size
+	
+	color_rect.global_position = global_position - world_size / 2.0

@@ -218,7 +218,7 @@ script = ExtResource("19_ghyco")
 base_value = 200.0
 metadata/_custom_type_script = "uid://bencr8mnns7ut"
 
-[sub_resource type="Resource" id="Resource_4selt"]
+[sub_resource type="Resource" id="Resource_gh443"]
 resource_local_to_scene = true
 script = ExtResource("20_1q1xv")
 speed = SubResource("Resource_xq73l")
@@ -242,11 +242,7 @@ tile_set = SubResource("TileSet_kxqhn")
 tile_map_data = PackedByteArray("AAArAAoAAAAAAAAAAAArAAsAAAAAAAAAAAAsAAsAAAAAAAAAAAAsAAoAAAAAAAAAAAAsAAwAAAAAAAAAAAAsAA0AAAAAAAAAAAArAA0AAAAAAAAAAAArAAwAAAAAAAAAAAAVAAUABQAAAAAAAAAWAAUABQABAAAAAAAVAAYABQAAAAEAAAAWAAYABQABAAEAAAD4/wMADgAAAAAAAAD5/wMADgAAAAAAAAD6/wMADgAAAAAAAAD7/wMADgAAAAAAAAD8/wMADgAAAAAAAAD9/wMADQABAAAAAAD4/wQADwAAAAAAAAD4/wUADwAAAAAAAAD5/wQADwAAAAAAAAD5/wUADwAAAAAAAAD6/wQADwAAAAAAAAD6/wUADwAAAAAAAAD7/wQADwAAAAAAAAD7/wUADwAAAAAAAAD8/wQADAAAAAAAAAD8/wUADAAAAAAAAAD9/wQADgABAAEAAAD9/wUADgABAAEAAAD4/wYADwAAAAAAAAD4/wcADgAAAAEAAAD5/wYADwAAAAAAAAD5/wcADgAAAAEAAAD6/wYADwAAAAAAAAD6/wcADgAAAAEAAAD7/wYADwAAAAAAAAD7/wcADgAAAAEAAAD8/wYADwAAAAAAAAD8/wcADgAAAAEAAAD9/wYADgABAAEAAAD9/wcADQABAAEAAAD2/wMADgAAAAAAAAD3/wMADgAAAAAAAAD1/wMADgAAAAAAAAD2/wQADwAAAAAAAAD2/wUADwAAAAAAAAD3/wQADwAAAAAAAAD3/wUADwAAAAAAAAD0/wUADgABAAAAAAD1/wQADwAAAAAAAAD1/wUADwAAAAAAAAD2/wYADwAAAAAAAAD2/wcADgAAAAEAAAD3/wYADwAAAAAAAAD3/wcADgAAAAEAAAD0/wYADgABAAAAAAD0/wcADQAAAAEAAAD1/wYADAAAAAAAAAD1/wcADgAAAAEAAAD0/wMADQAAAAAAAAD0/wQADgABAAAAAAA=")
 tile_set = SubResource("TileSet_u5om0")
 
-[node name="CanvasLayer" parent="." index="1" unique_id=1849002311]
-layer = 99
-
 [node name="CanvasModulate" parent="." index="3" unique_id=1420828885]
-visible = false
 color = Color(0.7490196, 0.73333335, 0.87058824, 1)
 
 [node name="Camera_Start_Position_Marker" parent="." index="6" unique_id=816834425]
@@ -417,13 +413,16 @@ position = Vector2(-720, -64)
 
 [node name="Luke_Regular" parent="." index="27" unique_id=18689023 instance=ExtResource("7_ag2mn")]
 position = Vector2(1192, 664)
+ENEMY_COLLISION_DETECTION_MASK = 0
 
 [node name="Keith_Regular" parent="." index="28" unique_id=262190991 instance=ExtResource("8_spile")]
 position = Vector2(1000, 728)
+ENEMY_COLLISION_DETECTION_MASK = 0
 
 [node name="Valerie_Regular2" parent="." index="29" unique_id=2121574658 instance=ExtResource("6_dfbaw")]
 position = Vector2(1424, 528)
+ENEMY_COLLISION_DETECTION_MASK = 0
 
 [node name="Enemy" parent="." index="31" unique_id=1440065138 instance=ExtResource("18_gh443")]
 position = Vector2(1536, 416)
-soldier_stats = SubResource("Resource_4selt")
+soldier_stats = SubResource("Resource_gh443")

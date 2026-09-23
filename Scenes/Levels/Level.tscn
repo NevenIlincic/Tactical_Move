@@ -72,10 +72,6 @@ offset_bottom = 45.0
 theme_override_font_sizes/font_size = 32
 text = "FPS:"
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=1824573650]
-position = Vector2(984, 320)
-script = ExtResource("34_slepp")
-
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1420828885]
 visible = false
 color = Color(0.54901963, 0.5058824, 0.56078434, 1)
@@ -89,17 +85,29 @@ position = Vector2(576, 320)
 
 [node name="Vision_Polygons" type="Node2D" parent="." unique_id=1769543928]
 
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1824573650]
+position = Vector2(984, 320)
+script = ExtResource("34_slepp")
+
 [node name="CanvasLayer2" type="CanvasLayer" parent="." unique_id=1842855312]
 follow_viewport_enabled = true
 
 [node name="CanvasGroup" type="CanvasGroup" parent="CanvasLayer2" unique_id=1049991586]
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer2/CanvasGroup" unique_id=1501026146]
-offset_left = -504.0
-offset_top = -288.0
-offset_right = 1376.0
-offset_bottom = 552.0
-scale = Vector2(1.7455182, 1.7290245)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -940.0
+offset_top = -420.0
+offset_right = 940.0
+offset_bottom = 420.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2.1995776, 2.0779438)
+pivot_offset = Vector2(3.8774414, 5.0634766)
 mouse_filter = 2
 color = Color(0.101960786, 0.03529412, 0.08235294, 0.34901962)
 metadata/_edit_use_anchors_ = true

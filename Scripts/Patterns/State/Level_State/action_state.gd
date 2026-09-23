@@ -60,7 +60,8 @@ func update(delta: float) -> void:
 	check_for_deletion()
 			
 	for soldier_id: String in alive_soldiers.keys():
-		alive_soldiers[soldier_id].do_while_action(delta)
+		if not current_action_killed_players.has(soldier_id):
+			alive_soldiers[soldier_id].do_while_action(delta)
 		#player.do_while_action(delta)
 	
 func check_for_deletion():
