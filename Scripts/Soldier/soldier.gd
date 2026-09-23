@@ -301,14 +301,10 @@ func _on_actions_finished():
 		#Signals.player_move_finished.emit(self)
 
 #TEMPLATE METHODS
-var i: int = 11
 func do_while_action(delta: float):
-	#if i > 10:
-		#i = 0
-	
 	if vision_polygon.is_vision_enabled and vision_polygon.are_rays_enabled:
 		vision_polygon.update_vision()
-	#i += 1
+
 	check_is_enemy_in_sight()	
 	set_player_looking_at()
 	if current_weapon:

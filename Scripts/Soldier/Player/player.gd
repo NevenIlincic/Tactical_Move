@@ -61,8 +61,7 @@ func _ready() -> void:
 	move_to_position_marker.global_position = global_position	
 	
 	soldier_stats.HP.base_value = 50.0
-
-
+	
 func _unhandled_input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("select_player") and is_mouse_hovered:
 		_on_mouse_click()

@@ -20,7 +20,7 @@ var bullet_hit_point #Vector2/null
 
 var parent_soldier: Soldier
 
-var is_vision_enabled: bool = false
+var is_vision_enabled: bool = true
 func _ready() -> void:
 	enemy_target_line.add_point(Vector2.ZERO)
 	parent_soldier = get_parent()
@@ -29,7 +29,7 @@ func _ready() -> void:
 	level = get_tree().get_first_node_in_group("Level")
 	
 	##
-	query.collision_mask = 1
+	query.collision_mask = 2
 	
 func setup_vision_rays() -> void:
 	var half_fov = deg_to_rad(fov_degrees / 2.0)
@@ -115,7 +115,7 @@ var query := PhysicsRayQueryParameters2D.new()
 func update_vision():
 	space_state = get_world_2d().direct_space_state
 	
-	var num_rays := rays.size() # ili fiksni broj npr. 20
+	var num_rays := ray_count # ili fiksni broj npr. 20
 	var points := PackedVector2Array()
 	points.resize(num_rays + 2)
 	points[0] = Vector2.ZERO # Centar vida
@@ -127,29 +127,18 @@ func update_vision():
 		var angle := start_angle + i * step
 		var dir := Vector2.RIGHT.rotated(angle)
 		
-		# Postavljamo parametre za zrak u kodu
 		query.from = global_position
 		query.to = global_position + dir.rotated(global_rotation) * max_range
 		
 		var result := space_state.intersect_ray(query)
 		
 		if result:
-			# Prevaramo pogodak u lokalne koordinate
 			points[i + 1] = to_local(result.position)
 		else:
 			points[i + 1] = dir * max_range
-
+	
 	update_polygon_points.emit(points, global_position, global_rotation)
-	#
-	#if points.size() > 3:
-		#update_polygon_points.emit(points, global_position, global_rotation)
-		##var triangles = Geometry2D.triangulate_polygon(points)
-		##if not triangles.is_empty():
-			##self.polygon = points
-		##else:
-			##pass
-
-					
+				
 func enable_vision():
 	is_vision_enabled = true
 func disable_vision():

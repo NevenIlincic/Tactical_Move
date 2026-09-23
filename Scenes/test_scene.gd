@@ -75,8 +75,11 @@ func _ready() -> void:
 
 	set_vision_polygons()
 	
+	
+	
 const VISION_POLYGON = preload("uid://bjx1wow4vot1m")
-@onready var vision_polygons_node: Node2D = $CanvasGroup/Vision_Polygons_Node
+#@onready var vision_polygons_node: Node2D = $CanvasGroup/Vision_Polygons_Node
+@onready var vision_polygons_node: Node2D = $CanvasLayer2/CanvasGroup/Vision_Polygons_Node
 
 func set_vision_polygons():
 	for player: Player in players:
@@ -102,8 +105,9 @@ func _physics_process(delta: float) -> void:
 	#passed_time_label.text = str(total_passed_minutes, ":", total_passed_time_seconds, ":", total_passed_time_millis)
 	#
 func _process(delta: float) -> void:
+
 	#fps_label.text = str("FPS: ", Engine.get_frames_per_second())
-	VisionManager.handle_enemy_visibility(delta)
+	#VisionManager.handle_enemy_visibility(delta)
 	if total_passed_time_millis >= 1000.0:
 		total_passed_time_millis = 0.0
 		total_passed_time_seconds += 1
@@ -111,7 +115,7 @@ func _process(delta: float) -> void:
 			total_passed_time_seconds = 0
 			total_passed_minutes += 1
 	passed_time_label.text = str(total_passed_minutes, ":", total_passed_time_seconds, ":", total_passed_time_millis)
-	
+	#
 
 func get_alive_players() -> Dictionary:
 	var alive_players: Dictionary = {}

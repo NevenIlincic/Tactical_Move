@@ -42,7 +42,7 @@ func check_soldier_has_action():
 func _ready() -> void:
 	super._ready()
 	soldier_type = SoldierType.ENEMY
-	visible = false
+	#visible = false
 	engagement_strategy = StopShootFollowingStrategy.new()
 	point_to_look = Vector2.ZERO
 	level = get_tree().get_first_node_in_group("Level")

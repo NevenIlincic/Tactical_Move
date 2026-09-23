@@ -130,9 +130,6 @@ point_count = 2
 [sub_resource type="Gradient" id="Gradient_tk11s"]
 colors = PackedColorArray(1, 1, 0.43137255, 0, 1, 1, 0.43137255, 0.8039216)
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_vn3yt"]
-blend_mode = 2
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q6by2"]
 size = Vector2(34, 36)
 
@@ -254,15 +251,12 @@ position = Vector2(36, 7)
 
 [node name="Vision_Polygon" type="Polygon2D" parent="." unique_id=1560586749]
 modulate = Color(0.7882353, 0.7764706, 0.6392157, 0)
-self_modulate = Color(1, 1, 1, 0)
-light_mask = 3
-material = SubResource("CanvasItemMaterial_vn3yt")
+self_modulate = Color(1, 1, 1, 0.44313726)
 use_parent_material = true
 polygon = PackedVector2Array(0, 0, -256, -256, 256, -256)
 script = ExtResource("4_t26db")
 max_range = 900.0
 fov_degrees = 60.0
-ray_count = 20.0
 
 [node name="Enemy_Target_Line" type="Line2D" parent="Vision_Polygon" unique_id=1477870436]
 show_behind_parent = true
@@ -273,6 +267,8 @@ texture = ExtResource("5_jmcll")
 texture_mode = 1
 
 [node name="Detection_Areas" type="Area2D" parent="." unique_id=1442483156 groups=["detection_areas", "door_detection_area"]]
+collision_layer = 2
+collision_mask = 2
 
 [node name="Door_Collision_Shape" type="CollisionShape2D" parent="Detection_Areas" unique_id=233869902]
 visible = false
