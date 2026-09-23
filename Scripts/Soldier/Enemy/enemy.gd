@@ -281,6 +281,7 @@ func _on_rays_activation_area_body_entered(body: Node2D) -> void:
 			set_process(true)
 			set_physics_process(true)
 			vision_polygon.enable_rays()
+			vision_polygon.enable_vision()
 
 
 
@@ -295,3 +296,4 @@ func _on_rays_activation_area_body_exited(body: Node2D) -> void:
 			set_physics_process(false)
 			if vision_polygon.are_rays_enabled:
 				vision_polygon.disable_rays()
+				vision_polygon.disable_vision()

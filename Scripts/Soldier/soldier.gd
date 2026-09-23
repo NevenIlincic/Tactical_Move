@@ -8,6 +8,7 @@ const MUZZLE_COCOON = preload("uid://dqqyoom4gsr0e")
 
 @onready var hit_sprite: Sprite2D = $Hit_Sprite
 
+@export var ENEMY_COLLISION_DETECTION_MASK: int
 
 enum SoldierType{
 	PLAYER,

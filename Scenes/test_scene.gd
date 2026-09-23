@@ -92,10 +92,10 @@ func _physics_process(delta: float) -> void:
 	fps_label.text = str("FPS: ", Engine.get_frames_per_second())
 	#print(Engine.get_frames_per_second())
 	
-	#VisionManager.handle_enemy_visibility(delta)
-	if i == 0:
-		current_state.update(delta)
-	i = (i+1) % 2
+	VisionManager.handle_enemy_visibility(delta)
+	current_state.update(delta)
+	#if i == 0:
+	#i = (i+1) % 2
 	#if total_passed_time_millis >= 1000.0:
 		#total_passed_time_millis = 0.0
 		#total_passed_time_seconds += 1

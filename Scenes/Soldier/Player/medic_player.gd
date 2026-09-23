@@ -72,6 +72,8 @@ func _on_medic_apply_detection_shape_entered(area: Area2D, area_shape_index: int
 		if soldier != self:
 			allies_to_heal_nearby[soldier.soldier_id] = soldier
 func _on_medic_apply_detection_shape_exited(area: Area2D, area_shape_index: int) -> void:
+	if not area:
+		return
 	if area.is_in_group("detection_areas") and area_shape_index == medic_detection_shape_index:
 		var soldier: Player = area.get_parent()
 		if soldier != self:

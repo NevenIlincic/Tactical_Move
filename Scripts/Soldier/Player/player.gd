@@ -248,7 +248,7 @@ func _on_ally_detection_collision_shape_entered(area: Area2D) -> void:
 			if not soldier.allies_nearby.has(self):
 				soldier.allies_nearby[self] = true
 func _on_ally_detection_collision_shape_exited(area: Area2D) -> void:
-	if area.is_in_group("detection_areas"):
+	if area and area.is_in_group("detection_areas"):
 		var soldier: Player = area.get_parent()
 		if soldier != self:
 			if allies_nearby.has(soldier):

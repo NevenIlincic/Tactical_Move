@@ -707,13 +707,3 @@ position = Vector2(-312, -344)
 rotation = 0.8475856
 scale = Vector2(0.99999994, 0.99999994)
 soldier_stats = SubResource("Resource_uf6cy")
-
-[node name="CanvasGroup" type="CanvasGroup" parent="." index="32" unique_id=211903318]
-
-[node name="ColorRect" type="ColorRect" parent="CanvasGroup" index="0" unique_id=242708230]
-offset_right = 1880.0
-offset_bottom = 840.0
-mouse_filter = 2
-color = Color(0.101960786, 0.03529412, 0.08235294, 0.5058824)
-
-[node name="Vision_Polygons_Node" type="Node2D" parent="CanvasGroup" index="1" unique_id=1364661368]

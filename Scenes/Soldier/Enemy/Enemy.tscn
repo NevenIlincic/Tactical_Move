@@ -132,6 +132,7 @@ emission_curve = SubResource("CurveTexture_7jdmd")
 [node name="Enemy" type="Node2D" unique_id=1440065138 groups=["enemy_node", "soldier"]]
 z_index = 2
 script = ExtResource("1_02vxf")
+ENEMY_COLLISION_DETECTION_MASK = 512
 soldier_stats = ExtResource("2_5e0s2")
 weapons = Array[ExtResource("3_1kajf")]([SubResource("Resource_8rupe")])
 
@@ -151,6 +152,7 @@ shape = SubResource("CircleShape2D_02vxf")
 disabled = true
 
 [node name="Hitbox" type="StaticBody2D" parent="." unique_id=1448689257]
+collision_layer = 257
 
 [node name="Hitbox_Collision_Shape" type="CollisionShape2D" parent="Hitbox" unique_id=781357414]
 shape = SubResource("CircleShape2D_wy1ij")

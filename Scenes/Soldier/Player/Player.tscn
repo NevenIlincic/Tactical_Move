@@ -169,6 +169,7 @@ emission_curve = SubResource("CurveTexture_vvysc")
 [node name="Player" type="Node2D" unique_id=1108589071 groups=["Player", "soldier"]]
 z_index = 2
 script = ExtResource("1_ft8w5")
+ENEMY_COLLISION_DETECTION_MASK = 256
 
 [node name="Player_Path_Line" type="Line2D" parent="." unique_id=2110637716]
 show_behind_parent = true
@@ -228,6 +229,7 @@ texture = ExtResource("9_3um6k")
 texture_mode = 1
 
 [node name="Hitbox" type="StaticBody2D" parent="." unique_id=1767789613 groups=["player_hitbox"]]
+collision_layer = 513
 
 [node name="Hitbox_Collision_Shape" type="CollisionShape2D" parent="Hitbox" unique_id=206391692]
 shape = SubResource("CircleShape2D_06txj")

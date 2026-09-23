@@ -29,7 +29,7 @@ func _ready() -> void:
 	level = get_tree().get_first_node_in_group("Level")
 	
 	##
-	query.collision_mask = 2
+	query.collision_mask = 2 | parent_soldier.ENEMY_COLLISION_DETECTION_MASK
 	
 func setup_vision_rays() -> void:
 	var half_fov = deg_to_rad(fov_degrees / 2.0)
@@ -130,9 +130,22 @@ func update_vision():
 		query.from = global_position
 		query.to = global_position + dir.rotated(global_rotation) * max_range
 		
-		var result := space_state.intersect_ray(query)
-		
+		var result: Dictionary = space_state.intersect_ray(query)
+		var current_point: Vector2
+		var enemy_position: Vector2
 		if result:
+			var hit_position: Vector2 = result["position"]
+			var hit_object: Object = result["collider"].get_parent()
+			if hit_object and hit_object is Soldier:
+				if hit_object.is_killed:
+					return
+				if check_is_enemy_soldier_hit(parent_soldier, hit_object):
+						points[i + 1] = to_local(result.position)
+						bullet_hit_point = hit_position
+						#if not enemy_position and hit_object == parent_soldier.enemy_to_shoot:
+							#enemy_position = current_point
+						Signals.report_enemy_seen.emit(hit_object, parent_soldier)
+			
 			points[i + 1] = to_local(result.position)
 		else:
 			points[i + 1] = dir * max_range

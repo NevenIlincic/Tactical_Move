@@ -16,6 +16,7 @@ script = ExtResource("1_echjq")
 [node name="TileMaps" type="Node2D" parent="." unique_id=641455981]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1849002311]
+layer = 99
 
 [node name="PlayerStats" parent="CanvasLayer" unique_id=1324960430 instance=ExtResource("25_wr6c8")]
 visible = false
@@ -76,6 +77,7 @@ position = Vector2(984, 320)
 script = ExtResource("34_slepp")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1420828885]
+visible = false
 color = Color(0.54901963, 0.5058824, 0.56078434, 1)
 
 [node name="Path_Line" type="Line2D" parent="." unique_id=597328806]
@@ -86,3 +88,20 @@ position = Vector2(576, 320)
 [node name="Camera_Start_Position_Marker" type="Marker2D" parent="." unique_id=816834425]
 
 [node name="Vision_Polygons" type="Node2D" parent="." unique_id=1769543928]
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="." unique_id=1842855312]
+follow_viewport_enabled = true
+
+[node name="CanvasGroup" type="CanvasGroup" parent="CanvasLayer2" unique_id=1049991586]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer2/CanvasGroup" unique_id=1501026146]
+offset_left = -504.0
+offset_top = -288.0
+offset_right = 1376.0
+offset_bottom = 552.0
+scale = Vector2(1.7455182, 1.7290245)
+mouse_filter = 2
+color = Color(0.101960786, 0.03529412, 0.08235294, 0.34901962)
+metadata/_edit_use_anchors_ = true
+
+[node name="Vision_Polygons_Node" type="Node2D" parent="CanvasLayer2/CanvasGroup" unique_id=1434571516]

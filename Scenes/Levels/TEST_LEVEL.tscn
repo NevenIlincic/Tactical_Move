@@ -17,6 +17,9 @@
 [ext_resource type="PackedScene" uid="uid://bsxjq5u2glxba" path="res://Scenes/Soldier/Player/Keith_Regular.tscn" id="8_spile"]
 [ext_resource type="Texture2D" uid="uid://cjlwwyc44rr32" path="res://Sprites/Tiles/Grass/Grass_One_Corner_Side.png" id="9_1q1xv"]
 [ext_resource type="Texture2D" uid="uid://dabjh4v6265n0" path="res://Sprites/Tiles/Grass/New Piskel-1.png - 2026-08-21T000520.022.png" id="10_4selt"]
+[ext_resource type="PackedScene" uid="uid://y3pndfcq1kxo" path="res://Scenes/Soldier/Enemy/Enemy.tscn" id="18_gh443"]
+[ext_resource type="Script" uid="uid://bencr8mnns7ut" path="res://Scripts/Patterns/Stat/stat.gd" id="19_ghyco"]
+[ext_resource type="Script" uid="uid://cp4iog725gtuq" path="res://Scripts/Soldier/Player/player_stats.gd" id="20_1q1xv"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_i126p"]
 texture = ExtResource("2_spile")
@@ -194,6 +197,35 @@ parsed_geometry_type = 1
 parsed_collision_mask = 4294967041
 source_geometry_mode = 2
 source_geometry_group_name = &"wall"
+
+[sub_resource type="Resource" id="Resource_sf78t"]
+script = ExtResource("19_ghyco")
+base_value = 100.0
+metadata/_custom_type_script = "uid://bencr8mnns7ut"
+
+[sub_resource type="Resource" id="Resource_stuxa"]
+script = ExtResource("19_ghyco")
+base_value = 1000.0
+metadata/_custom_type_script = "uid://bencr8mnns7ut"
+
+[sub_resource type="Resource" id="Resource_42oyf"]
+script = ExtResource("19_ghyco")
+base_value = 0.4
+metadata/_custom_type_script = "uid://bencr8mnns7ut"
+
+[sub_resource type="Resource" id="Resource_xq73l"]
+script = ExtResource("19_ghyco")
+base_value = 200.0
+metadata/_custom_type_script = "uid://bencr8mnns7ut"
+
+[sub_resource type="Resource" id="Resource_4selt"]
+resource_local_to_scene = true
+script = ExtResource("20_1q1xv")
+speed = SubResource("Resource_xq73l")
+reaction_time = SubResource("Resource_42oyf")
+max_travel_distance = SubResource("Resource_stuxa")
+MAX_HP = SubResource("Resource_sf78t")
+metadata/_custom_type_script = "uid://cp4iog725gtuq"
 
 [node name="Level" unique_id=1509814780 instance=ExtResource("1_jf8ei")]
 
@@ -392,19 +424,6 @@ position = Vector2(1000, 728)
 [node name="Valerie_Regular2" parent="." index="29" unique_id=2121574658 instance=ExtResource("6_dfbaw")]
 position = Vector2(1424, 528)
 
-[node name="CanvasLayer2" type="CanvasLayer" parent="." index="30" unique_id=1999465109]
-follow_viewport_enabled = true
-
-[node name="CanvasGroup" type="CanvasGroup" parent="CanvasLayer2" index="0" unique_id=1407599853]
-
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer2/CanvasGroup" index="0" unique_id=1678035037]
-offset_left = -504.0
-offset_top = -288.0
-offset_right = 1376.0
-offset_bottom = 552.0
-scale = Vector2(1.7455182, 1.7290245)
-mouse_filter = 2
-color = Color(0.101960786, 0.03529412, 0.08235294, 0.34901962)
-metadata/_edit_use_anchors_ = true
-
-[node name="Vision_Polygons_Node" type="Node2D" parent="CanvasLayer2/CanvasGroup" index="1" unique_id=79182173]
+[node name="Enemy" parent="." index="31" unique_id=1440065138 instance=ExtResource("18_gh443")]
+position = Vector2(1536, 416)
+soldier_stats = SubResource("Resource_4selt")
