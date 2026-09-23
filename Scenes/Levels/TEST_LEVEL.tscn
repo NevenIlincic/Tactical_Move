@@ -323,15 +323,20 @@ offset_top = -8.0
 offset_right = -416.0
 offset_bottom = -8.0
 
-[node name="Valerie_Regular" parent="." index="25" unique_id=1108589071 instance=ExtResource("6_dfbaw")]
-position = Vector2(1424, 736)
-rotation = -2.1201563
+[node name="Luke_Regular" parent="." index="25" unique_id=18689023 instance=ExtResource("7_ag2mn")]
+position = Vector2(1192, 664)
 
-[node name="NavigationRegion2D" type="NavigationRegion2D" parent="." index="26" unique_id=846295402]
+[node name="Keith_Regular" parent="." index="26" unique_id=262190991 instance=ExtResource("8_spile")]
+position = Vector2(1000, 728)
+
+[node name="Nate_Medic" parent="." index="27" unique_id=2126127563 instance=ExtResource("9_s04pa")]
+position = Vector2(1336, 600)
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="." index="28" unique_id=846295402]
 visible = false
 navigation_polygon = SubResource("NavigationPolygon_4selt")
 
-[node name="Covers" type="Node2D" parent="." index="27" unique_id=52044403]
+[node name="Covers" type="Node2D" parent="." index="29" unique_id=52044403]
 
 [node name="Marker2D" type="Marker2D" parent="Covers" index="0" unique_id=1926599074 groups=["a_star_point"]]
 position = Vector2(160, 160)
@@ -384,7 +389,7 @@ position = Vector2(16, 488)
 [node name="Marker2D17" type="Marker2D" parent="Covers" index="16" unique_id=33172417 groups=["a_star_point"]]
 position = Vector2(-720, -64)
 
-[node name="CanvasGroup" type="CanvasGroup" parent="." index="28" unique_id=1407599853]
+[node name="CanvasGroup" type="CanvasGroup" parent="." index="30" unique_id=1407599853]
 
 [node name="ColorRect" type="ColorRect" parent="CanvasGroup" index="0" unique_id=1678035037]
 offset_right = 1880.0
@@ -395,11 +400,5 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Vision_Polygons_Node" type="Node2D" parent="CanvasGroup" index="1" unique_id=79182173]
 
-[node name="Luke_Regular" parent="CanvasGroup" index="2" unique_id=18689023 instance=ExtResource("7_ag2mn")]
-position = Vector2(1192, 664)
-
-[node name="Keith_Regular" parent="CanvasGroup" index="3" unique_id=262190991 instance=ExtResource("8_spile")]
-position = Vector2(1000, 728)
-
-[node name="Nate_Medic" parent="CanvasGroup" index="4" unique_id=2126127563 instance=ExtResource("9_s04pa")]
-position = Vector2(1336, 600)
+[node name="Valerie_Regular2" parent="." index="31" unique_id=2121574658 instance=ExtResource("6_dfbaw")]
+position = Vector2(1424, 528)

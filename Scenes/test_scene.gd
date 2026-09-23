@@ -52,7 +52,6 @@ var current_confirm_callback: Callable
 @onready var fps_label: Label = $CanvasLayer/FPS_Label
 
 
-
 func _ready() -> void:
 	UpgradeCardsManager.clear_available_permanent_upgrades()
 	for player in get_tree().get_nodes_in_group("Player"):

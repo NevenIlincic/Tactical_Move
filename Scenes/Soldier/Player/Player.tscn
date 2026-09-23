@@ -120,7 +120,7 @@ _data = {
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_06txj"]
-radius = 16.0
+radius = 24.0
 
 [sub_resource type="Curve" id="Curve_tk11s"]
 _limits = [0.0, 4.0, 0.0, 1.0]
@@ -130,20 +130,20 @@ point_count = 2
 [sub_resource type="Gradient" id="Gradient_tk11s"]
 colors = PackedColorArray(1, 1, 0.43137255, 0, 1, 1, 0.43137255, 0.8039216)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_jjc5n"]
-size = Vector2(256, 248)
-
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_vn3yt"]
 blend_mode = 2
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q6by2"]
 size = Vector2(34, 36)
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_58pdj"]
-light_mode = 1
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jjc5n"]
+size = Vector2(256, 248)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fhwqp"]
 size = Vector2(48, 48)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_58pdj"]
+light_mode = 1
 
 [sub_resource type="Curve" id="Curve_gr3gk"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.98192763, 0.82142854), 0.0, 0.0, 0, 0]
@@ -203,6 +203,7 @@ hframes = 7
 [node name="Selection_Area" type="Area2D" parent="." unique_id=2041313350]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Selection_Area" unique_id=108256655]
+visible = false
 shape = SubResource("RectangleShape2D_06txj")
 
 [node name="Look_At_Position_Sprite" type="Sprite2D" parent="." unique_id=560975301]
@@ -243,13 +244,6 @@ default_color = Color(1, 1, 0.43137255, 0.8039216)
 gradient = SubResource("Gradient_tk11s")
 script = ExtResource("11_tk11s")
 
-[node name="Ally_Detection_Area" type="Area2D" parent="." unique_id=996566538 groups=["ally_detection_area"]]
-visible = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Ally_Detection_Area" unique_id=1560835526]
-position = Vector2(0, -4)
-shape = SubResource("RectangleShape2D_jjc5n")
-
 [node name="m4a1_rifle_bullet_spawn_point" type="Marker2D" parent="." unique_id=1798696889]
 position = Vector2(34, 4)
 
@@ -278,10 +272,19 @@ width = 3.0
 texture = ExtResource("5_jmcll")
 texture_mode = 1
 
-[node name="Door_Detection_Area" type="Area2D" parent="." unique_id=1442483156 groups=["door_detection_area"]]
+[node name="Detection_Areas" type="Area2D" parent="." unique_id=1442483156 groups=["detection_areas", "door_detection_area"]]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Door_Detection_Area" unique_id=233869902]
+[node name="Door_Collision_Shape" type="CollisionShape2D" parent="Detection_Areas" unique_id=233869902]
+visible = false
 shape = SubResource("RectangleShape2D_q6by2")
+
+[node name="Ally_Detection_Shape" type="CollisionShape2D" parent="Detection_Areas" unique_id=1735243656]
+visible = false
+position = Vector2(0, -4)
+shape = SubResource("RectangleShape2D_jjc5n")
+
+[node name="Medic_Detection_Shape" type="CollisionShape2D" parent="Detection_Areas" unique_id=2070876421]
+shape = SubResource("RectangleShape2D_fhwqp")
 
 [node name="Healing_Needed_Sprite" type="Sprite2D" parent="." unique_id=872506951]
 visible = false
@@ -293,15 +296,9 @@ scale = Vector2(0.5, 0.5)
 texture = ExtResource("14_esp8e")
 
 [node name="HealingEffect_Cross" parent="." unique_id=718372442 instance=ExtResource("15_yq3hi")]
-visible = false
 
 [node name="Position_Marker_AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1121704710]
 libraries/ = SubResource("AnimationLibrary_x56g5")
-
-[node name="Medic_Detection_Area" type="Area2D" parent="." unique_id=1241310332]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Medic_Detection_Area" unique_id=1240614037]
-shape = SubResource("RectangleShape2D_fhwqp")
 
 [node name="Dying_Sprite" type="Sprite2D" parent="." unique_id=1339253334]
 visible = false
@@ -333,6 +330,5 @@ process_material = SubResource("ParticleProcessMaterial_rw7ms")
 [connection signal="mouse_entered" from="Selection_Area" to="." method="_on_selection_area_mouse_entered"]
 [connection signal="mouse_exited" from="Selection_Area" to="." method="_on_selection_area_mouse_exited"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
-[connection signal="body_entered" from="Ally_Detection_Area" to="." method="_on_ally_detection_area_body_entered"]
-[connection signal="body_exited" from="Ally_Detection_Area" to="." method="_on_ally_detection_area_body_exited"]
-[connection signal="area_entered" from="Medic_Detection_Area" to="." method="_on_medic_detection_area_area_entered"]
+[connection signal="area_shape_entered" from="Detection_Areas" to="." method="_on_detection_areas_area_shape_entered"]
+[connection signal="area_shape_exited" from="Detection_Areas" to="." method="_on_detection_areas_area_shape_exited"]

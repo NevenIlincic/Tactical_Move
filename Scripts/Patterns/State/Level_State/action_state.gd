@@ -96,8 +96,8 @@ func _on_player_move_finished(soldier: Soldier):
 			#print(player.soldier_id, " ", current_action_killed_players)
 			if is_instance_valid(alive_players[player_id]) and not alive_players[player_id].is_queued_for_deletion() and not current_action_killed_players.has(player_id):
 				var player: Player = alive_players[player_id]
-				player.is_queued_for_medic_healing = false
-				player.healing_needed_sprite.visible = false
+				#player.is_queued_for_medic_healing = false
+				#player.healing_needed_sprite.visible = false
 				if player is MedicPlayer:
 					player._check_is_healing_available(action_duration)
 		level.set_level_state(PreparationState.new([level]))

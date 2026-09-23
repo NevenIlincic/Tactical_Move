@@ -59,6 +59,8 @@ func _ready() -> void:
 	#animation_player.play("Position_Marker_Rotation")
 	position_marker_animation_player.play("Position_Marker_Rotation")
 	move_to_position_marker.global_position = global_position	
+	
+	soldier_stats.HP.base_value = 50.0
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -232,27 +234,29 @@ func check_is_healing_needed():
 		return true
 	return false
 
-func can_soldier_move():
-	if is_queued_for_medic_healing:
-		reset_path()
-		return false
-	return true
+#func can_soldier_move():
+	#if is_queued_for_medic_healing:
+		#reset_path()
+		#return false
+	#return true
 	
-func _on_ally_detection_area_body_entered(body: Node2D) -> void:
-	var soldier = body.get_parent()
-	if soldier != self and body.is_in_group("player_hitbox") and soldier is Player:
-		if not allies_nearby.has(soldier):
-			allies_nearby[soldier] = true
-		if not soldier.allies_nearby.has(self):
-			soldier.allies_nearby[self] = true
-func _on_ally_detection_area_body_exited(body: Node2D) -> void:
-	var soldier = body.get_parent()
-	if soldier != self and body.is_in_group("player_hitbox") and soldier is Player:
-		if allies_nearby.has(soldier):
-			allies_nearby.erase(soldier)
-		if soldier.allies_nearby.has(self):
-			soldier.allies_nearby.erase(self)
-
+func _on_ally_detection_collision_shape_entered(area: Area2D) -> void:
+	if area.is_in_group("detection_areas"):
+		var soldier: Player = area.get_parent()
+		if soldier != self:
+			if not allies_nearby.has(soldier):
+				allies_nearby[soldier] = true
+			if not soldier.allies_nearby.has(self):
+				soldier.allies_nearby[self] = true
+func _on_ally_detection_collision_shape_exited(area: Area2D) -> void:
+	if area.is_in_group("detection_areas"):
+		var soldier: Player = area.get_parent()
+		if soldier != self:
+			if allies_nearby.has(soldier):
+				allies_nearby.erase(soldier)
+			if soldier.allies_nearby.has(self):
+				soldier.allies_nearby.erase(self)
+				
 func do_before_movement():
 	animation_player.play("running_animation")
 	UpgradeManager.apply_movement_penalty_perk(self)
@@ -282,10 +286,10 @@ func do_hit_effect():
 		hit_sprite.visible = false
 		)
 
-func _on_medic_detection_area_area_entered(area: Area2D) -> void:
-	if area.is_in_group("medic_detection_area"):
+func _on_medic_detection_shape_entered(area: Area2D, area_shape_index: int) -> void:
+	if area.is_in_group("detection_areas") and area_shape_index == 3:
 		var soldier: Player = area.get_parent()
-		if soldier != self:
+		if soldier != self and soldier is MedicPlayer:
 			soldier.allies_to_heal_nearby[soldier_id] = self
 
 
@@ -312,3 +316,26 @@ func _on_selection_area_mouse_entered() -> void:
 
 func _on_selection_area_mouse_exited() -> void:
 	is_mouse_hovered = false
+
+@onready var door_collision_shape_index: int = $Detection_Areas/Door_Collision_Shape.get_index()
+@onready var ally_detection_shape_index: int = $Detection_Areas/Ally_Detection_Shape.get_index()
+@onready var medic_detection_shape_index: int = $Detection_Areas/Medic_Detection_Shape.get_index()
+
+
+func _on_detection_areas_area_shape_entered(area_rid: RID, area: Area2D, area_shape_index: int, local_shape_index: int) -> void:
+	match local_shape_index:
+		ally_detection_shape_index:
+			_on_ally_detection_collision_shape_entered(area)
+		
+		medic_detection_shape_index:
+			_on_medic_detection_shape_entered(area, area_shape_index)
+		
+		#DOORS
+		door_collision_shape_index:
+			pass
+
+
+func _on_detection_areas_area_shape_exited(area_rid: RID, area: Area2D, area_shape_index: int, local_shape_index: int) -> void:
+	match local_shape_index:
+		ally_detection_shape_index:
+			_on_ally_detection_collision_shape_exited(area)

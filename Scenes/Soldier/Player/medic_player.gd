@@ -3,6 +3,7 @@ class_name MedicPlayer extends Player
 signal check_can_heal()
 
 @onready var healing_area_indicator: Sprite2D = $Healing_Area_Indicator
+@onready var medic_apply_detection_shape_index: int = $Detection_Areas/Medic_Apply_Detection_Shape.get_index()
 
 var allies_to_heal_nearby: Dictionary = {}
 
@@ -40,6 +41,7 @@ func do_healing():
 	healing_timeout = HEALING_TIMEOUT_AMOUNT
 	healing_area_indicator.visible = false
 	can_heal = false
+	is_queued_for_medic_healing = false
 	for ally_id: String in allies_to_heal_nearby:
 		var ally: Player = allies_to_heal_nearby[ally_id]
 		if ally.is_queued_for_medic_healing:
@@ -50,16 +52,30 @@ func heal_player(player: Player):
 	player.healing_needed_sprite.visible = false
 	if player.soldier_stats.HP.base_value / player.soldier_stats.MAX_HP.base_value >= 0.3:
 		UpgradeManager.remove_low_hp_penalty(player)
-###
 
-func _on_medic_apply_area_body_entered(body: Node2D) -> void:
-	var soldier = body.get_parent()
-	if soldier != self and body.is_in_group("player_hitbox") and soldier is Player:
-		allies_to_heal_nearby[soldier.soldier_id] = soldier
-func _on_medic_apply_area_body_exited(body: Node2D) -> void:
-	var soldier = body.get_parent()
-	if soldier != self and body.is_in_group("player_hitbox") and soldier is Player:
-		allies_to_heal_nearby.erase(soldier.soldier_id)
+func _on_detection_areas_area_shape_entered(area_rid: RID, area: Area2D, area_shape_index: int, local_shape_index: int) -> void:
+	super._on_detection_areas_area_shape_entered(area_rid, area, area_shape_index, local_shape_index)
+	match local_shape_index:
+		medic_apply_detection_shape_index:
+			_on_medic_apply_detection_shape_entered(area, area_shape_index)
+
+func _on_detection_areas_area_shape_exited(area_rid: RID, area: Area2D, area_shape_index: int, local_shape_index: int) -> void:
+	super._on_detection_areas_area_shape_exited(area_rid, area, area_shape_index, local_shape_index)
+
+	match local_shape_index:
+		medic_apply_detection_shape_index:
+			_on_medic_apply_detection_shape_exited(area, area_shape_index)
+
+func _on_medic_apply_detection_shape_entered(area: Area2D, area_shape_index: int) -> void:
+	if area.is_in_group("detection_areas") and area_shape_index == medic_detection_shape_index:
+		var soldier: Player = area.get_parent()
+		if soldier != self:
+			allies_to_heal_nearby[soldier.soldier_id] = soldier
+func _on_medic_apply_detection_shape_exited(area: Area2D, area_shape_index: int) -> void:
+	if area.is_in_group("detection_areas") and area_shape_index == medic_detection_shape_index:
+		var soldier: Player = area.get_parent()
+		if soldier != self:
+			allies_to_heal_nearby.erase(soldier.soldier_id)
 
 #func _on_mouse_click(event: InputEvent):
 	#pass
