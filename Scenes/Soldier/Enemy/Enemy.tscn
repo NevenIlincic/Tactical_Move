@@ -180,7 +180,7 @@ polygon = PackedVector2Array(0, 0, -256, -256, 256, -256)
 script = ExtResource("3_fw0yv")
 max_range = 900.0
 fov_degrees = 60.0
-ray_count = 20.0
+ray_count = 10.0
 
 [node name="Enemy_Target_Line" type="Line2D" parent="Vision_Polygon" unique_id=1406944396]
 visible = false
@@ -195,8 +195,6 @@ texture_mode = 1
 collision_layer = 4
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Vision_Polygon/Vision_Area" unique_id=664566003]
-
-[node name="PointLight2D" type="PointLight2D" parent="Vision_Polygon" unique_id=1171120504]
 
 [node name="Door_Detection_Area" type="Area2D" parent="." unique_id=1757595917 groups=["door_detection_area"]]
 
@@ -231,6 +229,7 @@ position = Vector2(7, 0)
 texture = ExtResource("12_1kajf")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=504575328]
+visible = false
 follow_viewport_enabled = true
 
 [node name="GunBlastEffect" parent="CanvasLayer" unique_id=1793492474 instance=ExtResource("2_cgwcb")]

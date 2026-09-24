@@ -9,7 +9,6 @@
 [ext_resource type="Texture2D" uid="uid://b57h4w4d5rop7" path="res://Sprites/Tiles/Interior/Dark_Ground.png" id="4_s34pd"]
 [ext_resource type="Texture2D" uid="uid://bo60888547asv" path="res://Sprites/Wall/New Piskel (30).png" id="5_6jphs"]
 [ext_resource type="PackedScene" uid="uid://bm1ppd4si4asw" path="res://Scenes/Map_Assets/Door/Door.tscn" id="5_8n15c"]
-[ext_resource type="PackedScene" uid="uid://cjloixtn6v5rp" path="res://Scenes/Soldier/Player/Valerie_Regular.tscn" id="6_dfbaw"]
 [ext_resource type="Texture2D" uid="uid://dws2prvoqt80s" path="res://Sprites/Wall/wall_tiles.png" id="6_ybhuq"]
 [ext_resource type="PackedScene" uid="uid://bpg5m07qvbc3m" path="res://Scenes/Soldier/Player/Luke_Regular.tscn" id="7_ag2mn"]
 [ext_resource type="Texture2D" uid="uid://b0ys5hsblpl5u" path="res://Sprites/Tiles/Grass/Grass.png" id="7_gh443"]
@@ -242,10 +241,10 @@ tile_set = SubResource("TileSet_kxqhn")
 tile_map_data = PackedByteArray("AAArAAoAAAAAAAAAAAArAAsAAAAAAAAAAAAsAAsAAAAAAAAAAAAsAAoAAAAAAAAAAAAsAAwAAAAAAAAAAAAsAA0AAAAAAAAAAAArAA0AAAAAAAAAAAArAAwAAAAAAAAAAAAVAAUABQAAAAAAAAAWAAUABQABAAAAAAAVAAYABQAAAAEAAAAWAAYABQABAAEAAAD4/wMADgAAAAAAAAD5/wMADgAAAAAAAAD6/wMADgAAAAAAAAD7/wMADgAAAAAAAAD8/wMADgAAAAAAAAD9/wMADQABAAAAAAD4/wQADwAAAAAAAAD4/wUADwAAAAAAAAD5/wQADwAAAAAAAAD5/wUADwAAAAAAAAD6/wQADwAAAAAAAAD6/wUADwAAAAAAAAD7/wQADwAAAAAAAAD7/wUADwAAAAAAAAD8/wQADAAAAAAAAAD8/wUADAAAAAAAAAD9/wQADgABAAEAAAD9/wUADgABAAEAAAD4/wYADwAAAAAAAAD4/wcADgAAAAEAAAD5/wYADwAAAAAAAAD5/wcADgAAAAEAAAD6/wYADwAAAAAAAAD6/wcADgAAAAEAAAD7/wYADwAAAAAAAAD7/wcADgAAAAEAAAD8/wYADwAAAAAAAAD8/wcADgAAAAEAAAD9/wYADgABAAEAAAD9/wcADQABAAEAAAD2/wMADgAAAAAAAAD3/wMADgAAAAAAAAD1/wMADgAAAAAAAAD2/wQADwAAAAAAAAD2/wUADwAAAAAAAAD3/wQADwAAAAAAAAD3/wUADwAAAAAAAAD0/wUADgABAAAAAAD1/wQADwAAAAAAAAD1/wUADwAAAAAAAAD2/wYADwAAAAAAAAD2/wcADgAAAAEAAAD3/wYADwAAAAAAAAD3/wcADgAAAAEAAAD0/wYADgABAAAAAAD0/wcADQAAAAEAAAD1/wYADAAAAAAAAAD1/wcADgAAAAEAAAD0/wMADQAAAAAAAAD0/wQADgABAAAAAAA=")
 tile_set = SubResource("TileSet_u5om0")
 
-[node name="CanvasModulate" parent="." index="3" unique_id=1420828885]
+[node name="CanvasModulate" parent="." index="2" unique_id=1420828885]
 color = Color(0.7490196, 0.73333335, 0.87058824, 1)
 
-[node name="Camera_Start_Position_Marker" parent="." index="6" unique_id=816834425]
+[node name="Camera_Start_Position_Marker" parent="." index="5" unique_id=816834425]
 position = Vector2(1264, 704)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." index="8" unique_id=1698048583 groups=["wall"]]
@@ -411,18 +410,12 @@ position = Vector2(16, 488)
 [node name="Marker2D17" type="Marker2D" parent="Covers" index="16" unique_id=33172417 groups=["a_star_point"]]
 position = Vector2(-720, -64)
 
-[node name="Luke_Regular" parent="." index="27" unique_id=18689023 instance=ExtResource("7_ag2mn")]
-position = Vector2(1192, 664)
-ENEMY_COLLISION_DETECTION_MASK = 0
-
-[node name="Keith_Regular" parent="." index="28" unique_id=262190991 instance=ExtResource("8_spile")]
-position = Vector2(1000, 728)
-ENEMY_COLLISION_DETECTION_MASK = 0
-
-[node name="Valerie_Regular2" parent="." index="29" unique_id=2121574658 instance=ExtResource("6_dfbaw")]
-position = Vector2(1424, 528)
-ENEMY_COLLISION_DETECTION_MASK = 0
-
-[node name="Enemy" parent="." index="31" unique_id=1440065138 instance=ExtResource("18_gh443")]
-position = Vector2(1536, 416)
+[node name="Enemy" parent="." index="27" unique_id=1440065138 instance=ExtResource("18_gh443")]
+position = Vector2(1392, 440)
 soldier_stats = SubResource("Resource_gh443")
+
+[node name="Luke_Regular" parent="." index="28" unique_id=1108589071 instance=ExtResource("7_ag2mn")]
+position = Vector2(1152, 752)
+
+[node name="Keith_Regular" parent="." index="29" unique_id=686689231 instance=ExtResource("8_spile")]
+position = Vector2(1136, 688)

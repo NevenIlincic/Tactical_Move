@@ -218,7 +218,7 @@ script = ExtResource("22_1upsa")
 base_value = 200.0
 metadata/_custom_type_script = "uid://bencr8mnns7ut"
 
-[sub_resource type="Resource" id="Resource_frhld"]
+[sub_resource type="Resource" id="Resource_1upsa"]
 resource_local_to_scene = true
 script = ExtResource("23_pa4ua")
 speed = SubResource("Resource_cnjlm")
@@ -246,24 +246,6 @@ metadata/_custom_type_script = "uid://bencr8mnns7ut"
 script = ExtResource("22_1upsa")
 base_value = 200.0
 metadata/_custom_type_script = "uid://bencr8mnns7ut"
-
-[sub_resource type="Resource" id="Resource_baqr5"]
-resource_local_to_scene = true
-script = ExtResource("23_pa4ua")
-speed = SubResource("Resource_xq73l")
-reaction_time = SubResource("Resource_42oyf")
-max_travel_distance = SubResource("Resource_stuxa")
-MAX_HP = SubResource("Resource_sf78t")
-metadata/_custom_type_script = "uid://cp4iog725gtuq"
-
-[sub_resource type="Resource" id="Resource_1upsa"]
-resource_local_to_scene = true
-script = ExtResource("23_pa4ua")
-speed = SubResource("Resource_xq73l")
-reaction_time = SubResource("Resource_42oyf")
-max_travel_distance = SubResource("Resource_stuxa")
-MAX_HP = SubResource("Resource_sf78t")
-metadata/_custom_type_script = "uid://cp4iog725gtuq"
 
 [sub_resource type="Resource" id="Resource_pa4ua"]
 resource_local_to_scene = true
@@ -364,6 +346,24 @@ max_travel_distance = SubResource("Resource_stuxa")
 MAX_HP = SubResource("Resource_sf78t")
 metadata/_custom_type_script = "uid://cp4iog725gtuq"
 
+[sub_resource type="Resource" id="Resource_frhld"]
+resource_local_to_scene = true
+script = ExtResource("23_pa4ua")
+speed = SubResource("Resource_xq73l")
+reaction_time = SubResource("Resource_42oyf")
+max_travel_distance = SubResource("Resource_stuxa")
+MAX_HP = SubResource("Resource_sf78t")
+metadata/_custom_type_script = "uid://cp4iog725gtuq"
+
+[sub_resource type="Resource" id="Resource_ujgsu"]
+resource_local_to_scene = true
+script = ExtResource("23_pa4ua")
+speed = SubResource("Resource_xq73l")
+reaction_time = SubResource("Resource_42oyf")
+max_travel_distance = SubResource("Resource_stuxa")
+MAX_HP = SubResource("Resource_sf78t")
+metadata/_custom_type_script = "uid://cp4iog725gtuq"
+
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_7v413"]
 vertices = PackedVector2Array(-787.4922, -715.2422, -718.28906, -837.9531, -681.10156, -856.3125, -618, 166, -793.3125, -543.7031, -919.3906, -405.2422, -856.8125, -471.46875, -822.60156, -476.17188, -922.1797, -326.4375, -1468, -190, -1194, -254, -1148, -254, -1044, -196.49219, -1148, -146, -1194, -146, -888.9531, -478.6875, -929.40625, -421.39063, -738.27344, -838.0469, -1038.9297, -368.0625, -1148, -722, -1037.3281, -401.84375, -1032.7813, -415.15625, -1468, -382, -1194, -722, -1468, -338, -1468, -594, -1468, -638, -1009.9375, -435.71094, -1468, -786, -1194, -822, -1150, -822, -943.5703, -433.4922, -903.0625, -490.84375, -766.0078, -847.4531, -817.1719, -728.96094, -1518.3203, 166, -1533.75, -1076, -1514, -1076, -1514, -830, -1150, -1076, -785.46094, -1076, -786.5, -868.14844, -883.7969, -730.78906, -904.1719, -714.5, -1470, -830, -1470, -1076, -1194, -1076, -1514, -638, -1514, -594, -1514, -382, -1514, -338, -669.4531, -1076, -618, -1076, -670.4531, -877.35156, -795.0703, -509.9297, -799.65625, -496.6328, -927.34375, -197.75781, -1148, 166, -947.6406, -181.36719, -1014.2578, -182.92188, -1194, 166, -1468, 166, -1468, -146, -1514, -190, -1514, -146, -1514, 166, -975.75, -440.57813, -913.0078, -507.0625, -909.8828, -585.8281, -1514, -786)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32Array(5, 6, 7, 3, 8), PackedInt32Array(9, 10, 11, 12, 13, 14), PackedInt32Array(15, 6, 5, 16), PackedInt32Array(17, 1, 0), PackedInt32Array(18, 12, 11, 19), PackedInt32Array(20, 18, 19), PackedInt32Array(21, 20, 19), PackedInt32Array(22, 23, 10, 24), PackedInt32Array(23, 22, 25), PackedInt32Array(26, 23, 25), PackedInt32Array(27, 21, 19), PackedInt32Array(23, 26, 28, 29, 30), PackedInt32Array(10, 9, 24), PackedInt32Array(15, 16, 31, 32), PackedInt32Array(33, 17, 0, 34), PackedInt32Array(35, 36, 37, 38), PackedInt32Array(30, 39, 40, 41, 42, 43), PackedInt32Array(44, 45, 46, 29, 28), PackedInt32Array(47, 26, 25, 48), PackedInt32Array(49, 22, 24, 50), PackedInt32Array(51, 52, 3, 53), PackedInt32Array(2, 53, 3), PackedInt32Array(54, 4, 3), PackedInt32Array(55, 54, 3), PackedInt32Array(7, 55, 3), PackedInt32Array(56, 8, 3), PackedInt32Array(56, 3, 57, 58), PackedInt32Array(58, 57, 13, 59), PackedInt32Array(12, 59, 13), PackedInt32Array(14, 60, 61, 62), PackedInt32Array(9, 14, 62, 63), PackedInt32Array(63, 62, 64), PackedInt32Array(64, 65, 35), PackedInt32Array(32, 66, 27, 19, 67), PackedInt32Array(33, 34, 42, 41), PackedInt32Array(30, 43, 68, 19), PackedInt32Array(32, 31, 66), PackedInt32Array(68, 67, 19), PackedInt32Array(30, 19, 23), PackedInt32Array(44, 28, 69, 38), PackedInt32Array(35, 38, 69), PackedInt32Array(35, 69, 47), PackedInt32Array(35, 47, 48), PackedInt32Array(35, 48, 49), PackedInt32Array(35, 49, 50), PackedInt32Array(35, 50, 63), PackedInt32Array(35, 63, 64)])
@@ -434,10 +434,7 @@ texture_repeat = 1
 tile_map_data = PackedByteArray("AAD4/wAAAAAAAAAAAAD4/wIAAAAAAAAAAAD4/wQAAAAAAAAAAAD4/wYAAAAAAAAAAAD4/wgAAAAAAAAAAAD4/woAAAAAAAAAAAD4/wwAAAAAAAAAAAD4/w4AAAAAAAAAAAD4/xAAAAAAAAAAAAD4/xIAAAAAAAAAAAD4/xQAAAAAAAAAAAD4/xYAAAAAAAAAAAD4/xgAAAAAAAAAAAD4/xoAAAAAAAAAAAD4/xwAAAAAAAAAAAD4/yYAAAAAAAAAAAD4/yQAAAAAAAAAAAD4/yIAAAAAAAAAAAD4/yAAAAAAAAAAAAD4/x4AAAAAAAAAAAA=")
 tile_set = SubResource("TileSet_06txj")
 
-[node name="PauseMenu" parent="CanvasLayer" parent_id_path=PackedInt32Array(1849002311) index="6" unique_id=487446487]
-visible = false
-
-[node name="Camera_Start_Position_Marker" parent="." index="8" unique_id=816834425]
+[node name="Camera_Start_Position_Marker" parent="." index="7" unique_id=816834425]
 position = Vector2(208, 176)
 
 [node name="Beach_Ball" type="RigidBody2D" parent="." index="9" unique_id=1114574470]
@@ -596,72 +593,72 @@ position = Vector2(768, 344)
 position = Vector2(528, 1248)
 rotation = -1.9085715
 scale = Vector2(0.99999994, 0.99999994)
-soldier_stats = SubResource("Resource_frhld")
+soldier_stats = SubResource("Resource_1upsa")
 
 [node name="Enemy10" parent="Enemies" index="1" unique_id=1440065138 instance=ExtResource("21_baqr5")]
 position = Vector2(1568.0001, 80.00006)
 rotation = 1.9349624
-soldier_stats = SubResource("Resource_baqr5")
+soldier_stats = SubResource("Resource_pa4ua")
 
 [node name="Enemy11" parent="Enemies" index="2" unique_id=986521434 instance=ExtResource("21_baqr5")]
 position = Vector2(1144, 1152)
 rotation = -2.2588348
-soldier_stats = SubResource("Resource_1upsa")
+soldier_stats = SubResource("Resource_m28yf")
 
 [node name="Enemy12" parent="Enemies" index="3" unique_id=63015456 instance=ExtResource("21_baqr5")]
 position = Vector2(1336, 872)
 rotation = 2.5129216
-soldier_stats = SubResource("Resource_pa4ua")
+soldier_stats = SubResource("Resource_ghp5y")
 
 [node name="Enemy13" parent="Enemies" index="4" unique_id=1906174568 instance=ExtResource("21_baqr5")]
 position = Vector2(784, 831.99994)
 rotation = -2.7226598
-soldier_stats = SubResource("Resource_m28yf")
+soldier_stats = SubResource("Resource_0ipfo")
 
 [node name="Enemy" parent="Enemies" index="5" unique_id=1622970741 instance=ExtResource("21_baqr5")]
 position = Vector2(760, 1184)
 rotation = -1.6862817
-soldier_stats = SubResource("Resource_ghp5y")
+soldier_stats = SubResource("Resource_uixfn")
 
 [node name="Enemy2" parent="Enemies" index="6" unique_id=1765156065 instance=ExtResource("21_baqr5")]
 position = Vector2(1080, 776)
 rotation = 2.0706382
-soldier_stats = SubResource("Resource_0ipfo")
+soldier_stats = SubResource("Resource_pyfh8")
 
 [node name="Enemy3" parent="Enemies" index="7" unique_id=433063275 instance=ExtResource("21_baqr5")]
 position = Vector2(984.00006, 1240.0001)
 rotation = -2.2389836
-soldier_stats = SubResource("Resource_uixfn")
+soldier_stats = SubResource("Resource_hegf1")
 
 [node name="Enemy4" parent="Enemies" index="8" unique_id=136146198 instance=ExtResource("21_baqr5")]
 position = Vector2(1464, 448)
 rotation = 3.1489403
-soldier_stats = SubResource("Resource_pyfh8")
+soldier_stats = SubResource("Resource_cah5s")
 
 [node name="Enemy5" parent="Enemies" index="9" unique_id=694650020 instance=ExtResource("21_baqr5")]
 position = Vector2(1344, 720)
 rotation = -2.8329606
-soldier_stats = SubResource("Resource_hegf1")
+soldier_stats = SubResource("Resource_6l8ho")
 
 [node name="Enemy6" parent="Enemies" index="10" unique_id=380243598 instance=ExtResource("21_baqr5")]
 position = Vector2(1128, 416)
 rotation = -2.6879241
-soldier_stats = SubResource("Resource_cah5s")
+soldier_stats = SubResource("Resource_h2vgs")
 
 [node name="Enemy7" parent="Enemies" index="11" unique_id=322668376 instance=ExtResource("21_baqr5")]
 position = Vector2(1095.9999, 215.99997)
 rotation = 1.9782188
-soldier_stats = SubResource("Resource_6l8ho")
+soldier_stats = SubResource("Resource_7x8cp")
 
 [node name="Enemy8" parent="Enemies" index="12" unique_id=445302661 instance=ExtResource("21_baqr5")]
 position = Vector2(808, 384)
 rotation = 2.4135222
-soldier_stats = SubResource("Resource_h2vgs")
+soldier_stats = SubResource("Resource_frhld")
 
 [node name="Enemy9" parent="Enemies" index="13" unique_id=489767340 instance=ExtResource("21_baqr5")]
 position = Vector2(800, 176)
 rotation = 2.0900474
-soldier_stats = SubResource("Resource_7x8cp")
+soldier_stats = SubResource("Resource_ujgsu")
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="." index="15" unique_id=1857072233]
 visible = false
@@ -827,5 +824,8 @@ texture_filter = 1
 texture_repeat = 1
 position = Vector2(744, 1016)
 texture = ExtResource("24_1upsa")
+
+[node name="CanvasLayer2" parent="." index="18" unique_id=1842855312]
+layer = 0
 
 [connection signal="body_entered" from="Beach_Ball" to="Beach_Ball" method="_on_body_entered"]

@@ -8,8 +8,9 @@ var is_dragging: bool = false
 
 @onready var color_rect: ColorRect = $"../CanvasLayer2/CanvasGroup/ColorRect"
 #
-func _ready() -> void:
-	_update_color_rect_transform()
+#func _ready() -> void:
+	##color_rect.global_position = global_position
+	#_update_color_rect_transform()
 
 func _unhandled_input(event: InputEvent) -> void:
 	if Input.is_action_pressed("camera_drag"):

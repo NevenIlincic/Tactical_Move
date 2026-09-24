@@ -175,6 +175,15 @@ sources/13 = SubResource("TileSetAtlasSource_vat2a")
 sources/14 = SubResource("TileSetAtlasSource_anmmq")
 sources/15 = SubResource("TileSetAtlasSource_84ym3")
 
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_vn3yt"]
+vertices = PackedVector2Array(1221.8516, 39.703125, 1193.2266, 45.140625, -310, 10, -310, -330, 1597.9297, -358.0625, 842, 266, 842, 54, 878, 118, 878, 486, 1402.3281, 162.54688, 1590.0625, 821.96094, 1398.7969, 188.74219, 842, 466, 82, 486, 118, 466, 1207.2109, 562, 1218, 529.6172, 1365.0469, 238.34375, 1337.9063, 259.02344, 1218, 469.64063, 1169.9531, 62.890625, 922, 530, 958, 514.3594, 976.5469, 551.4531, 906, 538, 1219.4688, 294.79688, 1217.2578, 327.42188, 1206.1797, 446, 82, 110, 118, 366, 1054.8984, 383.1797, 987.8594, 446, 1022.72656, 393.57813, 1008.65625, 394.03125, 922, 118, 958, 494.3828, 964.77344, 349.60938, 967.2578, 466.60156, 960.0703, 317.0078, -814.1328, 814.03125, 997.6406, 562, 54, 538, 38, 110, 38, 530, -450.6797, 152.46094, -462.5, 124.10156, -457.39844, 186.34375, -474.7422, 214.35156, -438, -74, -630, -74, -630, -246, -394, -246, -394, 10, -438, 10, 458, 366, 458, 266, 566, 266, 566, 330, 842, 366, 650, 330, 650, 266, 714, 266, 118, 266, 374, 266, 374, 366, 118, 182, 54, 530, 906, 530, 1197.4219, 231.90625, 1164.6563, 141.10156, 1174.9219, 218.70313, 981.3906, 379.89844, 1153.1563, 120.52344, 1052.6797, 259.25, -490.84375, 223.71875, 758, 266, 758, 138, 714, 182, 118, 138, 118, 54, 1158.7031, 79.421875, -829.8594, -373.9297, -714, -330, -714, 10, -509.39844, 227.82031, -582.8203, 199.10938, -702.5625, 151.64844, -473.57813, 115.40625, 966.3828, 299.4922, 977.97656, 284.40625, -504.92188, 102.71875, -665.1406, 41.140625, -687.78906, 64.71875, -711.2969, 127.078125)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32Array(5, 6, 7, 8), PackedInt32Array(9, 4, 10, 11), PackedInt32Array(12, 8, 13, 14), PackedInt32Array(11, 10, 15, 16, 17), PackedInt32Array(18, 17, 16, 19), PackedInt32Array(2, 1, 20, 6), PackedInt32Array(21, 22, 23, 24), PackedInt32Array(25, 18, 19, 26), PackedInt32Array(26, 19, 27), PackedInt32Array(14, 13, 28, 29), PackedInt32Array(30, 26, 27, 31), PackedInt32Array(32, 30, 31), PackedInt32Array(33, 32, 31), PackedInt32Array(22, 21, 34, 35), PackedInt32Array(36, 37, 35, 34, 38), PackedInt32Array(15, 10, 39, 40), PackedInt32Array(24, 23, 40, 39, 41), PackedInt32Array(4, 9, 0), PackedInt32Array(42, 43, 44, 45), PackedInt32Array(46, 44, 43), PackedInt32Array(47, 46, 43), PackedInt32Array(48, 49, 50, 51), PackedInt32Array(48, 51, 52, 53), PackedInt32Array(54, 55, 56, 57), PackedInt32Array(58, 54, 57, 59), PackedInt32Array(59, 60, 61, 58), PackedInt32Array(62, 63, 64, 29), PackedInt32Array(62, 29, 28), PackedInt32Array(65, 62, 28), PackedInt32Array(43, 66, 41, 39), PackedInt32Array(24, 67, 21), PackedInt32Array(18, 25, 68), PackedInt32Array(69, 18, 68, 70), PackedInt32Array(71, 33, 31, 37), PackedInt32Array(72, 69, 70, 73, 34), PackedInt32Array(74, 47, 43, 39), PackedInt32Array(8, 12, 58), PackedInt32Array(5, 8, 58), PackedInt32Array(75, 5, 58), PackedInt32Array(75, 58, 61), PackedInt32Array(76, 75, 61, 77), PackedInt32Array(78, 76, 77, 65), PackedInt32Array(78, 65, 28), PackedInt32Array(79, 78, 28), PackedInt32Array(80, 34, 7, 6, 20), PackedInt32Array(81, 4, 3, 82), PackedInt32Array(39, 81, 82, 83), PackedInt32Array(79, 28, 42, 2), PackedInt32Array(84, 74, 39), PackedInt32Array(85, 84, 39), PackedInt32Array(86, 85, 39), PackedInt32Array(2, 42, 45, 87, 52), PackedInt32Array(36, 71, 37), PackedInt32Array(88, 38, 34), PackedInt32Array(89, 88, 34), PackedInt32Array(73, 89, 34), PackedInt32Array(80, 72, 34), PackedInt32Array(2, 6, 79), PackedInt32Array(53, 52, 87), PackedInt32Array(83, 53, 87, 90), PackedInt32Array(83, 90, 91), PackedInt32Array(83, 91, 92), PackedInt32Array(83, 92, 93), PackedInt32Array(39, 83, 93), PackedInt32Array(39, 93, 86)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-840, -384, 1608, -368, 1600, 832, -824, 824)])
+parsed_geometry_type = 1
+parsed_collision_mask = 4294967041
+source_geometry_mode = 2
+source_geometry_group_name = &"wall"
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dodo2"]
 size = Vector2(24, 392)
 
@@ -192,15 +201,6 @@ size = Vector2(576, 64)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yxivt"]
 size = Vector2(64, 128)
-
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_vn3yt"]
-vertices = PackedVector2Array(1221.8516, 39.703125, 1193.2266, 45.140625, -310, 10, -310, -330, 1597.9297, -358.0625, 842, 266, 842, 54, 878, 118, 878, 486, 1402.3281, 162.54688, 1590.0625, 821.96094, 1398.7969, 188.74219, 842, 466, 82, 486, 118, 466, 1207.2109, 562, 1218, 529.6172, 1365.0469, 238.34375, 1337.9063, 259.02344, 1218, 469.64063, 1169.9531, 62.890625, 922, 530, 958, 514.3594, 976.5469, 551.4531, 906, 538, 1219.4688, 294.79688, 1217.2578, 327.42188, 1206.1797, 446, 82, 110, 118, 366, 1054.8984, 383.1797, 987.8594, 446, 1022.72656, 393.57813, 1008.65625, 394.03125, 922, 118, 958, 494.3828, 964.77344, 349.60938, 967.2578, 466.60156, 960.0703, 317.0078, -814.1328, 814.03125, 997.6406, 562, 54, 538, 38, 110, 38, 530, -450.6797, 152.46094, -462.5, 124.10156, -457.39844, 186.34375, -474.7422, 214.35156, -438, -74, -630, -74, -630, -246, -394, -246, -394, 10, -438, 10, 458, 366, 458, 266, 566, 266, 566, 330, 842, 366, 650, 330, 650, 266, 714, 266, 118, 266, 374, 266, 374, 366, 118, 182, 54, 530, 906, 530, 1197.4219, 231.90625, 1164.6563, 141.10156, 1174.9219, 218.70313, 981.3906, 379.89844, 1153.1563, 120.52344, 1052.6797, 259.25, -490.84375, 223.71875, 758, 266, 758, 138, 714, 182, 118, 138, 118, 54, 1158.7031, 79.421875, -829.8594, -373.9297, -714, -330, -714, 10, -509.39844, 227.82031, -582.8203, 199.10938, -702.5625, 151.64844, -473.57813, 115.40625, 966.3828, 299.4922, 977.97656, 284.40625, -504.92188, 102.71875, -665.1406, 41.140625, -687.78906, 64.71875, -711.2969, 127.078125)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32Array(5, 6, 7, 8), PackedInt32Array(9, 4, 10, 11), PackedInt32Array(12, 8, 13, 14), PackedInt32Array(11, 10, 15, 16, 17), PackedInt32Array(18, 17, 16, 19), PackedInt32Array(2, 1, 20, 6), PackedInt32Array(21, 22, 23, 24), PackedInt32Array(25, 18, 19, 26), PackedInt32Array(26, 19, 27), PackedInt32Array(14, 13, 28, 29), PackedInt32Array(30, 26, 27, 31), PackedInt32Array(32, 30, 31), PackedInt32Array(33, 32, 31), PackedInt32Array(22, 21, 34, 35), PackedInt32Array(36, 37, 35, 34, 38), PackedInt32Array(15, 10, 39, 40), PackedInt32Array(24, 23, 40, 39, 41), PackedInt32Array(4, 9, 0), PackedInt32Array(42, 43, 44, 45), PackedInt32Array(46, 44, 43), PackedInt32Array(47, 46, 43), PackedInt32Array(48, 49, 50, 51), PackedInt32Array(48, 51, 52, 53), PackedInt32Array(54, 55, 56, 57), PackedInt32Array(58, 54, 57, 59), PackedInt32Array(59, 60, 61, 58), PackedInt32Array(62, 63, 64, 29), PackedInt32Array(62, 29, 28), PackedInt32Array(65, 62, 28), PackedInt32Array(43, 66, 41, 39), PackedInt32Array(24, 67, 21), PackedInt32Array(18, 25, 68), PackedInt32Array(69, 18, 68, 70), PackedInt32Array(71, 33, 31, 37), PackedInt32Array(72, 69, 70, 73, 34), PackedInt32Array(74, 47, 43, 39), PackedInt32Array(8, 12, 58), PackedInt32Array(5, 8, 58), PackedInt32Array(75, 5, 58), PackedInt32Array(75, 58, 61), PackedInt32Array(76, 75, 61, 77), PackedInt32Array(78, 76, 77, 65), PackedInt32Array(78, 65, 28), PackedInt32Array(79, 78, 28), PackedInt32Array(80, 34, 7, 6, 20), PackedInt32Array(81, 4, 3, 82), PackedInt32Array(39, 81, 82, 83), PackedInt32Array(79, 28, 42, 2), PackedInt32Array(84, 74, 39), PackedInt32Array(85, 84, 39), PackedInt32Array(86, 85, 39), PackedInt32Array(2, 42, 45, 87, 52), PackedInt32Array(36, 71, 37), PackedInt32Array(88, 38, 34), PackedInt32Array(89, 88, 34), PackedInt32Array(73, 89, 34), PackedInt32Array(80, 72, 34), PackedInt32Array(2, 6, 79), PackedInt32Array(53, 52, 87), PackedInt32Array(83, 53, 87, 90), PackedInt32Array(83, 90, 91), PackedInt32Array(83, 91, 92), PackedInt32Array(83, 92, 93), PackedInt32Array(39, 83, 93), PackedInt32Array(39, 93, 86)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-840, -384, 1608, -368, 1600, 832, -824, 824)])
-parsed_geometry_type = 1
-parsed_collision_mask = 4294967041
-source_geometry_mode = 2
-source_geometry_group_name = &"wall"
 
 [sub_resource type="Resource" id="Resource_vat2a"]
 script = ExtResource("12_fspd8")
@@ -429,137 +429,47 @@ tile_set = SubResource("TileSet_q44no")
 tile_map_data = PackedByteArray("AAArAAoAAAAAAAAAAAArAAsAAAAAAAAAAAAsAAsAAAAAAAAAAAAsAAoAAAAAAAAAAAAsAAwAAAAAAAAAAAAsAA0AAAAAAAAAAAArAA0AAAAAAAAAAAArAAwAAAAAAAAAAAAVAAUABQAAAAAAAAAWAAUABQABAAAAAAAVAAYABQAAAAEAAAAWAAYABQABAAEAAAD4/wMADgAAAAAAAAD5/wMADgAAAAAAAAD6/wMADgAAAAAAAAD7/wMADgAAAAAAAAD8/wMADgAAAAAAAAD9/wMADQABAAAAAAD4/wQADwAAAAAAAAD4/wUADwAAAAAAAAD5/wQADwAAAAAAAAD5/wUADwAAAAAAAAD6/wQADwAAAAAAAAD6/wUADwAAAAAAAAD7/wQADwAAAAAAAAD7/wUADwAAAAAAAAD8/wQADAAAAAAAAAD8/wUADAAAAAAAAAD9/wQADgABAAEAAAD9/wUADgABAAEAAAD4/wYADwAAAAAAAAD4/wcADgAAAAEAAAD5/wYADwAAAAAAAAD5/wcADgAAAAEAAAD6/wYADwAAAAAAAAD6/wcADgAAAAEAAAD7/wYADwAAAAAAAAD7/wcADgAAAAEAAAD8/wYADwAAAAAAAAD8/wcADgAAAAEAAAD9/wYADgABAAEAAAD9/wcADQABAAEAAAD2/wMADgAAAAAAAAD3/wMADgAAAAAAAAD1/wMADgAAAAAAAAD2/wQADwAAAAAAAAD2/wUADwAAAAAAAAD3/wQADwAAAAAAAAD3/wUADwAAAAAAAAD0/wUADgABAAAAAAD1/wQADwAAAAAAAAD1/wUADwAAAAAAAAD2/wYADwAAAAAAAAD2/wcADgAAAAEAAAD3/wYADwAAAAAAAAD3/wcADgAAAAEAAAD0/wYADgABAAAAAAD0/wcADQAAAAEAAAD1/wYADAAAAAAAAAD1/wcADgAAAAEAAAD0/wMADQAAAAAAAAD0/wQADgABAAAAAAA=")
 tile_set = SubResource("TileSet_wcwi6")
 
-[node name="StaticBody2D" type="StaticBody2D" parent="." index="6" unique_id=1881679868 groups=["wall"]]
-position = Vector2(928, 288)
-collision_layer = 3
+[node name="Camera_Start_Position_Marker" parent="." index="4" unique_id=816834425]
+position = Vector2(1256, 576)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" index="0" unique_id=1303726051]
-position = Vector2(-28, 36)
-shape = SubResource("RectangleShape2D_dodo2")
-
-[node name="StaticBody2D2" type="StaticBody2D" parent="." index="7" unique_id=369173911 groups=["wall"]]
-position = Vector2(480, 96)
-collision_layer = 3
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2" index="0" unique_id=79934699]
-position = Vector2(-32, 0)
-shape = SubResource("RectangleShape2D_4w7dd")
-
-[node name="StaticBody2D3" type="StaticBody2D" parent="." index="8" unique_id=1696350185 groups=["wall"]]
-position = Vector2(800, 160)
-collision_layer = 3
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3" index="0" unique_id=126638648]
-shape = SubResource("RectangleShape2D_uoqvf")
-
-[node name="StaticBody2D4" type="StaticBody2D" parent="." index="9" unique_id=1892678620 groups=["wall"]]
-position = Vector2(26, 323)
-collision_layer = 3
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4" index="0" unique_id=110358197]
-position = Vector2(34, -3)
-shape = SubResource("RectangleShape2D_5o8og")
-
-[node name="StaticBody2D5" type="StaticBody2D" parent="." index="10" unique_id=85164539 groups=["wall"]]
-position = Vector2(448, 224)
-collision_layer = 3
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D5" index="0" unique_id=690278472]
-position = Vector2(-32, 0)
-shape = SubResource("RectangleShape2D_gkt43")
-
-[node name="StaticBody2D6" type="StaticBody2D" parent="." index="11" unique_id=81414632 groups=["wall"]]
-position = Vector2(416, 320)
-collision_layer = 3
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D6" index="0" unique_id=80328347]
-shape = SubResource("RectangleShape2D_yxivt")
-
-[node name="StaticBody2D7" type="StaticBody2D" parent="." index="12" unique_id=670809220 groups=["wall"]]
-collision_layer = 3
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D7" index="0" unique_id=248856073]
-polygon = PackedVector2Array(64, 528, 64, 496, 896, 496, 896, 528)
-
-[node name="StaticBody2D8" type="StaticBody2D" parent="." index="13" unique_id=1886692827 groups=["wall"]]
-collision_layer = 3
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D8" index="0" unique_id=636201200]
-position = Vector2(292.49997, 274.36865)
-scale = Vector2(0.39062503, 0.3173831)
-polygon = PackedVector2Array(-421.1199, 320.21667, -421.1199, 572.27795, 1381.1199, 572.27795, 1381.1199, 320.21667)
-
-[node name="StaticBody2D9" type="StaticBody2D" parent="." index="14" unique_id=933076431 groups=["wall"]]
-collision_layer = 3
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D9" index="0" unique_id=291530961]
-polygon = PackedVector2Array(576, 256, 576, 320, 640, 320, 640, 256)
-
-[node name="Car" parent="." index="15" unique_id=75836846 instance=ExtResource("17_vn3yt")]
+[node name="Car" parent="." index="6" unique_id=75836846 instance=ExtResource("17_vn3yt")]
 position = Vector2(1088, 312)
 rotation = -0.31757402
 
-[node name="RedCar" parent="." index="16" unique_id=573821789 instance=ExtResource("18_q44no")]
+[node name="RedCar" parent="." index="7" unique_id=573821789 instance=ExtResource("18_q44no")]
 position = Vector2(1272, 144.00003)
 rotation = 0.59766555
 
-[node name="RedCar2" parent="." index="17" unique_id=717737631 instance=ExtResource("18_q44no")]
+[node name="RedCar2" parent="." index="8" unique_id=717737631 instance=ExtResource("18_q44no")]
 position = Vector2(1088, 504)
 
-[node name="BlueCar" parent="." index="18" unique_id=1145836756 instance=ExtResource("19_th001")]
+[node name="BlueCar" parent="." index="9" unique_id=1145836756 instance=ExtResource("19_th001")]
 position = Vector2(-576, 136.00005)
 rotation = -2.761487
 
-[node name="Door2" parent="." index="19" unique_id=312792714 instance=ExtResource("20_vat2a")]
+[node name="Door2" parent="." index="10" unique_id=312792714 instance=ExtResource("20_vat2a")]
 offset_left = 96.0
 offset_top = 124.0
 offset_right = 96.0
 offset_bottom = 124.0
 
-[node name="Door" parent="." index="20" unique_id=414111184 instance=ExtResource("20_vat2a")]
+[node name="Door" parent="." index="11" unique_id=414111184 instance=ExtResource("20_vat2a")]
 offset_left = 864.0
 offset_top = 124.0
 offset_right = 864.0
 offset_bottom = 124.0
 
-[node name="StaticBody2D10" type="StaticBody2D" parent="." index="21" unique_id=496805210 groups=["wall"]]
-position = Vector2(-512, -160)
-collision_layer = 3
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D10" index="0" unique_id=2128397553]
-polygon = PackedVector2Array(64, 96, 64, 160, -192, 160, -192, -160, 192, -160, 192, 160, 128, 160, 128, -96, -128, -96, -128, 96)
-
-[node name="Door4" parent="." index="22" unique_id=2146785107 instance=ExtResource("20_vat2a")]
+[node name="Door4" parent="." index="12" unique_id=2146785107 instance=ExtResource("20_vat2a")]
 offset_left = -416.0
 offset_top = -8.0
 offset_right = -416.0
 offset_bottom = -8.0
 
-[node name="Valerie_Regular" parent="." index="23" unique_id=28340368 instance=ExtResource("22_84ym3")]
-position = Vector2(1424, 736)
-rotation = -2.1201563
-
-[node name="Luke_Regular" parent="." index="24" unique_id=861690818 instance=ExtResource("23_wcwi6")]
-position = Vector2(1408, 792)
-rotation = -2.6022253
-
-[node name="Keith_Regular" parent="." index="25" unique_id=551971936 instance=ExtResource("24_53pe1")]
-position = Vector2(1544, 768)
-rotation = 3.8747728
-
-[node name="Nate_Medic" parent="." index="26" unique_id=1108589071 instance=ExtResource("21_anmmq")]
-position = Vector2(1320.0001, 736)
-rotation = -2.329266
-scale = Vector2(0.9999999, 0.9999999)
-
-[node name="NavigationRegion2D" type="NavigationRegion2D" parent="." index="27" unique_id=139603122]
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="." index="13" unique_id=139603122]
 visible = false
 navigation_polygon = SubResource("NavigationPolygon_vn3yt")
 
-[node name="Camera_Start_Position_Marker" parent="." index="28" unique_id=816834425]
-position = Vector2(1256, 576)
-
-[node name="Covers" type="Node2D" parent="." index="29" unique_id=2074276636]
+[node name="Covers" type="Node2D" parent="." index="14" unique_id=2074276636]
 
 [node name="Marker2D" type="Marker2D" parent="Covers" index="0" unique_id=879500727 groups=["a_star_point"]]
 position = Vector2(160, 160)
@@ -612,7 +522,112 @@ position = Vector2(16, 488)
 [node name="Marker2D17" type="Marker2D" parent="Covers" index="16" unique_id=1138555812 groups=["a_star_point"]]
 position = Vector2(-720, -64)
 
-[node name="Enemies" type="Node2D" parent="." index="30" unique_id=314142467]
+[node name="Walls" type="Node2D" parent="." index="15" unique_id=519404028]
+
+[node name="StaticBody2D10" type="StaticBody2D" parent="Walls" index="0" unique_id=496805210 groups=["wall"]]
+position = Vector2(-512, -160)
+collision_layer = 3
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Walls/StaticBody2D10" index="0" unique_id=2128397553]
+polygon = PackedVector2Array(64, 96, 64, 160, -192, 160, -192, -160, 192, -160, 192, 160, 128, 160, 128, -96, -128, -96, -128, 96)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Walls" index="1" unique_id=1881679868 groups=["wall"]]
+position = Vector2(928, 288)
+collision_layer = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/StaticBody2D" index="0" unique_id=1303726051]
+position = Vector2(-28, 36)
+shape = SubResource("RectangleShape2D_dodo2")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="Walls" index="2" unique_id=369173911 groups=["wall"]]
+position = Vector2(480, 96)
+collision_layer = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/StaticBody2D2" index="0" unique_id=79934699]
+position = Vector2(-32, 0)
+shape = SubResource("RectangleShape2D_4w7dd")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="Walls" index="3" unique_id=1696350185 groups=["wall"]]
+position = Vector2(800, 160)
+collision_layer = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/StaticBody2D3" index="0" unique_id=126638648]
+shape = SubResource("RectangleShape2D_uoqvf")
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="Walls" index="4" unique_id=1892678620 groups=["wall"]]
+position = Vector2(26, 323)
+collision_layer = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/StaticBody2D4" index="0" unique_id=110358197]
+position = Vector2(34, -3)
+shape = SubResource("RectangleShape2D_5o8og")
+
+[node name="StaticBody2D5" type="StaticBody2D" parent="Walls" index="5" unique_id=85164539 groups=["wall"]]
+position = Vector2(448, 224)
+collision_layer = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/StaticBody2D5" index="0" unique_id=690278472]
+position = Vector2(-32, 0)
+shape = SubResource("RectangleShape2D_gkt43")
+
+[node name="StaticBody2D6" type="StaticBody2D" parent="Walls" index="6" unique_id=81414632 groups=["wall"]]
+position = Vector2(416, 320)
+collision_layer = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/StaticBody2D6" index="0" unique_id=80328347]
+shape = SubResource("RectangleShape2D_yxivt")
+
+[node name="StaticBody2D7" type="StaticBody2D" parent="Walls" index="7" unique_id=670809220 groups=["wall"]]
+collision_layer = 3
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Walls/StaticBody2D7" index="0" unique_id=248856073]
+polygon = PackedVector2Array(64, 528, 64, 496, 896, 496, 896, 528)
+
+[node name="StaticBody2D8" type="StaticBody2D" parent="Walls" index="8" unique_id=1886692827 groups=["wall"]]
+collision_layer = 3
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Walls/StaticBody2D8" index="0" unique_id=636201200]
+position = Vector2(292.49997, 274.36865)
+scale = Vector2(0.39062503, 0.3173831)
+polygon = PackedVector2Array(-421.1199, 320.21667, -421.1199, 572.27795, 1381.1199, 572.27795, 1381.1199, 320.21667)
+
+[node name="StaticBody2D9" type="StaticBody2D" parent="Walls" index="9" unique_id=933076431 groups=["wall"]]
+collision_layer = 3
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Walls/StaticBody2D9" index="0" unique_id=291530961]
+polygon = PackedVector2Array(576, 256, 576, 320, 640, 320, 640, 256)
+
+[node name="StaticBody2D11" type="StaticBody2D" parent="Walls" index="10" unique_id=865244666 groups=["wall"]]
+position = Vector2(-440, -424)
+collision_layer = 3
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Walls/StaticBody2D11" index="0" unique_id=1429884727]
+polygon = PackedVector2Array(-392, 32, -392, 56, 360, 56, 360, 120, 424, 120, 424, 376, 2048, 376, 2048, 352, 448, 352, 448, 96, 384, 96, 384, 32)
+
+[node name="StaticBody2D12" type="StaticBody2D" parent="Walls" index="11" unique_id=2018869342 groups=["wall"]]
+collision_layer = 3
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Walls/StaticBody2D12" index="0" unique_id=362665992]
+polygon = PackedVector2Array(-840, -376, -840, 840, 1608, 840, 1608, -56, 1584, -56, 1584, 816, -816, 816, -816, -376)
+
+[node name="Nate_Medic" parent="." index="16" unique_id=1108589071 instance=ExtResource("21_anmmq")]
+position = Vector2(1528, 776)
+rotation = -2.2438579
+scale = Vector2(0.99999994, 0.99999994)
+
+[node name="Luke_Regular" parent="." index="17" unique_id=639361440 instance=ExtResource("23_wcwi6")]
+position = Vector2(1432, 776)
+rotation = -2.1441178
+
+[node name="Keith_Regular" parent="." index="18" unique_id=1269005987 instance=ExtResource("24_53pe1")]
+position = Vector2(1552, 720)
+rotation = -2.1091821
+
+[node name="Valerie_Regular" parent="." index="19" unique_id=1585808156 instance=ExtResource("22_84ym3")]
+position = Vector2(1488, 735.99994)
+rotation = -2.2452533
+
+[node name="Enemies" type="Node2D" parent="." index="20" unique_id=314142467]
 
 [node name="Enemy17" parent="Enemies" index="0" unique_id=1192233983 instance=ExtResource("11_yp7qk")]
 position = Vector2(-520, -136)

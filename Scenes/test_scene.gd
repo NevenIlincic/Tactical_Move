@@ -67,6 +67,8 @@ func _ready() -> void:
 		])
 	
 	camera.global_position = camera_start_position_marker.global_position
+	camera._update_color_rect_transform()
+
 	
 	initial_num_players = get_alive_players().size()
 	initial_num_enemies = get_alive_enemies().size()
@@ -92,8 +94,8 @@ func _physics_process(delta: float) -> void:
 	fps_label.text = str("FPS: ", Engine.get_frames_per_second())
 	#print(Engine.get_frames_per_second())
 	
-	VisionManager.handle_enemy_visibility(delta)
 	current_state.update(delta)
+	VisionManager.handle_enemy_visibility(delta)
 	#if i == 0:
 	#i = (i+1) % 2
 	#if total_passed_time_millis >= 1000.0:
@@ -161,6 +163,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		pause_menu.show_pause_menu()
 	if Input.is_action_just_pressed("reset_camera_position"):
 		camera.global_position = camera_start_position_marker.global_position
+		camera._update_color_rect_transform()
 	#if Input.is_action_just_pressed("quit"):
 		#get_tree().quit()
 	current_state._unhandled_input(event)

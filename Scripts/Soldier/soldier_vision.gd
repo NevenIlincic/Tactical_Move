@@ -141,7 +141,8 @@ func update_vision():
 					return
 				if check_is_enemy_soldier_hit(parent_soldier, hit_object):
 						points[i + 1] = to_local(result.position)
-						bullet_hit_point = hit_position
+						if bullet_hit_point == null:
+							bullet_hit_point = hit_position
 						#if not enemy_position and hit_object == parent_soldier.enemy_to_shoot:
 							#enemy_position = current_point
 						Signals.report_enemy_seen.emit(hit_object, parent_soldier)

@@ -15,6 +15,21 @@ script = ExtResource("1_echjq")
 
 [node name="TileMaps" type="Node2D" parent="." unique_id=641455981]
 
+[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1420828885]
+visible = false
+color = Color(0.54901963, 0.5058824, 0.56078434, 1)
+
+[node name="Path_Line" type="Line2D" parent="." unique_id=597328806]
+
+[node name="Camera_Reset_Position_Marker" type="Marker2D" parent="." unique_id=1479611963]
+position = Vector2(576, 320)
+
+[node name="Camera_Start_Position_Marker" type="Marker2D" parent="." unique_id=816834425]
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1824573650]
+position = Vector2(984, 320)
+script = ExtResource("34_slepp")
+
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1849002311]
 layer = 99
 
@@ -72,23 +87,6 @@ offset_bottom = 45.0
 theme_override_font_sizes/font_size = 32
 text = "FPS:"
 
-[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1420828885]
-visible = false
-color = Color(0.54901963, 0.5058824, 0.56078434, 1)
-
-[node name="Path_Line" type="Line2D" parent="." unique_id=597328806]
-
-[node name="Camera_Reset_Position_Marker" type="Marker2D" parent="." unique_id=1479611963]
-position = Vector2(576, 320)
-
-[node name="Camera_Start_Position_Marker" type="Marker2D" parent="." unique_id=816834425]
-
-[node name="Vision_Polygons" type="Node2D" parent="." unique_id=1769543928]
-
-[node name="Camera2D" type="Camera2D" parent="." unique_id=1824573650]
-position = Vector2(984, 320)
-script = ExtResource("34_slepp")
-
 [node name="CanvasLayer2" type="CanvasLayer" parent="." unique_id=1842855312]
 follow_viewport_enabled = true
 
@@ -100,13 +98,13 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -940.0
-offset_top = -420.0
-offset_right = 940.0
-offset_bottom = 420.0
+offset_left = -64.00006
+offset_top = -56.00003
+offset_right = 1816.0
+offset_bottom = 784.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(2.1995776, 2.0779438)
+scale = Vector2(1.4038682, 1.559933)
 pivot_offset = Vector2(3.8774414, 5.0634766)
 mouse_filter = 2
 color = Color(0.101960786, 0.03529412, 0.08235294, 0.34901962)
