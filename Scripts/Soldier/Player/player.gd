@@ -4,7 +4,7 @@ class_name Player extends Soldier
 var starting_tile: Vector2i
 var target_tile: Vector2i
 var is_selected: bool = false
-@onready var hitbox: StaticBody2D = $Hitbox
+#@onready var hitbox: StaticBody2D = $Hitbox
 
 var is_set_for_move: bool = false
 var is_set_for_rotation: bool = false

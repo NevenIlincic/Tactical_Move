@@ -10,7 +10,7 @@ func _ready() -> void:
 func set_soldier(player: Soldier):
 	soldier = player
 	soldier.vision_polygon.update_polygon_points.connect(_update_points)
-	soldier.vision_polygon.update_vision()
+	#soldier.vision_polygon.update_vision()
 func _update_points(new_points: PackedVector2Array, new_position: Vector2, new_rotation: float):
 	polygon = new_points
 	global_transform = Transform2D(new_rotation, new_position)

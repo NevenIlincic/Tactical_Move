@@ -16,6 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://cofk5d3mox6jp" path="res://Sprites/Soldier/Player/player_soldier_m4a1_rifle_sprites.png" id="16_8bdxw"]
 [ext_resource type="Texture2D" uid="uid://bul8qv1rsnp6o" path="res://Sprites/Soldier/Player/player_dying_sprites.png" id="16_cifhn"]
 [ext_resource type="Texture2D" uid="uid://d1k6yblmluefj" path="res://Sprites/Soldier/soldier_hit_effect.png" id="17_cifhn"]
+[ext_resource type="Script" uid="uid://bxgbnw73mg5an" path="res://Scenes/Soldier/Player/Vision_Area.gd" id="17_vvysc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_06txj"]
 size = Vector2(60, 60)
@@ -259,7 +260,7 @@ polygon = PackedVector2Array(0, 0, -256, -256, 256, -256)
 script = ExtResource("4_t26db")
 max_range = 900.0
 fov_degrees = 60.0
-ray_count = 20.0
+ray_count = 150.0
 
 [node name="Enemy_Target_Line" type="Line2D" parent="Vision_Polygon" unique_id=1477870436]
 show_behind_parent = true
@@ -324,6 +325,18 @@ follow_viewport_enabled = true
 [node name="GunBlastEffect" parent="CanvasLayer" unique_id=1793492474 instance=ExtResource("2_rw7ms")]
 process_material = SubResource("ParticleProcessMaterial_rw7ms")
 
+[node name="Vision_Area" type="Area2D" parent="." unique_id=1296404884]
+script = ExtResource("17_vvysc")
+ray_count = 20.0
+edge_precision = 1
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Vision_Area" unique_id=618780294]
+polygon = PackedVector2Array(48, -24, 104, 0, 56, 48)
+
+[node name="Polygon2D" type="Polygon2D" parent="Vision_Area" unique_id=179908900]
+visible = false
+color = Color(1, 1, 1, 0.3137255)
+
 [connection signal="area_entered" from="Selection_Area" to="." method="_on_selection_area_area_entered"]
 [connection signal="area_exited" from="Selection_Area" to="." method="_on_selection_area_area_exited"]
 [connection signal="mouse_entered" from="Selection_Area" to="." method="_on_selection_area_mouse_entered"]
@@ -331,3 +344,5 @@ process_material = SubResource("ParticleProcessMaterial_rw7ms")
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="area_shape_entered" from="Detection_Areas" to="." method="_on_detection_areas_area_shape_entered"]
 [connection signal="area_shape_exited" from="Detection_Areas" to="." method="_on_detection_areas_area_shape_exited"]
+[connection signal="body_entered" from="Vision_Area" to="Vision_Area" method="_on_body_entered"]
+[connection signal="body_exited" from="Vision_Area" to="Vision_Area" method="_on_body_exited"]

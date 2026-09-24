@@ -1,6 +1,8 @@
 #Base class for Player and Enemy
 class_name Soldier extends Node2D
 #@onready var vision_polygon: SoldierVision = $CanvasGroup/Vision_Polygon
+@onready var vision_area: VisionArea = $Vision_Area
+@onready var hitbox: StaticBody2D = $Hitbox
 
 #MUZZLE EFFECT
 @onready var muzzle_dropout_spawn_point: Marker2D = $Muzzle_Dropout_Spawn_Point
@@ -304,7 +306,7 @@ func _on_actions_finished():
 #TEMPLATE METHODS
 func do_while_action(delta: float):
 	if vision_polygon.is_vision_enabled and vision_polygon.are_rays_enabled:
-		vision_polygon.update_vision()
+		vision_area.update_vision()
 
 	check_is_enemy_in_sight()	
 	set_player_looking_at()

@@ -115,13 +115,16 @@ var query := PhysicsRayQueryParameters2D.new()
 func update_vision():
 	space_state = get_world_2d().direct_space_state
 	
-	var num_rays := ray_count # ili fiksni broj npr. 20
+	var num_rays := ray_count 
 	var points := PackedVector2Array()
 	points.resize(num_rays + 2)
-	points[0] = Vector2.ZERO # Centar vida
+	points[0] = Vector2.ZERO
 	
 	var step := deg_to_rad(fov_degrees) / num_rays
 	var start_angle := -deg_to_rad(fov_degrees)/ 2.0
+	
+	##
+
 	
 	for i in range(num_rays):
 		var angle := start_angle + i * step
@@ -138,7 +141,7 @@ func update_vision():
 			var hit_object: Object = result["collider"].get_parent()
 			if hit_object and hit_object is Soldier:
 				if hit_object.is_killed:
-					return
+					continue
 				if check_is_enemy_soldier_hit(parent_soldier, hit_object):
 						points[i + 1] = to_local(result.position)
 						if bullet_hit_point == null:
@@ -152,7 +155,7 @@ func update_vision():
 			points[i + 1] = dir * max_range
 	
 	update_polygon_points.emit(points, global_position, global_rotation)
-				
+			
 func enable_vision():
 	is_vision_enabled = true
 func disable_vision():
