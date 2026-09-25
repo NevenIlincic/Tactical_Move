@@ -91,25 +91,11 @@ func set_vision_polygons():
 		
 var i: int = 0
 func _physics_process(delta: float) -> void:
-	fps_label.text = str("FPS: ", Engine.get_frames_per_second())
-	#print(Engine.get_frames_per_second())
-	
+	fps_label.text = str("FPS: ", Engine.get_frames_per_second())	
 	current_state.update(delta)
 	VisionManager.handle_enemy_visibility(delta)
-	#if i == 0:
-	#i = (i+1) % 2
-	#if total_passed_time_millis >= 1000.0:
-		#total_passed_time_millis = 0.0
-		#total_passed_time_seconds += 1
-		#if total_passed_time_seconds >= 60:
-			#total_passed_time_seconds = 0
-			#total_passed_minutes += 1
-	#passed_time_label.text = str(total_passed_minutes, ":", total_passed_time_seconds, ":", total_passed_time_millis)
-	#
 func _process(delta: float) -> void:
 
-	#fps_label.text = str("FPS: ", Engine.get_frames_per_second())
-	#VisionManager.handle_enemy_visibility(delta)
 	if total_passed_time_millis >= 1000.0:
 		total_passed_time_millis = 0.0
 		total_passed_time_seconds += 1

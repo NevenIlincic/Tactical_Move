@@ -1239,7 +1239,7 @@ offset_top = -3.0
 offset_right = 366.0
 offset_bottom = 53.0
 alignment = 1
-selected = 1
+selected = 0
 item_count = 2
 popup/item_0/text = "BASIC"
 popup/item_0/id = 0
@@ -1249,18 +1249,18 @@ popup/item_1/id = 1
 [node name="Dummy_2" type="Control" parent="Video_Menu/Inputs_Scroll_Container/GridContainer" unique_id=883736109]
 layout_mode = 2
 
-[node name="Ray_Cast_Number_Input" type="Control" parent="Video_Menu/Inputs_Scroll_Container/GridContainer" unique_id=892247813]
+[node name="Advanced_Vision_Control" type="Control" parent="Video_Menu/Inputs_Scroll_Container/GridContainer" unique_id=892247813]
 layout_mode = 2
 
-[node name="Ray_Cast_Number" type="Control" parent="Video_Menu/Inputs_Scroll_Container/GridContainer/Ray_Cast_Number_Input" unique_id=110985618]
+[node name="Ray_Cast_Number" type="Control" parent="Video_Menu/Inputs_Scroll_Container/GridContainer/Advanced_Vision_Control" unique_id=110985618]
 anchors_preset = 0
 
-[node name="Sprite" type="Sprite2D" parent="Video_Menu/Inputs_Scroll_Container/GridContainer/Ray_Cast_Number_Input/Ray_Cast_Number" unique_id=404078231]
+[node name="Sprite" type="Sprite2D" parent="Video_Menu/Inputs_Scroll_Container/GridContainer/Advanced_Vision_Control/Ray_Cast_Number" unique_id=404078231]
 position = Vector2(128, 26)
 scale = Vector2(1.0092957, 0.43750006)
 texture = ExtResource("11_nkoq7")
 
-[node name="Select_Player_Label" type="Label" parent="Video_Menu/Inputs_Scroll_Container/GridContainer/Ray_Cast_Number_Input/Ray_Cast_Number" unique_id=1273398232]
+[node name="Select_Player_Label" type="Label" parent="Video_Menu/Inputs_Scroll_Container/GridContainer/Advanced_Vision_Control/Ray_Cast_Number" unique_id=1273398232]
 layout_mode = 0
 offset_left = 1.0
 offset_top = -3.0
@@ -1273,7 +1273,7 @@ text = "RAYCAST NUMBER"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Ray_Cast_Spin_Box" type="SpinBox" parent="Video_Menu/Inputs_Scroll_Container/GridContainer/Ray_Cast_Number_Input/Ray_Cast_Number" unique_id=1935671113]
+[node name="Ray_Cast_Spin_Box" type="SpinBox" parent="Video_Menu/Inputs_Scroll_Container/GridContainer/Advanced_Vision_Control/Ray_Cast_Number" unique_id=1935671113]
 layout_mode = 0
 offset_left = 265.0
 offset_top = -6.0
@@ -1284,18 +1284,19 @@ max_value = 150.0
 value = 5.0
 alignment = 1
 
-[node name="Dummy_8" type="Control" parent="Video_Menu/Inputs_Scroll_Container/GridContainer" unique_id=831453655]
-layout_mode = 2
+[node name="Edge_Iterations_Number" type="Control" parent="Video_Menu/Inputs_Scroll_Container/GridContainer/Advanced_Vision_Control" unique_id=1012483311]
+anchors_preset = 0
+offset_left = 409.0
+offset_top = 2.0
+offset_right = 409.0
+offset_bottom = 2.0
 
-[node name="Edge_Iterations_Number" type="Control" parent="Video_Menu/Inputs_Scroll_Container/GridContainer" unique_id=1012483311]
-layout_mode = 2
-
-[node name="Sprite" type="Sprite2D" parent="Video_Menu/Inputs_Scroll_Container/GridContainer/Edge_Iterations_Number" unique_id=521195414]
+[node name="Sprite" type="Sprite2D" parent="Video_Menu/Inputs_Scroll_Container/GridContainer/Advanced_Vision_Control/Edge_Iterations_Number" unique_id=521195414]
 position = Vector2(128, 24)
 scale = Vector2(1.0092957, 0.43750006)
 texture = ExtResource("11_nkoq7")
 
-[node name="Edge_Iterations_Label" type="Label" parent="Video_Menu/Inputs_Scroll_Container/GridContainer/Edge_Iterations_Number" unique_id=627344425]
+[node name="Edge_Iterations_Label" type="Label" parent="Video_Menu/Inputs_Scroll_Container/GridContainer/Advanced_Vision_Control/Edge_Iterations_Number" unique_id=627344425]
 layout_mode = 0
 offset_left = 1.0
 offset_top = -3.0
@@ -1308,7 +1309,7 @@ text = "EDGE PRECISION ITERATIONS"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Edge_Iterations_Spin_Box" type="SpinBox" parent="Video_Menu/Inputs_Scroll_Container/GridContainer/Edge_Iterations_Number" unique_id=936661956]
+[node name="Edge_Iterations_Spin_Box" type="SpinBox" parent="Video_Menu/Inputs_Scroll_Container/GridContainer/Advanced_Vision_Control/Edge_Iterations_Number" unique_id=936661956]
 layout_mode = 0
 offset_left = 265.0
 offset_top = -8.0
@@ -1335,15 +1336,15 @@ text = "EFFECTS"
 [node name="Dummy_4" type="Control" parent="Video_Menu/Inputs_Scroll_Container/GridContainer" unique_id=922461251]
 layout_mode = 2
 
-[node name="Gun_Blast_Effect" type="Control" parent="Video_Menu/Inputs_Scroll_Container/GridContainer" unique_id=1469771611]
+[node name="Select_Player_Inptu" type="Control" parent="Video_Menu/Inputs_Scroll_Container/GridContainer" unique_id=1469771611]
 layout_mode = 2
 
-[node name="Sprite" type="Sprite2D" parent="Video_Menu/Inputs_Scroll_Container/GridContainer/Gun_Blast_Effect" unique_id=833604811]
+[node name="Sprite" type="Sprite2D" parent="Video_Menu/Inputs_Scroll_Container/GridContainer/Select_Player_Inptu" unique_id=833604811]
 position = Vector2(128, 26)
 scale = Vector2(1.0092957, 0.43750006)
 texture = ExtResource("11_nkoq7")
 
-[node name="Gun_Blast_Effect" type="Label" parent="Video_Menu/Inputs_Scroll_Container/GridContainer/Gun_Blast_Effect" unique_id=1708432942]
+[node name="Gun_Blast_Effect" type="Label" parent="Video_Menu/Inputs_Scroll_Container/GridContainer/Select_Player_Inptu" unique_id=1708432942]
 layout_mode = 0
 offset_left = 1.0
 offset_top = -3.0
@@ -1355,25 +1356,19 @@ text = "GUN BLAST LIGHT"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="OptionButton" type="OptionButton" parent="Video_Menu/Inputs_Scroll_Container/GridContainer/Gun_Blast_Effect" unique_id=645081791]
+[node name="OptionButton" type="OptionButton" parent="Video_Menu/Inputs_Scroll_Container/GridContainer/Select_Player_Inptu" unique_id=645081791]
 layout_mode = 0
 offset_left = 264.0
 offset_top = -3.0
 offset_right = 366.0
 offset_bottom = 53.0
 alignment = 1
-selected = 1
+selected = 0
 item_count = 2
-popup/item_0/text = "OFF"
+popup/item_0/text = "ON"
 popup/item_0/id = 0
-popup/item_1/text = "ON"
+popup/item_1/text = "OFF"
 popup/item_1/id = 1
-
-[node name="Dummy_9" type="Control" parent="Video_Menu/Inputs_Scroll_Container/GridContainer" unique_id=1955401264]
-layout_mode = 2
-
-[node name="Dummy_10" type="Control" parent="Video_Menu/Inputs_Scroll_Container/GridContainer" unique_id=921909989]
-layout_mode = 2
 
 [connection signal="toggled" from="Tabs/Inputs_Tab_Button/Inputs_Button" to="Tabs/Inputs_Tab_Button" method="_on_inputs_button_toggled"]
 [connection signal="toggled" from="Tabs/Audio_Tab_Button/Inputs_Button" to="Tabs/Audio_Tab_Button" method="_on_inputs_button_toggled"]
@@ -1382,5 +1377,5 @@ layout_mode = 2
 [connection signal="item_selected" from="Video_Menu/Inputs_Scroll_Container/GridContainer/Show_FPS_Input/FPS_Option_Button" to="Video_Menu" method="_on_fps_option_button_item_selected"]
 [connection signal="value_changed" from="Video_Menu/Inputs_Scroll_Container/GridContainer/Max_FPS_Input/Max_FPS_Spin_Box" to="Video_Menu" method="_on_max_fps_spin_box_value_changed"]
 [connection signal="item_selected" from="Video_Menu/Inputs_Scroll_Container/GridContainer/Player_Vision_Indicator/OptionButton" to="Video_Menu" method="_on_option_button_item_selected"]
-[connection signal="value_changed" from="Video_Menu/Inputs_Scroll_Container/GridContainer/Ray_Cast_Number_Input/Ray_Cast_Number/Ray_Cast_Spin_Box" to="Video_Menu" method="_on_ray_cast_spin_box_value_changed"]
-[connection signal="value_changed" from="Video_Menu/Inputs_Scroll_Container/GridContainer/Edge_Iterations_Number/Edge_Iterations_Spin_Box" to="Video_Menu" method="_on_edge_iterations_spin_box_value_changed"]
+[connection signal="value_changed" from="Video_Menu/Inputs_Scroll_Container/GridContainer/Advanced_Vision_Control/Ray_Cast_Number/Ray_Cast_Spin_Box" to="Video_Menu" method="_on_ray_cast_spin_box_value_changed"]
+[connection signal="value_changed" from="Video_Menu/Inputs_Scroll_Container/GridContainer/Advanced_Vision_Control/Edge_Iterations_Number/Edge_Iterations_Spin_Box" to="Video_Menu" method="_on_edge_iterations_spin_box_value_changed"]

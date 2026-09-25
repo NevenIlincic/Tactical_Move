@@ -53,3 +53,7 @@ func _on_video_tab_button_pressed():
 	inputs_menu.visible = false
 	audio_menu.visible = false
 	video_menu.visible = true
+
+
+func _on_max_fps_spin_box_value_changed(value: float) -> void:
+	pass # Replace with function body.

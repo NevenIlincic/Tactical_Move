@@ -335,7 +335,6 @@ visible = false
 polygon = PackedVector2Array(48, -24, 104, 0, 56, 48)
 
 [node name="Player_Vision_Cone" type="Line2D" parent="Vision_Area" unique_id=856495062]
-visible = false
 closed = true
 width = 1.0
 

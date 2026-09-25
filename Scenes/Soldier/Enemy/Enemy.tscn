@@ -238,9 +238,15 @@ process_material = SubResource("ParticleProcessMaterial_l07se")
 
 [node name="Vision_Area" type="Area2D" parent="." unique_id=1912630791]
 script = ExtResource("13_v1ooi")
+ray_count = 10
+vision_type = 0
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Vision_Area" unique_id=961437821]
 polygon = PackedVector2Array(48, -24, 104, 0, 56, 48)
+
+[node name="Player_Vision_Cone" type="Line2D" parent="Vision_Area" unique_id=441845227]
+closed = true
+width = 1.0
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="body_entered" from="Rays_Activation_Area" to="." method="_on_rays_activation_area_body_entered"]

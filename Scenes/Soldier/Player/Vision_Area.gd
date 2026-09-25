@@ -1,100 +1,3 @@
-#class_name VisionArea extends Area2D
-#
-#@onready var collision_polygon_2d: CollisionPolygon2D = $CollisionPolygon2D
-#
-#@export var max_range: float = 900.0
-#@export var fov_degrees: float = 60.0
-#@export var ray_count: float = 75
-#@export var wall_collision_mask: int = 1
-#@onready var vision_polygon: SoldierVision = $"../Vision_Polygon"
-#@onready var player_vision_cone: Line2D = $Player_Vision_Cone
-#
-#
-#var _dirs := PackedVector2Array()
-#var _last_pos := Vector2.INF
-#var _last_rot := INF
-#var _points := PackedVector2Array()
-#
-#var space_state: PhysicsDirectSpaceState2D
-#var query: PhysicsRayQueryParameters2D
-#
-#var enemies_in_view: Dictionary = {}
-#var parent_soldier: Soldier
-#
-#
-#func _ready() -> void:
-	#space_state = get_world_2d().direct_space_state
-#
-	#parent_soldier = get_parent()
-	#var half := deg_to_rad(fov_degrees) * 0.5
-	#var pts := PackedVector2Array([Vector2.ZERO])
-	#var n := 8
-	#for i in n + 1:
-		#pts.append(Vector2.from_angle(-half + i * (half * 2.0) / n) * max_range)
-	#collision_polygon_2d.polygon = pts#	
-	#player_vision_cone.points = pts
-	##player_vision_cone.add_point(Vector2.ZERO)
-	##if polygon_2d:
-		##polygon_2d.polygon = pts
-	#query = PhysicsRayQueryParameters2D.new()
-	#query.collision_mask = 2 | parent_soldier.ENEMY_COLLISION_DETECTION_MASK
-	#
-#func update_vision():
-	#space_state = get_world_2d().direct_space_state
-	#_check_enemies()
-#
-#func _check_enemies():
-	#for enemy_soldier_id in enemies_in_view:
-		#if not is_instance_valid(enemies_in_view[enemy_soldier_id]) or enemies_in_view[enemy_soldier_id].is_queued_for_deletion():
-			#continue
-		#var enemy: Soldier = enemies_in_view[enemy_soldier_id]
-		#if enemy.is_killed:
-			#continue
-			#
-		#query.from = global_position
-		#query.to = enemy.global_position
-		#var result: Dictionary = space_state.intersect_ray(query)
-		#if result:
-			#var hit_object: Object = result["collider"].get_parent()
-			#var hit_position: Vector2 = result["position"]
-			#if hit_object and hit_object is Soldier:
-				#if hit_object.is_killed:
-					#continue
-				#if check_is_enemy_soldier_hit(parent_soldier, hit_object):
-					#if vision_polygon.bullet_hit_point == null:
-						#vision_polygon.bullet_hit_point = hit_position
-					##if not enemy_position and hit_object == parent_soldier.enemy_to_shoot:
-						##enemy_position = current_point
-					#Signals.report_enemy_seen.emit(hit_object, parent_soldier)
-	##vision_polygon.update_polygon_points.emit(collision_polygon_2d.polygon, collision_polygon_2d.global_position, collision_polygon_2d.global_rotation)
-#
-#
-#var wall_query: PhysicsRayQueryParameters2D
-#
-#func check_is_enemy_soldier_hit(current_soldier: Soldier, hit_soldier: Soldier):
-	#return current_soldier.soldier_type != hit_soldier.soldier_type
-#
-#
-#func _on_body_entered(body: Node2D) -> void:
-	#var soldier = body.get_parent()
-	#if soldier is Soldier and soldier.soldier_id != parent_soldier.soldier_id:
-		#var enemy_soldier: Soldier = soldier
-		#if enemy_soldier.is_killed:
-			#return
-		#if check_is_enemy_soldier_hit(parent_soldier, enemy_soldier):
-			#enemies_in_view[enemy_soldier.soldier_id] = enemy_soldier
-#
-#func _on_body_exited(body: Node2D) -> void:
-	#var soldier = body.get_parent()
-	#if soldier is Soldier and soldier.soldier_id != parent_soldier.soldier_id:
-		#var enemy_soldier: Soldier = soldier
-		#if enemies_in_view.has(enemy_soldier.soldier_id):
-			#enemies_in_view.erase(enemy_soldier.soldier_id)
-##################
-##func _update_vision_polygon():
-	##vision_polygon.update_polygon_points.emit(collision_polygon_2d.polygon, collision_polygon_2d.global_position, collision_polygon_2d.global_rotation)
-#
-#######
 class_name VisionArea extends Area2D
 
 @onready var collision_polygon_2d: CollisionPolygon2D = $CollisionPolygon2D
@@ -102,9 +5,9 @@ class_name VisionArea extends Area2D
 
 @export var max_range: float = 900.0
 @export var fov_degrees: float = 60.0
-@export var ray_count: int = 50 # Smanjeno sa 75 na 50 jer dodajemo Edge Detection koji je mnogo precizniji!
+#@export var ray_count: int = 50
 @export var wall_collision_mask: int = 1
-@export var edge_precision_iterations: int = 5 # Broj podela za traženje tačnog ugla zida
+@export var edge_precision_iterations: int = 5
 
 var _dirs := PackedVector2Array()
 var space_state: PhysicsDirectSpaceState2D
@@ -116,25 +19,44 @@ var parent_soldier: Soldier
 
 var can_draw_vision: bool = false
 
+enum VisionType{
+	BASIC,
+	ADVANCED
+}
+
+@onready var player_vision_cone: Line2D = $Player_Vision_Cone
+
 func enable_drawing_vision_sight():
 	can_draw_vision = true
-	_update_vision_polygon_ultra_precise()
+	match OptionVariables.vision_type:
+		VisionType.BASIC:
+			set_player_vision_cone_points()
+		VisionType.ADVANCED:
+			_update_vision_polygon_ultra_precise()
 func disable_drawing_vision_sight():
 	can_draw_vision = false
-	#player_vision_cone.points = player_vision_cone.points.slice(0, 1)
+	player_vision_cone.points = player_vision_cone.points.slice(0, 1)
 	vision_polygon.update_polygon_points.emit([], global_position, global_rotation)
 
 
-func _ready() -> void:
-	space_state = get_world_2d().direct_space_state
-	parent_soldier = get_parent()
-	
+func get_initial_cone_points() -> PackedVector2Array:
 	var half := deg_to_rad(fov_degrees) * 0.5
 	var pts := PackedVector2Array([Vector2.ZERO])
 	var n := 8
+	
 	for i in n + 1:
 		pts.append(Vector2.from_angle(-half + i * (half * 2.0) / n) * max_range)
-	collision_polygon_2d.polygon = pts#	
+	return pts
+	
+func set_player_vision_cone_points():
+	var pts: PackedVector2Array = get_initial_cone_points()
+	player_vision_cone.points = pts
+func _ready() -> void:
+	space_state = get_world_2d().direct_space_state
+	parent_soldier = get_parent()
+	var pts: PackedVector2Array = get_initial_cone_points()
+	collision_polygon_2d.polygon = pts
+
 	
 	query = PhysicsRayQueryParameters2D.new()
 	query.collision_mask = 2 | parent_soldier.ENEMY_COLLISION_DETECTION_MASK
@@ -153,6 +75,7 @@ func _ready() -> void:
 
 
 func _build_dirs() -> void:
+	var ray_count: int = OptionVariables.ray_count
 	var fov := deg_to_rad(fov_degrees)
 	var step := fov / ray_count
 	_dirs.resize(ray_count + 1)
@@ -166,7 +89,7 @@ func update_vision() -> void:
 	frame_counter = (frame_counter + 1) % 3
 	space_state = get_world_2d().direct_space_state
 	_check_enemies()
-	if frame_counter == 0 and can_draw_vision:
+	if OptionVariables.check_is_advanced_vision_type() and frame_counter == 0 and can_draw_vision:
 		_update_vision_polygon_ultra_precise()
 
 
