@@ -327,15 +327,17 @@ process_material = SubResource("ParticleProcessMaterial_rw7ms")
 
 [node name="Vision_Area" type="Area2D" parent="." unique_id=1296404884]
 script = ExtResource("17_vvysc")
-ray_count = 20.0
-edge_precision = 1
+ray_count = 30
+edge_precision_iterations = 3
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Vision_Area" unique_id=618780294]
+visible = false
 polygon = PackedVector2Array(48, -24, 104, 0, 56, 48)
 
-[node name="Polygon2D" type="Polygon2D" parent="Vision_Area" unique_id=179908900]
+[node name="Player_Vision_Cone" type="Line2D" parent="Vision_Area" unique_id=856495062]
 visible = false
-color = Color(1, 1, 1, 0.3137255)
+closed = true
+width = 1.0
 
 [connection signal="area_entered" from="Selection_Area" to="." method="_on_selection_area_area_entered"]
 [connection signal="area_exited" from="Selection_Area" to="." method="_on_selection_area_area_exited"]

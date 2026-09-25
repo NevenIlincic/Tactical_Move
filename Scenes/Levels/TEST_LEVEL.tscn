@@ -15,9 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://bsxjq5u2glxba" path="res://Scenes/Soldier/Player/Keith_Regular.tscn" id="8_spile"]
 [ext_resource type="Texture2D" uid="uid://cjlwwyc44rr32" path="res://Sprites/Tiles/Grass/Grass_One_Corner_Side.png" id="9_1q1xv"]
 [ext_resource type="Texture2D" uid="uid://dabjh4v6265n0" path="res://Sprites/Tiles/Grass/New Piskel-1.png - 2026-08-21T000520.022.png" id="10_4selt"]
-[ext_resource type="PackedScene" uid="uid://y3pndfcq1kxo" path="res://Scenes/Soldier/Enemy/Enemy.tscn" id="18_gh443"]
-[ext_resource type="Script" uid="uid://bencr8mnns7ut" path="res://Scripts/Patterns/Stat/stat.gd" id="19_ghyco"]
-[ext_resource type="Script" uid="uid://cp4iog725gtuq" path="res://Scripts/Soldier/Player/player_stats.gd" id="20_1q1xv"]
+[ext_resource type="PackedScene" uid="uid://bpg5m07qvbc3m" path="res://Scenes/Soldier/Player/Luke_Regular.tscn" id="16_s04pa"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_i126p"]
 texture = ExtResource("2_spile")
@@ -196,35 +194,6 @@ parsed_collision_mask = 4294967041
 source_geometry_mode = 2
 source_geometry_group_name = &"wall"
 
-[sub_resource type="Resource" id="Resource_sf78t"]
-script = ExtResource("19_ghyco")
-base_value = 100.0
-metadata/_custom_type_script = "uid://bencr8mnns7ut"
-
-[sub_resource type="Resource" id="Resource_stuxa"]
-script = ExtResource("19_ghyco")
-base_value = 1000.0
-metadata/_custom_type_script = "uid://bencr8mnns7ut"
-
-[sub_resource type="Resource" id="Resource_42oyf"]
-script = ExtResource("19_ghyco")
-base_value = 0.4
-metadata/_custom_type_script = "uid://bencr8mnns7ut"
-
-[sub_resource type="Resource" id="Resource_xq73l"]
-script = ExtResource("19_ghyco")
-base_value = 200.0
-metadata/_custom_type_script = "uid://bencr8mnns7ut"
-
-[sub_resource type="Resource" id="Resource_6jphs"]
-resource_local_to_scene = true
-script = ExtResource("20_1q1xv")
-speed = SubResource("Resource_xq73l")
-reaction_time = SubResource("Resource_42oyf")
-max_travel_distance = SubResource("Resource_stuxa")
-MAX_HP = SubResource("Resource_sf78t")
-metadata/_custom_type_script = "uid://cp4iog725gtuq"
-
 [node name="Level" unique_id=1509814780 instance=ExtResource("1_jf8ei")]
 
 [node name="TileMap" type="TileMapLayer" parent="TileMaps" parent_id_path=PackedInt32Array(641455981) index="0" unique_id=1681926995]
@@ -246,7 +215,19 @@ color = Color(0.7490196, 0.73333335, 0.87058824, 1)
 [node name="Camera_Start_Position_Marker" parent="." index="4" unique_id=816834425]
 position = Vector2(1264, 704)
 
-[node name="StaticBody2D" type="StaticBody2D" parent="." index="8" unique_id=1698048583 groups=["wall"]]
+[node name="Keith_Regular4" parent="." index="6" unique_id=567824232 instance=ExtResource("8_spile")]
+position = Vector2(1080, 616)
+
+[node name="Luke_Regular" parent="." index="7" unique_id=1108589071 instance=ExtResource("16_s04pa")]
+position = Vector2(1056, 744)
+
+[node name="Luke_Regular2" parent="." index="8" unique_id=1175360632 instance=ExtResource("16_s04pa")]
+position = Vector2(1264, 696)
+
+[node name="Luke_Regular3" parent="." index="9" unique_id=812218119 instance=ExtResource("16_s04pa")]
+position = Vector2(1288, 800)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." index="12" unique_id=1698048583 groups=["wall"]]
 position = Vector2(928, 288)
 collision_layer = 3
 
@@ -254,7 +235,7 @@ collision_layer = 3
 position = Vector2(-28, 36)
 shape = SubResource("RectangleShape2D_s34pd")
 
-[node name="StaticBody2D2" type="StaticBody2D" parent="." index="9" unique_id=2039150789 groups=["wall"]]
+[node name="StaticBody2D2" type="StaticBody2D" parent="." index="13" unique_id=2039150789 groups=["wall"]]
 position = Vector2(480, 96)
 collision_layer = 3
 
@@ -262,14 +243,14 @@ collision_layer = 3
 position = Vector2(-32, 0)
 shape = SubResource("RectangleShape2D_6jphs")
 
-[node name="StaticBody2D3" type="StaticBody2D" parent="." index="10" unique_id=523970281 groups=["wall"]]
+[node name="StaticBody2D3" type="StaticBody2D" parent="." index="14" unique_id=523970281 groups=["wall"]]
 position = Vector2(800, 160)
 collision_layer = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3" index="0" unique_id=856692096]
 shape = SubResource("RectangleShape2D_ybhuq")
 
-[node name="StaticBody2D4" type="StaticBody2D" parent="." index="11" unique_id=1175825702 groups=["wall"]]
+[node name="StaticBody2D4" type="StaticBody2D" parent="." index="15" unique_id=1175825702 groups=["wall"]]
 position = Vector2(26, 323)
 collision_layer = 3
 
@@ -277,7 +258,7 @@ collision_layer = 3
 position = Vector2(34, -3)
 shape = SubResource("RectangleShape2D_gh443")
 
-[node name="StaticBody2D5" type="StaticBody2D" parent="." index="12" unique_id=1144569672 groups=["wall"]]
+[node name="StaticBody2D5" type="StaticBody2D" parent="." index="16" unique_id=1144569672 groups=["wall"]]
 position = Vector2(448, 224)
 collision_layer = 3
 
@@ -285,20 +266,20 @@ collision_layer = 3
 position = Vector2(-32, 0)
 shape = SubResource("RectangleShape2D_ghyco")
 
-[node name="StaticBody2D6" type="StaticBody2D" parent="." index="13" unique_id=1517008955 groups=["wall"]]
+[node name="StaticBody2D6" type="StaticBody2D" parent="." index="17" unique_id=1517008955 groups=["wall"]]
 position = Vector2(416, 320)
 collision_layer = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D6" index="0" unique_id=2022253334]
 shape = SubResource("RectangleShape2D_1q1xv")
 
-[node name="StaticBody2D7" type="StaticBody2D" parent="." index="14" unique_id=1667089276 groups=["wall"]]
+[node name="StaticBody2D7" type="StaticBody2D" parent="." index="18" unique_id=1667089276 groups=["wall"]]
 collision_layer = 3
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D7" index="0" unique_id=2114123490]
 polygon = PackedVector2Array(64, 528, 64, 496, 896, 496, 896, 528)
 
-[node name="StaticBody2D8" type="StaticBody2D" parent="." index="15" unique_id=413909589 groups=["wall"]]
+[node name="StaticBody2D8" type="StaticBody2D" parent="." index="19" unique_id=413909589 groups=["wall"]]
 collision_layer = 3
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D8" index="0" unique_id=1542802316]
@@ -306,57 +287,57 @@ position = Vector2(292.49997, 274.36865)
 scale = Vector2(0.39062503, 0.3173831)
 polygon = PackedVector2Array(-421.1199, 320.21667, -421.1199, 572.27795, 1381.1199, 572.27795, 1381.1199, 320.21667)
 
-[node name="StaticBody2D9" type="StaticBody2D" parent="." index="16" unique_id=1140075443 groups=["wall"]]
+[node name="StaticBody2D9" type="StaticBody2D" parent="." index="20" unique_id=1140075443 groups=["wall"]]
 collision_layer = 3
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D9" index="0" unique_id=268312116]
 polygon = PackedVector2Array(576, 256, 576, 320, 640, 320, 640, 256)
 
-[node name="Car" parent="." index="17" unique_id=75836846 instance=ExtResource("2_g2ccm")]
+[node name="Car" parent="." index="21" unique_id=75836846 instance=ExtResource("2_g2ccm")]
 position = Vector2(1088, 312)
 rotation = -0.31757402
 
-[node name="RedCar" parent="." index="18" unique_id=573821789 instance=ExtResource("3_pvf4f")]
+[node name="RedCar" parent="." index="22" unique_id=573821789 instance=ExtResource("3_pvf4f")]
 position = Vector2(1272, 144.00003)
 rotation = 0.59766555
 
-[node name="RedCar2" parent="." index="19" unique_id=376915284 instance=ExtResource("3_pvf4f")]
+[node name="RedCar2" parent="." index="23" unique_id=376915284 instance=ExtResource("3_pvf4f")]
 position = Vector2(1088, 504)
 
-[node name="BlueCar" parent="." index="20" unique_id=1145836756 instance=ExtResource("4_5nsoh")]
+[node name="BlueCar" parent="." index="24" unique_id=1145836756 instance=ExtResource("4_5nsoh")]
 position = Vector2(-576, 136.00005)
 rotation = -2.761487
 
-[node name="Door2" parent="." index="21" unique_id=312792714 instance=ExtResource("5_8n15c")]
+[node name="Door2" parent="." index="25" unique_id=312792714 instance=ExtResource("5_8n15c")]
 offset_left = 96.0
 offset_top = 124.0
 offset_right = 96.0
 offset_bottom = 124.0
 
-[node name="Door" parent="." index="22" unique_id=326861121 instance=ExtResource("5_8n15c")]
+[node name="Door" parent="." index="26" unique_id=326861121 instance=ExtResource("5_8n15c")]
 offset_left = 864.0
 offset_top = 124.0
 offset_right = 864.0
 offset_bottom = 124.0
 
-[node name="StaticBody2D10" type="StaticBody2D" parent="." index="23" unique_id=165348274 groups=["wall"]]
+[node name="StaticBody2D10" type="StaticBody2D" parent="." index="27" unique_id=165348274 groups=["wall"]]
 position = Vector2(-512, -160)
 collision_layer = 3
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D10" index="0" unique_id=1632218031]
 polygon = PackedVector2Array(64, 96, 64, 160, -192, 160, -192, -160, 192, -160, 192, 160, 128, 160, 128, -96, -128, -96, -128, 96)
 
-[node name="Door4" parent="." index="24" unique_id=841919884 instance=ExtResource("5_8n15c")]
+[node name="Door4" parent="." index="28" unique_id=841919884 instance=ExtResource("5_8n15c")]
 offset_left = -416.0
 offset_top = -8.0
 offset_right = -416.0
 offset_bottom = -8.0
 
-[node name="NavigationRegion2D" type="NavigationRegion2D" parent="." index="25" unique_id=846295402]
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="." index="29" unique_id=846295402]
 visible = false
 navigation_polygon = SubResource("NavigationPolygon_4selt")
 
-[node name="Covers" type="Node2D" parent="." index="26" unique_id=52044403]
+[node name="Covers" type="Node2D" parent="." index="30" unique_id=52044403]
 
 [node name="Marker2D" type="Marker2D" parent="Covers" index="0" unique_id=1926599074 groups=["a_star_point"]]
 position = Vector2(160, 160)
@@ -408,10 +389,3 @@ position = Vector2(16, 488)
 
 [node name="Marker2D17" type="Marker2D" parent="Covers" index="16" unique_id=33172417 groups=["a_star_point"]]
 position = Vector2(-720, -64)
-
-[node name="Keith_Regular4" parent="." index="27" unique_id=567824232 instance=ExtResource("8_spile")]
-position = Vector2(1080, 616)
-
-[node name="Enemy" parent="." index="28" unique_id=1440065138 instance=ExtResource("18_gh443")]
-position = Vector2(1112, 408)
-soldier_stats = SubResource("Resource_6jphs")

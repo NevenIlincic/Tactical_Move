@@ -16,6 +16,7 @@ func _ready() -> void:
 
 func deselect_player():
 	if selected_player:
+		selected_player.vision_area.disable_drawing_vision_sight()
 		player_deselected.emit(selected_player)
 		selected_player.is_selected = false
 		selected_player.player_sprite.modulate.a = 1.0
@@ -27,6 +28,7 @@ func select_player(new_selected_player: Player):
 		deselect_player()
 	if not new_selected_player.is_killed:
 		selected_player = new_selected_player
+		selected_player.vision_area.enable_drawing_vision_sight()
 		selected_player.player_sprite.modulate.a = 0.5
 		if old_player:
 			player_selection_changed.emit(old_player, selected_player)

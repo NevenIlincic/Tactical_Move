@@ -238,10 +238,6 @@ process_material = SubResource("ParticleProcessMaterial_l07se")
 
 [node name="Vision_Area" type="Area2D" parent="." unique_id=1912630791]
 script = ExtResource("13_v1ooi")
-max_range = null
-fov_degrees = null
-ray_count = null
-wall_collision_mask = null
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Vision_Area" unique_id=961437821]
 polygon = PackedVector2Array(48, -24, 104, 0, 56, 48)

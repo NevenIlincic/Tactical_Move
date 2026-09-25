@@ -33,8 +33,8 @@ func _unhandled_input(event: InputEvent):
 		return
 	
 	if Input.is_action_just_pressed("move_confirm"):
-		if PlayerSelectionManager.selected_player:
-			PlayerSelectionManager.deselect_player()
+		#if PlayerSelectionManager.selected_player:
+			#PlayerSelectionManager.deselect_player()
 		if check_can_do_action():
 			Signals.action_started.emit()
 			level.set_level_state(ActionState.new([level]))

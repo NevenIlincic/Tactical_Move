@@ -122,7 +122,8 @@ func _on_deselect_player():
 	hide_stats()
 
 func _on_action_started():
-	hide_stats()
+	pass
+	#hide_stats()
 
 
 func hide_stats():
