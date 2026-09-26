@@ -1281,7 +1281,7 @@ offset_right = 385.0
 offset_bottom = 55.0
 min_value = 5.0
 max_value = 150.0
-value = 5.0
+value = 10.0
 alignment = 1
 
 [node name="Dummy_8" type="Control" parent="Video_Menu/Inputs_Scroll_Container/GridContainer" unique_id=831453655]

@@ -270,12 +270,11 @@ width = 3.0
 texture = ExtResource("5_jmcll")
 texture_mode = 1
 
-[node name="Detection_Areas" type="Area2D" parent="." unique_id=1442483156 groups=["detection_areas", "door_detection_area"]]
+[node name="Detection_Areas" type="Area2D" parent="." unique_id=1442483156 groups=["detection_areas"]]
 collision_layer = 2
 collision_mask = 2
 
 [node name="Door_Collision_Shape" type="CollisionShape2D" parent="Detection_Areas" unique_id=233869902]
-visible = false
 shape = SubResource("RectangleShape2D_q6by2")
 
 [node name="Ally_Detection_Shape" type="CollisionShape2D" parent="Detection_Areas" unique_id=1735243656]

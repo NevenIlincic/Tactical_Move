@@ -7,7 +7,6 @@ class_name VisionArea extends Area2D
 @export var fov_degrees: float = 60.0
 #@export var ray_count: int = 50
 @export var wall_collision_mask: int = 1
-@export var edge_precision_iterations: int = 5
 
 var _dirs := PackedVector2Array()
 var space_state: PhysicsDirectSpaceState2D
@@ -31,8 +30,10 @@ func enable_drawing_vision_sight():
 	can_draw_vision = true
 	match OptionVariables.vision_type:
 		VisionType.BASIC:
+			vision_polygon.update_polygon_points.emit([], global_position, global_rotation)
 			set_player_vision_cone_points()
 		VisionType.ADVANCED:
+			player_vision_cone.points = player_vision_cone.points.slice(0, 1)
 			_update_vision_polygon_ultra_precise()
 func disable_drawing_vision_sight():
 	can_draw_vision = false
@@ -71,9 +72,32 @@ func _ready() -> void:
 		wall_query.exclude = [parent_soldier.hitbox.get_rid()]
 	
 	_build_dirs()
+	
+	connect_to_signals()
 
+func check_is_currently_selected_player() -> bool:
+	var selected_player: Player = PlayerSelectionManager.selected_player
+	if selected_player:
+		if selected_player.soldier_id == parent_soldier.soldier_id:
+			return true
+	return false
+func connect_to_signals():
+	if parent_soldier is Player:
+		OptionVariables.vision_type_changed.connect(_on_vision_type_changed)
+		OptionVariables.ray_cast_num_changed.connect(_on_ray_cast_num_changed)
+		OptionVariables.num_edge_precision_iterations_changed.connect(_on_edge_precision_iterations_changed)
+func _on_vision_type_changed(vision_type: OptionVariables.VisionType):
+	if check_is_currently_selected_player():
+		enable_drawing_vision_sight()
 
+func _on_ray_cast_num_changed(new_value: int):
+	if check_is_currently_selected_player():
+		_build_dirs()
+		_update_vision_polygon_ultra_precise()
 
+func _on_edge_precision_iterations_changed(new_value: int):
+	if check_is_currently_selected_player():
+		_update_vision_polygon_ultra_precise()
 
 func _build_dirs() -> void:
 	var ray_count: int = OptionVariables.ray_count
@@ -92,8 +116,6 @@ func update_vision() -> void:
 	_check_enemies()
 	if OptionVariables.check_is_advanced_vision_type() and frame_counter == 0 and can_draw_vision:
 		_update_vision_polygon_ultra_precise()
-
-
 
 func _update_vision_polygon_ultra_precise() -> void:
 	var pts := PackedVector2Array()
@@ -147,7 +169,7 @@ func _find_exact_edge(min_angle: float, max_angle: float) -> Vector2:
 	var max_a := max_angle
 	var last_valid_pt := Vector2.ZERO
 	
-	for iter in range(edge_precision_iterations):
+	for iter in range(OptionVariables.edge_precision_iterations):
 		var mid_angle := (min_a + max_a) * 0.5
 		var mid_dir := Vector2.from_angle(mid_angle)
 		var global_target := global_position + mid_dir.rotated(global_rotation) * max_range

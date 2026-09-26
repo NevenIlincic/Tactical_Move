@@ -414,6 +414,15 @@ max_travel_distance = SubResource("Resource_flh4p")
 MAX_HP = SubResource("Resource_7v413")
 metadata/_custom_type_script = "uid://cp4iog725gtuq"
 
+[sub_resource type="Resource" id="Resource_au4on"]
+resource_local_to_scene = true
+script = ExtResource("13_kkaij")
+speed = SubResource("Resource_cnjlm")
+reaction_time = SubResource("Resource_bgu6o")
+max_travel_distance = SubResource("Resource_flh4p")
+MAX_HP = SubResource("Resource_7v413")
+metadata/_custom_type_script = "uid://cp4iog725gtuq"
+
 [node name="House" unique_id=1509814780 instance=ExtResource("1_jr8ct")]
 
 [node name="TileMap" type="TileMapLayer" parent="TileMaps" parent_id_path=PackedInt32Array(641455981) index="0" unique_id=1104648915]
@@ -521,6 +530,12 @@ position = Vector2(16, 488)
 
 [node name="Marker2D17" type="Marker2D" parent="Covers" index="16" unique_id=1138555812 groups=["a_star_point"]]
 position = Vector2(-720, -64)
+
+[node name="Marker2D18" type="Marker2D" parent="Covers" index="17" unique_id=1536717719 groups=["a_star_point"]]
+position = Vector2(-688, 160)
+
+[node name="Marker2D19" type="Marker2D" parent="Covers" index="18" unique_id=1464093350 groups=["a_star_point"]]
+position = Vector2(792, 40)
 
 [node name="Walls" type="Node2D" parent="." index="15" unique_id=519404028]
 
@@ -652,7 +667,8 @@ soldier_stats = SubResource("Resource_53pe1")
 weapons = Array[ExtResource("14_116v4")]([SubResource("Resource_3u3yd")])
 
 [node name="Enemy5" parent="Enemies" index="4" unique_id=1376091809 instance=ExtResource("11_yp7qk")]
-position = Vector2(1112, 424)
+position = Vector2(712, 24.000015)
+rotation = 0.39776316
 soldier_stats = SubResource("Resource_5o8og")
 
 [node name="Enemy6" parent="Enemies" index="5" unique_id=597549199 instance=ExtResource("11_yp7qk")]
@@ -692,7 +708,7 @@ rotation = 2.716936
 soldier_stats = SubResource("Resource_lmnaw")
 
 [node name="Enemy13" parent="Enemies" index="12" unique_id=211030698 instance=ExtResource("11_yp7qk")]
-position = Vector2(-96.000015, 456)
+position = Vector2(-744, 112)
 rotation = 0.60794103
 soldier_stats = SubResource("Resource_8hjqt")
 
@@ -722,3 +738,8 @@ position = Vector2(-312, -344)
 rotation = 0.8475856
 scale = Vector2(0.99999994, 0.99999994)
 soldier_stats = SubResource("Resource_uf6cy")
+
+[node name="Enemy19" parent="Enemies" index="18" unique_id=512623149 instance=ExtResource("11_yp7qk")]
+position = Vector2(1104, 223.99997)
+rotation = -0.21096846
+soldier_stats = SubResource("Resource_au4on")
