@@ -130,7 +130,11 @@ gravity = Vector3(0, 0, 0)
 alpha_curve = SubResource("CurveTexture_qqij5")
 emission_curve = SubResource("CurveTexture_7jdmd")
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_v1ooi"]
+radius = 24.0
+
 [node name="Enemy" type="Node2D" unique_id=1440065138 groups=["enemy_node", "soldier"]]
+process_mode = 3
 z_index = 2
 script = ExtResource("1_02vxf")
 ENEMY_COLLISION_DETECTION_MASK = 512
@@ -145,7 +149,6 @@ texture = ExtResource("2_2i7on")
 hframes = 7
 
 [node name="Detection_Area" type="Area2D" parent="." unique_id=96710695 groups=["enemy"]]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Detection_Area" unique_id=1216236629]
 visible = false
@@ -179,9 +182,6 @@ light_mask = 2
 color = Color(0.5822249, 0.63125, 0.33140624, 0.19500001)
 polygon = PackedVector2Array(0, 0, -256, -256, 256, -256)
 script = ExtResource("3_fw0yv")
-max_range = 900.0
-fov_degrees = 60.0
-ray_count = 10.0
 
 [node name="Enemy_Target_Line" type="Line2D" parent="Vision_Polygon" unique_id=1406944396]
 visible = false
@@ -246,7 +246,13 @@ polygon = PackedVector2Array(48, -24, 104, 0, 56, 48)
 closed = true
 width = 1.0
 
+[node name="Area_HitBox" type="Area2D" parent="." unique_id=1367086891 groups=["area_hitbox", "enemy"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area_HitBox" unique_id=2125673365]
+shape = SubResource("CircleShape2D_v1ooi")
+
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="body_entered" from="Rays_Activation_Area" to="." method="_on_rays_activation_area_body_entered"]
 [connection signal="body_exited" from="Rays_Activation_Area" to="." method="_on_rays_activation_area_body_exited"]
-[connection signal="body_entered" from="Vision_Area" to="Vision_Area" method="_on_body_entered"]
+[connection signal="area_entered" from="Vision_Area" to="Vision_Area" method="_on_area_entered"]
+[connection signal="area_exited" from="Vision_Area" to="Vision_Area" method="_on_area_exited"]

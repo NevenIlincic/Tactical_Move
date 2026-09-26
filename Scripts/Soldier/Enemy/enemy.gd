@@ -47,7 +47,7 @@ func _ready() -> void:
 	point_to_look = Vector2.ZERO
 	level = get_tree().get_first_node_in_group("Level")
 	Signals.stop_enemy_actions.connect(_on_players_action_finished)
-		
+	
 	if close_players.is_empty():
 		set_process(false)
 		set_physics_process(false)

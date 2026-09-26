@@ -2,6 +2,7 @@ class_name FPSLabel extends Label
 
 func _ready() -> void:
 	OptionVariables.show_fps_changed.connect(_on_fps_visibility_changed)
+	_on_fps_visibility_changed(OptionVariables.show_fps)
 
 func _physics_process(delta: float) -> void:
 	text = str("FPS: ", int(Engine.get_frames_per_second()))	

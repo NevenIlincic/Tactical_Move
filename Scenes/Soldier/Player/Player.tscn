@@ -167,6 +167,9 @@ gravity = Vector3(0, 0, 0)
 alpha_curve = SubResource("CurveTexture_cifhn")
 emission_curve = SubResource("CurveTexture_vvysc")
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_jjc5n"]
+radius = 24.0
+
 [node name="Player" type="Node2D" unique_id=1108589071 groups=["Player", "soldier"]]
 z_index = 2
 script = ExtResource("1_ft8w5")
@@ -258,9 +261,6 @@ self_modulate = Color(1, 1, 1, 0.44313726)
 use_parent_material = true
 polygon = PackedVector2Array(0, 0, -256, -256, 256, -256)
 script = ExtResource("4_t26db")
-max_range = 900.0
-fov_degrees = 60.0
-ray_count = 150.0
 
 [node name="Enemy_Target_Line" type="Line2D" parent="Vision_Polygon" unique_id=1477870436]
 show_behind_parent = true
@@ -325,7 +325,6 @@ process_material = SubResource("ParticleProcessMaterial_rw7ms")
 
 [node name="Vision_Area" type="Area2D" parent="." unique_id=1296404884]
 script = ExtResource("17_vvysc")
-edge_precision_iterations = 3
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Vision_Area" unique_id=618780294]
 visible = false
@@ -335,6 +334,11 @@ polygon = PackedVector2Array(48, -24, 104, 0, 56, 48)
 closed = true
 width = 1.0
 
+[node name="Area_HitBox" type="Area2D" parent="." unique_id=1360683541 groups=["area_hitbox"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area_HitBox" unique_id=951640124]
+shape = SubResource("CircleShape2D_jjc5n")
+
 [connection signal="area_entered" from="Selection_Area" to="." method="_on_selection_area_area_entered"]
 [connection signal="area_exited" from="Selection_Area" to="." method="_on_selection_area_area_exited"]
 [connection signal="mouse_entered" from="Selection_Area" to="." method="_on_selection_area_mouse_entered"]
@@ -342,5 +346,5 @@ width = 1.0
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="area_shape_entered" from="Detection_Areas" to="." method="_on_detection_areas_area_shape_entered"]
 [connection signal="area_shape_exited" from="Detection_Areas" to="." method="_on_detection_areas_area_shape_exited"]
-[connection signal="body_entered" from="Vision_Area" to="Vision_Area" method="_on_body_entered"]
-[connection signal="body_exited" from="Vision_Area" to="Vision_Area" method="_on_body_exited"]
+[connection signal="area_entered" from="Vision_Area" to="Vision_Area" method="_on_area_entered"]
+[connection signal="area_exited" from="Vision_Area" to="Vision_Area" method="_on_area_exited"]

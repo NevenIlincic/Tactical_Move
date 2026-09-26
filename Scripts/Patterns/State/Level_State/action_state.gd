@@ -15,7 +15,7 @@ var current_action_killed_players: Dictionary
 var soldiers_in_action: Dictionary
 
 var action_duration: float = 0.0
-
+var is_action_state_finished: bool = false
 func _init(data: Array):
 	level = data[0]
 	level.players_set_for_move = {}
@@ -24,7 +24,7 @@ func _init(data: Array):
 	alive_players = level.get_alive_players()
 	alive_enemies = level.get_alive_enemies()
 	current_action_killed_players = {}
-	#soldiers_in_action = alive_soldiers.duplicate(true)
+	soldiers_in_action = alive_soldiers.duplicate(true)
 	#soldiers_in_action = {}
 	num_finished_moves = 0
 	initial_num_alive_players = len(alive_players)
@@ -77,21 +77,18 @@ func _on_player_move_finished(soldier: Soldier):
 		
 	if soldier is Player:
 		num_player_finished_moves += 1
-	
 	var enemies_finished_ids: Array[String] = []
-	if num_player_finished_moves == alive_players.size():
+	if num_player_finished_moves >= initial_num_alive_players:
 		for enemy_soldier_id in soldiers_in_action:
 			var enemy_soldier: Soldier = soldiers_in_action[enemy_soldier_id]
 			if is_instance_valid(enemy_soldier) and not enemy_soldier.is_queued_for_deletion() and enemy_soldier is Enemy:
 				if enemy_soldier.vision_area.enemies_can_be_shot_at.is_empty():
 					enemy_soldier._on_players_action_finished()
 					enemies_finished_ids.append(enemy_soldier.soldier_id)
-		#level.set_level_state(PlayerSetMoveState.new([level]))
-		
 	for enemy_id in enemies_finished_ids:
 		soldiers_in_action.erase(enemy_id)
 	
-	if soldiers_in_action.is_empty():
+	if soldiers_in_action.is_empty() and num_player_finished_moves >= initial_num_alive_players:
 		num_player_finished_moves = 0
 		for player_id: String in alive_players:
 			#print(player.soldier_id, " ", current_action_killed_players)
@@ -102,13 +99,18 @@ func _on_player_move_finished(soldier: Soldier):
 				
 				if player is MedicPlayer:
 					player._check_is_healing_available(action_duration)
-		level.set_level_state(PreparationState.new([level]))
+		if not is_action_state_finished:
+			is_action_state_finished = true
+			disconnect_signals()
+			level.set_level_state(PreparationState.new([level]))
 	
 func _on_player_move_continued(soldier: Soldier):
 	soldier.vision_polygon.enable_vision()
 	soldiers_in_action[soldier.soldier_id] = soldier
 	
 func _on_soldier_killed(enemy: Soldier, killed_by: Soldier):
+	if enemy is Player:
+		enemy.vision_area.disconnect_from_signals()
 	check_is_level_completed(enemy)
 	current_action_killed_players[enemy.soldier_id] = enemy
 	_on_player_move_finished(enemy)

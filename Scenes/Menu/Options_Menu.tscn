@@ -1072,6 +1072,7 @@ script = ExtResource("9_wekyc")
 [node name="Inputs_Scroll_Container" type="ScrollContainer" parent="Video_Menu" unique_id=520052159]
 offset_right = 808.0
 offset_bottom = 504.0
+scroll_vertical = 246
 
 [node name="GridContainer" type="GridContainer" parent="Video_Menu/Inputs_Scroll_Container" unique_id=319884591]
 layout_mode = 2
@@ -1232,7 +1233,7 @@ text = "VISION INDICATOR"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="OptionButton" type="OptionButton" parent="Video_Menu/Inputs_Scroll_Container/GridContainer/Player_Vision_Indicator" unique_id=1307921506]
+[node name="Vision_Indicator_Option_Button" type="OptionButton" parent="Video_Menu/Inputs_Scroll_Container/GridContainer/Player_Vision_Indicator" unique_id=1307921506]
 layout_mode = 0
 offset_left = 264.0
 offset_top = -3.0
@@ -1381,7 +1382,7 @@ layout_mode = 2
 [connection signal="item_selected" from="Video_Menu/Inputs_Scroll_Container/GridContainer/Quality_Input/Quality_Option_Button" to="Video_Menu" method="_on_quality_option_button_item_selected"]
 [connection signal="item_selected" from="Video_Menu/Inputs_Scroll_Container/GridContainer/Show_FPS_Input/FPS_Option_Button" to="Video_Menu" method="_on_fps_option_button_item_selected"]
 [connection signal="value_changed" from="Video_Menu/Inputs_Scroll_Container/GridContainer/Max_FPS_Input/Max_FPS_Spin_Box" to="Video_Menu" method="_on_max_fps_spin_box_value_changed"]
-[connection signal="item_selected" from="Video_Menu/Inputs_Scroll_Container/GridContainer/Player_Vision_Indicator/OptionButton" to="Video_Menu" method="_on_option_button_item_selected"]
+[connection signal="item_selected" from="Video_Menu/Inputs_Scroll_Container/GridContainer/Player_Vision_Indicator/Vision_Indicator_Option_Button" to="Video_Menu" method="_on_vision_indicator_option_button_item_selected"]
 [connection signal="value_changed" from="Video_Menu/Inputs_Scroll_Container/GridContainer/Ray_Cast_Number_Input/Ray_Cast_Number/Ray_Cast_Spin_Box" to="Video_Menu" method="_on_ray_cast_spin_box_value_changed"]
 [connection signal="value_changed" from="Video_Menu/Inputs_Scroll_Container/GridContainer/Edge_Iterations_Number/Edge_Iterations_Spin_Box" to="Video_Menu" method="_on_edge_iterations_spin_box_value_changed"]
 [connection signal="item_selected" from="Video_Menu/Inputs_Scroll_Container/GridContainer/Gun_Blast_Effect/Gun_Blast_Effect_Option_Button" to="Video_Menu" method="_on_gun_blast_effect_option_button_item_selected"]

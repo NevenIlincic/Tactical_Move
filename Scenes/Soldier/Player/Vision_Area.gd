@@ -53,13 +53,13 @@ func get_initial_cone_points() -> PackedVector2Array:
 func set_player_vision_cone_points():
 	var pts: PackedVector2Array = get_initial_cone_points()
 	player_vision_cone.points = pts
+
 func _ready() -> void:
 	space_state = get_world_2d().direct_space_state
 	parent_soldier = get_parent()
 	var pts: PackedVector2Array = get_initial_cone_points()
 	collision_polygon_2d.polygon = pts
 
-	
 	query = PhysicsRayQueryParameters2D.new()
 	query.collision_mask = 2 | parent_soldier.ENEMY_COLLISION_DETECTION_MASK
 	
@@ -69,9 +69,12 @@ func _ready() -> void:
 	wall_query.collide_with_bodies = true
 	
 	if parent_soldier and parent_soldier.hitbox:
+		query.exclude = [parent_soldier.hitbox.get_rid()]
 		wall_query.exclude = [parent_soldier.hitbox.get_rid()]
 	
 	_build_dirs()
+	
+	
 	
 	connect_to_signals()
 
@@ -86,6 +89,15 @@ func connect_to_signals():
 		OptionVariables.vision_type_changed.connect(_on_vision_type_changed)
 		OptionVariables.ray_cast_num_changed.connect(_on_ray_cast_num_changed)
 		OptionVariables.num_edge_precision_iterations_changed.connect(_on_edge_precision_iterations_changed)
+
+func disconnect_from_signals():
+	if OptionVariables.vision_type_changed.is_connected(_on_vision_type_changed):
+		OptionVariables.vision_type_changed.disconnect(_on_vision_type_changed)
+	if OptionVariables.ray_cast_num_changed.is_connected(_on_ray_cast_num_changed):
+		OptionVariables.ray_cast_num_changed.disconnect(_on_ray_cast_num_changed)
+	if OptionVariables.num_edge_precision_iterations_changed.is_connected(_on_edge_precision_iterations_changed):
+		OptionVariables.num_edge_precision_iterations_changed.disconnect(_on_edge_precision_iterations_changed)
+
 func _on_vision_type_changed(vision_type: OptionVariables.VisionType):
 	if check_is_currently_selected_player():
 		enable_drawing_vision_sight()
@@ -205,39 +217,39 @@ func _check_enemies():
 			var hit_object: Object = result["collider"].get_parent()
 			var hit_position: Vector2 = result["position"]
 			if hit_object and hit_object is Soldier:
-				if hit_object.is_killed:
-					if enemies_can_be_shot_at.has(enemy_soldier_id):
-						enemies_can_be_shot_at.erase(enemy_soldier_id)
-					continue
 				if check_is_enemy_soldier_hit(parent_soldier, hit_object):
+					if hit_object.is_killed:
+						if enemies_can_be_shot_at.has(enemy_soldier_id):
+							enemies_can_be_shot_at.erase(enemy_soldier_id)
+						continue
 					#if vision_polygon.bullet_hit_point == null:
 					enemies_can_be_shot_at[enemy_soldier_id] = hit_object
 					vision_polygon.bullet_hit_point = hit_position
 					Signals.report_enemy_seen.emit(hit_object, parent_soldier)
-				else:
-					if enemies_can_be_shot_at.has(enemy_soldier_id):
-						enemies_can_be_shot_at.erase(enemy_soldier_id)
 			else:
 				if enemies_can_be_shot_at.has(enemy_soldier_id):
 					enemies_can_be_shot_at.erase(enemy_soldier_id)
+		else:
+			if enemies_can_be_shot_at.has(enemy_soldier_id):
+				enemies_can_be_shot_at.erase(enemy_soldier_id)
+
 
 func check_is_enemy_soldier_hit(current_soldier: Soldier, hit_soldier: Soldier) -> bool:
 	return current_soldier.soldier_type != hit_soldier.soldier_type
 
-
-func _on_body_entered(body: Node2D) -> void:
-	var soldier = body.get_parent()
-	if soldier is Soldier and soldier.soldier_id != parent_soldier.soldier_id:
-		var enemy_soldier: Soldier = soldier
+func _on_area_entered(area: Area2D) -> void:
+	if area.is_in_group("area_hitbox"):
+		var enemy_soldier: Soldier = area.get_parent()
+		if enemy_soldier.soldier_id == parent_soldier.soldier_id:
+			return
 		if enemy_soldier.is_killed:
 			return
 		if check_is_enemy_soldier_hit(parent_soldier, enemy_soldier):
 			enemies_in_view[enemy_soldier.soldier_id] = enemy_soldier
 
 
-func _on_body_exited(body: Node2D) -> void:
-	var soldier = body.get_parent()
-	if soldier is Soldier and soldier.soldier_id != parent_soldier.soldier_id:
-		var enemy_soldier: Soldier = soldier
+func _on_area_exited(area: Area2D) -> void:
+	if area.is_in_group("area_hitbox"):
+		var enemy_soldier: Soldier = area.get_parent()
 		if enemies_in_view.has(enemy_soldier.soldier_id):
 			enemies_in_view.erase(enemy_soldier.soldier_id)
