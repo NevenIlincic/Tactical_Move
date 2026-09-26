@@ -49,7 +49,7 @@ var current_confirm_callback: Callable
 @onready var camera: Camera2D = $Camera2D
 @onready var player_stats: PlayerStatsHUD = $CanvasLayer/PlayerStats
 
-@onready var fps_label: Label = $CanvasLayer/FPS_Label
+@onready var fps_label: FPSLabel = $CanvasLayer/FPS_Label
 
 
 func _ready() -> void:
@@ -91,7 +91,6 @@ func set_vision_polygons():
 		
 var i: int = 0
 func _physics_process(delta: float) -> void:
-	fps_label.text = str("FPS: ", Engine.get_frames_per_second())	
 	current_state.update(delta)
 	VisionManager.handle_enemy_visibility(delta)
 func _process(delta: float) -> void:

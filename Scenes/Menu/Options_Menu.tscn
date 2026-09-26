@@ -274,7 +274,6 @@ script = ExtResource("1_pobh7")
 libraries/ = SubResource("AnimationLibrary_av6u3")
 
 [node name="Inputs_Menu" type="Node2D" parent="." unique_id=1996078480]
-visible = false
 modulate = Color(1, 1, 1, 0)
 position = Vector2(31, 96)
 
@@ -1066,6 +1065,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Video_Menu" type="Node2D" parent="." unique_id=809832490]
+visible = false
 position = Vector2(31, 96)
 script = ExtResource("9_wekyc")
 
@@ -1195,7 +1195,7 @@ max_value = 999.0
 value = 999.0
 alignment = 1
 
-[node name="Max_FPS_Input2" type="Control" parent="Video_Menu/Inputs_Scroll_Container/GridContainer" unique_id=418037629]
+[node name="Dummy" type="Control" parent="Video_Menu/Inputs_Scroll_Container/GridContainer" unique_id=418037629]
 layout_mode = 2
 
 [node name="Player_Vision_Section" type="Control" parent="Video_Menu/Inputs_Scroll_Container/GridContainer" unique_id=1379478285]

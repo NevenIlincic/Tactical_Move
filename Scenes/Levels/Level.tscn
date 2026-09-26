@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://b58hel4nndam5" path="res://Scenes/test_scene.gd" id="1_echjq"]
 [ext_resource type="PackedScene" uid="uid://xsp0v8p2pc4e" path="res://Scenes/Menu/End_Game_Menu.tscn" id="8_d3u4r"]
 [ext_resource type="PackedScene" uid="uid://diubehftswotg" path="res://Scenes/Menu/Pause_Menu.tscn" id="8_etd3f"]
+[ext_resource type="Script" uid="uid://hdtatee4o2v3" path="res://Scenes/Levels/fps_label.gd" id="10_y1810"]
 [ext_resource type="PackedScene" uid="uid://dyh4j30522553" path="res://Scenes/Soldier/Player/Player_Stats.tscn" id="25_wr6c8"]
 [ext_resource type="PackedScene" uid="uid://bmbr4kpa58muf" path="res://Scenes/Menu/Upgrade_Menu.tscn" id="26_u4xmi"]
 [ext_resource type="PackedScene" uid="uid://q6uf7pve5vqm" path="res://Scenes/Dialog/Confirmation_Dialog.tscn" id="27_bvxha"]
@@ -80,12 +81,14 @@ visible = false
 visible = false
 
 [node name="FPS_Label" type="Label" parent="CanvasLayer" unique_id=1445502002]
-offset_left = 728.0
-offset_top = 24.0
-offset_right = 768.0
-offset_bottom = 45.0
+process_mode = 3
+visible = false
+offset_top = 16.0
+offset_right = 55.0
+offset_bottom = 58.0
 theme_override_font_sizes/font_size = 32
 text = "FPS:"
+script = ExtResource("10_y1810")
 
 [node name="CanvasLayer2" type="CanvasLayer" parent="." unique_id=1842855312]
 follow_viewport_enabled = true
