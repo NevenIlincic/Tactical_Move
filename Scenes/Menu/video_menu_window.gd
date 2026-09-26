@@ -45,3 +45,11 @@ func hide_show_advanced_vision_inputs(is_shown: bool):
 	dummy_8.visible = is_shown
 	edge_iterations_number.visible = is_shown
 	dummy_3.visible = is_shown
+
+
+func _on_gun_blast_effect_option_button_item_selected(index: int) -> void:
+	match index:
+		0: #OFF
+			OptionVariables.is_blast_effect_enabled = false
+		1:
+			OptionVariables.is_blast_effect_enabled = true

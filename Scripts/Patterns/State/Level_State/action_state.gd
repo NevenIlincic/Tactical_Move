@@ -83,7 +83,7 @@ func _on_player_move_finished(soldier: Soldier):
 		for enemy_soldier_id in soldiers_in_action:
 			var enemy_soldier: Soldier = soldiers_in_action[enemy_soldier_id]
 			if is_instance_valid(enemy_soldier) and not enemy_soldier.is_queued_for_deletion() and enemy_soldier is Enemy:
-				if enemy_soldier.enemies_in_sight.is_empty():
+				if enemy_soldier.vision_area.enemies_can_be_shot_at.is_empty():
 					enemy_soldier._on_players_action_finished()
 					enemies_finished_ids.append(enemy_soldier.soldier_id)
 		#level.set_level_state(PlayerSetMoveState.new([level]))

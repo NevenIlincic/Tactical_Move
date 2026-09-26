@@ -319,7 +319,6 @@ position = Vector2(7, 0)
 texture = ExtResource("17_cifhn")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=290687053]
-visible = false
 follow_viewport_enabled = true
 
 [node name="GunBlastEffect" parent="CanvasLayer" unique_id=1793492474 instance=ExtResource("2_rw7ms")]
@@ -327,7 +326,6 @@ process_material = SubResource("ParticleProcessMaterial_rw7ms")
 
 [node name="Vision_Area" type="Area2D" parent="." unique_id=1296404884]
 script = ExtResource("17_vvysc")
-ray_count = 30
 edge_precision_iterations = 3
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Vision_Area" unique_id=618780294]

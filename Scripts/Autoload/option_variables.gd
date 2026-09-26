@@ -37,3 +37,6 @@ var fps_limit: float = 0:
 	set(value):
 		print(value)
 		Engine.max_fps = value
+
+## EFFECTS
+var is_blast_effect_enabled: bool = true

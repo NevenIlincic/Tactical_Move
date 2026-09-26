@@ -15,6 +15,7 @@ var query: PhysicsRayQueryParameters2D
 var wall_query: PhysicsRayQueryParameters2D
 
 var enemies_in_view: Dictionary = {}
+var enemies_can_be_shot_at: Dictionary = {}
 var parent_soldier: Soldier
 
 var can_draw_vision: bool = false
@@ -171,6 +172,8 @@ func _check_enemies():
 			continue
 		var enemy: Soldier = enemies_in_view[enemy_soldier_id]
 		if enemy.is_killed:
+			if enemies_can_be_shot_at.has(enemy_soldier_id):
+				enemies_can_be_shot_at.erase(enemy_soldier_id)
 			continue
 			
 		query.from = global_position
@@ -181,12 +184,20 @@ func _check_enemies():
 			var hit_position: Vector2 = result["position"]
 			if hit_object and hit_object is Soldier:
 				if hit_object.is_killed:
+					if enemies_can_be_shot_at.has(enemy_soldier_id):
+						enemies_can_be_shot_at.erase(enemy_soldier_id)
 					continue
 				if check_is_enemy_soldier_hit(parent_soldier, hit_object):
 					#if vision_polygon.bullet_hit_point == null:
+					enemies_can_be_shot_at[enemy_soldier_id] = hit_object
 					vision_polygon.bullet_hit_point = hit_position
 					Signals.report_enemy_seen.emit(hit_object, parent_soldier)
-
+				else:
+					if enemies_can_be_shot_at.has(enemy_soldier_id):
+						enemies_can_be_shot_at.erase(enemy_soldier_id)
+			else:
+				if enemies_can_be_shot_at.has(enemy_soldier_id):
+					enemies_can_be_shot_at.erase(enemy_soldier_id)
 
 func check_is_enemy_soldier_hit(current_soldier: Soldier, hit_soldier: Soldier) -> bool:
 	return current_soldier.soldier_type != hit_soldier.soldier_type
