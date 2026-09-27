@@ -15,7 +15,7 @@ func _ready() -> void:
 		tutorial_labels.append(tutorial_label)
 	tutorial_labels[tutorial_label_appearing_order].visible = true
 	
-	keith_regular.soldier_stats.HP.base_value = 200.0
+	keith_regular.soldier_stats.HP.base_value = 100.0
 
 
 func _on_tutorial_button_pressed(tutorial_label: TutorialTextDialog):
@@ -34,3 +34,11 @@ func check_is_satisfied(tutorial_label: TutorialTextDialog) -> bool:
 			#return true
 		#return false
 	return true
+
+func check_for_achivements():
+	achievement_manager.check_is_completed()
+	achievement_manager.check_is_under_time(0, 7)
+	achievement_manager.check_is_soldier_lost()
+	achievement_manager.check_are_all_achievements_completed()
+
+	

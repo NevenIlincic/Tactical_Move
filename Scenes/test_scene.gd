@@ -1,6 +1,7 @@
 extends Node2D 
 class_name Level
 
+@export var LEVEL_NAME: String
 @onready var tile_map: TileMapLayer = $TileMaps/TileMap
 
 var selected_player: Player
@@ -51,6 +52,7 @@ var current_confirm_callback: Callable
 
 @onready var fps_label: FPSLabel = $CanvasLayer/FPS_Label
 
+var achievement_manager: AchievementManager
 
 func _ready() -> void:
 	UpgradeCardsManager.clear_available_permanent_upgrades()
@@ -76,6 +78,9 @@ func _ready() -> void:
 	AudioManager.play_background_music(AudioManager.BACKGROUND_MUSIC_LEVEL)
 
 	set_vision_polygons()
+	
+	achievement_manager = AchievementManager.new()
+	achievement_manager.set_level(self)
 	
 	
 	
@@ -187,6 +192,8 @@ func level_completed():
 	is_level_completed = true
 	await start_end_game_timer()
 	end_game_menu.on_level_completed(self)
+	check_for_achivements()
+	
 func level_failed():
 	player_stats.disconnect_from_signals()
 	is_level_completed = true
@@ -203,3 +210,7 @@ func get_num_killed_players() -> int:
 	return players_killed
 func get_num_killed_enemies() -> int:
 	return enemies_killed
+
+
+func check_for_achivements():
+	pass

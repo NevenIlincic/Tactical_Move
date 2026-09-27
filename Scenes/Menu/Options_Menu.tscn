@@ -1072,7 +1072,7 @@ script = ExtResource("9_wekyc")
 [node name="Inputs_Scroll_Container" type="ScrollContainer" parent="Video_Menu" unique_id=520052159]
 offset_right = 808.0
 offset_bottom = 504.0
-scroll_vertical = 246
+scroll_vertical = 100
 
 [node name="GridContainer" type="GridContainer" parent="Video_Menu/Inputs_Scroll_Container" unique_id=319884591]
 layout_mode = 2

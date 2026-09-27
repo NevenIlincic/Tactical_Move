@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://dnkukugw6ahs7"]
+
+[ext_resource type="Script" uid="uid://bv81wbwunw1aq" path="res://Scenes/Labels/achievement_label.gd" id="1_p5mip"]
+[ext_resource type="Texture2D" uid="uid://cyexu3fm2aq3s" path="res://Sprites/HUD/background.png" id="1_wg5va"]
+
+[node name="AchievementLabel" type="Control" unique_id=79911430]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_p5mip")
+
+[node name="Locked_Achievemnt_Texture_Rect" type="TextureRect" parent="." unique_id=1093440202]
+modulate = Color(0.41568628, 0.41568628, 0.41568628, 0.49803922)
+texture_filter = 1
+texture_repeat = 1
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 64.0
+texture = ExtResource("1_wg5va")
+expand_mode = 1
+
+[node name="Unlocked_Achievemnt_Texture_Rect" type="TextureRect" parent="." unique_id=548006407]
+visible = false
+texture_filter = 1
+texture_repeat = 1
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 64.0
+texture = ExtResource("1_wg5va")
+expand_mode = 1
+
+[node name="Achievement_Label" type="Label" parent="." unique_id=1497781703]
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 64.0
+text = "Achievement text"
+horizontal_alignment = 1
+vertical_alignment = 1

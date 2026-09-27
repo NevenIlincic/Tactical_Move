@@ -37,7 +37,7 @@ scale = Vector2(0.3, 0.3)
 texture = ExtResource("2_w6mgx")
 
 [node name="Level_Selection_Back_Button" parent="." unique_id=900227919 instance=ExtResource("1_yoamj")]
-position = Vector2(0, 512)
+position = Vector2(896, 544)
 button_text = "BACK"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=86404589]
@@ -91,3 +91,24 @@ layout_mode = 2
 
 [node name="LevelSelectionButton" parent="ScrollContainer/VBoxContainer/Level_5" unique_id=716842579 instance=ExtResource("3_yqc5b")]
 button_text = "Not Available"
+
+[node name="ScrollContainer2" type="ScrollContainer" parent="." unique_id=623278450]
+offset_left = 80.0
+offset_top = 440.0
+offset_right = 656.0
+offset_bottom = 592.0
+
+[node name="Achievements_Grid_Container" type="GridContainer" parent="ScrollContainer2" unique_id=1946086071]
+layout_mode = 2
+theme_override_constants/h_separation = 300
+theme_override_constants/v_separation = 75
+columns = 2
+
+[node name="Achievements_Label" type="Label" parent="." unique_id=88463557]
+offset_left = 64.0
+offset_top = 392.0
+offset_right = 656.0
+offset_bottom = 434.0
+theme_override_font_sizes/font_size = 32
+text = "ACHIEVEMENTS"
+horizontal_alignment = 1
