@@ -30,6 +30,16 @@ func check_is_under_time(minutes: int, seconds: int):
 		if level.total_passed_time_seconds < seconds:
 			level_achievements["under_time"] = true
 
+func check_no_upgrades_applied():
+	if not level_achievements["use_no_upgrades"]:
+		if not level.is_upgrade_applied_once:
+			level_achievements["use_no_upgrades"] = true
+
+func check_no_healing_applied():
+	if not level_achievements["use_no_heal"]:
+		if not level.is_healing_applied_once:
+			level_achievements["use_no_heal"] = true
+
 func check_are_all_achievements_completed():
 	if level_achievements["unlock_previous_achievements"]:
 		return

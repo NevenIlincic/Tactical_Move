@@ -26,6 +26,8 @@ var cover_points: Array
 
 #BOOLEANS
 var is_level_completed: bool = false
+var is_healing_applied_once: bool = false
+var is_upgrade_applied_once: bool = false
 
 #LABELS
 @onready var passed_time_label: Label = $CanvasLayer/Timer/Passed_Time_Label
@@ -59,6 +61,8 @@ func _ready() -> void:
 	for player in get_tree().get_nodes_in_group("Player"):
 		if player is Player:
 			players[player] = true
+		if player is MedicPlayer:
+			player.healing_applied.connect(_on_medic_healing_applied)
 	cover_points = get_tree().get_nodes_in_group("a_star_point")
 
 	connect_to_signals()
@@ -142,7 +146,7 @@ func connect_to_signals():
 	Signals.open_upgrade_removal_confirmation_dialog.connect(_on_confirmation_dialog_opened)
 	confirmation_dialog.action_confirmed.connect(_on_action_confirmed)
 	confirmation_dialog.action_canceled.connect(_on_action_canceled)
-			
+	Signals.permanent_upgrade_applied.connect(_on_permanent_upgrade_applied)
 @onready var path_line: Line2D = $Path_Line
 var start_tile: Vector2i = Vector2i(0,0)
 
@@ -193,12 +197,14 @@ func level_completed():
 	await start_end_game_timer()
 	end_game_menu.on_level_completed(self)
 	check_for_achivements()
+	disconnect_from_signals()
 	
 func level_failed():
 	player_stats.disconnect_from_signals()
 	is_level_completed = true
 	await start_end_game_timer()
 	end_game_menu.on_level_failed(self)
+	disconnect_from_signals()
 
 func start_end_game_timer():
 	await get_tree().create_timer(1.0).timeout
@@ -214,3 +220,22 @@ func get_num_killed_enemies() -> int:
 
 func check_for_achivements():
 	pass
+
+func disconnect_from_signals(): 
+	if Signals.open_upgrade_removal_confirmation_dialog.is_connected(_on_confirmation_dialog_opened):
+		Signals.open_upgrade_removal_confirmation_dialog.disconnect(_on_confirmation_dialog_opened)
+	if confirmation_dialog.action_confirmed.is_connected(_on_action_confirmed):
+		confirmation_dialog.action_confirmed.disconnect(_on_action_confirmed)
+	if confirmation_dialog.action_canceled.is_connected(_on_action_canceled):
+		confirmation_dialog.action_canceled.disconnect(_on_action_canceled)
+	if Signals.permanent_upgrade_applied.is_connected(_on_permanent_upgrade_applied):
+		Signals.permanent_upgrade_applied.disconnect(_on_permanent_upgrade_applied)
+	
+	
+func _on_permanent_upgrade_applied(upgrade_card: UpgradeCard):
+	if not is_upgrade_applied_once:
+		is_upgrade_applied_once = true
+
+func _on_medic_healing_applied():
+	if not is_healing_applied_once:
+		is_healing_applied_once = true

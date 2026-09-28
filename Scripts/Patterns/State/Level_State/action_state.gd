@@ -111,6 +111,10 @@ func _on_player_move_continued(soldier: Soldier):
 func _on_soldier_killed(enemy: Soldier, killed_by: Soldier):
 	if enemy is Player:
 		enemy.vision_area.disconnect_from_signals()
+		if enemy is MedicPlayer:
+			if enemy.healing_applied.is_connected(level._on_medic_healing_applied):
+				enemy.healing_applied.disconnect(level._on_medic_healing_applied)
+
 	check_is_level_completed(enemy)
 	current_action_killed_players[enemy.soldier_id] = enemy
 	_on_player_move_finished(enemy)

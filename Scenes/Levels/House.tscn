@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://dhnsrmoddn8sp" path="res://Scenes/Levels/Level.tscn" id="1_jr8ct"]
 [ext_resource type="Texture2D" uid="uid://by41vprbe8yxy" path="res://Sprites/Tiles/wood.png" id="2_dodo2"]
+[ext_resource type="Script" uid="uid://c0ief34b3dp3j" path="res://Scripts/Levels/house_level.gd" id="2_q44no"]
 [ext_resource type="Texture2D" uid="uid://coidsrajfw0k4" path="res://Sprites/Tiles/concrete.png" id="3_4w7dd"]
 [ext_resource type="Texture2D" uid="uid://b57h4w4d5rop7" path="res://Sprites/Tiles/Interior/Dark_Ground.png" id="4_uoqvf"]
 [ext_resource type="Texture2D" uid="uid://bo60888547asv" path="res://Sprites/Wall/New Piskel (30).png" id="5_pa2hw"]
@@ -424,6 +425,8 @@ MAX_HP = SubResource("Resource_7v413")
 metadata/_custom_type_script = "uid://cp4iog725gtuq"
 
 [node name="House" unique_id=1509814780 instance=ExtResource("1_jr8ct")]
+script = ExtResource("2_q44no")
+LEVEL_NAME = "House"
 
 [node name="TileMap" type="TileMapLayer" parent="TileMaps" parent_id_path=PackedInt32Array(641455981) index="0" unique_id=1104648915]
 z_index = -1

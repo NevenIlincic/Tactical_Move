@@ -9,7 +9,6 @@ signal action_canceled()
 func _on_yes_button_pressed() -> void:
 	action_confirmed.emit()
 
-
 func _on_no_button_pressed() -> void:
 	action_canceled.emit()
 

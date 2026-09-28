@@ -1,6 +1,7 @@
 class_name MedicPlayer extends Player
 
 signal check_can_heal()
+signal healing_applied()
 
 @onready var healing_area_indicator: Sprite2D = $Healing_Area_Indicator
 @onready var medic_apply_detection_shape_index: int = $Detection_Areas/Medic_Apply_Detection_Shape.get_index()
@@ -42,6 +43,7 @@ func do_healing():
 	healing_area_indicator.visible = false
 	can_heal = false
 	is_queued_for_medic_healing = false
+	healing_applied.emit()
 	for ally_id: String in allies_to_heal_nearby:
 		var ally: Player = allies_to_heal_nearby[ally_id]
 		if ally.is_queued_for_medic_healing:
