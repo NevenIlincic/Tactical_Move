@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://jsaa0pon4le5"]
+
+[ext_resource type="Texture2D" uid="uid://crxvgh4kq6cxv" path="res://Sprites/Assets/Bench/bench.png" id="1_2hhr0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_06txj"]
+size = Vector2(128, 64)
+
+[node name="Bench" type="StaticBody2D" unique_id=2033981355 groups=["wall"]]
+collision_layer = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1679384352]
+texture_filter = 1
+texture_repeat = 1
+texture = ExtResource("1_2hhr0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1678002137]
+shape = SubResource("RectangleShape2D_06txj")

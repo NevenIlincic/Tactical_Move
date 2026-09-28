@@ -44,5 +44,7 @@ func set_under_time() -> String:
 			additional_text = " 1m 30s"
 		"Parking Lot":
 			additional_text = " 3m"
+		"Park":
+			additional_text = " 1m 15s"
 				
 	return additional_text

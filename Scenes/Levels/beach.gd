@@ -13,7 +13,6 @@ func _on_beach_ball_area_body_entered(body: Node2D) -> void:
 	if body.is_in_group("beach_ball"):
 		is_beach_ball_reached = true
 
-
 func _on_beach_ball_area_body_exited(body: Node2D) -> void:
 	if body.is_in_group("beach_ball"):
 		is_beach_ball_reached = false

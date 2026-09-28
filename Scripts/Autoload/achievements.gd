@@ -30,6 +30,13 @@ var achievements: Dictionary = {
 		"use_no_upgrades": false,
 		"use_no_heal": false,
 		"unlock_previous_achievements": false
+	},
+	"Park": {
+		"completed": false,
+		"under_time": false,
+		"no_soldier_lost": false,
+		"use_no_upgrades": false,
+		"unlock_previous_achievements": false
 	}
 }
 

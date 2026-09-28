@@ -85,7 +85,7 @@ polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ur0lx"]
 polygon = PackedVector2Array(-16, -16, -8, -16, -8, -8, -16, -8)
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_f2b76"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_q44no"]
 texture = ExtResource("5_pa2hw")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
@@ -116,7 +116,7 @@ texture_region_size = Vector2i(32, 32)
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_u6o8x"]
 polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vn3yt"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wcwi6"]
 texture = ExtResource("6_orwpj")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
@@ -140,8 +140,8 @@ texture_region_size = Vector2i(32, 32)
 [sub_resource type="TileSet" id="TileSet_q44no"]
 tile_size = Vector2i(32, 32)
 occlusion_layer_0/light_mask = 1
-sources/4 = SubResource("TileSetAtlasSource_f2b76")
-sources/5 = SubResource("TileSetAtlasSource_vn3yt")
+sources/4 = SubResource("TileSetAtlasSource_q44no")
+sources/5 = SubResource("TileSetAtlasSource_wcwi6")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_th001"]
 texture = ExtResource("7_ej0hm")

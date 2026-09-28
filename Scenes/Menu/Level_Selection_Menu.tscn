@@ -2,11 +2,12 @@
 
 [ext_resource type="Script" uid="uid://h4natj2o6s8x" path="res://Scripts/Menus/level_selection_menu.gd" id="1_8cq7g"]
 [ext_resource type="PackedScene" uid="uid://b6pfugr3kdl2v" path="res://Scenes/Buttons/Menus_Button.tscn" id="1_yoamj"]
-[ext_resource type="Texture2D" uid="uid://dju38dowp0jfy" path="res://Sprites/Level_Covers/House.png" id="2_w6mgx"]
+[ext_resource type="Texture2D" uid="uid://ddk4jfftq5sjq" path="res://Sprites/Level_Covers/House.png" id="2_w6mgx"]
 [ext_resource type="PackedScene" uid="uid://dx3kt52m4smv1" path="res://Scenes/Buttons/Level_Selection_Button.tscn" id="3_yqc5b"]
 [ext_resource type="Texture2D" uid="uid://tdhufd83vo2e" path="res://Sprites/Level_Covers/Training_Course.png" id="5_4552k"]
 [ext_resource type="Texture2D" uid="uid://c4v1lyfvi5noh" path="res://Sprites/Level_Covers/Beach.png" id="6_loknk"]
 [ext_resource type="Texture2D" uid="uid://chuc7spn23j05" path="res://Sprites/Level_Covers/Parking_Lot.png" id="6_ve437"]
+[ext_resource type="Texture2D" uid="uid://bv1mxf7sk1vcj" path="res://Sprites/Level_Covers/Park.png" id="8_n7gn6"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4552k"]
 draw_center = false
@@ -80,13 +81,15 @@ layout_mode = 2
 button_text = "Parking Lot"
 level_cover_texture = ExtResource("6_ve437")
 
-[node name="Level_4" type="Control" parent="ScrollContainer/VBoxContainer" unique_id=1059994538]
+[node name="Park" type="Control" parent="ScrollContainer/VBoxContainer" unique_id=1059994538]
 layout_mode = 2
 
-[node name="LevelSelectionButton" parent="ScrollContainer/VBoxContainer/Level_4" unique_id=79403450 instance=ExtResource("3_yqc5b")]
-button_text = "Not Available"
+[node name="LevelSelectionButton" parent="ScrollContainer/VBoxContainer/Park" unique_id=79403450 instance=ExtResource("3_yqc5b")]
+button_text = "Park"
+level_cover_texture = ExtResource("8_n7gn6")
 
 [node name="Level_5" type="Control" parent="ScrollContainer/VBoxContainer" unique_id=870259796]
+visible = false
 layout_mode = 2
 
 [node name="LevelSelectionButton" parent="ScrollContainer/VBoxContainer/Level_5" unique_id=716842579 instance=ExtResource("3_yqc5b")]
