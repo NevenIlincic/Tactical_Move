@@ -28,10 +28,12 @@ func _on_audio_state_changed(is_enabled):
 	var is_muted: bool = not is_enabled
 	set_audio_mute(is_muted)
 func _on_pause_state_changed(is_paused):
-	var tree = Engine.get_main_loop() as SceneTree
-	if tree:
-		tree.paused = is_paused
-		set_audio_mute(is_paused)
+	var level: Level = get_tree().get_first_node_in_group("Level") as Level
+	if level:
+		var pause_menu: PauseMenu = level.pause_menu
+		if not pause_menu.visible:
+			get_tree().paused = is_paused
+	set_audio_mute(is_paused)
 func check_is_game_audio_muted():
 	var is_muted: bool = not Bridge.platform.is_audio_enabled
 	var master_bus_index: int = AudioServer.get_bus_index("Master")
@@ -41,16 +43,12 @@ func set_audio_mute(is_muted: bool):
 	AudioServer.set_bus_mute(master_bus_index, is_muted)
 
 func save_data():
-	Bridge.storage.set({
-	"level": "dungeon_123",
-	"is_tutorial_completed": true,
-	"coins": 42
-	}, Callable(self, "_on_storage_set_completed"))
+	pass
 	
 func load_data():
-	var key: String = "Level_Achievements"
-	Bridge.storage.get(key, Callable(self, "_on_level_achievements_storage_get_completed"))
-
+	var keys: Array[String] = ["Level_Achievements", "Options"]
+	Bridge.storage.get(keys, Callable(self, "_on_storage_get_completed"))
+	
 func delete_data():
 	Bridge.storage.delete("Level_Achievements", Callable(self, "_on_storage_delete_completed"))
 
@@ -59,14 +57,43 @@ func save_level_achievements():
 	var data_to_save: Dictionary = Achievements.achievements
 	var data_json: String = JSON.stringify(data_to_save)
 	Bridge.storage.set(key, data_json, Callable(self, "_on_storage_set_completed"))
+
+func save_option_values():
+	var key: String = "Options"
+	var data_to_save: Dictionary = OptionVariables.option_values
+	var data_json: String = JSON.stringify(data_to_save)
+	Bridge.storage.set(key, data_json, Callable(self, "_on_options_storage_set_completed"))
+
+
 func _on_storage_set_completed(success: bool):
 	pass
 
-func _on_level_achievements_storage_get_completed(success, data):
+func _on_options_storage_set_completed(success: bool):
+	Signals.options_saved.emit()
+
+func _on_storage_get_completed(success, data):
+	if success:
+
+		var json = JSON.new()
+		#ACHIEVEMENTS
+		var parse_result = json.parse(data[0])
+		if parse_result == OK:
+				var achivements_dict: Dictionary = json.data
+				Achievements.achievements = achivements_dict
+		
+		#OPTIONS
+		parse_result = json.parse(data[1])
+		if parse_result == OK:
+			var option_values: Dictionary = json.data
+			OptionVariables.option_values = option_values
+			OptionVariables.set_values()
+		
+func _on_options_storage_get_completed(success, data):
 	if success:
 		if data is String:
 			var json = JSON.new()
 			var parse_result = json.parse(data)
 			if parse_result == OK:
-				var achivements_dict: Dictionary = json.data
-				Achievements.achievements = achivements_dict
+				var options_dict: Dictionary = json.data
+				OptionVariables.option_values = options_dict
+				OptionVariables.set_values()

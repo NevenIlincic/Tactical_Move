@@ -47,3 +47,6 @@ signal player_low_hp_applied(player: Player)
 signal movement_penalty_applied_removed(player: Soldier)
 
 signal dark(points: Array)
+
+#OPTIONS
+signal options_saved()

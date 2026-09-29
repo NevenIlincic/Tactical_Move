@@ -119,6 +119,18 @@ tracks/8/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 1)]
 }
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Save_Options_Button:modulate")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_nkoq7"]
 resource_name = "Tabs_Appear_Animation"
@@ -226,6 +238,18 @@ tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
 "times": PackedFloat32Array(0.5, 0.85),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Save_Options_Button:modulate")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0.6, 0.95),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
@@ -1374,6 +1398,18 @@ layout_mode = 2
 
 [node name="Dummy_10" type="Control" parent="Video_Menu/Inputs_Scroll_Container/GridContainer" unique_id=921909989]
 layout_mode = 2
+
+[node name="Save_Options_Button" parent="." unique_id=1347199976 instance=ExtResource("5_ehegv")]
+position = Vector2(896, 128)
+button_text = "SAVE"
+
+[node name="Options_Saved_Label" type="Label" parent="." unique_id=1040080668]
+visible = false
+offset_left = 968.0
+offset_top = 608.0
+offset_right = 1143.0
+offset_bottom = 629.0
+text = "Options saved successfully"
 
 [connection signal="toggled" from="Tabs/Inputs_Tab_Button/Inputs_Button" to="Tabs/Inputs_Tab_Button" method="_on_inputs_button_toggled"]
 [connection signal="toggled" from="Tabs/Audio_Tab_Button/Inputs_Button" to="Tabs/Audio_Tab_Button" method="_on_inputs_button_toggled"]

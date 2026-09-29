@@ -1,4 +1,4 @@
-extends Node2D
+class_name VideoMenu extends Node2D
 
 @onready var ray_cast_number_input: Control = $Inputs_Scroll_Container/GridContainer/Ray_Cast_Number_Input
 @onready var dummy_8: Control = $Inputs_Scroll_Container/GridContainer/Dummy_8
@@ -14,13 +14,10 @@ extends Node2D
 @onready var edge_iterations_spin_box: SpinBox = $Inputs_Scroll_Container/GridContainer/Edge_Iterations_Number/Edge_Iterations_Spin_Box
 @onready var gun_blast_effect_option_button: OptionButton = $Inputs_Scroll_Container/GridContainer/Gun_Blast_Effect/Gun_Blast_Effect_Option_Button
 
-func _ready() -> void:
-	set_initial_values()
 
 func set_initial_values():
 	var is_advanced_options_visible: bool = true if OptionVariables.vision_type == OptionVariables.VisionType.ADVANCED else false
 	hide_show_advanced_vision_inputs(is_advanced_options_visible)
-	
 	quality_option_button.selected = 0 if get_tree().root.content_scale_mode == Window.CONTENT_SCALE_MODE_CANVAS_ITEMS else 1
 	fps_option_button.selected = 1 if OptionVariables.show_fps else 0
 	max_fps_spin_box.value = 999 if Engine.max_fps == 0 else OptionVariables.fps_limit
@@ -40,10 +37,12 @@ func _on_quality_option_button_item_selected(index: int) -> void:
 	match index:
 		0:
 			get_tree().root.content_scale_mode = Window.CONTENT_SCALE_MODE_CANVAS_ITEMS
+			OptionVariables.option_values["Video"]["quality"] = "NORMAL"
 
 		1:
 			get_tree().root.content_scale_mode = Window.CONTENT_SCALE_MODE_VIEWPORT
-			
+			OptionVariables.option_values["Video"]["quality"] = "WORSE"
+
 func _on_fps_option_button_item_selected(index: int) -> void:
 	match index:
 		0: #OFF

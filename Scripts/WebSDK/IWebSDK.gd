@@ -28,4 +28,6 @@ func load_data();
 @abstract
 func delete_data();
 @abstract 
-func save_level_achievements()
+func save_level_achievements();
+@abstract
+func save_option_values();

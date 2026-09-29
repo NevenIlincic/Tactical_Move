@@ -6,11 +6,20 @@ class_name OptionsMenu extends Node2D
 @onready var inputs_tab_button: TabButton = $Tabs/Inputs_Tab_Button
 @onready var audio_tab_button: TabButton = $Tabs/Audio_Tab_Button
 @onready var video_tab_button: TabButton = $Tabs/Video_Tab_Button
+@onready var options_saved_label: Label = $Options_Saved_Label
 
 #MENUS
 @onready var inputs_menu: Node2D = $Inputs_Menu
 @onready var audio_menu: Node2D = $Audio_Menu
-@onready var video_menu: Node2D = $Video_Menu
+@onready var video_menu: VideoMenu = $Video_Menu
+
+#AUDIO SLIDERS
+@onready var control: AudioSlider = $Audio_Menu/ScrollContainer/VBoxContainer/Control
+@onready var control_2: AudioSlider = $Audio_Menu/ScrollContainer/VBoxContainer/Control2
+@onready var control_3: AudioSlider = $Audio_Menu/ScrollContainer/VBoxContainer/Control3
+@onready var control_4: AudioSlider = $Audio_Menu/ScrollContainer/VBoxContainer/Control4
+
+var audio_sliders: Array[AudioSlider] = []
 
 ####
 var input_remap_manager: InputRemapManager
@@ -26,10 +35,16 @@ func _ready() -> void:
 	
 	connect_to_signals()
 	
+	audio_sliders.append(control)
+	audio_sliders.append(control_2)
+	audio_sliders.append(control_3)
+	audio_sliders.append(control_4)
 func connect_to_signals():
 	inputs_tab_button.inputs_button.pressed.connect(_on_inputs_tab_button_pressed)
 	audio_tab_button.inputs_button.pressed.connect(_on_audio_tab_button_pressed)
 	video_tab_button.inputs_button.pressed.connect(_on_video_tab_button_pressed)
+	Signals.options_saved.connect(_on_options_saved)
+
 func play_appear_animation():
 	visible = true
 	animation_player.play("Tabs_Appear_Animation")
@@ -49,11 +64,21 @@ func _on_audio_tab_button_pressed():
 	inputs_menu.visible = false
 	audio_menu.visible = true
 	video_menu.visible = false
+	for audio_slider: AudioSlider in audio_sliders:
+		audio_slider.set_slider_value()
 func _on_video_tab_button_pressed():
 	inputs_menu.visible = false
 	audio_menu.visible = false
 	video_menu.visible = true
+	video_menu.set_initial_values()
 
 
 func _on_max_fps_spin_box_value_changed(value: float) -> void:
 	pass # Replace with function body.
+
+func _on_options_saved():
+	options_saved_label.visible = true
+	get_tree().create_timer(2.0).timeout.connect(
+		func():
+			options_saved_label.visible = false
+	)
