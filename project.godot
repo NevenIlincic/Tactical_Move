@@ -25,6 +25,8 @@ UpgradeCardsManager="*uid://btrbxuoxaw5kv"
 PlayerSelectionManager="*uid://bmky30kaktiyu"
 OptionVariables="*uid://dy5jstg1ygan6"
 Achievements="*uid://k0vjdu346fql"
+Bridge="*uid://cx4klxojbw6ck"
+Sdk="*uid://d26d4w3hxxwy8"
 
 [display]
 
@@ -34,7 +36,7 @@ window/stretch/aspect="ignore"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/minimize_html_build/plugin.cfg")
+enabled=PackedStringArray("res://addons/playgama_bridge/plugin.cfg")
 
 [gui]
 

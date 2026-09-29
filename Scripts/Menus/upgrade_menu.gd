@@ -15,6 +15,17 @@ func _ready() -> void:
 	Signals.open_upgrade_confirmation_dialog.connect(_on_confirmation_dialog_opened)
 	confirmation_dialog.action_confirmed.connect(_on_action_confirmed)
 	confirmation_dialog.action_canceled.connect(_on_action_canceled)
+	UpgradeCardsManager.upgrade_card_created.connect(_on_upgrade_card_created)
+#func fill_available_cards_grid():
+	#for upgrade_card_id: String in UpgradeCardsManager.available_permanent_upgrades:
+		#var card: UpgradeCard = UpgradeCardsManager.available_permanent_upgrades[upgrade_card_id]
+		#if card.get_parent() == null:
+			#grid_container_available.add_child(card)
+
+func _on_upgrade_card_created(upgrade_card: UpgradeCard):
+	if upgrade_card.get_parent() == null:
+		grid_container_available.add_child(upgrade_card)
+
 func show_upgrade_menu():
 	visible = true
 	for upgrade_card_id: String in UpgradeCardsManager.available_permanent_upgrades:
@@ -25,6 +36,7 @@ func show_upgrade_menu():
 	#fill_applied_upgrades_grid()
 func hide_upgrade_menu():
 	visible = false
+	clear_grid(grid_container_available)
 
 func _on_changed_selected_player(_old_player: Player, _new_player: Player):
 	#clear_grid(grid_container_applied)

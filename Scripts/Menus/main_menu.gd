@@ -27,7 +27,10 @@ func _ready() -> void:
 	level_selection_button.appear_effect_animation_player.play("appear_animation")
 	options_button.appear_effect_animation_player.play("appear_animation")
 	AudioManager.play_background_music(AudioManager.BACKGROUND_MUSIC_MENU_1)
-
+	
+	#SDK
+	Sdk.web_sdk.set_game_ready()
+	
 func connect_to_signals():
 	level_selection_button.transition_to_level_selection_screen.connect(_on_level_selection_button_pressed)
 	level_selection_menu.level_selection_back_button.transition_to_main_screen.connect(_on_main_screen_button_pressed)

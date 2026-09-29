@@ -43,12 +43,13 @@ func check_no_healing_applied():
 func check_are_all_achievements_completed():
 	if level_achievements["unlock_previous_achievements"]:
 		return
-		
+	
+	var is_unlocked: bool = true
 	for key in level_achievements:
 		if key == "unlock_previous_achievements":
-			break
+			continue
 		if not level_achievements[key]:
-			return 
+			is_unlocked = false
 	
-	level_achievements["unlock_previous_achievements"] = true
+	level_achievements["unlock_previous_achievements"] = is_unlocked
 	

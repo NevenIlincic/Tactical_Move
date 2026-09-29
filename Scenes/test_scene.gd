@@ -86,7 +86,8 @@ func _ready() -> void:
 	achievement_manager = AchievementManager.new()
 	achievement_manager.set_level(self)
 	
-	
+	##SDK
+	Sdk.web_sdk.level_started()
 	
 const VISION_POLYGON = preload("uid://bjx1wow4vot1m")
 #@onready var vision_polygons_node: Node2D = $CanvasGroup/Vision_Polygons_Node
@@ -155,6 +156,8 @@ var is_drawing: bool = false
 func _unhandled_input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("pause_menu") and not is_level_completed:
 		pause_menu.show_pause_menu()
+		Sdk.web_sdk.level_paused()
+		
 	if Input.is_action_just_pressed("reset_camera_position"):
 		camera.global_position = camera_start_position_marker.global_position
 		camera._update_color_rect_transform()
@@ -198,6 +201,8 @@ func level_completed():
 	end_game_menu.on_level_completed(self)
 	check_for_achivements()
 	disconnect_from_signals()
+	Sdk.web_sdk.level_completed()
+	Sdk.web_sdk.save_level_achievements()
 	
 func level_failed():
 	player_stats.disconnect_from_signals()
@@ -205,6 +210,7 @@ func level_failed():
 	await start_end_game_timer()
 	end_game_menu.on_level_failed(self)
 	disconnect_from_signals()
+	Sdk.web_sdk.level_failed()
 
 func start_end_game_timer():
 	await get_tree().create_timer(1.0).timeout
@@ -239,3 +245,15 @@ func _on_permanent_upgrade_applied(upgrade_card: UpgradeCard):
 func _on_medic_healing_applied():
 	if not is_healing_applied_once:
 		is_healing_applied_once = true
+
+@onready var upgrade_card_bonus_button: TextureButton = $CanvasLayer/Upgrade_Card_Bonus_Button
+
+func _on_upgrade_card_bonus_button_pressed() -> void:
+	if not upgrade_card_bonus_button.disabled:
+		upgrade_card_bonus_button.disabled = true
+		var dialog_text: String = "Watch an AD in order to get bonus upgrade card?"
+		confirmation_dialog.set_dialog_label_text(dialog_text)
+		confirmation_dialog.visible = true
+		current_confirm_callback = func():
+			#DODATI ZA POZIV REWARDED AD U SDK
+			UpgradeCardsManager.create_upgrade_card()

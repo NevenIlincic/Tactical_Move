@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://xsp0v8p2pc4e" path="res://Scenes/Menu/End_Game_Menu.tscn" id="8_d3u4r"]
 [ext_resource type="PackedScene" uid="uid://diubehftswotg" path="res://Scenes/Menu/Pause_Menu.tscn" id="8_etd3f"]
 [ext_resource type="Script" uid="uid://hdtatee4o2v3" path="res://Scenes/Levels/fps_label.gd" id="10_y1810"]
+[ext_resource type="Texture2D" uid="uid://bpkgac27fftke" path="res://Sprites/Upgrades/upgrade_card_ad_bonus.png" id="11_vkf7a"]
 [ext_resource type="PackedScene" uid="uid://dyh4j30522553" path="res://Scenes/Soldier/Player/Player_Stats.tscn" id="25_wr6c8"]
 [ext_resource type="PackedScene" uid="uid://bmbr4kpa58muf" path="res://Scenes/Menu/Upgrade_Menu.tscn" id="26_u4xmi"]
 [ext_resource type="PackedScene" uid="uid://q6uf7pve5vqm" path="res://Scenes/Dialog/Confirmation_Dialog.tscn" id="27_bvxha"]
@@ -33,6 +34,17 @@ script = ExtResource("34_slepp")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1849002311]
 layer = 99
+
+[node name="Upgrade_Card_Bonus_Button" type="TextureButton" parent="CanvasLayer" unique_id=944463575]
+modulate = Color(1, 1, 1, 0.47843137)
+offset_left = 1096.0
+offset_top = 8.0
+offset_right = 1144.0
+offset_bottom = 72.0
+focus_mode = 0
+texture_normal = ExtResource("11_vkf7a")
+ignore_texture_size = true
+stretch_mode = 0
 
 [node name="PlayerStats" parent="CanvasLayer" unique_id=1324960430 instance=ExtResource("25_wr6c8")]
 visible = false
@@ -114,3 +126,5 @@ color = Color(0.101960786, 0.03529412, 0.08235294, 0.34901962)
 metadata/_edit_use_anchors_ = true
 
 [node name="Vision_Polygons_Node" type="Node2D" parent="CanvasLayer2/CanvasGroup" unique_id=1434571516]
+
+[connection signal="pressed" from="CanvasLayer/Upgrade_Card_Bonus_Button" to="." method="_on_upgrade_card_bonus_button_pressed"]
