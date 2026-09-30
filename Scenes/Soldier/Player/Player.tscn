@@ -4,8 +4,8 @@
 [ext_resource type="Script" uid="uid://kkaaaj6uvi8u" path="res://Scripts/Line/player_path_line.gd" id="2_4wape"]
 [ext_resource type="PackedScene" uid="uid://b4siawy1vgojx" path="res://Scenes/Effects/Gun_Blast_Effect.tscn" id="2_rw7ms"]
 [ext_resource type="Script" uid="uid://c386pr8tx5qep" path="res://Scripts/Soldier/soldier_vision.gd" id="4_t26db"]
-[ext_resource type="Texture2D" uid="uid://cp3f8t70d5twp" path="res://icon.svg" id="4_ude3g"]
 [ext_resource type="Texture2D" uid="uid://uwcsyrtrt75l" path="res://Sprites/Path_Line/New Piskel-1.png - 2026-08-04T161338.290.png" id="5_jmcll"]
+[ext_resource type="Texture2D" uid="uid://t8spdeamj1oa" path="res://Sprites/Soldier/Player/look_at_position_end_marker.png" id="6_cifhn"]
 [ext_resource type="Script" uid="uid://b260cldj7kekv" path="res://Scripts/Line/player_look_at_line.gd" id="7_t26db"]
 [ext_resource type="Texture2D" uid="uid://bldh4qpfu1l23" path="res://Sprites/Soldier/Player/look_at_position.png" id="7_x56g5"]
 [ext_resource type="Texture2D" uid="uid://cynm5bschf8o1" path="res://Sprites/Soldier/Player/move_to_position_marker.png" id="8_0eouq"]
@@ -210,8 +210,8 @@ shape = SubResource("RectangleShape2D_06txj")
 
 [node name="Look_At_Position_Sprite" type="Sprite2D" parent="." unique_id=560975301]
 visible = false
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("4_ude3g")
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("6_cifhn")
 
 [node name="Player_Look_At_Line" type="Line2D" parent="." unique_id=1956234443]
 show_behind_parent = true

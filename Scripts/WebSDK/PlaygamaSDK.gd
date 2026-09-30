@@ -15,8 +15,7 @@ func initialize_sdk():
 func set_language():
 	Bridge.platform.language
 func show_rewarded_ad():
-	var placement = "test_placement"
-	Bridge.advertisement.show_rewarded(placement)
+	Bridge.advertisement.show_rewarded()
 func set_game_ready():
 	Bridge.platform.send_message(Bridge.PlatformMessage.GAME_READY)
 func level_started():
@@ -37,7 +36,8 @@ func _on_pause_state_changed(is_paused):
 	var level: Level = get_tree().get_first_node_in_group("Level") as Level
 	if level:
 		var pause_menu: PauseMenu = level.pause_menu
-		if not pause_menu.visible:
+		var end_game_menu: EndGameMenu = level.end_game_menu
+		if not pause_menu.visible and not end_game_menu.visible:
 			get_tree().paused = is_paused
 	set_audio_mute(is_paused)
 func check_is_game_audio_muted():
@@ -107,8 +107,7 @@ func _on_storage_delete_completed(sucess: bool):
 
 
 func show_interstitial_ad():
-	var placement = "test_placement"
-	Bridge.advertisement.show_interstitial(placement)
+	Bridge.advertisement.show_interstitial()
 
 func _on_interstitial_state_changed(state: String):
 	pass

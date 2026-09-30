@@ -223,7 +223,7 @@ func level_failed():
 	Sdk.web_sdk.level_failed()
 	Sdk.web_sdk.num_tries_before_ad -= 1
 	if Sdk.web_sdk.num_tries_before_ad <= 0:
-		Sdk.web_sdk.num_tries_before_ad = 5
+		Sdk.web_sdk.num_tries_before_ad = 2
 		Sdk.web_sdk.show_interstitial_ad()
 	end_game_menu.on_level_failed(self)
 	disconnect_from_signals()

@@ -6,7 +6,7 @@ signal interstitial_ad_watched()
 
 var is_initialized: bool = false
 var is_ad_block_enabled: bool = true
-var num_tries_before_ad: int = 5
+var num_tries_before_ad: int = 2
 
 @abstract
 func initialize_sdk();
