@@ -5,6 +5,7 @@ func initialize_sdk():
 	Bridge.platform.connect("audio_state_changed", Callable(self, "_on_audio_state_changed"))
 	Bridge.platform.connect("pause_state_changed", Callable(self, "_on_pause_state_changed"))
 	check_is_game_audio_muted()
+	#delete_data()
 	load_data()
 
 func set_language():
@@ -51,6 +52,7 @@ func load_data():
 	
 func delete_data():
 	Bridge.storage.delete("Level_Achievements", Callable(self, "_on_storage_delete_completed"))
+	Bridge.storage.delete("Options", Callable(self, "_on_storage_delete_completed"))
 
 func save_level_achievements():
 	var key: String = "Level_Achievements"
@@ -69,31 +71,33 @@ func _on_storage_set_completed(success: bool):
 	pass
 
 func _on_options_storage_set_completed(success: bool):
-	Signals.options_saved.emit()
-
+	if success:	
+		Signals.options_saved.emit("Options saved successfully")
+	else:
+		Signals.options_saved.emit("Error while saving")
 func _on_storage_get_completed(success, data):
 	if success:
-
-		var json = JSON.new()
-		#ACHIEVEMENTS
-		var parse_result = json.parse(data[0])
-		if parse_result == OK:
-				var achivements_dict: Dictionary = json.data
-				Achievements.achievements = achivements_dict
-		
-		#OPTIONS
-		parse_result = json.parse(data[1])
-		if parse_result == OK:
-			var option_values: Dictionary = json.data
-			OptionVariables.option_values = option_values
-			OptionVariables.set_values()
-		
-func _on_options_storage_get_completed(success, data):
-	if success:
-		if data is String:
+		if data != null:
 			var json = JSON.new()
-			var parse_result = json.parse(data)
-			if parse_result == OK:
-				var options_dict: Dictionary = json.data
-				OptionVariables.option_values = options_dict
-				OptionVariables.set_values()
+			#ACHIEVEMENTS
+			if data[0] == null:
+				save_level_achievements()
+			else:
+				var parse_result = json.parse(data[0])
+				if parse_result == OK:
+						var achivements_dict: Dictionary = json.data
+						Achievements.achievements = achivements_dict
+			
+			#OPTIONS
+			if data[1] == null:
+				save_option_values()
+			else:
+				var parse_result = json.parse(data[1])
+				if parse_result == OK:
+					var option_values: Dictionary = json.data
+					OptionVariables.option_values = option_values
+					OptionVariables.set_values()
+					print(OptionVariables.option_values)
+
+func _on_storage_delete_completed(sucess: bool):
+	pass

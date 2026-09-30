@@ -65,12 +65,34 @@ var option_values: Dictionary = {
 			"ray_count": ray_count,
 			"edge_precision_iterations": edge_precision_iterations,
 			"blast_effect_enabled": is_blast_effect_enabled
-			}
+			},
+	"Inputs": {
+			"move_confirm": "Space",
+			"drawing": "Shift",
+			"reset_path": "Q",
+			"rotate_player": "RMB",
+			"reset_look_at_path": "W",
+			"rotate_player_after_move": "Z",
+			"reset_rotate_player_after_move": "X",
+			"camera_drag": "Ctrl",
+			"upgrade_menu": 3,
+			"popup": "P",
+			"healing": "H",
+			"zoom_camera_in": "MOUSE WHEEL UP",
+			"zoom_camera_out": "MOUSE WHEEL DOWN",
+			"switch_to_preparation_state": 1,
+			"switch_to_move_state": 2,
+			"pause_menu": "Escape",
+			"reset_camera_position": "MMB",
+			"next_tutorial_step": "Enter",
+			"select_player": "LMB"
+	}
 }
 
 func set_values():
 	_set_audio_values()
 	_set_video_values()
+	_set_input_values()
 
 func _set_audio_values():
 	for audio_bus: String in option_values["Audio"].keys():
@@ -81,8 +103,14 @@ func _set_audio_values():
 		AudioServer.set_bus_volume_db(bus_index, db_value)
 		AudioServer.set_bus_mute(bus_index, linear_value == 0)
 
+func _set_input_values():
+	var input_values: Dictionary = option_values["Inputs"]
+	register_custom_inputs(input_values)
+
+
 func _set_video_values():
 	var video_values: Dictionary = option_values["Video"]
+	var input_values: Dictionary = option_values["Inputs"]
 	if video_values["quality"] == "NORMAL":
 		get_tree().root.content_scale_mode = Window.CONTENT_SCALE_MODE_CANVAS_ITEMS
 	else:
@@ -94,3 +122,64 @@ func _set_video_values():
 	ray_count = video_values["ray_count"]
 	edge_precision_iterations = video_values["edge_precision_iterations"]
 	is_blast_effect_enabled = video_values["blast_effect_enabled"]
+func register_custom_inputs(data: Dictionary) -> void:
+	for action_name in data:
+		var raw_value = data[action_name]
+		if not InputMap.has_action(action_name):
+			InputMap.add_action(action_name)
+		else:
+			InputMap.action_erase_events(action_name)
+		
+		if raw_value is String and raw_value == "":
+			return
+		
+		var event: InputEvent = create_input_event(raw_value)
+		
+		if event:
+			InputMap.action_add_event(action_name, event)
+
+func create_input_event(value) -> InputEvent:
+	if typeof(value) == TYPE_STRING:
+		var val_upper = value.strip_edges().to_upper()
+		match val_upper:
+			"LMB":
+				var mb = InputEventMouseButton.new()
+				mb.button_index = MOUSE_BUTTON_LEFT
+				return mb
+			"RMB":
+				var mb = InputEventMouseButton.new()
+				mb.button_index = MOUSE_BUTTON_RIGHT
+				return mb
+			"MMB":
+				var mb = InputEventMouseButton.new()
+				mb.button_index = MOUSE_BUTTON_MIDDLE
+				return mb
+			"MOUSE WHEEL UP":
+				var mb = InputEventMouseButton.new()
+				mb.button_index = MOUSE_BUTTON_WHEEL_UP
+				return mb
+			"MOUSE WHEEL DOWN":
+				var mb = InputEventMouseButton.new()
+				mb.button_index = MOUSE_BUTTON_WHEEL_DOWN
+				return mb
+
+		var keycode = OS.find_keycode_from_string(value)
+		if keycode != KEY_NONE:
+			var key_event = InputEventKey.new()
+			key_event.keycode = keycode
+			return key_event
+
+	elif typeof(value) == TYPE_INT or typeof(value) == TYPE_FLOAT:
+		var key_event = InputEventKey.new()
+		key_event.keycode = OS.find_keycode_from_string(str(int(value)))
+		return key_event
+
+	push_error("Failed to parse input value: %s" % str(value))
+	return null
+
+func check_key_exists(action: String, value: String):
+	for key in option_values["Inputs"].keys():
+		if key == action:
+			continue
+		if str(int(option_values["Inputs"][key])) == value:
+			option_values["Inputs"][key] = ""

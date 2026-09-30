@@ -12,7 +12,8 @@ func _unhandled_input(event: InputEvent) -> void:
 			var action_text: String = get_action_bind_key(activated_button.action)
 			activated_button.text = action_text
 			input_key_changed.emit(activated_button.id, action_text)
-			
+			OptionVariables.option_values["Inputs"][activated_button.action] = action_text
+			OptionVariables.check_key_exists(activated_button.action, action_text)
 			activated_button = null
 			
 func start_input_remap(button: InputButton):

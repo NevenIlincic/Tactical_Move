@@ -21,6 +21,7 @@ func hide_pause_menu():
 	retry_button.visible = false
 func show_pause_menu():
 	get_tree().paused = true
+	options_menu._on_inputs_tab_button_pressed()
 	visible = true
 	options_menu.play_appear_animation()
 

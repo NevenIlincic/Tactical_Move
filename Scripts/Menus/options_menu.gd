@@ -32,7 +32,6 @@ func _ready() -> void:
 	for button: InputButton in input_buttons:
 		button.set_input_remap_manager(input_remap_manager)
 		input_remap_manager.input_key_changed.connect(button.check_is_same_action_key_bind)
-	
 	connect_to_signals()
 	
 	audio_sliders.append(control)
@@ -60,6 +59,8 @@ func _on_inputs_tab_button_pressed():
 	inputs_menu.visible = true
 	audio_menu.visible = false
 	video_menu.visible = false
+	for button: InputButton in input_buttons:
+		button.get_action_bind_key()
 func _on_audio_tab_button_pressed():
 	inputs_menu.visible = false
 	audio_menu.visible = true
@@ -73,10 +74,8 @@ func _on_video_tab_button_pressed():
 	video_menu.set_initial_values()
 
 
-func _on_max_fps_spin_box_value_changed(value: float) -> void:
-	pass # Replace with function body.
-
-func _on_options_saved():
+func _on_options_saved(message: String):
+	options_saved_label.text = message
 	options_saved_label.visible = true
 	get_tree().create_timer(2.0).timeout.connect(
 		func():
