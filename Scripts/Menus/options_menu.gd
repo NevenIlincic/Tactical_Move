@@ -20,7 +20,7 @@ class_name OptionsMenu extends Node2D
 @onready var control_4: AudioSlider = $Audio_Menu/ScrollContainer/VBoxContainer/Control4
 
 var audio_sliders: Array[AudioSlider] = []
-
+var current_tab_opened: String = "INPUTS_TAB"
 ####
 var input_remap_manager: InputRemapManager
 var input_buttons: Array
@@ -56,18 +56,21 @@ func _unhandled_input(event: InputEvent) -> void:
 	input_remap_manager._unhandled_input(event)
 
 func _on_inputs_tab_button_pressed():
+	current_tab_opened = "INPUTS_TAB"
 	inputs_menu.visible = true
 	audio_menu.visible = false
 	video_menu.visible = false
 	for button: InputButton in input_buttons:
 		button.get_action_bind_key()
 func _on_audio_tab_button_pressed():
+	current_tab_opened = "AUDIO_TAB"
 	inputs_menu.visible = false
 	audio_menu.visible = true
 	video_menu.visible = false
 	for audio_slider: AudioSlider in audio_sliders:
 		audio_slider.set_slider_value()
 func _on_video_tab_button_pressed():
+	current_tab_opened = "VIDEO_TAB"
 	inputs_menu.visible = false
 	audio_menu.visible = false
 	video_menu.visible = true
@@ -81,3 +84,11 @@ func _on_options_saved(message: String):
 		func():
 			options_saved_label.visible = false
 	)
+
+func check_tab_to_open():
+	if current_tab_opened == "INPUTS_TAB":
+		_on_inputs_tab_button_pressed()
+	elif current_tab_opened == "AUDIO_TAB":
+		_on_audio_tab_button_pressed()
+	else:
+		_on_video_tab_button_pressed()

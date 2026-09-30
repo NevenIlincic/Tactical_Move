@@ -119,18 +119,6 @@ tracks/8/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 1)]
 }
-tracks/9/type = "value"
-tracks/9/imported = false
-tracks/9/enabled = true
-tracks/9/path = NodePath("Save_Options_Button:modulate")
-tracks/9/interp = 1
-tracks/9/loop_wrap = true
-tracks/9/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
 
 [sub_resource type="Animation" id="Animation_nkoq7"]
 resource_name = "Tabs_Appear_Animation"
@@ -298,6 +286,7 @@ script = ExtResource("1_pobh7")
 libraries/ = SubResource("AnimationLibrary_av6u3")
 
 [node name="Inputs_Menu" type="Node2D" parent="." unique_id=1996078480]
+visible = false
 modulate = Color(1, 1, 1, 0)
 position = Vector2(31, 96)
 

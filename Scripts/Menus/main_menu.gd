@@ -42,7 +42,7 @@ func _process(delta: float) -> void:
 	pass
 
 func _on_options_button_pressed():
-	options_menu._on_inputs_tab_button_pressed()
+	options_menu.check_tab_to_open()
 	var tween: Tween = create_tween()
 	tween.tween_property(camera, "global_position", option_camera_position.global_position, 0.4)
 	tween.finished.connect(func():

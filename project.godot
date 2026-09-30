@@ -17,15 +17,15 @@ config/icon="uid://gvmk7pgk7mlc"
 
 [autoload]
 
-Signals="*uid://bsc3uuw8qrlyh"
+Bridge="*uid://cx4klxojbw6ck"
 UpgradeManager="*uid://d1do4d5se6p6a"
+Signals="*uid://bsc3uuw8qrlyh"
 VisionManager="*uid://ew73ulpjh61n"
 AudioManager="*uid://8gvgwh77kxfw"
 UpgradeCardsManager="*uid://btrbxuoxaw5kv"
 PlayerSelectionManager="*uid://bmky30kaktiyu"
 OptionVariables="*uid://dy5jstg1ygan6"
 Achievements="*uid://k0vjdu346fql"
-Bridge="*uid://cx4klxojbw6ck"
 Sdk="*uid://d26d4w3hxxwy8"
 
 [display]
