@@ -1,12 +1,19 @@
 @abstract
 class_name IWebSDK extends Node
 
+signal rewarded_ad_watched()
+signal interstitial_ad_watched()
+
 var is_initialized: bool = false
+var is_ad_block_enabled: bool = true
+var num_tries_before_ad: int = 5
 
 @abstract
 func initialize_sdk();
 @abstract
 func show_rewarded_ad();
+@abstract
+func show_interstitial_ad();
 @abstract
 func set_language();
 @abstract

@@ -2,8 +2,12 @@ class_name PlaygamaSDK extends IWebSDK
 
 func initialize_sdk():
 	is_initialized = true
+	Bridge.advertisement.set_minimum_delay_between_interstitial(30)
 	Bridge.platform.connect("audio_state_changed", Callable(self, "_on_audio_state_changed"))
 	Bridge.platform.connect("pause_state_changed", Callable(self, "_on_pause_state_changed"))
+	Bridge.advertisement.connect("interstitial_state_changed", Callable(self, "_on_interstitial_state_changed"))
+	Bridge.advertisement.connect("rewarded_state_changed", Callable(self, "_on_rewarded_state_changed"))
+	Bridge.advertisement.check_adblock(Callable(self, "_on_check_adblock_completed"))
 	check_is_game_audio_muted()
 	#delete_data()
 	load_data()
@@ -11,7 +15,8 @@ func initialize_sdk():
 func set_language():
 	Bridge.platform.language
 func show_rewarded_ad():
-	pass
+	var placement = "test_placement"
+	Bridge.advertisement.show_rewarded(placement)
 func set_game_ready():
 	Bridge.platform.send_message(Bridge.PlatformMessage.GAME_READY)
 func level_started():
@@ -51,8 +56,7 @@ func load_data():
 	Bridge.storage.get(keys, Callable(self, "_on_storage_get_completed"))
 	
 func delete_data():
-	Bridge.storage.delete("Level_Achievements", Callable(self, "_on_storage_delete_completed"))
-	Bridge.storage.delete("Options", Callable(self, "_on_storage_delete_completed"))
+	Bridge.storage.delete(["Level_Achievements", "Options"], Callable(self, "_on_storage_delete_completed"))
 
 func save_level_achievements():
 	var key: String = "Level_Achievements"
@@ -97,7 +101,23 @@ func _on_storage_get_completed(success, data):
 					var option_values: Dictionary = json.data
 					OptionVariables.option_values = option_values
 					OptionVariables.set_values()
-					print(OptionVariables.option_values)
 
 func _on_storage_delete_completed(sucess: bool):
 	pass
+
+
+func show_interstitial_ad():
+	var placement = "test_placement"
+	Bridge.advertisement.show_interstitial(placement)
+
+func _on_interstitial_state_changed(state: String):
+	pass
+
+func _on_rewarded_state_changed(state: String):
+	match state:
+		"rewarded":
+			UpgradeCardsManager.create_upgrade_card()
+			rewarded_ad_watched.emit()
+			
+func _on_check_adblock_completed(result: bool):
+	is_ad_block_enabled = result

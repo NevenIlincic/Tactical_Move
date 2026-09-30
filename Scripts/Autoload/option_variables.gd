@@ -123,15 +123,14 @@ func _set_video_values():
 	edge_precision_iterations = video_values["edge_precision_iterations"]
 	is_blast_effect_enabled = video_values["blast_effect_enabled"]
 func register_custom_inputs(data: Dictionary) -> void:
-	for action_name in data:
+	for action_name in data.keys():
 		var raw_value = data[action_name]
+		if raw_value is String and raw_value == "":
+			continue
 		if not InputMap.has_action(action_name):
 			InputMap.add_action(action_name)
 		else:
 			InputMap.action_erase_events(action_name)
-		
-		if raw_value is String and raw_value == "":
-			return
 		
 		var event: InputEvent = create_input_event(raw_value)
 		

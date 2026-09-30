@@ -56,5 +56,5 @@ func return_achivement_base_text(achievement: String) -> String:
 		"use_no_heal":
 			base_text = "Don't use medic healing"
 		"unlock_previous_achievements":
-			base_text = "Unlock all previous achievements"
+			base_text = "Unlock all other achievements"
 	return base_text

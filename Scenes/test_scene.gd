@@ -55,6 +55,8 @@ var current_confirm_callback: Callable
 @onready var fps_label: FPSLabel = $CanvasLayer/FPS_Label
 
 var achievement_manager: AchievementManager
+enum DialogType { NONE, UPGRADE, REWARDED_AD }
+var current_dialog_type: DialogType = DialogType.NONE
 
 func _ready() -> void:
 	UpgradeCardsManager.clear_available_permanent_upgrades()
@@ -88,6 +90,8 @@ func _ready() -> void:
 	
 	##SDK
 	Sdk.web_sdk.level_started()
+	if Sdk.web_sdk.is_ad_block_enabled:
+		upgrade_card_bonus_button.disabled = true
 	
 const VISION_POLYGON = preload("uid://bjx1wow4vot1m")
 #@onready var vision_polygons_node: Node2D = $CanvasGroup/Vision_Polygons_Node
@@ -148,6 +152,9 @@ func connect_to_signals():
 	confirmation_dialog.action_confirmed.connect(_on_action_confirmed)
 	confirmation_dialog.action_canceled.connect(_on_action_canceled)
 	Signals.permanent_upgrade_applied.connect(_on_permanent_upgrade_applied)
+	
+	Sdk.web_sdk.rewarded_ad_watched.connect(_on_rewarded_ad_watched)
+	Sdk.web_sdk.interstitial_ad_watched.connect(_on_interstitial_ad_watched)
 @onready var path_line: Line2D = $Path_Line
 var start_tile: Vector2i = Vector2i(0,0)
 
@@ -191,6 +198,10 @@ func _on_action_confirmed():
 		current_confirm_callback = Callable()
 	confirmation_dialog.visible = false
 func _on_action_canceled():
+	if current_dialog_type == DialogType.REWARDED_AD:
+		upgrade_card_bonus_button.disabled = false
+		current_dialog_type = DialogType.NONE
+		
 	current_confirm_callback = Callable()
 	confirmation_dialog.visible = false
 
@@ -198,19 +209,24 @@ func level_completed():
 	player_stats.disconnect_from_signals()
 	is_level_completed = true
 	await start_end_game_timer()
-	end_game_menu.on_level_completed(self)
 	check_for_achivements()
-	disconnect_from_signals()
 	Sdk.web_sdk.level_completed()
 	Sdk.web_sdk.save_level_achievements()
+	Sdk.web_sdk.show_interstitial_ad()
+	end_game_menu.on_level_completed(self)
+	disconnect_from_signals()
 	
 func level_failed():
 	player_stats.disconnect_from_signals()
 	is_level_completed = true
 	await start_end_game_timer()
+	Sdk.web_sdk.level_failed()
+	Sdk.web_sdk.num_tries_before_ad -= 1
+	if Sdk.web_sdk.num_tries_before_ad <= 0:
+		Sdk.web_sdk.num_tries_before_ad = 5
+		Sdk.web_sdk.show_interstitial_ad()
 	end_game_menu.on_level_failed(self)
 	disconnect_from_signals()
-	Sdk.web_sdk.level_failed()
 
 func start_end_game_timer():
 	await get_tree().create_timer(1.0).timeout
@@ -250,10 +266,18 @@ func _on_medic_healing_applied():
 
 func _on_upgrade_card_bonus_button_pressed() -> void:
 	if not upgrade_card_bonus_button.disabled:
+		current_dialog_type = DialogType.REWARDED_AD
 		upgrade_card_bonus_button.disabled = true
 		var dialog_text: String = "Watch an AD in order to get bonus upgrade card?"
 		confirmation_dialog.set_dialog_label_text(dialog_text)
 		confirmation_dialog.visible = true
 		current_confirm_callback = func():
-			#DODATI ZA POZIV REWARDED AD U SDK
-			UpgradeCardsManager.create_upgrade_card()
+			Sdk.web_sdk.show_rewarded_ad()
+	
+func _on_rewarded_ad_watched():
+	if not Sdk.web_sdk.is_ad_block_enabled:
+		upgrade_card_bonus_button.disabled = false
+	current_dialog_type = DialogType.NONE
+
+func _on_interstitial_ad_watched():
+	pass
