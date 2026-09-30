@@ -117,6 +117,8 @@ func _on_rewarded_state_changed(state: String):
 		"rewarded":
 			UpgradeCardsManager.create_upgrade_card()
 			rewarded_ad_watched.emit()
+		"closed":
+			rewarded_ad_closed_early.emit()
 			
 func _on_check_adblock_completed(result: bool):
 	is_ad_block_enabled = result

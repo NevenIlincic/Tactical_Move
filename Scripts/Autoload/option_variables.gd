@@ -90,7 +90,8 @@ var option_values: Dictionary = {
 }
 
 func set_values():
-	_set_audio_values()
+	if Bridge.platform.is_audio_enabled:
+		_set_audio_values()
 	_set_video_values()
 	_set_input_values()
 

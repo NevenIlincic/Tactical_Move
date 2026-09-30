@@ -154,6 +154,7 @@ func connect_to_signals():
 	Signals.permanent_upgrade_applied.connect(_on_permanent_upgrade_applied)
 	
 	Sdk.web_sdk.rewarded_ad_watched.connect(_on_rewarded_ad_watched)
+	Sdk.web_sdk.rewarded_ad_closed_early.connect(_on_rewarded_ad_closed_early)
 	Sdk.web_sdk.interstitial_ad_watched.connect(_on_interstitial_ad_watched)
 @onready var path_line: Line2D = $Path_Line
 var start_tile: Vector2i = Vector2i(0,0)
@@ -275,6 +276,11 @@ func _on_upgrade_card_bonus_button_pressed() -> void:
 			Sdk.web_sdk.show_rewarded_ad()
 	
 func _on_rewarded_ad_watched():
+	if not Sdk.web_sdk.is_ad_block_enabled:
+		upgrade_card_bonus_button.disabled = false
+	current_dialog_type = DialogType.NONE
+
+func _on_rewarded_ad_closed_early():
 	if not Sdk.web_sdk.is_ad_block_enabled:
 		upgrade_card_bonus_button.disabled = false
 	current_dialog_type = DialogType.NONE

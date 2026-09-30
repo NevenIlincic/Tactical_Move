@@ -31,7 +31,8 @@ func _on_slider_drag_ended(has_value_changed: bool):
 		var linear_value: float = slider.value / 100.0
 		var db_value: float = linear_to_db(linear_value)
 		
-		AudioServer.set_bus_volume_db(bus_index, db_value)
-		AudioServer.set_bus_mute(bus_index, linear_value == 0)
+		if Sdk.web_sdk.is_initialized and Bridge.platform.is_audio_enabled:
+			AudioServer.set_bus_volume_db(bus_index, db_value)
+			AudioServer.set_bus_mute(bus_index, linear_value == 0)
 		
 		OptionVariables.option_values["Audio"][bus_name] = slider.value

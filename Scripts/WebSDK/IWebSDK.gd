@@ -2,6 +2,7 @@
 class_name IWebSDK extends Node
 
 signal rewarded_ad_watched()
+signal rewarded_ad_closed_early()
 signal interstitial_ad_watched()
 
 var is_initialized: bool = false
