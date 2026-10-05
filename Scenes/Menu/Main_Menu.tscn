@@ -184,7 +184,3 @@ blend_mode = 2
 shadow_enabled = true
 texture = ExtResource("10_hj5rx")
 texture_scale = 1.41
-
-[node name="Quit_Button" parent="." unique_id=407185381 instance=ExtResource("15_4cq6o")]
-position = Vector2(896, 568)
-button_text = "QUIT"

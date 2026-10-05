@@ -426,7 +426,7 @@ script = ExtResource("16_4itsr")
 base_value = 200.0
 metadata/_custom_type_script = "uid://bencr8mnns7ut"
 
-[sub_resource type="Resource" id="Resource_4itsr"]
+[sub_resource type="Resource" id="Resource_h6h5q"]
 resource_local_to_scene = true
 script = ExtResource("17_h5hos")
 speed = SubResource("Resource_xq73l")
@@ -435,7 +435,7 @@ max_travel_distance = SubResource("Resource_stuxa")
 MAX_HP = SubResource("Resource_sf78t")
 metadata/_custom_type_script = "uid://cp4iog725gtuq"
 
-[sub_resource type="Resource" id="Resource_h5hos"]
+[sub_resource type="Resource" id="Resource_j5vlj"]
 resource_local_to_scene = true
 script = ExtResource("17_h5hos")
 speed = SubResource("Resource_xq73l")
@@ -444,7 +444,7 @@ max_travel_distance = SubResource("Resource_stuxa")
 MAX_HP = SubResource("Resource_sf78t")
 metadata/_custom_type_script = "uid://cp4iog725gtuq"
 
-[sub_resource type="Resource" id="Resource_oqkbo"]
+[sub_resource type="Resource" id="Resource_nb5qh"]
 resource_local_to_scene = true
 script = ExtResource("17_h5hos")
 speed = SubResource("Resource_xq73l")
@@ -919,17 +919,17 @@ rotation = 1.5707964
 [node name="Enemy" parent="." index="4" unique_id=1440065138 instance=ExtResource("15_qpldm")]
 position = Vector2(-288, 360)
 rotation = 1.652506
-soldier_stats = SubResource("Resource_4itsr")
+soldier_stats = SubResource("Resource_h6h5q")
 
 [node name="Enemy2" parent="." index="5" unique_id=1671743338 instance=ExtResource("15_qpldm")]
 position = Vector2(-288, 647.99994)
 rotation = -2.1114616
-soldier_stats = SubResource("Resource_h5hos")
+soldier_stats = SubResource("Resource_j5vlj")
 
 [node name="Enemy3" parent="." index="6" unique_id=315076816 instance=ExtResource("15_qpldm")]
 position = Vector2(144, 408)
 rotation = 2.1874497
-soldier_stats = SubResource("Resource_oqkbo")
+soldier_stats = SubResource("Resource_nb5qh")
 
 [node name="Camera_Start_Position_Marker" parent="." index="9" unique_id=816834425]
 position = Vector2(-577, 419)
