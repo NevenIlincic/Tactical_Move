@@ -292,3 +292,10 @@ func _on_rewarded_ad_closed_early():
 
 func _on_interstitial_ad_watched():
 	pass
+
+@onready var scroll_container: ScrollContainer = $CanvasLayer/ScrollContainer
+@onready var controller_button: TextureButton = $CanvasLayer/Controller_Button
+
+func _on_controller_button_pressed() -> void:
+	scroll_container.visible = !scroll_container.visible
+	controller_button.release_focus()

@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://diubehftswotg" path="res://Scenes/Menu/Pause_Menu.tscn" id="8_etd3f"]
 [ext_resource type="Script" uid="uid://hdtatee4o2v3" path="res://Scenes/Levels/fps_label.gd" id="10_y1810"]
 [ext_resource type="Texture2D" uid="uid://bpkgac27fftke" path="res://Sprites/Upgrades/upgrade_card_ad_bonus.png" id="11_vkf7a"]
+[ext_resource type="PackedScene" uid="uid://sle28fdvjlhu" path="res://Scenes/Labels/Tutorial_Button_Label.tscn" id="13_3jhef"]
+[ext_resource type="Texture2D" uid="uid://dwu8ehdbn2lax" path="res://Sprites/HUD/controller_icon.png" id="14_flwvg"]
 [ext_resource type="PackedScene" uid="uid://dyh4j30522553" path="res://Scenes/Soldier/Player/Player_Stats.tscn" id="25_wr6c8"]
 [ext_resource type="PackedScene" uid="uid://bmbr4kpa58muf" path="res://Scenes/Menu/Upgrade_Menu.tscn" id="26_u4xmi"]
 [ext_resource type="PackedScene" uid="uid://q6uf7pve5vqm" path="res://Scenes/Dialog/Confirmation_Dialog.tscn" id="27_bvxha"]
@@ -114,6 +116,126 @@ offset_right = 1089.0
 offset_bottom = 29.0
 text = "Upgrade card added to upgrade menu"
 
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer" unique_id=594881798]
+visible = false
+offset_left = 808.0
+offset_top = 88.0
+offset_right = 1144.0
+offset_bottom = 576.0
+focus_behavior_recursive = 1
+
+[node name="Controls" type="VBoxContainer" parent="CanvasLayer/ScrollContainer" unique_id=358194993]
+layout_mode = 2
+theme_override_constants/separation = 100
+
+[node name="Control" type="Control" parent="CanvasLayer/ScrollContainer/Controls" unique_id=479276486]
+layout_mode = 2
+
+[node name="Draw_Path" parent="CanvasLayer/ScrollContainer/Controls/Control" unique_id=1600195212 instance=ExtResource("13_3jhef")]
+key_action = "drawing"
+dialog_text = "DRAW PATH"
+appearing_order = -1
+
+[node name="Control8" type="Control" parent="CanvasLayer/ScrollContainer/Controls" unique_id=1743805122]
+layout_mode = 2
+
+[node name="Delete_Path" parent="CanvasLayer/ScrollContainer/Controls/Control8" unique_id=423940623 instance=ExtResource("13_3jhef")]
+key_action = "reset_path"
+dialog_text = "DELETE PATH"
+appearing_order = -1
+
+[node name="Control2" type="Control" parent="CanvasLayer/ScrollContainer/Controls" unique_id=12739427]
+layout_mode = 2
+
+[node name="Rotate_After_Move" parent="CanvasLayer/ScrollContainer/Controls/Control2" unique_id=1184265391 instance=ExtResource("13_3jhef")]
+key_action = "rotate_player_after_move"
+dialog_text = "SOLDIER's DIRECTION (AFTER MOVE)"
+appearing_order = -1
+
+[node name="Control10" type="Control" parent="CanvasLayer/ScrollContainer/Controls" unique_id=1679633829]
+layout_mode = 2
+
+[node name="Reset_Point_After_Move" parent="CanvasLayer/ScrollContainer/Controls/Control10" unique_id=927081975 instance=ExtResource("13_3jhef")]
+key_action = "reset_rotate_player_after_move"
+dialog_text = "DELETE SOLDIER's DIRECTION (AFTER MOVE)"
+appearing_order = -1
+
+[node name="Control3" type="Control" parent="CanvasLayer/ScrollContainer/Controls" unique_id=1061604955]
+layout_mode = 2
+
+[node name="Rotate_While_Moving" parent="CanvasLayer/ScrollContainer/Controls/Control3" unique_id=2098949845 instance=ExtResource("13_3jhef")]
+key_action = "rotate_player"
+dialog_text = "SET POINT TO LOOK"
+appearing_order = -1
+
+[node name="Control9" type="Control" parent="CanvasLayer/ScrollContainer/Controls" unique_id=2065042897]
+layout_mode = 2
+
+[node name="Reset_Point_To_Look" parent="CanvasLayer/ScrollContainer/Controls/Control9" unique_id=668994478 instance=ExtResource("13_3jhef")]
+key_action = "reset_look_at_path"
+dialog_text = "RESET POINT TO LOOK"
+appearing_order = -1
+
+[node name="Control4" type="Control" parent="CanvasLayer/ScrollContainer/Controls" unique_id=1611094530]
+layout_mode = 2
+
+[node name="Action" parent="CanvasLayer/ScrollContainer/Controls/Control4" unique_id=693377339 instance=ExtResource("13_3jhef")]
+key_action = "move_confirm"
+dialog_text = "START ACTION"
+appearing_order = -1
+
+[node name="Control12" type="Control" parent="CanvasLayer/ScrollContainer/Controls" unique_id=94812951]
+layout_mode = 2
+
+[node name="Observation_State" parent="CanvasLayer/ScrollContainer/Controls/Control12" unique_id=228485147 instance=ExtResource("13_3jhef")]
+key_action = "switch_to_preparation_state"
+dialog_text = "OBSERVATION STATE"
+appearing_order = -1
+
+[node name="Control13" type="Control" parent="CanvasLayer/ScrollContainer/Controls" unique_id=1395510131]
+layout_mode = 2
+
+[node name="Move_State" parent="CanvasLayer/ScrollContainer/Controls/Control13" unique_id=356219475 instance=ExtResource("13_3jhef")]
+key_action = "switch_to_move_state"
+dialog_text = "MOVE STATE"
+appearing_order = -1
+
+[node name="Control5" type="Control" parent="CanvasLayer/ScrollContainer/Controls" unique_id=1827960842]
+layout_mode = 2
+
+[node name="Upgrade_Menu" parent="CanvasLayer/ScrollContainer/Controls/Control5" unique_id=1101915752 instance=ExtResource("13_3jhef")]
+key_action = "upgrade_menu"
+dialog_text = "UPGRADE MENU"
+appearing_order = -1
+
+[node name="Control6" type="Control" parent="CanvasLayer/ScrollContainer/Controls" unique_id=1987001963]
+layout_mode = 2
+
+[node name="Strategy_Menu" parent="CanvasLayer/ScrollContainer/Controls/Control6" unique_id=1264617302 instance=ExtResource("13_3jhef")]
+key_action = "popup"
+dialog_text = "STRATEGY MENU"
+appearing_order = -1
+
+[node name="Control11" type="Control" parent="CanvasLayer/ScrollContainer/Controls" unique_id=1658964129]
+layout_mode = 2
+
+[node name="Healing" parent="CanvasLayer/ScrollContainer/Controls/Control11" unique_id=179735943 instance=ExtResource("13_3jhef")]
+key_action = "healing"
+dialog_text = "TOGGLE HEALING"
+appearing_order = -1
+
+[node name="Control7" type="Control" parent="CanvasLayer/ScrollContainer/Controls" unique_id=884021889]
+layout_mode = 2
+
+[node name="Controller_Button" type="TextureButton" parent="CanvasLayer" unique_id=424929178]
+offset_left = 1088.0
+offset_top = 584.0
+offset_right = 1136.0
+offset_bottom = 632.0
+texture_normal = ExtResource("14_flwvg")
+ignore_texture_size = true
+stretch_mode = 0
+
 [node name="CanvasLayer2" type="CanvasLayer" parent="." unique_id=1842855312]
 follow_viewport_enabled = true
 
@@ -140,3 +262,4 @@ metadata/_edit_use_anchors_ = true
 [node name="Vision_Polygons_Node" type="Node2D" parent="CanvasLayer2/CanvasGroup" unique_id=1434571516]
 
 [connection signal="pressed" from="CanvasLayer/Upgrade_Card_Bonus_Button" to="." method="_on_upgrade_card_bonus_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Controller_Button" to="." method="_on_controller_button_pressed"]
