@@ -106,6 +106,14 @@ theme_override_font_sizes/font_size = 32
 text = "FPS:"
 script = ExtResource("10_y1810")
 
+[node name="Rewarded_Upgrade_Card_Label" type="Label" parent="CanvasLayer" unique_id=1452812267]
+visible = false
+offset_left = 840.0
+offset_top = 8.0
+offset_right = 1089.0
+offset_bottom = 29.0
+text = "Upgrade card added to upgrade menu"
+
 [node name="CanvasLayer2" type="CanvasLayer" parent="." unique_id=1842855312]
 follow_viewport_enabled = true
 

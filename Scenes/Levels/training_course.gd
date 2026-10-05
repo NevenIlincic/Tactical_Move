@@ -7,8 +7,29 @@ class_name TrainingCourseLevel extends Level
 var tutorial_labels: Array
 var tutorial_label_appearing_order: int = 0
 
+@onready var animation_sprite: AnimatedSprite2D = $CanvasLayer/Animation_Sprite
+@onready var video_background_rect: ColorRect = $CanvasLayer/Video_Background_Rect
+
+var tutorial_animations: Dictionary = {
+	0: "camera_drag",
+	1: "camera_zoom_in",
+	2: "camera_zoom_out",
+	3: "camera_reset_position",
+	4: "select_soldier",
+	6: "draw_path",
+	7: "look_after_move",
+	8: "look_while_moving",
+	9: "reset_point_while_moving",
+	10: "reset_point_after_move",
+	11: "reset_path",
+	12: "open_strategy_menu",
+	13: "toggle_healing",
+	14: "open_upgrade_menu"
+}
+
 func _ready() -> void:
 	super._ready()
+	animation_sprite.play(tutorial_animations[tutorial_label_appearing_order])
 	for tutorial_label: TutorialTextDialog in tutorial_labels_group.get_children():
 		tutorial_label.key_action_released.connect(_on_tutorial_button_pressed.bind(tutorial_label))
 		#tutorial_label.key_action_released.connect(_on_tutorial_button_pressed.bind(tutorial_label))
@@ -22,9 +43,21 @@ func _on_tutorial_button_pressed(tutorial_label: TutorialTextDialog):
 	if tutorial_label_appearing_order == tutorial_label.appearing_order and check_is_satisfied(tutorial_label):
 		tutorial_labels[tutorial_label_appearing_order].visible = false
 		tutorial_label_appearing_order += 1
+		if tutorial_animations.has(tutorial_label_appearing_order):
+			animation_sprite.visible = true
+			video_background_rect.visible = true
+			animation_sprite.play(tutorial_animations[tutorial_label_appearing_order])
+		else:
+			animation_sprite.visible = false
+			video_background_rect.visible = false
+
 		if tutorial_label_appearing_order >= tutorial_labels.size():
 			start_room_door.can_open = true
 			return
+		if tutorial_label_appearing_order >= 15:
+			animation_sprite.stop()
+			animation_sprite.visible = false
+			video_background_rect.visible = false
 		tutorial_labels[tutorial_label_appearing_order].visible = true
 		tutorial_labels[tutorial_label_appearing_order].get_action_bind_key()
 
