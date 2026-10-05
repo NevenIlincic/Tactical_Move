@@ -1,6 +1,8 @@
 #Base class for Player and Enemy
 class_name Soldier extends Node2D
 #@onready var vision_polygon: SoldierVision = $CanvasGroup/Vision_Polygon
+@onready var vision_area: VisionArea = $Vision_Area
+@onready var hitbox: StaticBody2D = $Hitbox
 
 #MUZZLE EFFECT
 @onready var muzzle_dropout_spawn_point: Marker2D = $Muzzle_Dropout_Spawn_Point
@@ -8,6 +10,7 @@ const MUZZLE_COCOON = preload("uid://dqqyoom4gsr0e")
 
 @onready var hit_sprite: Sprite2D = $Hit_Sprite
 
+@export var ENEMY_COLLISION_DETECTION_MASK: int
 
 enum SoldierType{
 	PLAYER,
@@ -85,9 +88,10 @@ func _ready() -> void:
 		current_weapon.set_weapon_owner(self)
 	set_player_sprite()
 
-
-func _physics_process(_delta: float) -> void:
+func update(_delta: float):
 	vision_polygon.update_vision()
+#func _physics_process(_delta: float) -> void:
+	#vision_polygon.update_vision()
 
 func connect_to_signals():
 	Signals.enemy_soldier_killed.connect(_on_enemy_soldier_killed)
@@ -301,6 +305,9 @@ func _on_actions_finished():
 
 #TEMPLATE METHODS
 func do_while_action(delta: float):
+	if vision_polygon.is_vision_enabled and vision_polygon.are_rays_enabled:
+		vision_area.update_vision()
+
 	check_is_enemy_in_sight()	
 	set_player_looking_at()
 	if current_weapon:

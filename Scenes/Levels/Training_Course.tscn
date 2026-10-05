@@ -306,6 +306,15 @@ script = ExtResource("16_4itsr")
 base_value = 200.0
 metadata/_custom_type_script = "uid://bencr8mnns7ut"
 
+[sub_resource type="Resource" id="Resource_bh7no"]
+resource_local_to_scene = true
+script = ExtResource("17_h5hos")
+speed = SubResource("Resource_xq73l")
+reaction_time = SubResource("Resource_42oyf")
+max_travel_distance = SubResource("Resource_stuxa")
+MAX_HP = SubResource("Resource_sf78t")
+metadata/_custom_type_script = "uid://cp4iog725gtuq"
+
 [sub_resource type="Resource" id="Resource_qpldm"]
 resource_local_to_scene = true
 script = ExtResource("17_h5hos")
@@ -324,17 +333,9 @@ max_travel_distance = SubResource("Resource_stuxa")
 MAX_HP = SubResource("Resource_sf78t")
 metadata/_custom_type_script = "uid://cp4iog725gtuq"
 
-[sub_resource type="Resource" id="Resource_h5hos"]
-resource_local_to_scene = true
-script = ExtResource("17_h5hos")
-speed = SubResource("Resource_xq73l")
-reaction_time = SubResource("Resource_42oyf")
-max_travel_distance = SubResource("Resource_stuxa")
-MAX_HP = SubResource("Resource_sf78t")
-metadata/_custom_type_script = "uid://cp4iog725gtuq"
-
 [node name="Training_Course" unique_id=1509814780 instance=ExtResource("1_sk2xm")]
 script = ExtResource("2_3th1t")
+LEVEL_NAME = "Training Course"
 
 [node name="Keith_Regular" parent="." index="0" unique_id=1560366945 instance=ExtResource("12_ckni2")]
 position = Vector2(-680, 504)
@@ -361,6 +362,24 @@ offset_top = 481.0
 offset_right = -133.0
 offset_bottom = 481.0
 rotation = 1.5707964
+
+[node name="Enemy" parent="." index="4" unique_id=1440065138 instance=ExtResource("15_qpldm")]
+position = Vector2(-288, 360)
+rotation = 1.652506
+soldier_stats = SubResource("Resource_bh7no")
+
+[node name="Enemy2" parent="." index="5" unique_id=1671743338 instance=ExtResource("15_qpldm")]
+position = Vector2(-288, 647.99994)
+rotation = -2.1114616
+soldier_stats = SubResource("Resource_qpldm")
+
+[node name="Enemy3" parent="." index="6" unique_id=315076816 instance=ExtResource("15_qpldm")]
+position = Vector2(144, 408)
+rotation = 2.1874497
+soldier_stats = SubResource("Resource_4itsr")
+
+[node name="Camera_Start_Position_Marker" parent="." index="9" unique_id=816834425]
+position = Vector2(-577, 419)
 
 [node name="Tutorial_Labels_Group" type="CanvasGroup" parent="CanvasLayer" parent_id_path=PackedInt32Array(1849002311) index="8" unique_id=524848771]
 position = Vector2(0, 70)
@@ -493,24 +512,6 @@ key_action = "pause_menu"
 dialog_text = "YOU CAN CHANGE BINDS IN OPTION/PAUSE MENU."
 appearing_order = 20
 is_activated_by_pressing = true
-
-[node name="Enemy" parent="." index="4" unique_id=1440065138 instance=ExtResource("15_qpldm")]
-position = Vector2(-288, 360)
-rotation = 1.652506
-soldier_stats = SubResource("Resource_qpldm")
-
-[node name="Enemy2" parent="." index="5" unique_id=1671743338 instance=ExtResource("15_qpldm")]
-position = Vector2(-288, 647.99994)
-rotation = -2.1114616
-soldier_stats = SubResource("Resource_4itsr")
-
-[node name="Enemy3" parent="." index="6" unique_id=315076816 instance=ExtResource("15_qpldm")]
-position = Vector2(144, 408)
-rotation = 2.1874497
-soldier_stats = SubResource("Resource_h5hos")
-
-[node name="Camera_Start_Position_Marker" parent="." index="11" unique_id=816834425]
-position = Vector2(-577, 419)
 
 [node name="Start_Room_Door" parent="." index="12" unique_id=1753195525 instance=ExtResource("13_ckni2")]
 offset_left = -489.0

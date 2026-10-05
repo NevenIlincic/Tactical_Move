@@ -33,24 +33,29 @@ func _unhandled_input(event: InputEvent) -> void:
 			key_action_released.emit()
 
 func get_action_bind_key():
-	var events = InputMap.action_get_events(key_action)
-	for event in events:
-		if event is InputEventKey:
-			var key = OS.get_keycode_string(event.physical_keycode)
-			action_label.text = key
-		elif event is InputEventMouseButton:
-			match event.button_index:
-				MOUSE_BUTTON_LEFT:
-					action_label.text = "LMB"
-				MOUSE_BUTTON_RIGHT:
-					action_label.text = "RMB"
-				MOUSE_BUTTON_WHEEL_UP:
-					action_label.text = "MOUSE WHEEL UP"
-				MOUSE_BUTTON_WHEEL_DOWN:
-					action_label.text = "MOUSE WHEEL DOWN"
-				MOUSE_BUTTON_MIDDLE:
-					action_label.text = "MMB"
-			break
+	var value = OptionVariables.option_values["Inputs"][key_action]
+	if typeof(value) == TYPE_INT or typeof(value) == TYPE_FLOAT:
+		action_label.text = str(int(value))
+	else:
+		action_label.text = OptionVariables.option_values["Inputs"][key_action]
+	#var events = InputMap.action_get_events(key_action)
+	#for event in events:
+		#if event is InputEventKey:
+			#var key = OS.get_keycode_string(event.physical_keycode)
+			#action_label.text = key
+		#elif event is InputEventMouseButton:
+			#match event.button_index:
+				#MOUSE_BUTTON_LEFT:
+					#action_label.text = "LMB"
+				#MOUSE_BUTTON_RIGHT:
+					#action_label.text = "RMB"
+				#MOUSE_BUTTON_WHEEL_UP:
+					#action_label.text = "MOUSE WHEEL UP"
+				#MOUSE_BUTTON_WHEEL_DOWN:
+					#action_label.text = "MOUSE WHEEL DOWN"
+				#MOUSE_BUTTON_MIDDLE:
+					#action_label.text = "MMB"
+			#break
 
 func start_pulse_effect():
 	var tween = create_tween().set_loops()

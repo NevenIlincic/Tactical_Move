@@ -1,5 +1,7 @@
 extends Node
 
+signal upgrade_card_created(upgrade_card: UpgradeCard)
+
 const UPGRADE_CARD = preload("uid://c60uemqf7gdf2")
 
 const UPGRADE_ICONS: Dictionary = {
@@ -85,3 +87,4 @@ func create_upgrade_card():
 	
 	upgrade_data.set_upgrade_card(new_upgrade_card)
 	available_permanent_upgrades[new_upgrade_card.unique_id] = new_upgrade_card
+	upgrade_card_created.emit(new_upgrade_card)

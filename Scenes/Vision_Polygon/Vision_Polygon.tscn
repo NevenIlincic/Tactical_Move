@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://bjx1wow4vot1m"]
+
+[ext_resource type="Script" uid="uid://rqxlawdyo6mn" path="res://Scenes/Vision_Polygon/vision_polygon.gd" id="1_xb2mo"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_xb2mo"]
+blend_mode = 2
+
+[node name="VisionPolygon" type="Polygon2D" unique_id=558214437]
+material = SubResource("CanvasItemMaterial_xb2mo")
+script = ExtResource("1_xb2mo")

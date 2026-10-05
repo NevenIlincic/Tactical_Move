@@ -24,12 +24,14 @@ script = ExtResource("1_voded")
 
 [node name="Bottom_Indicator" type="Area2D" parent="." unique_id=652057634]
 position = Vector2(0, 11)
+collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Bottom_Indicator" unique_id=1943503554]
 shape = SubResource("RectangleShape2D_fhwqp")
 
 [node name="Top_Indicator" type="Area2D" parent="." unique_id=417440998]
 position = Vector2(0, -13)
+collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Top_Indicator" unique_id=1806920694]
 shape = SubResource("RectangleShape2D_jjc5n")
@@ -51,4 +53,6 @@ shape = SubResource("RectangleShape2D_06txj")
 stream = ExtResource("3_y4x0x")
 
 [connection signal="area_entered" from="Bottom_Indicator" to="." method="_on_bottom_indicator_area_entered"]
+[connection signal="area_shape_entered" from="Bottom_Indicator" to="." method="_on_bottom_indicator_area_shape_entered"]
 [connection signal="area_entered" from="Top_Indicator" to="." method="_on_top_indicator_area_entered"]
+[connection signal="area_shape_entered" from="Top_Indicator" to="." method="_on_top_indicator_area_shape_entered"]

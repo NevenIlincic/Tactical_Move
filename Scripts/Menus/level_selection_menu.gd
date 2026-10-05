@@ -1,6 +1,9 @@
 class_name LevelSelectionMenu extends Node2D
 
+const ACHIEVEMENT_LABEL = preload("uid://dnkukugw6ahs7")
+
 @onready var v_box_container: VBoxContainer = $ScrollContainer/VBoxContainer
+@onready var achievements_grid_container: GridContainer = $ScrollContainer2/Achievements_Grid_Container
 
 @onready var level_selection_back_button: NavigationButton = $Level_Selection_Back_Button
 @onready var level_cover: Sprite2D = $Level_Cover
@@ -16,3 +19,23 @@ func connect_to_signals():
 
 func _on_button_hovered(button: LevelSelectionButton):
 	level_cover.texture = button.level_cover_texture
+	clear_achievements_grid()
+	display_level_achievements(button.button_text)
+
+func display_level_achievements(level_name: String):
+	if Achievements.achievements.has(level_name):
+		for achievement_text in Achievements.achievements[level_name]:
+			var achievement_label: AchievementLabel = ACHIEVEMENT_LABEL.instantiate()
+			achievements_grid_container.add_child(achievement_label)
+			achievement_label.initialize_achivement_node(level_name, achievement_text)
+	
+	var control_1: Control = Control.new()
+	var control_2: Control = Control.new()
+	achievements_grid_container.add_child(control_1)
+	achievements_grid_container.add_child(control_2)
+
+	
+func clear_achievements_grid():
+	var level_achivements: Array = achievements_grid_container.get_children()
+	for achivement_node in level_achivements:
+		achievements_grid_container.remove_child(achivement_node)

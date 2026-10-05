@@ -21,6 +21,7 @@ func hide_pause_menu():
 	retry_button.visible = false
 func show_pause_menu():
 	get_tree().paused = true
+	options_menu.check_tab_to_open()
 	visible = true
 	options_menu.play_appear_animation()
 
@@ -31,6 +32,7 @@ func _on_leave_button_pressed():
 func _on_resume_button_pressed():
 	hide_pause_menu()
 	get_tree().paused = false
+	Sdk.web_sdk.level_resumed()
 
 func _on_options_appear_animation_finished(anim_name: String):
 	if anim_name == "Tabs_Appear_Animation":

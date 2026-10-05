@@ -15,7 +15,7 @@ var current_action_killed_players: Dictionary
 var soldiers_in_action: Dictionary
 
 var action_duration: float = 0.0
-
+var is_action_state_finished: bool = false
 func _init(data: Array):
 	level = data[0]
 	level.players_set_for_move = {}
@@ -34,8 +34,10 @@ func _init(data: Array):
 	connect_to_signals()
 	
 	#vision_manager = VisionManager.new()
-	for player: Soldier in alive_soldiers.keys():	
-		player.do_actions()
+	for soldier_id in alive_soldiers:
+		var soldier: Soldier = alive_soldiers[soldier_id]
+		soldier.vision_polygon.enable_vision()	
+		soldier.do_actions()
 	
 	level.current_state_label.text = "ACTION STATE"
 	
@@ -49,62 +51,76 @@ func connect_to_signals():
 func _unhandled_input(event: InputEvent):
 	pass
 
-func _physics_process(delta: float) -> void:
+
+func update(delta: float) -> void:
 	level.total_passed_time_millis += int(delta * 1000.0)
 	action_duration += delta
 	var all_players_finished_moves: bool = true
 	
 	check_for_deletion()
 			
-	for player: Soldier in alive_soldiers.keys():
-		player.do_while_action(delta)
-		
+	for soldier_id: String in alive_soldiers.keys():
+		if is_instance_valid(alive_soldiers[soldier_id]) and not alive_soldiers[soldier_id].is_queued_for_deletion() and not current_action_killed_players.has(soldier_id):
+			alive_soldiers[soldier_id].do_while_action(delta)
+		#player.do_while_action(delta)
+	
 func check_for_deletion():
-	for player in alive_soldiers.keys():
-		if not is_instance_valid(player) or player.is_queued_for_deletion():
-			alive_soldiers.erase(player)
+	for soldier_id: String in alive_soldiers.keys():
+		if current_action_killed_players.has(soldier_id):
+			alive_soldiers.erase(soldier_id)
+		#if not is_instance_valid(player) or player.is_queued_for_deletion():
+			#alive_soldiers.erase(player)
 
 func _on_player_move_finished(soldier: Soldier):
-	if soldiers_in_action.has(soldier):
-		soldiers_in_action.erase(soldier)
+	if soldiers_in_action.has(soldier.soldier_id):
+		soldiers_in_action.erase(soldier.soldier_id)
 		
 	if soldier is Player:
 		num_player_finished_moves += 1
-	
-	var enemies_finished: Array[Soldier] = []
-	if num_player_finished_moves == alive_players.size():
-		for enemy_soldier in soldiers_in_action:
+	var enemies_finished_ids: Array[String] = []
+	if num_player_finished_moves >= initial_num_alive_players:
+		for enemy_soldier_id in soldiers_in_action:
+			var enemy_soldier: Soldier = soldiers_in_action[enemy_soldier_id]
 			if is_instance_valid(enemy_soldier) and not enemy_soldier.is_queued_for_deletion() and enemy_soldier is Enemy:
-				if enemy_soldier.enemies_in_sight.is_empty():
+				if enemy_soldier.vision_area.enemies_can_be_shot_at.is_empty():
 					enemy_soldier._on_players_action_finished()
-					enemies_finished.append(enemy_soldier)
-		#level.set_level_state(PlayerSetMoveState.new([level]))
-		
-	for enemy in enemies_finished:
-		soldiers_in_action.erase(enemy)
+					enemies_finished_ids.append(enemy_soldier.soldier_id)
+	for enemy_id in enemies_finished_ids:
+		soldiers_in_action.erase(enemy_id)
 	
-	if soldiers_in_action.is_empty():
+	if soldiers_in_action.is_empty() and num_player_finished_moves >= initial_num_alive_players:
 		num_player_finished_moves = 0
 		for player_id: String in alive_players:
 			#print(player.soldier_id, " ", current_action_killed_players)
 			if is_instance_valid(alive_players[player_id]) and not alive_players[player_id].is_queued_for_deletion() and not current_action_killed_players.has(player_id):
 				var player: Player = alive_players[player_id]
-				player.is_queued_for_medic_healing = false
-				player.healing_needed_sprite.visible = false
+				#player.is_queued_for_medic_healing = false
+				#player.healing_needed_sprite.visible = false
+				
 				if player is MedicPlayer:
 					player._check_is_healing_available(action_duration)
-		
-		level.set_level_state(PreparationState.new([level]))
+		if not is_action_state_finished:
+			is_action_state_finished = true
+			disconnect_signals()
+			level.set_level_state(PreparationState.new([level]))
 	
 func _on_player_move_continued(soldier: Soldier):
-	soldiers_in_action[soldier] = true
+	soldier.vision_polygon.enable_vision()
+	soldiers_in_action[soldier.soldier_id] = soldier
 	
 func _on_soldier_killed(enemy: Soldier, killed_by: Soldier):
+	if enemy is Player:
+		enemy.vision_area.disconnect_from_signals()
+		if enemy is MedicPlayer:
+			if enemy.healing_applied.is_connected(level._on_medic_healing_applied):
+				enemy.healing_applied.disconnect(level._on_medic_healing_applied)
+
 	check_is_level_completed(enemy)
 	current_action_killed_players[enemy.soldier_id] = enemy
 	_on_player_move_finished(enemy)
 
 func _on_stop_enemy_actions(enemy_soldier: Soldier):
+	enemy_soldier.vision_polygon.disable_vision()
 	if soldiers_in_action.has(enemy_soldier):
 		soldiers_in_action.erase(enemy_soldier)
 

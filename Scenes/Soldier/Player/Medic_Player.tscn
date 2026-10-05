@@ -16,23 +16,16 @@ player_avatar = ExtResource("3_sm8ne")
 [node name="Player_Sprite" parent="." index="2" unique_id=1716240992]
 texture = ExtResource("4_ibbrm")
 
-[node name="pistol_bullet_spawn_point" parent="." index="12" unique_id=2000225844]
+[node name="pistol_bullet_spawn_point" parent="." index="11" unique_id=2000225844]
 position = Vector2(26, 5)
 
-[node name="Medic_Apply_Area" type="Area2D" parent="." index="17" unique_id=1419835665]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Medic_Apply_Area" index="0" unique_id=1916169960]
+[node name="Medic_Apply_Detection_Shape" type="CollisionShape2D" parent="Detection_Areas" parent_id_path=PackedInt32Array(1442483156) index="3" unique_id=1916169960]
 shape = SubResource("RectangleShape2D_06txj")
 
-[node name="Healing_Area_Indicator" type="Sprite2D" parent="." index="20" unique_id=1281354257]
+[node name="Healing_Area_Indicator" type="Sprite2D" parent="." index="19" unique_id=1281354257]
 modulate = Color(0.07077583, 1.0142531, 0.48320764, 1)
 z_index = -1
 texture_filter = 1
 position = Vector2(0, 1.4305115e-06)
 scale = Vector2(3, 3)
 texture = ExtResource("3_3go7f")
-
-[node name="Medic_Detection_Area" parent="." index="22" unique_id=1241310332 groups=["medic_detection_area"]]
-
-[connection signal="body_entered" from="Medic_Apply_Area" to="." method="_on_medic_apply_area_body_entered"]
-[connection signal="body_exited" from="Medic_Apply_Area" to="." method="_on_medic_apply_area_body_exited"]

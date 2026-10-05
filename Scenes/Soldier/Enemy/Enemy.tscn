@@ -12,6 +12,7 @@
 [ext_resource type="Resource" uid="uid://ttdsvtwhyg75" path="res://Resources/Weapon_Stats/m4a1_Rifle_Stats.tres" id="5_l07se"]
 [ext_resource type="Texture2D" uid="uid://cj7du6skub5ll" path="res://Sprites/Soldier/Enemy/enemy_dying_sprites.png" id="7_2i7on"]
 [ext_resource type="Texture2D" uid="uid://d1k6yblmluefj" path="res://Sprites/Soldier/soldier_hit_effect.png" id="12_1kajf"]
+[ext_resource type="Script" uid="uid://bxgbnw73mg5an" path="res://Scenes/Soldier/Player/Vision_Area.gd" id="13_v1ooi"]
 
 [sub_resource type="Resource" id="Resource_8rupe"]
 script = ExtResource("4_v1ooi")
@@ -129,9 +130,14 @@ gravity = Vector3(0, 0, 0)
 alpha_curve = SubResource("CurveTexture_qqij5")
 emission_curve = SubResource("CurveTexture_7jdmd")
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_v1ooi"]
+radius = 24.0
+
 [node name="Enemy" type="Node2D" unique_id=1440065138 groups=["enemy_node", "soldier"]]
+process_mode = 3
 z_index = 2
 script = ExtResource("1_02vxf")
+ENEMY_COLLISION_DETECTION_MASK = 512
 soldier_stats = ExtResource("2_5e0s2")
 weapons = Array[ExtResource("3_1kajf")]([SubResource("Resource_8rupe")])
 
@@ -143,7 +149,6 @@ texture = ExtResource("2_2i7on")
 hframes = 7
 
 [node name="Detection_Area" type="Area2D" parent="." unique_id=96710695 groups=["enemy"]]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Detection_Area" unique_id=1216236629]
 visible = false
@@ -151,6 +156,7 @@ shape = SubResource("CircleShape2D_02vxf")
 disabled = true
 
 [node name="Hitbox" type="StaticBody2D" parent="." unique_id=1448689257]
+collision_layer = 257
 
 [node name="Hitbox_Collision_Shape" type="CollisionShape2D" parent="Hitbox" unique_id=781357414]
 shape = SubResource("CircleShape2D_wy1ij")
@@ -176,9 +182,6 @@ light_mask = 2
 color = Color(0.5822249, 0.63125, 0.33140624, 0.19500001)
 polygon = PackedVector2Array(0, 0, -256, -256, 256, -256)
 script = ExtResource("3_fw0yv")
-max_range = 900.0
-fov_degrees = 60.0
-ray_count = 20.0
 
 [node name="Enemy_Target_Line" type="Line2D" parent="Vision_Polygon" unique_id=1406944396]
 visible = false
@@ -193,8 +196,6 @@ texture_mode = 1
 collision_layer = 4
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Vision_Polygon/Vision_Area" unique_id=664566003]
-
-[node name="PointLight2D" type="PointLight2D" parent="Vision_Polygon" unique_id=1171120504]
 
 [node name="Door_Detection_Area" type="Area2D" parent="." unique_id=1757595917 groups=["door_detection_area"]]
 
@@ -229,11 +230,29 @@ position = Vector2(7, 0)
 texture = ExtResource("12_1kajf")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=504575328]
+visible = false
 follow_viewport_enabled = true
 
 [node name="GunBlastEffect" parent="CanvasLayer" unique_id=1793492474 instance=ExtResource("2_cgwcb")]
 process_material = SubResource("ParticleProcessMaterial_l07se")
 
+[node name="Vision_Area" type="Area2D" parent="." unique_id=1912630791]
+script = ExtResource("13_v1ooi")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Vision_Area" unique_id=961437821]
+polygon = PackedVector2Array(48, -24, 104, 0, 56, 48)
+
+[node name="Player_Vision_Cone" type="Line2D" parent="Vision_Area" unique_id=441845227]
+closed = true
+width = 1.0
+
+[node name="Area_HitBox" type="Area2D" parent="." unique_id=1367086891 groups=["area_hitbox", "enemy"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area_HitBox" unique_id=2125673365]
+shape = SubResource("CircleShape2D_v1ooi")
+
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="body_entered" from="Rays_Activation_Area" to="." method="_on_rays_activation_area_body_entered"]
 [connection signal="body_exited" from="Rays_Activation_Area" to="." method="_on_rays_activation_area_body_exited"]
+[connection signal="area_entered" from="Vision_Area" to="Vision_Area" method="_on_area_entered"]
+[connection signal="area_exited" from="Vision_Area" to="Vision_Area" method="_on_area_exited"]

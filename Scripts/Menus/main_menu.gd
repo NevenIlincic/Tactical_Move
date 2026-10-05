@@ -29,7 +29,10 @@ func _ready() -> void:
 	options_button.appear_effect_animation_player.play("appear_animation")
 	quit_button.appear_effect_animation_player.play("appear_animation")
 	AudioManager.play_background_music(AudioManager.BACKGROUND_MUSIC_MENU_1)
-
+	
+	#SDK
+	Sdk.web_sdk.set_game_ready()
+	
 func connect_to_signals():
 	level_selection_button.transition_to_level_selection_screen.connect(_on_level_selection_button_pressed)
 	level_selection_menu.level_selection_back_button.transition_to_main_screen.connect(_on_main_screen_button_pressed)
@@ -41,6 +44,7 @@ func _process(delta: float) -> void:
 	pass
 
 func _on_options_button_pressed():
+	options_menu.check_tab_to_open()
 	var tween: Tween = create_tween()
 	tween.tween_property(camera, "global_position", option_camera_position.global_position, 0.4)
 	tween.finished.connect(func():

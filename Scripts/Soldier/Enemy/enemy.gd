@@ -47,8 +47,10 @@ func _ready() -> void:
 	point_to_look = Vector2.ZERO
 	level = get_tree().get_first_node_in_group("Level")
 	Signals.stop_enemy_actions.connect(_on_players_action_finished)
-		
+	
 	if close_players.is_empty():
+		set_process(false)
+		set_physics_process(false)
 		vision_polygon.disable_rays()
 func _on_players_action_finished():
 	reset_path()
@@ -276,7 +278,10 @@ func _on_rays_activation_area_body_entered(body: Node2D) -> void:
 	if soldier != self and body.is_in_group("player_hitbox") and soldier is Player:
 		close_players[soldier.soldier_id] = soldier
 		if not vision_polygon.are_rays_enabled:
+			set_process(true)
+			set_physics_process(true)
 			vision_polygon.enable_rays()
+			vision_polygon.enable_vision()
 
 
 
@@ -287,5 +292,8 @@ func _on_rays_activation_area_body_exited(body: Node2D) -> void:
 		if close_players.has(soldier.soldier_id):
 			close_players.erase(soldier.soldier_id)
 		if close_players.is_empty():
+			set_process(false)
+			set_physics_process(false)
 			if vision_polygon.are_rays_enabled:
 				vision_polygon.disable_rays()
+				vision_polygon.disable_vision()

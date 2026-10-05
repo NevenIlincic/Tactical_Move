@@ -28,5 +28,5 @@ func _unhandled_input(_event: InputEvent):
 			upgrade_menu.hide_upgrade_menu()
 			level.set_level_state(ActionState.new([level]))
 		
-func _physics_process(_delta: float):
+func update(_delta: float):
 	pass

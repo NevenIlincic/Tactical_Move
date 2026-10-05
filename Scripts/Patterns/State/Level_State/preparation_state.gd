@@ -21,7 +21,7 @@ func _unhandled_input(_event: InputEvent):
 	if Input.is_action_just_pressed("popup") and PlayerSelectionManager.selected_player and not PlayerSelectionManager.selected_player.is_killed:
 			level.radial_menu.popup()
 			return
-func _physics_process(_delta: float):
+func update(_delta: float):
 	pass
 
 

@@ -2,17 +2,11 @@
 
 [ext_resource type="Script" uid="uid://b58hel4nndam5" path="res://Scenes/test_scene.gd" id="1_4ms0o"]
 [ext_resource type="Texture2D" uid="uid://by41vprbe8yxy" path="res://Sprites/Tiles/wood.png" id="4_tq75k"]
-[ext_resource type="Script" uid="uid://bencr8mnns7ut" path="res://Scripts/Patterns/Stat/stat.gd" id="5_8c5ma"]
-[ext_resource type="PackedScene" uid="uid://y3pndfcq1kxo" path="res://Scenes/Soldier/Enemy/Enemy.tscn" id="5_svcn8"]
 [ext_resource type="Texture2D" uid="uid://b57h4w4d5rop7" path="res://Sprites/Tiles/Interior/Dark_Ground.png" id="6_jygqt"]
-[ext_resource type="Script" uid="uid://cp4iog725gtuq" path="res://Scripts/Soldier/Player/player_stats.gd" id="6_ltieu"]
-[ext_resource type="Script" uid="uid://cubw4ogrqm6po" path="res://Scripts/Weapon/weapon.gd" id="6_mykrp"]
 [ext_resource type="Texture2D" uid="uid://coidsrajfw0k4" path="res://Sprites/Tiles/concrete.png" id="7_3y4ie"]
 [ext_resource type="PackedScene" uid="uid://diubehftswotg" path="res://Scenes/Menu/Pause_Menu.tscn" id="11_ir5aq"]
 [ext_resource type="Texture2D" uid="uid://c4135vaiolep5" path="res://Sprites/Tiles/Grass/Grass_Corners_128x128.png" id="12_elm60"]
-[ext_resource type="Script" uid="uid://bmr38t2grjqqv" path="res://Scripts/Weapon/m4a1_rifle.gd" id="12_grcoo"]
 [ext_resource type="Texture2D" uid="uid://cjlwwyc44rr32" path="res://Sprites/Tiles/Grass/Grass_One_Corner_Side.png" id="13_ir5aq"]
-[ext_resource type="Resource" uid="uid://ttdsvtwhyg75" path="res://Resources/Weapon_Stats/m4a1_Rifle_Stats.tres" id="13_tq75k"]
 [ext_resource type="Texture2D" uid="uid://b0ys5hsblpl5u" path="res://Sprites/Tiles/Grass/Grass.png" id="13_us5gr"]
 [ext_resource type="Texture2D" uid="uid://dabjh4v6265n0" path="res://Sprites/Tiles/Grass/New Piskel-1.png - 2026-08-21T000520.022.png" id="14_us5gr"]
 [ext_resource type="PackedScene" uid="uid://dyh4j30522553" path="res://Scenes/Soldier/Player/Player_Stats.tscn" id="23_nfmrh"]
@@ -25,12 +19,9 @@
 [ext_resource type="PackedScene" uid="uid://q6uf7pve5vqm" path="res://Scenes/Dialog/Confirmation_Dialog.tscn" id="29_3u3yd"]
 [ext_resource type="PackedScene" uid="uid://c0vgcvlc1hb3x" path="res://Scenes/Map_Assets/Cars/Red_Car.tscn" id="29_l3xug"]
 [ext_resource type="PackedScene" uid="uid://brfg83jmoawos" path="res://Scenes/Soldier/Player/Nate_Medic.tscn" id="30_1q75p"]
-[ext_resource type="PackedScene" uid="uid://cjloixtn6v5rp" path="res://Scenes/Soldier/Player/Valerie_Regular.tscn" id="31_elm60"]
 [ext_resource type="Texture2D" uid="uid://bo60888547asv" path="res://Sprites/Wall/New Piskel (30).png" id="31_xk5uc"]
 [ext_resource type="Texture2D" uid="uid://dws2prvoqt80s" path="res://Sprites/Wall/wall_tiles.png" id="32_avk4t"]
-[ext_resource type="PackedScene" uid="uid://bpg5m07qvbc3m" path="res://Scenes/Soldier/Player/Luke_Regular.tscn" id="32_ir5aq"]
 [ext_resource type="Texture2D" uid="uid://fkr18ad8igyo" path="res://Sprites/Assets/Furniture/wooden_table.png" id="33_1q75p"]
-[ext_resource type="PackedScene" uid="uid://bsxjq5u2glxba" path="res://Scenes/Soldier/Player/Keith_Regular.tscn" id="33_us5gr"]
 [ext_resource type="PackedScene" uid="uid://di76hjbstq4th" path="res://Scenes/Map_Assets/Cars/Blue_Car.tscn" id="37_vtp3d"]
 [ext_resource type="PackedScene" uid="uid://bm1ppd4si4asw" path="res://Scenes/Map_Assets/Door/Door.tscn" id="39_58pdj"]
 
@@ -202,72 +193,6 @@ parsed_collision_mask = 4294967041
 source_geometry_mode = 2
 source_geometry_group_name = &"wall"
 
-[sub_resource type="Resource" id="Resource_8b03y"]
-script = ExtResource("5_8c5ma")
-base_value = 20.0
-metadata/_custom_type_script = "uid://bencr8mnns7ut"
-
-[sub_resource type="Resource" id="Resource_ploxg"]
-script = ExtResource("5_8c5ma")
-base_value = 1000.0
-metadata/_custom_type_script = "uid://bencr8mnns7ut"
-
-[sub_resource type="Resource" id="Resource_37g1s"]
-script = ExtResource("5_8c5ma")
-base_value = 0.5
-metadata/_custom_type_script = "uid://bencr8mnns7ut"
-
-[sub_resource type="Resource" id="Resource_d2fdr"]
-script = ExtResource("5_8c5ma")
-base_value = 150.0
-metadata/_custom_type_script = "uid://bencr8mnns7ut"
-
-[sub_resource type="Resource" id="Resource_s8unp"]
-script = ExtResource("6_ltieu")
-speed = SubResource("Resource_d2fdr")
-reaction_time = SubResource("Resource_37g1s")
-max_travel_distance = SubResource("Resource_ploxg")
-MAX_HP = SubResource("Resource_8b03y")
-metadata/_custom_type_script = "uid://cp4iog725gtuq"
-
-[sub_resource type="Resource" id="Resource_nja13"]
-script = ExtResource("12_grcoo")
-weapon_stats = ExtResource("13_tq75k")
-metadata/_custom_type_script = "uid://bmr38t2grjqqv"
-
-[sub_resource type="Resource" id="Resource_tho2i"]
-script = ExtResource("5_8c5ma")
-base_value = 100.0
-metadata/_custom_type_script = "uid://bencr8mnns7ut"
-
-[sub_resource type="Resource" id="Resource_56rnl"]
-script = ExtResource("5_8c5ma")
-base_value = 1000.0
-metadata/_custom_type_script = "uid://bencr8mnns7ut"
-
-[sub_resource type="Resource" id="Resource_ifs1h"]
-script = ExtResource("5_8c5ma")
-base_value = 0.5
-metadata/_custom_type_script = "uid://bencr8mnns7ut"
-
-[sub_resource type="Resource" id="Resource_1vcrt"]
-script = ExtResource("5_8c5ma")
-base_value = 150.0
-metadata/_custom_type_script = "uid://bencr8mnns7ut"
-
-[sub_resource type="Resource" id="Resource_6uspl"]
-script = ExtResource("6_ltieu")
-speed = SubResource("Resource_1vcrt")
-reaction_time = SubResource("Resource_ifs1h")
-max_travel_distance = SubResource("Resource_56rnl")
-MAX_HP = SubResource("Resource_tho2i")
-metadata/_custom_type_script = "uid://cp4iog725gtuq"
-
-[sub_resource type="Resource" id="Resource_3u3yd"]
-script = ExtResource("12_grcoo")
-weapon_stats = ExtResource("13_tq75k")
-metadata/_custom_type_script = "uid://bmr38t2grjqqv"
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_moqms"]
 size = Vector2(7, 400)
 
@@ -342,16 +267,6 @@ position = Vector2(160, 352)
 visible = false
 navigation_polygon = SubResource("NavigationPolygon_6uspl")
 
-[node name="Enemy" parent="." unique_id=1440065138 instance=ExtResource("5_svcn8")]
-position = Vector2(210, 356)
-soldier_stats = SubResource("Resource_s8unp")
-weapons = Array[ExtResource("6_mykrp")]([SubResource("Resource_nja13")])
-
-[node name="Enemy2" parent="." unique_id=754966804 instance=ExtResource("5_svcn8")]
-position = Vector2(280, 480)
-soldier_stats = SubResource("Resource_6uspl")
-weapons = Array[ExtResource("6_mykrp")]([SubResource("Resource_3u3yd")])
-
 [node name="StaticBody2D4" type="StaticBody2D" parent="." unique_id=714018171 groups=["wall"]]
 position = Vector2(26, 323)
 collision_layer = 3
@@ -406,16 +321,6 @@ position = Vector2(800, 288)
 
 [node name="Marker2D10" type="Marker2D" parent="." unique_id=11463602 groups=["a_star_point"]]
 position = Vector2(160, 480)
-
-[node name="Enemy3" parent="." unique_id=1139274691 instance=ExtResource("5_svcn8")]
-position = Vector2(-520, -136)
-soldier_stats = SubResource("Resource_6uspl")
-weapons = Array[ExtResource("6_mykrp")]([SubResource("Resource_3u3yd")])
-
-[node name="Enemy4" parent="." unique_id=388256567 instance=ExtResource("5_svcn8")]
-position = Vector2(541, 288)
-soldier_stats = SubResource("Resource_6uspl")
-weapons = Array[ExtResource("6_mykrp")]([SubResource("Resource_3u3yd")])
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1266865912]
 
@@ -521,12 +426,3 @@ position = Vector2(576, 320)
 
 [node name="MedicPlayer" parent="." unique_id=1108589071 instance=ExtResource("30_1q75p")]
 position = Vector2(872, 64)
-
-[node name="Valerie_Regular" parent="." unique_id=495495978 instance=ExtResource("31_elm60")]
-position = Vector2(-56, 96)
-
-[node name="Luke_Regular" parent="." unique_id=589206871 instance=ExtResource("32_ir5aq")]
-position = Vector2(728, 320)
-
-[node name="Keith_Regular" parent="." unique_id=2037414245 instance=ExtResource("33_us5gr")]
-position = Vector2(208, 160)

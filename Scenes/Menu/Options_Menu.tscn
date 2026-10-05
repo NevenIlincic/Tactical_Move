@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://b4wpvtdbstpya" path="res://Scripts/Buttons/tab_buttons.gd" id="5_0sjke"]
 [ext_resource type="PackedScene" uid="uid://b6pfugr3kdl2v" path="res://Scenes/Buttons/Menus_Button.tscn" id="5_ehegv"]
 [ext_resource type="Script" uid="uid://bp3qo6kc4jx74" path="res://Scenes/Menu/audio_slider.gd" id="8_n6evs"]
+[ext_resource type="Script" uid="uid://bpm6uu7doofex" path="res://Scenes/Menu/video_menu_window.gd" id="9_wekyc"]
 [ext_resource type="Texture2D" uid="uid://cyexu3fm2aq3s" path="res://Sprites/HUD/background.png" id="11_nkoq7"]
 [ext_resource type="Texture2D" uid="uid://jmhohtbrj7dy" path="res://Sprites/Button/button.png" id="12_av6u3"]
 [ext_resource type="PackedScene" uid="uid://iah5eecblfbi" path="res://Scenes/Buttons/Input_Button.tscn" id="13_ktebc"]
@@ -101,6 +102,18 @@ tracks/7/path = NodePath("Audio_Menu:modulate")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Video_Menu:modulate")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
@@ -205,6 +218,30 @@ tracks/7/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Video_Menu:modulate")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0.5, 0.85),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Save_Options_Button:modulate")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0.6, 0.95),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_av6u3"]
 _data = {
@@ -249,6 +286,7 @@ script = ExtResource("1_pobh7")
 libraries/ = SubResource("AnimationLibrary_av6u3")
 
 [node name="Inputs_Menu" type="Node2D" parent="." unique_id=1996078480]
+visible = false
 modulate = Color(1, 1, 1, 0)
 position = Vector2(31, 96)
 
@@ -1041,15 +1079,334 @@ vertical_alignment = 1
 
 [node name="Video_Menu" type="Node2D" parent="." unique_id=809832490]
 visible = false
+position = Vector2(31, 96)
+script = ExtResource("9_wekyc")
 
-[node name="Label" type="Label" parent="Video_Menu" unique_id=1774109662]
-offset_left = 264.0
-offset_top = 280.0
-offset_right = 422.0
-offset_bottom = 301.0
+[node name="Inputs_Scroll_Container" type="ScrollContainer" parent="Video_Menu" unique_id=520052159]
+offset_right = 808.0
+offset_bottom = 504.0
+
+[node name="GridContainer" type="GridContainer" parent="Video_Menu/Inputs_Scroll_Container" unique_id=319884591]
+layout_mode = 2
+theme_override_constants/h_separation = 400
+theme_override_constants/v_separation = 75
+columns = 2
+
+[node name="General_Section" type="Control" parent="Video_Menu/Inputs_Scroll_Container/GridContainer" unique_id=24841356]
+layout_mode = 2
+
+[node name="General_Section_Label" type="Label" parent="Video_Menu/Inputs_Scroll_Container/GridContainer/General_Section" unique_id=1923556116]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 21.0
 theme_override_font_sizes/font_size = 32
-text = "YET TO BE IMPLEMENTED"
+text = "GENERAL"
+
+[node name="Dummy_5" type="Control" parent="Video_Menu/Inputs_Scroll_Container/GridContainer" unique_id=1278564105]
+layout_mode = 2
+
+[node name="Quality_Input" type="Control" parent="Video_Menu/Inputs_Scroll_Container/GridContainer" unique_id=1548893098]
+layout_mode = 2
+
+[node name="Sprite" type="Sprite2D" parent="Video_Menu/Inputs_Scroll_Container/GridContainer/Quality_Input" unique_id=592106134]
+position = Vector2(128, 26)
+scale = Vector2(1.0092957, 0.43750006)
+texture = ExtResource("11_nkoq7")
+
+[node name="Quality_Label" type="Label" parent="Video_Menu/Inputs_Scroll_Container/GridContainer/Quality_Input" unique_id=1436225818]
+layout_mode = 0
+offset_left = 1.0
+offset_top = -3.0
+offset_right = 257.0
+offset_bottom = 53.0
+mouse_filter = 0
+text = "VIDEO QUALITY"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Quality_Option_Button" type="OptionButton" parent="Video_Menu/Inputs_Scroll_Container/GridContainer/Quality_Input" unique_id=1886593669]
+layout_mode = 0
+offset_left = 264.0
+offset_top = -3.0
+offset_right = 366.0
+offset_bottom = 53.0
+alignment = 1
+selected = 0
+item_count = 2
+popup/item_0/text = "NORMAL"
+popup/item_0/id = 0
+popup/item_1/text = "WORSE"
+popup/item_1/id = 1
+
+[node name="Dummy_6" type="Control" parent="Video_Menu/Inputs_Scroll_Container/GridContainer" unique_id=2112901874]
+layout_mode = 2
+
+[node name="Show_FPS_Input" type="Control" parent="Video_Menu/Inputs_Scroll_Container/GridContainer" unique_id=350849570]
+layout_mode = 2
+
+[node name="Sprite" type="Sprite2D" parent="Video_Menu/Inputs_Scroll_Container/GridContainer/Show_FPS_Input" unique_id=1058360372]
+position = Vector2(128, 26)
+scale = Vector2(1.0092957, 0.43750006)
+texture = ExtResource("11_nkoq7")
+
+[node name="Select_Player_Label" type="Label" parent="Video_Menu/Inputs_Scroll_Container/GridContainer/Show_FPS_Input" unique_id=1548878307]
+layout_mode = 0
+offset_left = 1.0
+offset_top = -3.0
+offset_right = 257.0
+offset_bottom = 53.0
+mouse_filter = 0
+text = "SHOW FPS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="FPS_Option_Button" type="OptionButton" parent="Video_Menu/Inputs_Scroll_Container/GridContainer/Show_FPS_Input" unique_id=441590951]
+layout_mode = 0
+offset_left = 264.0
+offset_top = -3.0
+offset_right = 366.0
+offset_bottom = 53.0
+alignment = 1
+selected = 0
+item_count = 2
+popup/item_0/text = "OFF"
+popup/item_0/id = 0
+popup/item_1/text = "ON"
+popup/item_1/id = 1
+
+[node name="Dummy_7" type="Control" parent="Video_Menu/Inputs_Scroll_Container/GridContainer" unique_id=1997349410]
+layout_mode = 2
+
+[node name="Max_FPS_Input" type="Control" parent="Video_Menu/Inputs_Scroll_Container/GridContainer" unique_id=815814342]
+layout_mode = 2
+
+[node name="Sprite" type="Sprite2D" parent="Video_Menu/Inputs_Scroll_Container/GridContainer/Max_FPS_Input" unique_id=1627848695]
+position = Vector2(128, 26)
+scale = Vector2(1.0092957, 0.43750006)
+texture = ExtResource("11_nkoq7")
+
+[node name="Max_FPS_Label" type="Label" parent="Video_Menu/Inputs_Scroll_Container/GridContainer/Max_FPS_Input" unique_id=379923532]
+layout_mode = 0
+offset_left = 1.0
+offset_top = -3.0
+offset_right = 257.0
+offset_bottom = 53.0
+tooltip_text = "Limits maximum FPS amount."
+mouse_filter = 0
+text = "MAX FPS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Max_FPS_Spin_Box" type="SpinBox" parent="Video_Menu/Inputs_Scroll_Container/GridContainer/Max_FPS_Input" unique_id=1133149627]
+layout_mode = 0
+offset_left = 265.0
+offset_top = -8.0
+offset_right = 384.0
+offset_bottom = 54.0
+min_value = 30.0
+max_value = 999.0
+value = 999.0
+alignment = 1
+
+[node name="Dummy" type="Control" parent="Video_Menu/Inputs_Scroll_Container/GridContainer" unique_id=418037629]
+layout_mode = 2
+
+[node name="Player_Vision_Section" type="Control" parent="Video_Menu/Inputs_Scroll_Container/GridContainer" unique_id=1379478285]
+layout_mode = 2
+
+[node name="Player_Vision_Label" type="Label" parent="Video_Menu/Inputs_Scroll_Container/GridContainer/Player_Vision_Section" unique_id=1304108170]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 21.0
+theme_override_font_sizes/font_size = 32
+text = "PLAYER VISION"
+
+[node name="Dummy_1" type="Control" parent="Video_Menu/Inputs_Scroll_Container/GridContainer" unique_id=2089840289]
+layout_mode = 2
+
+[node name="Player_Vision_Indicator" type="Control" parent="Video_Menu/Inputs_Scroll_Container/GridContainer" unique_id=769531627]
+layout_mode = 2
+
+[node name="Sprite" type="Sprite2D" parent="Video_Menu/Inputs_Scroll_Container/GridContainer/Player_Vision_Indicator" unique_id=1468696376]
+position = Vector2(128, 26)
+scale = Vector2(1.0092957, 0.43750006)
+texture = ExtResource("11_nkoq7")
+
+[node name="Select_Player_Label" type="Label" parent="Video_Menu/Inputs_Scroll_Container/GridContainer/Player_Vision_Indicator" unique_id=76599039]
+layout_mode = 0
+offset_left = 1.0
+offset_top = -3.0
+offset_right = 257.0
+offset_bottom = 53.0
+tooltip_text = "BASIC - shows vision cone ignoring objects (better for performance)
+ADVANCED - vision cone changes depending on objects it hits (can degrade performance)"
+mouse_filter = 0
+text = "VISION INDICATOR"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Vision_Indicator_Option_Button" type="OptionButton" parent="Video_Menu/Inputs_Scroll_Container/GridContainer/Player_Vision_Indicator" unique_id=1307921506]
+layout_mode = 0
+offset_left = 264.0
+offset_top = -3.0
+offset_right = 366.0
+offset_bottom = 53.0
+alignment = 1
+selected = 1
+item_count = 2
+popup/item_0/text = "BASIC"
+popup/item_0/id = 0
+popup/item_1/text = "ADVANCED"
+popup/item_1/id = 1
+
+[node name="Dummy_2" type="Control" parent="Video_Menu/Inputs_Scroll_Container/GridContainer" unique_id=883736109]
+layout_mode = 2
+
+[node name="Ray_Cast_Number_Input" type="Control" parent="Video_Menu/Inputs_Scroll_Container/GridContainer" unique_id=892247813]
+layout_mode = 2
+
+[node name="Ray_Cast_Number" type="Control" parent="Video_Menu/Inputs_Scroll_Container/GridContainer/Ray_Cast_Number_Input" unique_id=110985618]
+anchors_preset = 0
+
+[node name="Sprite" type="Sprite2D" parent="Video_Menu/Inputs_Scroll_Container/GridContainer/Ray_Cast_Number_Input/Ray_Cast_Number" unique_id=404078231]
+position = Vector2(128, 26)
+scale = Vector2(1.0092957, 0.43750006)
+texture = ExtResource("11_nkoq7")
+
+[node name="Select_Player_Label" type="Label" parent="Video_Menu/Inputs_Scroll_Container/GridContainer/Ray_Cast_Number_Input/Ray_Cast_Number" unique_id=1273398232]
+layout_mode = 0
+offset_left = 1.0
+offset_top = -3.0
+offset_right = 257.0
+offset_bottom = 53.0
+tooltip_text = "The number of raycast that forms the vision indicator. 
+Greater number - more precise shape, but worse performanse"
+mouse_filter = 0
+text = "RAYCAST NUMBER"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Ray_Cast_Spin_Box" type="SpinBox" parent="Video_Menu/Inputs_Scroll_Container/GridContainer/Ray_Cast_Number_Input/Ray_Cast_Number" unique_id=1935671113]
+layout_mode = 0
+offset_left = 265.0
+offset_top = -6.0
+offset_right = 385.0
+offset_bottom = 55.0
+min_value = 5.0
+max_value = 150.0
+value = 10.0
+alignment = 1
+
+[node name="Dummy_8" type="Control" parent="Video_Menu/Inputs_Scroll_Container/GridContainer" unique_id=831453655]
+layout_mode = 2
+
+[node name="Edge_Iterations_Number" type="Control" parent="Video_Menu/Inputs_Scroll_Container/GridContainer" unique_id=1012483311]
+layout_mode = 2
+
+[node name="Sprite" type="Sprite2D" parent="Video_Menu/Inputs_Scroll_Container/GridContainer/Edge_Iterations_Number" unique_id=521195414]
+position = Vector2(128, 24)
+scale = Vector2(1.0092957, 0.43750006)
+texture = ExtResource("11_nkoq7")
+
+[node name="Edge_Iterations_Label" type="Label" parent="Video_Menu/Inputs_Scroll_Container/GridContainer/Edge_Iterations_Number" unique_id=627344425]
+layout_mode = 0
+offset_left = 1.0
+offset_top = -3.0
+offset_right = 257.0
+offset_bottom = 53.0
+tooltip_text = "Enables more precise calculation of object edges.
+Greater number can decrease performanse."
+mouse_filter = 0
+text = "EDGE PRECISION ITERATIONS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Edge_Iterations_Spin_Box" type="SpinBox" parent="Video_Menu/Inputs_Scroll_Container/GridContainer/Edge_Iterations_Number" unique_id=936661956]
+layout_mode = 0
+offset_left = 265.0
+offset_top = -8.0
+offset_right = 384.0
+offset_bottom = 54.0
+min_value = 1.0
+max_value = 5.0
+value = 1.0
+alignment = 1
+
+[node name="Dummy_3" type="Control" parent="Video_Menu/Inputs_Scroll_Container/GridContainer" unique_id=1371914441]
+layout_mode = 2
+
+[node name="Effects_Section" type="Control" parent="Video_Menu/Inputs_Scroll_Container/GridContainer" unique_id=1646164391]
+layout_mode = 2
+
+[node name="Effects_Label" type="Label" parent="Video_Menu/Inputs_Scroll_Container/GridContainer/Effects_Section" unique_id=474491563]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 21.0
+theme_override_font_sizes/font_size = 32
+text = "EFFECTS"
+
+[node name="Dummy_4" type="Control" parent="Video_Menu/Inputs_Scroll_Container/GridContainer" unique_id=922461251]
+layout_mode = 2
+
+[node name="Gun_Blast_Effect" type="Control" parent="Video_Menu/Inputs_Scroll_Container/GridContainer" unique_id=1469771611]
+layout_mode = 2
+
+[node name="Sprite" type="Sprite2D" parent="Video_Menu/Inputs_Scroll_Container/GridContainer/Gun_Blast_Effect" unique_id=833604811]
+position = Vector2(128, 26)
+scale = Vector2(1.0092957, 0.43750006)
+texture = ExtResource("11_nkoq7")
+
+[node name="Gun_Blast_Effect" type="Label" parent="Video_Menu/Inputs_Scroll_Container/GridContainer/Gun_Blast_Effect" unique_id=1708432942]
+layout_mode = 0
+offset_left = 1.0
+offset_top = -3.0
+offset_right = 257.0
+offset_bottom = 53.0
+tooltip_text = "Enabling this effect can decreaase performanse."
+mouse_filter = 0
+text = "GUN BLAST LIGHT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Gun_Blast_Effect_Option_Button" type="OptionButton" parent="Video_Menu/Inputs_Scroll_Container/GridContainer/Gun_Blast_Effect" unique_id=645081791]
+layout_mode = 0
+offset_left = 264.0
+offset_top = -3.0
+offset_right = 366.0
+offset_bottom = 53.0
+alignment = 1
+selected = 1
+item_count = 2
+popup/item_0/text = "OFF"
+popup/item_0/id = 0
+popup/item_1/text = "ON"
+popup/item_1/id = 1
+
+[node name="Dummy_9" type="Control" parent="Video_Menu/Inputs_Scroll_Container/GridContainer" unique_id=1955401264]
+layout_mode = 2
+
+[node name="Dummy_10" type="Control" parent="Video_Menu/Inputs_Scroll_Container/GridContainer" unique_id=921909989]
+layout_mode = 2
+
+[node name="Save_Options_Button" parent="." unique_id=1347199976 instance=ExtResource("5_ehegv")]
+position = Vector2(896, 128)
+button_text = "SAVE"
+
+[node name="Options_Saved_Label" type="Label" parent="." unique_id=1040080668]
+visible = false
+offset_left = 968.0
+offset_top = 608.0
+offset_right = 1143.0
+offset_bottom = 629.0
+text = "Options saved successfully"
 
 [connection signal="toggled" from="Tabs/Inputs_Tab_Button/Inputs_Button" to="Tabs/Inputs_Tab_Button" method="_on_inputs_button_toggled"]
 [connection signal="toggled" from="Tabs/Audio_Tab_Button/Inputs_Button" to="Tabs/Audio_Tab_Button" method="_on_inputs_button_toggled"]
 [connection signal="toggled" from="Tabs/Video_Tab_Button/Inputs_Button" to="Tabs/Video_Tab_Button" method="_on_inputs_button_toggled"]
+[connection signal="item_selected" from="Video_Menu/Inputs_Scroll_Container/GridContainer/Quality_Input/Quality_Option_Button" to="Video_Menu" method="_on_quality_option_button_item_selected"]
+[connection signal="item_selected" from="Video_Menu/Inputs_Scroll_Container/GridContainer/Show_FPS_Input/FPS_Option_Button" to="Video_Menu" method="_on_fps_option_button_item_selected"]
+[connection signal="value_changed" from="Video_Menu/Inputs_Scroll_Container/GridContainer/Max_FPS_Input/Max_FPS_Spin_Box" to="Video_Menu" method="_on_max_fps_spin_box_value_changed"]
+[connection signal="item_selected" from="Video_Menu/Inputs_Scroll_Container/GridContainer/Player_Vision_Indicator/Vision_Indicator_Option_Button" to="Video_Menu" method="_on_vision_indicator_option_button_item_selected"]
+[connection signal="value_changed" from="Video_Menu/Inputs_Scroll_Container/GridContainer/Ray_Cast_Number_Input/Ray_Cast_Number/Ray_Cast_Spin_Box" to="Video_Menu" method="_on_ray_cast_spin_box_value_changed"]
+[connection signal="value_changed" from="Video_Menu/Inputs_Scroll_Container/GridContainer/Edge_Iterations_Number/Edge_Iterations_Spin_Box" to="Video_Menu" method="_on_edge_iterations_spin_box_value_changed"]
+[connection signal="item_selected" from="Video_Menu/Inputs_Scroll_Container/GridContainer/Gun_Blast_Effect/Gun_Blast_Effect_Option_Button" to="Video_Menu" method="_on_gun_blast_effect_option_button_item_selected"]
