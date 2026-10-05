@@ -228,6 +228,7 @@ script = ExtResource("7_t26db")
 libraries/ = SubResource("AnimationLibrary_x56g5")
 
 [node name="Player_Look_At_Line_After_Move" type="Line2D" parent="." unique_id=438514574]
+modulate = Color(2.454227, 2.454227, 2.454227, 1)
 top_level = true
 texture_filter = 1
 texture_repeat = 2
