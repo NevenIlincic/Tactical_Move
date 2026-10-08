@@ -210,6 +210,7 @@ shape = SubResource("RectangleShape2D_06txj")
 
 [node name="Look_At_Position_Sprite" type="Sprite2D" parent="." unique_id=560975301]
 visible = false
+modulate = Color(1.9417582, 1.9417582, 1.9417582, 1)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("6_cifhn")
 
@@ -218,6 +219,7 @@ show_behind_parent = true
 top_level = true
 texture_repeat = 2
 width = 5.0
+default_color = Color(1.942, 1.942, 1.942, 1)
 texture = ExtResource("7_x56g5")
 texture_mode = 1
 script = ExtResource("7_t26db")

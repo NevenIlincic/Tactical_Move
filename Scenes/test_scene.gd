@@ -53,6 +53,7 @@ var current_confirm_callback: Callable
 @onready var player_stats: PlayerStatsHUD = $CanvasLayer/PlayerStats
 
 @onready var fps_label: FPSLabel = $CanvasLayer/FPS_Label
+@onready var rewarded_upgrade_card_label: Label = $CanvasLayer/Rewarded_Upgrade_Card_Label
 
 var achievement_manager: AchievementManager
 enum DialogType { NONE, UPGRADE, REWARDED_AD }
@@ -278,6 +279,10 @@ func _on_upgrade_card_bonus_button_pressed() -> void:
 func _on_rewarded_ad_watched():
 	if not Sdk.web_sdk.is_ad_block_enabled:
 		upgrade_card_bonus_button.disabled = false
+		rewarded_upgrade_card_label.visible = true
+		get_tree().create_timer(3.0).timeout.connect(
+			func(): rewarded_upgrade_card_label.visible = false
+		)
 	current_dialog_type = DialogType.NONE
 
 func _on_rewarded_ad_closed_early():
@@ -287,3 +292,10 @@ func _on_rewarded_ad_closed_early():
 
 func _on_interstitial_ad_watched():
 	pass
+
+@onready var scroll_container: ScrollContainer = $CanvasLayer/ScrollContainer
+@onready var controller_button: TextureButton = $CanvasLayer/Controller_Button
+
+func _on_controller_button_pressed() -> void:
+	scroll_container.visible = !scroll_container.visible
+	controller_button.release_focus()
