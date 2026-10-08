@@ -1080,6 +1080,9 @@ dialog_text = "YOU CAN CHANGE BINDS IN OPTION/PAUSE MENU."
 appearing_order = 20
 is_activated_by_pressing = true
 
+[node name="Controller_Button" parent="CanvasLayer" parent_id_path=PackedInt32Array(1849002311) index="15" unique_id=424929178]
+visible = false
+
 [node name="Start_Room_Door" parent="." index="12" unique_id=1753195525 instance=ExtResource("13_ckni2")]
 offset_left = -489.0
 offset_top = 480.0

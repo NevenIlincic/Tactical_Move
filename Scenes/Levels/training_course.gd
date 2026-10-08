@@ -29,6 +29,7 @@ var tutorial_animations: Dictionary = {
 
 func _ready() -> void:
 	super._ready()
+	controller_button.visible = false
 	animation_sprite.play(tutorial_animations[tutorial_label_appearing_order])
 	for tutorial_label: TutorialTextDialog in tutorial_labels_group.get_children():
 		tutorial_label.key_action_released.connect(_on_tutorial_button_pressed.bind(tutorial_label))
@@ -58,6 +59,7 @@ func _on_tutorial_button_pressed(tutorial_label: TutorialTextDialog):
 			animation_sprite.stop()
 			animation_sprite.visible = false
 			video_background_rect.visible = false
+			controller_button.visible = true
 		tutorial_labels[tutorial_label_appearing_order].visible = true
 		tutorial_labels[tutorial_label_appearing_order].get_action_bind_key()
 

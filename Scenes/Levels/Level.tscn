@@ -92,12 +92,6 @@ offset_bottom = 65.0
 theme_override_font_sizes/font_size = 48
 text = "0:0:0"
 
-[node name="PauseMenu" parent="CanvasLayer" unique_id=487446487 instance=ExtResource("8_etd3f")]
-visible = false
-
-[node name="EndGameMenu" parent="CanvasLayer" unique_id=705450075 instance=ExtResource("8_d3u4r")]
-visible = false
-
 [node name="FPS_Label" type="Label" parent="CanvasLayer" unique_id=1445502002]
 process_mode = 3
 visible = false
@@ -235,6 +229,12 @@ offset_bottom = 632.0
 texture_normal = ExtResource("14_flwvg")
 ignore_texture_size = true
 stretch_mode = 0
+
+[node name="PauseMenu" parent="CanvasLayer" unique_id=487446487 instance=ExtResource("8_etd3f")]
+visible = false
+
+[node name="EndGameMenu" parent="CanvasLayer" unique_id=705450075 instance=ExtResource("8_d3u4r")]
+visible = false
 
 [node name="CanvasLayer2" type="CanvasLayer" parent="." unique_id=1842855312]
 follow_viewport_enabled = true
