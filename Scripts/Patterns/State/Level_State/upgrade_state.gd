@@ -14,17 +14,26 @@ func _init(data: Array):
 	
 	if not OptionVariables.check_is_device_pc():
 		connect_to_mobile_signals()
+		level.mobile_move_state_button.visible = false
+		level.mobile_observation_state_button.visible = false
+		level.controller_button.visible = false
+		level.mobile_pause_button.visible = false
+		level.mobile_strategy_button.visible = false
 
 func connect_to_mobile_signals():
 	level.upgrade_button_pressed_mobile.connect(_on_upgrade_button_pressed_mobile)
-
+	level.action_button_pressed_mobile.connect(_on_action_button_pressed_mobile)
+	
+	
 func _unhandled_input(_event: InputEvent):
 	if Input.is_action_just_pressed("switch_to_move_state"):
 		upgrade_menu.hide_upgrade_menu()
+		level.controller_button.visible = true
 		level.set_level_state(PlayerSetMoveState.new([level]))
 		return
 	if Input.is_action_just_pressed("switch_to_preparation_state"):
 		upgrade_menu.hide_upgrade_menu()
+		level.controller_button.visible = true
 		level.set_level_state(PreparationState.new([level]))
 		return
 	
@@ -38,8 +47,22 @@ func update(_delta: float):
 
 #MOBILE
 func _on_upgrade_button_pressed_mobile():
+	disconnect_from_signals()
+	upgrade_menu.hide_upgrade_menu()
+	level.controller_button.visible = true
+	level.mobile_pause_button.visible = true
+	level.set_level_state(PreparationState.new([level]))
+
+func _on_action_button_pressed_mobile():
+	if level.check_can_do_action():
+		disconnect_from_signals()
+		upgrade_menu.hide_upgrade_menu()
+		level.controller_button.visible = true
+		level.mobile_pause_button.visible = true
+		level.set_level_state(ActionState.new([level]))
+
+func disconnect_from_signals():
 	if level.upgrade_button_pressed_mobile.is_connected(_on_upgrade_button_pressed_mobile):
 		level.upgrade_button_pressed_mobile.disconnect(_on_upgrade_button_pressed_mobile)
-	
-	upgrade_menu.hide_upgrade_menu()
-	level.set_level_state(PreparationState.new([level]))
+	if level.action_button_pressed_mobile.is_connected(_on_action_button_pressed_mobile):
+		level.action_button_pressed_mobile.disconnect(_on_action_button_pressed_mobile)

@@ -310,8 +310,17 @@ func _on_controller_button_pressed() -> void:
 
 #MOBILE
 @onready var mobile_upgrade_menu_button: TextureButton = $CanvasLayer/Mobile_Buttons/Mobile_Upgrade_Menu_Button
+@onready var mobile_move_state_button: TextureButton = $CanvasLayer/Mobile_Buttons/Mobile_Move_State_Button
+@onready var mobile_observation_state_button: TextureButton = $CanvasLayer/Mobile_Buttons/Mobile_Observation_State_Button
+@onready var mobile_action_button: TextureButton = $CanvasLayer/Mobile_Buttons/Mobile_Action_Button
+@onready var mobile_pause_button: TextureButton = $CanvasLayer/Mobile_Buttons/Mobile_Pause_Button
+@onready var mobile_strategy_button: TextureButton = $CanvasLayer/Mobile_Buttons/Mobile_Strategy_Button
 
 signal upgrade_button_pressed_mobile()
+signal move_state_button_pressed_mobile()
+signal observation_state_button_pressed_mobile()
+signal action_button_pressed_mobile()
+signal strategy_button_pressed_mobile()
 
 func _on_mobile_pause_button_pressed() -> void:
 	if not is_level_completed:
@@ -321,3 +330,17 @@ func _on_mobile_pause_button_pressed() -> void:
 
 func _on_mobile_upgrade_menu_button_pressed() -> void:
 	upgrade_button_pressed_mobile.emit()
+
+func _on_mobile_move_state_button_pressed() -> void:
+	move_state_button_pressed_mobile.emit()
+
+func _on_mobile_observation_state_button_pressed() -> void:
+	observation_state_button_pressed_mobile.emit()
+
+
+func _on_mobile_action_button_pressed() -> void:
+	action_button_pressed_mobile.emit()
+
+
+func _on_mobile_strategy_button_pressed() -> void:
+	strategy_button_pressed_mobile.emit()

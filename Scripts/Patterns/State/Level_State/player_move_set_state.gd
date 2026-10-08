@@ -18,12 +18,18 @@ func _init(data: Array):
 	#player_selection_manager = PlayerSelectionManager.new()
 	level.current_state_label.text = "MOVE STATE"
 	#fill_occupied_target_tiles_dict()
-	if not OptionVariables.check_is_device_pc():
+	if OptionVariables.check_is_device_pc():
 		connect_to_mobile_signals()
+		level.mobile_move_state_button.visible = false
+		level.mobile_observation_state_button.visible = true
 
 func connect_to_mobile_signals():
 	level.upgrade_button_pressed_mobile.connect(_on_upgrade_button_pressed_mobile)
-
+	level.observation_state_button_pressed_mobile.connect(_on_observation_state_button_pressed_mobile)
+	level.strategy_button_pressed_mobile.connect(_on_strategy_button_pressed_mobile)
+	PlayerSelectionManager.player_selection_changed_mobile.connect(_on_player_selected_mobile)
+	PlayerSelectionManager.player_deselected.connect(_on_player_deselected_mobile)
+	
 func _unhandled_input(event: InputEvent):
 	var selected_player = PlayerSelectionManager.selected_player
 	#var selected_player = player_selection_manager.selected_player
@@ -31,11 +37,11 @@ func _unhandled_input(event: InputEvent):
 		update_preview()
 	
 	if Input.is_action_just_pressed("switch_to_preparation_state"):
+		disconnect_from_signals()
 		level.set_level_state(PreparationState.new([level]))
 		return
 	if Input.is_action_just_pressed("upgrade_menu"):
-		if level.radial_menu.id_pressed.is_connected(_on_popup_menu_item_pressed):
-			level.radial_menu.id_pressed.disconnect(_on_popup_menu_item_pressed)
+		disconnect_from_signals()
 		level.set_level_state(UpgradeState.new([level]))
 		return
 	
@@ -43,8 +49,7 @@ func _unhandled_input(event: InputEvent):
 		#if PlayerSelectionManager.selected_player:
 			#PlayerSelectionManager.deselect_player()
 		if check_can_do_action():
-			if level.radial_menu.id_pressed.is_connected(_on_popup_menu_item_pressed):
-				level.radial_menu.id_pressed.disconnect(_on_popup_menu_item_pressed)
+			disconnect_from_signals()
 			Signals.action_started.emit()
 			level.set_level_state(ActionState.new([level]))
 			return
@@ -161,7 +166,32 @@ func _on_popup_menu_item_pressed(item_id: int):
 
 #MOBILE
 func _on_upgrade_button_pressed_mobile():
+	disconnect_from_signals()
+	level.set_level_state(UpgradeState.new([level]))
+
+func _on_observation_state_button_pressed_mobile():
+	disconnect_from_signals()
+	level.set_level_state(PreparationState.new([level]))
+
+func _on_strategy_button_pressed_mobile():
+	if PlayerSelectionManager.selected_player and not PlayerSelectionManager.selected_player.is_killed:
+		level.radial_menu.popup()
+
+func _on_player_selected_mobile():
+	if PlayerSelectionManager.selected_player and not PlayerSelectionManager.selected_player.is_killed:
+		level.mobile_strategy_button.visible = true
+
+func _on_player_deselected_mobile(deselected_player: Player):
+	level.mobile_strategy_button.visible = false
+
+func disconnect_from_signals():
+	if level.radial_menu.id_pressed.is_connected(_on_popup_menu_item_pressed):
+		level.radial_menu.id_pressed.disconnect(_on_popup_menu_item_pressed)
 	if level.upgrade_button_pressed_mobile.is_connected(_on_upgrade_button_pressed_mobile):
 		level.upgrade_button_pressed_mobile.disconnect(_on_upgrade_button_pressed_mobile)
-		
-	level.set_level_state(UpgradeState.new([level]))
+	if level.strategy_button_pressed_mobile.is_connected(_on_strategy_button_pressed_mobile):
+		level.strategy_button_pressed_mobile.disconnect(_on_strategy_button_pressed_mobile)
+	if PlayerSelectionManager.player_selection_changed_mobile.is_connected(_on_player_selected_mobile):
+		PlayerSelectionManager.player_selection_changed_mobile.disconnect(_on_player_selected_mobile)
+	if 	PlayerSelectionManager.player_deselected.is_connected(_on_player_deselected_mobile):
+		PlayerSelectionManager.player_deselected.disconnect(_on_player_deselected_mobile)

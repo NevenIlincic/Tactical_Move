@@ -10,7 +10,10 @@
 [ext_resource type="Texture2D" uid="uid://cqkb0dm6dgh1d" path="res://Sprites/Mobile_Sprites/HUD/action_button.png" id="12_umfvy"]
 [ext_resource type="PackedScene" uid="uid://sle28fdvjlhu" path="res://Scenes/Labels/Tutorial_Button_Label.tscn" id="13_3jhef"]
 [ext_resource type="Texture2D" uid="uid://dg1lgkghotkmu" path="res://Sprites/Mobile_Sprites/HUD/upgrade_menu_button.png" id="13_8loo1"]
+[ext_resource type="Texture2D" uid="uid://u4snu2wiae1p" path="res://Sprites/Mobile_Sprites/HUD/move_state_button.png" id="14_4hk1l"]
 [ext_resource type="Texture2D" uid="uid://dwu8ehdbn2lax" path="res://Sprites/HUD/controller_icon.png" id="14_flwvg"]
+[ext_resource type="Texture2D" uid="uid://bubrqq711mt3u" path="res://Sprites/Mobile_Sprites/HUD/observation_state_button.png" id="15_bi7sv"]
+[ext_resource type="Texture2D" uid="uid://boyruiqtblehv" path="res://Sprites/Mobile_Sprites/HUD/strategy_button.png" id="16_jk42q"]
 [ext_resource type="PackedScene" uid="uid://dyh4j30522553" path="res://Scenes/Soldier/Player/Player_Stats.tscn" id="25_wr6c8"]
 [ext_resource type="PackedScene" uid="uid://bmbr4kpa58muf" path="res://Scenes/Menu/Upgrade_Menu.tscn" id="26_u4xmi"]
 [ext_resource type="PackedScene" uid="uid://q6uf7pve5vqm" path="res://Scenes/Dialog/Confirmation_Dialog.tscn" id="27_bvxha"]
@@ -117,10 +120,9 @@ text = "Upgrade card added to upgrade menu"
 
 [node name="Mobile_Pause_Button" type="TextureButton" parent="CanvasLayer/Mobile_Buttons" unique_id=1392886850]
 texture_filter = 1
-offset_left = 1088.0
-offset_top = 320.0
-offset_right = 1152.0
-offset_bottom = 384.0
+offset_top = 128.0
+offset_right = 64.0
+offset_bottom = 192.0
 texture_normal = ExtResource("11_umfvy")
 
 [node name="Mobile_Action_Button" type="TextureButton" parent="CanvasLayer/Mobile_Buttons" unique_id=1627530202]
@@ -141,6 +143,29 @@ offset_bottom = 544.0
 texture_normal = ExtResource("13_8loo1")
 ignore_texture_size = true
 stretch_mode = 0
+
+[node name="Mobile_Move_State_Button" type="TextureButton" parent="CanvasLayer/Mobile_Buttons" unique_id=502293379]
+texture_filter = 1
+offset_left = 1089.0
+offset_top = 296.0
+offset_right = 1153.0
+offset_bottom = 360.0
+texture_normal = ExtResource("14_4hk1l")
+
+[node name="Mobile_Observation_State_Button" type="TextureButton" parent="CanvasLayer/Mobile_Buttons" unique_id=1258614588]
+texture_filter = 1
+offset_left = 1088.0
+offset_top = 384.0
+offset_right = 1152.0
+offset_bottom = 448.0
+texture_normal = ExtResource("15_bi7sv")
+
+[node name="Mobile_Strategy_Button" type="TextureButton" parent="CanvasLayer/Mobile_Buttons" unique_id=1719445036]
+visible = false
+offset_top = 384.0
+offset_right = 64.0
+offset_bottom = 448.0
+texture_normal = ExtResource("16_jk42q")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer" unique_id=594881798]
 visible = false
@@ -295,5 +320,9 @@ metadata/_edit_use_anchors_ = true
 
 [connection signal="pressed" from="CanvasLayer/Upgrade_Card_Bonus_Button" to="." method="_on_upgrade_card_bonus_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/Mobile_Buttons/Mobile_Pause_Button" to="." method="_on_mobile_pause_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Mobile_Buttons/Mobile_Action_Button" to="." method="_on_mobile_action_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/Mobile_Buttons/Mobile_Upgrade_Menu_Button" to="." method="_on_mobile_upgrade_menu_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Mobile_Buttons/Mobile_Move_State_Button" to="." method="_on_mobile_move_state_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Mobile_Buttons/Mobile_Observation_State_Button" to="." method="_on_mobile_observation_state_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Mobile_Buttons/Mobile_Strategy_Button" to="." method="_on_mobile_strategy_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/Controller_Button" to="." method="_on_controller_button_pressed"]
