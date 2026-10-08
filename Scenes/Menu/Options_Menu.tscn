@@ -790,14 +790,17 @@ layout_mode = 2
 [node name="Dummy_Control_Input8" type="Control" parent="Inputs_Menu/Inputs_Scroll_Container/GridContainer" unique_id=1918905500]
 layout_mode = 2
 
-[node name="Tabs" type="Node2D" parent="." unique_id=1090724165]
+[node name="Tabs" type="HBoxContainer" parent="." unique_id=232100434]
+theme_override_constants/separation = 250
 script = ExtResource("4_k0apt")
 
-[node name="Inputs_Tab_Button" type="Node2D" parent="Tabs" unique_id=1909949166]
+[node name="Inputs_Tab_Button" type="Control" parent="Tabs" unique_id=1978984912]
 modulate = Color(1, 1, 1, 0)
+layout_mode = 2
 script = ExtResource("5_0sjke")
 
 [node name="Inputs_Button" type="TextureButton" parent="Tabs/Inputs_Tab_Button" unique_id=1811131419]
+layout_mode = 0
 offset_left = 24.0
 offset_top = 24.000011
 offset_right = 280.0
@@ -809,6 +812,7 @@ button_group = SubResource("ButtonGroup_ehegv")
 texture_normal = ExtResource("12_av6u3")
 
 [node name="Input_Label" type="Label" parent="Tabs/Inputs_Tab_Button" unique_id=715021113]
+layout_mode = 0
 offset_left = 28.689651
 offset_top = 28.992546
 offset_right = 220.68964
@@ -819,12 +823,13 @@ text = "INPUTS"
 horizontal_alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="Audio_Tab_Button" type="Node2D" parent="Tabs" unique_id=2106812418]
+[node name="Audio_Tab_Button" type="Control" parent="Tabs" unique_id=1150064277]
 modulate = Color(1, 1, 1, 0)
-position = Vector2(232, 0)
+layout_mode = 2
 script = ExtResource("5_0sjke")
 
 [node name="Inputs_Button" type="TextureButton" parent="Tabs/Audio_Tab_Button" unique_id=1003803770]
+layout_mode = 0
 offset_left = 24.0
 offset_top = 24.000011
 offset_right = 280.0
@@ -835,6 +840,7 @@ button_group = SubResource("ButtonGroup_0sjke")
 texture_normal = ExtResource("12_av6u3")
 
 [node name="Input_Label" type="Label" parent="Tabs/Audio_Tab_Button" unique_id=1703855915]
+layout_mode = 0
 offset_left = 28.689651
 offset_top = 28.992546
 offset_right = 220.68964
@@ -845,12 +851,13 @@ text = "AUDIO"
 horizontal_alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="Video_Tab_Button" type="Node2D" parent="Tabs" unique_id=981360680]
+[node name="Video_Tab_Button" type="Control" parent="Tabs" unique_id=475848411]
 modulate = Color(1, 1, 1, 0)
-position = Vector2(480, 0)
+layout_mode = 2
 script = ExtResource("5_0sjke")
 
 [node name="Inputs_Button" type="TextureButton" parent="Tabs/Video_Tab_Button" unique_id=328089402]
+layout_mode = 0
 offset_left = 24.0
 offset_top = 24.000011
 offset_right = 280.0
@@ -861,6 +868,7 @@ button_group = SubResource("ButtonGroup_k0apt")
 texture_normal = ExtResource("12_av6u3")
 
 [node name="Input_Label" type="Label" parent="Tabs/Video_Tab_Button" unique_id=602713770]
+layout_mode = 0
 offset_left = 28.689651
 offset_top = 28.992546
 offset_right = 220.68964

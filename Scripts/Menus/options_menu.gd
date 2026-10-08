@@ -29,9 +29,15 @@ func _ready() -> void:
 	input_remap_manager = InputRemapManager.new()
 	input_buttons = get_tree().get_nodes_in_group("input_button")
 	play_appear_animation()
-	for button: InputButton in input_buttons:
-		button.set_input_remap_manager(input_remap_manager)
-		input_remap_manager.input_key_changed.connect(button.check_is_same_action_key_bind)
+	if OptionVariables.check_is_device_pc():
+		current_tab_opened = "INPUTS_TAB"
+		for button: InputButton in input_buttons:
+			button.set_input_remap_manager(input_remap_manager)
+			input_remap_manager.input_key_changed.connect(button.check_is_same_action_key_bind)
+	else:
+		current_tab_opened = "AUDIO_TAB"
+		inputs_tab_button.visible = false
+		
 	connect_to_signals()
 	
 	audio_sliders.append(control)
@@ -39,7 +45,8 @@ func _ready() -> void:
 	audio_sliders.append(control_3)
 	audio_sliders.append(control_4)
 func connect_to_signals():
-	inputs_tab_button.inputs_button.pressed.connect(_on_inputs_tab_button_pressed)
+	if OptionVariables.check_is_device_pc():
+		inputs_tab_button.inputs_button.pressed.connect(_on_inputs_tab_button_pressed)
 	audio_tab_button.inputs_button.pressed.connect(_on_audio_tab_button_pressed)
 	video_tab_button.inputs_button.pressed.connect(_on_video_tab_button_pressed)
 	Signals.options_saved.connect(_on_options_saved)

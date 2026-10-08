@@ -1,5 +1,29 @@
 extends Node
 
+enum RunningDevice{
+	PC,
+	MOBILE
+}
+var device: RunningDevice = RunningDevice.PC
+
+func _ready() -> void:
+	check_device_platform()
+
+func check_is_device_pc() -> bool:
+	return device == RunningDevice.PC
+
+func check_device_platform() -> void:
+	if OS.get_name() == "Web":
+		var user_agent = JavaScriptBridge.eval("navigator.userAgent").to_lower()
+		
+		if "iphone" in user_agent or "ipad" in user_agent or "ipod" in user_agent:
+			device = RunningDevice.MOBILE
+		elif "android" in user_agent:
+			device = RunningDevice.MOBILE
+		else:
+			device = RunningDevice.PC
+
+
 #### VIDEO SETTINGS
 #PLAYER VISION
 signal vision_type_changed(new_vision_type: VisionType)

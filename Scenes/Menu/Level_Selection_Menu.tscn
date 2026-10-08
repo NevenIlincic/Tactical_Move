@@ -42,14 +42,14 @@ position = Vector2(896, 544)
 button_text = "BACK"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=86404589]
-offset_left = 832.0
-offset_top = 64.0
-offset_right = 1152.0
-offset_bottom = 576.0
+offset_left = 600.0
+offset_top = 32.0
+offset_right = 1136.0
+offset_bottom = 544.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer" unique_id=1849956178]
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 6
 size_flags_vertical = 3
 theme_override_constants/separation = 75
 
@@ -95,14 +95,25 @@ layout_mode = 2
 [node name="LevelSelectionButton" parent="ScrollContainer/VBoxContainer/Level_5" unique_id=716842579 instance=ExtResource("3_yqc5b")]
 button_text = "Not Available"
 
-[node name="ScrollContainer2" type="ScrollContainer" parent="." unique_id=623278450]
-offset_left = 80.0
+[node name="Achievements_Scroll_Container" type="ScrollContainer" parent="." unique_id=623278450]
+offset_left = -624.0
 offset_top = 440.0
-offset_right = 656.0
+offset_right = -48.0
 offset_bottom = 592.0
+layout_direction = 3
 
-[node name="Achievements_Grid_Container" type="GridContainer" parent="ScrollContainer2" unique_id=1946086071]
+[node name="MarginContainer" type="MarginContainer" parent="Achievements_Scroll_Container" unique_id=1740306938]
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+offset_transform_enabled = true
+
+[node name="Achievements_Grid_Container" type="GridContainer" parent="Achievements_Scroll_Container/MarginContainer" unique_id=1946086071]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+offset_transform_enabled = true
+layout_direction = 2
 theme_override_constants/h_separation = 300
 theme_override_constants/v_separation = 75
 columns = 2

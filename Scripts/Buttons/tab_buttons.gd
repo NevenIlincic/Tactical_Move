@@ -1,14 +1,18 @@
-class_name TabButton extends Node2D
+class_name TabButton extends Control
 
 @onready var input_label: Label = $Input_Label
 @onready var inputs_button: TextureButton = $Inputs_Button
 
 
 func _ready() -> void:
-	if input_label.text == "INPUTS":
-		set_input_label_font_color(Color.LIGHT_SALMON)
-		do_input_label_tween_scale(Vector2(1.2, 1.2))
-
+	if OptionVariables.check_is_device_pc():
+		if input_label.text == "INPUTS":
+			set_input_label_font_color(Color.LIGHT_SALMON)
+			do_input_label_tween_scale(Vector2(1.2, 1.2))
+	else:
+		if input_label.text == "AUDIO":
+			set_input_label_font_color(Color.LIGHT_SALMON)
+			do_input_label_tween_scale(Vector2(1.2, 1.2))
 
 func _on_inputs_button_toggled(toggled_on: bool) -> void:
 	var scale_amount: Vector2

@@ -13,8 +13,13 @@ var is_mouse_hovered: bool = false
 
 @export var level_cover_texture: CompressedTexture2D
 
+#MOBILE DEVICES
+@onready var mobile_level_button: Button = $Mobile_Level_Button
+
 func _ready() -> void:
 	label.text = button_text
+	if OptionVariables.check_is_device_pc():
+		mobile_level_button.visible = false
 
 func _on_animation_loop_finished():
 	if not is_mouse_hovered:
@@ -31,7 +36,8 @@ func _on_texture_rect_mouse_entered() -> void:
 	animation_player.play("card_shine_effect")
 	is_mouse_hovered = true
 	AudioManager.play_button_hover_sound()
-	show_level_cover_image.emit()
+	if OptionVariables.check_is_device_pc():
+		show_level_cover_image.emit()
 
 
 func _on_texture_rect_mouse_exited() -> void:
@@ -63,3 +69,7 @@ func _on_texture_rect_gui_input(event: InputEvent) -> void:
 					##get_tree().change_scene_to_file("res://Scenes/Menu/Options_Menu.tscn")
 				#"BACK":
 					#transition_to_main_screen.emit()
+
+
+func _on_mobile_level_button_pressed() -> void:
+	show_level_cover_image.emit()

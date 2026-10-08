@@ -1,4 +1,4 @@
-extends Node2D
+extends HBoxContainer
 
 @onready var inputs_tab_button: TabButton = $Inputs_Tab_Button
 @onready var audio_tab_button: TabButton = $Audio_Tab_Button
