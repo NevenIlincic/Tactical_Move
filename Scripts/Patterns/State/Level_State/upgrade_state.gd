@@ -11,7 +11,12 @@ func _init(data: Array):
 	upgrade_menu.set_alive_players(alive_players)
 	upgrade_menu.show_upgrade_menu()
 	level.current_state_label.text = "UPGRADE STATE"
+	
+	if not OptionVariables.check_is_device_pc():
+		connect_to_mobile_signals()
 
+func connect_to_mobile_signals():
+	level.upgrade_button_pressed_mobile.connect(_on_upgrade_button_pressed_mobile)
 
 func _unhandled_input(_event: InputEvent):
 	if Input.is_action_just_pressed("switch_to_move_state"):
@@ -30,3 +35,11 @@ func _unhandled_input(_event: InputEvent):
 		
 func update(_delta: float):
 	pass
+
+#MOBILE
+func _on_upgrade_button_pressed_mobile():
+	if level.upgrade_button_pressed_mobile.is_connected(_on_upgrade_button_pressed_mobile):
+		level.upgrade_button_pressed_mobile.disconnect(_on_upgrade_button_pressed_mobile)
+	
+	upgrade_menu.hide_upgrade_menu()
+	level.set_level_state(PreparationState.new([level]))

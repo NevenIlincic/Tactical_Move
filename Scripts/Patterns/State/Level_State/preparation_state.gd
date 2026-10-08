@@ -6,16 +6,32 @@ func _init(data: Array):
 	level = data[0]
 	level.current_state_label.text = "OBSERVATION STATE"
 	level.radial_menu.id_pressed.connect(_on_popup_menu_item_pressed)
+	
+	if not OptionVariables.check_is_device_pc():
+		connect_to_mobile_signals()
 
+func connect_to_mobile_signals():
+	level.upgrade_button_pressed_mobile.connect(_on_upgrade_button_pressed_mobile)
+
+	
 func _unhandled_input(_event: InputEvent):
 	if Input.is_action_just_pressed("upgrade_menu"):
+		if level.upgrade_button_pressed_mobile.is_connected(_on_upgrade_button_pressed_mobile):
+			level.upgrade_button_pressed_mobile.disconnect(_on_upgrade_button_pressed_mobile)
+		
 		level.set_level_state(UpgradeState.new([level]))
 		return
 	if Input.is_action_just_pressed("switch_to_move_state"):
+		if level.upgrade_button_pressed_mobile.is_connected(_on_upgrade_button_pressed_mobile):
+			level.upgrade_button_pressed_mobile.disconnect(_on_upgrade_button_pressed_mobile)
+		
 		level.set_level_state(PlayerSetMoveState.new([level]))
 		return
 	if Input.is_action_just_pressed("move_confirm"):
 		if level.check_can_do_action():
+			if level.upgrade_button_pressed_mobile.is_connected(_on_upgrade_button_pressed_mobile):
+				level.upgrade_button_pressed_mobile.disconnect(_on_upgrade_button_pressed_mobile)
+		
 			level.set_level_state(ActionState.new([level]))
 			return
 	if Input.is_action_just_pressed("popup") and PlayerSelectionManager.selected_player and not PlayerSelectionManager.selected_player.is_killed:
@@ -43,3 +59,11 @@ func _on_popup_menu_item_pressed(item_id: int):
 			PlayerSelectionManager.selected_player.change_engagement_strategy(Player.EngagementRules.MOVE_AND_SHOT_FOLLOWING)
 			#PlayerSelectionManager.selected_player.set_engagement_strategy(MoveShootFollowingStrategy.new())
 	Signals.engagement_strategy_changed.emit(PlayerSelectionManager.selected_player)
+
+
+#MOBILE
+func _on_upgrade_button_pressed_mobile():
+	if level.upgrade_button_pressed_mobile.is_connected(_on_upgrade_button_pressed_mobile):
+		level.upgrade_button_pressed_mobile.disconnect(_on_upgrade_button_pressed_mobile)
+		
+	level.set_level_state(UpgradeState.new([level]))

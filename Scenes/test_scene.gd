@@ -59,7 +59,13 @@ var achievement_manager: AchievementManager
 enum DialogType { NONE, UPGRADE, REWARDED_AD }
 var current_dialog_type: DialogType = DialogType.NONE
 
+#MOBILE
+@onready var mobile_buttons: Node2D = $CanvasLayer/Mobile_Buttons
+
 func _ready() -> void:
+	#if OptionVariables.check_is_device_pc():
+		#mobile_buttons.visible = false
+	
 	UpgradeCardsManager.clear_available_permanent_upgrades()
 	for player in get_tree().get_nodes_in_group("Player"):
 		if player is Player:
@@ -93,6 +99,8 @@ func _ready() -> void:
 	Sdk.web_sdk.level_started()
 	if Sdk.web_sdk.is_ad_block_enabled:
 		upgrade_card_bonus_button.disabled = true
+		
+
 	
 const VISION_POLYGON = preload("uid://bjx1wow4vot1m")
 #@onready var vision_polygons_node: Node2D = $CanvasGroup/Vision_Polygons_Node
@@ -299,3 +307,17 @@ func _on_interstitial_ad_watched():
 func _on_controller_button_pressed() -> void:
 	scroll_container.visible = !scroll_container.visible
 	controller_button.release_focus()
+
+#MOBILE
+@onready var mobile_upgrade_menu_button: TextureButton = $CanvasLayer/Mobile_Buttons/Mobile_Upgrade_Menu_Button
+
+signal upgrade_button_pressed_mobile()
+
+func _on_mobile_pause_button_pressed() -> void:
+	if not is_level_completed:
+		pause_menu.show_pause_menu()
+		Sdk.web_sdk.level_paused()
+
+
+func _on_mobile_upgrade_menu_button_pressed() -> void:
+	upgrade_button_pressed_mobile.emit()
