@@ -251,7 +251,7 @@ func check_are_buttons_visible():
 			level.mobile_reset_path_button.visible = true
 		else:
 			level.mobile_reset_path_button.visible = false
-		if selected_player.point_to_look != null:
+		if selected_player.look_at_position_sprite.visible:
 			level.mobile_reset_point_to_look_while_moving_button.visible = true
 		else:
 			level.mobile_reset_point_to_look_while_moving_button.visible = false
@@ -300,7 +300,7 @@ func _on_player_selected_mobile():
 			level.mobile_reset_path_button.visible = true
 		else:
 			level.mobile_reset_path_button.visible = false
-		if selected_player.point_to_look != null:
+		if selected_player.look_at_position_sprite.visible:
 			level.mobile_reset_point_to_look_while_moving_button.visible = true
 		else:
 			level.mobile_reset_point_to_look_while_moving_button.visible = false
