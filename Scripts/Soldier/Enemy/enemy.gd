@@ -26,9 +26,10 @@ func when_spotted():
 	num_seen_by += 1 
 
 func when_escaped():
-	num_seen_by -= 1
-	if num_seen_by == 0:
-		visible = false
+	if num_seen_by > 0:
+		num_seen_by -= 1
+		if num_seen_by <= 0:
+			visible = false
 
 func check_soldier_has_action():
 	if close_players.is_empty():

@@ -93,8 +93,8 @@ func _on_player_move_finished(soldier: Soldier):
 	var enemies_finished_ids: Array[String] = []
 	if num_player_finished_moves >= initial_num_alive_players:
 		for enemy_soldier_id in soldiers_in_action:
-			var enemy_soldier: Soldier = soldiers_in_action[enemy_soldier_id]
-			if is_instance_valid(enemy_soldier) and not enemy_soldier.is_queued_for_deletion() and enemy_soldier is Enemy:
+			if is_instance_valid(soldiers_in_action[enemy_soldier_id]) and not soldiers_in_action[enemy_soldier_id].is_queued_for_deletion() and soldiers_in_action[enemy_soldier_id] is Enemy:
+				var enemy_soldier: Soldier = soldiers_in_action[enemy_soldier_id]
 				if enemy_soldier.vision_area.enemies_can_be_shot_at.is_empty():
 					enemy_soldier._on_players_action_finished()
 					enemies_finished_ids.append(enemy_soldier.soldier_id)

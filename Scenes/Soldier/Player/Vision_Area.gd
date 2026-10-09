@@ -206,6 +206,7 @@ func _check_enemies():
 			continue
 		var enemy: Soldier = enemies_in_view[enemy_soldier_id]
 		if enemy.is_killed:
+			parent_soldier._on_enemy_lost(enemy)
 			if enemies_can_be_shot_at.has(enemy_soldier_id):
 				enemies_can_be_shot_at.erase(enemy_soldier_id)
 			continue

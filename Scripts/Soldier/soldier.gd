@@ -105,7 +105,14 @@ func _on_enemy_soldier_killed(enemy_killed: Soldier, _killed_by: Soldier):
 		vision_polygon.bullet_hit_point = null
 	if soldier_id != enemy_killed.soldier_id:
 		_on_enemy_lost(enemy_killed)
-		
+	else:
+		if enemy_killed is Player:
+			var enemies_in_view: Dictionary = enemy_killed.vision_area.enemies_in_view.duplicate()
+			for enemy_id: String in enemies_in_view:
+				if is_instance_valid(enemies_in_view[enemy_id]) and not enemies_in_view[enemy_id].is_queued_for_deletion():
+					var enemy: Enemy = enemies_in_view[enemy_id]
+					enemy.when_escaped()
+
 func when_killed():
 	if is_killed:
 		disconnect_from_signals()
