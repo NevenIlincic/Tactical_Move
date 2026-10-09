@@ -17,6 +17,9 @@
 [ext_resource type="Texture2D" uid="uid://rn3tv1uo8xo1" path="res://Sprites/Mobile_Sprites/HUD/draw_path_button.png" id="17_1tq5b"]
 [ext_resource type="Texture2D" uid="uid://2g3vja68t02q" path="res://Sprites/Mobile_Sprites/HUD/draw_path_button_pressed.png" id="18_xmo3k"]
 [ext_resource type="Texture2D" uid="uid://vffni4l4q3cs" path="res://Sprites/Mobile_Sprites/HUD/reset_path_button.png" id="19_1rxo4"]
+[ext_resource type="Texture2D" uid="uid://cgx3x57yjdju7" path="res://Sprites/Mobile_Sprites/HUD/point_to_look_while_moving_button.png" id="20_x2ay6"]
+[ext_resource type="Texture2D" uid="uid://bvbyia07b3pcy" path="res://Sprites/Mobile_Sprites/HUD/point_to_look_while_moving_button_pressed.png" id="21_k3aso"]
+[ext_resource type="Texture2D" uid="uid://wksc55ragfoh" path="res://Sprites/Mobile_Sprites/HUD/reset_point_to_look_while_moving_button.png" id="22_803qd"]
 [ext_resource type="PackedScene" uid="uid://dyh4j30522553" path="res://Scenes/Soldier/Player/Player_Stats.tscn" id="25_wr6c8"]
 [ext_resource type="PackedScene" uid="uid://bmbr4kpa58muf" path="res://Scenes/Menu/Upgrade_Menu.tscn" id="26_u4xmi"]
 [ext_resource type="PackedScene" uid="uid://q6uf7pve5vqm" path="res://Scenes/Dialog/Confirmation_Dialog.tscn" id="27_bvxha"]
@@ -123,9 +126,9 @@ text = "Upgrade card added to upgrade menu"
 
 [node name="Mobile_Pause_Button" type="TextureButton" parent="CanvasLayer/Mobile_Buttons" unique_id=1392886850]
 texture_filter = 1
-offset_top = 128.0
+offset_top = 64.0
 offset_right = 64.0
-offset_bottom = 192.0
+offset_bottom = 128.0
 focus_mode = 0
 texture_normal = ExtResource("11_umfvy")
 
@@ -169,32 +172,52 @@ focus_mode = 0
 texture_normal = ExtResource("15_bi7sv")
 
 [node name="Mobile_Strategy_Button" type="TextureButton" parent="CanvasLayer/Mobile_Buttons" unique_id=1719445036]
-visible = false
-offset_top = 384.0
-offset_right = 64.0
-offset_bottom = 448.0
+offset_left = 8.0
+offset_top = 447.0
+offset_right = 72.0
+offset_bottom = 511.0
 focus_mode = 0
 texture_normal = ExtResource("16_jk42q")
 
 [node name="Mobile_Draw_Path_Button" type="TextureButton" parent="CanvasLayer/Mobile_Buttons" unique_id=261377266]
-visible = false
-offset_top = 256.0
+offset_left = 8.0
+offset_top = 176.0
 offset_right = 64.0
-offset_bottom = 320.0
+offset_bottom = 232.0
 focus_mode = 0
 toggle_mode = true
 texture_normal = ExtResource("17_1tq5b")
 texture_pressed = ExtResource("18_xmo3k")
+ignore_texture_size = true
+stretch_mode = 0
 
 [node name="Mobile_Reset_Path_Button" type="TextureButton" parent="CanvasLayer/Mobile_Buttons" unique_id=1331168704]
-visible = false
 texture_filter = 1
 texture_repeat = 1
 offset_left = 152.0
-offset_top = 8.0
-offset_right = 200.0
+offset_right = 208.0
 offset_bottom = 56.0
 texture_normal = ExtResource("19_1rxo4")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Mobile_Point_To_Look_While_Moving_Button" type="TextureButton" parent="CanvasLayer/Mobile_Buttons" unique_id=269581802]
+offset_top = 264.0
+offset_right = 64.0
+offset_bottom = 328.0
+focus_mode = 0
+toggle_mode = true
+texture_normal = ExtResource("20_x2ay6")
+texture_pressed = ExtResource("21_k3aso")
+
+[node name="Mobile_Reset_Point_To_Look_While_Moving_Button" type="TextureButton" parent="CanvasLayer/Mobile_Buttons" unique_id=978968608]
+texture_filter = 1
+texture_repeat = 1
+offset_left = 232.0
+offset_right = 288.0
+offset_bottom = 61.25
+focus_mode = 0
+texture_normal = ExtResource("22_803qd")
 ignore_texture_size = true
 stretch_mode = 0
 
@@ -358,4 +381,6 @@ metadata/_edit_use_anchors_ = true
 [connection signal="pressed" from="CanvasLayer/Mobile_Buttons/Mobile_Strategy_Button" to="." method="_on_mobile_strategy_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/Mobile_Buttons/Mobile_Draw_Path_Button" to="." method="_on_mobile_draw_path_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/Mobile_Buttons/Mobile_Reset_Path_Button" to="." method="_on_mobile_reset_path_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Mobile_Buttons/Mobile_Point_To_Look_While_Moving_Button" to="." method="_on_mobile_point_to_look_while_moving_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Mobile_Buttons/Mobile_Reset_Point_To_Look_While_Moving_Button" to="." method="_on_mobile_reset_point_to_look_while_moving_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/Controller_Button" to="." method="_on_controller_button_pressed"]

@@ -19,9 +19,12 @@ func _init(data: Array):
 		level.controller_button.visible = false
 		level.mobile_pause_button.visible = false
 		level.mobile_strategy_button.visible = false
-		level.mobile_draw_path_button.visible = false
 		level.mobile_action_button.visible = false
+		
+		level.mobile_draw_path_button.visible = false
 		level.mobile_reset_path_button.visible = false
+		level.mobile_point_to_look_while_moving_button.visible = false
+		level.mobile_reset_point_to_look_while_moving_button.visible = false
 
 	
 	level.can_manipulate_camera_signal.emit(true)

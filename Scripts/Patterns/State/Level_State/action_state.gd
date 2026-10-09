@@ -46,10 +46,14 @@ func _init(data: Array):
 		level.mobile_move_state_button.visible = false
 		level.mobile_observation_state_button.visible = false
 		level.mobile_upgrade_menu_button.visible = false
-		level.mobile_draw_path_button.visible = false
 		level.mobile_strategy_button.visible = false
 		level.mobile_action_button.visible = false
+		
+		level.mobile_draw_path_button.visible = false
 		level.mobile_reset_path_button.visible = false
+		level.mobile_point_to_look_while_moving_button.visible = false
+		level.mobile_reset_point_to_look_while_moving_button.visible = false
+
 	
 	
 func connect_to_signals():

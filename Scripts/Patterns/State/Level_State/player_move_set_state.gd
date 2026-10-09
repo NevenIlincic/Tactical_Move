@@ -10,6 +10,9 @@ var is_drawing: bool = false
 var occupied_target_tiles: Dictionary = {} #{tile: {player_key: true } }
 var players_cause_collision: Dictionary = {}
 
+#MOBILE
+var is_rotate_player_toggled: bool = false
+
 func _init(data: Array):
 	level = data[0]
 
@@ -33,6 +36,7 @@ func connect_to_mobile_signals():
 	level.strategy_button_pressed_mobile.connect(_on_strategy_button_pressed_mobile)
 	level.draw_button_pressed_mobile.connect(_on_draw_button_pressed_mobile)
 	level.reset_path_button_pressed_mobile.connect(_on_reset_path_button_pressed_mobile)
+	level.point_to_look_while_moving_button_pressed_mobile.connect(_on_point_to_look_while_moving_pressed_mobile)
 	PlayerSelectionManager.player_selection_changed_mobile.connect(_on_player_selected_mobile)
 	PlayerSelectionManager.player_deselected.connect(_on_player_deselected_mobile)
 	
@@ -80,9 +84,16 @@ func _unhandled_input(event: InputEvent):
 		if Input.is_action_just_pressed("reset_rotate_player_after_move"):
 			selected_player.reset_after_move_looking_point()
 		
-		if Input.is_action_just_pressed("rotate_player"):
-			level.players_set_for_rotation[selected_player] = true
-			selected_player.set_point_to_look(level.get_global_mouse_position())
+		if OptionVariables.check_is_device_pc():
+			if Input.is_action_just_pressed("rotate_player"):
+				level.players_set_for_rotation[selected_player] = true
+				selected_player.set_point_to_look(level.get_global_mouse_position())
+		else:
+			if is_rotate_player_toggled:
+				level.players_set_for_rotation[selected_player] = true
+				selected_player.set_point_to_look(level.get_global_mouse_position())
+				level.mobile_reset_point_to_look_while_moving_button.visible = true
+				
 		if Input.is_action_just_pressed("reset_path"):
 				#_erase_from_occupated_tiles_dict(selected_player.player_path[-1], selected_player)
 			selected_player.reset_path()
@@ -221,14 +232,26 @@ func _on_popup_menu_item_pressed(item_id: int):
 
 #MOBILE
 func check_are_buttons_visible():
-	if PlayerSelectionManager.selected_player and not PlayerSelectionManager.selected_player.is_killed:
+	var selected_player: Player = PlayerSelectionManager.selected_player
+	if selected_player and not selected_player.is_killed:
 		level.mobile_strategy_button.visible = true
 		level.mobile_draw_path_button.visible = true
+		level.mobile_point_to_look_while_moving_button.visible = true
+		if selected_player.player_path.size() > 1:
+			level.mobile_reset_path_button.visible = true
+		else:
+			level.mobile_reset_path_button.visible = false
+		if selected_player.point_to_look != null:
+			level.mobile_reset_point_to_look_while_moving_button.visible = true
+		else:
+			level.mobile_reset_point_to_look_while_moving_button.visible = false
+
 func _on_action_button_pressed_mobile():
 	if check_can_do_action():
 		disconnect_from_signals()
 		is_drawing = false
 		level.mobile_draw_path_button.set_pressed_no_signal(false)
+		level.mobile_point_to_look_while_moving_button.set_pressed_no_signal(false)
 		Signals.action_started.emit()
 		level.set_level_state(ActionState.new([level]))
 
@@ -236,12 +259,14 @@ func _on_upgrade_button_pressed_mobile():
 	disconnect_from_signals()
 	is_drawing = false
 	level.mobile_draw_path_button.set_pressed_no_signal(false)
+	level.mobile_point_to_look_while_moving_button.set_pressed_no_signal(false)
 	level.set_level_state(UpgradeState.new([level]))
 
 func _on_observation_state_button_pressed_mobile():
 	disconnect_from_signals()
 	is_drawing = false
 	level.mobile_draw_path_button.set_pressed_no_signal(false)
+	level.mobile_point_to_look_while_moving_button.set_pressed_no_signal(false)
 	level.set_level_state(PreparationState.new([level]))
 
 func _on_strategy_button_pressed_mobile():
@@ -249,26 +274,46 @@ func _on_strategy_button_pressed_mobile():
 		level.radial_menu.popup()
 
 func _on_player_selected_mobile():
-	if PlayerSelectionManager.selected_player and not PlayerSelectionManager.selected_player.is_killed:
+	var selected_player: Player = PlayerSelectionManager.selected_player
+	if selected_player and not selected_player.is_killed:
 		level.mobile_strategy_button.visible = true
+		level.mobile_point_to_look_while_moving_button.visible = true
 		level.mobile_draw_path_button.visible = true
-		if PlayerSelectionManager.selected_player.player_path.size() > 1:
+		if selected_player.player_path.size() > 1:
 			level.mobile_reset_path_button.visible = true
 		else:
 			level.mobile_reset_path_button.visible = false
+		if selected_player.point_to_look != null:
+			level.mobile_reset_point_to_look_while_moving_button.visible = true
+		else:
+			level.mobile_reset_point_to_look_while_moving_button.visible = false
 
 func _on_player_deselected_mobile(deselected_player: Player):
 	level.mobile_strategy_button.visible = false
 	level.mobile_draw_path_button.visible = false
 	level.mobile_reset_path_button.visible = false
+	level.mobile_point_to_look_while_moving_button.visible = false
 
 func _on_draw_button_pressed_mobile():
 	is_drawing = !is_drawing
 	if is_drawing:
 		level.can_manipulate_camera_signal.emit(false)
+		is_rotate_player_toggled = false
+		level.mobile_point_to_look_while_moving_button.set_pressed_no_signal(false)
 	else:
 		level.can_manipulate_camera_signal.emit(true)
 
+func _on_point_to_look_while_moving_pressed_mobile():
+	var selected_player: Player = PlayerSelectionManager.selected_player
+	if selected_player and not selected_player.is_killed:
+		is_rotate_player_toggled = !is_rotate_player_toggled
+		if is_rotate_player_toggled:
+			level.can_manipulate_camera_signal.emit(false)
+			is_drawing = false
+			level.mobile_draw_path_button.set_pressed_no_signal(false)
+		else:
+			level.can_manipulate_camera_signal.emit(true)
+			
 func _on_reset_path_button_pressed_mobile():
 	var selected_player: Player = PlayerSelectionManager.selected_player
 	if selected_player and not selected_player.is_killed:
