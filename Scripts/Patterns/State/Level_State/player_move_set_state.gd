@@ -12,6 +12,7 @@ var players_cause_collision: Dictionary = {}
 
 #MOBILE
 var is_rotate_player_toggled: bool = false
+var is_rotate_player_after_move_toggled: bool = false
 
 func _init(data: Array):
 	level = data[0]
@@ -38,6 +39,7 @@ func connect_to_mobile_signals():
 	level.reset_path_button_pressed_mobile.connect(_on_reset_path_button_pressed_mobile)
 	level.point_to_look_while_moving_button_pressed_mobile.connect(_on_point_to_look_while_moving_pressed_mobile)
 	level.reset_point_to_look_while_moving_button_pressed_mobile.connect(_on_reset_point_to_look_while_moving_button_pressed_mobile)
+	level.point_to_look_after_move_button_pressed_mobile.connect(_on_point_to_look_after_move_button_pressed_mobile)
 	PlayerSelectionManager.player_selection_changed_mobile.connect(_on_player_selected_mobile)
 	PlayerSelectionManager.player_deselected.connect(_on_player_deselected_mobile)
 	
@@ -80,8 +82,13 @@ func _unhandled_input(event: InputEvent):
 			selected_player.reset_point_to_look()
 			level.players_set_for_rotation.erase(selected_player)
 		
-		if Input.is_action_just_pressed("rotate_player_after_move") and len(selected_player.player_path) > 1:
-			selected_player.set_after_move_looking_point(level.get_global_mouse_position())
+		if OptionVariables.check_is_device_pc():
+			if Input.is_action_just_pressed("rotate_player_after_move") and len(selected_player.player_path) > 1:
+				selected_player.set_after_move_looking_point(level.get_global_mouse_position())
+		else:
+			if is_rotate_player_after_move_toggled and len(selected_player.player_path) > 1:
+				selected_player.set_after_move_looking_point(level.get_global_mouse_position())
+				#level.mobile_reset_point_after_move_button.visible = false
 		if Input.is_action_just_pressed("reset_rotate_player_after_move"):
 			selected_player.reset_after_move_looking_point()
 		
@@ -238,6 +245,8 @@ func check_are_buttons_visible():
 		level.mobile_strategy_button.visible = true
 		level.mobile_draw_path_button.visible = true
 		level.mobile_point_to_look_while_moving_button.visible = true
+		level.mobile_point_to_look_after_move_button.visible = true
+
 		if selected_player.player_path.size() > 1:
 			level.mobile_reset_path_button.visible = true
 		else:
@@ -246,7 +255,9 @@ func check_are_buttons_visible():
 			level.mobile_reset_point_to_look_while_moving_button.visible = true
 		else:
 			level.mobile_reset_point_to_look_while_moving_button.visible = false
-
+		
+		
+		
 func _on_action_button_pressed_mobile():
 	if check_can_do_action():
 		disconnect_from_signals()
@@ -280,6 +291,8 @@ func _on_player_selected_mobile():
 		level.mobile_strategy_button.visible = true
 		level.mobile_point_to_look_while_moving_button.visible = true
 		level.mobile_draw_path_button.visible = true
+		level.mobile_point_to_look_after_move_button.visible = true
+		
 		if selected_player.player_path.size() > 1:
 			level.mobile_reset_path_button.visible = true
 		else:
@@ -291,16 +304,24 @@ func _on_player_selected_mobile():
 
 func _on_player_deselected_mobile(deselected_player: Player):
 	level.mobile_strategy_button.visible = false
+	
 	level.mobile_draw_path_button.visible = false
 	level.mobile_reset_path_button.visible = false
+	
 	level.mobile_point_to_look_while_moving_button.visible = false
-
+	level.mobile_reset_point_to_look_while_moving_button.visible = false
+	
+	level.mobile_point_to_look_after_move_button.visible = false
+	#level.mobile_reset_point_to_look_after_move_button.visible = false
+	
 func _on_draw_button_pressed_mobile():
 	is_drawing = !is_drawing
 	if is_drawing:
 		level.can_manipulate_camera_signal.emit(false)
 		is_rotate_player_toggled = false
+		is_rotate_player_after_move_toggled = false
 		level.mobile_point_to_look_while_moving_button.set_pressed_no_signal(false)
+		level.mobile_point_to_look_after_move_button.set_pressed_no_signal(false)
 	else:
 		level.can_manipulate_camera_signal.emit(true)
 
@@ -311,10 +332,25 @@ func _on_point_to_look_while_moving_pressed_mobile():
 		if is_rotate_player_toggled:
 			level.can_manipulate_camera_signal.emit(false)
 			is_drawing = false
+			is_rotate_player_after_move_toggled = false
 			level.mobile_draw_path_button.set_pressed_no_signal(false)
+			level.mobile_point_to_look_after_move_button.set_pressed_no_signal(false)
 		else:
 			level.can_manipulate_camera_signal.emit(true)
-			
+
+func _on_point_to_look_after_move_button_pressed_mobile():
+	var selected_player: Player = PlayerSelectionManager.selected_player
+	if selected_player and not selected_player.is_killed:
+		is_rotate_player_after_move_toggled = !is_rotate_player_after_move_toggled
+		if is_rotate_player_after_move_toggled:
+			level.can_manipulate_camera_signal.emit(false)
+			is_drawing = false
+			is_rotate_player_toggled = false
+			level.mobile_draw_path_button.set_pressed_no_signal(false)
+			level.mobile_point_to_look_while_moving_button.set_pressed_no_signal(false)
+		else:
+			level.can_manipulate_camera_signal.emit(true)
+		
 func _on_reset_path_button_pressed_mobile():
 	var selected_player: Player = PlayerSelectionManager.selected_player
 	if selected_player and not selected_player.is_killed:
@@ -346,6 +382,10 @@ func disconnect_from_signals():
 		level.point_to_look_while_moving_button_pressed_mobile.disconnect(_on_point_to_look_while_moving_pressed_mobile)
 	if level.reset_point_to_look_while_moving_button_pressed_mobile.is_connected(_on_reset_point_to_look_while_moving_button_pressed_mobile):
 		level.reset_point_to_look_while_moving_button_pressed_mobile.disconnect(_on_reset_point_to_look_while_moving_button_pressed_mobile)
+	if level.point_to_look_after_move_button_pressed_mobile.is_connected(_on_point_to_look_after_move_button_pressed_mobile):
+		level.point_to_look_after_move_button_pressed_mobile.disconnect(_on_point_to_look_after_move_button_pressed_mobile)
+
+
 	if PlayerSelectionManager.player_selection_changed_mobile.is_connected(_on_player_selected_mobile):
 		PlayerSelectionManager.player_selection_changed_mobile.disconnect(_on_player_selected_mobile)
 	if 	PlayerSelectionManager.player_deselected.is_connected(_on_player_deselected_mobile):

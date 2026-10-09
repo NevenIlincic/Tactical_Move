@@ -319,16 +319,19 @@ func _on_controller_button_pressed() -> void:
 @onready var mobile_reset_path_button: TextureButton = $CanvasLayer/Mobile_Buttons/Mobile_Reset_Path_Button
 @onready var mobile_point_to_look_while_moving_button: TextureButton = $CanvasLayer/Mobile_Buttons/Mobile_Point_To_Look_While_Moving_Button
 @onready var mobile_reset_point_to_look_while_moving_button: TextureButton = $CanvasLayer/Mobile_Buttons/Mobile_Reset_Point_To_Look_While_Moving_Button
+@onready var mobile_point_to_look_after_move_button: TextureButton = $CanvasLayer/Mobile_Buttons/Mobile_Point_To_Look_After_Move_Button
 
 signal upgrade_button_pressed_mobile()
 signal move_state_button_pressed_mobile()
 signal observation_state_button_pressed_mobile()
 signal action_button_pressed_mobile()
 signal strategy_button_pressed_mobile()
+
 signal draw_button_pressed_mobile()
 signal reset_path_button_pressed_mobile()
 signal point_to_look_while_moving_button_pressed_mobile()
 signal reset_point_to_look_while_moving_button_pressed_mobile()
+signal point_to_look_after_move_button_pressed_mobile()
 
 signal can_manipulate_camera_signal(can_manipulate: bool)
 
@@ -370,3 +373,7 @@ func _on_mobile_point_to_look_while_moving_button_pressed() -> void:
 
 func _on_mobile_reset_point_to_look_while_moving_button_pressed() -> void:
 	reset_point_to_look_while_moving_button_pressed_mobile.emit()
+
+
+func _on_mobile_point_to_look_after_move_button_pressed() -> void:
+	point_to_look_after_move_button_pressed_mobile.emit()

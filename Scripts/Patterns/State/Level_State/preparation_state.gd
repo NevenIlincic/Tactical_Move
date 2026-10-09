@@ -19,7 +19,8 @@ func _init(data: Array):
 		level.mobile_reset_path_button.visible = false
 		level.mobile_point_to_look_while_moving_button.visible = false
 		level.mobile_reset_point_to_look_while_moving_button.visible = false
-		
+		level.mobile_point_to_look_after_move_button.visible = false
+
 	level.can_manipulate_camera_signal.emit(true)
 	
 func connect_to_mobile_signals():
