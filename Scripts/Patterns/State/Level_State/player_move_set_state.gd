@@ -37,6 +37,7 @@ func connect_to_mobile_signals():
 	level.draw_button_pressed_mobile.connect(_on_draw_button_pressed_mobile)
 	level.reset_path_button_pressed_mobile.connect(_on_reset_path_button_pressed_mobile)
 	level.point_to_look_while_moving_button_pressed_mobile.connect(_on_point_to_look_while_moving_pressed_mobile)
+	level.reset_point_to_look_while_moving_button_pressed_mobile.connect(_on_reset_point_to_look_while_moving_button_pressed_mobile)
 	PlayerSelectionManager.player_selection_changed_mobile.connect(_on_player_selected_mobile)
 	PlayerSelectionManager.player_deselected.connect(_on_player_deselected_mobile)
 	
@@ -321,6 +322,13 @@ func _on_reset_path_button_pressed_mobile():
 		level.players_set_for_move.erase(selected_player)
 		level.mobile_reset_path_button.visible = false
 
+func _on_reset_point_to_look_while_moving_button_pressed_mobile():
+	var selected_player: Player = PlayerSelectionManager.selected_player
+	if selected_player and not selected_player.is_killed:
+		selected_player.reset_point_to_look()
+		level.players_set_for_rotation.erase(selected_player)
+		level.mobile_reset_point_to_look_while_moving_button.visible = false
+
 func disconnect_from_signals():
 	if level.action_button_pressed_mobile.is_connected(_on_action_button_pressed_mobile):
 		level.action_button_pressed_mobile.disconnect(_on_action_button_pressed_mobile)
@@ -334,7 +342,10 @@ func disconnect_from_signals():
 		level.draw_button_pressed_mobile.disconnect(_on_draw_button_pressed_mobile)
 	if level.reset_path_button_pressed_mobile.is_connected(_on_reset_path_button_pressed_mobile):
 		level.reset_path_button_pressed_mobile.disconnect(_on_reset_path_button_pressed_mobile)
-
+	if level.point_to_look_while_moving_button_pressed_mobile.is_connected(_on_point_to_look_while_moving_pressed_mobile):
+		level.point_to_look_while_moving_button_pressed_mobile.disconnect(_on_point_to_look_while_moving_pressed_mobile)
+	if level.reset_point_to_look_while_moving_button_pressed_mobile.is_connected(_on_reset_point_to_look_while_moving_button_pressed_mobile):
+		level.reset_point_to_look_while_moving_button_pressed_mobile.disconnect(_on_reset_point_to_look_while_moving_button_pressed_mobile)
 	if PlayerSelectionManager.player_selection_changed_mobile.is_connected(_on_player_selected_mobile):
 		PlayerSelectionManager.player_selection_changed_mobile.disconnect(_on_player_selected_mobile)
 	if 	PlayerSelectionManager.player_deselected.is_connected(_on_player_deselected_mobile):
