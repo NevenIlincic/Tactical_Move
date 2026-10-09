@@ -16,6 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://boyruiqtblehv" path="res://Sprites/Mobile_Sprites/HUD/strategy_button.png" id="16_jk42q"]
 [ext_resource type="Texture2D" uid="uid://rn3tv1uo8xo1" path="res://Sprites/Mobile_Sprites/HUD/draw_path_button.png" id="17_1tq5b"]
 [ext_resource type="Texture2D" uid="uid://2g3vja68t02q" path="res://Sprites/Mobile_Sprites/HUD/draw_path_button_pressed.png" id="18_xmo3k"]
+[ext_resource type="Texture2D" uid="uid://vffni4l4q3cs" path="res://Sprites/Mobile_Sprites/HUD/reset_path_button.png" id="19_1rxo4"]
 [ext_resource type="PackedScene" uid="uid://dyh4j30522553" path="res://Scenes/Soldier/Player/Player_Stats.tscn" id="25_wr6c8"]
 [ext_resource type="PackedScene" uid="uid://bmbr4kpa58muf" path="res://Scenes/Menu/Upgrade_Menu.tscn" id="26_u4xmi"]
 [ext_resource type="PackedScene" uid="uid://q6uf7pve5vqm" path="res://Scenes/Dialog/Confirmation_Dialog.tscn" id="27_bvxha"]
@@ -185,6 +186,18 @@ toggle_mode = true
 texture_normal = ExtResource("17_1tq5b")
 texture_pressed = ExtResource("18_xmo3k")
 
+[node name="Mobile_Reset_Path_Button" type="TextureButton" parent="CanvasLayer/Mobile_Buttons" unique_id=1331168704]
+visible = false
+texture_filter = 1
+texture_repeat = 1
+offset_left = 152.0
+offset_top = 8.0
+offset_right = 200.0
+offset_bottom = 56.0
+texture_normal = ExtResource("19_1rxo4")
+ignore_texture_size = true
+stretch_mode = 0
+
 [node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer" unique_id=594881798]
 visible = false
 offset_left = 808.0
@@ -344,4 +357,5 @@ metadata/_edit_use_anchors_ = true
 [connection signal="pressed" from="CanvasLayer/Mobile_Buttons/Mobile_Observation_State_Button" to="." method="_on_mobile_observation_state_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/Mobile_Buttons/Mobile_Strategy_Button" to="." method="_on_mobile_strategy_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/Mobile_Buttons/Mobile_Draw_Path_Button" to="." method="_on_mobile_draw_path_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Mobile_Buttons/Mobile_Reset_Path_Button" to="." method="_on_mobile_reset_path_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/Controller_Button" to="." method="_on_controller_button_pressed"]

@@ -49,6 +49,7 @@ func _init(data: Array):
 		level.mobile_draw_path_button.visible = false
 		level.mobile_strategy_button.visible = false
 		level.mobile_action_button.visible = false
+		level.mobile_reset_path_button.visible = false
 	
 	
 func connect_to_signals():

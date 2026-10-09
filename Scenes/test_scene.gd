@@ -316,6 +316,7 @@ func _on_controller_button_pressed() -> void:
 @onready var mobile_pause_button: TextureButton = $CanvasLayer/Mobile_Buttons/Mobile_Pause_Button
 @onready var mobile_strategy_button: TextureButton = $CanvasLayer/Mobile_Buttons/Mobile_Strategy_Button
 @onready var mobile_draw_path_button: TextureButton = $CanvasLayer/Mobile_Buttons/Mobile_Draw_Path_Button
+@onready var mobile_reset_path_button: TextureButton = $CanvasLayer/Mobile_Buttons/Mobile_Reset_Path_Button
 
 signal upgrade_button_pressed_mobile()
 signal move_state_button_pressed_mobile()
@@ -323,6 +324,7 @@ signal observation_state_button_pressed_mobile()
 signal action_button_pressed_mobile()
 signal strategy_button_pressed_mobile()
 signal draw_button_pressed_mobile()
+signal reset_path_button_pressed_mobile()
 
 signal can_manipulate_camera_signal(can_manipulate: bool)
 
@@ -352,3 +354,7 @@ func _on_mobile_strategy_button_pressed() -> void:
 
 func _on_mobile_draw_path_button_pressed() -> void:
 	draw_button_pressed_mobile.emit()
+
+
+func _on_mobile_reset_path_button_pressed() -> void:
+	reset_path_button_pressed_mobile.emit()

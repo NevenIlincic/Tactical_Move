@@ -32,6 +32,7 @@ func connect_to_mobile_signals():
 	level.observation_state_button_pressed_mobile.connect(_on_observation_state_button_pressed_mobile)
 	level.strategy_button_pressed_mobile.connect(_on_strategy_button_pressed_mobile)
 	level.draw_button_pressed_mobile.connect(_on_draw_button_pressed_mobile)
+	level.reset_path_button_pressed_mobile.connect(_on_reset_path_button_pressed_mobile)
 	PlayerSelectionManager.player_selection_changed_mobile.connect(_on_player_selected_mobile)
 	PlayerSelectionManager.player_deselected.connect(_on_player_deselected_mobile)
 	
@@ -145,7 +146,10 @@ func draw_path_mobile(event_position: Vector2) -> void:
 	var selected_player = PlayerSelectionManager.selected_player
 	if not selected_player or selected_player.player_path.is_empty():
 		return
-
+	
+	if not level.mobile_reset_path_button.visible and selected_player.player_path.size() > 1:
+		level.mobile_reset_path_button.visible = true
+	
 	var last_mouse_pos: Vector2 = selected_player.player_path[-1]
 
 	if abs(last_mouse_pos.distance_to(touch_pos)) > 10.0:
@@ -220,7 +224,6 @@ func check_are_buttons_visible():
 	if PlayerSelectionManager.selected_player and not PlayerSelectionManager.selected_player.is_killed:
 		level.mobile_strategy_button.visible = true
 		level.mobile_draw_path_button.visible = true
-
 func _on_action_button_pressed_mobile():
 	if check_can_do_action():
 		disconnect_from_signals()
@@ -249,10 +252,15 @@ func _on_player_selected_mobile():
 	if PlayerSelectionManager.selected_player and not PlayerSelectionManager.selected_player.is_killed:
 		level.mobile_strategy_button.visible = true
 		level.mobile_draw_path_button.visible = true
+		if PlayerSelectionManager.selected_player.player_path.size() > 1:
+			level.mobile_reset_path_button.visible = true
+		else:
+			level.mobile_reset_path_button.visible = false
 
 func _on_player_deselected_mobile(deselected_player: Player):
 	level.mobile_strategy_button.visible = false
 	level.mobile_draw_path_button.visible = false
+	level.mobile_reset_path_button.visible = false
 
 func _on_draw_button_pressed_mobile():
 	is_drawing = !is_drawing
@@ -261,7 +269,12 @@ func _on_draw_button_pressed_mobile():
 	else:
 		level.can_manipulate_camera_signal.emit(true)
 
-
+func _on_reset_path_button_pressed_mobile():
+	var selected_player: Player = PlayerSelectionManager.selected_player
+	if selected_player and not selected_player.is_killed:
+		selected_player.reset_path()
+		level.players_set_for_move.erase(selected_player)
+		level.mobile_reset_path_button.visible = false
 
 func disconnect_from_signals():
 	if level.action_button_pressed_mobile.is_connected(_on_action_button_pressed_mobile):
@@ -274,6 +287,9 @@ func disconnect_from_signals():
 		level.strategy_button_pressed_mobile.disconnect(_on_strategy_button_pressed_mobile)
 	if level.draw_button_pressed_mobile.is_connected(_on_draw_button_pressed_mobile):
 		level.draw_button_pressed_mobile.disconnect(_on_draw_button_pressed_mobile)
+	if level.reset_path_button_pressed_mobile.is_connected(_on_reset_path_button_pressed_mobile):
+		level.reset_path_button_pressed_mobile.disconnect(_on_reset_path_button_pressed_mobile)
+
 	if PlayerSelectionManager.player_selection_changed_mobile.is_connected(_on_player_selected_mobile):
 		PlayerSelectionManager.player_selection_changed_mobile.disconnect(_on_player_selected_mobile)
 	if 	PlayerSelectionManager.player_deselected.is_connected(_on_player_deselected_mobile):
