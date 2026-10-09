@@ -1,8 +1,5 @@
 class_name PlayerSetMoveState extends State
 
-#Data variables
-var level: Level
-
 #Other variables
 var alive_players: Dictionary 
 var is_drawing: bool = false
@@ -31,6 +28,7 @@ func _init(data: Array):
 	
 	
 func connect_to_mobile_signals():
+	connect_to_signals_extra()
 	level.action_button_pressed_mobile.connect(_on_action_button_pressed_mobile)
 	level.upgrade_button_pressed_mobile.connect(_on_upgrade_button_pressed_mobile)
 	level.observation_state_button_pressed_mobile.connect(_on_observation_state_button_pressed_mobile)
@@ -383,6 +381,8 @@ func _on_reset_point_to_look_after_move_button_pressed_mobile():
 
 
 func disconnect_from_signals():
+	if level.radial_menu.id_pressed.is_connected(_on_popup_menu_item_pressed):
+		level.radial_menu.id_pressed.disconnect(_on_popup_menu_item_pressed)
 	if level.action_button_pressed_mobile.is_connected(_on_action_button_pressed_mobile):
 		level.action_button_pressed_mobile.disconnect(_on_action_button_pressed_mobile)
 	if level.radial_menu.id_pressed.is_connected(_on_popup_menu_item_pressed):

@@ -1,7 +1,5 @@
 class_name PreparationState extends State
 
-var level: Level
-
 func _init(data: Array):
 	level = data[0]
 	level.current_state_label.text = "OBSERVATION STATE"
@@ -25,6 +23,7 @@ func _init(data: Array):
 	level.can_manipulate_camera_signal.emit(true)
 	
 func connect_to_mobile_signals():
+	connect_to_signals_extra()
 	level.action_button_pressed_mobile.connect(_on_action_button_pressed_mobile)
 	level.upgrade_button_pressed_mobile.connect(_on_upgrade_button_pressed_mobile)
 	level.move_state_button_pressed_mobile.connect(_on_move_state_button_pressed_mobile)
@@ -107,6 +106,13 @@ func check_is_strategy_button_visible():
 		level.mobile_strategy_button.visible = true
 
 func disconnect_from_signals():
+	if PlayerSelectionManager.player_selection_changed_mobile.is_connected(_on_player_selected_mobile):
+		PlayerSelectionManager.player_selection_changed_mobile.disconnect(_on_player_selected_mobile)
+	if 	PlayerSelectionManager.player_deselected.is_connected(_on_player_deselected_mobile):
+		PlayerSelectionManager.player_deselected.disconnect(_on_player_deselected_mobile)
+	
+	if level.radial_menu.id_pressed.is_connected(_on_popup_menu_item_pressed):
+		level.radial_menu.id_pressed.disconnect(_on_popup_menu_item_pressed)
 	if level.action_button_pressed_mobile.is_connected(_on_action_button_pressed_mobile):
 		level.action_button_pressed_mobile.disconnect(_on_action_button_pressed_mobile)
 	if level.upgrade_button_pressed_mobile.is_connected(_on_upgrade_button_pressed_mobile):
@@ -115,10 +121,6 @@ func disconnect_from_signals():
 		level.move_state_button_pressed_mobile.disconnect(_on_move_state_button_pressed_mobile)
 	if level.strategy_button_pressed_mobile.is_connected(_on_strategy_button_pressed_mobile):
 		level.strategy_button_pressed_mobile.disconnect(_on_strategy_button_pressed_mobile)
-	if PlayerSelectionManager.player_selection_changed_mobile.is_connected(_on_player_selected_mobile):
-		PlayerSelectionManager.player_selection_changed_mobile.disconnect(_on_player_selected_mobile)
-	if 	PlayerSelectionManager.player_deselected.is_connected(_on_player_deselected_mobile):
-		PlayerSelectionManager.player_deselected.disconnect(_on_player_deselected_mobile)
 
 
 

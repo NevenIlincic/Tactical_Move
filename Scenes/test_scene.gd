@@ -63,8 +63,8 @@ var current_dialog_type: DialogType = DialogType.NONE
 @onready var mobile_buttons: Node2D = $CanvasLayer/Mobile_Buttons
 
 func _ready() -> void:
-	#if OptionVariables.check_is_device_pc():
-		#mobile_buttons.visible = false
+	if OptionVariables.check_is_device_pc():
+		mobile_buttons.visible = false
 	
 	UpgradeCardsManager.clear_available_permanent_upgrades()
 	for player in get_tree().get_nodes_in_group("Player"):
@@ -100,7 +100,7 @@ func _ready() -> void:
 	if Sdk.web_sdk.is_ad_block_enabled:
 		upgrade_card_bonus_button.disabled = true
 		
-
+	pause_menu.set_level(self)
 	
 const VISION_POLYGON = preload("uid://bjx1wow4vot1m")
 #@onready var vision_polygons_node: Node2D = $CanvasGroup/Vision_Polygons_Node
@@ -262,7 +262,13 @@ func disconnect_from_signals():
 		confirmation_dialog.action_canceled.disconnect(_on_action_canceled)
 	if Signals.permanent_upgrade_applied.is_connected(_on_permanent_upgrade_applied):
 		Signals.permanent_upgrade_applied.disconnect(_on_permanent_upgrade_applied)
-	
+	if Sdk.web_sdk.rewarded_ad_watched.is_connected(_on_rewarded_ad_watched):
+		Sdk.web_sdk.rewarded_ad_watched.disconnect(_on_rewarded_ad_watched)
+	if Sdk.web_sdk.rewarded_ad_closed_early.is_connected(_on_rewarded_ad_closed_early):
+		Sdk.web_sdk.rewarded_ad_closed_early.disconnect(_on_rewarded_ad_closed_early)
+	if Sdk.web_sdk.interstitial_ad_watched.is_connected(_on_interstitial_ad_watched):
+		Sdk.web_sdk.interstitial_ad_watched.disconnect(_on_interstitial_ad_watched)
+
 	
 func _on_permanent_upgrade_applied(upgrade_card: UpgradeCard):
 	if not is_upgrade_applied_once:

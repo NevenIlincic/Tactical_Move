@@ -1,6 +1,6 @@
 class_name ActionState extends State
 
-var level: Level
+
 #var vision_manager: VisionManager
 
 var initial_num_alive_enemies: int 
@@ -43,6 +43,7 @@ func _init(data: Array):
 	level.current_state_label.text = "ACTION STATE"
 	
 	if not OptionVariables.check_is_device_pc():
+		connect_to_signals_extra()
 		level.mobile_move_state_button.visible = false
 		level.mobile_observation_state_button.visible = false
 		level.mobile_upgrade_menu_button.visible = false
@@ -114,7 +115,7 @@ func _on_player_move_finished(soldier: Soldier):
 					player._check_is_healing_available(action_duration)
 		if not is_action_state_finished:
 			is_action_state_finished = true
-			disconnect_signals()
+			disconnect_from_signals()
 			level.set_level_state(PreparationState.new([level]))
 	
 func _on_player_move_continued(soldier: Soldier):
@@ -151,7 +152,7 @@ func check_is_level_completed(enemy: Soldier):
 				level.level_completed()
 
 
-func disconnect_signals():
+func disconnect_from_signals():
 	if Signals.player_move_finished.is_connected(_on_player_move_finished):
 		Signals.player_move_finished.disconnect(_on_player_move_finished)
 	if Signals.player_move_continued.is_connected(_on_player_move_continued):

@@ -1,6 +1,5 @@
 class_name UpgradeState extends State
 
-var level: Level
 var alive_players: Dictionary
 var upgrade_menu: UpgradeMenu
 
@@ -31,6 +30,7 @@ func _init(data: Array):
 	
 	level.can_manipulate_camera_signal.emit(true)
 func connect_to_mobile_signals():
+	connect_to_signals_extra()
 	level.upgrade_button_pressed_mobile.connect(_on_upgrade_button_pressed_mobile)
 	
 	

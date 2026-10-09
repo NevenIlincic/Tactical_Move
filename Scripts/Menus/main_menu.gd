@@ -10,14 +10,15 @@ extends Node2D
 @onready var level_selection_menu: LevelSelectionMenu = $CanvasLayer/LevelSelectionMenu
 @onready var options_menu: OptionsMenu = $CanvasLayer/OptionsMenu
 ####### BUTTONS
-@onready var options_button: NavigationButton = $Options_Button
-@onready var level_selection_button: NavigationButton = $Level_Selection_Button
+@onready var level_selection_button: NavigationButton = $Main_Menu_Canvas_Layer/Level_Selection_Button
+@onready var options_button: NavigationButton = $Main_Menu_Canvas_Layer/Options_Button
 
 
 ###
 #LIGHTS
 @onready var main_menu_point_light_1: PointLight2D = $Main_Menu_Point_Light_1
 @onready var main_menu_point_light_2: PointLight2D = $Main_Menu_Point_Light_2
+@onready var option_menu_point_light: PointLight2D = $Option_Menu_Point_Light
 ########
 
 # Called when the node enters the scene tree for the first time.
@@ -28,6 +29,10 @@ func _ready() -> void:
 	options_button.appear_effect_animation_player.play("appear_animation")
 	AudioManager.play_background_music(AudioManager.BACKGROUND_MUSIC_MENU_1)
 	
+	if not OptionVariables.check_is_device_pc():
+		main_menu_point_light_1.enabled = false
+		main_menu_point_light_2.enabled = false
+		option_menu_point_light.enabled = false
 	#SDK
 	Sdk.web_sdk.set_game_ready()
 	
