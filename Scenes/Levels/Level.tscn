@@ -22,6 +22,7 @@
 [ext_resource type="Texture2D" uid="uid://wksc55ragfoh" path="res://Sprites/Mobile_Sprites/HUD/reset_point_to_look_while_moving_button.png" id="22_803qd"]
 [ext_resource type="Texture2D" uid="uid://bq3737tfxvbx5" path="res://Sprites/Mobile_Sprites/HUD/point_to_look_after_move_button.png" id="23_v5qxt"]
 [ext_resource type="Texture2D" uid="uid://dumktqe5kf5ei" path="res://Sprites/Mobile_Sprites/HUD/point_to_look_after_move_button_pressed.png" id="24_uxcut"]
+[ext_resource type="Texture2D" uid="uid://dgy2b51ar205t" path="res://Sprites/Mobile_Sprites/HUD/reset_point_to_look_after_move_button.png" id="25_uxcut"]
 [ext_resource type="PackedScene" uid="uid://dyh4j30522553" path="res://Scenes/Soldier/Player/Player_Stats.tscn" id="25_wr6c8"]
 [ext_resource type="PackedScene" uid="uid://bmbr4kpa58muf" path="res://Scenes/Menu/Upgrade_Menu.tscn" id="26_u4xmi"]
 [ext_resource type="PackedScene" uid="uid://q6uf7pve5vqm" path="res://Scenes/Dialog/Confirmation_Dialog.tscn" id="27_bvxha"]
@@ -236,6 +237,16 @@ toggle_mode = true
 texture_normal = ExtResource("23_v5qxt")
 texture_pressed = ExtResource("24_uxcut")
 
+[node name="Mobile_Reset_Point_To_Look_After_Move_Button" type="TextureButton" parent="CanvasLayer/Mobile_Buttons" unique_id=504361880]
+texture_filter = 1
+texture_repeat = 1
+offset_left = 328.0
+offset_right = 392.0
+offset_bottom = 65.0
+focus_mode = 0
+toggle_mode = true
+texture_normal = ExtResource("25_uxcut")
+
 [node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer" unique_id=594881798]
 visible = false
 offset_left = 808.0
@@ -399,4 +410,5 @@ metadata/_edit_use_anchors_ = true
 [connection signal="pressed" from="CanvasLayer/Mobile_Buttons/Mobile_Point_To_Look_While_Moving_Button" to="." method="_on_mobile_point_to_look_while_moving_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/Mobile_Buttons/Mobile_Reset_Point_To_Look_While_Moving_Button" to="." method="_on_mobile_reset_point_to_look_while_moving_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/Mobile_Buttons/Mobile_Point_To_Look_After_Move_Button" to="." method="_on_mobile_point_to_look_after_move_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Mobile_Buttons/Mobile_Reset_Point_To_Look_After_Move_Button" to="." method="_on_mobile_reset_point_to_look_after_move_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/Controller_Button" to="." method="_on_controller_button_pressed"]

@@ -40,6 +40,7 @@ func connect_to_mobile_signals():
 	level.point_to_look_while_moving_button_pressed_mobile.connect(_on_point_to_look_while_moving_pressed_mobile)
 	level.reset_point_to_look_while_moving_button_pressed_mobile.connect(_on_reset_point_to_look_while_moving_button_pressed_mobile)
 	level.point_to_look_after_move_button_pressed_mobile.connect(_on_point_to_look_after_move_button_pressed_mobile)
+	level.reset_point_to_look_after_move_button_pressed_mobile.connect(_on_reset_point_to_look_after_move_button_pressed_mobile)
 	PlayerSelectionManager.player_selection_changed_mobile.connect(_on_player_selected_mobile)
 	PlayerSelectionManager.player_deselected.connect(_on_player_deselected_mobile)
 	
@@ -88,7 +89,8 @@ func _unhandled_input(event: InputEvent):
 		else:
 			if is_rotate_player_after_move_toggled and len(selected_player.player_path) > 1:
 				selected_player.set_after_move_looking_point(level.get_global_mouse_position())
-				#level.mobile_reset_point_after_move_button.visible = false
+				level.mobile_reset_point_to_look_after_move_button.visible = true
+				
 		if Input.is_action_just_pressed("reset_rotate_player_after_move"):
 			selected_player.reset_after_move_looking_point()
 		
@@ -256,7 +258,10 @@ func check_are_buttons_visible():
 		else:
 			level.mobile_reset_point_to_look_while_moving_button.visible = false
 		
-		
+		if selected_player.after_move_looking_point != null:
+			level.mobile_reset_point_to_look_after_move_button.visible = true
+		else:
+			level.mobile_reset_point_to_look_after_move_button.visible = false
 		
 func _on_action_button_pressed_mobile():
 	if check_can_do_action():
@@ -301,7 +306,11 @@ func _on_player_selected_mobile():
 			level.mobile_reset_point_to_look_while_moving_button.visible = true
 		else:
 			level.mobile_reset_point_to_look_while_moving_button.visible = false
-
+		if selected_player.after_move_looking_point != null:
+			level.mobile_reset_point_to_look_after_move_button.visible = true
+		else:
+			level.mobile_reset_point_to_look_after_move_button.visible = false
+		
 func _on_player_deselected_mobile(deselected_player: Player):
 	level.mobile_strategy_button.visible = false
 	
@@ -357,6 +366,7 @@ func _on_reset_path_button_pressed_mobile():
 		selected_player.reset_path()
 		level.players_set_for_move.erase(selected_player)
 		level.mobile_reset_path_button.visible = false
+		level.mobile_reset_point_to_look_after_move_button.visible = false
 
 func _on_reset_point_to_look_while_moving_button_pressed_mobile():
 	var selected_player: Player = PlayerSelectionManager.selected_player
@@ -364,6 +374,13 @@ func _on_reset_point_to_look_while_moving_button_pressed_mobile():
 		selected_player.reset_point_to_look()
 		level.players_set_for_rotation.erase(selected_player)
 		level.mobile_reset_point_to_look_while_moving_button.visible = false
+
+func _on_reset_point_to_look_after_move_button_pressed_mobile():
+	var selected_player: Player = PlayerSelectionManager.selected_player
+	if selected_player and not selected_player.is_killed:
+		selected_player.reset_after_move_looking_point()
+		level.mobile_reset_point_to_look_after_move_button.visible = false
+
 
 func disconnect_from_signals():
 	if level.action_button_pressed_mobile.is_connected(_on_action_button_pressed_mobile):
@@ -384,8 +401,8 @@ func disconnect_from_signals():
 		level.reset_point_to_look_while_moving_button_pressed_mobile.disconnect(_on_reset_point_to_look_while_moving_button_pressed_mobile)
 	if level.point_to_look_after_move_button_pressed_mobile.is_connected(_on_point_to_look_after_move_button_pressed_mobile):
 		level.point_to_look_after_move_button_pressed_mobile.disconnect(_on_point_to_look_after_move_button_pressed_mobile)
-
-
+	if level.reset_point_to_look_after_move_button_pressed_mobile.is_connected(_on_reset_point_to_look_after_move_button_pressed_mobile):
+		level.reset_point_to_look_after_move_button_pressed_mobile.disconnect(_on_reset_point_to_look_after_move_button_pressed_mobile)
 	if PlayerSelectionManager.player_selection_changed_mobile.is_connected(_on_player_selected_mobile):
 		PlayerSelectionManager.player_selection_changed_mobile.disconnect(_on_player_selected_mobile)
 	if 	PlayerSelectionManager.player_deselected.is_connected(_on_player_deselected_mobile):
