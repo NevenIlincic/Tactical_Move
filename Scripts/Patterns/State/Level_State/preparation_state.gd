@@ -13,7 +13,11 @@ func _init(data: Array):
 		level.mobile_move_state_button.visible = true
 		level.mobile_observation_state_button.visible = false
 		level.mobile_draw_path_button.visible = false
-
+		level.mobile_action_button.visible = true
+		level.mobile_upgrade_menu_button.visible = true
+	
+	level.can_manipulate_camera_signal.emit(true)
+	
 func connect_to_mobile_signals():
 	level.upgrade_button_pressed_mobile.connect(_on_upgrade_button_pressed_mobile)
 	level.move_state_button_pressed_mobile.connect(_on_move_state_button_pressed_mobile)
@@ -87,6 +91,7 @@ func check_is_strategy_button_visible():
 	if PlayerSelectionManager.selected_player and not PlayerSelectionManager.selected_player.is_killed:
 		level.mobile_strategy_button.visible = true
 
+
 func disconnect_from_signals():
 	if level.upgrade_button_pressed_mobile.is_connected(_on_upgrade_button_pressed_mobile):
 		level.upgrade_button_pressed_mobile.disconnect(_on_upgrade_button_pressed_mobile)
@@ -98,6 +103,7 @@ func disconnect_from_signals():
 		PlayerSelectionManager.player_selection_changed_mobile.disconnect(_on_player_selected_mobile)
 	if 	PlayerSelectionManager.player_deselected.is_connected(_on_player_deselected_mobile):
 		PlayerSelectionManager.player_deselected.disconnect(_on_player_deselected_mobile)
+
 
 
 

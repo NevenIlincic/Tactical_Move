@@ -23,8 +23,11 @@ func _init(data: Array):
 		connect_to_mobile_signals()
 		level.mobile_move_state_button.visible = false
 		level.mobile_observation_state_button.visible = true
-
+		level.mobile_action_button.visible = true
+	
+	
 func connect_to_mobile_signals():
+	level.action_button_pressed_mobile.connect(_on_action_button_pressed_mobile)
 	level.upgrade_button_pressed_mobile.connect(_on_upgrade_button_pressed_mobile)
 	level.observation_state_button_pressed_mobile.connect(_on_observation_state_button_pressed_mobile)
 	level.strategy_button_pressed_mobile.connect(_on_strategy_button_pressed_mobile)
@@ -150,42 +153,6 @@ func draw_path_mobile(event_position: Vector2) -> void:
 			selected_player.add_point_to_path(touch_global_position)
 			if not level.players_set_for_move.has(selected_player):
 				level.players_set_for_move[selected_player] = true
-#func draw_path_mobile(screen_pos: Vector2) -> void:
-	#var player = PlayerSelectionManager.selected_player
-	#if player == null:
-		#return
-	#
-#
-	#var global_pos: Vector2 = screen_pos
-#
-	#if check_is_mouse_over_wall(global_pos):
-		#return
-#
-	#var last_pos: Vector2 = player.player_path[-1]
-	#if last_pos.distance_to(global_pos) > 10.0:
-		#if not is_path_blocked(last_pos, global_pos):
-			#player.add_point_to_path(global_pos)
-			#if not level.players_set_for_move.has(player):
-				#level.players_set_for_move[player] = true
-#func draw_path_mobile(screen_pos: Vector2) -> void:
-	#print("OVDE")
-	#var player = PlayerSelectionManager.selected_player
-	#if player == null:
-		#return
-#
-	#var global_pos: Vector2 = get_viewport().get_canvas_transform().affine_inverse() * screen_pos
-	#var local_pos: Vector2 = level.tile_map.to_local(global_pos)
-	#var target_tile: Vector2i = level.tile_map.local_to_map(local_pos)
-#
-	#if check_is_mouse_over_wall(global_pos):
-		#return
-#
-	#var last_pos: Vector2 = player.player_path[-1]
-	#if last_pos.distance_to(local_pos) > 10.0:
-		#if not is_path_blocked(last_pos, local_pos):
-			#player.add_point_to_path(global_pos)
-			#if not level.players_set_for_move.has(player):
-				#level.players_set_for_move[player] = true
 
 func is_path_blocked(from: Vector2, to: Vector2) -> bool:
 	var space_state = level.get_world_2d().direct_space_state
@@ -254,6 +221,14 @@ func check_are_buttons_visible():
 		level.mobile_strategy_button.visible = true
 		level.mobile_draw_path_button.visible = true
 
+func _on_action_button_pressed_mobile():
+	if check_can_do_action():
+		disconnect_from_signals()
+		is_drawing = false
+		level.mobile_draw_path_button.set_pressed_no_signal(false)
+		Signals.action_started.emit()
+		level.set_level_state(ActionState.new([level]))
+
 func _on_upgrade_button_pressed_mobile():
 	disconnect_from_signals()
 	is_drawing = false
@@ -281,8 +256,16 @@ func _on_player_deselected_mobile(deselected_player: Player):
 
 func _on_draw_button_pressed_mobile():
 	is_drawing = !is_drawing
+	if is_drawing:
+		level.can_manipulate_camera_signal.emit(false)
+	else:
+		level.can_manipulate_camera_signal.emit(true)
+
+
 
 func disconnect_from_signals():
+	if level.action_button_pressed_mobile.is_connected(_on_action_button_pressed_mobile):
+		level.action_button_pressed_mobile.disconnect(_on_action_button_pressed_mobile)
 	if level.radial_menu.id_pressed.is_connected(_on_popup_menu_item_pressed):
 		level.radial_menu.id_pressed.disconnect(_on_popup_menu_item_pressed)
 	if level.upgrade_button_pressed_mobile.is_connected(_on_upgrade_button_pressed_mobile):

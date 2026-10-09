@@ -324,6 +324,8 @@ signal action_button_pressed_mobile()
 signal strategy_button_pressed_mobile()
 signal draw_button_pressed_mobile()
 
+signal can_manipulate_camera_signal(can_manipulate: bool)
+
 func _on_mobile_pause_button_pressed() -> void:
 	if not is_level_completed:
 		pause_menu.show_pause_menu()

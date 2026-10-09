@@ -18,6 +18,7 @@ var action_duration: float = 0.0
 var is_action_state_finished: bool = false
 func _init(data: Array):
 	level = data[0]
+	level.can_manipulate_camera_signal.emit(true)
 	level.players_set_for_move = {}
 	level.players_set_for_rotation = {}
 	alive_soldiers = level.get_alive_soldiers()
@@ -41,6 +42,13 @@ func _init(data: Array):
 	
 	level.current_state_label.text = "ACTION STATE"
 	
+	if not OptionVariables.check_is_device_pc():
+		level.mobile_move_state_button.visible = false
+		level.mobile_observation_state_button.visible = false
+		level.mobile_upgrade_menu_button.visible = false
+		level.mobile_draw_path_button.visible = false
+		level.mobile_strategy_button.visible = false
+		level.mobile_action_button.visible = false
 	
 	
 func connect_to_signals():

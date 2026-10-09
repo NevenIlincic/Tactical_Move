@@ -20,10 +20,11 @@ func _init(data: Array):
 		level.mobile_pause_button.visible = false
 		level.mobile_strategy_button.visible = false
 		level.mobile_draw_path_button.visible = false
-
+		level.mobile_action_button.visible = false
+	
+	level.can_manipulate_camera_signal.emit(true)
 func connect_to_mobile_signals():
 	level.upgrade_button_pressed_mobile.connect(_on_upgrade_button_pressed_mobile)
-	level.action_button_pressed_mobile.connect(_on_action_button_pressed_mobile)
 	
 	
 func _unhandled_input(_event: InputEvent):
@@ -54,16 +55,6 @@ func _on_upgrade_button_pressed_mobile():
 	level.mobile_pause_button.visible = true
 	level.set_level_state(PreparationState.new([level]))
 
-func _on_action_button_pressed_mobile():
-	if level.check_can_do_action():
-		disconnect_from_signals()
-		upgrade_menu.hide_upgrade_menu()
-		level.controller_button.visible = true
-		level.mobile_pause_button.visible = true
-		level.set_level_state(ActionState.new([level]))
-
 func disconnect_from_signals():
 	if level.upgrade_button_pressed_mobile.is_connected(_on_upgrade_button_pressed_mobile):
 		level.upgrade_button_pressed_mobile.disconnect(_on_upgrade_button_pressed_mobile)
-	if level.action_button_pressed_mobile.is_connected(_on_action_button_pressed_mobile):
-		level.action_button_pressed_mobile.disconnect(_on_action_button_pressed_mobile)
