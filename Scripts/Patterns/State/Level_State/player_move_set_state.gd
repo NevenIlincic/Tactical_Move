@@ -18,7 +18,8 @@ func _init(data: Array):
 	#player_selection_manager = PlayerSelectionManager.new()
 	level.current_state_label.text = "MOVE STATE"
 	#fill_occupied_target_tiles_dict()
-	if OptionVariables.check_is_device_pc():
+	if not OptionVariables.check_is_device_pc():
+		check_are_buttons_visible()
 		connect_to_mobile_signals()
 		level.mobile_move_state_button.visible = false
 		level.mobile_observation_state_button.visible = true
@@ -27,14 +28,19 @@ func connect_to_mobile_signals():
 	level.upgrade_button_pressed_mobile.connect(_on_upgrade_button_pressed_mobile)
 	level.observation_state_button_pressed_mobile.connect(_on_observation_state_button_pressed_mobile)
 	level.strategy_button_pressed_mobile.connect(_on_strategy_button_pressed_mobile)
+	level.draw_button_pressed_mobile.connect(_on_draw_button_pressed_mobile)
 	PlayerSelectionManager.player_selection_changed_mobile.connect(_on_player_selected_mobile)
 	PlayerSelectionManager.player_deselected.connect(_on_player_deselected_mobile)
 	
 func _unhandled_input(event: InputEvent):
 	var selected_player = PlayerSelectionManager.selected_player
 	#var selected_player = player_selection_manager.selected_player
-	if event is InputEventMouseMotion:
-		update_preview()
+	if OptionVariables.check_is_device_pc():
+		if event is InputEventMouseMotion:
+			update_preview()
+	else:
+		if event is InputEventScreenDrag and is_drawing:
+			draw_path_mobile(event.position)
 	
 	if Input.is_action_just_pressed("switch_to_preparation_state"):
 		disconnect_from_signals()
@@ -55,10 +61,11 @@ func _unhandled_input(event: InputEvent):
 			return
 	
 	if selected_player and not selected_player.is_killed:
-		if Input.is_action_pressed("drawing"):
-			is_drawing = true
-		else:
-			is_drawing = false
+		if OptionVariables.check_is_device_pc():
+			if Input.is_action_pressed("drawing"):
+				is_drawing = true
+			else:
+				is_drawing = false
 		
 		if Input.is_action_just_pressed("reset_look_at_path"):
 			selected_player.reset_point_to_look()
@@ -88,20 +95,97 @@ func is_adjacent(a: Vector2i, b: Vector2i) -> bool:
 func update_preview() -> void:
 	if PlayerSelectionManager.selected_player:
 		if is_drawing:
-			var mouse_pos = level.tile_map.get_local_mouse_position()
-			var target_tile = level.tile_map.local_to_map(mouse_pos)
-			#
-			if check_is_mouse_over_wall():
-				return
-			#if not level.check_is_tile_in_boundsv(target_tile) or level.check_is_tile_solid(target_tile):
+			draw_path_pc()
+		
+				
+					
+			#var mouse_pos = level.tile_map.get_local_mouse_position()
+			#var target_tile = level.tile_map.local_to_map(mouse_pos)
+			##
+			#if check_is_mouse_over_wall():
 				#return
-			var last_mouse_pos: Vector2 = PlayerSelectionManager.selected_player.player_path[-1]
-			if abs(last_mouse_pos.distance_to(mouse_pos)) > 10.0:
-				if not is_path_blocked(last_mouse_pos, mouse_pos):
-					var mouse_global_position: Vector2 = level.get_global_mouse_position()
-					PlayerSelectionManager.selected_player.add_point_to_path(mouse_global_position)	
-					if not level.players_set_for_move.has(PlayerSelectionManager.selected_player):
-						level.players_set_for_move[PlayerSelectionManager.selected_player] = true
+			##if not level.check_is_tile_in_boundsv(target_tile) or level.check_is_tile_solid(target_tile):
+				##return
+			#var last_mouse_pos: Vector2 = PlayerSelectionManager.selected_player.player_path[-1]
+			#if abs(last_mouse_pos.distance_to(mouse_pos)) > 10.0:
+				#if not is_path_blocked(last_mouse_pos, mouse_pos):
+					#var mouse_global_position: Vector2 = level.get_global_mouse_position()
+					#PlayerSelectionManager.selected_player.add_point_to_path(mouse_global_position)	
+					#if not level.players_set_for_move.has(PlayerSelectionManager.selected_player):
+						#level.players_set_for_move[PlayerSelectionManager.selected_player] = true
+
+func draw_path_pc():
+	var mouse_pos = level.tile_map.get_local_mouse_position()
+	#var target_tile = level.tile_map.local_to_map(mouse_pos)
+	#
+	if check_is_mouse_over_wall(level.get_global_mouse_position()):
+		return
+	#if not level.check_is_tile_in_boundsv(target_tile) or level.check_is_tile_solid(target_tile):
+		#return
+	var last_mouse_pos: Vector2 = PlayerSelectionManager.selected_player.player_path[-1]
+	if abs(last_mouse_pos.distance_to(mouse_pos)) > 10.0:
+		if not is_path_blocked(last_mouse_pos, mouse_pos):
+			var mouse_global_position: Vector2 = level.get_global_mouse_position()
+			PlayerSelectionManager.selected_player.add_point_to_path(mouse_global_position)	
+			if not level.players_set_for_move.has(PlayerSelectionManager.selected_player):
+				level.players_set_for_move[PlayerSelectionManager.selected_player] = true
+
+func draw_path_mobile(event_position: Vector2) -> void:
+	var touch_global_position: Vector2 = level.get_global_mouse_position()
+	
+	var touch_pos: Vector2 = level.tile_map.to_local(touch_global_position)
+	#var target_tile: Vector2i = level.tile_map.local_to_map(touch_pos)
+
+	if check_is_mouse_over_wall(touch_global_position):
+		return
+
+	var selected_player = PlayerSelectionManager.selected_player
+	if not selected_player or selected_player.player_path.is_empty():
+		return
+
+	var last_mouse_pos: Vector2 = selected_player.player_path[-1]
+
+	if abs(last_mouse_pos.distance_to(touch_pos)) > 10.0:
+		if not is_path_blocked(last_mouse_pos, touch_pos):
+			selected_player.add_point_to_path(touch_global_position)
+			if not level.players_set_for_move.has(selected_player):
+				level.players_set_for_move[selected_player] = true
+#func draw_path_mobile(screen_pos: Vector2) -> void:
+	#var player = PlayerSelectionManager.selected_player
+	#if player == null:
+		#return
+	#
+#
+	#var global_pos: Vector2 = screen_pos
+#
+	#if check_is_mouse_over_wall(global_pos):
+		#return
+#
+	#var last_pos: Vector2 = player.player_path[-1]
+	#if last_pos.distance_to(global_pos) > 10.0:
+		#if not is_path_blocked(last_pos, global_pos):
+			#player.add_point_to_path(global_pos)
+			#if not level.players_set_for_move.has(player):
+				#level.players_set_for_move[player] = true
+#func draw_path_mobile(screen_pos: Vector2) -> void:
+	#print("OVDE")
+	#var player = PlayerSelectionManager.selected_player
+	#if player == null:
+		#return
+#
+	#var global_pos: Vector2 = get_viewport().get_canvas_transform().affine_inverse() * screen_pos
+	#var local_pos: Vector2 = level.tile_map.to_local(global_pos)
+	#var target_tile: Vector2i = level.tile_map.local_to_map(local_pos)
+#
+	#if check_is_mouse_over_wall(global_pos):
+		#return
+#
+	#var last_pos: Vector2 = player.player_path[-1]
+	#if last_pos.distance_to(local_pos) > 10.0:
+		#if not is_path_blocked(last_pos, local_pos):
+			#player.add_point_to_path(global_pos)
+			#if not level.players_set_for_move.has(player):
+				#level.players_set_for_move[player] = true
 
 func is_path_blocked(from: Vector2, to: Vector2) -> bool:
 	var space_state = level.get_world_2d().direct_space_state
@@ -128,8 +212,8 @@ func check_can_do_action() -> bool:
 		return false
 	return true
 	
-func check_is_mouse_over_wall() -> bool:
-	var mouse_global_pos = level.get_global_mouse_position()
+func check_is_mouse_over_wall(mouse_global_pos: Vector2) -> bool:
+	#var mouse_global_pos = level.get_global_mouse_position()
 	
 	var parameters = PhysicsPointQueryParameters2D.new()
 	parameters.position = mouse_global_pos
@@ -165,12 +249,21 @@ func _on_popup_menu_item_pressed(item_id: int):
 
 
 #MOBILE
+func check_are_buttons_visible():
+	if PlayerSelectionManager.selected_player and not PlayerSelectionManager.selected_player.is_killed:
+		level.mobile_strategy_button.visible = true
+		level.mobile_draw_path_button.visible = true
+
 func _on_upgrade_button_pressed_mobile():
 	disconnect_from_signals()
+	is_drawing = false
+	level.mobile_draw_path_button.set_pressed_no_signal(false)
 	level.set_level_state(UpgradeState.new([level]))
 
 func _on_observation_state_button_pressed_mobile():
 	disconnect_from_signals()
+	is_drawing = false
+	level.mobile_draw_path_button.set_pressed_no_signal(false)
 	level.set_level_state(PreparationState.new([level]))
 
 func _on_strategy_button_pressed_mobile():
@@ -180,9 +273,14 @@ func _on_strategy_button_pressed_mobile():
 func _on_player_selected_mobile():
 	if PlayerSelectionManager.selected_player and not PlayerSelectionManager.selected_player.is_killed:
 		level.mobile_strategy_button.visible = true
+		level.mobile_draw_path_button.visible = true
 
 func _on_player_deselected_mobile(deselected_player: Player):
 	level.mobile_strategy_button.visible = false
+	level.mobile_draw_path_button.visible = false
+
+func _on_draw_button_pressed_mobile():
+	is_drawing = !is_drawing
 
 func disconnect_from_signals():
 	if level.radial_menu.id_pressed.is_connected(_on_popup_menu_item_pressed):
@@ -191,6 +289,8 @@ func disconnect_from_signals():
 		level.upgrade_button_pressed_mobile.disconnect(_on_upgrade_button_pressed_mobile)
 	if level.strategy_button_pressed_mobile.is_connected(_on_strategy_button_pressed_mobile):
 		level.strategy_button_pressed_mobile.disconnect(_on_strategy_button_pressed_mobile)
+	if level.draw_button_pressed_mobile.is_connected(_on_draw_button_pressed_mobile):
+		level.draw_button_pressed_mobile.disconnect(_on_draw_button_pressed_mobile)
 	if PlayerSelectionManager.player_selection_changed_mobile.is_connected(_on_player_selected_mobile):
 		PlayerSelectionManager.player_selection_changed_mobile.disconnect(_on_player_selected_mobile)
 	if 	PlayerSelectionManager.player_deselected.is_connected(_on_player_deselected_mobile):

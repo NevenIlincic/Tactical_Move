@@ -63,9 +63,10 @@ func _ready() -> void:
 	#soldier_stats.HP.base_value = 50.0
 	
 func _unhandled_input(event: InputEvent) -> void:
-	if Input.is_action_just_pressed("select_player") and is_mouse_hovered:
-		_on_mouse_click()
-
+	if OptionVariables.check_is_device_pc():
+		if Input.is_action_just_pressed("select_player") and is_mouse_hovered:
+			_on_mouse_click()
+	
 func set_player_sprite():
 	pass
 	#const PLAYER_SOLDIER_PISTOL = preload("uid://xobgolcljc7w")
@@ -338,3 +339,9 @@ func _on_detection_areas_area_shape_exited(area_rid: RID, area: Area2D, area_sha
 	match local_shape_index:
 		ally_detection_shape_index:
 			_on_ally_detection_collision_shape_exited(area)
+
+
+func _on_selection_area_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
+	if not OptionVariables.check_is_device_pc():
+		if event is InputEventScreenTouch and event.is_pressed():
+			_on_mouse_click()

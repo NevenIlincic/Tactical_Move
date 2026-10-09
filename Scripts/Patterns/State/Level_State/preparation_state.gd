@@ -7,11 +7,12 @@ func _init(data: Array):
 	level.current_state_label.text = "OBSERVATION STATE"
 	level.radial_menu.id_pressed.connect(_on_popup_menu_item_pressed)
 	
-	if OptionVariables.check_is_device_pc():
+	if not OptionVariables.check_is_device_pc():
 		check_is_strategy_button_visible()
 		connect_to_mobile_signals()
 		level.mobile_move_state_button.visible = true
 		level.mobile_observation_state_button.visible = false
+		level.mobile_draw_path_button.visible = false
 
 func connect_to_mobile_signals():
 	level.upgrade_button_pressed_mobile.connect(_on_upgrade_button_pressed_mobile)

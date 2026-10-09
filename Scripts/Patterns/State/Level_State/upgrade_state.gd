@@ -19,6 +19,7 @@ func _init(data: Array):
 		level.controller_button.visible = false
 		level.mobile_pause_button.visible = false
 		level.mobile_strategy_button.visible = false
+		level.mobile_draw_path_button.visible = false
 
 func connect_to_mobile_signals():
 	level.upgrade_button_pressed_mobile.connect(_on_upgrade_button_pressed_mobile)
