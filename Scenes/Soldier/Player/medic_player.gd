@@ -18,6 +18,16 @@ var is_timeout_active: bool = true
 func _ready() -> void:
 	super._ready()
 	check_can_heal.connect(_check_is_healing_available)
+	if not OptionVariables.check_is_device_pc():
+		level.healing_button_pressed_mobile.connect(_on_healing_button_pressed_mobile)
+
+func disconnect_from_signals():
+	super.disconnect_from_signals()
+	if check_can_heal.is_connected(_check_is_healing_available):
+		check_can_heal.disconnect(_check_is_healing_available)
+	if level.healing_button_pressed_mobile.is_connected(_on_healing_button_pressed_mobile):
+		level.healing_button_pressed_mobile.disconnect(_on_healing_button_pressed_mobile)
+
 
 func _pre_move_actions():
 	super._pre_move_actions()
@@ -96,17 +106,24 @@ func on_soldier_killed():
 func _unhandled_input(event: InputEvent) -> void:
 	super._unhandled_input(event)
 	if Input.is_action_just_pressed("healing") and is_selected and not allies_to_heal_nearby.is_empty() and can_heal:
-		var i: int = 0
-		is_queued_for_medic_healing = !is_queued_for_medic_healing
-		for ally_id: String in allies_to_heal_nearby:
-			var ally: Player = allies_to_heal_nearby[ally_id]
-			if is_queued_for_medic_healing:
-				if ally.check_is_healing_needed():
-					ally.healing_needed_sprite.visible = true
-					ally.is_queued_for_medic_healing = true
-					i += 1
-			else:
-				ally.healing_needed_sprite.visible = false
-				ally.is_queued_for_medic_healing = false
-		if i == 0:
-			is_queued_for_medic_healing = false
+		toggle_healing()
+
+func _on_healing_button_pressed_mobile():
+	if is_selected and not allies_to_heal_nearby.is_empty() and can_heal:
+		toggle_healing()	
+
+func toggle_healing():
+	var i: int = 0
+	is_queued_for_medic_healing = !is_queued_for_medic_healing
+	for ally_id: String in allies_to_heal_nearby:
+		var ally: Player = allies_to_heal_nearby[ally_id]
+		if is_queued_for_medic_healing:
+			if ally.check_is_healing_needed():
+				ally.healing_needed_sprite.visible = true
+				ally.is_queued_for_medic_healing = true
+				i += 1
+		else:
+			ally.healing_needed_sprite.visible = false
+			ally.is_queued_for_medic_healing = false
+	if i == 0:
+		is_queued_for_medic_healing = false

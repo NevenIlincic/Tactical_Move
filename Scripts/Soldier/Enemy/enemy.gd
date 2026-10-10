@@ -11,7 +11,6 @@ var num_seen_by: int = 0
 
 #FOR ENEMY
 var alive_players: Dictionary = {}
-var level: Level
 var recent_covers: Array[Marker2D] = []
 const MAX_RECENT_COVERS: int = 2
 var close_players: Dictionary = {}
@@ -46,7 +45,7 @@ func _ready() -> void:
 	visible = false
 	engagement_strategy = StopShootFollowingStrategy.new()
 	point_to_look = Vector2.ZERO
-	level = get_tree().get_first_node_in_group("Level")
+	#level = get_tree().get_first_node_in_group("Level")
 	Signals.stop_enemy_actions.connect(_on_players_action_finished)
 	
 	if close_players.is_empty():
@@ -66,6 +65,12 @@ func set_point_to_look(point):
 	point_to_look = point
 	if not check_is_point_to_look_vector():
 		point_to_look = point.global_position
+
+func disconnect_from_signals():
+	super.disconnect_from_signals()
+	if Signals.stop_enemy_actions.is_connected(_on_players_action_finished):
+		Signals.stop_enemy_actions.disconnect(_on_players_action_finished)
+
 
 
 func _pre_move_actions():

@@ -94,16 +94,25 @@ func _on_strategy_button_pressed_mobile():
 		level.radial_menu.popup()
 
 func _on_player_selected_mobile():
-	if PlayerSelectionManager.selected_player and not PlayerSelectionManager.selected_player.is_killed:
+	var selected_player: Player = PlayerSelectionManager.selected_player
+	if selected_player and not selected_player.is_killed:
 		level.mobile_strategy_button.visible = true
+		if selected_player is MedicPlayer:
+			level.mobile_healing_button.visible = true
 
 func _on_player_deselected_mobile(deselected_player: Player):
 	level.mobile_strategy_button.visible = false
-	level.mobile_reset_path_button.visible = false
+	level.mobile_healing_button.visible = false
 
 func check_is_strategy_button_visible():
-	if PlayerSelectionManager.selected_player and not PlayerSelectionManager.selected_player.is_killed:
+	var selected_player: Player = PlayerSelectionManager.selected_player
+	if selected_player and not selected_player.is_killed:
 		level.mobile_strategy_button.visible = true
+		if selected_player is MedicPlayer:
+			level.mobile_healing_button.visible = true
+	else:
+		level.mobile_strategy_button.visible = false
+		level.mobile_healing_button.visible = false
 
 func disconnect_from_signals():
 	if PlayerSelectionManager.player_selection_changed_mobile.is_connected(_on_player_selected_mobile):

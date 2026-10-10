@@ -261,6 +261,11 @@ func check_are_buttons_visible():
 		else:
 			level.mobile_reset_point_to_look_after_move_button.visible = false
 		
+		if selected_player is MedicPlayer:
+			level.mobile_healing_button.visible = true
+		else:
+			level.mobile_healing_button.visible = false
+		
 func _on_action_button_pressed_mobile():
 	if check_can_do_action():
 		disconnect_from_signals()
@@ -288,6 +293,7 @@ func _on_strategy_button_pressed_mobile():
 	if PlayerSelectionManager.selected_player and not PlayerSelectionManager.selected_player.is_killed:
 		level.radial_menu.popup()
 
+
 func _on_player_selected_mobile():
 	var selected_player: Player = PlayerSelectionManager.selected_player
 	if selected_player and not selected_player.is_killed:
@@ -308,6 +314,11 @@ func _on_player_selected_mobile():
 			level.mobile_reset_point_to_look_after_move_button.visible = true
 		else:
 			level.mobile_reset_point_to_look_after_move_button.visible = false
+		
+		if selected_player is MedicPlayer:
+			level.mobile_healing_button.visible = true
+		else:
+			level.mobile_healing_button.visible = false
 		
 func _on_player_deselected_mobile(deselected_player: Player):
 	level.mobile_strategy_button.visible = false

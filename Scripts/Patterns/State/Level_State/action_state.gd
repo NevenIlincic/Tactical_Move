@@ -56,12 +56,14 @@ func _init(data: Array):
 		level.mobile_reset_point_to_look_while_moving_button.visible = false
 		level.mobile_point_to_look_after_move_button.visible = false
 		level.mobile_reset_point_to_look_after_move_button.visible = false
-	
+		level.mobile_healing_button.visible = false
+		
 func connect_to_signals():
 	Signals.player_move_finished.connect(_on_player_move_finished)
 	Signals.player_move_continued.connect(_on_player_move_continued)
 	Signals.enemy_soldier_killed.connect(_on_soldier_killed)
 	Signals.stop_enemy_actions.connect(_on_stop_enemy_actions)
+	
 func _unhandled_input(event: InputEvent):
 	pass
 
@@ -159,3 +161,5 @@ func disconnect_from_signals():
 		Signals.player_move_continued.disconnect(_on_player_move_continued)
 	if Signals.enemy_soldier_killed.is_connected(_on_soldier_killed):
 		Signals.enemy_soldier_killed.disconnect(_on_soldier_killed)
+	if Signals.stop_enemy_actions.is_connected(_on_stop_enemy_actions):
+		Signals.stop_enemy_actions.disconnect(_on_stop_enemy_actions)

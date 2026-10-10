@@ -24,10 +24,14 @@
 [ext_resource type="Texture2D" uid="uid://dumktqe5kf5ei" path="res://Sprites/Mobile_Sprites/HUD/point_to_look_after_move_button_pressed.png" id="24_uxcut"]
 [ext_resource type="Texture2D" uid="uid://dgy2b51ar205t" path="res://Sprites/Mobile_Sprites/HUD/reset_point_to_look_after_move_button.png" id="25_uxcut"]
 [ext_resource type="PackedScene" uid="uid://dyh4j30522553" path="res://Scenes/Soldier/Player/Player_Stats.tscn" id="25_wr6c8"]
+[ext_resource type="Texture2D" uid="uid://culr0obif7v8f" path="res://Sprites/Mobile_Sprites/HUD/reset_camera_position_button.png" id="26_m1ceq"]
 [ext_resource type="PackedScene" uid="uid://bmbr4kpa58muf" path="res://Scenes/Menu/Upgrade_Menu.tscn" id="26_u4xmi"]
 [ext_resource type="PackedScene" uid="uid://q6uf7pve5vqm" path="res://Scenes/Dialog/Confirmation_Dialog.tscn" id="27_bvxha"]
+[ext_resource type="Texture2D" uid="uid://dk760qawqs272" path="res://Sprites/Mobile_Sprites/HUD/reset_camera_position_button_pressed.png" id="27_yny8a"]
+[ext_resource type="Texture2D" uid="uid://bf76fqclkuigg" path="res://Sprites/Mobile_Sprites/HUD/healing_button.png" id="28_fnflu"]
 [ext_resource type="PackedScene" uid="uid://d3gwg3d0gxd4w" path="res://Scenes/Menu/Radial_Menu.tscn" id="28_ywepe"]
 [ext_resource type="Texture2D" uid="uid://daf3icuwxhg26" path="res://Sprites/HUD/Timer/timer_icon.png" id="29_3u0pf"]
+[ext_resource type="Texture2D" uid="uid://cc40qcs786y48" path="res://Sprites/Mobile_Sprites/HUD/healing_button_pressed.png" id="29_v3g0q"]
 [ext_resource type="Script" uid="uid://jqj0nkq44djb" path="res://Scenes/camera_2d.gd" id="34_slepp"]
 
 [node name="Level" type="Node2D" unique_id=1509814780 groups=["Level"]]
@@ -126,12 +130,14 @@ offset_bottom = 29.0
 text = "Upgrade card added to upgrade menu"
 
 [node name="Mobile_Buttons" type="Node2D" parent="CanvasLayer" unique_id=1388636324]
+z_index = 99
 
 [node name="Mobile_Pause_Button" type="TextureButton" parent="CanvasLayer/Mobile_Buttons" unique_id=1392886850]
 texture_filter = 1
-offset_top = 64.0
-offset_right = 64.0
-offset_bottom = 128.0
+offset_left = 1088.0
+offset_top = 104.0
+offset_right = 1152.0
+offset_bottom = 168.0
 focus_mode = 0
 texture_normal = ExtResource("11_umfvy")
 
@@ -246,6 +252,30 @@ offset_bottom = 65.0
 focus_mode = 0
 toggle_mode = true
 texture_normal = ExtResource("25_uxcut")
+
+[node name="Mobile_Reset_Camera_Position_Button" type="TextureButton" parent="CanvasLayer/Mobile_Buttons" unique_id=1437060490]
+texture_filter = 1
+texture_repeat = 1
+offset_left = 8.0
+offset_top = 56.0
+offset_right = 64.875
+offset_bottom = 112.0
+focus_mode = 0
+texture_normal = ExtResource("26_m1ceq")
+texture_pressed = ExtResource("27_yny8a")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Mobile_Healing_Button" type="TextureButton" parent="CanvasLayer/Mobile_Buttons" unique_id=1098106808]
+texture_filter = 1
+texture_repeat = 1
+offset_left = 96.0
+offset_top = 456.0
+offset_right = 160.0
+offset_bottom = 511.0
+focus_mode = 0
+texture_normal = ExtResource("28_fnflu")
+texture_pressed = ExtResource("29_v3g0q")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer" unique_id=594881798]
 visible = false
@@ -411,4 +441,6 @@ metadata/_edit_use_anchors_ = true
 [connection signal="pressed" from="CanvasLayer/Mobile_Buttons/Mobile_Reset_Point_To_Look_While_Moving_Button" to="." method="_on_mobile_reset_point_to_look_while_moving_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/Mobile_Buttons/Mobile_Point_To_Look_After_Move_Button" to="." method="_on_mobile_point_to_look_after_move_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/Mobile_Buttons/Mobile_Reset_Point_To_Look_After_Move_Button" to="." method="_on_mobile_reset_point_to_look_after_move_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Mobile_Buttons/Mobile_Reset_Camera_Position_Button" to="." method="_on_mobile_reset_camera_position_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Mobile_Buttons/Mobile_Healing_Button" to="." method="_on_mobile_healing_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/Controller_Button" to="." method="_on_controller_button_pressed"]

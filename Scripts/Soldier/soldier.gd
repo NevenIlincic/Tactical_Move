@@ -1,5 +1,8 @@
 #Base class for Player and Enemy
 class_name Soldier extends Node2D
+
+var level: Level
+
 #@onready var vision_polygon: SoldierVision = $CanvasGroup/Vision_Polygon
 @onready var vision_area: VisionArea = $Vision_Area
 @onready var hitbox: StaticBody2D = $Hitbox
@@ -80,6 +83,7 @@ var permanent_upgrades: Dictionary = {} #{unique_id: UpgradeCard}
 		if current_weapon:
 			current_weapon = current_weapon.duplicate(true)
 func _ready() -> void:
+	level = get_tree().get_first_node_in_group("Level")
 	connect_to_signals()
 	player_path.append(global_position)
 	soldier_id = str(Time.get_ticks_usec(), "_", randi())
