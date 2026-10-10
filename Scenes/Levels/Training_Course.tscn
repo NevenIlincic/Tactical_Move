@@ -953,7 +953,7 @@ position = Vector2(0, 70)
 
 [node name="Camera_Move_Tutorial" parent="CanvasLayer/Tutorial_Labels_Group" index="0" unique_id=370262015 instance=ExtResource("14_oiwn7")]
 key_action = "camera_drag"
-dialog_text = "HOLD TO MOVE CAMERA"
+dialog_text = "HOLD TO MOVE THE CAMERA"
 
 [node name="Camera_Zoom_In_Tutorial" parent="CanvasLayer/Tutorial_Labels_Group" index="1" unique_id=1600195212 instance=ExtResource("14_oiwn7")]
 visible = false
@@ -1076,7 +1076,7 @@ is_activated_by_pressing = true
 [node name="Input_Binds_Next_Step_1" parent="CanvasLayer/Tutorial_Labels_Group" index="20" unique_id=240259264 instance=ExtResource("14_oiwn7")]
 visible = false
 key_action = "pause_menu"
-dialog_text = "YOU CAN CHANGE BINDS IN OPTION/PAUSE MENU."
+dialog_text = "YOU CAN CHANGE THE SETTINGS IN THE PAUSE MENU."
 appearing_order = 20
 is_activated_by_pressing = true
 

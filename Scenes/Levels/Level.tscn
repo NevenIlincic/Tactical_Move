@@ -223,8 +223,8 @@ texture_pressed = ExtResource("21_k3aso")
 [node name="Mobile_Reset_Point_To_Look_While_Moving_Button" type="TextureButton" parent="CanvasLayer/Mobile_Buttons" unique_id=978968608]
 texture_filter = 1
 texture_repeat = 1
-offset_left = 232.0
-offset_right = 288.0
+offset_left = 216.0
+offset_right = 272.0
 offset_bottom = 61.25
 focus_mode = 0
 texture_normal = ExtResource("22_803qd")
@@ -246,8 +246,8 @@ texture_pressed = ExtResource("24_uxcut")
 [node name="Mobile_Reset_Point_To_Look_After_Move_Button" type="TextureButton" parent="CanvasLayer/Mobile_Buttons" unique_id=504361880]
 texture_filter = 1
 texture_repeat = 1
-offset_left = 328.0
-offset_right = 392.0
+offset_left = 280.0
+offset_right = 344.0
 offset_bottom = 65.0
 focus_mode = 0
 toggle_mode = true
@@ -256,10 +256,10 @@ texture_normal = ExtResource("25_uxcut")
 [node name="Mobile_Reset_Camera_Position_Button" type="TextureButton" parent="CanvasLayer/Mobile_Buttons" unique_id=1437060490]
 texture_filter = 1
 texture_repeat = 1
-offset_left = 8.0
-offset_top = 56.0
-offset_right = 64.875
-offset_bottom = 112.0
+offset_left = 1000.0
+offset_top = 8.0
+offset_right = 1056.875
+offset_bottom = 64.0
 focus_mode = 0
 texture_normal = ExtResource("26_m1ceq")
 texture_pressed = ExtResource("27_yny8a")

@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://dqygpomcgwsnq" path="res://Scenes/Labels/tutorial_button_label.gd" id="1_c4lga"]
 [ext_resource type="Texture2D" uid="uid://cyexu3fm2aq3s" path="res://Sprites/HUD/background.png" id="2_d2ajl"]
 [ext_resource type="Texture2D" uid="uid://rn3tv1uo8xo1" path="res://Sprites/Mobile_Sprites/HUD/draw_path_button.png" id="3_wadw3"]
+[ext_resource type="Texture2D" uid="uid://dg1lgkghotkmu" path="res://Sprites/Mobile_Sprites/HUD/upgrade_menu_button.png" id="4_b7cff"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d2ajl"]
 content_margin_left = 5.0
@@ -61,3 +62,15 @@ theme_override_font_sizes/font_size = 16
 text = "SELECT SOLDIER"
 vertical_alignment = 1
 autowrap_mode = 2
+
+[node name="Next_Button" type="TextureButton" parent="." unique_id=1515427019]
+offset_left = 1024.0
+offset_top = 96.0
+offset_right = 1094.0
+offset_bottom = 166.0
+rotation = 1.5707964
+focus_mode = 0
+texture_normal = ExtResource("4_b7cff")
+flip_h = true
+
+[connection signal="pressed" from="Next_Button" to="." method="_on_next_button_pressed"]

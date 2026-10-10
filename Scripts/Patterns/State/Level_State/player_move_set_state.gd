@@ -322,6 +322,7 @@ func _on_player_selected_mobile():
 		
 func _on_player_deselected_mobile(deselected_player: Player):
 	level.mobile_strategy_button.visible = false
+	level.mobile_healing_button.visible = false
 	
 	level.mobile_draw_path_button.visible = false
 	level.mobile_reset_path_button.visible = false
@@ -330,7 +331,7 @@ func _on_player_deselected_mobile(deselected_player: Player):
 	level.mobile_reset_point_to_look_while_moving_button.visible = false
 	
 	level.mobile_point_to_look_after_move_button.visible = false
-	#level.mobile_reset_point_to_look_after_move_button.visible = false
+	level.mobile_reset_point_to_look_after_move_button.visible = false
 	
 func _on_draw_button_pressed_mobile():
 	is_drawing = !is_drawing

@@ -40,6 +40,12 @@ func _ready() -> void:
 	keith_regular.soldier_stats.HP.base_value = 100.0
 
 
+func disconnect_from_signals():
+	super.disconnect_from_signals()
+	for tutorial_label: TutorialTextDialog in tutorial_labels_group.get_children():
+		if tutorial_label.key_action_released.is_connected(_on_tutorial_button_pressed.bind(tutorial_label)):
+			tutorial_label.key_action_released.disconnect(_on_tutorial_button_pressed.bind(tutorial_label))
+
 func _on_tutorial_button_pressed(tutorial_label: TutorialTextDialog):
 	if tutorial_label_appearing_order == tutorial_label.appearing_order and check_is_satisfied(tutorial_label):
 		tutorial_labels[tutorial_label_appearing_order].visible = false

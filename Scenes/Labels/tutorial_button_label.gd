@@ -20,7 +20,7 @@ var button_textures: Dictionary = {
 	"drawing": preload("uid://rn3tv1uo8xo1"),
 	"reset_path": preload("uid://vffni4l4q3cs"),
 	"rotate_player": preload("uid://cgx3x57yjdju7"),
-	"reset_look_at_path": preload("uid://cgx3x57yjdju7"),
+	"reset_look_at_path": preload("uid://wksc55ragfoh"),
 	"rotate_player_after_move": preload("uid://bq3737tfxvbx5"),
 	"reset_rotate_player_after_move": preload("uid://dgy2b51ar205t"),
 	"upgrade_menu": preload("uid://dg1lgkghotkmu"),
@@ -31,29 +31,48 @@ var button_textures: Dictionary = {
 	"switch_to_move_state": preload("uid://u4snu2wiae1p"),
 	"pause_menu": preload("uid://dbepwj2v1an3"),
 	"reset_camera_position": preload("uid://culr0obif7v8f")
-	
+}
+
+var hide_mobile_tutorial_icons: Dictionary = {
+	0: "DRAG ON SCREEN TO MOVE THE CAMERA",
+	1: "PINCH OUT ON SCREEN TO ZOOM IN THE CAMERA",
+	2: "PINCH IN ON SCREEN TO ZOOM OUT THE CAMERA",
+	4: "TAP THE SOLDIER TO SELECT"
 }
 
 @onready var mobile_action_texture_rect: TextureRect = $TextureRect/HBoxContainer/Mobile_Action_Texture_Rect
 
 func _ready() -> void:
+		
 	get_action_bind_key()
 	dialog_label.text = dialog_text
 	start_pulse_effect()
 	if not OptionVariables.check_is_device_pc():
 		action_label.visible = false
-		mobile_action_texture_rect.visible = true
+		
+		if hide_mobile_tutorial_icons.has(appearing_order):
+			mobile_action_texture_rect.visible = false
+			dialog_label.text = hide_mobile_tutorial_icons[appearing_order]
+		else:
+			mobile_action_texture_rect.visible = true
+			
 		if button_textures.has(key_action):
 			mobile_action_texture_rect.texture = button_textures[key_action]
 		else:
 			visible = false
+			
+	if key_action == "next_tutorial_step":
+		action_label.visible = false
+		mobile_action_texture_rect.visible = false
+		
 func _unhandled_input(event: InputEvent) -> void:
-	if not is_activated_by_pressing:
-		if Input.is_action_just_released(key_action):
-			key_action_released.emit()
-	else:
-		if Input.is_action_just_pressed(key_action):
-			key_action_released.emit()
+	pass
+	#if not is_activated_by_pressing:
+		#if Input.is_action_just_released(key_action):
+			#key_action_released.emit()
+	#else:
+		#if Input.is_action_just_pressed(key_action):
+			#key_action_released.emit()
 
 func get_action_bind_key():
 	var value = OptionVariables.option_values["Inputs"][key_action]
@@ -97,3 +116,7 @@ func start_pulse_effect():
 		.set_trans(Tween.TRANS_SINE)\
 		.set_ease(Tween.EASE_IN_OUT)
 		
+
+
+func _on_next_button_pressed() -> void:
+	key_action_released.emit()
