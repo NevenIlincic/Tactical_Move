@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://b6pfugr3kdl2v" path="res://Scenes/Buttons/Menus_Button.tscn" id="5_ehegv"]
 [ext_resource type="Script" uid="uid://bp3qo6kc4jx74" path="res://Scenes/Menu/audio_slider.gd" id="8_n6evs"]
 [ext_resource type="Script" uid="uid://bpm6uu7doofex" path="res://Scenes/Menu/video_menu_window.gd" id="9_wekyc"]
+[ext_resource type="Script" uid="uid://bmrxdvnohqc2a" path="res://Scripts/Mobile_Tooltip/label_tooltip.gd" id="10_o75mi"]
 [ext_resource type="Texture2D" uid="uid://cyexu3fm2aq3s" path="res://Sprites/HUD/background.png" id="11_nkoq7"]
 [ext_resource type="Texture2D" uid="uid://jmhohtbrj7dy" path="res://Sprites/Button/button.png" id="12_av6u3"]
 [ext_resource type="PackedScene" uid="uid://iah5eecblfbi" path="res://Scenes/Buttons/Input_Button.tscn" id="13_ktebc"]
@@ -278,6 +279,13 @@ corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 expand_margin_top = 20.0
 expand_margin_bottom = 20.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nkoq7"]
+bg_color = Color(0.23137255, 0.23137255, 0.23529412, 0.7607843)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
 
 [node name="OptionsMenu" type="Node2D" unique_id=1686594788]
 script = ExtResource("1_pobh7")
@@ -1085,7 +1093,7 @@ text = "HUD EFFECTS"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Video_Menu" type="Node2D" parent="." unique_id=809832490]
+[node name="Video_Menu" type="Node2D" parent="." unique_id=809832490 groups=["video_menu"]]
 visible = false
 position = Vector2(31, 96)
 script = ExtResource("9_wekyc")
@@ -1204,6 +1212,8 @@ mouse_filter = 0
 text = "MAX FPS"
 horizontal_alignment = 1
 vertical_alignment = 1
+script = ExtResource("10_o75mi")
+option = "max_fps"
 
 [node name="Max_FPS_Spin_Box" type="SpinBox" parent="Video_Menu/Inputs_Scroll_Container/GridContainer/Max_FPS_Input" unique_id=1133149627]
 layout_mode = 0
@@ -1252,6 +1262,8 @@ mouse_filter = 0
 text = "VISION INDICATOR"
 horizontal_alignment = 1
 vertical_alignment = 1
+script = ExtResource("10_o75mi")
+option = "vision_indicator"
 
 [node name="Vision_Indicator_Option_Button" type="OptionButton" parent="Video_Menu/Inputs_Scroll_Container/GridContainer/Player_Vision_Indicator" unique_id=1307921506]
 layout_mode = 0
@@ -1293,6 +1305,8 @@ mouse_filter = 0
 text = "RAYCAST NUMBER"
 horizontal_alignment = 1
 vertical_alignment = 1
+script = ExtResource("10_o75mi")
+option = "ray_cast_num"
 
 [node name="Ray_Cast_Spin_Box" type="SpinBox" parent="Video_Menu/Inputs_Scroll_Container/GridContainer/Ray_Cast_Number_Input/Ray_Cast_Number" unique_id=1935671113]
 layout_mode = 0
@@ -1328,6 +1342,8 @@ mouse_filter = 0
 text = "EDGE PRECISION ITERATIONS"
 horizontal_alignment = 1
 vertical_alignment = 1
+script = ExtResource("10_o75mi")
+option = "num_edge_iterations"
 
 [node name="Edge_Iterations_Spin_Box" type="SpinBox" parent="Video_Menu/Inputs_Scroll_Container/GridContainer/Edge_Iterations_Number" unique_id=936661956]
 layout_mode = 0
@@ -1370,11 +1386,13 @@ offset_left = 1.0
 offset_top = -3.0
 offset_right = 257.0
 offset_bottom = 53.0
-tooltip_text = "Enabling this effect can decreaase performanse."
+tooltip_text = "Enabling this effect can decrease performanse."
 mouse_filter = 0
 text = "GUN BLAST LIGHT"
 horizontal_alignment = 1
 vertical_alignment = 1
+script = ExtResource("10_o75mi")
+option = "gun_blast_effect"
 
 [node name="Gun_Blast_Effect_Option_Button" type="OptionButton" parent="Video_Menu/Inputs_Scroll_Container/GridContainer/Gun_Blast_Effect" unique_id=645081791]
 layout_mode = 0
@@ -1396,6 +1414,18 @@ layout_mode = 2
 [node name="Dummy_10" type="Control" parent="Video_Menu/Inputs_Scroll_Container/GridContainer" unique_id=921909989]
 layout_mode = 2
 
+[node name="Tooltip_Label" type="Label" parent="Video_Menu" unique_id=1547836732]
+visible = false
+texture_filter = 1
+texture_repeat = 1
+offset_left = 489.0
+offset_top = 72.0
+offset_right = 626.0
+offset_bottom = 120.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_nkoq7")
+text = "TOOLTIP"
+vertical_alignment = 1
+
 [node name="Save_Options_Button" parent="." unique_id=1347199976 instance=ExtResource("5_ehegv")]
 position = Vector2(896, 128)
 button_text = "SAVE"
@@ -1413,8 +1443,13 @@ text = "Options saved successfully"
 [connection signal="toggled" from="Tabs/Video_Tab_Button/Inputs_Button" to="Tabs/Video_Tab_Button" method="_on_inputs_button_toggled"]
 [connection signal="item_selected" from="Video_Menu/Inputs_Scroll_Container/GridContainer/Quality_Input/Quality_Option_Button" to="Video_Menu" method="_on_quality_option_button_item_selected"]
 [connection signal="item_selected" from="Video_Menu/Inputs_Scroll_Container/GridContainer/Show_FPS_Input/FPS_Option_Button" to="Video_Menu" method="_on_fps_option_button_item_selected"]
+[connection signal="gui_input" from="Video_Menu/Inputs_Scroll_Container/GridContainer/Max_FPS_Input/Max_FPS_Label" to="Video_Menu/Inputs_Scroll_Container/GridContainer/Max_FPS_Input/Max_FPS_Label" method="_on_gui_input"]
 [connection signal="value_changed" from="Video_Menu/Inputs_Scroll_Container/GridContainer/Max_FPS_Input/Max_FPS_Spin_Box" to="Video_Menu" method="_on_max_fps_spin_box_value_changed"]
+[connection signal="gui_input" from="Video_Menu/Inputs_Scroll_Container/GridContainer/Player_Vision_Indicator/Select_Player_Label" to="Video_Menu/Inputs_Scroll_Container/GridContainer/Player_Vision_Indicator/Select_Player_Label" method="_on_gui_input"]
 [connection signal="item_selected" from="Video_Menu/Inputs_Scroll_Container/GridContainer/Player_Vision_Indicator/Vision_Indicator_Option_Button" to="Video_Menu" method="_on_vision_indicator_option_button_item_selected"]
+[connection signal="gui_input" from="Video_Menu/Inputs_Scroll_Container/GridContainer/Ray_Cast_Number_Input/Ray_Cast_Number/Select_Player_Label" to="Video_Menu/Inputs_Scroll_Container/GridContainer/Ray_Cast_Number_Input/Ray_Cast_Number/Select_Player_Label" method="_on_gui_input"]
 [connection signal="value_changed" from="Video_Menu/Inputs_Scroll_Container/GridContainer/Ray_Cast_Number_Input/Ray_Cast_Number/Ray_Cast_Spin_Box" to="Video_Menu" method="_on_ray_cast_spin_box_value_changed"]
+[connection signal="gui_input" from="Video_Menu/Inputs_Scroll_Container/GridContainer/Edge_Iterations_Number/Edge_Iterations_Label" to="Video_Menu/Inputs_Scroll_Container/GridContainer/Edge_Iterations_Number/Edge_Iterations_Label" method="_on_gui_input"]
 [connection signal="value_changed" from="Video_Menu/Inputs_Scroll_Container/GridContainer/Edge_Iterations_Number/Edge_Iterations_Spin_Box" to="Video_Menu" method="_on_edge_iterations_spin_box_value_changed"]
+[connection signal="gui_input" from="Video_Menu/Inputs_Scroll_Container/GridContainer/Gun_Blast_Effect/Gun_Blast_Effect" to="Video_Menu/Inputs_Scroll_Container/GridContainer/Gun_Blast_Effect/Gun_Blast_Effect" method="_on_gui_input"]
 [connection signal="item_selected" from="Video_Menu/Inputs_Scroll_Container/GridContainer/Gun_Blast_Effect/Gun_Blast_Effect_Option_Button" to="Video_Menu" method="_on_gun_blast_effect_option_button_item_selected"]

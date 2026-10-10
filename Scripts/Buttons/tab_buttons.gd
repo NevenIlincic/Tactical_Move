@@ -7,10 +7,12 @@ class_name TabButton extends Control
 func _ready() -> void:
 	if OptionVariables.check_is_device_pc():
 		if input_label.text == "INPUTS":
+			inputs_button.set_pressed_no_signal(true)
 			set_input_label_font_color(Color.LIGHT_SALMON)
 			do_input_label_tween_scale(Vector2(1.2, 1.2))
 	else:
 		if input_label.text == "AUDIO":
+			inputs_button.set_pressed_no_signal(true)
 			set_input_label_font_color(Color.LIGHT_SALMON)
 			do_input_label_tween_scale(Vector2(1.2, 1.2))
 

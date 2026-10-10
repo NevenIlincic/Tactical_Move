@@ -14,6 +14,39 @@ class_name VideoMenu extends Node2D
 @onready var edge_iterations_spin_box: SpinBox = $Inputs_Scroll_Container/GridContainer/Edge_Iterations_Number/Edge_Iterations_Spin_Box
 @onready var gun_blast_effect_option_button: OptionButton = $Inputs_Scroll_Container/GridContainer/Gun_Blast_Effect/Gun_Blast_Effect_Option_Button
 
+@onready var tooltip_label: Label = $Tooltip_Label
+
+var style: StyleBoxFlat
+var activated_tooltips: Dictionary = {}
+
+
+func _ready() -> void:
+	create_label_tooltip_style()
+	
+func create_label_tooltip_style():
+	style = StyleBoxFlat.new()
+	
+	style.bg_color = Color("#3b3b3cc2")      
+	
+	style.corner_radius_top_left = 5
+	style.corner_radius_top_right = 5
+	style.corner_radius_bottom_left = 5
+	style.corner_radius_bottom_right = 5
+	
+func _on_tooltip_activated(activated_label: CustomTooltip, mouse_global_position: Vector2i):
+	if activated_tooltips.has(activated_label.option):
+		return
+	activated_tooltips[activated_label.option] = true
+	var label: Label = Label.new()
+	label.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	label.add_theme_stylebox_override("normal", style)
+	label.text = activated_label.tooltip_text
+	add_child(label)
+	label.global_position = mouse_global_position + Vector2i(20, 0)
+	await get_tree().create_timer(2.0).timeout.connect(func():
+		activated_tooltips.erase(activated_label.option)
+		label.queue_free()
+		)
 
 func set_initial_values():
 	var is_advanced_options_visible: bool = true if OptionVariables.vision_type == OptionVariables.VisionType.ADVANCED else false
