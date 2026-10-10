@@ -40,12 +40,12 @@ offset_bottom = 88.0
 theme_override_constants/separation = 20
 
 [node name="Mobile_Action_Texture_Rect" type="TextureRect" parent="TextureRect/HBoxContainer" unique_id=1465767571]
-visible = false
 layout_mode = 2
 texture = ExtResource("3_wadw3")
 stretch_mode = 3
 
 [node name="Action_Label" type="Label" parent="TextureRect/HBoxContainer" unique_id=1671916754]
+visible = false
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 0, 1)
 theme_override_font_sizes/font_size = 32

@@ -153,7 +153,6 @@ func check_is_level_completed(enemy: Soldier):
 			if initial_num_alive_enemies <= 0:
 				level.level_completed()
 
-
 func disconnect_from_signals():
 	if Signals.player_move_finished.is_connected(_on_player_move_finished):
 		Signals.player_move_finished.disconnect(_on_player_move_finished)

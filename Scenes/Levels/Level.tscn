@@ -279,11 +279,13 @@ texture_pressed = ExtResource("29_v3g0q")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer" unique_id=594881798]
 visible = false
-offset_left = 808.0
+z_index = 99
+offset_left = 744.0
 offset_top = 88.0
-offset_right = 1144.0
+offset_right = 1136.0
 offset_bottom = 576.0
 focus_behavior_recursive = 1
+scroll_hint_mode = 3
 
 [node name="Controls" type="VBoxContainer" parent="CanvasLayer/ScrollContainer" unique_id=358194993]
 layout_mode = 2
@@ -383,6 +385,14 @@ layout_mode = 2
 [node name="Healing" parent="CanvasLayer/ScrollContainer/Controls/Control11" unique_id=179735943 instance=ExtResource("13_3jhef")]
 key_action = "healing"
 dialog_text = "TOGGLE HEALING"
+appearing_order = -1
+
+[node name="Control14" type="Control" parent="CanvasLayer/ScrollContainer/Controls" unique_id=1274400836]
+layout_mode = 2
+
+[node name="Reset_Camera_Position" parent="CanvasLayer/ScrollContainer/Controls/Control14" unique_id=1940381385 instance=ExtResource("13_3jhef")]
+key_action = "reset_camera_position"
+dialog_text = "RESET CAMERA"
 appearing_order = -1
 
 [node name="Control7" type="Control" parent="CanvasLayer/ScrollContainer/Controls" unique_id=884021889]

@@ -126,3 +126,15 @@ offset_bottom = 434.0
 theme_override_font_sizes/font_size = 32
 text = "ACHIEVEMENTS"
 horizontal_alignment = 1
+
+[node name="Loading_Label" type="Label" parent="." unique_id=37704412]
+visible = false
+texture_filter = 1
+texture_repeat = 1
+offset_left = 64.0
+offset_top = 8.0
+offset_right = 656.0
+offset_bottom = 29.0
+text = "LOADING..."
+horizontal_alignment = 1
+vertical_alignment = 1

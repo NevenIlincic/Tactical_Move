@@ -1,6 +1,7 @@
 class_name LevelSelectionButton extends Node2D
 
 signal show_level_cover_image()
+signal level_button_pressed()
 
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
@@ -52,14 +53,19 @@ func _on_texture_rect_gui_input(event: InputEvent) -> void:
 			AudioManager.play_upgrade_sound()
 			match button_text:
 				"Training Course":
+					await _on_button_pressed()
 					get_tree().change_scene_to_file("res://Scenes/Levels/Training_Course.tscn")
 				"Beach":
+					await _on_button_pressed()
 					get_tree().change_scene_to_file("res://Scenes/Levels/Beach.tscn")
 				"House":
+					await _on_button_pressed()
 					get_tree().change_scene_to_file("res://Scenes/Levels/House.tscn")
 				"Parking Lot":
+					await _on_button_pressed()
 					get_tree().change_scene_to_file("res://Scenes/Levels/Parking_Lot.tscn")
 				"Park":
+					await _on_button_pressed()
 					get_tree().change_scene_to_file("res://Scenes/Levels/Park.tscn")
 				#"START":
 					#transition_to_level_selection_screen.emit()
@@ -70,6 +76,10 @@ func _on_texture_rect_gui_input(event: InputEvent) -> void:
 				#"BACK":
 					#transition_to_main_screen.emit()
 
+
+func _on_button_pressed():
+	level_button_pressed.emit()
+	await get_tree().create_timer(0.5).timeout
 
 func _on_mobile_level_button_pressed() -> void:
 	show_level_cover_image.emit()

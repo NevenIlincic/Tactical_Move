@@ -16,14 +16,37 @@ class_name TutorialTextDialog extends Node2D
 signal key_action_pressed()
 signal key_action_released()
 
+var button_textures: Dictionary = {
+	"drawing": preload("uid://rn3tv1uo8xo1"),
+	"reset_path": preload("uid://vffni4l4q3cs"),
+	"rotate_player": preload("uid://cgx3x57yjdju7"),
+	"reset_look_at_path": preload("uid://cgx3x57yjdju7"),
+	"rotate_player_after_move": preload("uid://bq3737tfxvbx5"),
+	"reset_rotate_player_after_move": preload("uid://dgy2b51ar205t"),
+	"upgrade_menu": preload("uid://dg1lgkghotkmu"),
+	"move_confirm": preload("uid://cqkb0dm6dgh1d"),
+	"healing": preload("uid://bf76fqclkuigg"),
+	"popup": preload("uid://boyruiqtblehv"),
+	"switch_to_preparation_state": preload("uid://bubrqq711mt3u"),
+	"switch_to_move_state": preload("uid://u4snu2wiae1p"),
+	"pause_menu": preload("uid://dbepwj2v1an3"),
+	"reset_camera_position": preload("uid://culr0obif7v8f")
+	
+}
 
+@onready var mobile_action_texture_rect: TextureRect = $TextureRect/HBoxContainer/Mobile_Action_Texture_Rect
 
 func _ready() -> void:
 	get_action_bind_key()
 	dialog_label.text = dialog_text
 	start_pulse_effect()
-	
-
+	if not OptionVariables.check_is_device_pc():
+		action_label.visible = false
+		mobile_action_texture_rect.visible = true
+		if button_textures.has(key_action):
+			mobile_action_texture_rect.texture = button_textures[key_action]
+		else:
+			visible = false
 func _unhandled_input(event: InputEvent) -> void:
 	if not is_activated_by_pressing:
 		if Input.is_action_just_released(key_action):
@@ -60,10 +83,17 @@ func get_action_bind_key():
 func start_pulse_effect():
 	var tween = create_tween().set_loops()
 	
-	tween.tween_property(action_label, "scale", Vector2(1.05, 1.05), 0.5)\
+	var object_to_be_applied_on
+	
+	if OptionVariables.check_is_device_pc():
+		object_to_be_applied_on = action_label
+	else:
+		object_to_be_applied_on = mobile_action_texture_rect
+	tween.tween_property(object_to_be_applied_on, "scale", Vector2(1.05, 1.05), 0.5)\
 		.set_trans(Tween.TRANS_SINE)\
 		.set_ease(Tween.EASE_IN_OUT)
 		
-	tween.tween_property(action_label, "scale", Vector2(1.0, 1.0), 0.5)\
+	tween.tween_property(object_to_be_applied_on, "scale", Vector2(1.0, 1.0), 0.5)\
 		.set_trans(Tween.TRANS_SINE)\
 		.set_ease(Tween.EASE_IN_OUT)
+		
